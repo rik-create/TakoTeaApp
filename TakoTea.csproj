@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="batch%28try%29.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="batch%28try%29.Designer.cs">
+      <DependentUpon>batch%28try%29.cs</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
