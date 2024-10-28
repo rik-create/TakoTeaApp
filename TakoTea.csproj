@@ -140,7 +140,6 @@
     <None Include="Resources\Batch Management%281%29.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dashboard\NewFolder1\" />
     <Folder Include="Item Management\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
