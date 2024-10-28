@@ -1,5 +1,4 @@
-﻿
-using MaterialSkin;
+﻿using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
@@ -11,11 +10,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TakoTea.Dashboard
+namespace TakoTea.Item_Management
 {
-    public partial class Form1 : MaterialForm
+    public partial class ItemForm : MaterialForm
     {
-        public Form1()
+        public ItemForm()
         {
             InitializeComponent();
             var materialSkinManager = MaterialSkinManager.Instance;
