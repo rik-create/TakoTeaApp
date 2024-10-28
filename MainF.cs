@@ -12,19 +12,15 @@ using System.Windows.Forms;
 
 namespace TakoTea
 {
-    public partial class Form2 : MaterialForm
+    public partial class MainF : MaterialForm
     {
-        public Form2()
+        public MainF()
         {
             InitializeComponent();
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.Red500, Primary.BlueGrey900, Primary.BlueGrey900, Accent.LightBlue200, TextShade.WHITE);
-
-
         }
-
-  
     }
 }
