@@ -116,6 +116,18 @@
     <Compile Include="Dashboard\MainOverviewFoorm.Designer.cs">
       <DependentUpon>MainOverviewFoorm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Item Management\AddNewItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Item Management\AddNewItem.Designer.cs">
+      <DependentUpon>AddNewItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Item Management\Item.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Item Management\Item.Designer.cs">
+      <DependentUpon>Item.cs</DependentUpon>
+    </Compile>
     <Compile Include="Item Management\ItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +141,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard\MainOverviewFoorm.resx">
       <DependentUpon>MainOverviewFoorm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Item Management\AddNewItem.resx">
+      <DependentUpon>AddNewItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Item Management\Item.resx">
+      <DependentUpon>Item.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
