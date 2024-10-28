@@ -104,18 +104,68 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Dashboard\Form1.cs">
+    <Compile Include="MainForm\BatchForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dashboard\Form1.Designer.cs">
+    <Compile Include="MainForm\BatchForm.Designer.cs">
+      <DependentUpon>BatchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm\Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm\Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm\MainFormLoaderFactory.cs" />
+    <Compile Include="MainForm\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dashboard\MainOverviewFoorm.cs">
+    <Compile Include="MainForm\ItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dashboard\MainOverviewFoorm.Designer.cs">
-      <DependentUpon>MainOverviewFoorm.cs</DependentUpon>
+    <Compile Include="MainForm\ItemForm.Designer.cs">
+      <DependentUpon>ItemForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainForm\MainOverviewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm\MainOverviewForm.Designer.cs">
+      <DependentUpon>MainOverviewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm\OrdersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm\OrdersForm.Designer.cs">
+      <DependentUpon>OrdersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm\ReportsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm\ReportsForm.Designer.cs">
+      <DependentUpon>ReportsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm\SalesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm\SalesForm.Designer.cs">
+      <DependentUpon>SalesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm\StockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm\StockForm.Designer.cs">
+      <DependentUpon>StockForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\ITabFormLoader.cs" />
     <Compile Include="Item Management\AddNewItem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,19 +184,43 @@
     <Compile Include="Item Management\ItemForm.Designer.cs">
       <DependentUpon>ItemForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Order\OrderList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Order\OrderList.Designer.cs">
+      <DependentUpon>OrderList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Dashboard\Form1.resx">
+    <EmbeddedResource Include="MainForm\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dashboard\MainOverviewFoorm.resx">
-      <DependentUpon>MainOverviewFoorm.cs</DependentUpon>
+    <EmbeddedResource Include="MainForm\Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm\ItemForm.resx">
+      <DependentUpon>ItemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm\MainOverviewForm.resx">
+      <DependentUpon>MainOverviewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Item Management\AddNewItem.resx">
       <DependentUpon>AddNewItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Item Management\Item.resx">
       <DependentUpon>Item.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm\ReportsForm.resx">
+      <DependentUpon>ReportsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm\SalesForm.resx">
+      <DependentUpon>SalesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm\StockForm.resx">
+      <DependentUpon>StockForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Order\OrderList.resx">
+      <DependentUpon>OrderList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -176,6 +250,7 @@
     <None Include="Resources\Batch Management%281%29.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Dashboard\" />
     <Folder Include="Resources\NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
