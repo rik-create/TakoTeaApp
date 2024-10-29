@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TakoTea.Factory;
 using TakoTea.MainForm;
 using static MaterialSkin.Controls.MaterialForm;
 
@@ -24,11 +25,6 @@ namespace TakoTea.Dashboard
             materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.Red500, Primary.BlueGrey900, Primary.BlueGrey900, Accent.LightBlue200, TextShade.WHITE);
             this.FormStyle = FormStyles.StatusAndActionBar_None;
-
-            Form formToLoad = new MainOverviewFormLoader().LoadForm();
-
-            panel1.Controls.Add(formToLoad);
-            formToLoad.Show();
 
 
 

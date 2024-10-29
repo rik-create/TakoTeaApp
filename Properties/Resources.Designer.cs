@@ -69,5 +69,25 @@ namespace TakoTea.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap takoyaki {
+            get {
+                object obj = ResourceManager.GetObject("takoyaki", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap vecteezy_takoyaki_png_with_ai_generated_30577578 {
+            get {
+                object obj = ResourceManager.GetObject("vecteezy_takoyaki-png-with-ai-generated_30577578", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

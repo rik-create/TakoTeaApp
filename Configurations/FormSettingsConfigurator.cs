@@ -17,7 +17,6 @@ namespace TakoTea.Configurations
             form.Sizable = false;
             form.MaximizeBox = false;
             form.MinimizeBox = false;
-            form.ControlBox = false;
 
             form.DrawerAutoHide = false;
             form.DrawerAutoShow = false;
@@ -27,6 +26,7 @@ namespace TakoTea.Configurations
             form.AutoScroll = true;
             form.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             form.AutoScaleMode = AutoScaleMode.None;
+            form.Padding = new Padding(0);
 
         }
     }

@@ -1,4 +1,7 @@
-﻿using MaterialSkin;
+﻿using LiveCharts.Defaults;
+using LiveCharts.Wpf;
+using LiveCharts;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
@@ -9,6 +12,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TakoTea.Configurations;
+using LiveCharts.WinForms;
+using DevExpress.Data.Browsing;
+using System.Windows.Media;
+using System.Runtime.Serialization;
 
 namespace TakoTea.Dashboard
 {
@@ -17,16 +25,54 @@ namespace TakoTea.Dashboard
         public MainOverviewForm()
         {
             InitializeComponent();
-            var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.Red500, Primary.BlueGrey900, Primary.BlueGrey900, Accent.LightBlue200, TextShade.WHITE);
-            this.FormStyle = FormStyles.StatusAndActionBar_None;
+            ThemeConfigurator.ApplyDarkTheme(this);
+            FormSettingsConfigurator.ApplyStandardFormSettings(this);
+            InitializeChart();
+
+
+
+
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        private void InitializeChart()
         {
+            cartesianChart1.Series = new SeriesCollection
+            {
+                new ColumnSeries
+                {
+                    Title = "2015",
+                    Values = new ChartValues<double> { 10, 50, 39, 50 }
+                }
+            };
+
+            //adding series will update and animate the chart automatically
+            cartesianChart1.Series.Add(new ColumnSeries
+            {
+                Title = "2016",
+                Values = new ChartValues<double> { 11, 56, 42 }
+            });
+
+            //also adding values updates and animates the chart automatically
+            cartesianChart1.Series[1].Values.Add(48d);
+
+            cartesianChart1.AxisX.Add(new Axis
+            {
+                Title = "Sales Man",
+                Labels = new[] { "Maria", "Susan", "Charles", "Frida" }
+            });
+
+            cartesianChart1.AxisY.Add(new Axis
+            {
+                Title = "Sold Apps",
+                LabelFormatter = value => value.ToString("N")
+            });
+
 
         }
+        private void CartesianChart1OnDataClick(object sender, ChartPoint chartPoint)
+        {
+            MessageBox.Show("You clicked (" + chartPoint.X + "," + chartPoint.Y + ")");
+        }
+
     }
 }

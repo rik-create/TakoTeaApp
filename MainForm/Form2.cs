@@ -1,4 +1,6 @@
-﻿using MaterialSkin.Controls;
+﻿using LiveCharts.Wpf;
+using LiveCharts;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,34 +19,41 @@ namespace TakoTea.MainForm
         {
             InitializeComponent();
 
-            materialDrawer1.Controls.Add(materialButton3);
             InitializeMaterialListView();
         }
 
         private void InitializeMaterialListView()
         {
-            // Create a MaterialListView
-            MaterialListView materialListView = new MaterialListView
+            cartesianChart1.Series = new SeriesCollection
             {
-                Dock = DockStyle.Fill,
-                View = View.Details, // Set view style to Details
-                FullRowSelect = true, // Select the entire row
-                GridLines = true // Show grid lines
+                new ColumnSeries
+                {
+                    Title = "2015",
+                    Values = new ChartValues<double> { 10, 50, 39, 50 }
+                }
             };
 
-            // Add columns
-            materialListView.Columns.Add("Column 1", 100);
-            materialListView.Columns.Add("Column 2", 100);
-            materialListView.Columns.Add("Column 3", 100);
+            //adding series will update and animate the chart automatically
+            cartesianChart1.Series.Add(new ColumnSeries
+            {
+                Title = "2016",
+                Values = new ChartValues<double> { 11, 56, 42 }
+            });
 
-            // Add sample data
-            ListViewItem item1 = new ListViewItem(new[] { "Item 1", "Data 1", "More Data 1" });
-            ListViewItem item2 = new ListViewItem(new[] { "Item 2", "Data 2", "More Data 2" });
-            materialListView.Items.Add(item1);
-            materialListView.Items.Add(item2);
+            //also adding values updates and animates the chart automatically
+            cartesianChart1.Series[1].Values.Add(48d);
 
-            // Add the MaterialListView to the form
-            this.Controls.Add(materialListView);
+            cartesianChart1.AxisX.Add(new Axis
+            {
+                Title = "Sales Man",
+                Labels = new[] { "Maria", "Susan", "Charles", "Frida" }
+            });
+
+            cartesianChart1.AxisY.Add(new Axis
+            {
+                Title = "Sold Apps",
+                LabelFormatter = value => value.ToString("N")
+            });
         }
     }
 }

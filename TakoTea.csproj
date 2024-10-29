@@ -106,6 +106,18 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Configurations\FormSettingsConfigurator.cs" />
     <Compile Include="Configurations\ThemeConfigurator.cs" />
+    <Compile Include="Dashboard\OrderQueueForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dashboard\OrderQueueForm.Designer.cs">
+      <DependentUpon>OrderQueueForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\UserActivitiesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dashboard\UserActivitiesForm.Designer.cs">
+      <DependentUpon>UserActivitiesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Factory\DashboardFormLoaderFactory.cs" />
     <Compile Include="Dashboard\Dashboard Modals\EditLowStockThresholdModal.cs">
       <SubType>Form</SubType>
@@ -119,7 +131,26 @@
     <Compile Include="Dashboard\StockAlertsForm.Designer.cs">
       <DependentUpon>StockAlertsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Factory\ItemFormLoaderFactory.cs" />
     <Compile Include="Interfaces\IThemeConfigurator.cs" />
+    <Compile Include="Items\Item Modals\EditItemModal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Items\Item Modals\EditItemModal.Designer.cs">
+      <DependentUpon>EditItemModal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Items\ItemCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Items\ItemCategoryForm.Designer.cs">
+      <DependentUpon>ItemCategoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Items\ItemEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Items\ItemEditForm.Designer.cs">
+      <DependentUpon>ItemEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm\BatchForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,17 +164,11 @@
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
     <Compile Include="Factory\MainFormLoaderFactory.cs" />
-    <Compile Include="MainForm\Form1.cs">
+    <Compile Include="MainForm\MainForm1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MainForm\ItemForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm\ItemForm.Designer.cs">
-      <DependentUpon>ItemForm.cs</DependentUpon>
+    <Compile Include="MainForm\MainForm1.Designer.cs">
+      <DependentUpon>MainForm1.cs</DependentUpon>
     </Compile>
     <Compile Include="Dashboard\MainOverviewForm.cs">
       <SubType>Form</SubType>
@@ -182,23 +207,17 @@
       <DependentUpon>StockForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\ITabFormLoader.cs" />
-    <Compile Include="Item Management\AddNewItem.cs">
+    <Compile Include="Items\ItemAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Item Management\AddNewItem.Designer.cs">
-      <DependentUpon>AddNewItem.cs</DependentUpon>
+    <Compile Include="Items\ItemAddForm.Designer.cs">
+      <DependentUpon>ItemAddForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Item Management\Item.cs">
+    <Compile Include="Items\ItemListForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Item Management\Item.Designer.cs">
-      <DependentUpon>Item.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Item Management\ItemForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Item Management\ItemForm.Designer.cs">
-      <DependentUpon>ItemForm.cs</DependentUpon>
+    <Compile Include="Items\ItemListForm.Designer.cs">
+      <DependentUpon>ItemListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Order\OrderList.cs">
       <SubType>Form</SubType>
@@ -206,31 +225,55 @@
     <Compile Include="Order\OrderList.Designer.cs">
       <DependentUpon>OrderList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Product\Product Modals\EditProductModal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Product\Product Modals\EditProductModal.Designer.cs">
+      <DependentUpon>EditProductModal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Product\ProductListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Product\ProductListForm.Designer.cs">
+      <DependentUpon>ProductListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Dashboard\Dashboard Modals\EditLowStockThresholdModal.resx">
       <DependentUpon>EditLowStockThresholdModal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard\OrderQueueForm.resx">
+      <DependentUpon>OrderQueueForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dashboard\StockAlertsForm.resx">
       <DependentUpon>StockAlertsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Dashboard\UserActivitiesForm.resx">
+      <DependentUpon>UserActivitiesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Items\Item Modals\EditItemModal.resx">
+      <DependentUpon>EditItemModal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Items\ItemCategoryForm.resx">
+      <DependentUpon>ItemCategoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Items\ItemEditForm.resx">
+      <DependentUpon>ItemEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm\MainForm1.resx">
+      <DependentUpon>MainForm1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm\Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm\ItemForm.resx">
-      <DependentUpon>ItemForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Dashboard\MainOverviewForm.resx">
       <DependentUpon>MainOverviewForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Item Management\AddNewItem.resx">
-      <DependentUpon>AddNewItem.cs</DependentUpon>
+    <EmbeddedResource Include="Items\ItemAddForm.resx">
+      <DependentUpon>ItemAddForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Item Management\Item.resx">
-      <DependentUpon>Item.cs</DependentUpon>
+    <EmbeddedResource Include="Items\ItemListForm.resx">
+      <DependentUpon>ItemListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm\ReportsForm.resx">
       <DependentUpon>ReportsForm.cs</DependentUpon>
@@ -243,6 +286,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Order\OrderList.resx">
       <DependentUpon>OrderList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Product\Product Modals\EditProductModal.resx">
+      <DependentUpon>EditProductModal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Product\ProductListForm.resx">
+      <DependentUpon>ProductListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -272,7 +321,15 @@
     <None Include="Resources\Batch Management%281%29.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="MainForm\NewFolder1\" />
+    <Folder Include="Product Image\" />
     <Folder Include="Resources\NewFolder1\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vecteezy_takoyaki-png-with-ai-generated_30577578.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\takoyaki.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

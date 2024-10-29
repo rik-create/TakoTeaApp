@@ -6,11 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
+using TakoTea.Dashboard;
 using TakoTea.Interfaces;
 using TakoTea.Item_Management;
+using TakoTea.Items;
 using TakoTea.MainForm;
+using TakoTea.Product;
 
-namespace TakoTea.Dashboard
+namespace TakoTea.Factory
 {
     public class MainFormLoaderFactory
     {
@@ -40,9 +43,9 @@ namespace TakoTea.Dashboard
         }
     }
 
-    public class MainOverviewFormLoader : ITabFormLoader
+    public class MainOverviewFormLoader2 : ITabFormLoader
     {
-     
+
 
         public Form LoadForm()
         {
@@ -52,6 +55,21 @@ namespace TakoTea.Dashboard
             mainOverviewControl.FormBorderStyle = FormBorderStyle.None;
             mainOverviewControl.Dock = DockStyle.Fill;
             return mainOverviewControl;
+        }
+    }
+
+    public class ProductFormLoader : ITabFormLoader
+    {
+
+
+        public Form LoadForm()
+        {
+
+            ProductListForm productList = new ProductListForm();
+            productList.TopLevel = false;
+            productList.FormBorderStyle = FormBorderStyle.None;
+            productList.Dock = DockStyle.Fill;
+            return productList;
         }
     }
     public class SalesFormLoader : ITabFormLoader
@@ -70,7 +88,7 @@ namespace TakoTea.Dashboard
     {
         public Form LoadForm()
         {
-            ItemForm itemControl = new ItemForm();
+            ItemListForm itemControl = new ItemListForm();
             itemControl.TopLevel = false;
             itemControl.FormBorderStyle = FormBorderStyle.None;
             itemControl.Dock = DockStyle.Fill;

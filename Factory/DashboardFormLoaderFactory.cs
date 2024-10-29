@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TakoTea.Dashboard;
+using TakoTea.Dashboard.Dashboard_Modals;
 using TakoTea.Interfaces;
 
-namespace TakoTea.Dashboard.Dashboard_Modals
+namespace TakoTea.Factory
 {
     public class DashboardFormLoaderFactory
     {
@@ -59,11 +61,11 @@ namespace TakoTea.Dashboard.Dashboard_Modals
     {
         public Form LoadForm()
         {
-            ItemForm itemControl = new ItemForm();
-            itemControl.TopLevel = false;
-            itemControl.FormBorderStyle = FormBorderStyle.None;
-            itemControl.Dock = DockStyle.Fill;
-            return itemControl;
+            OrderQueueForm orderQueue = new OrderQueueForm();
+            orderQueue.TopLevel = false;
+            orderQueue.FormBorderStyle = FormBorderStyle.None;
+            orderQueue.Dock = DockStyle.Fill;
+            return orderQueue;
         }
     }
 
@@ -71,11 +73,11 @@ namespace TakoTea.Dashboard.Dashboard_Modals
     {
         public Form LoadForm()
         {
-            StockForm stockControl = new StockForm();
-            stockControl.TopLevel = false;
-            stockControl.FormBorderStyle = FormBorderStyle.None;
-            stockControl.Dock = DockStyle.Fill;
-            return stockControl;
+            UserActivitiesForm userActivities = new UserActivitiesForm();
+            userActivities.TopLevel = false;
+            userActivities.FormBorderStyle = FormBorderStyle.None;
+            userActivities.Dock = DockStyle.Fill;
+            return userActivities;
         }
     }
 
