@@ -104,6 +104,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Configurations\FormSettingsConfigurator.cs" />
+    <Compile Include="Configurations\ThemeConfigurator.cs" />
+    <Compile Include="Factory\DashboardFormLoaderFactory.cs" />
+    <Compile Include="Dashboard\Dashboard Modals\EditLowStockThresholdModal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dashboard\Dashboard Modals\EditLowStockThresholdModal.Designer.cs">
+      <DependentUpon>EditLowStockThresholdModal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard\StockAlertsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dashboard\StockAlertsForm.Designer.cs">
+      <DependentUpon>StockAlertsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\IThemeConfigurator.cs" />
     <Compile Include="MainForm\BatchForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,7 +132,7 @@
     <Compile Include="MainForm\Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm\MainFormLoaderFactory.cs" />
+    <Compile Include="Factory\MainFormLoaderFactory.cs" />
     <Compile Include="MainForm\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,10 +145,10 @@
     <Compile Include="MainForm\ItemForm.Designer.cs">
       <DependentUpon>ItemForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm\MainOverviewForm.cs">
+    <Compile Include="Dashboard\MainOverviewForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm\MainOverviewForm.Designer.cs">
+    <Compile Include="Dashboard\MainOverviewForm.Designer.cs">
       <DependentUpon>MainOverviewForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm\OrdersForm.cs">
@@ -192,6 +208,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Dashboard\Dashboard Modals\EditLowStockThresholdModal.resx">
+      <DependentUpon>EditLowStockThresholdModal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard\StockAlertsForm.resx">
+      <DependentUpon>StockAlertsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -201,7 +223,7 @@
     <EmbeddedResource Include="MainForm\ItemForm.resx">
       <DependentUpon>ItemForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm\MainOverviewForm.resx">
+    <EmbeddedResource Include="Dashboard\MainOverviewForm.resx">
       <DependentUpon>MainOverviewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Item Management\AddNewItem.resx">
@@ -250,7 +272,6 @@
     <None Include="Resources\Batch Management%281%29.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dashboard\" />
     <Folder Include="Resources\NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

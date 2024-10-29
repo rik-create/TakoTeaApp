@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TakoTea.Dashboard.Dashboard_Modals;
 using TakoTea.MainForm;
 
 namespace TakoTea.Dashboard
@@ -23,6 +24,24 @@ namespace TakoTea.Dashboard
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.Red500, Primary.BlueGrey900, Primary.BlueGrey900, Accent.LightBlue200, TextShade.WHITE);
+            Form formToLoad = null;
+            Control targetPanel = null;
+            formToLoad = new MainOverviewFormLoader().LoadForm();
+            targetPanel = panelDashboard;
+
+            if (targetPanel != null && formToLoad != null)
+            {
+                targetPanel.Controls.Clear(); // Clears any previous control
+
+
+                targetPanel.Controls.Add(formToLoad); // Adds the new form
+                formToLoad.Show();
+
+                // Position it manually inside the panel (optional: center it)
+
+
+            }
+
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -45,9 +64,6 @@ namespace TakoTea.Dashboard
                 case "tabPageDashboard":
                     formToLoad = new MainOverviewFormLoader().LoadForm();
                     targetPanel = panelDashboard;
-
-
-
                     break;
                 case "tabPageSales":
                     formToLoad = new SalesFormLoader().LoadForm();
@@ -102,8 +118,21 @@ namespace TakoTea.Dashboard
 
         private void iconButton1_Click(object sender, EventArgs e)
         {
-            ReportsForm reportsForm = new ReportsForm();
+            Form2 reportsForm = new Form2();
             reportsForm.Show();
+        }
+
+        private void menuStripDashboardSections_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            var loader = DashboardFormLoaderFactory.GetFormLoader(e.ClickedItem.Name);
+
+            if (loader != null)
+            {
+                Form form = loader.LoadForm();
+                panelDashboard.Controls.Clear();  
+                panelDashboard.Controls.Add(form); 
+                form.Show();                      
+            }
         }
     }
 }

@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
+            this.tabPageDashboard = new System.Windows.Forms.TabPage();
+            this.panelDashboard = new System.Windows.Forms.Panel();
             this.tabPageSales = new System.Windows.Forms.TabPage();
             this.panelSales = new System.Windows.Forms.Panel();
             this.tabPageItem = new System.Windows.Forms.TabPage();
@@ -49,12 +51,15 @@
             this.panelSettings = new System.Windows.Forms.Panel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.iconSplitButton1 = new FontAwesome.Sharp.IconSplitButton();
-            this.tabPageDashboard = new System.Windows.Forms.TabPage();
             this.materialProgressBar1 = new MaterialSkin.Controls.MaterialProgressBar();
-            this.panelDashboard = new System.Windows.Forms.Panel();
             this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.menuStripDashboardSections = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItemMainOverview = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemStockAlerts = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemOrderQueue = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemUserActivities = new System.Windows.Forms.ToolStripMenuItem();
             this.materialTabControl1.SuspendLayout();
+            this.tabPageDashboard.SuspendLayout();
             this.tabPageSales.SuspendLayout();
             this.tabPageItem.SuspendLayout();
             this.tabPageOrder.SuspendLayout();
@@ -64,7 +69,7 @@
             this.tabPageBatch.SuspendLayout();
             this.tabPageReports.SuspendLayout();
             this.tabPageSettings.SuspendLayout();
-            this.tabPageDashboard.SuspendLayout();
+            this.menuStripDashboardSections.SuspendLayout();
             this.SuspendLayout();
             // 
             // materialTabControl1
@@ -88,6 +93,29 @@
             this.materialTabControl1.Size = new System.Drawing.Size(938, 685);
             this.materialTabControl1.TabIndex = 0;
             this.materialTabControl1.SelectedIndexChanged += new System.EventHandler(this.materialTabControl1_SelectedIndexChanged);
+            // 
+            // tabPageDashboard
+            // 
+            this.tabPageDashboard.AutoScroll = true;
+            this.tabPageDashboard.Controls.Add(this.panelDashboard);
+            this.tabPageDashboard.Controls.Add(this.menuStripDashboardSections);
+            this.tabPageDashboard.ImageKey = "icons8-dashboard-24.png";
+            this.tabPageDashboard.Location = new System.Drawing.Point(4, 39);
+            this.tabPageDashboard.Name = "tabPageDashboard";
+            this.tabPageDashboard.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageDashboard.Size = new System.Drawing.Size(930, 642);
+            this.tabPageDashboard.TabIndex = 0;
+            this.tabPageDashboard.Text = "Dashboard";
+            this.tabPageDashboard.UseVisualStyleBackColor = true;
+            this.tabPageDashboard.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // panelDashboard
+            // 
+            this.panelDashboard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelDashboard.Location = new System.Drawing.Point(3, 27);
+            this.panelDashboard.Name = "panelDashboard";
+            this.panelDashboard.Size = new System.Drawing.Size(924, 612);
+            this.panelDashboard.TabIndex = 1;
             // 
             // tabPageSales
             // 
@@ -245,32 +273,6 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // iconSplitButton1
-            // 
-            this.iconSplitButton1.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.iconSplitButton1.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.iconSplitButton1.IconColor = System.Drawing.Color.Black;
-            this.iconSplitButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconSplitButton1.IconSize = 48;
-            this.iconSplitButton1.Name = "iconSplitButton1";
-            this.iconSplitButton1.Rotation = 0D;
-            this.iconSplitButton1.Size = new System.Drawing.Size(23, 23);
-            this.iconSplitButton1.Text = "iconSplitButton1";
-            // 
-            // tabPageDashboard
-            // 
-            this.tabPageDashboard.AutoScroll = true;
-            this.tabPageDashboard.Controls.Add(this.panelDashboard);
-            this.tabPageDashboard.ImageKey = "icons8-dashboard-24.png";
-            this.tabPageDashboard.Location = new System.Drawing.Point(4, 39);
-            this.tabPageDashboard.Name = "tabPageDashboard";
-            this.tabPageDashboard.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDashboard.Size = new System.Drawing.Size(930, 642);
-            this.tabPageDashboard.TabIndex = 0;
-            this.tabPageDashboard.Text = "Dashboard";
-            this.tabPageDashboard.UseVisualStyleBackColor = true;
-            this.tabPageDashboard.Click += new System.EventHandler(this.tabPage1_Click);
-            // 
             // materialProgressBar1
             // 
             this.materialProgressBar1.Depth = 0;
@@ -279,14 +281,6 @@
             this.materialProgressBar1.Name = "materialProgressBar1";
             this.materialProgressBar1.Size = new System.Drawing.Size(67, 5);
             this.materialProgressBar1.TabIndex = 2;
-            // 
-            // panelDashboard
-            // 
-            this.panelDashboard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDashboard.Location = new System.Drawing.Point(3, 3);
-            this.panelDashboard.Name = "panelDashboard";
-            this.panelDashboard.Size = new System.Drawing.Size(924, 636);
-            this.panelDashboard.TabIndex = 1;
             // 
             // iconButton1
             // 
@@ -300,6 +294,47 @@
             this.iconButton1.Text = "iconButton1";
             this.iconButton1.UseVisualStyleBackColor = true;
             this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
+            // 
+            // menuStripDashboardSections
+            // 
+            this.menuStripDashboardSections.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.menuStripDashboardSections.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
+            this.menuStripDashboardSections.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemMainOverview,
+            this.toolStripMenuItemStockAlerts,
+            this.toolStripMenuItemOrderQueue,
+            this.toolStripMenuItemUserActivities});
+            this.menuStripDashboardSections.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.menuStripDashboardSections.Location = new System.Drawing.Point(3, 3);
+            this.menuStripDashboardSections.Name = "menuStripDashboardSections";
+            this.menuStripDashboardSections.Size = new System.Drawing.Size(924, 24);
+            this.menuStripDashboardSections.TabIndex = 2;
+            this.menuStripDashboardSections.Text = "Dashboard Sections";
+            this.menuStripDashboardSections.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStripDashboardSections_ItemClicked);
+            // 
+            // toolStripMenuItemMainOverview
+            // 
+            this.toolStripMenuItemMainOverview.Name = "toolStripMenuItemMainOverview";
+            this.toolStripMenuItemMainOverview.Size = new System.Drawing.Size(98, 20);
+            this.toolStripMenuItemMainOverview.Text = "Main Overview";
+            // 
+            // toolStripMenuItemStockAlerts
+            // 
+            this.toolStripMenuItemStockAlerts.Name = "toolStripMenuItemStockAlerts";
+            this.toolStripMenuItemStockAlerts.Size = new System.Drawing.Size(81, 20);
+            this.toolStripMenuItemStockAlerts.Text = "Stock Alerts";
+            // 
+            // toolStripMenuItemOrderQueue
+            // 
+            this.toolStripMenuItemOrderQueue.Name = "toolStripMenuItemOrderQueue";
+            this.toolStripMenuItemOrderQueue.Size = new System.Drawing.Size(87, 20);
+            this.toolStripMenuItemOrderQueue.Text = "Order Queue";
+            // 
+            // toolStripMenuItemUserActivities
+            // 
+            this.toolStripMenuItemUserActivities.Name = "toolStripMenuItemUserActivities";
+            this.toolStripMenuItemUserActivities.Size = new System.Drawing.Size(93, 20);
+            this.toolStripMenuItemUserActivities.Text = "User Activities";
             // 
             // Form1
             // 
@@ -321,6 +356,8 @@
             this.Text = "TakoTea";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.materialTabControl1.ResumeLayout(false);
+            this.tabPageDashboard.ResumeLayout(false);
+            this.tabPageDashboard.PerformLayout();
             this.tabPageSales.ResumeLayout(false);
             this.tabPageItem.ResumeLayout(false);
             this.tabPageOrder.ResumeLayout(false);
@@ -330,7 +367,8 @@
             this.tabPageBatch.ResumeLayout(false);
             this.tabPageReports.ResumeLayout(false);
             this.tabPageSettings.ResumeLayout(false);
-            this.tabPageDashboard.ResumeLayout(false);
+            this.menuStripDashboardSections.ResumeLayout(false);
+            this.menuStripDashboardSections.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -356,10 +394,14 @@
         private System.Windows.Forms.Panel panelReports;
         private System.Windows.Forms.Panel panelSettings;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private FontAwesome.Sharp.IconSplitButton iconSplitButton1;
         private System.Windows.Forms.TabPage tabPageDashboard;
         private MaterialSkin.Controls.MaterialProgressBar materialProgressBar1;
         private System.Windows.Forms.Panel panelDashboard;
         private FontAwesome.Sharp.IconButton iconButton1;
+        private System.Windows.Forms.MenuStrip menuStripDashboardSections;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemMainOverview;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemStockAlerts;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOrderQueue;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemUserActivities;
     }
 }
