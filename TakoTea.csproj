@@ -119,6 +119,12 @@
     <Compile Include="View\Dashboard\OrderQueueForm.Designer.cs">
       <DependentUpon>OrderQueueForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Dashboard\qwe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Dashboard\qwe.Designer.cs">
+      <DependentUpon>qwe.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Dashboard\UserActivitiesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,11 +171,11 @@
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
     <Compile Include="Factory\MainFormLoaderFactory.cs" />
-    <Compile Include="View\MainForm\MainForm1.cs">
+    <Compile Include="View\MainForm\TakoTeaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\MainForm\MainForm1.Designer.cs">
-      <DependentUpon>MainForm1.cs</DependentUpon>
+    <Compile Include="View\MainForm\TakoTeaForm.Designer.cs">
+      <DependentUpon>TakoTeaForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Dashboard\MainOverviewForm.cs">
       <SubType>Form</SubType>
@@ -270,6 +276,9 @@
     <EmbeddedResource Include="View\Dashboard\OrderQueueForm.resx">
       <DependentUpon>OrderQueueForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Dashboard\qwe.resx">
+      <DependentUpon>qwe.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Dashboard\StockAlertsForm.resx">
       <DependentUpon>StockAlertsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -285,8 +294,8 @@
     <EmbeddedResource Include="View\Items\ItemEditForm.resx">
       <DependentUpon>ItemEditForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\MainForm\MainForm1.resx">
-      <DependentUpon>MainForm1.cs</DependentUpon>
+    <EmbeddedResource Include="View\MainForm\TakoTeaForm.resx">
+      <DependentUpon>TakoTeaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\MainForm\Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>

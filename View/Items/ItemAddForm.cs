@@ -20,5 +20,10 @@ namespace TakoTea.Items
             ThemeConfigurator.ApplyDarkTheme(this);
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
         }
+
+        private void materialLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

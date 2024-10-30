@@ -18,13 +18,13 @@ using DevExpress.Data.Browsing;
 using System.Windows.Media;
 using System.Runtime.Serialization;
 using Audit_Trail;
+using TakoTea.MainForm;
 
 namespace TakoTea.Dashboard
 {
     public partial class MainOverviewForm : MaterialForm
     {
 
-        private MainForm mainForm;
         public MainOverviewForm()
         {
             InitializeComponent();
@@ -36,35 +36,18 @@ namespace TakoTea.Dashboard
 
 
         }
-        public MainOverviewForm(MainForm mainForm)
+        public MainOverviewForm(TakoTeaForm mainForm)
         {
             InitializeComponent();
             ThemeConfigurator.ApplyDarkTheme(this);
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
             InitializeChart();
-            this.mainForm = mainForm;
 
 
 
 
         }
 
-        private void materialCardStocks_Click(object sender, EventArgs e)
-        {
-            var stockTab = MainForm.Instance.materialTabControl1.TabPages["tabPageStock"];
-
-            if (stockTab != null)
-            {
-                MainForm.Instance.materialTabControl1.SelectedTab = stockTab; // Switch to the specified tab
-            }
-            else
-            {
-                MessageBox.Show("The specified tab was not found.");
-            }
-
-            // Close the current form
-            this.Close();
-        }
 
 
         private void InitializeChart()
@@ -115,6 +98,42 @@ namespace TakoTea.Dashboard
 
         }
 
-  
+        private void materialCard4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void materialCard1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void materialCard9_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void materialCardStocks_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
+
+
+        private void materialCardStocks_Click_1(object sender, EventArgs e)
+        {
+            var stockTab = TakoTeaForm.Instance.materialTabControl1.TabPages["tabPageStock"];
+
+            if (stockTab != null)
+            {
+                TakoTeaForm.Instance.materialTabControl1.SelectedTab = stockTab; // Switch to the specified tab
+            }
+            else
+            {
+                MessageBox.Show("The specified tab was not found.");
+            }
+
+            // Close the current form
+            this.Close();
+        }
     }
 }

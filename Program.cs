@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TakoTea.Dashboard;
+using TakoTea.MainForm;
 
 namespace TakoTea
 {
@@ -17,7 +17,7 @@ namespace TakoTea
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Dashboard.MainForm());
+            Application.Run(new TakoTeaForm());
         }
     }
 }

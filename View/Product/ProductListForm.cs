@@ -21,6 +21,7 @@ namespace TakoTea.Product
             InitializeComponent();
             ThemeConfigurator.ApplyDarkTheme(this);
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
+            this.DrawerWidth = 0;
 
 
             materialCheckedListBox1.Items.Add("Milktea");
@@ -40,13 +41,18 @@ namespace TakoTea.Product
 
         {
             this.Hide();
-            Dashboard.MainForm.Instance.Hide();
+            ParentForm.Hide();
             
             EditProductModal editProductModal = new EditProductModal();
             editProductModal.ShowDialog();
-            Dashboard.MainForm.Instance.Show();
+            ParentForm.Show();
             this.Show();
 
+
+        }
+
+        private void materialCard1_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }

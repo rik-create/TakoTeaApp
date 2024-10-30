@@ -11,23 +11,24 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TakoTea.Configurations;
 using TakoTea.Dashboard.Dashboard_Modals;
 using TakoTea.Factory;
 using TakoTea.MainForm;
 
-namespace TakoTea.Dashboard
+namespace TakoTea.MainForm
 {
-    public partial class MainForm : MaterialForm
+    public partial class TakoTeaForm : MaterialForm
     {
-        public static MainForm Instance;
+        public static TakoTeaForm Instance;
 
-        public MainForm()
+        public TakoTeaForm()
         {
             InitializeComponent();
-            var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.Red500, Primary.BlueGrey900, Primary.BlueGrey900, Accent.LightBlue200, TextShade.WHITE);
+
+            ThemeConfigurator.ApplyDarkTheme(this);
+
+
 
             Instance = this;
 

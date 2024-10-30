@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Dashboard;
 using TakoTea.View.Stock.Stock_Modal;
+using TakoTea.MainForm;
 
 namespace TakoTea.View.Stock
 {
@@ -27,23 +28,12 @@ namespace TakoTea.View.Stock
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
             materialSkinManager = MaterialSkinManager.Instance;
 
-            InitializeMaterialSkin();
             InitializeDataGridViewStockLevels();
             CustomizeDataGridView();
 
 
         }
-        private void InitializeMaterialSkin()
-        {
-            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-            materialSkinManager.ColorScheme = new ColorScheme(
-                Primary.Red500,
-                Primary.BlueGrey900,
-                Primary.BlueGrey900,
-                Accent.LightBlue200,
-                TextShade.WHITE
-            );
-        }
+
         private void CustomizeDataGridView()
         {
             // Set the background color of the DataGridView to match the dark theme
@@ -137,23 +127,69 @@ namespace TakoTea.View.Stock
 
                 if (dataGridViewStockLevels.Columns[e.ColumnIndex].Name == "ReorderButton")
                 {
-                    Dashboard.MainForm.Instance.Hide();
+                    MainForm.TakoTeaForm.Instance.Hide();
                     ReorderItemModal reorderItemModal = new ReorderItemModal();
                     reorderItemModal.ShowDialog();
-                    Dashboard.MainForm.Instance.Show();
+                    MainForm.TakoTeaForm.Instance.Show();
 
 
                 }
                 else if (dataGridViewStockLevels.Columns[e.ColumnIndex].Name == "AdjustButton")
                 {
-                    Dashboard.MainForm.Instance.Hide();
+                    MainForm.TakoTeaForm.Instance.Hide();
 
                     AdjustStockModal adjustStockModal = new AdjustStockModal();
                     adjustStockModal.ShowDialog();
-                    Dashboard.MainForm.Instance.Show();
+                    MainForm.TakoTeaForm.Instance.Show();
 
                 }
             }
+        }
+
+        private void materialLabel4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialButton1_Click(object sender, EventArgs e)
+        {
+            panel3.Enabled = true;
+            panel3.Visible = true;
+        }
+
+        private void materialLabel4_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialCheckedListBox1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void materialLabel6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialLabel2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialSlider1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialSlider2_Click(object sender, EventArgs e)
+        {
+
         }
     }
     public class DataGridViewProgressColumn : DataGridViewColumn

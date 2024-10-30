@@ -14,11 +14,11 @@ namespace TakoTea.Configurations
         {
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(form);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(
                 Primary.Red500,
                 Primary.BlueGrey900,
-                Primary.BlueGrey900,
+                Primary.Blue200,
                 Accent.LightBlue200,
                 TextShade.WHITE
             );

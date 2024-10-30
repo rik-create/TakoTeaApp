@@ -21,5 +21,10 @@ namespace TakoTea.Item_Management
             ThemeConfigurator.ApplyDarkTheme(this);
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
         }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
