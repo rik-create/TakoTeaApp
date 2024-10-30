@@ -12,6 +12,17 @@ using TakoTea.Item_Management;
 using TakoTea.Items;
 using TakoTea.MainForm;
 using TakoTea.Product;
+using TakoTea.View.Stock;
+
+
+
+
+
+using TakoTea.View.Reports;
+using TakoyakiMilkTea;
+using TakoTea.View;
+using TakoTea.View.Settings;
+using TakoTea.View.Sales;
 
 namespace TakoTea.Factory
 {
@@ -76,7 +87,7 @@ namespace TakoTea.Factory
     {
         public Form LoadForm()
         {
-            SalesForm salesControl = new SalesForm();
+            SalesListForm salesControl = new SalesListForm();
             salesControl.TopLevel = false;
             salesControl.FormBorderStyle = FormBorderStyle.None;
             salesControl.Dock = DockStyle.Fill;
@@ -100,7 +111,7 @@ namespace TakoTea.Factory
     {
         public Form LoadForm()
         {
-            StockForm stockControl = new StockForm();
+            CurrentStockForm stockControl = new CurrentStockForm();
             stockControl.TopLevel = false;
             stockControl.FormBorderStyle = FormBorderStyle.None;
             stockControl.Dock = DockStyle.Fill;
@@ -112,7 +123,7 @@ namespace TakoTea.Factory
     {
         public Form LoadForm()
         {
-            OrdersForm orderControl = new OrdersForm();
+            OrderList orderControl = new OrderList();
             orderControl.TopLevel = false;
             orderControl.FormBorderStyle = FormBorderStyle.None;
             orderControl.Dock = DockStyle.Fill;
@@ -124,7 +135,7 @@ namespace TakoTea.Factory
     {
         public Form LoadForm()
         {
-            BatchForm batchControl = new BatchForm();
+            BatchListForm batchControl = new BatchListForm();
             batchControl.TopLevel = false;
             batchControl.FormBorderStyle = FormBorderStyle.None;
             batchControl.Dock = DockStyle.Fill;
@@ -136,7 +147,7 @@ namespace TakoTea.Factory
     {
         public Form LoadForm()
         {
-            ReportsForm reportsControl = new ReportsForm();
+            SalesReportForm reportsControl = new SalesReportForm();
             reportsControl.TopLevel = false;
             reportsControl.FormBorderStyle = FormBorderStyle.None;
             reportsControl.Dock = DockStyle.Fill;
@@ -148,7 +159,7 @@ namespace TakoTea.Factory
     {
         public Form LoadForm()
         {
-            SettingsForm settingsControl = new SettingsForm();
+            UserManagementForm settingsControl = new UserManagementForm();
             settingsControl.TopLevel = false;
             settingsControl.FormBorderStyle = FormBorderStyle.None;
             settingsControl.Dock = DockStyle.Fill;

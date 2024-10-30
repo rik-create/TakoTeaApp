@@ -1,0 +1,120 @@
+﻿using LiveCharts.Defaults;
+using LiveCharts.Wpf;
+using LiveCharts;
+using MaterialSkin;
+using MaterialSkin.Controls;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using TakoTea.Configurations;
+using LiveCharts.WinForms;
+using DevExpress.Data.Browsing;
+using System.Windows.Media;
+using System.Runtime.Serialization;
+using Audit_Trail;
+
+namespace TakoTea.Dashboard
+{
+    public partial class MainOverviewForm : MaterialForm
+    {
+
+        private MainForm mainForm;
+        public MainOverviewForm()
+        {
+            InitializeComponent();
+            ThemeConfigurator.ApplyDarkTheme(this);
+            FormSettingsConfigurator.ApplyStandardFormSettings(this);
+            InitializeChart();
+
+
+
+
+        }
+        public MainOverviewForm(MainForm mainForm)
+        {
+            InitializeComponent();
+            ThemeConfigurator.ApplyDarkTheme(this);
+            FormSettingsConfigurator.ApplyStandardFormSettings(this);
+            InitializeChart();
+            this.mainForm = mainForm;
+
+
+
+
+        }
+
+        private void materialCardStocks_Click(object sender, EventArgs e)
+        {
+            var stockTab = MainForm.Instance.materialTabControl1.TabPages["tabPageStock"];
+
+            if (stockTab != null)
+            {
+                MainForm.Instance.materialTabControl1.SelectedTab = stockTab; // Switch to the specified tab
+            }
+            else
+            {
+                MessageBox.Show("The specified tab was not found.");
+            }
+
+            // Close the current form
+            this.Close();
+        }
+
+
+        private void InitializeChart()
+        {
+            cartesianChart1.Series = new SeriesCollection
+            {
+                new ColumnSeries
+                {
+                    Title = "2023",
+                    Values = new ChartValues<double> { 10, 50, 39, 50 }
+                }
+            };
+
+            cartesianChart1.Series.Add(new ColumnSeries
+            {
+                Title = "2024",
+                Values = new ChartValues<double> { 11, 56, 42 }
+            });
+
+            cartesianChart1.Series[1].Values.Add(48d);
+
+            cartesianChart1.AxisX.Add(new Axis
+            {
+                Title = "Month",
+                Labels = new[] { "Jan", "Feb", "Mar", "Apr" }
+            });
+
+            cartesianChart1.AxisY.Add(new Axis
+            {
+                Title = "Sold",
+                LabelFormatter = value => value.ToString("N")
+            });
+
+
+        }
+        private void CartesianChart1OnDataClick(object sender, ChartPoint chartPoint)
+        {
+        }
+
+        private void cartesianChart1_DataClick(object sender, ChartPoint chartPoint)
+        {
+            MessageBox.Show("You clicked (" + chartPoint.X + "," + chartPoint.Y + ")");
+
+        }
+
+        private void materialCardStocks_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+  
+    }
+}
