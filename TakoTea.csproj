@@ -104,14 +104,39 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Configurations\FormSettingsConfigurator.cs" />
-    <Compile Include="Configurations\ThemeConfigurator.cs" />
-    <Compile Include="Factory\StockFormLoaderFactory.cs" />
-    <Compile Include="View\BatchListForm.cs">
+    <Compile Include="Model\Configurations\FormSettingsConfigurator.cs" />
+    <Compile Include="Model\Configurations\ModalSettingsConfigurator.cs" />
+    <Compile Include="Model\Configurations\ThemeConfigurator.cs" />
+    <Compile Include="Controller\Factory\StockFormLoaderFactory.cs" />
+    <Compile Include="View\Batch\AddBatchForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\BatchListForm.Designer.cs">
+    <Compile Include="View\Batch\AddBatchForm.Designer.cs">
+      <DependentUpon>AddBatchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Batch\Batch Modals\AddBatchModal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Batch\Batch Modals\AddBatchModal.Designer.cs">
+      <DependentUpon>AddBatchModal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Batch\Batch Modals\SearchItemsModal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Batch\Batch Modals\SearchItemsModal.Designer.cs">
+      <DependentUpon>SearchItemsModal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Batch\BatchListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Batch\BatchListForm.Designer.cs">
       <DependentUpon>BatchListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dashboard\DashboardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Dashboard\DashboardForm.Designer.cs">
+      <DependentUpon>DashboardForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Dashboard\OrderQueueForm.cs">
       <SubType>Form</SubType>
@@ -131,7 +156,7 @@
     <Compile Include="View\Dashboard\UserActivitiesForm.Designer.cs">
       <DependentUpon>UserActivitiesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Factory\DashboardFormLoaderFactory.cs" />
+    <Compile Include="Controller\Factory\DashboardFormLoaderFactory.cs" />
     <Compile Include="View\Dashboard\Dashboard Modals\EditLowStockThresholdModal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,13 +169,25 @@
     <Compile Include="View\Dashboard\StockAlertsForm.Designer.cs">
       <DependentUpon>StockAlertsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Factory\ItemFormLoaderFactory.cs" />
+    <Compile Include="Controller\Factory\ItemFormLoaderFactory.cs" />
     <Compile Include="Interfaces\IThemeConfigurator.cs" />
+    <Compile Include="View\Items\Item Modals\AddItemModal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Items\Item Modals\AddItemModal.Designer.cs">
+      <DependentUpon>AddItemModal.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Items\Item Modals\EditItemModal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\Items\Item Modals\EditItemModal.Designer.cs">
       <DependentUpon>EditItemModal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Items\Item Modals\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Items\Item Modals\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Items\ItemCategoryForm.cs">
       <SubType>Form</SubType>
@@ -170,7 +207,7 @@
     <Compile Include="View\MainForm\Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Factory\MainFormLoaderFactory.cs" />
+    <Compile Include="Controller\Factory\MainFormLoaderFactory.cs" />
     <Compile Include="View\MainForm\TakoTeaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,6 +238,12 @@
     </Compile>
     <Compile Include="View\Order\OrderList.Designer.cs">
       <DependentUpon>OrderList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Product\Product Modals\AddProductModal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Product\Product Modals\AddProductModal.Designer.cs">
+      <DependentUpon>AddProductModal.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Product\Product Modals\EditProductModal.cs">
       <SubType>Form</SubType>
@@ -270,8 +313,23 @@
     <Compile Include="View\Stock\Stock Modal\ReorderItemModal.Designer.cs">
       <DependentUpon>ReorderItemModal.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\Batch\AddBatchForm.resx">
+      <DependentUpon>AddBatchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Batch\Batch Modals\AddBatchModal.resx">
+      <DependentUpon>AddBatchModal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Batch\Batch Modals\SearchItemsModal.resx">
+      <DependentUpon>SearchItemsModal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Batch\BatchListForm.resx">
+      <DependentUpon>BatchListForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Dashboard\Dashboard Modals\EditLowStockThresholdModal.resx">
       <DependentUpon>EditLowStockThresholdModal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dashboard\DashboardForm.resx">
+      <DependentUpon>DashboardForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Dashboard\OrderQueueForm.resx">
       <DependentUpon>OrderQueueForm.cs</DependentUpon>
@@ -285,8 +343,14 @@
     <EmbeddedResource Include="View\Dashboard\UserActivitiesForm.resx">
       <DependentUpon>UserActivitiesForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Items\Item Modals\AddItemModal.resx">
+      <DependentUpon>AddItemModal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Items\Item Modals\EditItemModal.resx">
       <DependentUpon>EditItemModal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Items\Item Modals\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Items\ItemCategoryForm.resx">
       <DependentUpon>ItemCategoryForm.cs</DependentUpon>
@@ -311,6 +375,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Order\OrderList.resx">
       <DependentUpon>OrderList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Product\Product Modals\AddProductModal.resx">
+      <DependentUpon>AddProductModal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Product\Product Modals\EditProductModal.resx">
       <DependentUpon>EditProductModal.cs</DependentUpon>
@@ -376,6 +443,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\takoyaki.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\png-transparent-qr-code-information-qr-code-android-qrcode-text-rectangle-monochrome-thumbnail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-export-excel-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-export-pdf-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maximize.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

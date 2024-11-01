@@ -1,18 +1,10 @@
 ﻿using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TakoTea.Configurations;
-using TakoTea.Dashboard;
 using TakoTea.View.Stock.Stock_Modal;
-using TakoTea.MainForm;
 
 namespace TakoTea.View.Stock
 {
@@ -37,7 +29,7 @@ namespace TakoTea.View.Stock
         private void CustomizeDataGridView()
         {
             // Set the background color of the DataGridView to match the dark theme
-            dataGridViewStockLevels.BackgroundColor = Color.FromArgb(80,80,80);
+            dataGridViewStockLevels.BackgroundColor = Color.FromArgb(80, 80, 80);
 
             // Set the grid color
             dataGridViewStockLevels.GridColor = materialSkinManager.ColorScheme.TextColor;

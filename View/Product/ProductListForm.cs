@@ -1,16 +1,9 @@
 ﻿using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TakoTea.Configurations;
-using TakoTea.Dashboard;
 using TakoTea.Product.Product_Modals;
+using TakoTea.View.Product.Product_Modals;
 
 namespace TakoTea.Product
 {
@@ -36,22 +29,71 @@ namespace TakoTea.Product
 
         }
 
- 
+
         private void materialButton1_Click_1(object sender, EventArgs e)
 
         {
-            this.Hide();
-            ParentForm.Hide();
-            
-            EditProductModal editProductModal = new EditProductModal();
-            editProductModal.ShowDialog();
-            ParentForm.Show();
-            this.Show();
+
 
 
         }
 
         private void materialCard1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void materialButton1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            ParentForm.Hide();
+
+            EditProductModal editProductModal = new EditProductModal();
+            editProductModal.ShowDialog();
+            ParentForm.Show();
+            this.Show();
+        }
+
+        private void flowLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void materialLabel25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialTextBox23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialButton3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void floatingActionButtonAddProduct_Click(object sender, EventArgs e)
+        {
+            AddProductModal addProductModal = new AddProductModal();
+            addProductModal.ShowDialog();
+            ThemeConfigurator.ApplyDarkTheme(this);
+
+
+        }
+
+        private void materialRadioButton5_CheckedChanged(object sender, EventArgs e)
         {
 
         }

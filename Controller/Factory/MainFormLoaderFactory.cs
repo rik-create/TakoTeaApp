@@ -1,28 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls.Primitives;
-using System.Windows.Forms;
-using TakoTea.Dashboard;
+﻿using System.Windows.Forms;
+using TakoTea.Factory;
 using TakoTea.Interfaces;
-using TakoTea.Item_Management;
 using TakoTea.Items;
-using TakoTea.MainForm;
 using TakoTea.Product;
-using TakoTea.View.Stock;
-
-
-
-
-
+using TakoTea.View.Batch;
+using TakoTea.View.Dashboard;
 using TakoTea.View.Reports;
-using TakoyakiMilkTea;
-using TakoTea.View;
-using TakoTea.View.Settings;
 using TakoTea.View.Sales;
+using TakoTea.View.Settings;
+using TakoTea.View.Stock;
+using TakoyakiMilkTea;
 
 namespace TakoTea.Factory
 {
@@ -61,7 +48,7 @@ namespace TakoTea.Factory
         public Form LoadForm()
         {
 
-            MainOverviewForm mainOverviewControl = new MainOverviewForm();
+            DashboardForm mainOverviewControl = new DashboardForm();
             mainOverviewControl.TopLevel = false;
             mainOverviewControl.FormBorderStyle = FormBorderStyle.None;
             mainOverviewControl.Dock = DockStyle.Fill;

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TakoTea.Dashboard.Dashboard_Modals;
-using TakoTea.Dashboard;
+﻿using System.Windows.Forms;
 using TakoTea.Interfaces;
 using TakoTea.View.Stock;
 

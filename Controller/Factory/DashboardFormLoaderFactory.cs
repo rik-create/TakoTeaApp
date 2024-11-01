@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using TakoTea.Dashboard;
 using TakoTea.Dashboard.Dashboard_Modals;
 using TakoTea.Interfaces;
+using TakoTea.View.Dashboard;
 
 namespace TakoTea.Factory
 {
@@ -37,7 +38,7 @@ namespace TakoTea.Factory
         public Form LoadForm()
         {
 
-            MainOverviewForm mainOverviewControl = new MainOverviewForm();
+            DashboardForm mainOverviewControl = new DashboardForm();
             mainOverviewControl.TopLevel = false;
             mainOverviewControl.FormBorderStyle = FormBorderStyle.None;
             mainOverviewControl.Dock = DockStyle.Fill;

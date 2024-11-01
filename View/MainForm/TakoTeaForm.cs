@@ -1,20 +1,10 @@
-﻿
-using MaterialSkin;
-using MaterialSkin.Controls;
+﻿using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TakoTea.Configurations;
-using TakoTea.Dashboard.Dashboard_Modals;
 using TakoTea.Factory;
-using TakoTea.MainForm;
+using TakoTea.View.Dashboard;
 
 namespace TakoTea.MainForm
 {
@@ -44,12 +34,10 @@ namespace TakoTea.MainForm
         private void materialTabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             Form formToLoad = null;
-            Control targetPanel = null;
+            Panel targetPanel = null;
+            TabPage selectedTab = materialTabControl1.SelectedTab;
 
-
-
-
-            switch (materialTabControl1.SelectedTab.Name)
+            switch (selectedTab.Name)
             {
                 case "tabPageDashboard":
                     formToLoad = new MainOverviewFormLoader2().LoadForm();
@@ -65,61 +53,83 @@ namespace TakoTea.MainForm
                     formToLoad = new SalesFormLoader().LoadForm();
                     targetPanel = panelSales;
                     this.Text = "TakoTea Sales Management";
-
                     break;
                 case "tabPageItem":
                     formToLoad = new ItemFormLoader().LoadForm();
                     targetPanel = panelItem;
                     this.Text = "TakoTea Item Management";
-
                     break;
                 case "tabPageStock":
                     formToLoad = new StockFormLoader().LoadForm();
                     targetPanel = panelStock;
                     this.Text = "TakoTea Stock Management";
-
                     break;
                 case "tabPageOrder":
                     formToLoad = new OrderFormLoader().LoadForm();
                     targetPanel = panelOrder;
                     this.Text = "TakoTea Order Management";
-
                     break;
                 case "tabPageBatch":
                     formToLoad = new BatchFormLoader().LoadForm();
                     targetPanel = panelBatch;
                     this.Text = "TakoTea Batch Management";
-
+                    // Adjust ClientSize for the vertical scroll
+                    AdjustClientSizeForTabPage(tabPageBatch); // Call the adjusted method here
                     break;
                 case "tabPageReports":
                     formToLoad = new ReportsFormLoader().LoadForm();
                     targetPanel = panelReports;
                     this.Text = "TakoTea Reports";
-
                     break;
                 case "tabPageSettings":
                     formToLoad = new SettingsFormLoader().LoadForm();
                     targetPanel = panelSettings;
                     this.Text = "TakoTea Settings";
-
                     break;
                 default:
-                    return; // If no matching tab, exit
+                    return;
             }
+
             if (targetPanel != null && formToLoad != null)
             {
-                targetPanel.Controls.Clear(); // Clears any previous control
 
 
-                targetPanel.Controls.Add(formToLoad); // Adds the new form
+
+                // Adjusting the target panel size and centering
+                targetPanel.Width = formToLoad.Width;
+                targetPanel.Height = formToLoad.Height;
+                CenterPanel(targetPanel);
+                targetPanel.Controls.Clear(); 
+                targetPanel.Controls.Add(formToLoad);
+
                 formToLoad.Show();
-
-
-
             }
-
         }
 
+        private void AdjustClientSizeForTabPage(TabPage tabPage)
+        {
+            // Check if there are any vertical scroll bars needed
+            if (AreControlsOutOfBounds(tabPage))
+            {
+                // Set the client size to accommodate scroll bars
+                this.ClientSize = new Size(this.ClientSize.Width, this.ClientSize.Height + SystemInformation.VerticalScrollBarArrowHeight + 30);
+            }
+        }
+
+        private bool AreControlsOutOfBounds(TabPage tabPage)
+        {
+            foreach (Control control in tabPage.Controls)
+            {
+                // Check if the control is out of bounds
+                if (!tabPage.ClientRectangle.Contains(control.Bounds))
+                {
+                    // If control's bounds exceed the parent's client area, return true
+                    return true;
+                }
+            }
+            // If no controls are out of bounds, return false
+            return false;
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -131,9 +141,10 @@ namespace TakoTea.MainForm
 
             if (targetPanel != null && formToLoad != null)
             {
+                panelDashboard.Width = formToLoad.Width;
+                panelDashboard.Height = formToLoad.Height;
+                CenterPanel(panelDashboard);
                 targetPanel.Controls.Clear(); // Clears any previous control
-
-
                 targetPanel.Controls.Add(formToLoad); // Adds the new form
                 formToLoad.Show();
 
@@ -150,48 +161,107 @@ namespace TakoTea.MainForm
             reportsForm.Show();
         }
 
+        private ToolStripMenuItem activeMenuItem = null;
+
+        private void HandleMenuItemClick(ToolStripMenuItem clickedMenuItem)
+        {
+            // Check if the clicked item is the same as the currently active one
+            if (activeMenuItem == clickedMenuItem)
+            {
+                // If the clicked item is already active, do nothing
+                return;
+            }
+
+            // Re-enable the previously active menu item if it exists
+            if (activeMenuItem != null)
+            {
+                activeMenuItem.Enabled = true;
+            }
+
+            // Disable the clicked menu item
+            clickedMenuItem.Enabled = false;
+
+            // Update the active menu item
+            activeMenuItem = clickedMenuItem;
+        }
+
+
         private void menuStripDashboardSections_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            var loader = DashboardFormLoaderFactory.GetFormLoader(e.ClickedItem.Name);
-
-            if (loader != null)
+            if (e.ClickedItem is ToolStripMenuItem clickedMenuItem)
             {
-                Form form = loader.LoadForm();
-                panelDashboard.Controls.Clear();
-                panelDashboard.Controls.Add(form);
-                form.Show();
+                // Call the reusable method to handle active menu item state
+                HandleMenuItemClick(clickedMenuItem);
+
+                // Load the form associated with the clicked item
+                var loader = DashboardFormLoaderFactory.GetFormLoader(clickedMenuItem.Name);
+                if (loader != null)
+                {
+                    Form form = loader.LoadForm();
+                    form.MdiParent = this;
+                    panelDashboard.Width = form.Width;
+                    panelDashboard.Height = form.Height;
+                    CenterPanel(panelDashboard);
+
+                    panelDashboard.Controls.Clear();
+                    panelDashboard.Controls.Add(form);
+                    form.Show();
+                }
             }
         }
+        private void CenterPanel(Panel panel)
+        {
+            panel.Left = (this.ClientSize.Width - panel.Width) / 2;
+        }
+
 
         private void menuStripItem_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            var loader = ItemFormLoaderFactory.GetFormLoader(e.ClickedItem.Name);
-
-            if (loader != null)
+            if (e.ClickedItem is ToolStripMenuItem clickedMenuItem)
             {
-                Form form = loader.LoadForm();
-                panelItem.Controls.Clear();
-                panelItem.Controls.Add(form);
-                form.Show();
+                // Call the reusable method to handle active menu item state
+                HandleMenuItemClick(clickedMenuItem);
+                var loader = ItemFormLoaderFactory.GetFormLoader(e.ClickedItem.Name);
+
+                if (loader != null)
+                {
+                    Form form = loader.LoadForm();
+                    form.MdiParent = this;
+                    panelDashboard.Width = form.Width;
+                    panelDashboard.Height = form.Height;
+                    CenterPanel(panelDashboard);
+                    panelItem.Controls.Clear();
+                    panelItem.Controls.Add(form);
+
+
+                    form.Show();
+                }
             }
         }
 
         private void menuStripStocks_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             {
-                var loader = StockFormLoaderFactory.GetFormLoader(e.ClickedItem.Name);
-
-                if (loader != null)
+                if (e.ClickedItem is ToolStripMenuItem clickedMenuItem)
                 {
-                    Form form = loader.LoadForm();
-                    panelStock.Controls.Clear();
-                    panelStock.Controls.Add(form);
-                    form.Show();
+                    // Call the reusable method to handle active menu item state
+                    HandleMenuItemClick(clickedMenuItem);
+                    var loader = StockFormLoaderFactory.GetFormLoader(e.ClickedItem.Name);
+
+                    if (loader != null)
+                    {
+                        Form form = loader.LoadForm();
+                        panelStock.Controls.Clear();
+                        panelStock.Controls.Add(form);
+                        form.Show();
+                    }
                 }
             }
         }
+
+        private void toolStripMenuItemMainOverview_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
-
-
-

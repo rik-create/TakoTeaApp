@@ -1,24 +1,11 @@
-﻿using LiveCharts.Defaults;
+﻿using LiveCharts;
 using LiveCharts.Wpf;
-using LiveCharts;
-using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TakoTea.Configurations;
-using LiveCharts.WinForms;
-using DevExpress.Data.Browsing;
-using System.Windows.Media;
-using System.Runtime.Serialization;
-using Audit_Trail;
 using TakoTea.MainForm;
+using TakoTea.View.Dashboard;
 
 namespace TakoTea.Dashboard
 {
@@ -134,6 +121,12 @@ namespace TakoTea.Dashboard
 
             // Close the current form
             this.Close();
+        }
+
+        private void materialButton1_Click(object sender, EventArgs e)
+        {
+            DashboardForm dashboardForm = new DashboardForm();
+            dashboardForm.Show();
         }
     }
 }

@@ -1,10 +1,5 @@
-﻿using MaterialSkin.Controls;
-using MaterialSkin;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MaterialSkin;
+using MaterialSkin.Controls;
 
 namespace TakoTea.Configurations
 {
@@ -14,12 +9,13 @@ namespace TakoTea.Configurations
         {
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(form);
+
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(
-                Primary.Red500,
+                Primary.Red600,
                 Primary.BlueGrey900,
                 Primary.Blue200,
-                Accent.LightBlue200,
+                Accent.LightBlue700,
                 TextShade.WHITE
             );
         }
