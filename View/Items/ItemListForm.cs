@@ -111,5 +111,15 @@ namespace TakoTea.Items
             AddItemModal addItemModal = new AddItemModal();
             addItemModal.ShowDialog();
         }
+
+        private void materialCard1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

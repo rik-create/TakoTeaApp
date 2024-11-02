@@ -1,10 +1,13 @@
-﻿using MaterialSkin.Controls;
+﻿using MaterialSkin;
+using MaterialSkin.Controls;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Factory;
+using TakoTea.Items;
 using TakoTea.View.Dashboard;
+using TakoTea.View.Order;
 
 namespace TakoTea.MainForm
 {
@@ -17,7 +20,7 @@ namespace TakoTea.MainForm
             InitializeComponent();
 
             ThemeConfigurator.ApplyDarkTheme(this);
-
+            menuStrip2.BackColor = System.Drawing.Color.FromArgb(1, 87, 155);
 
 
             Instance = this;
@@ -30,6 +33,27 @@ namespace TakoTea.MainForm
         {
 
         }
+        // Method to adjust the main form's height based on the panel's current height
+        private void AdjustFormHeightBasedOnPanel(Panel panel1)
+        {
+            this.Height = 774;
+            int basePanelHeight = 618; // The base height of the panel
+            int currentPanelHeight = panel1.Height; // Replace panel1 with the actual panel's name
+
+            if (currentPanelHeight > basePanelHeight)
+            {
+                // Calculate the difference and adjust the main form's height
+                int heightDifference = currentPanelHeight - basePanelHeight;
+                this.Height += heightDifference;
+            }
+            else if (currentPanelHeight < basePanelHeight)
+            {
+                // Optionally adjust down if the panel height is less than the base height
+                int heightDifference = basePanelHeight - currentPanelHeight;
+                this.Height -= heightDifference;
+            }
+        }
+
 
         private void materialTabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -43,6 +67,7 @@ namespace TakoTea.MainForm
                     formToLoad = new MainOverviewFormLoader2().LoadForm();
                     targetPanel = panelDashboard;
                     this.Text = "TakoTea Dashboard";
+                    
                     break;
                 case "tabPageProduct":
                     formToLoad = new ProductFormLoader().LoadForm();
@@ -73,8 +98,7 @@ namespace TakoTea.MainForm
                     formToLoad = new BatchFormLoader().LoadForm();
                     targetPanel = panelBatch;
                     this.Text = "TakoTea Batch Management";
-                    // Adjust ClientSize for the vertical scroll
-                    AdjustClientSizeForTabPage(tabPageBatch); // Call the adjusted method here
+                    
                     break;
                 case "tabPageReports":
                     formToLoad = new ReportsFormLoader().LoadForm();
@@ -95,10 +119,10 @@ namespace TakoTea.MainForm
 
 
 
-                // Adjusting the target panel size and centering
                 targetPanel.Width = formToLoad.Width;
                 targetPanel.Height = formToLoad.Height;
                 CenterPanel(targetPanel);
+                AdjustFormHeightBasedOnPanel(targetPanel);
                 targetPanel.Controls.Clear(); 
                 targetPanel.Controls.Add(formToLoad);
 
@@ -198,7 +222,6 @@ namespace TakoTea.MainForm
                 if (loader != null)
                 {
                     Form form = loader.LoadForm();
-                    form.MdiParent = this;
                     panelDashboard.Width = form.Width;
                     panelDashboard.Height = form.Height;
                     CenterPanel(panelDashboard);
@@ -211,7 +234,7 @@ namespace TakoTea.MainForm
         }
         private void CenterPanel(Panel panel)
         {
-            panel.Left = (this.ClientSize.Width - panel.Width) / 2;
+            panel.Left = ((this.ClientSize.Width - panel.Width) / 2) -30;
         }
 
 
@@ -226,10 +249,9 @@ namespace TakoTea.MainForm
                 if (loader != null)
                 {
                     Form form = loader.LoadForm();
-                    form.MdiParent = this;
-                    panelDashboard.Width = form.Width;
-                    panelDashboard.Height = form.Height;
-                    CenterPanel(panelDashboard);
+                    panelItem.Width = form.Width;
+                    panelItem.Height = form.Height;
+                    CenterPanel(panelItem);
                     panelItem.Controls.Clear();
                     panelItem.Controls.Add(form);
 
@@ -260,6 +282,22 @@ namespace TakoTea.MainForm
         }
 
         private void toolStripMenuItemMainOverview_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void iconButton1_Click_1(object sender, EventArgs e)
+        {
+            MenuOrderForm menuOrderForm = new MenuOrderForm();
+            menuOrderForm.Show();
+        }
+
+        private void panelItem_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tabPageItem_Click(object sender, EventArgs e)
         {
 
         }

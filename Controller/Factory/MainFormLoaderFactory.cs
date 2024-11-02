@@ -5,6 +5,7 @@ using TakoTea.Items;
 using TakoTea.Product;
 using TakoTea.View.Batch;
 using TakoTea.View.Dashboard;
+using TakoTea.View.Order;
 using TakoTea.View.Reports;
 using TakoTea.View.Sales;
 using TakoTea.View.Settings;
@@ -74,7 +75,7 @@ namespace TakoTea.Factory
     {
         public Form LoadForm()
         {
-            SalesListForm salesControl = new SalesListForm();
+            SalesHistoryForm salesControl = new SalesHistoryForm();
             salesControl.TopLevel = false;
             salesControl.FormBorderStyle = FormBorderStyle.None;
             salesControl.Dock = DockStyle.Fill;
@@ -110,7 +111,7 @@ namespace TakoTea.Factory
     {
         public Form LoadForm()
         {
-            OrderList orderControl = new OrderList();
+            MenuOrderForm orderControl = new MenuOrderForm();
             orderControl.TopLevel = false;
             orderControl.FormBorderStyle = FormBorderStyle.None;
             orderControl.Dock = DockStyle.Fill;

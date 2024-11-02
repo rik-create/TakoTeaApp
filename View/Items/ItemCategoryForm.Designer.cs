@@ -1,4 +1,4 @@
-﻿namespace TakoTea.Item_Management
+﻿namespace TakoTea.View.Items
 {
     partial class ItemCategoryForm
     {
@@ -79,6 +79,7 @@
             // 
             // materialCard1
             // 
+            this.materialCard1.AutoScroll = true;
             this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.materialCard1.Controls.Add(this.floatingActionButtonAddBatch);
             this.materialCard1.Controls.Add(this.panelExportButtons);
@@ -94,8 +95,8 @@
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard1.Size = new System.Drawing.Size(1191, 744);
-            this.materialCard1.TabIndex = 0;
+            this.materialCard1.Size = new System.Drawing.Size(1185, 789);
+            this.materialCard1.TabIndex = 2;
             // 
             // floatingActionButtonAddBatch
             // 
@@ -500,7 +501,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1197, 747);
+            this.ClientSize = new System.Drawing.Size(1191, 792);
             this.Controls.Add(this.materialCard1);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.StatusAndActionBar_None;
             this.Name = "ItemCategoryForm";

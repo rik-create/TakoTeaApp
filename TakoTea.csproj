@@ -108,6 +108,18 @@
     <Compile Include="Model\Configurations\ModalSettingsConfigurator.cs" />
     <Compile Include="Model\Configurations\ThemeConfigurator.cs" />
     <Compile Include="Controller\Factory\StockFormLoaderFactory.cs" />
+    <Compile Include="User Controls\CategoryButtonOrdering.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Controls\CategoryButtonOrdering.Designer.cs">
+      <DependentUpon>CategoryButtonOrdering.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User Controls\ProductWidget.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Controls\ProductWidget.Designer.cs">
+      <DependentUpon>ProductWidget.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Batch\AddBatchForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -233,6 +245,12 @@
     <Compile Include="View\Items\ItemListForm.Designer.cs">
       <DependentUpon>ItemListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Order\MenuOrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Order\MenuOrderForm.Designer.cs">
+      <DependentUpon>MenuOrderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Order\OrderList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -271,11 +289,23 @@
     <Compile Include="View\Reports\SalesReportForm.Designer.cs">
       <DependentUpon>SalesReportForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Sales\SalesListForm.cs">
+    <Compile Include="View\Sales\Sales Modals\AddAddOnsModal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Sales\SalesListForm.Designer.cs">
-      <DependentUpon>SalesListForm.cs</DependentUpon>
+    <Compile Include="View\Sales\Sales Modals\AddAddOnsModal.Designer.cs">
+      <DependentUpon>AddAddOnsModal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sales\Sales Modals\AddSalesEntryModal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Sales\Sales Modals\AddSalesEntryModal.Designer.cs">
+      <DependentUpon>AddSalesEntryModal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sales\SalesHistoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Sales\SalesHistoryForm.Designer.cs">
+      <DependentUpon>SalesHistoryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Settings\UserManagementForm.cs">
       <SubType>Form</SubType>
@@ -313,6 +343,12 @@
     <Compile Include="View\Stock\Stock Modal\ReorderItemModal.Designer.cs">
       <DependentUpon>ReorderItemModal.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="User Controls\CategoryButtonOrdering.resx">
+      <DependentUpon>CategoryButtonOrdering.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Controls\ProductWidget.resx">
+      <DependentUpon>ProductWidget.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Batch\AddBatchForm.resx">
       <DependentUpon>AddBatchForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -373,6 +409,9 @@
     <EmbeddedResource Include="View\Items\ItemListForm.resx">
       <DependentUpon>ItemListForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Order\MenuOrderForm.resx">
+      <DependentUpon>MenuOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Order\OrderList.resx">
       <DependentUpon>OrderList.cs</DependentUpon>
     </EmbeddedResource>
@@ -400,6 +439,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Reports\SalesReportForm.resx">
       <DependentUpon>SalesReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Sales\Sales Modals\AddAddOnsModal.resx">
+      <DependentUpon>AddAddOnsModal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Sales\Sales Modals\AddSalesEntryModal.resx">
+      <DependentUpon>AddSalesEntryModal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Sales\SalesHistoryForm.resx">
+      <DependentUpon>SalesHistoryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Stock\AdjustStockForm.resx">
       <DependentUpon>AdjustStockForm.cs</DependentUpon>
@@ -458,6 +506,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\maximize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\takoyaki%281%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -8,5 +8,10 @@ namespace TakoyakiMilkTea
         {
             InitializeComponent();
         }
+
+        private void OrderList_Load(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }

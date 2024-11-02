@@ -2,6 +2,7 @@
 using TakoTea.Interfaces;
 using TakoTea.Item_Management;
 using TakoTea.Items;
+using TakoTea.View.Items;
 
 namespace TakoTea.Factory
 {
@@ -32,11 +33,11 @@ namespace TakoTea.Factory
         public Form LoadForm()
         {
 
-            ItemListForm itemList = new ItemListForm();
-            itemList.TopLevel = false;
-            itemList.FormBorderStyle = FormBorderStyle.None;
-            itemList.Dock = DockStyle.Fill;
-            return itemList;
+            ItemListForm itemControl = new ItemListForm();
+            itemControl.TopLevel = false;
+            itemControl.FormBorderStyle = FormBorderStyle.None;
+            itemControl.Dock = DockStyle.Fill;
+            return itemControl;
         }
     }
 
@@ -68,11 +69,11 @@ namespace TakoTea.Factory
     {
         public Form LoadForm()
         {
-            ItemCategoryForm userActivities = new ItemCategoryForm();
-            userActivities.TopLevel = false;
-            userActivities.FormBorderStyle = FormBorderStyle.None;
-            userActivities.Dock = DockStyle.Fill;
-            return userActivities;
+            ItemCategoryForm itemControl = new ItemCategoryForm();
+            itemControl.TopLevel = false;
+            itemControl.FormBorderStyle = FormBorderStyle.None;
+            itemControl.Dock = DockStyle.Fill;
+            return itemControl;
         }
     }
 }

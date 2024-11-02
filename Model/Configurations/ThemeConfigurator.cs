@@ -12,10 +12,10 @@ namespace TakoTea.Configurations
 
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(
-                Primary.Red600,
+                Primary.LightBlue900,
                 Primary.BlueGrey900,
-                Primary.Blue200,
-                Accent.LightBlue700,
+                Primary.BlueGrey900,
+                Accent.Red700,
                 TextShade.WHITE
             );
         }

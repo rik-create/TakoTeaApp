@@ -116,6 +116,7 @@
             this.Controls.Add(this.dateTimePicker1);
             this.Name = "OrderList";
             this.Text = "OrderList";
+            this.Load += new System.EventHandler(this.OrderList_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
