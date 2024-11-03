@@ -33,7 +33,7 @@ namespace TakoTea.Factory
         public Form LoadForm()
         {
 
-            CurrentStockForm currentStock = new CurrentStockForm();
+            CurrentStockLevelForm currentStock = new CurrentStockLevelForm();
             currentStock.TopLevel = false;
             currentStock.FormBorderStyle = FormBorderStyle.None;
             currentStock.Dock = DockStyle.Fill;

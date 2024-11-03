@@ -7,7 +7,7 @@ namespace TakoTea.Configurations
     {
         public static void ApplyStandardModalSettings(MaterialForm form)
         {
-            form.StartPosition = FormStartPosition.CenterParent;
+            form.StartPosition = FormStartPosition.CenterScreen;
             form.FormBorderStyle = FormBorderStyle.None;
             form.Sizable = false;
             form.MaximizeBox = false;
