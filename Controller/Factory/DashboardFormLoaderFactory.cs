@@ -8,6 +8,7 @@ using TakoTea.Dashboard;
 using TakoTea.Dashboard.Dashboard_Modals;
 using TakoTea.Interfaces;
 using TakoTea.View.Dashboard;
+using TakoTea.View.Order;
 
 namespace TakoTea.Factory
 {
@@ -62,11 +63,11 @@ namespace TakoTea.Factory
     {
         public Form LoadForm()
         {
-            OrderQueueForm orderQueue = new OrderQueueForm();
-            orderQueue.TopLevel = false;
-            orderQueue.FormBorderStyle = FormBorderStyle.None;
-            orderQueue.Dock = DockStyle.Fill;
-            return orderQueue;
+            OrdersQueueForm orders = new OrdersQueueForm();
+            orders.TopLevel = false;
+            orders.FormBorderStyle = FormBorderStyle.None;
+            orders.Dock = DockStyle.Fill;
+            return orders;
         }
     }
 

@@ -21,7 +21,6 @@ namespace TakoTea.MainForm
             InitializeComponent();
 
             ThemeConfigurator.ApplyDarkTheme(this);
-            menuStripProducts.BackColor = System.Drawing.Color.FromArgb(1, 87, 155);
 
 
             Instance = this;
@@ -216,6 +215,8 @@ namespace TakoTea.MainForm
                     panelDashboard.Width = form.Width;
                     panelDashboard.Height = form.Height;
                     CenterPanel(panelDashboard);
+                    AdjustFormHeightBasedOnPanel(panelDashboard);
+
 
                     panelDashboard.Controls.Clear();
                     panelDashboard.Controls.Add(form);

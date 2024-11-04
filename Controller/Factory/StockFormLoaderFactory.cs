@@ -14,8 +14,6 @@ namespace TakoTea.Factory
                     return new StockLevelFormLoader();
                 case "toolStripMenuItemLowStockAlerts":
                     return new LowStockAlertsFormLoader();
-                case "toolStripMenuItemAdjustStock":
-                    return new AdjustStockFormLoader();
                 default:
                     return null;
             }
@@ -53,16 +51,5 @@ namespace TakoTea.Factory
         }
     }
 
-    public class AdjustStockFormLoader : ITabFormLoader
-    {
-        public Form LoadForm()
-        {
-            AdjustStockForm adjustStock = new AdjustStockForm();
-            adjustStock.TopLevel = false;
-            adjustStock.FormBorderStyle = FormBorderStyle.None;
-            adjustStock.Dock = DockStyle.Fill;
-            return adjustStock;
-        }
-    }
 
 }

@@ -112,6 +112,7 @@
             // 
             // tabPageDashboard
             // 
+            this.tabPageDashboard.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tabPageDashboard.Controls.Add(this.panelDashboard);
             this.tabPageDashboard.Controls.Add(this.menuStripDashboardSections);
             this.tabPageDashboard.ImageKey = "icons8-dashboard-24.png";
@@ -121,7 +122,6 @@
             this.tabPageDashboard.Size = new System.Drawing.Size(1302, 648);
             this.tabPageDashboard.TabIndex = 0;
             this.tabPageDashboard.Text = "Dashboard";
-            this.tabPageDashboard.UseVisualStyleBackColor = true;
             this.tabPageDashboard.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // panelDashboard
@@ -259,7 +259,7 @@
             // panelItem
             // 
             this.panelItem.AutoScroll = true;
-            this.panelItem.Location = new System.Drawing.Point(230, 40);
+            this.panelItem.Location = new System.Drawing.Point(230, 30);
             this.panelItem.Margin = new System.Windows.Forms.Padding(0);
             this.panelItem.MaximumSize = new System.Drawing.Size(1200, 900);
             this.panelItem.Name = "panelItem";
@@ -487,6 +487,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(1313, 774);
             this.Controls.Add(this.materialTabControl1);
             this.Controls.Add(this.iconButton1);

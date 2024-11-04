@@ -105,11 +105,18 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Controller\Factory\ProductFormLoaderFactory.cs" />
+    <Compile Include="Model\OrderModel.cs" />
     <Compile Include="User Controls\TakoyakiItemControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="User Controls\TakoyakiItemControl.Designer.cs">
       <DependentUpon>TakoyakiItemControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\OrdersQueueForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Order\OrdersQueueForm.Designer.cs">
+      <DependentUpon>OrdersQueueForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Order\Order Modals\OrderEntryModal.cs">
       <SubType>Form</SubType>
@@ -366,6 +373,9 @@
     <EmbeddedResource Include="User Controls\TakoyakiItemControl.resx">
       <DependentUpon>TakoyakiItemControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Order\OrdersQueueForm.resx">
+      <DependentUpon>OrdersQueueForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Order\Order Modals\OrderEntryModal.resx">
       <DependentUpon>OrderEntryModal.cs</DependentUpon>
     </EmbeddedResource>
@@ -550,6 +560,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\multiply.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\checked.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
