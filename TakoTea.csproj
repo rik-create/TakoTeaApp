@@ -112,6 +112,18 @@
     <Compile Include="User Controls\TakoyakiItemControl.Designer.cs">
       <DependentUpon>TakoyakiItemControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Batch\Batch Modals\EditBatchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Batch\Batch Modals\EditBatchForm.Designer.cs">
+      <DependentUpon>EditBatchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Batch\Batch Modals\NewBatchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Batch\Batch Modals\NewBatchForm.Designer.cs">
+      <DependentUpon>NewBatchForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Order\OrdersQueueForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,12 +163,6 @@
     </Compile>
     <Compile Include="Views\Batch\AddBatchForm.Designer.cs">
       <DependentUpon>AddBatchForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Batch\Batch Modals\AddBatchModal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Batch\Batch Modals\AddBatchModal.Designer.cs">
-      <DependentUpon>AddBatchModal.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Batch\Batch Modals\SearchItemsModal.cs">
       <SubType>Form</SubType>
@@ -373,6 +379,12 @@
     <EmbeddedResource Include="User Controls\TakoyakiItemControl.resx">
       <DependentUpon>TakoyakiItemControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Batch\Batch Modals\EditBatchForm.resx">
+      <DependentUpon>EditBatchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Batch\Batch Modals\NewBatchForm.resx">
+      <DependentUpon>NewBatchForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Order\OrdersQueueForm.resx">
       <DependentUpon>OrdersQueueForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -390,9 +402,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Batch\AddBatchForm.resx">
       <DependentUpon>AddBatchForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Batch\Batch Modals\AddBatchModal.resx">
-      <DependentUpon>AddBatchModal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Batch\Batch Modals\SearchItemsModal.resx">
       <DependentUpon>SearchItemsModal.cs</DependentUpon>

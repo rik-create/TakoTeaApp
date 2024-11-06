@@ -89,11 +89,6 @@ namespace TakoTea.MainForm
                     targetPanel = panelStock;
                     this.Text = "TakoTea Stock Management";
                     break;
-                case "tabPageOrder":
-                    formToLoad = new OrderFormLoader().LoadForm();
-                    targetPanel = panelOrder;
-                    this.Text = "TakoTea Order Management";
-                    break;
                 case "tabPageBatch":
                     formToLoad = new BatchFormLoader().LoadForm();
                     targetPanel = panelBatch;

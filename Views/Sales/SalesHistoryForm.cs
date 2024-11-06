@@ -18,23 +18,7 @@ namespace TakoTea.View.Sales
 
         }
 
-        private void floatingActionButtonAddBatch_Click(object sender, EventArgs e)
-        {
-
-
-            TakoTeaForm.Instance.Hide();
-
-            AddBatchModal addBatchModal = new AddBatchModal();
-            addBatchModal.ShowDialog();
-
-
-            TakoTeaForm.Instance.Show();
-            ThemeConfigurator.ApplyDarkTheme(this);
-
-
-
-        }
-
+ 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 

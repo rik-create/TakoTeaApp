@@ -69,6 +69,7 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.pictureBoxExportExcel = new System.Windows.Forms.PictureBox();
             this.pictureBoxExportPdf = new System.Windows.Forms.PictureBox();
+            this.buttonEditBatch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).BeginInit();
             this.materialCard2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -354,6 +355,7 @@
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.buttonEditBatch);
             this.panel3.Controls.Add(this.btnShowFilter);
             this.panel3.Controls.Add(this.materialButton2);
             this.panel3.Controls.Add(this.materialTextBox21);
@@ -376,9 +378,9 @@
             this.btnShowFilter.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnShowFilter.Name = "btnShowFilter";
             this.btnShowFilter.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnShowFilter.Size = new System.Drawing.Size(78, 36);
+            this.btnShowFilter.Size = new System.Drawing.Size(77, 36);
             this.btnShowFilter.TabIndex = 93;
-            this.btnShowFilter.Text = "Search";
+            this.btnShowFilter.Text = "Filters";
             this.btnShowFilter.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnShowFilter.UseAccentColor = false;
             this.btnShowFilter.UseVisualStyleBackColor = true;
@@ -502,6 +504,7 @@
             this.floatingActionButtonAddBatch.Size = new System.Drawing.Size(40, 40);
             this.floatingActionButtonAddBatch.TabIndex = 102;
             this.floatingActionButtonAddBatch.UseVisualStyleBackColor = true;
+            this.floatingActionButtonAddBatch.Click += new System.EventHandler(this.floatingActionButtonAddBatch_Click_1);
             // 
             // bindingNavigatorAddNewItem
             // 
@@ -577,6 +580,16 @@
             this.pictureBoxExportPdf.TabIndex = 97;
             this.pictureBoxExportPdf.TabStop = false;
             // 
+            // buttonEditBatch
+            // 
+            this.buttonEditBatch.Location = new System.Drawing.Point(930, 20);
+            this.buttonEditBatch.Name = "buttonEditBatch";
+            this.buttonEditBatch.Size = new System.Drawing.Size(75, 23);
+            this.buttonEditBatch.TabIndex = 94;
+            this.buttonEditBatch.Text = "Edit Batch";
+            this.buttonEditBatch.UseVisualStyleBackColor = true;
+            this.buttonEditBatch.Click += new System.EventHandler(this.buttonEditBatch_Click);
+            // 
             // BatchListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -647,5 +660,6 @@
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.DataGridView dataGridViewStockLevels;
         private MaterialSkin.Controls.MaterialButton btnShowFilter;
+        private System.Windows.Forms.Button buttonEditBatch;
     }
 }

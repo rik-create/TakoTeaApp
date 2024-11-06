@@ -120,5 +120,11 @@ namespace TakoTea.Items
         {
 
         }
+
+        private void floatingActionButtonAddItem_Click_1(object sender, EventArgs e)
+        {
+            AddItemModal addItemModal = new AddItemModal();
+            addItemModal.ShowDialog();
+        }
     }
 }

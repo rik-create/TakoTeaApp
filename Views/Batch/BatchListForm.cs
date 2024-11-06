@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.MainForm;
 using TakoTea.View.Batch.Batch_Modals;
+using TakoTea.Views.Batch.Batch_Modals;
 
 namespace TakoTea.View.Batch
 {
@@ -18,22 +19,6 @@ namespace TakoTea.View.Batch
 
         }
 
-        private void floatingActionButtonAddBatch_Click(object sender, EventArgs e)
-        {
-
-
-            TakoTeaForm.Instance.Hide();
-
-            AddBatchModal addBatchModal = new AddBatchModal();
-            addBatchModal.ShowDialog();
-
-
-            TakoTeaForm.Instance.Show();
-            ThemeConfigurator.ApplyDarkTheme(this);
-
-
-
-        }
 
         private void materialLabel1_Click(object sender, EventArgs e)
         {
@@ -64,6 +49,18 @@ namespace TakoTea.View.Batch
         {
             panelFilteringComponents.Visible = true;
             panelFilteringComponents.Enabled = true;
+        }
+
+        private void floatingActionButtonAddBatch_Click_1(object sender, EventArgs e)
+        {
+            NewBatchForm newBatchForm = new NewBatchForm();
+            newBatchForm.ShowDialog();
+        }
+
+        private void buttonEditBatch_Click(object sender, EventArgs e)
+        {
+            EditBatchForm edit = new EditBatchForm("10023");
+            edit.ShowDialog();
         }
     }
 }
