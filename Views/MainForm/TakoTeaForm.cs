@@ -8,7 +8,9 @@ using TakoTea.Controller.Factory;
 using TakoTea.Factory;
 using TakoTea.Items;
 using TakoTea.View.Dashboard;
+using TakoTea.View.Items.Item_Modals;
 using TakoTea.View.Order;
+using TakoTea.View.Product.Product_Modals;
 
 namespace TakoTea.MainForm
 {
@@ -144,7 +146,7 @@ namespace TakoTea.MainForm
 
 
             Form formToLoad = null;
-            Control targetPanel = null;
+            Panel targetPanel = null;
             formToLoad = new MainOverviewFormLoader().LoadForm();
             targetPanel = panelDashboard;
 
@@ -153,6 +155,8 @@ namespace TakoTea.MainForm
                 panelDashboard.Width = formToLoad.Width;
                 panelDashboard.Height = formToLoad.Height;
                 CenterPanel(panelDashboard);
+                AdjustFormHeightBasedOnPanel(targetPanel);
+
                 targetPanel.Controls.Clear(); // Clears any previous control
                 targetPanel.Controls.Add(formToLoad); // Adds the new form
                 formToLoad.Show();
@@ -268,11 +272,6 @@ namespace TakoTea.MainForm
             }
         }
 
-        private void iconButton1_Click_1(object sender, EventArgs e)
-        {
-            MenuOrderForm menuOrderForm = new MenuOrderForm();
-            menuOrderForm.Show();
-        }
 
 
         private void menuStripProducts_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -300,6 +299,34 @@ namespace TakoTea.MainForm
         private void tabPageStock_Click(object sender, EventArgs e)
         {
 
+        }
+
+  
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            toolStripQuickAccess.Visible = !toolStripQuickAccess.Visible;
+            toolStripQuickAccess.Enabled = toolStripQuickAccess.Visible;
+
+        }
+
+        private void toolStripBtnNewOrder_Click(object sender, EventArgs e)
+        {
+            MenuOrderForm menuOrderForm = new MenuOrderForm();
+            menuOrderForm.Show();
+        }
+
+        private void toolStripBtnAddIngredient_Click(object sender, EventArgs e)
+        {
+            AddItemModal addItemModal = new AddItemModal();
+            addItemModal.ShowDialog();
+
+        }
+
+        private void toolStripBtnAddProduct_Click(object sender, EventArgs e)
+        {
+            AddProductModal addProductModal = new AddProductModal();
+            addProductModal.ShowDialog();
         }
     }
 }

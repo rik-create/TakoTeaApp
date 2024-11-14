@@ -61,7 +61,11 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.miniToolStrip = new System.Windows.Forms.MenuStrip();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.toolStripQuickAccess = new System.Windows.Forms.ToolStrip();
+            this.toolStripBtnNewOrder = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnAddIngredient = new System.Windows.Forms.ToolStripButton();
+            this.buttonQuickAccess = new System.Windows.Forms.Button();
+            this.toolStripBtnAddProduct = new System.Windows.Forms.ToolStripButton();
             this.materialTabControl1.SuspendLayout();
             this.tabPageDashboard.SuspendLayout();
             this.menuStripDashboardSections.SuspendLayout();
@@ -75,6 +79,7 @@
             this.tabPageBatch.SuspendLayout();
             this.tabPageReports.SuspendLayout();
             this.tabPageSettings.SuspendLayout();
+            this.toolStripQuickAccess.SuspendLayout();
             this.SuspendLayout();
             // 
             // materialTabControl1
@@ -400,18 +405,60 @@
             this.miniToolStrip.Size = new System.Drawing.Size(930, 24);
             this.miniToolStrip.TabIndex = 5;
             // 
-            // iconButton1
+            // toolStripQuickAccess
             // 
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.iconButton1.IconColor = System.Drawing.Color.Black;
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.Location = new System.Drawing.Point(420, 40);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(75, 23);
-            this.iconButton1.TabIndex = 2;
-            this.iconButton1.Text = "Menu Ordering";
-            this.iconButton1.UseVisualStyleBackColor = true;
-            this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click_1);
+            this.toolStripQuickAccess.Dock = System.Windows.Forms.DockStyle.Right;
+            this.toolStripQuickAccess.Enabled = false;
+            this.toolStripQuickAccess.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripBtnNewOrder,
+            this.toolStripBtnAddIngredient,
+            this.toolStripBtnAddProduct});
+            this.toolStripQuickAccess.Location = new System.Drawing.Point(1159, 80);
+            this.toolStripQuickAccess.Name = "toolStripQuickAccess";
+            this.toolStripQuickAccess.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.toolStripQuickAccess.Size = new System.Drawing.Size(154, 694);
+            this.toolStripQuickAccess.TabIndex = 3;
+            this.toolStripQuickAccess.Text = "toolStrip1";
+            this.toolStripQuickAccess.Visible = false;
+            // 
+            // toolStripBtnNewOrder
+            // 
+            this.toolStripBtnNewOrder.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripBtnNewOrder.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnNewOrder.Name = "toolStripBtnNewOrder";
+            this.toolStripBtnNewOrder.Size = new System.Drawing.Size(151, 25);
+            this.toolStripBtnNewOrder.Text = "New Order";
+            this.toolStripBtnNewOrder.ToolTipText = "New Order";
+            this.toolStripBtnNewOrder.Click += new System.EventHandler(this.toolStripBtnNewOrder_Click);
+            // 
+            // toolStripBtnAddIngredient
+            // 
+            this.toolStripBtnAddIngredient.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.toolStripBtnAddIngredient.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnAddIngredient.Name = "toolStripBtnAddIngredient";
+            this.toolStripBtnAddIngredient.Size = new System.Drawing.Size(151, 25);
+            this.toolStripBtnAddIngredient.Text = "Add New Ingredient";
+            this.toolStripBtnAddIngredient.Click += new System.EventHandler(this.toolStripBtnAddIngredient_Click);
+            // 
+            // buttonQuickAccess
+            // 
+            this.buttonQuickAccess.Location = new System.Drawing.Point(1200, 40);
+            this.buttonQuickAccess.Name = "buttonQuickAccess";
+            this.buttonQuickAccess.Size = new System.Drawing.Size(100, 23);
+            this.buttonQuickAccess.TabIndex = 6;
+            this.buttonQuickAccess.Text = "Quick Access";
+            this.buttonQuickAccess.UseVisualStyleBackColor = true;
+            this.buttonQuickAccess.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // toolStripBtnAddProduct
+            // 
+            this.toolStripBtnAddProduct.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripBtnAddProduct.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.toolStripBtnAddProduct.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnAddProduct.Name = "toolStripBtnAddProduct";
+            this.toolStripBtnAddProduct.Size = new System.Drawing.Size(151, 25);
+            this.toolStripBtnAddProduct.Text = "Add New Product";
+            this.toolStripBtnAddProduct.Click += new System.EventHandler(this.toolStripBtnAddProduct_Click);
             // 
             // TakoTeaForm
             // 
@@ -419,8 +466,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(1313, 774);
+            this.Controls.Add(this.buttonQuickAccess);
+            this.Controls.Add(this.toolStripQuickAccess);
             this.Controls.Add(this.materialTabControl1);
-            this.Controls.Add(this.iconButton1);
             this.DrawerHighlightWithAccent = false;
             this.DrawerShowIconsWhenHidden = true;
             this.DrawerTabControl = this.materialTabControl1;
@@ -451,7 +499,10 @@
             this.tabPageBatch.ResumeLayout(false);
             this.tabPageReports.ResumeLayout(false);
             this.tabPageSettings.ResumeLayout(false);
+            this.toolStripQuickAccess.ResumeLayout(false);
+            this.toolStripQuickAccess.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -487,6 +538,10 @@
         public System.Windows.Forms.MenuStrip menuStripDashboardSections;
         private System.Windows.Forms.Panel panelDashboard;
         private System.Windows.Forms.Panel panelItem;
-        private FontAwesome.Sharp.IconButton iconButton1;
+        private System.Windows.Forms.ToolStrip toolStripQuickAccess;
+        private System.Windows.Forms.ToolStripButton toolStripBtnNewOrder;
+        private System.Windows.Forms.ToolStripButton toolStripBtnAddIngredient;
+        private System.Windows.Forms.Button buttonQuickAccess;
+        private System.Windows.Forms.ToolStripButton toolStripBtnAddProduct;
     }
 }

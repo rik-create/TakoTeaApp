@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ItemListForm));
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            this.floatingActionButtonAddItem = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.panelItemList = new System.Windows.Forms.Panel();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
@@ -51,7 +52,6 @@
             this.pictureBoxExportPdf = new System.Windows.Forms.PictureBox();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.floatingActionButtonAddItem = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.materialLabel11 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel12 = new MaterialSkin.Controls.MaterialLabel();
@@ -101,6 +101,20 @@
             this.materialCard1.Size = new System.Drawing.Size(1191, 787);
             this.materialCard1.TabIndex = 2;
             this.materialCard1.Paint += new System.Windows.Forms.PaintEventHandler(this.materialCard1_Paint);
+            // 
+            // floatingActionButtonAddItem
+            // 
+            this.floatingActionButtonAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.floatingActionButtonAddItem.Depth = 0;
+            this.floatingActionButtonAddItem.Icon = global::TakoTea.Properties.Resources.plus;
+            this.floatingActionButtonAddItem.Location = new System.Drawing.Point(1090, 270);
+            this.floatingActionButtonAddItem.MouseState = MaterialSkin.MouseState.HOVER;
+            this.floatingActionButtonAddItem.Name = "floatingActionButtonAddItem";
+            this.floatingActionButtonAddItem.Size = new System.Drawing.Size(62, 61);
+            this.floatingActionButtonAddItem.TabIndex = 11;
+            this.floatingActionButtonAddItem.Text = "1";
+            this.floatingActionButtonAddItem.UseVisualStyleBackColor = true;
+            this.floatingActionButtonAddItem.Click += new System.EventHandler(this.floatingActionButtonAddItem_Click_1);
             // 
             // panelItemList
             // 
@@ -303,20 +317,6 @@
             this.materialLabel1.Size = new System.Drawing.Size(116, 19);
             this.materialLabel1.TabIndex = 146;
             this.materialLabel1.Text = "Total Batches: 5";
-            // 
-            // floatingActionButtonAddItem
-            // 
-            this.floatingActionButtonAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.floatingActionButtonAddItem.Depth = 0;
-            this.floatingActionButtonAddItem.Icon = global::TakoTea.Properties.Resources.plus;
-            this.floatingActionButtonAddItem.Location = new System.Drawing.Point(1090, 270);
-            this.floatingActionButtonAddItem.MouseState = MaterialSkin.MouseState.HOVER;
-            this.floatingActionButtonAddItem.Name = "floatingActionButtonAddItem";
-            this.floatingActionButtonAddItem.Size = new System.Drawing.Size(62, 61);
-            this.floatingActionButtonAddItem.TabIndex = 11;
-            this.floatingActionButtonAddItem.Text = "1";
-            this.floatingActionButtonAddItem.UseVisualStyleBackColor = true;
-            this.floatingActionButtonAddItem.Click += new System.EventHandler(this.floatingActionButtonAddItem_Click_1);
             // 
             // panel2
             // 

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TakoTeaDataSet" targetNamespace="http://tempuri.org/TakoTeaDataSet.xsd" xmlns:mstns="http://tempuri.org/TakoTeaDataSet.xsd" xmlns="http://tempuri.org/TakoTeaDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="TakoTeaConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="TakoTeaConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.TakoTea.Properties.Settings.GlobalReference.Default.TakoTeaConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="BatchTableAdapter" GeneratorDataComponentClassName="BatchTableAdapter" Name="Batch" UserDataComponentName="BatchTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="TakoTeaConnectionString (Settings)" DbObjectName="TakoTea.dbo.Batch" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT ReorderLevel FROM dbo.Batch</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ReorderLevel" DataSetColumn="ReorderLevel" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="IngredientTableAdapter" GeneratorDataComponentClassName="IngredientTableAdapter" Name="Ingredient" UserDataComponentName="IngredientTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="TakoTeaConnectionString (Settings)" DbObjectName="TakoTea.dbo.Ingredient" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT MeasuringUnit FROM dbo.Ingredient</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="MeasuringUnit" DataSetColumn="MeasuringUnit" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TakoTeaDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_UserDSName="TakoTeaDataSet" msprop:Generator_DataSetName="TakoTeaDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Batch" msprop:Generator_RowEvHandlerName="BatchRowChangeEventHandler" msprop:Generator_RowDeletedName="BatchRowDeleted" msprop:Generator_RowDeletingName="BatchRowDeleting" msprop:Generator_RowEvArgName="BatchRowChangeEvent" msprop:Generator_TablePropName="Batch" msprop:Generator_RowChangedName="BatchRowChanged" msprop:Generator_RowChangingName="BatchRowChanging" msprop:Generator_TableClassName="BatchDataTable" msprop:Generator_RowClassName="BatchRow" msprop:Generator_TableVarName="tableBatch" msprop:Generator_UserTableName="Batch">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ReorderLevel" msprop:Generator_ColumnPropNameInRow="ReorderLevel" msprop:Generator_ColumnPropNameInTable="ReorderLevelColumn" msprop:Generator_ColumnVarNameInTable="columnReorderLevel" msprop:Generator_UserColumnName="ReorderLevel" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Ingredient" msprop:Generator_RowEvHandlerName="IngredientRowChangeEventHandler" msprop:Generator_RowDeletedName="IngredientRowDeleted" msprop:Generator_RowDeletingName="IngredientRowDeleting" msprop:Generator_RowEvArgName="IngredientRowChangeEvent" msprop:Generator_TablePropName="Ingredient" msprop:Generator_RowChangedName="IngredientRowChanged" msprop:Generator_RowChangingName="IngredientRowChanging" msprop:Generator_TableClassName="IngredientDataTable" msprop:Generator_RowClassName="IngredientRow" msprop:Generator_TableVarName="tableIngredient" msprop:Generator_UserTableName="Ingredient">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MeasuringUnit" msprop:Generator_ColumnPropNameInRow="MeasuringUnit" msprop:Generator_ColumnPropNameInTable="MeasuringUnitColumn" msprop:Generator_ColumnVarNameInTable="columnMeasuringUnit" msprop:Generator_UserColumnName="MeasuringUnit" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,6 +1,6 @@
-﻿namespace TakoTea.View.Stock
+﻿namespace TakoTea.View.Items
 {
-    partial class CurrentStockLevelForm
+    partial class IngredientListForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,17 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CurrentStockLevelForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IngredientListForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.miniToolStrip = new System.Windows.Forms.BindingNavigator(this.components);
             this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
             this.floatingActionButtonAddBatch = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panelFilteringComponents = new System.Windows.Forms.Panel();
-            this.materialRadioButton3 = new MaterialSkin.Controls.MaterialRadioButton();
-            this.materialRadioButton4 = new MaterialSkin.Controls.MaterialRadioButton();
             this.materialRadioButton5 = new MaterialSkin.Controls.MaterialRadioButton();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
@@ -54,7 +52,7 @@
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.panelItemList = new System.Windows.Forms.Panel();
-            this.bindingNavigatorStockLevels = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
@@ -80,13 +78,15 @@
             this.pictureBoxExportPdf = new System.Windows.Forms.PictureBox();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialRadioButton1 = new MaterialSkin.Controls.MaterialRadioButton();
+            this.materialRadioButton2 = new MaterialSkin.Controls.MaterialRadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).BeginInit();
             this.materialCard2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panelFilteringComponents.SuspendLayout();
             this.panelItemList.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorStockLevels)).BeginInit();
-            this.bindingNavigatorStockLevels.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
+            this.bindingNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStockLevels)).BeginInit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -169,8 +169,8 @@
             // panelFilteringComponents
             // 
             this.panelFilteringComponents.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelFilteringComponents.Controls.Add(this.materialRadioButton3);
-            this.panelFilteringComponents.Controls.Add(this.materialRadioButton4);
+            this.panelFilteringComponents.Controls.Add(this.materialRadioButton1);
+            this.panelFilteringComponents.Controls.Add(this.materialRadioButton2);
             this.panelFilteringComponents.Controls.Add(this.materialRadioButton5);
             this.panelFilteringComponents.Controls.Add(this.materialLabel5);
             this.panelFilteringComponents.Controls.Add(this.materialLabel6);
@@ -190,40 +190,6 @@
             this.panelFilteringComponents.Size = new System.Drawing.Size(1127, 287);
             this.panelFilteringComponents.TabIndex = 107;
             this.panelFilteringComponents.Visible = false;
-            // 
-            // materialRadioButton3
-            // 
-            this.materialRadioButton3.AutoSize = true;
-            this.materialRadioButton3.Depth = 0;
-            this.materialRadioButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.materialRadioButton3.Location = new System.Drawing.Point(670, 240);
-            this.materialRadioButton3.Margin = new System.Windows.Forms.Padding(0);
-            this.materialRadioButton3.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.materialRadioButton3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialRadioButton3.Name = "materialRadioButton3";
-            this.materialRadioButton3.Ripple = false;
-            this.materialRadioButton3.Size = new System.Drawing.Size(202, 20);
-            this.materialRadioButton3.TabIndex = 111;
-            this.materialRadioButton3.TabStop = true;
-            this.materialRadioButton3.Text = "Stock Level(Descending)";
-            this.materialRadioButton3.UseVisualStyleBackColor = true;
-            // 
-            // materialRadioButton4
-            // 
-            this.materialRadioButton4.AutoSize = true;
-            this.materialRadioButton4.Depth = 0;
-            this.materialRadioButton4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.materialRadioButton4.Location = new System.Drawing.Point(458, 240);
-            this.materialRadioButton4.Margin = new System.Windows.Forms.Padding(0);
-            this.materialRadioButton4.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.materialRadioButton4.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialRadioButton4.Name = "materialRadioButton4";
-            this.materialRadioButton4.Ripple = false;
-            this.materialRadioButton4.Size = new System.Drawing.Size(193, 20);
-            this.materialRadioButton4.TabIndex = 110;
-            this.materialRadioButton4.TabStop = true;
-            this.materialRadioButton4.Text = "Stock Level(Ascending)";
-            this.materialRadioButton4.UseVisualStyleBackColor = true;
             // 
             // materialRadioButton5
             // 
@@ -402,19 +368,19 @@
             // panelItemList
             // 
             this.panelItemList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelItemList.Controls.Add(this.bindingNavigatorStockLevels);
+            this.panelItemList.Controls.Add(this.bindingNavigator1);
             this.panelItemList.Controls.Add(this.dataGridViewStockLevels);
             this.panelItemList.Location = new System.Drawing.Point(3, 296);
             this.panelItemList.Name = "panelItemList";
             this.panelItemList.Size = new System.Drawing.Size(1127, 521);
             this.panelItemList.TabIndex = 106;
             // 
-            // bindingNavigatorStockLevels
+            // bindingNavigator1
             // 
-            this.bindingNavigatorStockLevels.AddNewItem = this.bindingNavigatorAddNewItem;
-            this.bindingNavigatorStockLevels.CountItem = this.bindingNavigatorCountItem;
-            this.bindingNavigatorStockLevels.DeleteItem = this.bindingNavigatorDeleteItem;
-            this.bindingNavigatorStockLevels.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigator1.AddNewItem = this.bindingNavigatorAddNewItem;
+            this.bindingNavigator1.CountItem = this.bindingNavigatorCountItem;
+            this.bindingNavigator1.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bindingNavigatorMoveFirstItem,
             this.bindingNavigatorMovePreviousItem,
             this.bindingNavigatorSeparator,
@@ -426,16 +392,16 @@
             this.bindingNavigatorSeparator2,
             this.bindingNavigatorAddNewItem,
             this.bindingNavigatorDeleteItem});
-            this.bindingNavigatorStockLevels.Location = new System.Drawing.Point(0, 0);
-            this.bindingNavigatorStockLevels.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-            this.bindingNavigatorStockLevels.MoveLastItem = this.bindingNavigatorMoveLastItem;
-            this.bindingNavigatorStockLevels.MoveNextItem = this.bindingNavigatorMoveNextItem;
-            this.bindingNavigatorStockLevels.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-            this.bindingNavigatorStockLevels.Name = "bindingNavigatorStockLevels";
-            this.bindingNavigatorStockLevels.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigatorStockLevels.Size = new System.Drawing.Size(1125, 25);
-            this.bindingNavigatorStockLevels.TabIndex = 6;
-            this.bindingNavigatorStockLevels.Text = "bindingNavigator1";
+            this.bindingNavigator1.Location = new System.Drawing.Point(0, 0);
+            this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.bindingNavigator1.Name = "bindingNavigator1";
+            this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
+            this.bindingNavigator1.Size = new System.Drawing.Size(1125, 25);
+            this.bindingNavigator1.TabIndex = 6;
+            this.bindingNavigator1.Text = "bindingNavigator1";
             // 
             // bindingNavigatorAddNewItem
             // 
@@ -528,37 +494,36 @@
             this.dataGridViewStockLevels.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewStockLevels.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridViewStockLevels.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewStockLevels.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewStockLevels.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewStockLevels.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewStockLevels.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridViewStockLevels.Dock = System.Windows.Forms.DockStyle.Bottom;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewStockLevels.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dataGridViewStockLevels.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewStockLevels.EnableHeadersVisualStyles = false;
-            this.dataGridViewStockLevels.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dataGridViewStockLevels.Location = new System.Drawing.Point(0, 30);
+            this.dataGridViewStockLevels.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewStockLevels.Name = "dataGridViewStockLevels";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewStockLevels.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridViewStockLevels.Size = new System.Drawing.Size(1125, 489);
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewStockLevels.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.dataGridViewStockLevels.Size = new System.Drawing.Size(1125, 519);
             this.dataGridViewStockLevels.TabIndex = 5;
             // 
             // panel3
@@ -637,7 +602,7 @@
             this.materialTextBox21.Depth = 0;
             this.materialTextBox21.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialTextBox21.HideSelection = true;
-            this.materialTextBox21.Hint = " Search for batches";
+            this.materialTextBox21.Hint = " Search by Item name or category";
             this.materialTextBox21.LeadingIcon = null;
             this.materialTextBox21.Location = new System.Drawing.Point(12, 8);
             this.materialTextBox21.MaxLength = 32767;
@@ -675,12 +640,13 @@
             this.materialLabel4.Depth = 0;
             this.materialLabel4.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel4.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.materialLabel4.Location = new System.Drawing.Point(535, 10);
+            this.materialLabel4.Location = new System.Drawing.Point(514, 10);
             this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(104, 24);
+            this.materialLabel4.Size = new System.Drawing.Size(130, 24);
             this.materialLabel4.TabIndex = 0;
-            this.materialLabel4.Text = "Stock Level";
+            this.materialLabel4.Text = "Ingredient List";
+            this.materialLabel4.Click += new System.EventHandler(this.materialLabel4_Click);
             // 
             // panelExportButtons
             // 
@@ -736,14 +702,48 @@
             this.materialLabel1.TabIndex = 94;
             this.materialLabel1.Text = "Total Item: 5";
             // 
-            // CurrentStockLevelForm
+            // materialRadioButton1
+            // 
+            this.materialRadioButton1.AutoSize = true;
+            this.materialRadioButton1.Depth = 0;
+            this.materialRadioButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.materialRadioButton1.Location = new System.Drawing.Point(452, 240);
+            this.materialRadioButton1.Margin = new System.Windows.Forms.Padding(0);
+            this.materialRadioButton1.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialRadioButton1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialRadioButton1.Name = "materialRadioButton1";
+            this.materialRadioButton1.Ripple = false;
+            this.materialRadioButton1.Size = new System.Drawing.Size(151, 20);
+            this.materialRadioButton1.TabIndex = 116;
+            this.materialRadioButton1.TabStop = true;
+            this.materialRadioButton1.Text = "Price (Ascending)";
+            this.materialRadioButton1.UseVisualStyleBackColor = true;
+            // 
+            // materialRadioButton2
+            // 
+            this.materialRadioButton2.AutoSize = true;
+            this.materialRadioButton2.Depth = 0;
+            this.materialRadioButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.materialRadioButton2.Location = new System.Drawing.Point(630, 240);
+            this.materialRadioButton2.Margin = new System.Windows.Forms.Padding(0);
+            this.materialRadioButton2.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialRadioButton2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialRadioButton2.Name = "materialRadioButton2";
+            this.materialRadioButton2.Ripple = false;
+            this.materialRadioButton2.Size = new System.Drawing.Size(156, 20);
+            this.materialRadioButton2.TabIndex = 115;
+            this.materialRadioButton2.TabStop = true;
+            this.materialRadioButton2.Text = "Price(Descending)";
+            this.materialRadioButton2.UseVisualStyleBackColor = true;
+            // 
+            // IngredientListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1197, 718);
             this.Controls.Add(this.materialCard2);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.StatusAndActionBar_None;
-            this.Name = "CurrentStockLevelForm";
+            this.Name = "IngredientListForm";
             this.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.Text = "BatchListForm";
             ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).EndInit();
@@ -754,9 +754,9 @@
             this.panelFilteringComponents.PerformLayout();
             this.panelItemList.ResumeLayout(false);
             this.panelItemList.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorStockLevels)).EndInit();
-            this.bindingNavigatorStockLevels.ResumeLayout(false);
-            this.bindingNavigatorStockLevels.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
+            this.bindingNavigator1.ResumeLayout(false);
+            this.bindingNavigator1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStockLevels)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -792,7 +792,7 @@
         private System.Windows.Forms.Panel panelItemList;
         private System.Windows.Forms.DataGridView dataGridViewStockLevels;
         private MaterialSkin.Controls.MaterialButton btnHideFilters;
-        private System.Windows.Forms.BindingNavigator bindingNavigatorStockLevels;
+        private System.Windows.Forms.BindingNavigator bindingNavigator1;
         private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
@@ -804,8 +804,6 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private MaterialSkin.Controls.MaterialRadioButton materialRadioButton3;
-        private MaterialSkin.Controls.MaterialRadioButton materialRadioButton4;
         private MaterialSkin.Controls.MaterialRadioButton materialRadioButton5;
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
         private MaterialSkin.Controls.MaterialLabel materialLabel6;
@@ -819,5 +817,7 @@
         private System.Windows.Forms.PictureBox pBoxShowFilter;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
+        private MaterialSkin.Controls.MaterialRadioButton materialRadioButton1;
+        private MaterialSkin.Controls.MaterialRadioButton materialRadioButton2;
     }
 }

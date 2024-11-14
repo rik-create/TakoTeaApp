@@ -30,7 +30,6 @@ namespace TakoTea.View.Stock.Stock_Modal
             this.components = new System.ComponentModel.Container();
             this.grpIngredientDetails = new System.Windows.Forms.GroupBox();
             this.lblIngredient = new System.Windows.Forms.Label();
-            this.cmbIngredient = new System.Windows.Forms.ComboBox();
             this.lblCurrentQuantity = new System.Windows.Forms.Label();
             this.txtCurrentQuantity = new System.Windows.Forms.TextBox();
             this.grpStockAdjustment = new System.Windows.Forms.GroupBox();
@@ -43,6 +42,7 @@ namespace TakoTea.View.Stock.Stock_Modal
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.txtBoxIngredientName = new System.Windows.Forms.TextBox();
             this.grpIngredientDetails.SuspendLayout();
             this.grpStockAdjustment.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numNewQuantity)).BeginInit();
@@ -51,8 +51,8 @@ namespace TakoTea.View.Stock.Stock_Modal
             // grpIngredientDetails
             // 
             this.grpIngredientDetails.Controls.Add(this.lblIngredient);
-            this.grpIngredientDetails.Controls.Add(this.cmbIngredient);
             this.grpIngredientDetails.Controls.Add(this.lblCurrentQuantity);
+            this.grpIngredientDetails.Controls.Add(this.txtBoxIngredientName);
             this.grpIngredientDetails.Controls.Add(this.txtCurrentQuantity);
             this.grpIngredientDetails.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
             this.grpIngredientDetails.Location = new System.Drawing.Point(20, 20);
@@ -71,21 +71,6 @@ namespace TakoTea.View.Stock.Stock_Modal
             this.lblIngredient.Size = new System.Drawing.Size(65, 15);
             this.lblIngredient.TabIndex = 0;
             this.lblIngredient.Text = "Ingredient:";
-            // 
-            // cmbIngredient
-            // 
-            this.cmbIngredient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbIngredient.Font = new System.Drawing.Font("Arial", 9F);
-            this.cmbIngredient.Items.AddRange(new object[] {
-            "Flour",
-            "Milk",
-            "Cheese",
-            "Sugar"});
-            this.cmbIngredient.Location = new System.Drawing.Point(100, 30);
-            this.cmbIngredient.Name = "cmbIngredient";
-            this.cmbIngredient.Size = new System.Drawing.Size(220, 23);
-            this.cmbIngredient.TabIndex = 1;
-            this.toolTip.SetToolTip(this.cmbIngredient, "Select the ingredient you want to adjust.");
             // 
             // lblCurrentQuantity
             // 
@@ -217,6 +202,15 @@ namespace TakoTea.View.Stock.Stock_Modal
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             // 
+            // txtBoxIngredientName
+            // 
+            this.txtBoxIngredientName.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxIngredientName.Location = new System.Drawing.Point(80, 30);
+            this.txtBoxIngredientName.Name = "txtBoxIngredientName";
+            this.txtBoxIngredientName.ReadOnly = true;
+            this.txtBoxIngredientName.Size = new System.Drawing.Size(240, 22);
+            this.txtBoxIngredientName.TabIndex = 3;
+            // 
             // EditStockModal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -231,6 +225,7 @@ namespace TakoTea.View.Stock.Stock_Modal
             this.Name = "EditStockModal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Stock Level";
+            this.Load += new System.EventHandler(this.EditStockModal_Load);
             this.grpIngredientDetails.ResumeLayout(false);
             this.grpIngredientDetails.PerformLayout();
             this.grpStockAdjustment.ResumeLayout(false);
@@ -243,7 +238,6 @@ namespace TakoTea.View.Stock.Stock_Modal
 
         private GroupBox grpIngredientDetails;
         private Label lblIngredient;
-        private ComboBox cmbIngredient;
         private ToolTip toolTip;
         private Label lblCurrentQuantity;
         private TextBox txtCurrentQuantity;
@@ -256,7 +250,6 @@ namespace TakoTea.View.Stock.Stock_Modal
         private TextBox txtReason;
         private Button btnSave;
         private Button btnCancel;
-
-
+        private TextBox txtBoxIngredientName;
     }
 }
