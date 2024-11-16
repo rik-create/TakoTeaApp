@@ -1,10 +1,8 @@
 ﻿using MaterialSkin.Controls;
 using System;
 using System.Data;
-using System.Linq;
 using System.Windows.Forms;
 using TakoTea.Configurations;
-using TakoTea.Controller.Factory;
 using TakoTea.HELPERS;
 using TakoTea.Repository;
 using TakoTea.View.Stock.Stock_Modal;
@@ -40,71 +38,50 @@ namespace TakoTea.View.Stock
 
         private void LoadData()
         {
-            DataTable stockData = _ingredientRepository.GetCurrentStockLevels();
-
-            if (stockData == null)
+            try
             {
-                MessageBox.Show("Failed to load stock data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+                // Get the stock data
+                DataTable stockData = _ingredientRepository.GetCurrentStockLevels();
 
-            _bindingSource.DataSource = stockData;
-            dataGridViewStockLevels.DataSource = _bindingSource;
-            bindingNavigatorStockLevels.BindingSource = _bindingSource;
+                if (stockData == null)
+                {
+                    DialogHelper.ShowError("Failed to load stock data.");
+                    return;
+                }
+
+                // Use the BindDataToGridView helper to bind data to DataGridView and refresh it
+                DataGridViewHelper.BindDataToGridView(dataGridViewStockLevels, _bindingSource, stockData);
+                DataGridViewHelper.BindNavigatorToBindingSource(bindingNavigatorStockLevels, _bindingSource);
+
+            }
+            catch (Exception ex)
+            {
+                DialogHelper.ShowError("Error loading data: " + ex.Message);
+            }
         }
+
 
 
         private void HandleButtonClick(int rowIndex)
         {
             // Get the data from the selected row
             var selectedRow = dataGridViewStockLevels.Rows[rowIndex];
+            int ingredientId = Convert.ToInt32(selectedRow.Cells["IngredientID"].Value); // Retrieve the hidden IngredientID
             string ingredientName = selectedRow.Cells["IngredientName"].Value.ToString();
             decimal quantityInStock = Convert.ToDecimal(selectedRow.Cells["QuantityInStock"].Value);
             string measuringUnit = selectedRow.Cells["MeasuringUnit"].Value.ToString();
             decimal reorderLevel = Convert.ToDecimal(selectedRow.Cells["ReorderLevel"].Value);
 
             // Open the EditStockModal with the selected data
-            EditStockModal editStockModal = new EditStockModal(ingredientName, quantityInStock, measuringUnit, reorderLevel);
+            EditStockModal editStockModal = new EditStockModal(ingredientId, ingredientName, quantityInStock, measuringUnit, reorderLevel);
             editStockModal.ShowDialog();
+
+            LoadData();
+
+
         }
 
 
-        private void InitializeGrid()
-        {
-          
-        }
-
-        private void ShowEditModal(int rowIndex)
-        {
-            if (rowIndex < 0 || rowIndex >= dataGridViewStockLevels.Rows.Count)
-            {
-                MessageBox.Show("Invalid row index.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            // Retrieve the stock level details and create a StockDetails object
-            var stockLevel = _bindingSource[rowIndex] as StockDetails;
-            if (stockLevel == null)
-            {
-                MessageBox.Show("Failed to retrieve stock level data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            var stockDetails = new StockDetails
-            {
-                IngredientName = stockLevel.IngredientName,
-                CurrentQuantity = stockLevel.CurrentQuantity,
-                MeasuringUnit = stockLevel.MeasuringUnit,
-                ReorderLevel = stockLevel.ReorderLevel
-            };
-
-            // Use ModalFactory to create the modal
-            using (var editStockModal = ModalFactory.CreateEditStockModal(stockDetails))
-            {
-                editStockModal.ShowDialog();
-                LoadData();
-            }
-        }
 
         private void btnHideFilters_Click(object sender, EventArgs e)
         {
@@ -120,7 +97,6 @@ namespace TakoTea.View.Stock
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ShowEditModal(dataGridViewStockLevels.CurrentRow?.Index ?? -1);
         }
     }
 
@@ -140,6 +116,9 @@ namespace TakoTea.View.Stock
         public string MeasuringUnit { get; set; }
         public decimal ReorderLevel { get; set; }
     }
+
+
+
 
 
 }

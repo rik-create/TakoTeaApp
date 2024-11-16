@@ -1,49 +1,56 @@
 ﻿using MaterialSkin.Controls;
 using System;
+using System.Data;
 using System.Windows.Forms;
 using TakoTea.Configurations;
-using TakoTea.MainForm;
-using TakoTea.View.Batch.Batch_Modals;
+using TakoTea.HELPERS;
+using TakoTea.REPOSITORY;
 using TakoTea.Views.Batch.Batch_Modals;
 
 namespace TakoTea.View.Batch
 {
     public partial class BatchListForm : MaterialForm
     {
+
+        BatchRepository _batchRepo;
         public BatchListForm()
         {
             InitializeComponent();
 
             ThemeConfigurator.ApplyDarkTheme(this);
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
+            _batchRepo = new BatchRepository(new DataAccessObject());
+
+            DataGridViewHelper.ApplyDefaultStyles(dataGridViewBatch);
 
         }
 
-
-        private void materialLabel1_Click(object sender, EventArgs e)
+        private void LoadData()
         {
+            try
+            {
+                // Get the stock data
+                DataTable batchData = _batchRepo.GetAllActiveBatches();
 
+                if (batchData == null)
+                {
+                    DialogHelper.ShowError("Failed to load batch data.");
+                    return;
+                }
+
+                // Use the BindDataToGridView helper to bind data to DataGridView and refresh it
+                DataGridViewHelper.BindDataToGridView(dataGridViewBatch, bindingSource1, batchData);
+                DataGridViewHelper.BindNavigatorToBindingSource(bindingNavigatorBatch, bindingSource1);
+
+            }
+            catch (Exception ex)
+            {
+                DialogHelper.ShowError("Error loading data: " + ex.Message);
+            }
         }
 
-        private void materialLabel2_Click(object sender, EventArgs e)
-        {
 
-        }
 
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void materialButton2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void materialLabel4_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnShowFilter_Click(object sender, EventArgs e)
         {
@@ -61,6 +68,11 @@ namespace TakoTea.View.Batch
         {
             EditBatchForm edit = new EditBatchForm("10023");
             edit.ShowDialog();
+        }
+
+        private void BatchListForm_Load(object sender, EventArgs e)
+        {
+            LoadData();
         }
     }
 }

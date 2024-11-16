@@ -31,6 +31,7 @@ namespace TakoTea.View.Stock.Stock_Modal
             this.grpIngredientDetails = new System.Windows.Forms.GroupBox();
             this.lblIngredient = new System.Windows.Forms.Label();
             this.lblCurrentQuantity = new System.Windows.Forms.Label();
+            this.txtBoxIngredientName = new System.Windows.Forms.TextBox();
             this.txtCurrentQuantity = new System.Windows.Forms.TextBox();
             this.grpStockAdjustment = new System.Windows.Forms.GroupBox();
             this.lblNewQuantity = new System.Windows.Forms.Label();
@@ -42,7 +43,6 @@ namespace TakoTea.View.Stock.Stock_Modal
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.txtBoxIngredientName = new System.Windows.Forms.TextBox();
             this.grpIngredientDetails.SuspendLayout();
             this.grpStockAdjustment.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numNewQuantity)).BeginInit();
@@ -81,6 +81,15 @@ namespace TakoTea.View.Stock.Stock_Modal
             this.lblCurrentQuantity.Size = new System.Drawing.Size(98, 15);
             this.lblCurrentQuantity.TabIndex = 2;
             this.lblCurrentQuantity.Text = "Current Quantity:";
+            // 
+            // txtBoxIngredientName
+            // 
+            this.txtBoxIngredientName.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxIngredientName.Location = new System.Drawing.Point(80, 30);
+            this.txtBoxIngredientName.Name = "txtBoxIngredientName";
+            this.txtBoxIngredientName.ReadOnly = true;
+            this.txtBoxIngredientName.Size = new System.Drawing.Size(240, 22);
+            this.txtBoxIngredientName.TabIndex = 3;
             // 
             // txtCurrentQuantity
             // 
@@ -188,6 +197,7 @@ namespace TakoTea.View.Stock.Stock_Modal
             this.btnSave.TabIndex = 2;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
@@ -201,15 +211,7 @@ namespace TakoTea.View.Stock.Stock_Modal
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
-            // 
-            // txtBoxIngredientName
-            // 
-            this.txtBoxIngredientName.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxIngredientName.Location = new System.Drawing.Point(80, 30);
-            this.txtBoxIngredientName.Name = "txtBoxIngredientName";
-            this.txtBoxIngredientName.ReadOnly = true;
-            this.txtBoxIngredientName.Size = new System.Drawing.Size(240, 22);
-            this.txtBoxIngredientName.TabIndex = 3;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // EditStockModal
             // 

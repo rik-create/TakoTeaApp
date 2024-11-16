@@ -1,13 +1,9 @@
-﻿using MaterialSkin;
-using MaterialSkin.Controls;
+﻿using MaterialSkin.Controls;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Controller.Factory;
 using TakoTea.Factory;
-using TakoTea.Items;
-using TakoTea.View.Dashboard;
 using TakoTea.View.Items.Item_Modals;
 using TakoTea.View.Order;
 using TakoTea.View.Product.Product_Modals;
@@ -46,7 +42,7 @@ namespace TakoTea.MainForm
             {
                 // Calculate the difference and adjust the main form's height
                 int heightDifference = currentPanelHeight - basePanelHeight;
-                this.Height += (heightDifference-36);
+                this.Height += (heightDifference - 36);
             }
             else if (currentPanelHeight < basePanelHeight)
             {
@@ -69,7 +65,7 @@ namespace TakoTea.MainForm
                     formToLoad = new MainOverviewFormLoader2().LoadForm();
                     targetPanel = panelDashboard;
                     this.Text = "TakoTea Dashboard";
-                    
+
                     break;
                 case "tabPageProduct":
                     formToLoad = new ProductFormLoader().LoadForm();
@@ -95,7 +91,7 @@ namespace TakoTea.MainForm
                     formToLoad = new BatchFormLoader().LoadForm();
                     targetPanel = panelBatch;
                     this.Text = "TakoTea Batch Management";
-                    
+
                     break;
                 case "tabPageReports":
                     formToLoad = new ReportsFormLoader().LoadForm();
@@ -120,7 +116,7 @@ namespace TakoTea.MainForm
                 targetPanel.Height = formToLoad.Height;
                 CenterPanel(targetPanel);
                 AdjustFormHeightBasedOnPanel(targetPanel);
-                targetPanel.Controls.Clear(); 
+                targetPanel.Controls.Clear();
                 targetPanel.Controls.Add(formToLoad);
 
                 formToLoad.Show();
@@ -225,7 +221,7 @@ namespace TakoTea.MainForm
         }
         private void CenterPanel(Panel panel)
         {
-            panel.Left = ((this.ClientSize.Width - panel.Width) / 2) -30;
+            panel.Left = ((this.ClientSize.Width - panel.Width) / 2) - 30;
         }
 
 
@@ -301,7 +297,7 @@ namespace TakoTea.MainForm
 
         }
 
-  
+
 
         private void button1_Click(object sender, EventArgs e)
         {

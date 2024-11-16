@@ -1,12 +1,10 @@
 ﻿using Moq;
-using Xunit;
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
-using TakoTea.Model.ENTITY;
-using TakoTea.Services;
-using TakoTea.View.Items.Item_Modals;
 using TakoTea.Interfaces;
+using TakoTea.Model.ENTITY;
+using TakoTea.View.Items.Item_Modals;
+using Xunit;
 
 
 namespace TakoTea.TESTS
@@ -28,7 +26,7 @@ namespace TakoTea.TESTS
             // etc.
         }
 
-      
+
         [Fact]
         public void BtnConfirm_Click_ShouldInvokeAddIngredient()
         {

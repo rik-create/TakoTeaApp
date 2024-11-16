@@ -1,17 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using TakoTea.Dashboard;
-using TakoTea.Dashboard.Dashboard_Modals;
-using TakoTea.MainForm;
 using TakoTea.View.Batch;
-using TakoTea.View.Dashboard;
-using TakoTea.View.Items.Item_Modals;
-using TakoTea.View.Order;
-using TakoTea.View.Product.Product_Modals;
 using TakoTea.View.Stock;
-using TakoTea.View.Stock.Stock_Modal;
-using TakoTea.Views.Order;
-using TakoTea.Views.Order.Order_Modals;
 
 namespace TakoTea
 {
@@ -25,7 +15,7 @@ namespace TakoTea
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CurrentStockLevelForm());
+            Application.Run(new BatchListForm());
         }
     }
 }

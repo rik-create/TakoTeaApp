@@ -2,8 +2,6 @@
 using System;
 using System.Windows.Forms;
 using TakoTea.Configurations;
-using TakoTea.MainForm;
-using TakoTea.View.Batch.Batch_Modals;
 
 namespace TakoTea.View.Sales
 {
@@ -18,7 +16,7 @@ namespace TakoTea.View.Sales
 
         }
 
- 
+
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -36,7 +34,7 @@ namespace TakoTea.View.Sales
 
         private void btnShowFilter_Click(object sender, EventArgs e)
         {
-         
+
         }
 
         private void btnHideFilters_Click(object sender, EventArgs e)

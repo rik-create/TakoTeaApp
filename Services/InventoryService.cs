@@ -1,8 +1,6 @@
 ﻿using Dapper;
-using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Threading.Tasks;
 using TakoTea.Controller.DATABASE;
 using TakoTea.Interfaces;
 using TakoTea.Model.ENTITY;  // Ensure this namespace is correct
@@ -12,13 +10,14 @@ namespace TakoTea.Services
     public class InventoryService : IInventoryService
     {
         // Use DatabaseConnection.Instance for accessing the connection
-        private readonly SqlConnection _dbConn = DatabaseConnection.Instance.GetConnection();
+        private readonly SqlConnection _dbConn = DatabaseConnection.GetConnection();
+
 
 
 
         public void AddIngredient(Ingredient ingredient, BatchIngredient batch, List<int> linkedProductIds)
         {
-            using (var connection = _dbConn )
+            using (var connection = _dbConn)
             {
                 connection.Open();
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
+﻿using Xunit;
 
 namespace TakoTea.TESTS
 {
@@ -15,7 +10,7 @@ namespace TakoTea.TESTS
         }
     }
 
-public class CalculatorTests
+    public class CalculatorTests
     {
         [Fact]
         public void Add_ReturnsCorrectSum_WhenGivenTwoIntegers()

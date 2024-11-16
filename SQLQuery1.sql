@@ -1,1 +1,1 @@
-Select*From Batch
+SELECT * FROM Batch

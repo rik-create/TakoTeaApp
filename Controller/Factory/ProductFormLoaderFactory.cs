@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TakoTea.Factory;
+﻿using System.Windows.Forms;
 using TakoTea.Interfaces;
-using TakoTea.Items;
 using TakoTea.Product;
 using TakoTea.View.Product;
 

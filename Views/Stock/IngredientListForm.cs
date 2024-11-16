@@ -2,9 +2,6 @@
 using System;
 using System.Windows.Forms;
 using TakoTea.Configurations;
-using TakoTea.MainForm;
-using TakoTea.View.Batch.Batch_Modals;
-using TakoTea.View.Stock.Stock_Modal;
 
 namespace TakoTea.View.Items
 {
@@ -38,7 +35,7 @@ namespace TakoTea.View.Items
 
         private void btnShowFilter_Click(object sender, EventArgs e)
         {
-         
+
         }
 
         private void btnHideFilters_Click(object sender, EventArgs e)

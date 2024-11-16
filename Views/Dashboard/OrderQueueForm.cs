@@ -3,9 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TakoTea.Configurations;
 using TakoTea.Model;
-using TakoTea.Views.Order;
 
 namespace TakoTea.Dashboard.Dashboard_Modals
 {

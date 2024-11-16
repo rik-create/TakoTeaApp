@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TakoTea.Views.Batch.Batch_Modals
@@ -19,7 +12,7 @@ namespace TakoTea.Views.Batch.Batch_Modals
             _batchNumber = batchNumber;
 
             InitializeComponent();
-        LoadBatchData(_batchNumber); // Load the batch data when form initializes
+            LoadBatchData(_batchNumber); // Load the batch data when form initializes
             txtBatchNumber.Text = _batchNumber; // Display batch number
 
 

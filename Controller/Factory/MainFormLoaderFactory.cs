@@ -1,8 +1,6 @@
 ﻿using System.Windows.Forms;
-using TakoTea.Factory;
 using TakoTea.Interfaces;
 using TakoTea.Items;
-using TakoTea.Product;
 using TakoTea.View.Batch;
 using TakoTea.View.Dashboard;
 using TakoTea.View.Order;
@@ -11,7 +9,6 @@ using TakoTea.View.Reports;
 using TakoTea.View.Sales;
 using TakoTea.View.Settings;
 using TakoTea.View.Stock;
-using TakoyakiMilkTea;
 
 namespace TakoTea.Factory
 {

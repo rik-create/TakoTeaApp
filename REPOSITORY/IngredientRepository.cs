@@ -1,45 +1,88 @@
 ﻿using Dapper;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using TakoTea.Controller.DATABASE;
-using TakoTea.HELPERS;
-using TakoTea.View.Stock;
+using TakoTea.Interfaces;
+using TakoTea.Model.ENTITY;
+using TakoTea.REPOSITORY;
 
 namespace TakoTea.Repository
 {
-    public class IngredientRepository
+    public class IngredientRepository : IIngredientRepository
     {
-        private readonly string _connectionString;
+        private readonly SqlConnection _connection;
+        private readonly DataAccessObject _dao;
+
 
         public IngredientRepository()
         {
-            _connectionString = DatabaseConnection.Instance.GetConnection().ConnectionString; // Retrieve connection string once
+            _connection = DatabaseConnection.GetConnection();
+            _dao = new DataAccessObject();
         }
 
         public DataTable GetCurrentStockLevels()
         {
             string query = @"
-            SELECT 
-                i.IngredientName,
-                b.QuantityInStock,
-                i.MeasuringUnit,
-                b.ReorderLevel
-            FROM 
-                Ingredient i
-            JOIN 
-                Batch b ON i.IngredientID = b.IngredientID
-            WHERE 
-                b.IsActive = 1";
+    SELECT 
+        i.IngredientID, 
+        i.IngredientName,
+        b.QuantityInStock,
+        i.MeasuringUnit,
+        b.ReorderLevel
+    FROM 
+        Ingredient i
+    JOIN 
+        Batch b ON i.IngredientID = b.IngredientID
+    WHERE 
+        b.IsActive = 1";
 
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+
+            return _dao.ExecuteQuery(query);
+
+        }
+
+
+        public void UpdateStockLevel(int ingredientID, decimal newQuantity)
+        {
+            const string query = @"
+        UPDATE Batch
+        SET QuantityInStock = @NewQuantity
+        WHERE IngredientID = @IngredientID;
+    ";
+
+            // Use a using statement to handle the connection lifecycle
+            using (var connection = DatabaseConnection.GetConnection())
             {
-                var dataTable = new DataTable();
-                dataTable.Load(connection.ExecuteReader(query));  // Load data into DataTable
-                return dataTable;
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                connection.Execute(query, new { IngredientID = ingredientID, NewQuantity = newQuantity });
             }
         }
+
+
+
+
+        public Ingredient GetIngredientById(int ingredientId)
+        {
+            var query = "SELECT * FROM Ingredient WHERE IngredientID = @IngredientID";
+            return _connection.QuerySingleOrDefault<Ingredient>(query, new { IngredientID = ingredientId });
+        }
+
+        public string GetIngredientNameById(int ingredientId)
+        {
+            var query = "SELECT IngredientName FROM Ingredient WHERE IngredientID = @IngredientID";
+            return _connection.QueryFirstOrDefault<string>(query, new { IngredientID = ingredientId });
+        }
+
+        public decimal GetPreviousQuantity(int ingredientId)
+        {
+            var query = "SELECT QuantityInStock FROM Batch WHERE IngredientID = @IngredientID AND IsActive = 1";
+            return _connection.QueryFirstOrDefault<decimal>(query, new { IngredientID = ingredientId });
+        }
+
 
 
 

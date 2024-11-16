@@ -150,20 +150,31 @@
     <Compile Include="Controller\DATABASE\DatabaseConnection.cs" />
     <Compile Include="Controller\Factory\ModalFactory.cs" />
     <Compile Include="Controller\Factory\ProductFormLoaderFactory.cs" />
+    <Compile Include="Exceptions\DataAccessException.cs" />
     <Compile Include="HELPERS\CheckedListBoxHelper.cs" />
     <Compile Include="HELPERS\DapperExtension.cs" />
     <Compile Include="HELPERS\DataGridViewHelper.cs" />
+    <Compile Include="HELPERS\DialogHelper.cs" />
     <Compile Include="HELPERS\FilterPanelHelper.cs" />
     <Compile Include="Interfaces\ICheckedItemIterator.cs" />
+    <Compile Include="Interfaces\IIngredientRepository.cs" />
     <Compile Include="Interfaces\IInventoryService.cs" />
+    <Compile Include="Interfaces\IStockAdjustmentRepository.cs" />
+    <Compile Include="Interfaces\IStockAdjustmentService.cs" />
+    <Compile Include="Interfaces\IStockService.cs" />
     <Compile Include="Model\ENTITY\BatchIngredient.cs" />
     <Compile Include="Model\ENTITY\Ingredient.cs" />
     <Compile Include="Model\ENTITY\Product.cs" />
     <Compile Include="Model\ENTITY\ProductCategory.cs" />
     <Compile Include="Model\OrderModel.cs" />
+    <Compile Include="Model\StockLevel.cs" />
     <Compile Include="PATTERNS\CheckedItemIterator.cs" />
+    <Compile Include="REPOSITORY\BatchRepository.cs" />
+    <Compile Include="REPOSITORY\DataAccessObject.cs" />
     <Compile Include="REPOSITORY\IngredientRepository.cs" />
+    <Compile Include="REPOSITORY\StockAdjustmentRepository.cs" />
     <Compile Include="Services\InventoryService.cs" />
+    <Compile Include="Services\StockService.cs" />
     <Compile Include="TakoTeaDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -178,6 +189,7 @@
     <Compile Include="User Controls\TakoyakiItemControl.Designer.cs">
       <DependentUpon>TakoyakiItemControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Validator\StockAdjustmentValidator.cs" />
     <Compile Include="Views\Batch\Batch Modals\EditBatchForm.cs">
       <SubType>Form</SubType>
     </Compile>

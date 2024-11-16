@@ -1,5 +1,5 @@
-﻿using LiveCharts.Wpf;
-using LiveCharts;
+﻿using LiveCharts;
+using LiveCharts.Wpf;
 using MaterialSkin.Controls;
 using TakoTea.Configurations;
 
@@ -37,9 +37,9 @@ namespace TakoTea.View.Dashboard
             {
                 Title = "2024",
                 Values = new ChartValues<double> { 11000, 56000, 42000 } // Initial gross revenue values for 2024
-                                
 
-            }); ;  ; ;
+
+            }); ; ; ;
 
             cartesianChart1.Series[1].Values.Add(48000d); // Add another month's revenue for 2024
 
