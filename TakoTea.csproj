@@ -10,12 +10,13 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>TakoTea</RootNamespace>
     <AssemblyName>TakoTea</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -146,429 +147,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Controller\DATABASE\DatabaseConnection.cs" />
-    <Compile Include="Controller\Factory\ModalFactory.cs" />
-    <Compile Include="Controller\Factory\ProductFormLoaderFactory.cs" />
-    <Compile Include="Exceptions\DataAccessException.cs" />
-    <Compile Include="HELPERS\CheckedListBoxHelper.cs" />
-    <Compile Include="HELPERS\DapperExtension.cs" />
-    <Compile Include="HELPERS\DataGridViewHelper.cs" />
-    <Compile Include="HELPERS\DialogHelper.cs" />
-    <Compile Include="HELPERS\FilterPanelHelper.cs" />
-    <Compile Include="Interfaces\ICheckedItemIterator.cs" />
-    <Compile Include="Interfaces\IIngredientRepository.cs" />
-    <Compile Include="Interfaces\IInventoryService.cs" />
-    <Compile Include="Interfaces\IStockAdjustmentRepository.cs" />
-    <Compile Include="Interfaces\IStockAdjustmentService.cs" />
-    <Compile Include="Interfaces\IStockService.cs" />
-    <Compile Include="Model\ENTITY\BatchIngredient.cs" />
-    <Compile Include="Model\ENTITY\Ingredient.cs" />
-    <Compile Include="Model\ENTITY\Product.cs" />
-    <Compile Include="Model\ENTITY\ProductCategory.cs" />
-    <Compile Include="Model\OrderModel.cs" />
-    <Compile Include="Model\StockLevel.cs" />
-    <Compile Include="PATTERNS\CheckedItemIterator.cs" />
-    <Compile Include="REPOSITORY\BatchRepository.cs" />
-    <Compile Include="REPOSITORY\DataAccessObject.cs" />
-    <Compile Include="REPOSITORY\IngredientRepository.cs" />
-    <Compile Include="REPOSITORY\StockAdjustmentRepository.cs" />
-    <Compile Include="Services\InventoryService.cs" />
-    <Compile Include="Services\StockService.cs" />
     <Compile Include="TakoTeaDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TakoTeaDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="TESTS\AddItemModalTests.cs" />
-    <Compile Include="TESTS\Calculator.cs" />
-    <Compile Include="TESTS\SampleTests.cs" />
-    <Compile Include="User Controls\TakoyakiItemControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="User Controls\TakoyakiItemControl.Designer.cs">
-      <DependentUpon>TakoyakiItemControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Validator\StockAdjustmentValidator.cs" />
-    <Compile Include="Views\Batch\Batch Modals\EditBatchForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Batch\Batch Modals\EditBatchForm.Designer.cs">
-      <DependentUpon>EditBatchForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Batch\Batch Modals\NewBatchForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Batch\Batch Modals\NewBatchForm.Designer.cs">
-      <DependentUpon>NewBatchForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Order\OrdersQueueForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Order\OrdersQueueForm.Designer.cs">
-      <DependentUpon>OrdersQueueForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Order\Order Modals\OrderEntryModal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Order\Order Modals\OrderEntryModal.Designer.cs">
-      <DependentUpon>OrderEntryModal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Stock\BatchListForm - Copy.Designer - Copy.cs">
-      <DependentUpon>IngredientListForm.cs</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Stock\IngredientListForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Stock\Stock Modal\EditStockModal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Stock\Stock Modal\EditStockModal.Designer.cs">
-      <DependentUpon>EditStockModal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Configurations\FormSettingsConfigurator.cs" />
-    <Compile Include="Model\Configurations\ModalSettingsConfigurator.cs" />
-    <Compile Include="Model\Configurations\ThemeConfigurator.cs" />
-    <Compile Include="Controller\Factory\StockFormLoaderFactory.cs" />
-    <Compile Include="User Controls\CategoryButtonOrdering.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="User Controls\CategoryButtonOrdering.Designer.cs">
-      <DependentUpon>CategoryButtonOrdering.cs</DependentUpon>
-    </Compile>
-    <Compile Include="User Controls\ProductWidget.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="User Controls\ProductWidget.Designer.cs">
-      <DependentUpon>ProductWidget.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Batch\AddBatchForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Batch\AddBatchForm.Designer.cs">
-      <DependentUpon>AddBatchForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Batch\Batch Modals\SearchItemsModal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Batch\Batch Modals\SearchItemsModal.Designer.cs">
-      <DependentUpon>SearchItemsModal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Sales\BatchListForm - Copy.Designer - Copy.cs">
-      <DependentUpon>SalesHistoryForm.cs</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Sales\SalesHistoryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Stock\CurrentStockLevelForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Stock\BatchListForm - Copy.Designer.cs">
-      <DependentUpon>CurrentStockLevelForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Batch\BatchListForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Batch\BatchListForm.Designer.cs">
-      <DependentUpon>BatchListForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Dashboard\DashboardForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Dashboard\DashboardForm.Designer.cs">
-      <DependentUpon>DashboardForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Dashboard\OrderQueueForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Dashboard\OrderQueueForm.Designer.cs">
-      <DependentUpon>OrderQueueForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Dashboard\qwe.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Dashboard\qwe.Designer.cs">
-      <DependentUpon>qwe.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Dashboard\UserActivitiesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Dashboard\UserActivitiesForm.Designer.cs">
-      <DependentUpon>UserActivitiesForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controller\Factory\DashboardFormLoaderFactory.cs" />
-    <Compile Include="Views\Dashboard\Dashboard Modals\EditLowStockThresholdModal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Dashboard\Dashboard Modals\EditLowStockThresholdModal.Designer.cs">
-      <DependentUpon>EditLowStockThresholdModal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Dashboard\StockAlertsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Dashboard\StockAlertsForm.Designer.cs">
-      <DependentUpon>StockAlertsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controller\Factory\ItemFormLoaderFactory.cs" />
-    <Compile Include="Interfaces\IThemeConfigurator.cs" />
-    <Compile Include="Views\Items\Item Modals\EditItemModal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Items\Item Modals\EditItemModal.Designer.cs">
-      <DependentUpon>EditItemModal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Items\Item Modals\AddItemModal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Items\Item Modals\AddItemModal.Designer.cs">
-      <DependentUpon>AddItemModal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Items\ItemCategoryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Items\ItemCategoryForm.Designer.cs">
-      <DependentUpon>ItemCategoryForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Items\ItemEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Items\ItemEditForm.Designer.cs">
-      <DependentUpon>ItemEditForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MainForm\Form2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\MainForm\Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controller\Factory\MainFormLoaderFactory.cs" />
-    <Compile Include="Views\MainForm\TakoTeaForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\MainForm\TakoTeaForm.Designer.cs">
-      <DependentUpon>TakoTeaForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Dashboard\MainOverviewForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Dashboard\MainOverviewForm.Designer.cs">
-      <DependentUpon>MainOverviewForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Interfaces\ITabFormLoader.cs" />
-    <Compile Include="Views\Items\ItemAddForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Items\ItemAddForm.Designer.cs">
-      <DependentUpon>ItemAddForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Items\ItemListForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Items\ItemListForm.Designer.cs">
-      <DependentUpon>ItemListForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Order\MenuOrderForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Order\MenuOrderForm.Designer.cs">
-      <DependentUpon>MenuOrderForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Order\OrderList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Order\OrderList.Designer.cs">
-      <DependentUpon>OrderList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AddOns\AddAddOnsModal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\AddOns\AddAddOnsModal.Designer.cs">
-      <DependentUpon>AddAddOnsModal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Product\Product Modals\AddProductCategoryModal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Product\Product Modals\AddProductCategoryModal.Designer.cs">
-      <DependentUpon>AddProductCategoryModal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Product\Product Modals\AddComboMealModal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Product\Product Modals\AddComboMealModal.Designer.cs">
-      <DependentUpon>AddComboMealModal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Product\Product Modals\AddProductModal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Product\Product Modals\AddProductModal.Designer.cs">
-      <DependentUpon>AddProductModal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Product\Product Modals\EditProductModal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Product\Product Modals\EditProductModal.Designer.cs">
-      <DependentUpon>EditProductModal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Product\ProductCategoryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Product\ProductCategoryForm.Designer.cs">
-      <DependentUpon>ProductCategoryForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Product\ProductListForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Product\ProductListForm.Designer.cs">
-      <DependentUpon>ProductListForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\Reports\Audit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Reports\Audit.Designer.cs">
-      <DependentUpon>Audit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Reports\SalesReportForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Reports\SalesReportForm.Designer.cs">
-      <DependentUpon>SalesReportForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Sales\Sales Modals\AddSalesEntryModal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Sales\Sales Modals\AddSalesEntryModal.Designer.cs">
-      <DependentUpon>AddSalesEntryModal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\UserManagementForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Settings\UserManagementForm.Designer.cs">
-      <DependentUpon>UserManagementForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Stock\LowStockAlertsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Stock\LowStockAlertsForm.Designer.cs">
-      <DependentUpon>LowStockAlertsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Stock\Stock Modal\ReorderItemModal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Stock\Stock Modal\ReorderItemModal.Designer.cs">
-      <DependentUpon>ReorderItemModal.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="User Controls\TakoyakiItemControl.resx">
-      <DependentUpon>TakoyakiItemControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Batch\Batch Modals\EditBatchForm.resx">
-      <DependentUpon>EditBatchForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Batch\Batch Modals\NewBatchForm.resx">
-      <DependentUpon>NewBatchForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Order\OrdersQueueForm.resx">
-      <DependentUpon>OrdersQueueForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Order\Order Modals\OrderEntryModal.resx">
-      <DependentUpon>OrderEntryModal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Stock\IngredientListForm.resx">
-      <DependentUpon>IngredientListForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Stock\Stock Modal\EditStockModal.resx">
-      <DependentUpon>EditStockModal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="User Controls\CategoryButtonOrdering.resx">
-      <DependentUpon>CategoryButtonOrdering.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="User Controls\ProductWidget.resx">
-      <DependentUpon>ProductWidget.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Batch\AddBatchForm.resx">
-      <DependentUpon>AddBatchForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Batch\Batch Modals\SearchItemsModal.resx">
-      <DependentUpon>SearchItemsModal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Batch\BatchListForm.resx">
-      <DependentUpon>BatchListForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Dashboard\Dashboard Modals\EditLowStockThresholdModal.resx">
-      <DependentUpon>EditLowStockThresholdModal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Dashboard\DashboardForm.resx">
-      <DependentUpon>DashboardForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Dashboard\OrderQueueForm.resx">
-      <DependentUpon>OrderQueueForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Dashboard\qwe.resx">
-      <DependentUpon>qwe.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Dashboard\StockAlertsForm.resx">
-      <DependentUpon>StockAlertsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Dashboard\UserActivitiesForm.resx">
-      <DependentUpon>UserActivitiesForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Items\Item Modals\EditItemModal.resx">
-      <DependentUpon>EditItemModal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Items\Item Modals\AddItemModal.resx">
-      <DependentUpon>AddItemModal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Items\ItemCategoryForm.resx">
-      <DependentUpon>ItemCategoryForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Items\ItemEditForm.resx">
-      <DependentUpon>ItemEditForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\MainForm\TakoTeaForm.resx">
-      <DependentUpon>TakoTeaForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\MainForm\Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Dashboard\MainOverviewForm.resx">
-      <DependentUpon>MainOverviewForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Items\ItemAddForm.resx">
-      <DependentUpon>ItemAddForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Items\ItemListForm.resx">
-      <DependentUpon>ItemListForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Order\MenuOrderForm.resx">
-      <DependentUpon>MenuOrderForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Order\OrderList.resx">
-      <DependentUpon>OrderList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\AddOns\AddAddOnsModal.resx">
-      <DependentUpon>AddAddOnsModal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Product\Product Modals\AddProductCategoryModal.resx">
-      <DependentUpon>AddProductCategoryModal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Product\Product Modals\AddComboMealModal.resx">
-      <DependentUpon>AddComboMealModal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Product\Product Modals\AddProductModal.resx">
-      <DependentUpon>AddProductModal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Product\Product Modals\EditProductModal.resx">
-      <DependentUpon>EditProductModal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Product\ProductCategoryForm.resx">
-      <DependentUpon>ProductCategoryForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Product\ProductListForm.resx">
-      <DependentUpon>ProductListForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -579,27 +164,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Views\Reports\Audit.resx">
-      <DependentUpon>Audit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Reports\SalesReportForm.resx">
-      <DependentUpon>SalesReportForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Sales\BatchListForm - Copy.Designer - Copy.resx">
-      <DependentUpon>BatchListForm - Copy.Designer - Copy.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Sales\Sales Modals\AddSalesEntryModal.resx">
-      <DependentUpon>AddSalesEntryModal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Stock\CurrentStockLevelForm.resx">
-      <DependentUpon>CurrentStockLevelForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Stock\LowStockAlertsForm.resx">
-      <DependentUpon>LowStockAlertsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Stock\Stock Modal\ReorderItemModal.resx">
-      <DependentUpon>ReorderItemModal.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -628,11 +192,7 @@
   <ItemGroup>
     <None Include="Resources\Batch Management%281%29.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Product Image\" />
-    <Folder Include="Resources\NewFolder1\" />
-    <Folder Include="Views\MainForm\NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\vecteezy_takoyaki-png-with-ai-generated_30577578.png" />
   </ItemGroup>
@@ -687,6 +247,36 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TakoTea.Controls\TakoTea.Controls.csproj">
+      <Project>{91CFD242-1CBF-4F29-BB7D-3DC77E449F99}</Project>
+      <Name>TakoTea.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TakoTea.Helpers\TakoTea.Helpers.csproj">
+      <Project>{f364ab89-a7dc-4c34-bb2b-586c90eb330b}</Project>
+      <Name>TakoTea.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TakoTea.Interfaces\TakoTea.Interfaces.csproj">
+      <Project>{b801f875-789a-4766-b84b-290f2233a7df}</Project>
+      <Name>TakoTea.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TakoTea.Models\TakoTea.Models.csproj">
+      <Project>{4ff12907-6236-4929-b3c0-e8d10a065437}</Project>
+      <Name>TakoTea.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TakoTea.Patterns\TakoTea.Patterns.csproj">
+      <Project>{d2f6bc22-8730-4313-9f0b-b61072ec5d59}</Project>
+      <Name>TakoTea.Patterns</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TakoTea.Repository\TakoTea.Repository.csproj">
+      <Project>{7daba7c5-30ff-471f-9f11-322fd40745bd}</Project>
+      <Name>TakoTea.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TakoTea.Views\TakoTea.Views.csproj">
+      <Project>{33c2935e-d694-4d14-8470-e796bd37e31f}</Project>
+      <Name>TakoTea.Views</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

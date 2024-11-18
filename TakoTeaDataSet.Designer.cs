@@ -7,12 +7,8 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
 #pragma warning disable 1591
-
 namespace TakoTea {
-    
-    
     /// <summary>
     ///Represents a strongly typed in-memory cache of data.
     ///</summary>
@@ -23,13 +19,9 @@ namespace TakoTea {
     [global::System.Xml.Serialization.XmlRootAttribute("TakoTeaDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class TakoTeaDataSet : global::System.Data.DataSet {
-        
         private BatchDataTable tableBatch;
-        
         private IngredientDataTable tableIngredient;
-        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public TakoTeaDataSet() {
@@ -40,7 +32,6 @@ namespace TakoTea {
             base.Relations.CollectionChanged += schemaChangedHandler;
             this.EndInit();
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         protected TakoTeaDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
@@ -79,7 +70,6 @@ namespace TakoTea {
             base.Tables.CollectionChanged += schemaChangedHandler;
             this.Relations.CollectionChanged += schemaChangedHandler;
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
@@ -89,7 +79,6 @@ namespace TakoTea {
                 return this.tableBatch;
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
@@ -99,7 +88,6 @@ namespace TakoTea {
                 return this.tableIngredient;
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
@@ -112,7 +100,6 @@ namespace TakoTea {
                 this._schemaSerializationMode = value;
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Hidden)]
@@ -121,7 +108,6 @@ namespace TakoTea {
                 return base.Tables;
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Hidden)]
@@ -130,7 +116,6 @@ namespace TakoTea {
                 return base.Relations;
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         protected override void InitializeDerivedDataSet() {
@@ -138,7 +123,6 @@ namespace TakoTea {
             this.InitClass();
             this.EndInit();
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public override global::System.Data.DataSet Clone() {
@@ -147,19 +131,16 @@ namespace TakoTea {
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         protected override bool ShouldSerializeTables() {
             return false;
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         protected override bool ShouldSerializeRelations() {
             return false;
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         protected override void ReadXmlSerializable(global::System.Xml.XmlReader reader) {
@@ -187,7 +168,6 @@ namespace TakoTea {
                 this.InitVars();
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         protected override global::System.Xml.Schema.XmlSchema GetSchemaSerializable() {
@@ -196,13 +176,11 @@ namespace TakoTea {
             stream.Position = 0;
             return global::System.Xml.Schema.XmlSchema.Read(new global::System.Xml.XmlTextReader(stream), null);
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         internal void InitVars() {
             this.InitVars(true);
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         internal void InitVars(bool initTable) {
@@ -219,7 +197,6 @@ namespace TakoTea {
                 }
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitClass() {
@@ -233,19 +210,16 @@ namespace TakoTea {
             this.tableIngredient = new IngredientDataTable();
             base.Tables.Add(this.tableIngredient);
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializeBatch() {
             return false;
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializeIngredient() {
             return false;
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
@@ -253,7 +227,6 @@ namespace TakoTea {
                 this.InitVars();
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
@@ -300,22 +273,17 @@ namespace TakoTea {
             xs.Add(dsSchema);
             return type;
         }
-        
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void BatchRowChangeEventHandler(object sender, BatchRowChangeEvent e);
-        
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void IngredientRowChangeEventHandler(object sender, IngredientRowChangeEvent e);
-        
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class BatchDataTable : global::System.Data.TypedTableBase<BatchRow> {
-            
             private global::System.Data.DataColumn columnReorderLevel;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public BatchDataTable() {
@@ -324,7 +292,6 @@ namespace TakoTea {
                 this.InitClass();
                 this.EndInit();
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal BatchDataTable(global::System.Data.DataTable table) {
@@ -341,14 +308,12 @@ namespace TakoTea {
                 this.Prefix = table.Prefix;
                 this.MinimumCapacity = table.MinimumCapacity;
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected BatchDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public global::System.Data.DataColumn ReorderLevelColumn {
@@ -356,7 +321,6 @@ namespace TakoTea {
                     return this.columnReorderLevel;
                 }
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
@@ -365,7 +329,6 @@ namespace TakoTea {
                     return this.Rows.Count;
                 }
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public BatchRow this[int index] {
@@ -373,25 +336,19 @@ namespace TakoTea {
                     return ((BatchRow)(this.Rows[index]));
                 }
             }
-            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public event BatchRowChangeEventHandler BatchRowChanging;
-            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public event BatchRowChangeEventHandler BatchRowChanged;
-            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public event BatchRowChangeEventHandler BatchRowDeleting;
-            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public event BatchRowChangeEventHandler BatchRowDeleted;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void AddBatchRow(BatchRow row) {
                 this.Rows.Add(row);
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public BatchRow AddBatchRow(decimal ReorderLevel) {
@@ -402,7 +359,6 @@ namespace TakoTea {
                 this.Rows.Add(rowBatchRow);
                 return rowBatchRow;
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public override global::System.Data.DataTable Clone() {
@@ -410,19 +366,16 @@ namespace TakoTea {
                 cln.InitVars();
                 return cln;
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
                 return new BatchDataTable();
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal void InitVars() {
                 this.columnReorderLevel = base.Columns["ReorderLevel"];
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             private void InitClass() {
@@ -430,25 +383,21 @@ namespace TakoTea {
                 base.Columns.Add(this.columnReorderLevel);
                 this.columnReorderLevel.AllowDBNull = false;
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public BatchRow NewBatchRow() {
                 return ((BatchRow)(this.NewRow()));
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
                 return new BatchRow(builder);
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Type GetRowType() {
                 return typeof(BatchRow);
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
@@ -457,7 +406,6 @@ namespace TakoTea {
                     this.BatchRowChanged(this, new BatchRowChangeEvent(((BatchRow)(e.Row)), e.Action));
                 }
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
@@ -466,7 +414,6 @@ namespace TakoTea {
                     this.BatchRowChanging(this, new BatchRowChangeEvent(((BatchRow)(e.Row)), e.Action));
                 }
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
@@ -475,7 +422,6 @@ namespace TakoTea {
                     this.BatchRowDeleted(this, new BatchRowChangeEvent(((BatchRow)(e.Row)), e.Action));
                 }
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
@@ -484,13 +430,11 @@ namespace TakoTea {
                     this.BatchRowDeleting(this, new BatchRowChangeEvent(((BatchRow)(e.Row)), e.Action));
                 }
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void RemoveBatchRow(BatchRow row) {
                 this.Rows.Remove(row);
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
@@ -554,16 +498,13 @@ namespace TakoTea {
                 return type;
             }
         }
-        
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class IngredientDataTable : global::System.Data.TypedTableBase<IngredientRow> {
-            
             private global::System.Data.DataColumn columnMeasuringUnit;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public IngredientDataTable() {
@@ -572,7 +513,6 @@ namespace TakoTea {
                 this.InitClass();
                 this.EndInit();
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal IngredientDataTable(global::System.Data.DataTable table) {
@@ -589,14 +529,12 @@ namespace TakoTea {
                 this.Prefix = table.Prefix;
                 this.MinimumCapacity = table.MinimumCapacity;
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected IngredientDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public global::System.Data.DataColumn MeasuringUnitColumn {
@@ -604,7 +542,6 @@ namespace TakoTea {
                     return this.columnMeasuringUnit;
                 }
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
@@ -613,7 +550,6 @@ namespace TakoTea {
                     return this.Rows.Count;
                 }
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public IngredientRow this[int index] {
@@ -621,25 +557,19 @@ namespace TakoTea {
                     return ((IngredientRow)(this.Rows[index]));
                 }
             }
-            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public event IngredientRowChangeEventHandler IngredientRowChanging;
-            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public event IngredientRowChangeEventHandler IngredientRowChanged;
-            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public event IngredientRowChangeEventHandler IngredientRowDeleting;
-            
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public event IngredientRowChangeEventHandler IngredientRowDeleted;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void AddIngredientRow(IngredientRow row) {
                 this.Rows.Add(row);
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public IngredientRow AddIngredientRow(string MeasuringUnit) {
@@ -650,7 +580,6 @@ namespace TakoTea {
                 this.Rows.Add(rowIngredientRow);
                 return rowIngredientRow;
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public override global::System.Data.DataTable Clone() {
@@ -658,19 +587,16 @@ namespace TakoTea {
                 cln.InitVars();
                 return cln;
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
                 return new IngredientDataTable();
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal void InitVars() {
                 this.columnMeasuringUnit = base.Columns["MeasuringUnit"];
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             private void InitClass() {
@@ -678,25 +604,21 @@ namespace TakoTea {
                 base.Columns.Add(this.columnMeasuringUnit);
                 this.columnMeasuringUnit.MaxLength = 50;
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public IngredientRow NewIngredientRow() {
                 return ((IngredientRow)(this.NewRow()));
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
                 return new IngredientRow(builder);
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Type GetRowType() {
                 return typeof(IngredientRow);
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
@@ -705,7 +627,6 @@ namespace TakoTea {
                     this.IngredientRowChanged(this, new IngredientRowChangeEvent(((IngredientRow)(e.Row)), e.Action));
                 }
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
@@ -714,7 +635,6 @@ namespace TakoTea {
                     this.IngredientRowChanging(this, new IngredientRowChangeEvent(((IngredientRow)(e.Row)), e.Action));
                 }
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
@@ -723,7 +643,6 @@ namespace TakoTea {
                     this.IngredientRowDeleted(this, new IngredientRowChangeEvent(((IngredientRow)(e.Row)), e.Action));
                 }
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
@@ -732,13 +651,11 @@ namespace TakoTea {
                     this.IngredientRowDeleting(this, new IngredientRowChangeEvent(((IngredientRow)(e.Row)), e.Action));
                 }
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void RemoveIngredientRow(IngredientRow row) {
                 this.Rows.Remove(row);
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
@@ -802,21 +719,17 @@ namespace TakoTea {
                 return type;
             }
         }
-        
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class BatchRow : global::System.Data.DataRow {
-            
             private BatchDataTable tableBatch;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal BatchRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
                 this.tableBatch = ((BatchDataTable)(this.Table));
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public decimal ReorderLevel {
@@ -828,21 +741,17 @@ namespace TakoTea {
                 }
             }
         }
-        
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class IngredientRow : global::System.Data.DataRow {
-            
             private IngredientDataTable tableIngredient;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal IngredientRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
                 this.tableIngredient = ((IngredientDataTable)(this.Table));
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string MeasuringUnit {
@@ -858,37 +767,30 @@ namespace TakoTea {
                     this[this.tableIngredient.MeasuringUnitColumn] = value;
                 }
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsMeasuringUnitNull() {
                 return this.IsNull(this.tableIngredient.MeasuringUnitColumn);
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetMeasuringUnitNull() {
                 this[this.tableIngredient.MeasuringUnitColumn] = global::System.Convert.DBNull;
             }
         }
-        
         /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public class BatchRowChangeEvent : global::System.EventArgs {
-            
             private BatchRow eventRow;
-            
             private global::System.Data.DataRowAction eventAction;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public BatchRowChangeEvent(BatchRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public BatchRow Row {
@@ -896,7 +798,6 @@ namespace TakoTea {
                     return this.eventRow;
                 }
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public global::System.Data.DataRowAction Action {
@@ -905,24 +806,19 @@ namespace TakoTea {
                 }
             }
         }
-        
         /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public class IngredientRowChangeEvent : global::System.EventArgs {
-            
             private IngredientRow eventRow;
-            
             private global::System.Data.DataRowAction eventAction;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public IngredientRowChangeEvent(IngredientRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public IngredientRow Row {
@@ -930,7 +826,6 @@ namespace TakoTea {
                     return this.eventRow;
                 }
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public global::System.Data.DataRowAction Action {
@@ -942,8 +837,6 @@ namespace TakoTea {
     }
 }
 namespace TakoTea.TakoTeaDataSetTableAdapters {
-    
-    
     /// <summary>
     ///Represents the connection and commands used to retrieve and save data.
     ///</summary>
@@ -954,23 +847,16 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class BatchTableAdapter : global::System.ComponentModel.Component {
-        
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
         private global::System.Data.SqlClient.SqlConnection _connection;
-        
         private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
         private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
         private bool _clearBeforeFill;
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public BatchTableAdapter() {
             this.ClearBeforeFill = true;
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
@@ -981,7 +867,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
                 return this._adapter;
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         internal global::System.Data.SqlClient.SqlConnection Connection {
@@ -1009,7 +894,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
                 }
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         internal global::System.Data.SqlClient.SqlTransaction Transaction {
@@ -1035,7 +919,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
                 }
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
@@ -1046,7 +929,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
                 return this._commandCollection;
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public bool ClearBeforeFill {
@@ -1057,7 +939,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
                 this._clearBeforeFill = value;
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitAdapter() {
@@ -1068,14 +949,12 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("ReorderLevel", "ReorderLevel");
             this._adapter.TableMappings.Add(tableMapping);
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
             this._connection.ConnectionString = global::TakoTea.Properties.Settings.Default.TakoTeaConnectionString;
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitCommandCollection() {
@@ -1085,7 +964,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
             this._commandCollection[0].CommandText = "SELECT ReorderLevel FROM dbo.Batch";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
@@ -1098,7 +976,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
             int returnValue = this.Adapter.Fill(dataTable);
             return returnValue;
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
@@ -1110,7 +987,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
             return dataTable;
         }
     }
-    
     /// <summary>
     ///Represents the connection and commands used to retrieve and save data.
     ///</summary>
@@ -1121,23 +997,16 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class IngredientTableAdapter : global::System.ComponentModel.Component {
-        
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
         private global::System.Data.SqlClient.SqlConnection _connection;
-        
         private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
         private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
         private bool _clearBeforeFill;
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public IngredientTableAdapter() {
             this.ClearBeforeFill = true;
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
@@ -1148,7 +1017,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
                 return this._adapter;
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         internal global::System.Data.SqlClient.SqlConnection Connection {
@@ -1176,7 +1044,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
                 }
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         internal global::System.Data.SqlClient.SqlTransaction Transaction {
@@ -1202,7 +1069,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
                 }
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
@@ -1213,7 +1079,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
                 return this._commandCollection;
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public bool ClearBeforeFill {
@@ -1224,7 +1089,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
                 this._clearBeforeFill = value;
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitAdapter() {
@@ -1235,14 +1099,12 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("MeasuringUnit", "MeasuringUnit");
             this._adapter.TableMappings.Add(tableMapping);
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
             this._connection.ConnectionString = global::TakoTea.Properties.Settings.Default.TakoTeaConnectionString;
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitCommandCollection() {
@@ -1252,7 +1114,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
             this._commandCollection[0].CommandText = "SELECT MeasuringUnit FROM dbo.Ingredient";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
@@ -1265,7 +1126,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
             int returnValue = this.Adapter.Fill(dataTable);
             return returnValue;
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
@@ -1277,7 +1137,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
             return dataTable;
         }
     }
-    
     /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
@@ -1287,13 +1146,9 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
         "esigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapterManager")]
     public partial class TableAdapterManager : global::System.ComponentModel.Component {
-        
         private UpdateOrderOption _updateOrder;
-        
         private bool _backupDataSetBeforeUpdate;
-        
         private global::System.Data.IDbConnection _connection;
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public UpdateOrderOption UpdateOrder {
@@ -1304,7 +1159,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
                 this._updateOrder = value;
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public bool BackupDataSetBeforeUpdate {
@@ -1315,7 +1169,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
                 this._backupDataSetBeforeUpdate = value;
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
@@ -1330,7 +1183,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
                 this._connection = value;
             }
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
@@ -1340,7 +1192,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
                 return count;
             }
         }
-        
         /// <summary>
         ///Update rows in top-down order.
         ///</summary>
@@ -1350,7 +1201,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
             int result = 0;
             return result;
         }
-        
         /// <summary>
         ///Insert rows in top-down order.
         ///</summary>
@@ -1360,7 +1210,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
             int result = 0;
             return result;
         }
-        
         /// <summary>
         ///Delete rows in bottom-up order.
         ///</summary>
@@ -1370,7 +1219,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
             int result = 0;
             return result;
         }
-        
         /// <summary>
         ///Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
         ///</summary>
@@ -1394,7 +1242,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
             }
             return realUpdatedRows.ToArray();
         }
-        
         /// <summary>
         ///Update all changes to the dataset.
         ///</summary>
@@ -1508,13 +1355,11 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
             }
             return result;
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         protected virtual void SortSelfReferenceRows(global::System.Data.DataRow[] rows, global::System.Data.DataRelation relation, bool childFirst) {
             global::System.Array.Sort<global::System.Data.DataRow>(rows, new SelfReferenceComparer(relation, childFirst));
         }
-        
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         protected virtual bool MatchTableAdapterConnection(global::System.Data.IDbConnection inputConnection) {
@@ -1530,28 +1375,21 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
             }
             return false;
         }
-        
         /// <summary>
         ///Update Order Option
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public enum UpdateOrderOption {
-            
             InsertUpdateDelete = 0,
-            
             UpdateInsertDelete = 1,
         }
-        
         /// <summary>
         ///Used to sort self-referenced table's rows
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private class SelfReferenceComparer : object, global::System.Collections.Generic.IComparer<global::System.Data.DataRow> {
-            
             private global::System.Data.DataRelation _relation;
-            
             private int _childFirst;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal SelfReferenceComparer(global::System.Data.DataRelation relation, bool childFirst) {
@@ -1563,17 +1401,14 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
                     this._childFirst = 1;
                 }
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             private global::System.Data.DataRow GetRoot(global::System.Data.DataRow row, out int distance) {
                 global::System.Diagnostics.Debug.Assert((row != null));
                 global::System.Data.DataRow root = row;
                 distance = 0;
-
                 global::System.Collections.Generic.IDictionary<global::System.Data.DataRow, global::System.Data.DataRow> traversedRows = new global::System.Collections.Generic.Dictionary<global::System.Data.DataRow, global::System.Data.DataRow>();
                 traversedRows[row] = row;
-
                 global::System.Data.DataRow parent = row.GetParentRow(this._relation, global::System.Data.DataRowVersion.Default);
                 for (
                 ; ((parent != null) 
@@ -1584,7 +1419,6 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
                     traversedRows[parent] = parent;
                     parent = parent.GetParentRow(this._relation, global::System.Data.DataRowVersion.Default);
                 }
-
                 if ((distance == 0)) {
                     traversedRows.Clear();
                     traversedRows[row] = row;
@@ -1599,10 +1433,8 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
                         parent = parent.GetParentRow(this._relation, global::System.Data.DataRowVersion.Original);
                     }
                 }
-
                 return root;
             }
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public int Compare(global::System.Data.DataRow row1, global::System.Data.DataRow row2) {
@@ -1615,13 +1447,10 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
                 if ((row2 == null)) {
                     return 1;
                 }
-
                 int distance1 = 0;
                 global::System.Data.DataRow root1 = this.GetRoot(row1, out distance1);
-
                 int distance2 = 0;
                 global::System.Data.DataRow root2 = this.GetRoot(row2, out distance2);
-
                 if (object.ReferenceEquals(root1, root2)) {
                     return (this._childFirst * distance1.CompareTo(distance2));
                 }
@@ -1639,5 +1468,4 @@ namespace TakoTea.TakoTeaDataSetTableAdapters {
         }
     }
 }
-
 #pragma warning restore 1591
