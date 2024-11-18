@@ -1,0 +1,3 @@
+﻿namespace TakoTea.Patterns.Factory
+{
+}

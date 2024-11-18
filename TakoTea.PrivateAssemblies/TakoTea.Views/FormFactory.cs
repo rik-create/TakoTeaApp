@@ -1,0 +1,44 @@
+﻿using System.Windows.Forms;
+using TakoTea.Interfaces;
+using TakoTea.View.Batch;
+using TakoTea.View.Order;
+using TakoTea.View.Product;
+using TakoTea.View.Reports;
+using TakoTea.View.Sales.Sales_Modals;
+using TakoTea.View.Settings;
+using TakoTea.Views.Dashboard;
+using TakoTea.Views.Items;
+using TakoTea.Views.Stock;
+namespace TakoTea.Views
+{
+    public class FormFactory : IFormFactory
+    {
+        public Form CreateForm(string formKey)
+        {
+            switch (formKey)
+            {
+                case "Dashboard":
+                    return new DashboardForm();
+                case "Product":
+                    return new ProductCategoryForm();
+                case "Sales":
+                    return new AddSalesEntryModal();
+                case "Item":
+                    return new ItemListForm();
+                case "Stock":
+                    return new CurrentStockLevelForm();
+                case "Order":
+                    return new MenuOrderForm();
+                case "Batch":
+                    return new BatchListForm();
+                case "Reports":
+                    return new SalesReportForm();
+                case "Settings":
+                    return new UserManagementForm();
+                // Add more cases as needed...
+                default:
+                    return null;
+            }
+        }
+    }
+}

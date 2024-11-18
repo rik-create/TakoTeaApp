@@ -5,31 +5,35 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea", "TakoTea.csproj", "{A8157ADA-0A86-4CB9-9319-BCB7A4FE1BD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Helpers", "..\TakoTea.Helpers\TakoTea.Helpers.csproj", "{F364AB89-A7DC-4C34-BB2B-586C90EB330B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "TakoTea.PrivateAssemblies\Helpers\Helpers.csproj", "{EB8914B0-29C2-4CE7-9678-9C0634611B25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Patterns", "..\TakoTea.Patterns\TakoTea.Patterns.csproj", "{D2F6BC22-8730-4313-9F0B-B61072EC5D59}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Configurations", "TakoTea.PrivateAssemblies\TakoTea.Configurations\TakoTea.Configurations.csproj", "{C19375C2-227C-47C8-826F-325FE05F3642}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Interfaces", "..\TakoTea.Interfaces\TakoTea.Interfaces.csproj", "{B801F875-789A-4766-B84B-290F2233A7DF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C97F778C-8C99-4872-A095-3C19DDA1325C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Models", "..\TakoTea.Models\TakoTea.Models.csproj", "{4FF12907-6236-4929-B3C0-E8D10A065437}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Controls", "TakoTea.PrivateAssemblies\TakoTea.Controls\TakoTea.Controls.csproj", "{91CFD242-1CBF-4F29-BB7D-3DC77E449F99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Repository", "..\TakoTea.Repository\TakoTea.Repository.csproj", "{7DABA7C5-30FF-471F-9F11-322FD40745BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Database", "TakoTea.PrivateAssemblies\TakoTea.Database\TakoTea.Database.csproj", "{2D88F7BB-0D29-4C06-B447-E2FAD1C973C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Database", "..\TakoTea.Database\TakoTea.Database.csproj", "{2D88F7BB-0D29-4C06-B447-E2FAD1C973C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Exceptions", "TakoTea.PrivateAssemblies\TakoTea.Exceptions\TakoTea.Exceptions.csproj", "{8F0152B7-6AD1-493B-85B3-1C66F0F44504}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Views", "..\TakoTea.Views\TakoTea.Views.csproj", "{33C2935E-D694-4D14-8470-E796BD37E31F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Files", "TakoTea.PrivateAssemblies\TakoTea.Files\TakoTea.Files.csproj", "{CC343A90-D73B-4E8F-95FD-2300E8F013C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Configurations", "..\TakoTea.Configurations\TakoTea.Configurations.csproj", "{C19375C2-227C-47C8-826F-325FE05F3642}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Helpers", "TakoTea.PrivateAssemblies\TakoTea.Helpers\TakoTea.Helpers.csproj", "{F364AB89-A7DC-4C34-BB2B-586C90EB330B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Files", "..\TakoTea.Files\TakoTea.Files.csproj", "{CC343A90-D73B-4E8F-95FD-2300E8F013C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Interfaces", "TakoTea.PrivateAssemblies\TakoTea.Interfaces\TakoTea.Interfaces.csproj", "{B801F875-789A-4766-B84B-290F2233A7DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Exceptions", "..\TakoTea.Exceptions\TakoTea.Exceptions.csproj", "{8F0152B7-6AD1-493B-85B3-1C66F0F44504}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Models", "TakoTea.PrivateAssemblies\TakoTea.Models\TakoTea.Models.csproj", "{4FF12907-6236-4929-B3C0-E8D10A065437}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Controls", "..\TakoTea.Controls\TakoTea.Controls.csproj", "{91CFD242-1CBF-4F29-BB7D-3DC77E449F99}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Patterns", "TakoTea.PrivateAssemblies\TakoTea.Patterns\TakoTea.Patterns.csproj", "{D2F6BC22-8730-4313-9F0B-B61072EC5D59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Services", "..\TakoTea.Services\TakoTea.Services.csproj", "{F5F5B860-65B6-472C-86D6-1F350E3F0A1B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Repository", "TakoTea.PrivateAssemblies\TakoTea.Repository\TakoTea.Repository.csproj", "{7DABA7C5-30FF-471F-9F11-322FD40745BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Tests", "..\TakoTea.Tests\TakoTea.Tests.csproj", "{4632CCEC-5EA4-46A4-8F6F-6DADE7BBBDF3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Services", "TakoTea.PrivateAssemblies\TakoTea.Services\TakoTea.Services.csproj", "{F5F5B860-65B6-472C-86D6-1F350E3F0A1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Tests", "TakoTea.PrivateAssemblies\TakoTea.Tests\TakoTea.Tests.csproj", "{4632CCEC-5EA4-46A4-8F6F-6DADE7BBBDF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TakoTea.Views", "TakoTea.PrivateAssemblies\TakoTea.Views\TakoTea.Views.csproj", "{33C2935E-D694-4D14-8470-E796BD37E31F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,14 +45,34 @@ Global
 		{A8157ADA-0A86-4CB9-9319-BCB7A4FE1BD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8157ADA-0A86-4CB9-9319-BCB7A4FE1BD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8157ADA-0A86-4CB9-9319-BCB7A4FE1BD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB8914B0-29C2-4CE7-9678-9C0634611B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB8914B0-29C2-4CE7-9678-9C0634611B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB8914B0-29C2-4CE7-9678-9C0634611B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB8914B0-29C2-4CE7-9678-9C0634611B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C19375C2-227C-47C8-826F-325FE05F3642}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C19375C2-227C-47C8-826F-325FE05F3642}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C19375C2-227C-47C8-826F-325FE05F3642}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C19375C2-227C-47C8-826F-325FE05F3642}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91CFD242-1CBF-4F29-BB7D-3DC77E449F99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91CFD242-1CBF-4F29-BB7D-3DC77E449F99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91CFD242-1CBF-4F29-BB7D-3DC77E449F99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91CFD242-1CBF-4F29-BB7D-3DC77E449F99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D88F7BB-0D29-4C06-B447-E2FAD1C973C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D88F7BB-0D29-4C06-B447-E2FAD1C973C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D88F7BB-0D29-4C06-B447-E2FAD1C973C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D88F7BB-0D29-4C06-B447-E2FAD1C973C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F0152B7-6AD1-493B-85B3-1C66F0F44504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F0152B7-6AD1-493B-85B3-1C66F0F44504}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F0152B7-6AD1-493B-85B3-1C66F0F44504}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F0152B7-6AD1-493B-85B3-1C66F0F44504}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC343A90-D73B-4E8F-95FD-2300E8F013C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC343A90-D73B-4E8F-95FD-2300E8F013C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC343A90-D73B-4E8F-95FD-2300E8F013C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC343A90-D73B-4E8F-95FD-2300E8F013C3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F364AB89-A7DC-4C34-BB2B-586C90EB330B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F364AB89-A7DC-4C34-BB2B-586C90EB330B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F364AB89-A7DC-4C34-BB2B-586C90EB330B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F364AB89-A7DC-4C34-BB2B-586C90EB330B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D2F6BC22-8730-4313-9F0B-B61072EC5D59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D2F6BC22-8730-4313-9F0B-B61072EC5D59}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D2F6BC22-8730-4313-9F0B-B61072EC5D59}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D2F6BC22-8730-4313-9F0B-B61072EC5D59}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B801F875-789A-4766-B84B-290F2233A7DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B801F875-789A-4766-B84B-290F2233A7DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B801F875-789A-4766-B84B-290F2233A7DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,34 +81,14 @@ Global
 		{4FF12907-6236-4929-B3C0-E8D10A065437}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FF12907-6236-4929-B3C0-E8D10A065437}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FF12907-6236-4929-B3C0-E8D10A065437}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2F6BC22-8730-4313-9F0B-B61072EC5D59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2F6BC22-8730-4313-9F0B-B61072EC5D59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2F6BC22-8730-4313-9F0B-B61072EC5D59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2F6BC22-8730-4313-9F0B-B61072EC5D59}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7DABA7C5-30FF-471F-9F11-322FD40745BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7DABA7C5-30FF-471F-9F11-322FD40745BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DABA7C5-30FF-471F-9F11-322FD40745BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DABA7C5-30FF-471F-9F11-322FD40745BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2D88F7BB-0D29-4C06-B447-E2FAD1C973C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2D88F7BB-0D29-4C06-B447-E2FAD1C973C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2D88F7BB-0D29-4C06-B447-E2FAD1C973C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2D88F7BB-0D29-4C06-B447-E2FAD1C973C2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{33C2935E-D694-4D14-8470-E796BD37E31F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{33C2935E-D694-4D14-8470-E796BD37E31F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{33C2935E-D694-4D14-8470-E796BD37E31F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{33C2935E-D694-4D14-8470-E796BD37E31F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C19375C2-227C-47C8-826F-325FE05F3642}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C19375C2-227C-47C8-826F-325FE05F3642}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C19375C2-227C-47C8-826F-325FE05F3642}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C19375C2-227C-47C8-826F-325FE05F3642}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CC343A90-D73B-4E8F-95FD-2300E8F013C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC343A90-D73B-4E8F-95FD-2300E8F013C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC343A90-D73B-4E8F-95FD-2300E8F013C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC343A90-D73B-4E8F-95FD-2300E8F013C3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8F0152B7-6AD1-493B-85B3-1C66F0F44504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8F0152B7-6AD1-493B-85B3-1C66F0F44504}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8F0152B7-6AD1-493B-85B3-1C66F0F44504}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8F0152B7-6AD1-493B-85B3-1C66F0F44504}.Release|Any CPU.Build.0 = Release|Any CPU
-		{91CFD242-1CBF-4F29-BB7D-3DC77E449F99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{91CFD242-1CBF-4F29-BB7D-3DC77E449F99}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{91CFD242-1CBF-4F29-BB7D-3DC77E449F99}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{91CFD242-1CBF-4F29-BB7D-3DC77E449F99}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F5F5B860-65B6-472C-86D6-1F350E3F0A1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F5F5B860-65B6-472C-86D6-1F350E3F0A1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5F5B860-65B6-472C-86D6-1F350E3F0A1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -93,6 +97,10 @@ Global
 		{4632CCEC-5EA4-46A4-8F6F-6DADE7BBBDF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4632CCEC-5EA4-46A4-8F6F-6DADE7BBBDF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4632CCEC-5EA4-46A4-8F6F-6DADE7BBBDF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33C2935E-D694-4D14-8470-E796BD37E31F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33C2935E-D694-4D14-8470-E796BD37E31F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33C2935E-D694-4D14-8470-E796BD37E31F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33C2935E-D694-4D14-8470-E796BD37E31F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
