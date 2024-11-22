@@ -1,6 +1,9 @@
-﻿using System.Data;
+﻿using Dapper;
+using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Linq;
+using TakoTea.Database;
 using TakoTea.Models;
 namespace TakoTea.Repository
 {
@@ -11,6 +14,96 @@ namespace TakoTea.Repository
         {
             _dao = dao;
         }
+
+        public void UpdateBatchStockLevel(int ingredientID, decimal newQuantity)
+        {
+            const string query = @"
+        UPDATE Batch
+        SET QuantityInStock = @NewQuantity
+        WHERE IngredientID = @IngredientID;
+    ";
+            // Use a using statement to handle the connection lifecycle
+            using (SqlConnection connection = DatabaseConnection.GetConnection())
+            {
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+                _ = connection.Execute(query, new { IngredientID = ingredientID, NewQuantity = newQuantity });
+            }
+        }
+
+        public IngredientModel GetIngredientById(int ingredientId)
+        {
+            string query = "SELECT * FROM Ingredient WHERE IngredientID = @IngredientID";
+            var parameters = new SqlParameter[]
+            {
+        new SqlParameter("@IngredientID", ingredientId)
+            };
+
+            // Execute the query to retrieve the ingredient data
+            var result = _dao.ExecuteQuery<IngredientModel>(query, parameters);
+            return result.FirstOrDefault();
+        }
+
+        public string GetIngredientNameById(int ingredientId)
+        {
+            string query = "SELECT IngredientName FROM Ingredient WHERE IngredientID = @IngredientID";
+            var parameters = new SqlParameter[]
+            {
+        new SqlParameter("@IngredientID", ingredientId)
+            };
+
+            // Execute the query to retrieve the ingredient name
+            var result = _dao.ExecuteQuery<string>(query, parameters);
+            return result.FirstOrDefault();
+        }
+
+        public decimal GetPreviousQuantity(int ingredientId)
+        {
+            string query = "SELECT QuantityInStock FROM Batch WHERE IngredientID = @IngredientID AND IsActive = 1";
+            var parameters = new SqlParameter[]
+            {
+        new SqlParameter("@IngredientID", ingredientId)
+            };
+
+            // Execute the query to retrieve the previous quantity in stock
+            var result = _dao.ExecuteQuery<decimal>(query, parameters);
+            return result.FirstOrDefault();
+        }
+
+
+        public DataTable GetCurrentStockLevels()
+        {
+            string query = @"
+    SELECT 
+        i.IngredientID, 
+        i.IngredientName,
+        b.QuantityInStock,
+        b.ReorderLevel
+    FROM 
+        Ingredient i
+    JOIN 
+        Batch b ON i.IngredientID = b.IngredientID
+    WHERE 
+        b.IsActive = 1";
+            return _dao.ExecuteQuery(query);
+        }
+
+        // Method to get a batch by its ID
+        public BatchModel GetBatchById(int batchId)
+        {
+            string query = "SELECT * FROM Batch WHERE BatchID = @BatchID";  // Adjust the query to your database schema
+            var parameters = new SqlParameter[]
+            {
+                new SqlParameter("@BatchID", batchId)
+            };
+
+            // Execute the query to retrieve the batch data
+            var result = _dao.ExecuteQuery<BatchModel>(query, parameters);
+            return result.FirstOrDefault();
+        }
+
         // Get all active batches with their stock levels
         public DataTable GetAllActiveBatches()
         {
@@ -63,33 +156,17 @@ namespace TakoTea.Repository
         UPDATE Batch
         SET 
             QuantityInStock = @QuantityInStock, 
-            Cost = @Cost, 
+            BatchCost = @Cost, 
             ReorderLevel = @ReorderLevel, 
             ExpirationDate = @ExpirationDate, 
-            ItemDescription = @ItemDescription, 
-            BrandName = @BrandName, 
-            Vendor = @Vendor, 
-            StorageCondition = @StorageCondition, 
-            IngredientImage = @IngredientImage, 
-            IngredientID = @IngredientID, 
-            IngredientType = @IngredientType, 
             IsActive = @IsActive
         WHERE BatchNumber = @BatchNumber";
 
             SqlParameter[] updateParameters = new SqlParameter[]
             {
         new SqlParameter("@BatchNumber", SqlDbType.NVarChar) { Value = batch.BatchNumber },
-        new SqlParameter("@QuantityInStock", SqlDbType.Decimal) { Value = batch.Quantity },
-        new SqlParameter("@Cost", SqlDbType.Decimal) { Value = batch.Cost },
-        new SqlParameter("@ReorderLevel", SqlDbType.Decimal) { Value = batch.LowLevel },
-        new SqlParameter("@ExpirationDate", SqlDbType.DateTime) { Value = batch.Expiration },
-        new SqlParameter("@ItemDescription", SqlDbType.NVarChar) { Value = batch.ItemDescription },
-        new SqlParameter("@BrandName", SqlDbType.NVarChar) { Value = batch.BrandName },
-        new SqlParameter("@Vendor", SqlDbType.NVarChar) { Value = batch.Vendor },
-        new SqlParameter("@StorageCondition", SqlDbType.NVarChar) { Value = batch.StorageCondition },
-        new SqlParameter("@IngredientImage", SqlDbType.NVarChar) { Value = batch.IngredientImage },
+        new SqlParameter("@QuantityInStock", SqlDbType.Decimal) { Value = batch.QuantityInStock },
         new SqlParameter("@IngredientID", SqlDbType.Int) { Value = batch.IngredientID },
-        new SqlParameter("@IngredientType", SqlDbType.NVarChar) { Value = batch.IngredientType },
         new SqlParameter("@IsActive", SqlDbType.Int) { Value = 1 }
             };
 

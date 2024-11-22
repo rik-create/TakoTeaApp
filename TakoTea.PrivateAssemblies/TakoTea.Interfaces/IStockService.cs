@@ -15,7 +15,7 @@ namespace TakoTea.Interfaces
         /// <param name="adjustmentQuantity">Amount to adjust (positive or negative).</param>
         /// <param name="reason">Reason for the stock adjustment.</param>
         /// <returns>Indicates whether the adjustment was successful.</returns>
-        void AdjustStock(int ingredientId, decimal adjustmentQuantity, string reason, int userId);
+        void AdjustBatchStock(int ingredientId, decimal adjustmentQuantity, string reason, int userId);
         /// <summary>
         /// Records stock adjustment activity for audit and tracking purposes.
         /// </summary>

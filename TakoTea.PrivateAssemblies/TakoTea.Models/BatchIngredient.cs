@@ -15,6 +15,6 @@ namespace TakoTea.Models
         public string StorageConditions { get; set; }
         public bool IsActive { get; set; }
         public decimal BatchCost { get; set; }
-        public Ingredient Ingredient { get; set; }
+        public IngredientModel Ingredient { get; set; }
     }
 }

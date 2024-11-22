@@ -262,7 +262,7 @@
             this.materialTextBox21.Depth = 0;
             this.materialTextBox21.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialTextBox21.HideSelection = true;
-            this.materialTextBox21.Hint = "Add Ingredient";
+            this.materialTextBox21.Hint = "Add IngredientModel";
             this.materialTextBox21.LeadingIcon = null;
             this.materialTextBox21.Location = new System.Drawing.Point(18, 298);
             this.materialTextBox21.MaxLength = 32767;

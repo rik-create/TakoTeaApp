@@ -2,17 +2,27 @@
 using System;
 using System.Windows.Forms;
 using TakoTea.Configurations;
+using TakoTea.Interfaces;
 using TakoTea.Product.Product_Modals;
+using TakoTea.Repository;
+using TakoTea.Services;
 using TakoTea.View.Product.Product_Modals;
 namespace TakoTea.Product
 {
     public partial class ProductListForm : MaterialForm
     {
+
+        IProductVariantService _variantService;
+        DataAccessObject _dataAccessObject;
         public ProductListForm()
         {
             InitializeComponent();
             ThemeConfigurator.ApplyDarkTheme(this);
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
+
+            _dataAccessObject = new DataAccessObject();
+            _variantService = new ProductVariantService(_dataAccessObject);
+
             DrawerWidth = 0;
             materialCheckedListBox1.Items.Add("Milktea");
             materialCheckedListBox1.Items.Add("Takoyaki");
@@ -58,7 +68,7 @@ namespace TakoTea.Product
         }
         private void floatingActionButtonAddProduct_Click(object sender, EventArgs e)
         {
-            AddProductModal addProductModal = new AddProductModal();
+            AddProductModal addProductModal = new AddProductModal(_variantService);
             _ = addProductModal.ShowDialog();
             ThemeConfigurator.ApplyDarkTheme(this);
         }

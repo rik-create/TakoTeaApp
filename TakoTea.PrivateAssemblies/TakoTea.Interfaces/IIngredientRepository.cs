@@ -6,7 +6,7 @@ namespace TakoTea.Interfaces
     {
         DataTable GetCurrentStockLevels();
         void UpdateStockLevel(int ingredientID, decimal newQuantity);
-        Ingredient GetIngredientById(int ingredientId);
+        IngredientModel GetIngredientById(int ingredientId);
         string GetIngredientNameById(int ingredientId);
         decimal GetPreviousQuantity(int ingredientId);
     }

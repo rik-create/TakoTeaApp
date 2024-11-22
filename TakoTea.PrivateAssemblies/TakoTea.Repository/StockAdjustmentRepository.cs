@@ -3,17 +3,20 @@ using System;
 using System.Data;
 using TakoTea.Database;
 using TakoTea.Interfaces;
+
 namespace TakoTea.Repository
 {
     public class StockAdjustmentRepository : IStockAdjustmentRepository
     {
-        private readonly IngredientRepository _ingredientRepository;
-        public StockAdjustmentRepository(IngredientRepository ingredientRepository)
+        private readonly BatchRepository _batchRepository;  // Changed from IngredientRepository to BatchRepository
+
+        public StockAdjustmentRepository(BatchRepository batchRepository)  // Constructor now takes BatchRepository
         {
-            _ingredientRepository = ingredientRepository ?? throw new ArgumentNullException(nameof(ingredientRepository));
+            _batchRepository = batchRepository ?? throw new ArgumentNullException(nameof(batchRepository));
         }
+
         public bool RecordAdjustment(
-            int ingredientId,
+            int batchId,  // Changed ingredientId to batchId
             decimal adjustmentQuantity,
             string reason,
             decimal previousQuantity,
@@ -34,48 +37,41 @@ namespace TakoTea.Repository
             {
                 throw new ArgumentException("New stock level cannot be negative.", nameof(newStockLevel));
             }
+
+            // SQL query to record the batch stock adjustment
             const string sql = @"
                 INSERT INTO StockAdjustmentLog 
-                (IngredientID, AdjustmentQuantity, Reason, UserID, AdjustmentDate, PreviousQuantity, NewQuantity)
+                (BatchID, AdjustmentQuantity, Reason, UserID, AdjustmentDate, PreviousQuantity, NewQuantity)
                 VALUES 
-                (@IngredientID, @AdjustmentQuantity, @Reason, @UserID, @AdjustmentDate, @PreviousQuantity, @NewQuantity);";
+                (@BatchID, @AdjustmentQuantity, @Reason, @UserID, @AdjustmentDate, @PreviousQuantity, @NewQuantity);";
+
             try
             {
-                using (System.Data.SqlClient.SqlConnection connection = DatabaseConnection.GetConnection())
-                using (IDataReader reader = connection.ExecuteReader(sql, new
+                using (var connection = DatabaseConnection.GetConnection())
                 {
-                    IngredientID = ingredientId,
-                    AdjustmentQuantity = adjustmentQuantity,
-                    Reason = reason.Trim(),
-                    UserID = userId,
-                    AdjustmentDate = adjustmentDate,
-                    PreviousQuantity = previousQuantity,
-                    NewQuantity = newStockLevel
-                }))
-                {
-                    // Optional: Log or validate execution if needed
+                    // Execute the query using Dapper
+                    connection.Execute(sql, new
+                    {
+                        BatchID = batchId,  // Using batchId instead of ingredientId
+                        AdjustmentQuantity = adjustmentQuantity,
+                        Reason = reason.Trim(),
+                        UserID = userId,
+                        AdjustmentDate = adjustmentDate,
+                        PreviousQuantity = previousQuantity,
+                        NewQuantity = newStockLevel
+                    });
                 }
+
                 return true;
             }
             catch (Exception ex)
             {
                 // Log the exception (replace with your logging mechanism)
-                Console.Error.WriteLine($"Error recording adjustment: {ex.Message}");
+                Console.Error.WriteLine($"Error recording batch adjustment: {ex.Message}");
                 return false;
             }
         }
-        public DataTable ExecuteQuery(string query)
-        {
-            using (System.Data.SqlClient.SqlConnection connection = DatabaseConnection.GetConnection())
-            {
-                // Execute the query and load the result into a DataTable
-                using (IDataReader reader = connection.ExecuteReader(query))
-                using (DataTable dataTable = new DataTable())
-                {
-                    dataTable.Load(reader); // Load data from the SqlDataReader
-                    return dataTable;
-                }
-            }
-        }
+
+
     }
 }

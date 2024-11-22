@@ -1,6 +1,6 @@
 ﻿using MaterialSkin.Controls;
 using System.Windows.Forms;
-namespace TakoTea.View.Stock.Stock_Modal
+namespace TakoTea.Views.Stock.Stock_Modal
 {
     partial class EditStockModal
     {
@@ -26,7 +26,7 @@ namespace TakoTea.View.Stock.Stock_Modal
             this.grpIngredientDetails = new System.Windows.Forms.GroupBox();
             this.lblIngredient = new System.Windows.Forms.Label();
             this.lblCurrentQuantity = new System.Windows.Forms.Label();
-            this.txtBoxIngredientName = new System.Windows.Forms.TextBox();
+            this.txtBoxBatchNumber = new System.Windows.Forms.TextBox();
             this.txtCurrentQuantity = new System.Windows.Forms.TextBox();
             this.grpStockAdjustment = new System.Windows.Forms.GroupBox();
             this.lblNewQuantity = new System.Windows.Forms.Label();
@@ -38,6 +38,8 @@ namespace TakoTea.View.Stock.Stock_Modal
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.txtBoxIngredientName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.grpIngredientDetails.SuspendLayout();
             this.grpStockAdjustment.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numNewQuantity)).BeginInit();
@@ -46,16 +48,18 @@ namespace TakoTea.View.Stock.Stock_Modal
             // grpIngredientDetails
             // 
             this.grpIngredientDetails.Controls.Add(this.lblIngredient);
+            this.grpIngredientDetails.Controls.Add(this.label1);
             this.grpIngredientDetails.Controls.Add(this.lblCurrentQuantity);
+            this.grpIngredientDetails.Controls.Add(this.txtBoxBatchNumber);
             this.grpIngredientDetails.Controls.Add(this.txtBoxIngredientName);
             this.grpIngredientDetails.Controls.Add(this.txtCurrentQuantity);
             this.grpIngredientDetails.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
             this.grpIngredientDetails.Location = new System.Drawing.Point(20, 20);
             this.grpIngredientDetails.Name = "grpIngredientDetails";
-            this.grpIngredientDetails.Size = new System.Drawing.Size(360, 100);
+            this.grpIngredientDetails.Size = new System.Drawing.Size(360, 140);
             this.grpIngredientDetails.TabIndex = 0;
             this.grpIngredientDetails.TabStop = false;
-            this.grpIngredientDetails.Text = "Ingredient Details";
+            this.grpIngredientDetails.Text = "Batch Details";
             // 
             // lblIngredient
             // 
@@ -63,33 +67,33 @@ namespace TakoTea.View.Stock.Stock_Modal
             this.lblIngredient.Font = new System.Drawing.Font("Arial", 9F);
             this.lblIngredient.Location = new System.Drawing.Point(15, 30);
             this.lblIngredient.Name = "lblIngredient";
-            this.lblIngredient.Size = new System.Drawing.Size(65, 15);
+            this.lblIngredient.Size = new System.Drawing.Size(51, 15);
             this.lblIngredient.TabIndex = 0;
-            this.lblIngredient.Text = "Ingredient:";
+            this.lblIngredient.Text = "Batch #:";
             // 
             // lblCurrentQuantity
             // 
             this.lblCurrentQuantity.AutoSize = true;
             this.lblCurrentQuantity.Font = new System.Drawing.Font("Arial", 9F);
-            this.lblCurrentQuantity.Location = new System.Drawing.Point(15, 65);
+            this.lblCurrentQuantity.Location = new System.Drawing.Point(15, 96);
             this.lblCurrentQuantity.Name = "lblCurrentQuantity";
             this.lblCurrentQuantity.Size = new System.Drawing.Size(98, 15);
             this.lblCurrentQuantity.TabIndex = 2;
             this.lblCurrentQuantity.Text = "Current Quantity:";
             // 
-            // txtBoxIngredientName
+            // txtBoxBatchNumber
             // 
-            this.txtBoxIngredientName.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxIngredientName.Location = new System.Drawing.Point(80, 30);
-            this.txtBoxIngredientName.Name = "txtBoxIngredientName";
-            this.txtBoxIngredientName.ReadOnly = true;
-            this.txtBoxIngredientName.Size = new System.Drawing.Size(240, 22);
-            this.txtBoxIngredientName.TabIndex = 3;
+            this.txtBoxBatchNumber.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxBatchNumber.Location = new System.Drawing.Point(80, 30);
+            this.txtBoxBatchNumber.Name = "txtBoxBatchNumber";
+            this.txtBoxBatchNumber.ReadOnly = true;
+            this.txtBoxBatchNumber.Size = new System.Drawing.Size(240, 22);
+            this.txtBoxBatchNumber.TabIndex = 3;
             // 
             // txtCurrentQuantity
             // 
             this.txtCurrentQuantity.Font = new System.Drawing.Font("Arial", 9F);
-            this.txtCurrentQuantity.Location = new System.Drawing.Point(130, 65);
+            this.txtCurrentQuantity.Location = new System.Drawing.Point(130, 96);
             this.txtCurrentQuantity.Name = "txtCurrentQuantity";
             this.txtCurrentQuantity.ReadOnly = true;
             this.txtCurrentQuantity.Size = new System.Drawing.Size(190, 21);
@@ -105,7 +109,7 @@ namespace TakoTea.View.Stock.Stock_Modal
             this.grpStockAdjustment.Controls.Add(this.lblReason);
             this.grpStockAdjustment.Controls.Add(this.txtReason);
             this.grpStockAdjustment.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            this.grpStockAdjustment.Location = new System.Drawing.Point(20, 140);
+            this.grpStockAdjustment.Location = new System.Drawing.Point(20, 176);
             this.grpStockAdjustment.Name = "grpStockAdjustment";
             this.grpStockAdjustment.Size = new System.Drawing.Size(360, 150);
             this.grpStockAdjustment.TabIndex = 1;
@@ -186,7 +190,7 @@ namespace TakoTea.View.Stock.Stock_Modal
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(140, 310);
+            this.btnSave.Location = new System.Drawing.Point(140, 344);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(90, 35);
             this.btnSave.TabIndex = 2;
@@ -200,7 +204,7 @@ namespace TakoTea.View.Stock.Stock_Modal
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(240, 310);
+            this.btnCancel.Location = new System.Drawing.Point(240, 344);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(90, 35);
             this.btnCancel.TabIndex = 3;
@@ -208,12 +212,31 @@ namespace TakoTea.View.Stock.Stock_Modal
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // txtBoxIngredientName
+            // 
+            this.txtBoxIngredientName.Font = new System.Drawing.Font("Arial", 9F);
+            this.txtBoxIngredientName.Location = new System.Drawing.Point(128, 64);
+            this.txtBoxIngredientName.Name = "txtBoxIngredientName";
+            this.txtBoxIngredientName.ReadOnly = true;
+            this.txtBoxIngredientName.Size = new System.Drawing.Size(190, 21);
+            this.txtBoxIngredientName.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 9F);
+            this.label1.Location = new System.Drawing.Point(16, 64);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(102, 15);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Ingredient Name:";
+            // 
             // EditStockModal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(385, 371);
+            this.ClientSize = new System.Drawing.Size(385, 404);
             this.Controls.Add(this.grpIngredientDetails);
             this.Controls.Add(this.grpStockAdjustment);
             this.Controls.Add(this.btnSave);
@@ -229,21 +252,24 @@ namespace TakoTea.View.Stock.Stock_Modal
             this.grpStockAdjustment.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numNewQuantity)).EndInit();
             this.ResumeLayout(false);
+
         }
-        private GroupBox grpIngredientDetails;
-        private Label lblIngredient;
-        private ToolTip toolTip;
-        private Label lblCurrentQuantity;
-        private TextBox txtCurrentQuantity;
-        private GroupBox grpStockAdjustment;
-        private Label lblNewQuantity;
-        private NumericUpDown numNewQuantity;
-        private Label lblAdjustmentType;
-        private ComboBox cmbAdjustmentType;
-        private Label lblReason;
-        private TextBox txtReason;
-        private Button btnSave;
-        private Button btnCancel;
-        private TextBox txtBoxIngredientName;
+        public GroupBox grpIngredientDetails;
+        public Label lblIngredient;
+        public ToolTip toolTip;
+        public Label lblCurrentQuantity;
+        public TextBox txtCurrentQuantity;
+        public GroupBox grpStockAdjustment;
+        public Label lblNewQuantity;
+        public NumericUpDown numNewQuantity;
+        public Label lblAdjustmentType;
+        public ComboBox cmbAdjustmentType;
+        public Label lblReason;
+        public TextBox txtReason;
+        public Button btnSave;
+        public Button btnCancel;
+        public TextBox txtBoxBatchNumber;
+        public Label label1;
+        public TextBox txtBoxIngredientName;
     }
 }

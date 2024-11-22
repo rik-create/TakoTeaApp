@@ -26,45 +26,44 @@
         private void InitializeComponent()
         {
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.materialButton5 = new MaterialSkin.Controls.MaterialButton();
-            this.materialButton4 = new MaterialSkin.Controls.MaterialButton();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.materialTextBox21 = new MaterialSkin.Controls.MaterialTextBox2();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ColumnImage = new System.Windows.Forms.DataGridViewImageColumn();
-            this.materialComboBox2 = new MaterialSkin.Controls.MaterialComboBox();
-            this.materialComboBox1 = new MaterialSkin.Controls.MaterialComboBox();
+            this.numericUpDownDiscountPercent = new System.Windows.Forms.NumericUpDown();
+            this.txtBoxComboMealName = new MaterialSkin.Controls.MaterialTextBox2();
+            this.btnDuplicateRow = new System.Windows.Forms.Button();
+            this.btnDeleteRow = new System.Windows.Forms.Button();
+            this.btnAddNewVariant = new System.Windows.Forms.Button();
+            this.dgViewAddComboMeal = new System.Windows.Forms.DataGridView();
+            this.cmbComboMealProductVariant = new MaterialSkin.Controls.MaterialComboBox();
+            this.cmbProductCategory = new MaterialSkin.Controls.MaterialComboBox();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.materialButton5 = new MaterialSkin.Controls.MaterialButton();
+            this.materialButton4 = new MaterialSkin.Controls.MaterialButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblBasePrice = new MaterialSkin.Controls.MaterialLabel();
+            this.lblDiscountedPrice = new MaterialSkin.Controls.MaterialLabel();
             this.ColumnVarName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnIngredients = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnInstructions = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.materialCard1.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDiscountPercent)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgViewAddComboMeal)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // materialCard1
@@ -84,29 +83,246 @@
             this.materialCard1.Size = new System.Drawing.Size(813, 782);
             this.materialCard1.TabIndex = 0;
             // 
-            // panel1
+            // panel3
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.materialLabel1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(14, 14);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(785, 46);
-            this.panel1.TabIndex = 100;
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.lblDiscountedPrice);
+            this.panel3.Controls.Add(this.lblBasePrice);
+            this.panel3.Controls.Add(this.materialLabel4);
+            this.panel3.Controls.Add(this.materialLabel9);
+            this.panel3.Controls.Add(this.materialLabel8);
+            this.panel3.Controls.Add(this.materialLabel7);
+            this.panel3.Controls.Add(this.numericUpDownDiscountPercent);
+            this.panel3.Controls.Add(this.txtBoxComboMealName);
+            this.panel3.Controls.Add(this.btnDuplicateRow);
+            this.panel3.Controls.Add(this.btnDeleteRow);
+            this.panel3.Controls.Add(this.btnAddNewVariant);
+            this.panel3.Controls.Add(this.dgViewAddComboMeal);
+            this.panel3.Controls.Add(this.cmbComboMealProductVariant);
+            this.panel3.Controls.Add(this.cmbProductCategory);
+            this.panel3.Controls.Add(this.materialLabel5);
+            this.panel3.Controls.Add(this.materialLabel3);
+            this.panel3.Controls.Add(this.materialLabel2);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(14, 60);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(785, 662);
+            this.panel3.TabIndex = 109;
             // 
-            // materialLabel1
+            // materialLabel4
             // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.materialLabel1.Location = new System.Drawing.Point(302, 10);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(154, 24);
-            this.materialLabel1.TabIndex = 0;
-            this.materialLabel1.Text = "Add Combo Meal";
+            this.materialLabel4.AutoSize = true;
+            this.materialLabel4.Depth = 0;
+            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel4.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
+            this.materialLabel4.Location = new System.Drawing.Point(10, 530);
+            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel4.Name = "materialLabel4";
+            this.materialLabel4.Size = new System.Drawing.Size(107, 17);
+            this.materialLabel4.TabIndex = 123;
+            this.materialLabel4.Text = "Total Variants: 5";
+            // 
+            // materialLabel9
+            // 
+            this.materialLabel9.AutoSize = true;
+            this.materialLabel9.Depth = 0;
+            this.materialLabel9.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel9.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            this.materialLabel9.Location = new System.Drawing.Point(506, 619);
+            this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel9.Name = "materialLabel9";
+            this.materialLabel9.Size = new System.Drawing.Size(106, 24);
+            this.materialLabel9.TabIndex = 121;
+            this.materialLabel9.Text = "Discounted:";
+            // 
+            // materialLabel8
+            // 
+            this.materialLabel8.AutoSize = true;
+            this.materialLabel8.Depth = 0;
+            this.materialLabel8.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel8.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            this.materialLabel8.Location = new System.Drawing.Point(506, 579);
+            this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel8.Name = "materialLabel8";
+            this.materialLabel8.Size = new System.Drawing.Size(102, 24);
+            this.materialLabel8.TabIndex = 122;
+            this.materialLabel8.Text = "Base Price:";
+            // 
+            // materialLabel7
+            // 
+            this.materialLabel7.AutoSize = true;
+            this.materialLabel7.Depth = 0;
+            this.materialLabel7.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel7.Location = new System.Drawing.Point(316, 569);
+            this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel7.Name = "materialLabel7";
+            this.materialLabel7.Size = new System.Drawing.Size(91, 19);
+            this.materialLabel7.TabIndex = 120;
+            this.materialLabel7.Text = "Discount (%)";
+            // 
+            // numericUpDownDiscountPercent
+            // 
+            this.numericUpDownDiscountPercent.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDownDiscountPercent.Location = new System.Drawing.Point(316, 599);
+            this.numericUpDownDiscountPercent.Name = "numericUpDownDiscountPercent";
+            this.numericUpDownDiscountPercent.Size = new System.Drawing.Size(120, 29);
+            this.numericUpDownDiscountPercent.TabIndex = 119;
+            // 
+            // txtBoxComboMealName
+            // 
+            this.txtBoxComboMealName.AnimateReadOnly = false;
+            this.txtBoxComboMealName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtBoxComboMealName.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtBoxComboMealName.Depth = 0;
+            this.txtBoxComboMealName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtBoxComboMealName.HideSelection = true;
+            this.txtBoxComboMealName.Hint = "Enter Combo Meal Name";
+            this.txtBoxComboMealName.LeadingIcon = null;
+            this.txtBoxComboMealName.Location = new System.Drawing.Point(16, 589);
+            this.txtBoxComboMealName.MaxLength = 32767;
+            this.txtBoxComboMealName.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtBoxComboMealName.Name = "txtBoxComboMealName";
+            this.txtBoxComboMealName.PasswordChar = '\0';
+            this.txtBoxComboMealName.PrefixSuffixText = null;
+            this.txtBoxComboMealName.ReadOnly = false;
+            this.txtBoxComboMealName.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtBoxComboMealName.SelectedText = "";
+            this.txtBoxComboMealName.SelectionLength = 0;
+            this.txtBoxComboMealName.SelectionStart = 0;
+            this.txtBoxComboMealName.ShortcutsEnabled = true;
+            this.txtBoxComboMealName.Size = new System.Drawing.Size(250, 48);
+            this.txtBoxComboMealName.TabIndex = 118;
+            this.txtBoxComboMealName.TabStop = false;
+            this.txtBoxComboMealName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtBoxComboMealName.TrailingIcon = null;
+            this.txtBoxComboMealName.UseSystemPasswordChar = false;
+            // 
+            // btnDuplicateRow
+            // 
+            this.btnDuplicateRow.Location = new System.Drawing.Point(568, 120);
+            this.btnDuplicateRow.Name = "btnDuplicateRow";
+            this.btnDuplicateRow.Size = new System.Drawing.Size(75, 23);
+            this.btnDuplicateRow.TabIndex = 116;
+            this.btnDuplicateRow.Text = "Duplicate";
+            this.btnDuplicateRow.UseVisualStyleBackColor = true;
+            this.btnDuplicateRow.Click += new System.EventHandler(this.btnDuplicateRow_Click);
+            // 
+            // btnDeleteRow
+            // 
+            this.btnDeleteRow.Location = new System.Drawing.Point(692, 529);
+            this.btnDeleteRow.Name = "btnDeleteRow";
+            this.btnDeleteRow.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteRow.TabIndex = 117;
+            this.btnDeleteRow.Text = "Delete";
+            this.btnDeleteRow.UseVisualStyleBackColor = true;
+            // 
+            // btnAddNewVariant
+            // 
+            this.btnAddNewVariant.AccessibleRole = System.Windows.Forms.AccessibleRole.OutlineButton;
+            this.btnAddNewVariant.Location = new System.Drawing.Point(656, 119);
+            this.btnAddNewVariant.Name = "btnAddNewVariant";
+            this.btnAddNewVariant.Size = new System.Drawing.Size(75, 23);
+            this.btnAddNewVariant.TabIndex = 115;
+            this.btnAddNewVariant.Text = "Add New";
+            this.btnAddNewVariant.UseVisualStyleBackColor = true;
+            // 
+            // dgViewAddComboMeal
+            // 
+            this.dgViewAddComboMeal.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgViewAddComboMeal.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgViewAddComboMeal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgViewAddComboMeal.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnVarName,
+            this.ColumnSize,
+            this.ColumnPrice,
+            this.Quantity});
+            this.dgViewAddComboMeal.Location = new System.Drawing.Point(12, 149);
+            this.dgViewAddComboMeal.Name = "dgViewAddComboMeal";
+            this.dgViewAddComboMeal.Size = new System.Drawing.Size(760, 370);
+            this.dgViewAddComboMeal.TabIndex = 114;
+            // 
+            // cmbComboMealProductVariant
+            // 
+            this.cmbComboMealProductVariant.AutoResize = false;
+            this.cmbComboMealProductVariant.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cmbComboMealProductVariant.Depth = 0;
+            this.cmbComboMealProductVariant.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbComboMealProductVariant.DropDownHeight = 174;
+            this.cmbComboMealProductVariant.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbComboMealProductVariant.DropDownWidth = 121;
+            this.cmbComboMealProductVariant.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cmbComboMealProductVariant.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cmbComboMealProductVariant.FormattingEnabled = true;
+            this.cmbComboMealProductVariant.Hint = "Select Variant";
+            this.cmbComboMealProductVariant.IntegralHeight = false;
+            this.cmbComboMealProductVariant.ItemHeight = 43;
+            this.cmbComboMealProductVariant.Location = new System.Drawing.Point(422, 49);
+            this.cmbComboMealProductVariant.MaxDropDownItems = 4;
+            this.cmbComboMealProductVariant.MouseState = MaterialSkin.MouseState.OUT;
+            this.cmbComboMealProductVariant.Name = "cmbComboMealProductVariant";
+            this.cmbComboMealProductVariant.Size = new System.Drawing.Size(350, 49);
+            this.cmbComboMealProductVariant.StartIndex = 0;
+            this.cmbComboMealProductVariant.TabIndex = 112;
+            // 
+            // cmbProductCategory
+            // 
+            this.cmbProductCategory.AutoResize = false;
+            this.cmbProductCategory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cmbProductCategory.Depth = 0;
+            this.cmbProductCategory.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbProductCategory.DropDownHeight = 174;
+            this.cmbProductCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbProductCategory.DropDownWidth = 121;
+            this.cmbProductCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cmbProductCategory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cmbProductCategory.FormattingEnabled = true;
+            this.cmbProductCategory.Hint = "Select Product";
+            this.cmbProductCategory.IntegralHeight = false;
+            this.cmbProductCategory.ItemHeight = 43;
+            this.cmbProductCategory.Location = new System.Drawing.Point(12, 49);
+            this.cmbProductCategory.MaxDropDownItems = 4;
+            this.cmbProductCategory.MouseState = MaterialSkin.MouseState.OUT;
+            this.cmbProductCategory.Name = "cmbProductCategory";
+            this.cmbProductCategory.Size = new System.Drawing.Size(350, 49);
+            this.cmbProductCategory.StartIndex = 0;
+            this.cmbProductCategory.TabIndex = 113;
+            // 
+            // materialLabel5
+            // 
+            this.materialLabel5.AutoSize = true;
+            this.materialLabel5.Depth = 0;
+            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel5.Location = new System.Drawing.Point(422, 19);
+            this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel5.Name = "materialLabel5";
+            this.materialLabel5.Size = new System.Drawing.Size(52, 19);
+            this.materialLabel5.TabIndex = 111;
+            this.materialLabel5.Text = "Variant";
+            // 
+            // materialLabel3
+            // 
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel3.Location = new System.Drawing.Point(16, 559);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(137, 19);
+            this.materialLabel3.TabIndex = 109;
+            this.materialLabel3.Text = "Combo Meal Name";
+            // 
+            // materialLabel2
+            // 
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel2.Location = new System.Drawing.Point(12, 19);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(56, 19);
+            this.materialLabel2.TabIndex = 110;
+            this.materialLabel2.Text = "Product";
             // 
             // panel2
             // 
@@ -158,269 +374,29 @@
             this.materialButton4.UseAccentColor = false;
             this.materialButton4.UseVisualStyleBackColor = true;
             // 
-            // panel3
+            // panel1
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.materialLabel4);
-            this.panel3.Controls.Add(this.materialLabel9);
-            this.panel3.Controls.Add(this.materialLabel8);
-            this.panel3.Controls.Add(this.materialLabel7);
-            this.panel3.Controls.Add(this.numericUpDown1);
-            this.panel3.Controls.Add(this.materialTextBox21);
-            this.panel3.Controls.Add(this.button4);
-            this.panel3.Controls.Add(this.button2);
-            this.panel3.Controls.Add(this.button1);
-            this.panel3.Controls.Add(this.dataGridView1);
-            this.panel3.Controls.Add(this.materialComboBox2);
-            this.panel3.Controls.Add(this.materialComboBox1);
-            this.panel3.Controls.Add(this.materialLabel5);
-            this.panel3.Controls.Add(this.materialButton1);
-            this.panel3.Controls.Add(this.materialLabel3);
-            this.panel3.Controls.Add(this.materialLabel2);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(14, 60);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(785, 662);
-            this.panel3.TabIndex = 109;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.materialLabel1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(14, 14);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(785, 46);
+            this.panel1.TabIndex = 100;
             // 
-            // materialLabel9
+            // materialLabel1
             // 
-            this.materialLabel9.AutoSize = true;
-            this.materialLabel9.Depth = 0;
-            this.materialLabel9.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel9.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.materialLabel9.Location = new System.Drawing.Point(506, 619);
-            this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel9.Name = "materialLabel9";
-            this.materialLabel9.Size = new System.Drawing.Size(239, 24);
-            this.materialLabel9.TabIndex = 121;
-            this.materialLabel9.Text = "Discounted:           PHP 300";
-            // 
-            // materialLabel8
-            // 
-            this.materialLabel8.AutoSize = true;
-            this.materialLabel8.Depth = 0;
-            this.materialLabel8.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel8.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.materialLabel8.Location = new System.Drawing.Point(506, 579);
-            this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel8.Name = "materialLabel8";
-            this.materialLabel8.Size = new System.Drawing.Size(240, 24);
-            this.materialLabel8.TabIndex = 122;
-            this.materialLabel8.Text = "Base Price:            PHP 300";
-            // 
-            // materialLabel7
-            // 
-            this.materialLabel7.AutoSize = true;
-            this.materialLabel7.Depth = 0;
-            this.materialLabel7.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel7.Location = new System.Drawing.Point(316, 569);
-            this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel7.Name = "materialLabel7";
-            this.materialLabel7.Size = new System.Drawing.Size(91, 19);
-            this.materialLabel7.TabIndex = 120;
-            this.materialLabel7.Text = "Discount (%)";
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown1.Location = new System.Drawing.Point(316, 599);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 29);
-            this.numericUpDown1.TabIndex = 119;
-            // 
-            // materialTextBox21
-            // 
-            this.materialTextBox21.AnimateReadOnly = false;
-            this.materialTextBox21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.materialTextBox21.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.materialTextBox21.Depth = 0;
-            this.materialTextBox21.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialTextBox21.HideSelection = true;
-            this.materialTextBox21.Hint = "Enter Combo Meal Name";
-            this.materialTextBox21.LeadingIcon = null;
-            this.materialTextBox21.Location = new System.Drawing.Point(16, 589);
-            this.materialTextBox21.MaxLength = 32767;
-            this.materialTextBox21.MouseState = MaterialSkin.MouseState.OUT;
-            this.materialTextBox21.Name = "materialTextBox21";
-            this.materialTextBox21.PasswordChar = '\0';
-            this.materialTextBox21.PrefixSuffixText = null;
-            this.materialTextBox21.ReadOnly = false;
-            this.materialTextBox21.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.materialTextBox21.SelectedText = "";
-            this.materialTextBox21.SelectionLength = 0;
-            this.materialTextBox21.SelectionStart = 0;
-            this.materialTextBox21.ShortcutsEnabled = true;
-            this.materialTextBox21.Size = new System.Drawing.Size(250, 48);
-            this.materialTextBox21.TabIndex = 118;
-            this.materialTextBox21.TabStop = false;
-            this.materialTextBox21.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.materialTextBox21.TrailingIcon = null;
-            this.materialTextBox21.UseSystemPasswordChar = false;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(610, 120);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 116;
-            this.button4.Text = "Duplicate";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(692, 529);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 117;
-            this.button2.Text = "Delete";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(696, 119);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 115;
-            this.button1.Text = "Add To";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnVarName,
-            this.ColumnSize,
-            this.ColumnPrice,
-            this.ColumnIngredients,
-            this.ColumnInstructions,
-            this.ColumnImage});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 149);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(760, 370);
-            this.dataGridView1.TabIndex = 114;
-            // 
-            // ColumnImage
-            // 
-            this.ColumnImage.HeaderText = "Image";
-            this.ColumnImage.Name = "ColumnImage";
-            // 
-            // materialComboBox2
-            // 
-            this.materialComboBox2.AutoResize = false;
-            this.materialComboBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialComboBox2.Depth = 0;
-            this.materialComboBox2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.materialComboBox2.DropDownHeight = 174;
-            this.materialComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.materialComboBox2.DropDownWidth = 121;
-            this.materialComboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialComboBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialComboBox2.FormattingEnabled = true;
-            this.materialComboBox2.Hint = "Select Variant";
-            this.materialComboBox2.IntegralHeight = false;
-            this.materialComboBox2.ItemHeight = 43;
-            this.materialComboBox2.Location = new System.Drawing.Point(422, 49);
-            this.materialComboBox2.MaxDropDownItems = 4;
-            this.materialComboBox2.MouseState = MaterialSkin.MouseState.OUT;
-            this.materialComboBox2.Name = "materialComboBox2";
-            this.materialComboBox2.Size = new System.Drawing.Size(350, 49);
-            this.materialComboBox2.StartIndex = 0;
-            this.materialComboBox2.TabIndex = 112;
-            // 
-            // materialComboBox1
-            // 
-            this.materialComboBox1.AutoResize = false;
-            this.materialComboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialComboBox1.Depth = 0;
-            this.materialComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.materialComboBox1.DropDownHeight = 174;
-            this.materialComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.materialComboBox1.DropDownWidth = 121;
-            this.materialComboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialComboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialComboBox1.FormattingEnabled = true;
-            this.materialComboBox1.Hint = "Select Product";
-            this.materialComboBox1.IntegralHeight = false;
-            this.materialComboBox1.ItemHeight = 43;
-            this.materialComboBox1.Location = new System.Drawing.Point(12, 49);
-            this.materialComboBox1.MaxDropDownItems = 4;
-            this.materialComboBox1.MouseState = MaterialSkin.MouseState.OUT;
-            this.materialComboBox1.Name = "materialComboBox1";
-            this.materialComboBox1.Size = new System.Drawing.Size(350, 49);
-            this.materialComboBox1.StartIndex = 0;
-            this.materialComboBox1.TabIndex = 113;
-            // 
-            // materialLabel5
-            // 
-            this.materialLabel5.AutoSize = true;
-            this.materialLabel5.Depth = 0;
-            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel5.Location = new System.Drawing.Point(422, 19);
-            this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel5.Name = "materialLabel5";
-            this.materialLabel5.Size = new System.Drawing.Size(52, 19);
-            this.materialLabel5.TabIndex = 111;
-            this.materialLabel5.Text = "Variant";
-            // 
-            // materialButton1
-            // 
-            this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.materialButton1.Depth = 0;
-            this.materialButton1.HighEmphasis = true;
-            this.materialButton1.Icon = null;
-            this.materialButton1.Location = new System.Drawing.Point(16, 109);
-            this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialButton1.Name = "materialButton1";
-            this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton1.Size = new System.Drawing.Size(139, 36);
-            this.materialButton1.TabIndex = 108;
-            this.materialButton1.Text = "Upload image...";
-            this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialButton1.UseAccentColor = true;
-            this.materialButton1.UseVisualStyleBackColor = true;
-            // 
-            // materialLabel3
-            // 
-            this.materialLabel3.AutoSize = true;
-            this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel3.Location = new System.Drawing.Point(16, 559);
-            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(137, 19);
-            this.materialLabel3.TabIndex = 109;
-            this.materialLabel3.Text = "Combo Meal Name";
-            // 
-            // materialLabel2
-            // 
-            this.materialLabel2.AutoSize = true;
-            this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.Location = new System.Drawing.Point(12, 19);
-            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(56, 19);
-            this.materialLabel2.TabIndex = 110;
-            this.materialLabel2.Text = "Product";
-            // 
-            // materialLabel4
-            // 
-            this.materialLabel4.AutoSize = true;
-            this.materialLabel4.Depth = 0;
-            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel4.FontType = MaterialSkin.MaterialSkinManager.fontType.Button;
-            this.materialLabel4.Location = new System.Drawing.Point(10, 530);
-            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(107, 17);
-            this.materialLabel4.TabIndex = 123;
-            this.materialLabel4.Text = "Total Variants: 5";
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            this.materialLabel1.Location = new System.Drawing.Point(302, 10);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(154, 24);
+            this.materialLabel1.TabIndex = 0;
+            this.materialLabel1.Text = "Add Combo Meal";
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -454,6 +430,32 @@
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.Width = 133;
             // 
+            // lblBasePrice
+            // 
+            this.lblBasePrice.AutoSize = true;
+            this.lblBasePrice.Depth = 0;
+            this.lblBasePrice.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.lblBasePrice.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            this.lblBasePrice.Location = new System.Drawing.Point(664, 576);
+            this.lblBasePrice.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblBasePrice.Name = "lblBasePrice";
+            this.lblBasePrice.Size = new System.Drawing.Size(79, 24);
+            this.lblBasePrice.TabIndex = 124;
+            this.lblBasePrice.Text = "PHP 300";
+            // 
+            // lblDiscountedPrice
+            // 
+            this.lblDiscountedPrice.AutoSize = true;
+            this.lblDiscountedPrice.Depth = 0;
+            this.lblDiscountedPrice.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.lblDiscountedPrice.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            this.lblDiscountedPrice.Location = new System.Drawing.Point(664, 616);
+            this.lblDiscountedPrice.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblDiscountedPrice.Name = "lblDiscountedPrice";
+            this.lblDiscountedPrice.Size = new System.Drawing.Size(79, 24);
+            this.lblDiscountedPrice.TabIndex = 124;
+            this.lblDiscountedPrice.Text = "PHP 300";
+            // 
             // ColumnVarName
             // 
             this.ColumnVarName.HeaderText = "Variant Name";
@@ -471,15 +473,10 @@
             this.ColumnPrice.HeaderText = "Price";
             this.ColumnPrice.Name = "ColumnPrice";
             // 
-            // ColumnIngredients
+            // Quantity
             // 
-            this.ColumnIngredients.HeaderText = "Ingredients";
-            this.ColumnIngredients.Name = "ColumnIngredients";
-            // 
-            // ColumnInstructions
-            // 
-            this.ColumnInstructions.HeaderText = "Instructions";
-            this.ColumnInstructions.Name = "ColumnInstructions";
+            this.Quantity.HeaderText = "Quantity";
+            this.Quantity.Name = "Quantity";
             // 
             // AddComboMealModal
             // 
@@ -491,17 +488,17 @@
             this.Name = "AddComboMealModal";
             this.Padding = new System.Windows.Forms.Padding(3, 24, 3, 3);
             this.Text = "Add Product";
-            this.Load += new System.EventHandler(this.AddProductModal_Load);
             this.materialCard1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDiscountPercent)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgViewAddComboMeal)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
+
         }
         #endregion
         private MaterialSkin.Controls.MaterialCard materialCard1;
@@ -519,24 +516,23 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel9;
         private MaterialSkin.Controls.MaterialLabel materialLabel8;
         protected MaterialSkin.Controls.MaterialLabel materialLabel7;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private MaterialSkin.Controls.MaterialTextBox2 materialTextBox21;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnVarName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSize;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIngredients;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnInstructions;
-        private System.Windows.Forms.DataGridViewImageColumn ColumnImage;
-        private MaterialSkin.Controls.MaterialComboBox materialComboBox2;
-        private MaterialSkin.Controls.MaterialComboBox materialComboBox1;
+        private System.Windows.Forms.NumericUpDown numericUpDownDiscountPercent;
+        private MaterialSkin.Controls.MaterialTextBox2 txtBoxComboMealName;
+        private System.Windows.Forms.Button btnDuplicateRow;
+        private System.Windows.Forms.Button btnDeleteRow;
+        private System.Windows.Forms.Button btnAddNewVariant;
+        private System.Windows.Forms.DataGridView dgViewAddComboMeal;
+        private MaterialSkin.Controls.MaterialComboBox cmbComboMealProductVariant;
+        private MaterialSkin.Controls.MaterialComboBox cmbProductCategory;
         protected MaterialSkin.Controls.MaterialLabel materialLabel5;
-        protected MaterialSkin.Controls.MaterialButton materialButton1;
         protected MaterialSkin.Controls.MaterialLabel materialLabel3;
         protected MaterialSkin.Controls.MaterialLabel materialLabel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
+        private MaterialSkin.Controls.MaterialLabel lblDiscountedPrice;
+        private MaterialSkin.Controls.MaterialLabel lblBasePrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnVarName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSize;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
     }
 }

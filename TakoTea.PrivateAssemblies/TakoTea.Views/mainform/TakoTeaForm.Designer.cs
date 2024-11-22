@@ -429,7 +429,7 @@
             this.toolStripBtnAddIngredient.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtnAddIngredient.Name = "toolStripBtnAddIngredient";
             this.toolStripBtnAddIngredient.Size = new System.Drawing.Size(151, 25);
-            this.toolStripBtnAddIngredient.Text = "Add New Ingredient";
+            this.toolStripBtnAddIngredient.Text = "Add New IngredientModel";
             this.toolStripBtnAddIngredient.Click += new System.EventHandler(this.toolStripBtnAddIngredient_Click);
             // 
             // buttonQuickAccess

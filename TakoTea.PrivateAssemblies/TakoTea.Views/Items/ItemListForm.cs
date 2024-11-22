@@ -3,7 +3,7 @@ using System;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.View.Items.Item_Modals;
-using TakoTea.Views.Batch;
+using TakoTea.Views.Batches;
 using TakoTea.Views.Items.Item_Modals;
 namespace TakoTea.Views.Items
 {

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="102d72a12c2648348c092c10af13695f" Name="Diagram1">
+        <EntityTypeShape EntityType="TakoTeaModel.Batch" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TakoTeaModel.Ingredient" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="TakoTeaModel.IngredientProductLink" Width="1.5" PointX="6" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TakoTeaModel.Product" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TakoTeaModel.ProductCategory" Width="1.5" PointX="1.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TakoTeaModel.StockAdjustmentLog" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <AssociationConnector Association="TakoTeaModel.FK__Batch__Ingredien__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="TakoTeaModel.FK__Ingredien__Ingre__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="TakoTeaModel.FK__StockAdju__Ingre__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="TakoTeaModel.FK__Ingredien__Produ__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="TakoTeaModel.FK__Product__Product__4CA06362" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -208,8 +208,8 @@ namespace TakoTea.Views.MainForm
         }
         private void toolStripBtnAddProduct_Click(object sender, EventArgs e)
         {
-            AddProductModal addProductModal = new AddProductModal();
-            _ = addProductModal.ShowDialog();
+         /*   AddProductModal addProductModal = new AddProductModal();
+            _ = addProductModal.ShowDialog();*/
         }
     }
 }

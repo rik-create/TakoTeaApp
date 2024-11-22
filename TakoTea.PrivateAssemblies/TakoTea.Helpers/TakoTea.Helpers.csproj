@@ -70,6 +70,7 @@
     <Compile Include="Validators\StockAdjustmentValidator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -77,6 +78,13 @@
       <Project>{b801f875-789a-4766-b84b-290f2233a7df}</Project>
       <Name>TakoTea.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TakoTea.Repository\TakoTea.Repository.csproj">
+      <Project>{7daba7c5-30ff-471f-9f11-322fd40745bd}</Project>
+      <Name>TakoTea.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataLoader\Modals\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

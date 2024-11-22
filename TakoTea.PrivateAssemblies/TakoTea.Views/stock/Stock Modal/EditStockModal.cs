@@ -4,82 +4,96 @@ using TakoTea.Helpers;
 using TakoTea.Helpers.Validators;
 using TakoTea.Repository;
 using TakoTea.Services;
-namespace TakoTea.View.Stock.Stock_Modal
+using TakoTea.Models;
+using TakoTea.Interfaces;
+using TakoTea.Views.DataLoaders.Modals;
+
+namespace TakoTea.Views.Stock.Stock_Modal
 {
     public partial class EditStockModal : Form
     {
-        private readonly IngredientRepository _ingredientRepository;
+        private readonly int _batchId;  // Changed from _ingredientId to _batchId
+        private readonly BatchRepository _batchRepository;
         private readonly StockAdjustmentRepository _stockAdjustmentRepository;
         private readonly StockService _stockManagementService;
-        public int IngredientID { get; }
-        public string IngredientName { get; }
-        public decimal CurrentQuantity { get; }
-        public string MeasuringUnit { get; }
-        public decimal ReorderLevel { get; }
-        public EditStockModal(int ingredientId, string ingredientName, decimal currentQuantity, string measuringUnit, decimal reorderLevel)
+
+        private readonly DataAccessObject _dao;
+
+        public EditStockModal(int batchId, DataAccessObject dao)
         {
             InitializeComponent();
-            _ingredientRepository = new IngredientRepository();
-            _stockAdjustmentRepository = new StockAdjustmentRepository(_ingredientRepository);
-            _stockManagementService = new StockService(_ingredientRepository, _stockAdjustmentRepository);
-            IngredientID = ingredientId;
-            IngredientName = ingredientName;
-            CurrentQuantity = currentQuantity;
-            MeasuringUnit = measuringUnit;
-            ReorderLevel = reorderLevel;
+            _dao = dao;
+
+            _batchRepository = new BatchRepository(_dao);  // Using BatchRepository now
+            _stockAdjustmentRepository = new StockAdjustmentRepository(_batchRepository);  // Adjusted for BatchRepository
+            _stockManagementService = new StockService(_batchRepository, _stockAdjustmentRepository);  // Adjusted for BatchRepository
+            _batchId = batchId;
         }
+
         private void EditStockModal_Load(object sender, EventArgs e)
         {
-            txtBoxIngredientName.Text = IngredientName;
-            txtCurrentQuantity.Text = CurrentQuantity.ToString();
-            numNewQuantity.Value = CurrentQuantity;
-            cmbAdjustmentType.SelectedIndex = 0;
-            txtReason.Clear();
+            // Create the data loader for batches and load the data
+            var dataLoader = ModalDataLoaderFactory.GetDataLoader(this, _batchId);  // Adjusted for Batch
+            dataLoader.LoadData(this);
         }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             decimal newQuantity = numNewQuantity.Value;
             string adjustmentType = cmbAdjustmentType.SelectedItem.ToString();
             string reason = txtReason.Text;
+
             // Validate the adjustment before proceeding
             if (!StockAdjustmentValidator.ValidateStockAdjustment(newQuantity, adjustmentType, reason))
             {
                 return;
             }
-            decimal currentQuantity = _ingredientRepository.GetPreviousQuantity(IngredientID);
-            _ = adjustmentType == "Addition" ? newQuantity - currentQuantity : currentQuantity - newQuantity;
+
+            // Get the current quantity of the batch to calculate the adjusted quantity
+            decimal currentQuantity = _batchRepository.GetPreviousQuantity(_batchId);
+            decimal adjustedQuantity = adjustmentType == "Addition" ? newQuantity - currentQuantity : currentQuantity - newQuantity;
+
+            // Confirm the action
             if (!DialogHelper.ShowConfirmation("Are you sure you want to apply this stock adjustment?"))
             {
                 return;
             }
+
             try
             {
-                _stockManagementService.AdjustStock(IngredientID, newQuantity, reason, 1);
-                DialogHelper.ShowSuccess("Stock adjustment successful!");
+                // Adjust the batch stock
+                _stockManagementService.AdjustBatchStock(_batchId, adjustedQuantity, reason, 1);// ex user id
+                DialogHelper.ShowSuccess("Batch stock adjustment successful!");
                 DialogResult = DialogResult.OK;
                 Close();
             }
             catch (Exception ex)
             {
-                DialogHelper.ShowError($"Failed to adjust stock. Error: {ex.Message}");
+                DialogHelper.ShowError($"Failed to adjust batch stock. Error: {ex.Message}");
             }
         }
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            // Confirm cancel action
             DialogResult dialogResult = MessageBox.Show(
                 "Are you sure you want to cancel? Any unsaved changes will be lost.",
                 "Confirm Cancel",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning
             );
+
             if (dialogResult == DialogResult.Yes)
             {
                 Close();
             }
-            else
-            {
-                return;
-            }
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            // Reset the data using the data loader for batch
+            var dataLoader = ModalDataLoaderFactory.GetDataLoader(this, _batchId);  // Adjusted for Batch
+            dataLoader.ResetData(this);
         }
     }
 }

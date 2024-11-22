@@ -1,6 +1,10 @@
 ﻿using Dapper;
+using System.Collections.Generic;
+using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using TakoTea.Database;
 using TakoTea.Interfaces;
 using TakoTea.Models;
@@ -10,19 +14,50 @@ namespace TakoTea.Repository
     {
         private readonly SqlConnection _connection;
         private readonly DataAccessObject _dao;
-        public IngredientRepository()
+        private readonly Entities _context;
+        public IngredientRepository(DataAccessObject _dao)
         {
             _connection = DatabaseConnection.GetConnection();
-            _dao = new DataAccessObject();
+            this._dao = _dao;
+            _context = new Entities();
         }
+
+        // Method to load ingredient data
+        // Method to load ingredient data
+        public List<object> GetAllIngredients()
+        {
+            try
+            {
+                // Query to fetch the ingredient data
+                var ingredientList = _context.Ingredients
+                    .Select(i => new
+                    {
+                        i.IngredientID,
+                        i.IngredientName,
+                        i.BrandName,
+                        AddOn = i.IsAddOn.HasValue && i.IsAddOn.Value ? "Yes" : "No"
+                    })
+                    .ToList<object>(); // Cast to List<object> to match the return type
+
+                return ingredientList;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error loading ingredients: " + ex.Message);
+            }
+        }
+
+
+
+
         public DataTable GetCurrentStockLevels()
         {
             string query = @"
     SELECT 
+        b.BatchID,
         i.IngredientID, 
         i.IngredientName,
         b.QuantityInStock,
-        i.MeasuringUnit,
         b.ReorderLevel
     FROM 
         Ingredient i
@@ -49,14 +84,14 @@ namespace TakoTea.Repository
                 _ = connection.Execute(query, new { IngredientID = ingredientID, NewQuantity = newQuantity });
             }
         }
-        public Ingredient GetIngredientById(int ingredientId)
+        public IngredientModel GetIngredientById(int ingredientId)
         {
-            string query = "SELECT * FROM Ingredient WHERE IngredientID = @IngredientID";
-            return _connection.QuerySingleOrDefault<Ingredient>(query, new { IngredientID = ingredientId });
+            string query = "SELECT * FROM IngredientModel WHERE IngredientID = @IngredientID";
+            return _connection.QuerySingleOrDefault<IngredientModel>(query, new { IngredientID = ingredientId });
         }
         public string GetIngredientNameById(int ingredientId)
         {
-            string query = "SELECT IngredientName FROM Ingredient WHERE IngredientID = @IngredientID";
+            string query = "SELECT IngredientName FROM IngredientModel WHERE IngredientID = @IngredientID";
             return _connection.QueryFirstOrDefault<string>(query, new { IngredientID = ingredientId });
         }
         public decimal GetPreviousQuantity(int ingredientId)
@@ -64,5 +99,31 @@ namespace TakoTea.Repository
             string query = "SELECT QuantityInStock FROM Batch WHERE IngredientID = @IngredientID AND IsActive = 1";
             return _connection.QueryFirstOrDefault<decimal>(query, new { IngredientID = ingredientId });
         }
+
+        public int GetIngredientIdUsingBatch(int batchId)
+        {
+            string query = "SELECT IngredientID FROM Batches WHERE BatchID = @BatchID";
+            var parameters = new SqlParameter[]
+            {
+            new SqlParameter("@BatchID", batchId)
+            };
+
+            var result = _dao.ExecuteQuery<int>(query, parameters);
+            return result.FirstOrDefault();
+        }
+
+
+        public string GetIngredientName(int ingredientId)
+        {
+            string query = "SELECT Name FROM Ingredients WHERE IngredientID = @IngredientID";
+            var parameters = new SqlParameter[]
+            {
+            new SqlParameter("@IngredientID", ingredientId)
+            };
+
+            var result = _dao.ExecuteQuery<string>(query, parameters);
+            return result.FirstOrDefault();
+        }
+
     }
 }

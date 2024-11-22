@@ -6,16 +6,22 @@ using TakoTea.Configurations;
 using TakoTea.Helpers;
 using TakoTea.Repository;
 using TakoTea.View.Stock.Stock_Modal;
+using TakoTea.Views.Stock.Stock_Modal;
 namespace TakoTea.Views.Stock
 {
     public partial class CurrentStockLevelForm : MaterialForm
     {
         private readonly IngredientRepository _ingredientRepository;
         private readonly BindingSource _bindingSource;
+
+        private readonly DataAccessObject _dao;
+
         public CurrentStockLevelForm(IngredientRepository ingredientRepository = null)
         {
             InitializeComponent();
-            _ingredientRepository = ingredientRepository ?? new IngredientRepository();
+            _dao = new DataAccessObject();
+
+            _ingredientRepository = ingredientRepository ?? new IngredientRepository(_dao);
             _bindingSource = new BindingSource();
             ThemeConfigurator.ApplyDarkTheme(this);
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
@@ -50,13 +56,10 @@ namespace TakoTea.Views.Stock
         {
             // Get the data from the selected row
             DataGridViewRow selectedRow = dataGridViewStockLevels.Rows[rowIndex];
-            int ingredientId = Convert.ToInt32(selectedRow.Cells["IngredientID"].Value); // Retrieve the hidden IngredientID
-            string ingredientName = selectedRow.Cells["IngredientName"].Value.ToString();
-            decimal quantityInStock = Convert.ToDecimal(selectedRow.Cells["QuantityInStock"].Value);
-            string measuringUnit = selectedRow.Cells["MeasuringUnit"].Value.ToString();
-            decimal reorderLevel = Convert.ToDecimal(selectedRow.Cells["ReorderLevel"].Value);
+            int batchID = Convert.ToInt32(selectedRow.Cells["BatchID"].Value); // Retrieve the hidden IngredientID
+
             // Open the EditStockModal with the selected data
-            EditStockModal editStockModal = new EditStockModal(ingredientId, ingredientName, quantityInStock, measuringUnit, reorderLevel);
+            EditStockModal editStockModal = new EditStockModal(batchID, _dao);
             _ = editStockModal.ShowDialog();
             LoadData();
         }

@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
-namespace TakoTea.Views.Batch.Batch_Modals
+namespace TakoTea.Views.Batches.Batch_Modals
 {
     partial class NewBatchForm
     {

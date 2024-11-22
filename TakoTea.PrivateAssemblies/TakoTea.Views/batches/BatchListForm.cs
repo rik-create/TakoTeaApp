@@ -8,18 +8,20 @@ using TakoTea.Configurations;
 using TakoTea.Helpers;
 using TakoTea.Repository;
 using TakoTea.Views.Items.Item_Modals;
-using TakoTea.Views.Batch.Batch_Modals;
-namespace TakoTea.View.Batch
+using TakoTea.Views.Batches.Batch_Modals;
+namespace TakoTea.View.Batches
 {
     public partial class BatchListForm : MaterialForm
     {
         private readonly BatchRepository _batchRepo;
+        private readonly DataAccessObject _dao;
         public BatchListForm()
         {
             InitializeComponent();
             ThemeConfigurator.ApplyDarkTheme(this);
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
-            _batchRepo = new BatchRepository(new DataAccessObject());
+            _dao = new DataAccessObject();
+            _batchRepo = new BatchRepository(_dao);
             DataGridViewHelper.ApplyDefaultStyles(dataGridViewBatch);
 
         }

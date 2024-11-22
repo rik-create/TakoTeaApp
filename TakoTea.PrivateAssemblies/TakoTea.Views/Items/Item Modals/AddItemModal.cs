@@ -1,17 +1,20 @@
 ﻿using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
 using TakoTea.Interfaces;
-using TakoTea.Models;
 using TakoTea.Services;
+using TakoTea.Models;
+
 namespace TakoTea.Views.Items.Item_Modals
 {
     public partial class AddItemModal : MaterialForm
     {
         private readonly IInventoryService _inventoryService;
+
         public AddItemModal()
         {
             InitializeComponent();
@@ -20,43 +23,40 @@ namespace TakoTea.Views.Items.Item_Modals
             ModalSettingsConfigurator.ApplyStandardModalSettings(this);
             PopulateAllergens(materialCheckedListBoxAllergens);
         }
+
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            _ = MessageBox.Show("asdasdasdasd"); Ingredient ingredient = new Ingredient
+            // Temporary message, replace with actual processing
+            _ = MessageBox.Show("Processing...");
+            txtBoxName.Text = "Test Ingredient";
+            txtBoxBrandName.Text = "Test Brand";
+            txtBoxItemDescription.Text = "A description of the test ingredient for testing purposes.";
+            pictureBoxImg.ImageLocation = @"C:\path\to\image.jpg"; // Path to a test image
+            rdButtonIsAddOnYes.Checked = true; // Simulating that "Is Add On" is selected
+            cmbboxStorageCondition.SelectedItem = "Cool & Dry"; // Assuming this is one of the options
+            cmbTypeOfIngredient.SelectedItem = "Spice"; // Assuming "Spice" is one of the ingredient types
+            materialCheckedListBoxAllergens.SetItemChecked(materialCheckedListBoxAllergens.Items.IndexOf("Gluten"), true); // Example allergen
+
+
+            // Create the ingredient entity
+            var ingredient = new Ingredient
             {
                 IngredientName = txtBoxName.Text,
                 BrandName = txtBoxBrandName.Text,
                 Description = txtBoxItemDescription.Text,
-                MeasuringUnit = cmbBoxMeasuringUnit.SelectedItem?.ToString() ?? "",
                 IngredientImage = pictureBoxImg.ImageLocation,
                 IsAddOn = rdButtonIsAddOnYes.Checked,
+                StorageConditions = cmbboxStorageCondition.SelectedItem?.ToString() ?? "",
                 TypeOfIngredient = cmbTypeOfIngredient.SelectedItem?.ToString() ?? "",
                 IsActive = true,
                 AllergyInformation = string.Join(", ", CheckedListBoxHelper.GetCheckedItemsFromIterator(materialCheckedListBoxAllergens))
             };
-            BatchIngredient batch = new BatchIngredient
-            {
-                BatchNumber = txtBoxBatchNumber.Text,
-                QuantityInStock = numericUpDownCost.Value,
-                ReorderLevel = numericUpDownLowLevel.Value,
-                ExpirationDate = dateTimePickerExpiration.Value,
-                Supplier = txtBoxVendor.Text,
-                StorageConditions = cmbboxStorageCondition.SelectedItem?.ToString() ?? "",
-                BatchCost = numericUpDownCost.Value,
-                IsActive = true
-            };
-            List<int> linkedProductIds = new List<int>();
-            CheckedItemIterator productIterator = new CheckedItemIterator(chkListBoxIngredientFunction);
-            while (productIterator.HasNext())
-            {
-                if (int.TryParse(productIterator.Next(), out int productId))
-                {
-                    linkedProductIds.Add(productId);
-                }
-            }
+ 
+
+
             try
             {
-                _inventoryService.AddIngredient(ingredient, batch, linkedProductIds);
+                _inventoryService.AddIngredient(ingredient); // Modify the service as needed for EF
                 _ = MessageBox.Show("Ingredient and batch added successfully.");
             }
             catch (Exception ex)
@@ -64,6 +64,8 @@ namespace TakoTea.Views.Items.Item_Modals
                 _ = MessageBox.Show("Error adding item: " + ex.Message);
             }
         }
+
+        // Populate allergen list in the checked list box
         public void PopulateAllergens(CheckedListBox materialCheckedListBoxAllergens)
         {
             List<string> allergens = new List<string>
@@ -72,6 +74,7 @@ namespace TakoTea.Views.Items.Item_Modals
                 "Gluten", "Sesame", "Soybeans", "Wheat", "Peanuts",
                 "Tree Nuts", "Shellfish", "Fish", "Eggs", "Milk"
             };
+
             foreach (string allergen in allergens)
             {
                 materialCheckedListBoxAllergens.Items.Add(allergen);
