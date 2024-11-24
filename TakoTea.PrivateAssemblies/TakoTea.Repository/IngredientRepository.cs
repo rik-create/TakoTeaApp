@@ -35,6 +35,8 @@ namespace TakoTea.Repository
                         i.IngredientID,
                         i.IngredientName,
                         i.BrandName,
+                        i.StockLevel,
+                        i.LowLevel,
                         AddOn = i.IsAddOn.HasValue && i.IsAddOn.Value ? "Yes" : "No"
                     })
                     .ToList<object>(); // Cast to List<object> to match the return type

@@ -165,11 +165,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddOn.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Batch.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="BatchIngredient.cs" />
     <Compile Include="BatchModel.cs" />
+    <Compile Include="ComboMeal.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ComboMealVariant.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DashboardPage\DashboardModel.cs" />
+    <Compile Include="DraftOrder.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DraftOrderItem.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ingredient.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -192,6 +208,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Order.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderItem.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -199,8 +221,16 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ProductCategoryModel.cs" />
-    <Compile Include="ProductVariant.cs" />
+    <Compile Include="ProductVariant.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductVariantIngredient.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Receipt.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="StockAdjustmentLog.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -234,6 +264,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="connString.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

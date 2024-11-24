@@ -12,17 +12,13 @@ namespace TakoTea.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class Entities : DbContext
     {
-        public Entities()
-               : base(GetConnectionString()) // Use the method to get the connection string
-        {
-        }
 
-        private static string GetConnectionString()
+        public Entities()
+      : base("metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=\"data source=DESKTOP-BJ889Q2\\SQLEXPRESS;initial catalog=TakoTea;integrated security=True;encrypt=False;MultipleActiveResultSets=True;App=EntityFramework\"")
         {
-            return "metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=\"data source=DESKTOP-BJ889Q2\\SQLEXPRESS;initial catalog=TakoTea;integrated security=True;encrypt=False;MultipleActiveResultSets=True;App=EntityFramework\"";
         }
 
 
@@ -37,5 +33,15 @@ namespace TakoTea.Models
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<StockAdjustmentLog> StockAdjustmentLogs { get; set; }
+        public virtual DbSet<ProductVariantIngredient> ProductVariantIngredients { get; set; }
+        public virtual DbSet<ProductVariant> ProductVariants { get; set; }
+        public virtual DbSet<ComboMeal> ComboMeals { get; set; }
+        public virtual DbSet<ComboMealVariant> ComboMealVariants { get; set; }
+        public virtual DbSet<AddOn> AddOns { get; set; }
+        public virtual DbSet<DraftOrder> DraftOrders { get; set; }
+        public virtual DbSet<DraftOrderItem> DraftOrderItems { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderItem> OrderItems { get; set; }
+        public virtual DbSet<Receipt> Receipts { get; set; }
     }
 }

@@ -31,8 +31,11 @@ namespace TakoTea.Configurations
             MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
             return materialSkinManager.ColorScheme.PrimaryColor;
         }
+        public static Color GetCustomAccentColor()
+        {
+            return Color.FromArgb(184, 35, 32); // Return the custom accent color
+        }
 
- 
 
         // Get the accent color
         public static Color GetAccentColor()
@@ -46,6 +49,11 @@ namespace TakoTea.Configurations
         {
             MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
             return materialSkinManager.ColorScheme.TextColor;
+        }
+
+        public static Color GetYellowColor()
+        {
+            return Color.FromArgb(255, 211, 47); // Return the yellow color (RGB 255, 211, 47)
         }
 
     }

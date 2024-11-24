@@ -27,22 +27,22 @@
         {
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
-            this.materialComboBox1 = new MaterialSkin.Controls.MaterialComboBox();
-            this.materialCheckedListBox1 = new MaterialSkin.Controls.MaterialCheckedListBox();
+            this.chckListBoxAddOns = new System.Windows.Forms.CheckedListBox();
+            this.productCard = new TakoTea.Controls.TakoyakiItemControl();
+            this.cmbSizes = new MaterialSkin.Controls.MaterialComboBox();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.takoyakiItemControl1 = new TakoTea.Controls.TakoyakiItemControl();
+            this.btnAddToDgViewOrderList = new System.Windows.Forms.Button();
+            this.lblTotalPrice = new MaterialSkin.Controls.MaterialLabel();
+            this.numericUpDownQuantity = new System.Windows.Forms.NumericUpDown();
             this.materialCard1.SuspendLayout();
             this.materialCard2.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
             this.SuspendLayout();
             // 
             // materialCard1
@@ -67,9 +67,9 @@
             this.materialCard2.AutoScroll = true;
             this.materialCard2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.materialCard2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.materialCard2.Controls.Add(this.takoyakiItemControl1);
-            this.materialCard2.Controls.Add(this.materialComboBox1);
-            this.materialCard2.Controls.Add(this.materialCheckedListBox1);
+            this.materialCard2.Controls.Add(this.chckListBoxAddOns);
+            this.materialCard2.Controls.Add(this.productCard);
+            this.materialCard2.Controls.Add(this.cmbSizes);
             this.materialCard2.Controls.Add(this.materialLabel3);
             this.materialCard2.Controls.Add(this.materialLabel2);
             this.materialCard2.Depth = 0;
@@ -82,42 +82,44 @@
             this.materialCard2.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard2.Size = new System.Drawing.Size(500, 310);
             this.materialCard2.TabIndex = 102;
-            this.materialCard2.Paint += new System.Windows.Forms.PaintEventHandler(this.materialCard2_Paint);
             // 
-            // materialComboBox1
+            // chckListBoxAddOns
             // 
-            this.materialComboBox1.AutoResize = false;
-            this.materialComboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialComboBox1.Depth = 0;
-            this.materialComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.materialComboBox1.DropDownHeight = 174;
-            this.materialComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.materialComboBox1.DropDownWidth = 121;
-            this.materialComboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialComboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialComboBox1.FormattingEnabled = true;
-            this.materialComboBox1.IntegralHeight = false;
-            this.materialComboBox1.ItemHeight = 43;
-            this.materialComboBox1.Location = new System.Drawing.Point(60, 150);
-            this.materialComboBox1.MaxDropDownItems = 4;
-            this.materialComboBox1.MouseState = MaterialSkin.MouseState.OUT;
-            this.materialComboBox1.Name = "materialComboBox1";
-            this.materialComboBox1.Size = new System.Drawing.Size(360, 49);
-            this.materialComboBox1.StartIndex = 0;
-            this.materialComboBox1.TabIndex = 132;
+            this.chckListBoxAddOns.FormattingEnabled = true;
+            this.chckListBoxAddOns.Location = new System.Drawing.Point(64, 240);
+            this.chckListBoxAddOns.Name = "chckListBoxAddOns";
+            this.chckListBoxAddOns.Size = new System.Drawing.Size(360, 139);
+            this.chckListBoxAddOns.TabIndex = 134;
             // 
-            // materialCheckedListBox1
+            // productCard
             // 
-            this.materialCheckedListBox1.AutoScroll = true;
-            this.materialCheckedListBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialCheckedListBox1.Depth = 0;
-            this.materialCheckedListBox1.Location = new System.Drawing.Point(60, 240);
-            this.materialCheckedListBox1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialCheckedListBox1.Name = "materialCheckedListBox1";
-            this.materialCheckedListBox1.Size = new System.Drawing.Size(362, 130);
-            this.materialCheckedListBox1.Striped = false;
-            this.materialCheckedListBox1.StripeDarkColor = System.Drawing.Color.Empty;
-            this.materialCheckedListBox1.TabIndex = 131;
+            this.productCard.BackColor = System.Drawing.Color.White;
+            this.productCard.Location = new System.Drawing.Point(64, 16);
+            this.productCard.Name = "productCard";
+            this.productCard.Size = new System.Drawing.Size(350, 100);
+            this.productCard.TabIndex = 133;
+            // 
+            // cmbSizes
+            // 
+            this.cmbSizes.AutoResize = false;
+            this.cmbSizes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cmbSizes.Depth = 0;
+            this.cmbSizes.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbSizes.DropDownHeight = 174;
+            this.cmbSizes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSizes.DropDownWidth = 121;
+            this.cmbSizes.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cmbSizes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cmbSizes.FormattingEnabled = true;
+            this.cmbSizes.IntegralHeight = false;
+            this.cmbSizes.ItemHeight = 43;
+            this.cmbSizes.Location = new System.Drawing.Point(60, 150);
+            this.cmbSizes.MaxDropDownItems = 4;
+            this.cmbSizes.MouseState = MaterialSkin.MouseState.OUT;
+            this.cmbSizes.Name = "cmbSizes";
+            this.cmbSizes.Size = new System.Drawing.Size(360, 49);
+            this.cmbSizes.StartIndex = 0;
+            this.cmbSizes.TabIndex = 132;
             // 
             // materialLabel3
             // 
@@ -168,50 +170,43 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.materialLabel1);
-            this.panel1.Controls.Add(this.numericUpDown1);
+            this.panel1.Controls.Add(this.btnAddToDgViewOrderList);
+            this.panel1.Controls.Add(this.lblTotalPrice);
+            this.panel1.Controls.Add(this.numericUpDownQuantity);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(14, 370);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(500, 39);
             this.panel1.TabIndex = 1;
             // 
-            // button1
+            // btnAddToDgViewOrderList
             // 
-            this.button1.Location = new System.Drawing.Point(410, 10);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAddToDgViewOrderList.Location = new System.Drawing.Point(410, 10);
+            this.btnAddToDgViewOrderList.Name = "btnAddToDgViewOrderList";
+            this.btnAddToDgViewOrderList.Size = new System.Drawing.Size(75, 23);
+            this.btnAddToDgViewOrderList.TabIndex = 2;
+            this.btnAddToDgViewOrderList.Text = "Add";
+            this.btnAddToDgViewOrderList.UseVisualStyleBackColor = true;
+            this.btnAddToDgViewOrderList.Click += new System.EventHandler(this.btnAddToDgViewOrderList_Click);
             // 
-            // materialLabel1
+            // lblTotalPrice
             // 
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(150, 10);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(70, 23);
-            this.materialLabel1.TabIndex = 1;
-            this.materialLabel1.Text = "PHP 200";
+            this.lblTotalPrice.Depth = 0;
+            this.lblTotalPrice.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblTotalPrice.Location = new System.Drawing.Point(150, 10);
+            this.lblTotalPrice.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblTotalPrice.Name = "lblTotalPrice";
+            this.lblTotalPrice.Size = new System.Drawing.Size(70, 23);
+            this.lblTotalPrice.TabIndex = 1;
+            this.lblTotalPrice.Text = "PHP 200";
             // 
-            // numericUpDown1
+            // numericUpDownQuantity
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(20, 10);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 0;
-            // 
-            // takoyakiItemControl1
-            // 
-            this.takoyakiItemControl1.BackColor = System.Drawing.Color.White;
-            this.takoyakiItemControl1.Location = new System.Drawing.Point(64, 16);
-            this.takoyakiItemControl1.Name = "takoyakiItemControl1";
-            this.takoyakiItemControl1.Size = new System.Drawing.Size(350, 100);
-            this.takoyakiItemControl1.TabIndex = 133;
-            this.takoyakiItemControl1.Load += new System.EventHandler(this.takoyakiItemControl1_Load_1);
+            this.numericUpDownQuantity.Location = new System.Drawing.Point(20, 10);
+            this.numericUpDownQuantity.Name = "numericUpDownQuantity";
+            this.numericUpDownQuantity.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownQuantity.TabIndex = 0;
+            this.numericUpDownQuantity.ValueChanged += new System.EventHandler(this.numericUpDownQuantity_ValueChanged);
             // 
             // OrderEntryModal
             // 
@@ -228,22 +223,23 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).EndInit();
             this.ResumeLayout(false);
+
         }
         #endregion
         private MaterialSkin.Controls.MaterialCard materialCard1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Button btnAddToDgViewOrderList;
+        private MaterialSkin.Controls.MaterialLabel lblTotalPrice;
+        private System.Windows.Forms.NumericUpDown numericUpDownQuantity;
         private MaterialSkin.Controls.MaterialCard materialCard2;
-        private MaterialSkin.Controls.MaterialComboBox materialComboBox1;
-        private MaterialSkin.Controls.MaterialCheckedListBox materialCheckedListBox1;
+        private MaterialSkin.Controls.MaterialComboBox cmbSizes;
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private System.Windows.Forms.Panel panel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
-        private Controls.TakoyakiItemControl takoyakiItemControl1;
+        private Controls.TakoyakiItemControl productCard;
+        private System.Windows.Forms.CheckedListBox chckListBoxAddOns;
     }
 }

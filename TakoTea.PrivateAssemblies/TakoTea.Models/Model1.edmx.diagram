@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="102d72a12c2648348c092c10af13695f" Name="Diagram1">
+      <Diagram DiagramId="102d72a12c2648348c092c10af13695f" Name="Diagram1" ZoomLevel="57">
         <EntityTypeShape EntityType="TakoTeaModel.Batch" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TakoTeaModel.Ingredient" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="TakoTeaModel.IngredientProductLink" Width="1.5" PointX="6" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TakoTeaModel.Product" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TakoTeaModel.Product" Width="2.125" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TakoTeaModel.ProductCategory" Width="1.5" PointX="1.5" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TakoTeaModel.StockAdjustmentLog" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
         <AssociationConnector Association="TakoTeaModel.FK__Batch__Ingredien__59063A47" ManuallyRouted="false" />
@@ -16,6 +16,25 @@
         <AssociationConnector Association="TakoTeaModel.FK__StockAdju__Ingre__6FE99F9F" ManuallyRouted="false" />
         <AssociationConnector Association="TakoTeaModel.FK__Ingredien__Produ__60A75C0F" ManuallyRouted="false" />
         <AssociationConnector Association="TakoTeaModel.FK__Product__Product__4CA06362" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TakoTeaModel.ProductVariantIngredient" Width="1.5" PointX="8.25" PointY="5.5" />
+        <EntityTypeShape EntityType="TakoTeaModel.ProductVariant" Width="1.5" PointX="6" PointY="2.875" />
+        <AssociationConnector Association="TakoTeaModel.FK__ProductVa__Ingre__0D7A0286" />
+        <AssociationConnector Association="TakoTeaModel.FK__ProductVa__Produ__04E4BC85" />
+        <AssociationConnector Association="TakoTeaModel.FK__ProductVa__Produ__0C85DE4D" />
+        <EntityTypeShape EntityType="TakoTeaModel.ComboMeal" Width="1.5" PointX="8.375" PointY="1" />
+        <EntityTypeShape EntityType="TakoTeaModel.ComboMealVariant" Width="1.5" PointX="10.625" PointY="1" />
+        <AssociationConnector Association="TakoTeaModel.FK__ComboMeal__Combo__14270015" />
+        <AssociationConnector Association="TakoTeaModel.FK_ComboMealVariants_ProductVariantID" />
+        <EntityTypeShape EntityType="TakoTeaModel.AddOn" Width="1.5" PointX="6.625" PointY="16" />
+        <EntityTypeShape EntityType="TakoTeaModel.DraftOrder" Width="1.5" PointX="10.375" PointY="5.125" />
+        <EntityTypeShape EntityType="TakoTeaModel.DraftOrderItem" Width="1.5" PointX="12.625" PointY="5" />
+        <EntityTypeShape EntityType="TakoTeaModel.Order" Width="1.5" PointX="8.375" PointY="11" />
+        <EntityTypeShape EntityType="TakoTeaModel.OrderItem" Width="1.5" PointX="10.625" PointY="13.25" />
+        <EntityTypeShape EntityType="TakoTeaModel.Receipt" Width="1.5" PointX="10.625" PointY="9.125" />
+        <AssociationConnector Association="TakoTeaModel.FK_AddOns_Product" />
+        <AssociationConnector Association="TakoTeaModel.FK_DraftOrderItem_DraftOrder" />
+        <AssociationConnector Association="TakoTeaModel.FK_OrderItem_Order" />
+        <AssociationConnector Association="TakoTeaModel.FK_Receipt_Order" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

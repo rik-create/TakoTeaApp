@@ -16,7 +16,7 @@ namespace TakoTea.Views.DataLoaders.Modals
         {
             switch (modalForm)
             {
-                case EditBatchModal _:
+                case AddBatchModal _:
                     return new EditBatchModalDataLoader((int)key);
                 case EditStockModal _:
                     return new EditStockModalDataLoader((int)key);

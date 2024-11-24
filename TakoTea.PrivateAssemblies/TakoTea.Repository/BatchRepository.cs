@@ -1,4 +1,6 @@
 ﻿using Dapper;
+using System.Collections.Generic;
+using System;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
@@ -10,9 +12,41 @@ namespace TakoTea.Repository
     public class BatchRepository
     {
         private readonly DataAccessObject _dao;
+        private readonly Entities _context;
+
         public BatchRepository(DataAccessObject dao)
         {
             _dao = dao;
+            _context = new Entities();
+        }
+
+        public List<object> GetAllBatches()
+        {
+            try
+            {
+                // Query to fetch the batch data and join with Ingredients
+                var batchList = _context.Batches
+                    .Join(
+                        _context.Ingredients, // Join Batches with Ingredients
+                        batch => batch.IngredientID, // Foreign key in Batches
+                        ingredient => ingredient.IngredientID, // Primary key in Ingredients
+                        (batch, ingredient) => new
+                        {
+                            batch.BatchNumber,
+                            IngredientName = ingredient.IngredientName, // Get IngredientName from Ingredients table
+                            batch.StockLevel,
+                            batch.ExpirationDate,
+                            batch.BatchCost,
+                            Active = batch.IsActive.HasValue && batch.IsActive.Value ? "Yes" : "No"
+                        })
+                    .ToList<object>(); // Cast to List<object> to match the return type
+
+                return batchList;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error loading batches: " + ex.Message);
+            }
         }
 
         public void UpdateBatchStockLevel(int ingredientID, decimal newQuantity)

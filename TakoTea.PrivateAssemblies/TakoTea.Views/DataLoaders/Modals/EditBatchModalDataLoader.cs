@@ -26,7 +26,7 @@ namespace TakoTea.Views.DataLoaders.Modals
 
         public void LoadData(Form modalForm)
         {
-            if (modalForm is EditBatchModal editBatchModal)
+            if (modalForm is AddBatchModal editBatchModal)
             {
                 var batch = _batchRepository.GetBatchById(_batchId);
                 _originalBatch = batch; // Store original data for resetting
@@ -45,7 +45,7 @@ namespace TakoTea.Views.DataLoaders.Modals
 
         public void ResetData(Form modalForm)
         {
-            if (modalForm is EditBatchModal editBatchModal)
+            if (modalForm is AddBatchModal editBatchModal)
             {
                 // Reset form fields to the original batch data
                 editBatchModal.txtBoxBatchNumber.Text = _originalBatch.BatchNumber;

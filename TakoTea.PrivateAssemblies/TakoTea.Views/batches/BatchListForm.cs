@@ -9,6 +9,7 @@ using TakoTea.Helpers;
 using TakoTea.Repository;
 using TakoTea.Views.Items.Item_Modals;
 using TakoTea.Views.Batches.Batch_Modals;
+using TakoTea.Views.Batches;
 namespace TakoTea.View.Batches
 {
     public partial class BatchListForm : MaterialForm
@@ -29,23 +30,13 @@ namespace TakoTea.View.Batches
         {
 
 
-            try
-            {
-                // Get the stock data
-                DataTable batchData = _batchRepo.GetAllActiveBatches();
-                if (batchData == null)
-                {
-                    DialogHelper.ShowError("Failed to load batch data.");
-                    return;
-                }
-                // Use the BindDataToGridView helper to bind data to DataGridView and refresh it
-                DataGridViewHelper.BindDataToGridView(dataGridViewBatch, bindingSource1, batchData);
-                DataGridViewHelper.BindNavigatorToBindingSource(bindingNavigatorBatch, bindingSource1);
-            }
-            catch (Exception ex)
-            {
-                DialogHelper.ShowError("Error loading data: " + ex.Message);
-            }
+            DataGridViewHelper.LoadData(
+             dataRetrievalFunc: () => _batchRepo.GetAllBatches(),
+             dataGridView: dataGridViewBatch,
+             bindingSource: bindingSource1,
+             bindingNavigator: bindingNavigatorBatch,
+             errorMessage: "Failed to load batch data."
+         );
         }
         private void btnShowFilter_Click(object sender, EventArgs e)
         {
@@ -54,8 +45,9 @@ namespace TakoTea.View.Batches
         }
         private void floatingActionButtonAddBatch_Click_1(object sender, EventArgs e)
         {
-            AddItemModal newBatchForm = new AddItemModal();
+            AddBatchModal newBatchForm = new AddBatchModal();
              newBatchForm.ShowDialog();
+            LoadData();
         }
         private void buttonEditBatch_Click(object sender, EventArgs e)
         {

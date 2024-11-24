@@ -3,10 +3,6 @@
     partial class TakoyakiItemControl
     {
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.PictureBox pictureBoxProductIcon;
-        private System.Windows.Forms.Label titleLabel;
-        private System.Windows.Forms.Label descriptionLabel;
-        private System.Windows.Forms.Label priceLabel;
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -79,6 +75,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProductIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
+
+        public System.Windows.Forms.PictureBox pictureBoxProductIcon;
+        public System.Windows.Forms.Label titleLabel;
+        public System.Windows.Forms.Label descriptionLabel;
+        public System.Windows.Forms.Label priceLabel;
     }
 }

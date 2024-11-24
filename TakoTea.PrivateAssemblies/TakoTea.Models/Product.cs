@@ -18,14 +18,21 @@ namespace TakoTea.Models
         public Product()
         {
             this.IngredientProductLinks = new HashSet<IngredientProductLink>();
+            this.ProductVariants = new HashSet<ProductVariant>();
+            this.AddOns = new HashSet<AddOn>();
         }
     
         public int ProductID { get; set; }
         public string ProductName { get; set; }
         public Nullable<int> ProductCategoryID { get; set; }
+        public string ProductImage { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IngredientProductLink> IngredientProductLinks { get; set; }
         public virtual ProductCategory ProductCategory { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductVariant> ProductVariants { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AddOn> AddOns { get; set; }
     }
 }

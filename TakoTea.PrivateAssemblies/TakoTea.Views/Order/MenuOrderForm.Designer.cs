@@ -35,13 +35,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.materialButton2 = new MaterialSkin.Controls.MaterialButton();
             this.materialTextBox21 = new MaterialSkin.Controls.MaterialTextBox2();
-            this.flowLayoutPanelProducts = new System.Windows.Forms.FlowLayoutPanel();
+            this.flPanelProductVariantsMenu = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanelCategpries = new System.Windows.Forms.FlowLayoutPanel();
             this.panelCart = new System.Windows.Forms.Panel();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-            this.dataGridViewOrder = new System.Windows.Forms.DataGridView();
+            this.dataGridViewOrderList = new System.Windows.Forms.DataGridView();
             this.ColumnProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,10 +76,10 @@
             this.materialCard1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelSearch.SuspendLayout();
-            this.flowLayoutPanelProducts.SuspendLayout();
+            this.flPanelProductVariantsMenu.SuspendLayout();
             this.flowLayoutPanelCategpries.SuspendLayout();
             this.panelCart.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrder)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrderList)).BeginInit();
             this.SuspendLayout();
             // 
             // materialCard1
@@ -87,7 +87,7 @@
             this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.materialCard1.Controls.Add(this.panel2);
             this.materialCard1.Controls.Add(this.panelSearch);
-            this.materialCard1.Controls.Add(this.flowLayoutPanelProducts);
+            this.materialCard1.Controls.Add(this.flPanelProductVariantsMenu);
             this.materialCard1.Controls.Add(this.flowLayoutPanelCategpries);
             this.materialCard1.Controls.Add(this.panelCart);
             this.materialCard1.Depth = 0;
@@ -198,34 +198,34 @@
             this.materialTextBox21.TrailingIcon = null;
             this.materialTextBox21.UseSystemPasswordChar = false;
             // 
-            // flowLayoutPanelProducts
+            // flPanelProductVariantsMenu
             // 
-            this.flowLayoutPanelProducts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.flPanelProductVariantsMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanelProducts.AutoScroll = true;
-            this.flowLayoutPanelProducts.BackColor = System.Drawing.SystemColors.Control;
-            this.flowLayoutPanelProducts.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanelProducts.Controls.Add(this.productWidget20);
-            this.flowLayoutPanelProducts.Controls.Add(this.productWidget21);
-            this.flowLayoutPanelProducts.Controls.Add(this.productWidget22);
-            this.flowLayoutPanelProducts.Controls.Add(this.productWidget23);
-            this.flowLayoutPanelProducts.Controls.Add(this.productWidget24);
-            this.flowLayoutPanelProducts.Controls.Add(this.productWidget25);
-            this.flowLayoutPanelProducts.Controls.Add(this.productWidget26);
-            this.flowLayoutPanelProducts.Controls.Add(this.productWidget27);
-            this.flowLayoutPanelProducts.Controls.Add(this.productWidget28);
-            this.flowLayoutPanelProducts.Controls.Add(this.productWidget29);
-            this.flowLayoutPanelProducts.Controls.Add(this.productWidget30);
-            this.flowLayoutPanelProducts.Controls.Add(this.productWidget31);
-            this.flowLayoutPanelProducts.Controls.Add(this.productWidget32);
-            this.flowLayoutPanelProducts.Controls.Add(this.productWidget33);
-            this.flowLayoutPanelProducts.Controls.Add(this.productWidget34);
-            this.flowLayoutPanelProducts.Controls.Add(this.productWidget35);
-            this.flowLayoutPanelProducts.Location = new System.Drawing.Point(210, 120);
-            this.flowLayoutPanelProducts.Name = "flowLayoutPanelProducts";
-            this.flowLayoutPanelProducts.Size = new System.Drawing.Size(690, 630);
-            this.flowLayoutPanelProducts.TabIndex = 4;
+            this.flPanelProductVariantsMenu.AutoScroll = true;
+            this.flPanelProductVariantsMenu.BackColor = System.Drawing.SystemColors.Control;
+            this.flPanelProductVariantsMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget20);
+            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget21);
+            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget22);
+            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget23);
+            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget24);
+            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget25);
+            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget26);
+            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget27);
+            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget28);
+            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget29);
+            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget30);
+            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget31);
+            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget32);
+            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget33);
+            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget34);
+            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget35);
+            this.flPanelProductVariantsMenu.Location = new System.Drawing.Point(210, 120);
+            this.flPanelProductVariantsMenu.Name = "flPanelProductVariantsMenu";
+            this.flPanelProductVariantsMenu.Size = new System.Drawing.Size(690, 630);
+            this.flPanelProductVariantsMenu.TabIndex = 4;
             // 
             // flowLayoutPanelCategpries
             // 
@@ -243,7 +243,6 @@
             this.flowLayoutPanelCategpries.Padding = new System.Windows.Forms.Padding(15, 10, 0, 0);
             this.flowLayoutPanelCategpries.Size = new System.Drawing.Size(196, 731);
             this.flowLayoutPanelCategpries.TabIndex = 3;
-            this.flowLayoutPanelCategpries.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanelCategpries_Paint);
             // 
             // panelCart
             // 
@@ -252,7 +251,7 @@
             this.panelCart.Controls.Add(this.materialLabel4);
             this.panelCart.Controls.Add(this.materialLabel3);
             this.panelCart.Controls.Add(this.materialLabel2);
-            this.panelCart.Controls.Add(this.dataGridViewOrder);
+            this.panelCart.Controls.Add(this.dataGridViewOrderList);
             this.panelCart.Controls.Add(this.materialLabel1);
             this.panelCart.Controls.Add(this.materialButton4);
             this.panelCart.Controls.Add(this.materialButton3);
@@ -300,10 +299,10 @@
             this.materialLabel2.TabIndex = 101;
             this.materialLabel2.Text = "Customer: Mark Gregorio";
             // 
-            // dataGridViewOrder
+            // dataGridViewOrderList
             // 
-            this.dataGridViewOrder.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dataGridViewOrder.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dataGridViewOrderList.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dataGridViewOrderList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -311,9 +310,9 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewOrder.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewOrder.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewOrderList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewOrderList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewOrderList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnProduct,
             this.ColumnQty,
             this.ColumnPrice});
@@ -324,13 +323,13 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewOrder.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewOrder.EnableHeadersVisualStyles = false;
-            this.dataGridViewOrder.Location = new System.Drawing.Point(10, 100);
-            this.dataGridViewOrder.MultiSelect = false;
-            this.dataGridViewOrder.Name = "dataGridViewOrder";
-            this.dataGridViewOrder.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dataGridViewOrder.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dataGridViewOrderList.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewOrderList.EnableHeadersVisualStyles = false;
+            this.dataGridViewOrderList.Location = new System.Drawing.Point(10, 100);
+            this.dataGridViewOrderList.MultiSelect = false;
+            this.dataGridViewOrderList.Name = "dataGridViewOrderList";
+            this.dataGridViewOrderList.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dataGridViewOrderList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -338,12 +337,11 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewOrder.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridViewOrder.RowHeadersWidth = 25;
-            this.dataGridViewOrder.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridViewOrder.Size = new System.Drawing.Size(300, 460);
-            this.dataGridViewOrder.TabIndex = 100;
-            this.dataGridViewOrder.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewOrder_CellContentClick);
+            this.dataGridViewOrderList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewOrderList.RowHeadersWidth = 25;
+            this.dataGridViewOrderList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dataGridViewOrderList.Size = new System.Drawing.Size(300, 460);
+            this.dataGridViewOrderList.TabIndex = 100;
             // 
             // ColumnProduct
             // 
@@ -402,7 +400,7 @@
             this.materialButton3.Depth = 0;
             this.materialButton3.HighEmphasis = true;
             this.materialButton3.Icon = null;
-            this.materialButton3.Location = new System.Drawing.Point(140, 640);
+            this.materialButton3.Location = new System.Drawing.Point(134, 680);
             this.materialButton3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton3.Name = "materialButton3";
@@ -421,7 +419,7 @@
             this.materialButton1.Depth = 0;
             this.materialButton1.HighEmphasis = true;
             this.materialButton1.Icon = null;
-            this.materialButton1.Location = new System.Drawing.Point(230, 640);
+            this.materialButton1.Location = new System.Drawing.Point(224, 680);
             this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton1.Name = "materialButton1";
@@ -630,12 +628,13 @@
             this.panel2.PerformLayout();
             this.panelSearch.ResumeLayout(false);
             this.panelSearch.PerformLayout();
-            this.flowLayoutPanelProducts.ResumeLayout(false);
+            this.flPanelProductVariantsMenu.ResumeLayout(false);
             this.flowLayoutPanelCategpries.ResumeLayout(false);
             this.panelCart.ResumeLayout(false);
             this.panelCart.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrder)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrderList)).EndInit();
             this.ResumeLayout(false);
+
         }
         #endregion
         private MaterialSkin.Controls.MaterialCard materialCard1;
@@ -643,7 +642,7 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
-        private System.Windows.Forms.DataGridView dataGridViewOrder;
+        private System.Windows.Forms.DataGridView dataGridViewOrderList;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPrice;
@@ -657,7 +656,7 @@
         private System.Windows.Forms.Panel panelSearch;
         private MaterialSkin.Controls.MaterialButton materialButton2;
         private MaterialSkin.Controls.MaterialTextBox2 materialTextBox21;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelProducts;
+        private System.Windows.Forms.FlowLayoutPanel flPanelProductVariantsMenu;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelCategpries;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel2;

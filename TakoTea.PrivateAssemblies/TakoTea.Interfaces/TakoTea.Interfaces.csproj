@@ -46,13 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBatchService.cs" />
     <Compile Include="ICheckedItemIterator.cs" />
+    <Compile Include="IDashboardService.cs" />
     <Compile Include="IFormFactory.cs" />
     <Compile Include="IFormLoader.cs" />
     <Compile Include="IIngredientRepository.cs" />
     <Compile Include="IInventoryService.cs" />
+    <Compile Include="IMenuOrderForm.cs" />
     <Compile Include="IModalDataLoader.cs" />
     <Compile Include="IProductCategoryService.cs" />
+    <Compile Include="IProductRepository.cs" />
+    <Compile Include="IProductsModuleService.cs" />
     <Compile Include="IProductVariantService.cs" />
     <Compile Include="IStockAdjustmentRepository.cs" />
     <Compile Include="IStockAdjustmentService.cs" />

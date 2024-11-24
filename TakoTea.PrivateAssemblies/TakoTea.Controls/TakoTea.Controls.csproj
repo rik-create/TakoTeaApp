@@ -87,5 +87,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TakoTea.Configurations\TakoTea.Configurations.csproj">
+      <Project>{C19375C2-227C-47C8-826F-325FE05F3642}</Project>
+      <Name>TakoTea.Configurations</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

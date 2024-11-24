@@ -30,6 +30,14 @@
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.panel4 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.pbExpirationReset = new System.Windows.Forms.PictureBox();
+            this.pbBatchNumberReset = new System.Windows.Forms.PictureBox();
+            this.dateTimePickerExpiration = new System.Windows.Forms.DateTimePicker();
+            this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
+            this.txtBoxBatchNumber = new MaterialSkin.Controls.MaterialTextBox2();
+            this.numericUpDownLowLevel = new System.Windows.Forms.NumericUpDown();
+            this.materialLabel14 = new MaterialSkin.Controls.MaterialLabel();
             this.pbDescReset = new System.Windows.Forms.PictureBox();
             this.pbCostReset = new System.Windows.Forms.PictureBox();
             this.pbMUnitReset = new System.Windows.Forms.PictureBox();
@@ -47,18 +55,13 @@
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.materialButton6 = new MaterialSkin.Controls.MaterialButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.numericUpDownLowLevel = new System.Windows.Forms.NumericUpDown();
-            this.materialLabel14 = new MaterialSkin.Controls.MaterialLabel();
-            this.pbExpirationReset = new System.Windows.Forms.PictureBox();
-            this.pbBatchNumberReset = new System.Windows.Forms.PictureBox();
-            this.dateTimePickerExpiration = new System.Windows.Forms.DateTimePicker();
-            this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
-            this.txtBoxBatchNumber = new MaterialSkin.Controls.MaterialTextBox2();
             this.panel1.SuspendLayout();
             this.materialCard1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbExpirationReset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBatchNumberReset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLowLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDescReset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCostReset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMUnitReset)).BeginInit();
@@ -66,9 +69,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCost)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLowLevel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbExpirationReset)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbBatchNumberReset)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -137,6 +137,108 @@
             this.groupBox3.TabIndex = 72;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Batch Information";
+            // 
+            // pbExpirationReset
+            // 
+            this.pbExpirationReset.Image = global::TakoTea.Views.Properties.Resources.restart;
+            this.pbExpirationReset.Location = new System.Drawing.Point(744, 128);
+            this.pbExpirationReset.Name = "pbExpirationReset";
+            this.pbExpirationReset.Size = new System.Drawing.Size(20, 20);
+            this.pbExpirationReset.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbExpirationReset.TabIndex = 113;
+            this.pbExpirationReset.TabStop = false;
+            // 
+            // pbBatchNumberReset
+            // 
+            this.pbBatchNumberReset.Image = global::TakoTea.Views.Properties.Resources.restart;
+            this.pbBatchNumberReset.Location = new System.Drawing.Point(352, 200);
+            this.pbBatchNumberReset.Name = "pbBatchNumberReset";
+            this.pbBatchNumberReset.Size = new System.Drawing.Size(20, 20);
+            this.pbBatchNumberReset.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbBatchNumberReset.TabIndex = 112;
+            this.pbBatchNumberReset.TabStop = false;
+            // 
+            // dateTimePickerExpiration
+            // 
+            this.dateTimePickerExpiration.Location = new System.Drawing.Point(440, 152);
+            this.dateTimePickerExpiration.Name = "dateTimePickerExpiration";
+            this.dateTimePickerExpiration.Size = new System.Drawing.Size(330, 26);
+            this.dateTimePickerExpiration.TabIndex = 111;
+            // 
+            // materialLabel9
+            // 
+            this.materialLabel9.AutoSize = true;
+            this.materialLabel9.Depth = 0;
+            this.materialLabel9.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel9.Location = new System.Drawing.Point(440, 112);
+            this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel9.Name = "materialLabel9";
+            this.materialLabel9.Size = new System.Drawing.Size(109, 19);
+            this.materialLabel9.TabIndex = 109;
+            this.materialLabel9.Text = "Expiration Date";
+            // 
+            // materialLabel8
+            // 
+            this.materialLabel8.AutoSize = true;
+            this.materialLabel8.Depth = 0;
+            this.materialLabel8.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel8.Location = new System.Drawing.Point(16, 32);
+            this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel8.Name = "materialLabel8";
+            this.materialLabel8.Size = new System.Drawing.Size(102, 19);
+            this.materialLabel8.TabIndex = 110;
+            this.materialLabel8.Text = "Batch Number";
+            // 
+            // txtBoxBatchNumber
+            // 
+            this.txtBoxBatchNumber.AnimateReadOnly = false;
+            this.txtBoxBatchNumber.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtBoxBatchNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtBoxBatchNumber.Depth = 0;
+            this.txtBoxBatchNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtBoxBatchNumber.HideSelection = true;
+            this.txtBoxBatchNumber.Hint = "Enter Batch Number";
+            this.txtBoxBatchNumber.LeadingIcon = null;
+            this.txtBoxBatchNumber.Location = new System.Drawing.Point(16, 64);
+            this.txtBoxBatchNumber.MaxLength = 32767;
+            this.txtBoxBatchNumber.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtBoxBatchNumber.Name = "txtBoxBatchNumber";
+            this.txtBoxBatchNumber.PasswordChar = '\0';
+            this.txtBoxBatchNumber.PrefixSuffixText = null;
+            this.txtBoxBatchNumber.ReadOnly = false;
+            this.txtBoxBatchNumber.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtBoxBatchNumber.SelectedText = "";
+            this.txtBoxBatchNumber.SelectionLength = 0;
+            this.txtBoxBatchNumber.SelectionStart = 0;
+            this.txtBoxBatchNumber.ShortcutsEnabled = true;
+            this.txtBoxBatchNumber.Size = new System.Drawing.Size(360, 48);
+            this.txtBoxBatchNumber.TabIndex = 108;
+            this.txtBoxBatchNumber.TabStop = false;
+            this.txtBoxBatchNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtBoxBatchNumber.TrailingIcon = null;
+            this.txtBoxBatchNumber.UseSystemPasswordChar = false;
+            // 
+            // numericUpDownLowLevel
+            // 
+            this.numericUpDownLowLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDownLowLevel.Location = new System.Drawing.Point(440, 64);
+            this.numericUpDownLowLevel.Name = "numericUpDownLowLevel";
+            this.numericUpDownLowLevel.Size = new System.Drawing.Size(330, 31);
+            this.numericUpDownLowLevel.TabIndex = 106;
+            this.toolTip1.SetToolTip(this.numericUpDownLowLevel, " A predefined threshold that triggers an automatic reorder or low stock notificat" +
+        "ion.");
+            // 
+            // materialLabel14
+            // 
+            this.materialLabel14.AutoSize = true;
+            this.materialLabel14.Depth = 0;
+            this.materialLabel14.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel14.Location = new System.Drawing.Point(440, 32);
+            this.materialLabel14.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel14.Name = "materialLabel14";
+            this.materialLabel14.Size = new System.Drawing.Size(177, 19);
+            this.materialLabel14.TabIndex = 105;
+            this.materialLabel14.Text = "Stock Reorder/Low Level";
             // 
             // pbDescReset
             // 
@@ -349,108 +451,6 @@
             this.materialButton6.UseAccentColor = false;
             this.materialButton6.UseVisualStyleBackColor = true;
             // 
-            // numericUpDownLowLevel
-            // 
-            this.numericUpDownLowLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownLowLevel.Location = new System.Drawing.Point(440, 64);
-            this.numericUpDownLowLevel.Name = "numericUpDownLowLevel";
-            this.numericUpDownLowLevel.Size = new System.Drawing.Size(330, 31);
-            this.numericUpDownLowLevel.TabIndex = 106;
-            this.toolTip1.SetToolTip(this.numericUpDownLowLevel, " A predefined threshold that triggers an automatic reorder or low stock notificat" +
-        "ion.");
-            // 
-            // materialLabel14
-            // 
-            this.materialLabel14.AutoSize = true;
-            this.materialLabel14.Depth = 0;
-            this.materialLabel14.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel14.Location = new System.Drawing.Point(440, 32);
-            this.materialLabel14.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel14.Name = "materialLabel14";
-            this.materialLabel14.Size = new System.Drawing.Size(177, 19);
-            this.materialLabel14.TabIndex = 105;
-            this.materialLabel14.Text = "Stock Reorder/Low Level";
-            // 
-            // pbExpirationReset
-            // 
-            this.pbExpirationReset.Image = global::TakoTea.Views.Properties.Resources.restart;
-            this.pbExpirationReset.Location = new System.Drawing.Point(744, 128);
-            this.pbExpirationReset.Name = "pbExpirationReset";
-            this.pbExpirationReset.Size = new System.Drawing.Size(20, 20);
-            this.pbExpirationReset.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbExpirationReset.TabIndex = 113;
-            this.pbExpirationReset.TabStop = false;
-            // 
-            // pbBatchNumberReset
-            // 
-            this.pbBatchNumberReset.Image = global::TakoTea.Views.Properties.Resources.restart;
-            this.pbBatchNumberReset.Location = new System.Drawing.Point(352, 200);
-            this.pbBatchNumberReset.Name = "pbBatchNumberReset";
-            this.pbBatchNumberReset.Size = new System.Drawing.Size(20, 20);
-            this.pbBatchNumberReset.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbBatchNumberReset.TabIndex = 112;
-            this.pbBatchNumberReset.TabStop = false;
-            // 
-            // dateTimePickerExpiration
-            // 
-            this.dateTimePickerExpiration.Location = new System.Drawing.Point(440, 152);
-            this.dateTimePickerExpiration.Name = "dateTimePickerExpiration";
-            this.dateTimePickerExpiration.Size = new System.Drawing.Size(330, 26);
-            this.dateTimePickerExpiration.TabIndex = 111;
-            // 
-            // materialLabel9
-            // 
-            this.materialLabel9.AutoSize = true;
-            this.materialLabel9.Depth = 0;
-            this.materialLabel9.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel9.Location = new System.Drawing.Point(440, 112);
-            this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel9.Name = "materialLabel9";
-            this.materialLabel9.Size = new System.Drawing.Size(109, 19);
-            this.materialLabel9.TabIndex = 109;
-            this.materialLabel9.Text = "Expiration Date";
-            // 
-            // materialLabel8
-            // 
-            this.materialLabel8.AutoSize = true;
-            this.materialLabel8.Depth = 0;
-            this.materialLabel8.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel8.Location = new System.Drawing.Point(16, 32);
-            this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel8.Name = "materialLabel8";
-            this.materialLabel8.Size = new System.Drawing.Size(102, 19);
-            this.materialLabel8.TabIndex = 110;
-            this.materialLabel8.Text = "Batch Number";
-            // 
-            // txtBoxBatchNumber
-            // 
-            this.txtBoxBatchNumber.AnimateReadOnly = false;
-            this.txtBoxBatchNumber.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtBoxBatchNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.txtBoxBatchNumber.Depth = 0;
-            this.txtBoxBatchNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.txtBoxBatchNumber.HideSelection = true;
-            this.txtBoxBatchNumber.Hint = "Edit Item Name";
-            this.txtBoxBatchNumber.LeadingIcon = null;
-            this.txtBoxBatchNumber.Location = new System.Drawing.Point(16, 64);
-            this.txtBoxBatchNumber.MaxLength = 32767;
-            this.txtBoxBatchNumber.MouseState = MaterialSkin.MouseState.OUT;
-            this.txtBoxBatchNumber.Name = "txtBoxBatchNumber";
-            this.txtBoxBatchNumber.PasswordChar = '\0';
-            this.txtBoxBatchNumber.PrefixSuffixText = null;
-            this.txtBoxBatchNumber.ReadOnly = false;
-            this.txtBoxBatchNumber.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtBoxBatchNumber.SelectedText = "";
-            this.txtBoxBatchNumber.SelectionLength = 0;
-            this.txtBoxBatchNumber.SelectionStart = 0;
-            this.txtBoxBatchNumber.ShortcutsEnabled = true;
-            this.txtBoxBatchNumber.Size = new System.Drawing.Size(360, 48);
-            this.txtBoxBatchNumber.TabIndex = 108;
-            this.txtBoxBatchNumber.TabStop = false;
-            this.txtBoxBatchNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtBoxBatchNumber.TrailingIcon = null;
-            this.txtBoxBatchNumber.UseSystemPasswordChar = false;
-            // 
             // EditBatchModal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -467,6 +467,9 @@
             this.panel4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbExpirationReset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBatchNumberReset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLowLevel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDescReset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCostReset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMUnitReset)).EndInit();
@@ -476,9 +479,6 @@
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLowLevel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbExpirationReset)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbBatchNumberReset)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -27,8 +27,8 @@
         {
             this.panelProductContainer = new System.Windows.Forms.Panel();
             this.panelLblHolder = new System.Windows.Forms.Panel();
-            this.lblProductPrice = new MaterialSkin.Controls.MaterialLabel();
-            this.lblProductName = new MaterialSkin.Controls.MaterialLabel();
+            this.lblProductPrice = new System.Windows.Forms.Label();
+            this.lblProductName = new System.Windows.Forms.Label();
             this.pictureBoxProduct = new System.Windows.Forms.PictureBox();
             this.panelProductContainer.SuspendLayout();
             this.panelLblHolder.SuspendLayout();
@@ -57,31 +57,23 @@
             // 
             // lblProductPrice
             // 
-            this.lblProductPrice.AutoSize = true;
-            this.lblProductPrice.Depth = 0;
-            this.lblProductPrice.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblProductPrice.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
-            this.lblProductPrice.Location = new System.Drawing.Point(39, 30);
-            this.lblProductPrice.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblProductPrice.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProductPrice.Location = new System.Drawing.Point(8, 32);
             this.lblProductPrice.Name = "lblProductPrice";
-            this.lblProductPrice.Size = new System.Drawing.Size(58, 19);
-            this.lblProductPrice.TabIndex = 6;
-            this.lblProductPrice.Text = "PHP: 30";
+            this.lblProductPrice.Size = new System.Drawing.Size(120, 23);
+            this.lblProductPrice.TabIndex = 7;
+            this.lblProductPrice.Text = "PHP 1,000";
+            this.lblProductPrice.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblProductName
             // 
-            this.lblProductName.AutoSize = true;
-            this.lblProductName.Depth = 0;
-            this.lblProductName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblProductName.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.lblProductName.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            this.lblProductName.ForeColor = System.Drawing.Color.Black;
-            this.lblProductName.Location = new System.Drawing.Point(19, 10);
-            this.lblProductName.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblProductName.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProductName.Location = new System.Drawing.Point(8, 0);
             this.lblProductName.Name = "lblProductName";
-            this.lblProductName.Size = new System.Drawing.Size(90, 17);
-            this.lblProductName.TabIndex = 5;
-            this.lblProductName.Text = "Octo-takoyaki";
+            this.lblProductName.Size = new System.Drawing.Size(120, 23);
+            this.lblProductName.TabIndex = 7;
+            this.lblProductName.Text = "Takoyaki";
+            this.lblProductName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBoxProduct
             // 
@@ -105,15 +97,15 @@
             this.Load += new System.EventHandler(this.ProductWidget_Load);
             this.panelProductContainer.ResumeLayout(false);
             this.panelLblHolder.ResumeLayout(false);
-            this.panelLblHolder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProduct)).EndInit();
             this.ResumeLayout(false);
+
         }
         #endregion
-        private System.Windows.Forms.PictureBox pictureBoxProduct;
-        private System.Windows.Forms.Panel panelLblHolder;
-        private MaterialSkin.Controls.MaterialLabel lblProductPrice;
-        private MaterialSkin.Controls.MaterialLabel lblProductName;
+        public System.Windows.Forms.PictureBox pictureBoxProduct;
+        public System.Windows.Forms.Panel panelLblHolder;
         public System.Windows.Forms.Panel panelProductContainer;
+        public System.Windows.Forms.Label lblProductPrice;
+        public System.Windows.Forms.Label lblProductName;
     }
 }

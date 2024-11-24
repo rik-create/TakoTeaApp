@@ -14,10 +14,7 @@ namespace TakoTea.View.Product.Product_Modals
         // Example list of product variants for demonstration
         private List<ProductVariant> allVariants = new List<ProductVariant>
         {
-            new ProductVariant("Variant 1", "Small", 10.99m, null),
-            new ProductVariant("Variant 2", "Medium", 12.99m, null),
-            new ProductVariant("Variant 3", "Large", 14.99m, null),
-            new ProductVariant("Variant 4", "Extra Large", 16.99m, null)
+          
         };
 
         public SelectVariantModal()

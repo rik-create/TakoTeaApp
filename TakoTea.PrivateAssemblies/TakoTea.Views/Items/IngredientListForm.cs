@@ -43,8 +43,10 @@ namespace TakoTea.Views.Items
                 }
 
 
-                bindingSource1.DataSource = ingredients;
-                dataGridViewIngredients.DataSource = bindingSource1;
+                DataGridViewHelper.BindDataToGridView(dataGridViewIngredients, bindingSource1, ingredients);
+                DataGridViewHelper.BindNavigatorToBindingSource(bindingNavigatorBatch, bindingSource1);
+
+
             }
             catch (Exception ex)
             {
@@ -60,6 +62,7 @@ namespace TakoTea.Views.Items
         {
             AddItemModal newBatchForm = new AddItemModal();
              newBatchForm.ShowDialog();
+            LoadData();
         }
         private void buttonEditBatch_Click(object sender, EventArgs e)
         {

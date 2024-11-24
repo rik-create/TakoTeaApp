@@ -131,6 +131,12 @@
     <Compile Include="batches\Batch Modals\EditBatchModal.Designer.cs">
       <DependentUpon>EditBatchModal.cs</DependentUpon>
     </Compile>
+    <Compile Include="batches\Batch Modals\AddBatchModal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="batches\Batch Modals\AddBatchModal.Designer.cs">
+      <DependentUpon>AddBatchModal.cs</DependentUpon>
+    </Compile>
     <Compile Include="batches\Batch Modals\NewBatchForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +171,12 @@
     <Compile Include="DataLoaders\Modals\EditStockModalDataLoader.cs" />
     <Compile Include="DataLoaders\Modals\ModalDataLoaderFactory.cs" />
     <Compile Include="FormFactory.cs" />
+    <Compile Include="Items\AddItemModal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Items\AddItemModal.Designer.cs">
+      <DependentUpon>AddItemModal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Items\IngredientListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -207,6 +219,7 @@
     <Compile Include="Order\MenuOrderForm.Designer.cs">
       <DependentUpon>MenuOrderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Order\MenuOrderFormService.cs" />
     <Compile Include="Order\Order Modals\OrderEntryModal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -317,6 +330,9 @@
     <EmbeddedResource Include="batches\Batch Modals\EditBatchModal.resx">
       <DependentUpon>EditBatchModal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="batches\Batch Modals\AddBatchModal.resx">
+      <DependentUpon>AddBatchModal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="batches\Batch Modals\NewBatchForm.resx">
       <DependentUpon>NewBatchForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -328,6 +344,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard\DashboardForm.resx">
       <DependentUpon>DashboardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Items\AddItemModal.resx">
+      <DependentUpon>AddItemModal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Items\IngredientListForm.resx">
       <DependentUpon>IngredientListForm.cs</DependentUpon>
@@ -470,6 +489,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ILLink\ILLink.Descriptors.LibraryBuild.xml" />
+    <None Include="Resources\restart1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
