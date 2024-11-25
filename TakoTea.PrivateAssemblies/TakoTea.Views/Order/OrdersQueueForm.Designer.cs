@@ -1,4 +1,4 @@
-﻿namespace TakoTea.View.Order
+﻿namespace TakoTea.View.Orders
 {
     partial class OrdersQueueForm
     {

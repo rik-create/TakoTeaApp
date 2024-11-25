@@ -2,11 +2,12 @@
 using System.Windows.Forms;
 using TakoTea.Product;
 using TakoTea.View.Batches;
-using TakoTea.View.Order;
+using TakoTea.View.Orders;
 using TakoTea.View.Product.Product_Modals;
 using TakoTea.Views.Batches;
 using TakoTea.Views.Items;
 using TakoTea.Views.MainForm;
+using TakoTea.Views.Order.Order_Modals;
 namespace TakoTea
 {
     internal static class Program
@@ -19,7 +20,7 @@ namespace TakoTea
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AddItemModal());
+            Application.Run(new MenuOrderForm());
             /*      // Register the dependency in the DI container
                   services.AddSingleton<IFormFactory, TakoTea.Views.FormFactory>();
                   services.AddTransient<FormLoader>();

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="102d72a12c2648348c092c10af13695f" Name="Diagram1" ZoomLevel="57">
+      <Diagram DiagramId="102d72a12c2648348c092c10af13695f" Name="Diagram1" ZoomLevel="97">
         <EntityTypeShape EntityType="TakoTeaModel.Batch" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TakoTeaModel.Ingredient" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="TakoTeaModel.IngredientProductLink" Width="1.5" PointX="6" PointY="6.75" IsExpanded="true" />
@@ -28,13 +28,13 @@
         <EntityTypeShape EntityType="TakoTeaModel.AddOn" Width="1.5" PointX="6.625" PointY="16" />
         <EntityTypeShape EntityType="TakoTeaModel.DraftOrder" Width="1.5" PointX="10.375" PointY="5.125" />
         <EntityTypeShape EntityType="TakoTeaModel.DraftOrderItem" Width="1.5" PointX="12.625" PointY="5" />
-        <EntityTypeShape EntityType="TakoTeaModel.Order" Width="1.5" PointX="8.375" PointY="11" />
         <EntityTypeShape EntityType="TakoTeaModel.OrderItem" Width="1.5" PointX="10.625" PointY="13.25" />
         <EntityTypeShape EntityType="TakoTeaModel.Receipt" Width="1.5" PointX="10.625" PointY="9.125" />
         <AssociationConnector Association="TakoTeaModel.FK_AddOns_Product" />
         <AssociationConnector Association="TakoTeaModel.FK_DraftOrderItem_DraftOrder" />
-        <AssociationConnector Association="TakoTeaModel.FK_OrderItem_Order" />
-        <AssociationConnector Association="TakoTeaModel.FK_Receipt_Order" />
+        <EntityTypeShape EntityType="TakoTeaModel.OrderModel" Width="1.5" PointX="5.375" PointY="11.25" />
+        <AssociationConnector Association="TakoTeaModel.FK_OrderItem_Order1" />
+        <AssociationConnector Association="TakoTeaModel.FK_Receipt_Order1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

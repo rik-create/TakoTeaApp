@@ -40,8 +40,8 @@ namespace TakoTea.Models
         public virtual DbSet<AddOn> AddOns { get; set; }
         public virtual DbSet<DraftOrder> DraftOrders { get; set; }
         public virtual DbSet<DraftOrderItem> DraftOrderItems { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderItem> OrderItems { get; set; }
         public virtual DbSet<Receipt> Receipts { get; set; }
+        public virtual DbSet<OrderModel> OrderModels { get; set; }
     }
 }

@@ -15,7 +15,18 @@ namespace TakoTea.Services
         {
             _context = new Entities();
         }
-
+        public void UpdateBatchStockLevel(int ingredientId, decimal quantityUsed)
+        {
+            using (var context = new Entities())
+            {
+                var batch = context.Batches.FirstOrDefault(b => b.IngredientID == ingredientId);
+                if (batch != null)
+                {
+                    batch.StockLevel -= quantityUsed;
+                    context.SaveChanges();
+                }
+            }
+        }
         public int GetNewComboMealID(string comboMealName)
         {
             using (var context = new Entities())
@@ -23,6 +34,21 @@ namespace TakoTea.Services
                 var comboMeal = context.ComboMeals.FirstOrDefault(cm => cm.ComboMealName == comboMealName);
                 return comboMeal?.ComboMealID ?? 0; // Return the ComboMealID of the newly inserted combo meal
             }
+        }
+        public int GetProductVariantId(string productName, string sizeId)
+        {
+
+            // Assuming 'Size' is actually the 'Name' of the Ingredient
+            var variantId = _context.ProductVariants
+                .Where(pv => pv.VariantName == productName)
+                .Where(pv => pv.Size == sizeId)
+                .Select(pv => pv.ProductVariantID)
+                .FirstOrDefault();
+
+            if (variantId == 0) // Check if no matching variant was found
+                throw new Exception($"Product variant not found for product '{productName}' and size '{sizeId}'.");
+
+            return variantId;
         }
 
 
@@ -69,6 +95,17 @@ namespace TakoTea.Services
                     throw new Exception($"Product '{productName}' not found.");
 
                 return product.ProductID;
+            }
+        }
+        public string GetProductNameById(int productId)
+        {
+            using (var context = new Entities())
+            {
+                var product = context.Products.FirstOrDefault(p => p.ProductID == productId);
+                if (product == null)
+                    throw new Exception($"Product with ID '{productId}' not found.");
+
+                return product.ProductName;
             }
         }
 

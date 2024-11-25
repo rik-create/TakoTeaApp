@@ -12,10 +12,10 @@ namespace TakoTea.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Order
+    public partial class OrderModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Order()
+        public OrderModel()
         {
             this.OrderItems = new HashSet<OrderItem>();
             this.Receipts = new HashSet<Receipt>();

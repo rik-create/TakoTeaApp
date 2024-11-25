@@ -1,7 +1,7 @@
 ﻿using MaterialSkin.Controls;
 using System;
 using TakoTea.Configurations;
-namespace TakoTea.View.Order
+namespace TakoTea.View.Orders
 {
     public partial class OrdersQueueForm : MaterialForm
     {

@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using TakoTea.Interfaces;
 using TakoTea.View.Batches;
-using TakoTea.View.Order;
+using TakoTea.View.Orders;
 using TakoTea.View.Product;
 using TakoTea.View.Reports;
 using TakoTea.View.Sales.Sales_Modals;

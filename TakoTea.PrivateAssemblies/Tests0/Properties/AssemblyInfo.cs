@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TakoTea.Tests")]
+[assembly: AssemblyTitle("Tests0")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TakoTea.Tests")]
+[assembly: AssemblyProduct("Tests0")]
 [assembly: AssemblyCopyright("Copyright ©  2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("4632ccec-5ea4-46a4-8f6f-6dade7bbbdf3")]
+[assembly: Guid("b317993e-fd83-47c2-91bf-860ef787d0d4")]
 
 // Version information for an assembly consists of the following four values:
 //

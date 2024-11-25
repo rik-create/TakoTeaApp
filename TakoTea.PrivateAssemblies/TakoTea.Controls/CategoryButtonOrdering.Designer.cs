@@ -6,59 +6,49 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+
+        // ... (Existing Dispose method) ...
+
         #region Component Designer generated code
+
         /// <summary> 
         /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            this.materialButtonCategory = new MaterialSkin.Controls.MaterialButton();
+            this.buttonCategory = new System.Windows.Forms.Button(); // Windows Forms Button
             this.SuspendLayout();
             // 
-            // materialButtonCategory
+            // buttonCategory
             // 
-            this.materialButtonCategory.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButtonCategory.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.materialButtonCategory.Depth = 0;
-            this.materialButtonCategory.HighEmphasis = true;
-            this.materialButtonCategory.Icon = null;
-            this.materialButtonCategory.Location = new System.Drawing.Point(10, 10);
-            this.materialButtonCategory.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialButtonCategory.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialButtonCategory.Name = "materialButtonCategory";
-            this.materialButtonCategory.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButtonCategory.Size = new System.Drawing.Size(138, 36);
-            this.materialButtonCategory.TabIndex = 0;
-            this.materialButtonCategory.Text = "All Categories";
-            this.materialButtonCategory.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialButtonCategory.UseAccentColor = false;
-            this.materialButtonCategory.UseVisualStyleBackColor = true;
-            this.materialButtonCategory.Click += new System.EventHandler(this.materialButton1_Click);
+            this.buttonCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonCategory.FlatAppearance.BorderSize = 0; // Remove default border
+            this.buttonCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat; // Flat appearance
+            this.buttonCategory.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold); // Larger font
+            this.buttonCategory.Location = new System.Drawing.Point(0, 0);
+            this.buttonCategory.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonCategory.Name = "buttonCategory";
+            this.buttonCategory.Size = new System.Drawing.Size(161, 57);
+            this.buttonCategory.TabIndex = 0;
+            this.buttonCategory.Text = "All Categories";
+            this.buttonCategory.UseVisualStyleBackColor = true;
             // 
             // CategoryButtonOrdering
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.materialButtonCategory);
+            this.BackColor = System.Drawing.Color.WhiteSmoke; // Set background color
+            this.Controls.Add(this.buttonCategory);
             this.Name = "CategoryButtonOrdering";
+            this.Padding = new System.Windows.Forms.Padding(5); // Add some padding
             this.Size = new System.Drawing.Size(161, 57);
             this.ResumeLayout(false);
-            this.PerformLayout();
+
         }
+
         #endregion
-        private MaterialSkin.Controls.MaterialButton materialButtonCategory;
+
+        public System.Windows.Forms.Button buttonCategory; // Windows Forms Button
     }
 }

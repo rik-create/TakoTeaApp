@@ -105,21 +105,6 @@
           <Property Name="IngredientID" Type="int" />
           <Property Name="ProductID" Type="int" />
         </EntityType>
-        <EntityType Name="Order">
-          <Key>
-            <PropertyRef Name="OrderId" />
-          </Key>
-          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="OrderDate" Type="datetime" Nullable="false" />
-          <Property Name="CustomerName" Type="nvarchar" MaxLength="100" />
-          <Property Name="PaymentMethod" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="PaymentStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
-          <Property Name="ModifiedDate" Type="datetime" />
-        </EntityType>
         <EntityType Name="OrderItem">
           <Key>
             <PropertyRef Name="OrderItemId" />
@@ -132,7 +117,23 @@
           <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="TotalPrice" Type="decimal" Precision="29" Scale="2" StoreGeneratedPattern="Computed" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="AddOns" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="OrderModel">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="100" />
+          <Property Name="PaymentMethod" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PaymentStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -365,10 +366,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderItem_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderModel" Type="Self.OrderModel" Multiplicity="1" />
           <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Order">
+            <Principal Role="OrderModel">
               <PropertyRef Name="OrderId" />
             </Principal>
             <Dependent Role="OrderItem">
@@ -377,10 +378,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Receipt_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderModel" Type="Self.OrderModel" Multiplicity="1" />
           <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Order">
+            <Principal Role="OrderModel">
               <PropertyRef Name="OrderId" />
             </Principal>
             <Dependent Role="Receipt">
@@ -397,8 +398,8 @@
           <EntitySet Name="DraftOrderItem" EntityType="Self.DraftOrderItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ingredient" EntityType="Self.Ingredient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IngredientProductLink" EntityType="Self.IngredientProductLink" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderItem" EntityType="Self.OrderItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderModel" EntityType="Self.OrderModel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductVariantIngredients" EntityType="Self.ProductVariantIngredients" Schema="dbo" store:Type="Tables" />
@@ -454,11 +455,11 @@
             <End Role="DraftOrderItem" EntitySet="DraftOrderItem" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderItem_Order" Association="Self.FK_OrderItem_Order">
-            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderModel" EntitySet="OrderModel" />
             <End Role="OrderItem" EntitySet="OrderItem" />
           </AssociationSet>
           <AssociationSet Name="FK_Receipt_Order" Association="Self.FK_Receipt_Order">
-            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderModel" EntitySet="OrderModel" />
             <End Role="Receipt" EntitySet="Receipt" />
           </AssociationSet>
         </EntityContainer>
@@ -671,7 +672,6 @@
           <EntitySet Name="AddOns" EntityType="TakoTeaModel.AddOn" />
           <EntitySet Name="DraftOrders" EntityType="TakoTeaModel.DraftOrder" />
           <EntitySet Name="DraftOrderItems" EntityType="TakoTeaModel.DraftOrderItem" />
-          <EntitySet Name="Orders" EntityType="TakoTeaModel.Order" />
           <EntitySet Name="OrderItems" EntityType="TakoTeaModel.OrderItem" />
           <EntitySet Name="Receipts" EntityType="TakoTeaModel.Receipt" />
           <AssociationSet Name="FK_AddOns_Product" Association="TakoTeaModel.FK_AddOns_Product">
@@ -682,12 +682,13 @@
             <End Role="DraftOrder" EntitySet="DraftOrders" />
             <End Role="DraftOrderItem" EntitySet="DraftOrderItems" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderItem_Order" Association="TakoTeaModel.FK_OrderItem_Order">
-            <End Role="Order" EntitySet="Orders" />
+          <EntitySet Name="OrderModels" EntityType="TakoTeaModel.OrderModel" />
+          <AssociationSet Name="FK_OrderItem_Order1" Association="TakoTeaModel.FK_OrderItem_Order1">
+            <End Role="OrderModel" EntitySet="OrderModels" />
             <End Role="OrderItem" EntitySet="OrderItems" />
           </AssociationSet>
-          <AssociationSet Name="FK_Receipt_Order" Association="TakoTeaModel.FK_Receipt_Order">
-            <End Role="Order" EntitySet="Orders" />
+          <AssociationSet Name="FK_Receipt_Order1" Association="TakoTeaModel.FK_Receipt_Order1">
+            <End Role="OrderModel" EntitySet="OrderModels" />
             <End Role="Receipt" EntitySet="Receipts" />
           </AssociationSet>
         </EntityContainer>
@@ -852,23 +853,6 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="DraftOrder" Relationship="TakoTeaModel.FK_DraftOrderItem_DraftOrder" FromRole="DraftOrderItem" ToRole="DraftOrder" />
         </EntityType>
-        <EntityType Name="Order">
-          <Key>
-            <PropertyRef Name="OrderId" />
-          </Key>
-          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PaymentMethod" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PaymentStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="OrderItems" Relationship="TakoTeaModel.FK_OrderItem_Order" FromRole="Order" ToRole="OrderItem" />
-          <NavigationProperty Name="Receipts" Relationship="TakoTeaModel.FK_Receipt_Order" FromRole="Order" ToRole="Receipt" />
-        </EntityType>
         <EntityType Name="OrderItem">
           <Key>
             <PropertyRef Name="OrderItemId" />
@@ -881,8 +865,9 @@
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="TotalPrice" Type="Decimal" Precision="29" Scale="2" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Order" Relationship="TakoTeaModel.FK_OrderItem_Order" FromRole="OrderItem" ToRole="Order" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="AddOns" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OrderModel" Relationship="TakoTeaModel.FK_OrderItem_Order1" FromRole="OrderItem" ToRole="OrderModel" />
         </EntityType>
         <EntityType Name="Receipt">
           <Key>
@@ -899,7 +884,7 @@
           <Property Name="ReceiptDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Order" Relationship="TakoTeaModel.FK_Receipt_Order" FromRole="Receipt" ToRole="Order" />
+          <NavigationProperty Name="OrderModel" Relationship="TakoTeaModel.FK_Receipt_Order1" FromRole="Receipt" ToRole="OrderModel" />
         </EntityType>
         <Association Name="FK_AddOns_Product">
           <End Type="TakoTeaModel.Product" Role="Product" Multiplicity="0..1">
@@ -927,11 +912,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderItem_Order">
-          <End Type="TakoTeaModel.Order" Role="Order" Multiplicity="1" />
+        <EntityType Name="OrderModel">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentMethod" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="OrderItems" Relationship="TakoTeaModel.FK_OrderItem_Order1" FromRole="OrderModel" ToRole="OrderItem" />
+          <NavigationProperty Name="Receipts" Relationship="TakoTeaModel.FK_Receipt_Order1" FromRole="OrderModel" ToRole="Receipt" />
+        </EntityType>
+        <Association Name="FK_OrderItem_Order1">
+          <End Type="TakoTeaModel.OrderModel" Role="OrderModel" Multiplicity="1" />
           <End Type="TakoTeaModel.OrderItem" Role="OrderItem" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Order">
+            <Principal Role="OrderModel">
               <PropertyRef Name="OrderId" />
             </Principal>
             <Dependent Role="OrderItem">
@@ -939,11 +941,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Receipt_Order">
-          <End Type="TakoTeaModel.Order" Role="Order" Multiplicity="1" />
+        <Association Name="FK_Receipt_Order1">
+          <End Type="TakoTeaModel.OrderModel" Role="OrderModel" Multiplicity="1" />
           <End Type="TakoTeaModel.Receipt" Role="Receipt" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Order">
+            <Principal Role="OrderModel">
               <PropertyRef Name="OrderId" />
             </Principal>
             <Dependent Role="Receipt">
@@ -1126,25 +1128,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="TakoTeaModel.Order">
-              <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
-                <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
-                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="OrderItems">
             <EntityTypeMapping TypeName="TakoTeaModel.OrderItem">
               <MappingFragment StoreEntitySet="OrderItem">
+                <ScalarProperty Name="AddOns" ColumnName="AddOns" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
@@ -1171,6 +1158,22 @@
                 <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderModels">
+            <EntityTypeMapping TypeName="TakoTeaModel.OrderModel">
+              <MappingFragment StoreEntitySet="OrderModel">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

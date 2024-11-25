@@ -15,6 +15,7 @@ namespace TakoTea.View.Product.Product_Modals
 {
     public partial class AddProductModal : MaterialForm
     {
+        //TODO: PRODUCTVARIANTINGREDIENT LINK
 
         private readonly IInventoryService _inventoryService;
         private int selectedRowIndex = -1;
@@ -490,6 +491,9 @@ namespace TakoTea.View.Product.Product_Modals
                     ImagePath = imagePath // Save the image path
                 };
 
+
+                //TODO: PRODUCTVARIANTINGREDIENT LINK
+
                 // Add the product variant to the list
                 productVariantsToSave.Add(productVariant);
 
@@ -537,6 +541,7 @@ namespace TakoTea.View.Product.Product_Modals
             // Now save the product variants (call the service method)
             try
             {
+                //TODO: PRODUCTVARIANTINGREDIENT LINK
 
                 // First, save the product variants
                 _productsService.AddMultipleProductVariants(productVariantsToSave);

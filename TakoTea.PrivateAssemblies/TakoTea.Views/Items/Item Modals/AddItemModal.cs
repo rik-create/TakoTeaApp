@@ -10,7 +10,8 @@ using TakoTea.Services;
 using TakoTea.Models;
 using System.Net.Security;
 
-namespace TakoTea.Views.Items.Item_Modals
+
+namespace TakoTea.View.Items.Item_Modals
 {
     public partial class AddItemModal : MaterialForm
     {
@@ -52,14 +53,12 @@ namespace TakoTea.Views.Items.Item_Modals
             txtBoxBrandName.Text = "Test Brand";
             txtBoxItemDescription.Text = "A description of the test ingredient for testing purposes.";
             pictureBoxImg.ImageLocation = @"C:\path\to\image.jpg"; // Path to a test image
-            rdButtonIsAddOnYes.Checked = true; // Simulating that "Is Add On" is selected
             cmbboxStorageCondition.SelectedItem = "Cool & Dry"; // Assuming this is one of the options
             cmbTypeOfIngredient.SelectedItem = "Spice"; // Assuming "Spice" is one of the ingredient types
             cmbMeasuringUnit.SelectedItem = "Grams";
-            materialCheckedListBoxAllergens.SetItemChecked(materialCheckedListBoxAllergens.Items.IndexOf("Gluten"), true); // Example allergen
 
             // Determine if the item is an "Add On"
-            bool isAddOn = rdButtonIsAddOnYes.Checked;
+            bool isAddOn = chkIsAddOn.Checked; // Use the CheckBox 
 
             // If it's an add-on, create the AddOn object and add it
             if (isAddOn)
@@ -126,34 +125,30 @@ namespace TakoTea.Views.Items.Item_Modals
                 materialCheckedListBoxAllergens.Items.Add(allergen);
             }
         }
-        private void rdButtonIsAddOnYes_CheckedChanged(object sender, EventArgs e)
+
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
         {
-            // Check if the "Yes" radio button is checked
-            if (rdButtonIsAddOnYes.Checked)
+
+        }
+
+        private void chkIsAddOn_CheckedChanged(object sender, EventArgs e)
+        {
+            // Check if the CheckBox is checked
+            if (chkIsAddOn.Checked)
             {
                 numericUpDownAddOnPrice.Visible = true;
                 lblAdditionalPrice.Visible = true;
                 cmbAddOnFor.Visible = true;
                 lblAddOnFor.Visible = true;
-
             }
-        }
-
-        private void rdButtonIsAddOnNo_CheckedChanged(object sender, EventArgs e)
-        {
-            // Check if the "No" radio button is checked
-            if (rdButtonIsAddOnNo.Checked)
+            else
             {
                 numericUpDownAddOnPrice.Visible = false;
                 lblAdditionalPrice.Visible = false;
                 cmbAddOnFor.Visible = false;
                 lblAddOnFor.Visible = false;
             }
-        }
-
-        private void panel4_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

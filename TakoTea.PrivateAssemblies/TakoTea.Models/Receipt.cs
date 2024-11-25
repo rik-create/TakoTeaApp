@@ -26,6 +26,6 @@ namespace TakoTea.Models
         public string CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
     
-        public virtual Order Order { get; set; }
+        public virtual OrderModel OrderModel { get; set; }
     }
 }

@@ -9,9 +9,8 @@ namespace TakoTea.Controls
         public ProductWidget()
         {
             InitializeComponent();
-            panelLblHolder.BackColor = ThemeConfigurator.GetCustomAccentColor();
+            lblProductName.BackColor = ThemeConfigurator.GetCustomAccentColor();
             lblProductName.ForeColor = Color.White;
-            lblProductPrice.ForeColor = Color.White;
         }
         private void ProductWidget_Load(object sender, EventArgs e)
         {

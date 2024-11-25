@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
 using TakoTea.Repository;
-using TakoTea.Views.Items.Item_Modals;
+using TakoTea.View.Items.Item_Modals;
 using TakoTea.Views.Batches.Batch_Modals;
 using TakoTea.Views.Batches;
 namespace TakoTea.View.Batches

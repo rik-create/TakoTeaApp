@@ -1,29 +1,63 @@
-﻿namespace TakoTea.View.Order
+﻿using System.Windows.Forms;
+
+namespace TakoTea.View.Orders
+
 {
+
     partial class MenuOrderForm
+
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+
+        /// <summary>
+
+        /// Required designer variable.
+
+        /// </summary>
+
+        private System.ComponentModel.IContainer components = null;
+
+
+
+        /// <summary>
+
+        /// Clean up any resources being used.
+
+        /// </summary>
+
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+
+        protected override void Dispose(bool disposing)
+
         {
+
             if (disposing && (components != null))
+
             {
+
                 components.Dispose();
+
             }
+
             base.Dispose(disposing);
+
         }
-        #region Windows Form Designer generated code
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
+
+
+
+        #region Windows Form Designer generated code
+
+
+
+        /// <summary>
+
+        /// Required method for Designer support - do not modify
+
+        /// the contents of this method with the code editor.
+
+        /// </summary>
+
+        private void InitializeComponent()
+
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -32,54 +66,39 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.panelSearch = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.materialButton2 = new MaterialSkin.Controls.MaterialButton();
-            this.materialTextBox21 = new MaterialSkin.Controls.MaterialTextBox2();
+            this.btnSearch = new MaterialSkin.Controls.MaterialButton();
+            this.txtBoxSearchVariant = new MaterialSkin.Controls.MaterialTextBox2();
             this.flPanelProductVariantsMenu = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanelCategpries = new System.Windows.Forms.FlowLayoutPanel();
             this.panelCart = new System.Windows.Forms.Panel();
-            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblOrderId = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.btnClearOrderList = new MaterialSkin.Controls.MaterialButton();
             this.dataGridViewOrderList = new System.Windows.Forms.DataGridView();
             this.ColumnProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AddOns = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialButton4 = new MaterialSkin.Controls.MaterialButton();
-            this.materialButton3 = new MaterialSkin.Controls.MaterialButton();
-            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productWidget20 = new TakoTea.Controls.ProductWidget();
-            this.productWidget21 = new TakoTea.Controls.ProductWidget();
-            this.productWidget22 = new TakoTea.Controls.ProductWidget();
-            this.productWidget23 = new TakoTea.Controls.ProductWidget();
-            this.productWidget24 = new TakoTea.Controls.ProductWidget();
-            this.productWidget25 = new TakoTea.Controls.ProductWidget();
-            this.productWidget26 = new TakoTea.Controls.ProductWidget();
-            this.productWidget27 = new TakoTea.Controls.ProductWidget();
-            this.productWidget28 = new TakoTea.Controls.ProductWidget();
-            this.productWidget29 = new TakoTea.Controls.ProductWidget();
-            this.productWidget30 = new TakoTea.Controls.ProductWidget();
-            this.productWidget31 = new TakoTea.Controls.ProductWidget();
-            this.productWidget32 = new TakoTea.Controls.ProductWidget();
-            this.productWidget33 = new TakoTea.Controls.ProductWidget();
-            this.productWidget34 = new TakoTea.Controls.ProductWidget();
-            this.productWidget35 = new TakoTea.Controls.ProductWidget();
-            this.categoryButtonOrdering6 = new TakoTea.Controls.CategoryButtonOrdering();
-            this.categoryButtonOrdering7 = new TakoTea.Controls.CategoryButtonOrdering();
-            this.categoryButtonOrdering8 = new TakoTea.Controls.CategoryButtonOrdering();
-            this.categoryButtonOrdering9 = new TakoTea.Controls.CategoryButtonOrdering();
-            this.categoryButtonOrdering10 = new TakoTea.Controls.CategoryButtonOrdering();
+            this.groupBoxPayment = new System.Windows.Forms.GroupBox();
+            this.cmbPaymentStatus = new MaterialSkin.Controls.MaterialComboBox();
+            this.lblPaymentStatus = new MaterialSkin.Controls.MaterialLabel();
+            this.cmbPaymentMethod = new MaterialSkin.Controls.MaterialComboBox();
+            this.lblPaymentMethod = new MaterialSkin.Controls.MaterialLabel();
+            this.lblTotalItems = new MaterialSkin.Controls.MaterialLabel();
+            this.lblTotalItemInOrderList = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblTotalInOrderList = new MaterialSkin.Controls.MaterialLabel();
+            this.btnSaveToDraft = new MaterialSkin.Controls.MaterialButton();
+            this.btnConfirmOrder = new MaterialSkin.Controls.MaterialButton();
+            this.panelSeparator = new System.Windows.Forms.Panel();
             this.materialCard1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelSearch.SuspendLayout();
-            this.flPanelProductVariantsMenu.SuspendLayout();
-            this.flowLayoutPanelCategpries.SuspendLayout();
             this.panelCart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrderList)).BeginInit();
+            this.groupBoxPayment.SuspendLayout();
             this.SuspendLayout();
             // 
             // materialCard1
@@ -98,7 +117,7 @@
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard1.Size = new System.Drawing.Size(1238, 759);
+            this.materialCard1.Size = new System.Drawing.Size(1380, 759);
             this.materialCard1.TabIndex = 0;
             // 
             // panel2
@@ -107,9 +126,9 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.materialLabel5);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(210, 14);
+            this.panel2.Location = new System.Drawing.Point(214, 14);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(694, 46);
+            this.panel2.Size = new System.Drawing.Size(698, 46);
             this.panel2.TabIndex = 102;
             // 
             // materialLabel5
@@ -131,72 +150,60 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.panelSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelSearch.Controls.Add(this.button1);
-            this.panelSearch.Controls.Add(this.materialButton2);
-            this.panelSearch.Controls.Add(this.materialTextBox21);
-            this.panelSearch.Location = new System.Drawing.Point(210, 60);
-            this.panelSearch.MaximumSize = new System.Drawing.Size(690, 56);
+            this.panelSearch.Controls.Add(this.btnSearch);
+            this.panelSearch.Controls.Add(this.txtBoxSearchVariant);
+            this.panelSearch.Location = new System.Drawing.Point(216, 60);
             this.panelSearch.Name = "panelSearch";
-            this.panelSearch.Size = new System.Drawing.Size(690, 56);
+            this.panelSearch.Size = new System.Drawing.Size(698, 56);
             this.panelSearch.TabIndex = 5;
             // 
-            // button1
+            // btnSearch
             // 
-            this.button1.Location = new System.Drawing.Point(490, 20);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 23);
-            this.button1.TabIndex = 98;
-            this.button1.Text = "Item CLicked***";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnSearch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSearch.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnSearch.Depth = 0;
+            this.btnSearch.HighEmphasis = true;
+            this.btnSearch.Icon = null;
+            this.btnSearch.Location = new System.Drawing.Point(350, 10);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnSearch.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnSearch.Size = new System.Drawing.Size(78, 36);
+            this.btnSearch.TabIndex = 97;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnSearch.UseAccentColor = false;
+            this.btnSearch.UseVisualStyleBackColor = true;
             // 
-            // materialButton2
+            // txtBoxSearchVariant
             // 
-            this.materialButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButton2.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.materialButton2.Depth = 0;
-            this.materialButton2.HighEmphasis = true;
-            this.materialButton2.Icon = null;
-            this.materialButton2.Location = new System.Drawing.Point(350, 10);
-            this.materialButton2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialButton2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialButton2.Name = "materialButton2";
-            this.materialButton2.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton2.Size = new System.Drawing.Size(78, 36);
-            this.materialButton2.TabIndex = 97;
-            this.materialButton2.Text = "Search";
-            this.materialButton2.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialButton2.UseAccentColor = false;
-            this.materialButton2.UseVisualStyleBackColor = true;
-            // 
-            // materialTextBox21
-            // 
-            this.materialTextBox21.AnimateReadOnly = false;
-            this.materialTextBox21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.materialTextBox21.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.materialTextBox21.Depth = 0;
-            this.materialTextBox21.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialTextBox21.HideSelection = true;
-            this.materialTextBox21.Hint = " Search for product name...";
-            this.materialTextBox21.LeadingIcon = null;
-            this.materialTextBox21.Location = new System.Drawing.Point(10, 4);
-            this.materialTextBox21.MaxLength = 32767;
-            this.materialTextBox21.MouseState = MaterialSkin.MouseState.OUT;
-            this.materialTextBox21.Name = "materialTextBox21";
-            this.materialTextBox21.PasswordChar = '\0';
-            this.materialTextBox21.PrefixSuffixText = null;
-            this.materialTextBox21.ReadOnly = false;
-            this.materialTextBox21.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.materialTextBox21.SelectedText = "";
-            this.materialTextBox21.SelectionLength = 0;
-            this.materialTextBox21.SelectionStart = 0;
-            this.materialTextBox21.ShortcutsEnabled = true;
-            this.materialTextBox21.Size = new System.Drawing.Size(328, 48);
-            this.materialTextBox21.TabIndex = 96;
-            this.materialTextBox21.TabStop = false;
-            this.materialTextBox21.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.materialTextBox21.TrailingIcon = null;
-            this.materialTextBox21.UseSystemPasswordChar = false;
+            this.txtBoxSearchVariant.AnimateReadOnly = false;
+            this.txtBoxSearchVariant.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtBoxSearchVariant.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtBoxSearchVariant.Depth = 0;
+            this.txtBoxSearchVariant.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtBoxSearchVariant.HideSelection = true;
+            this.txtBoxSearchVariant.Hint = " Search for product name...";
+            this.txtBoxSearchVariant.LeadingIcon = null;
+            this.txtBoxSearchVariant.Location = new System.Drawing.Point(10, 4);
+            this.txtBoxSearchVariant.MaxLength = 32767;
+            this.txtBoxSearchVariant.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtBoxSearchVariant.Name = "txtBoxSearchVariant";
+            this.txtBoxSearchVariant.PasswordChar = '\0';
+            this.txtBoxSearchVariant.PrefixSuffixText = null;
+            this.txtBoxSearchVariant.ReadOnly = false;
+            this.txtBoxSearchVariant.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtBoxSearchVariant.SelectedText = "";
+            this.txtBoxSearchVariant.SelectionLength = 0;
+            this.txtBoxSearchVariant.SelectionStart = 0;
+            this.txtBoxSearchVariant.ShortcutsEnabled = true;
+            this.txtBoxSearchVariant.Size = new System.Drawing.Size(328, 48);
+            this.txtBoxSearchVariant.TabIndex = 96;
+            this.txtBoxSearchVariant.TabStop = false;
+            this.txtBoxSearchVariant.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtBoxSearchVariant.TrailingIcon = null;
+            this.txtBoxSearchVariant.UseSystemPasswordChar = false;
             // 
             // flPanelProductVariantsMenu
             // 
@@ -206,86 +213,71 @@
             this.flPanelProductVariantsMenu.AutoScroll = true;
             this.flPanelProductVariantsMenu.BackColor = System.Drawing.SystemColors.Control;
             this.flPanelProductVariantsMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget20);
-            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget21);
-            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget22);
-            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget23);
-            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget24);
-            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget25);
-            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget26);
-            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget27);
-            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget28);
-            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget29);
-            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget30);
-            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget31);
-            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget32);
-            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget33);
-            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget34);
-            this.flPanelProductVariantsMenu.Controls.Add(this.productWidget35);
-            this.flPanelProductVariantsMenu.Location = new System.Drawing.Point(210, 120);
+            this.flPanelProductVariantsMenu.Location = new System.Drawing.Point(216, 120);
             this.flPanelProductVariantsMenu.Name = "flPanelProductVariantsMenu";
-            this.flPanelProductVariantsMenu.Size = new System.Drawing.Size(690, 630);
+            this.flPanelProductVariantsMenu.Padding = new System.Windows.Forms.Padding(10);
+            this.flPanelProductVariantsMenu.Size = new System.Drawing.Size(696, 630);
             this.flPanelProductVariantsMenu.TabIndex = 4;
+            this.flPanelProductVariantsMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.flPanelProductVariantsMenu_Paint);
             // 
             // flowLayoutPanelCategpries
             // 
             this.flowLayoutPanelCategpries.AutoScroll = true;
-            this.flowLayoutPanelCategpries.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.flowLayoutPanelCategpries.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanelCategpries.Controls.Add(this.categoryButtonOrdering6);
-            this.flowLayoutPanelCategpries.Controls.Add(this.categoryButtonOrdering7);
-            this.flowLayoutPanelCategpries.Controls.Add(this.categoryButtonOrdering8);
-            this.flowLayoutPanelCategpries.Controls.Add(this.categoryButtonOrdering9);
-            this.flowLayoutPanelCategpries.Controls.Add(this.categoryButtonOrdering10);
+            this.flowLayoutPanelCategpries.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.flowLayoutPanelCategpries.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flowLayoutPanelCategpries.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelCategpries.Location = new System.Drawing.Point(14, 14);
             this.flowLayoutPanelCategpries.Name = "flowLayoutPanelCategpries";
-            this.flowLayoutPanelCategpries.Padding = new System.Windows.Forms.Padding(15, 10, 0, 0);
-            this.flowLayoutPanelCategpries.Size = new System.Drawing.Size(196, 731);
+            this.flowLayoutPanelCategpries.Padding = new System.Windows.Forms.Padding(20, 15, 10, 10);
+            this.flowLayoutPanelCategpries.Size = new System.Drawing.Size(200, 731);
             this.flowLayoutPanelCategpries.TabIndex = 3;
             // 
             // panelCart
             // 
             this.panelCart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.panelCart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelCart.Controls.Add(this.materialLabel4);
-            this.panelCart.Controls.Add(this.materialLabel3);
-            this.panelCart.Controls.Add(this.materialLabel2);
-            this.panelCart.Controls.Add(this.dataGridViewOrderList);
             this.panelCart.Controls.Add(this.materialLabel1);
-            this.panelCart.Controls.Add(this.materialButton4);
-            this.panelCart.Controls.Add(this.materialButton3);
-            this.panelCart.Controls.Add(this.materialButton1);
+            this.panelCart.Controls.Add(this.lblOrderId);
+            this.panelCart.Controls.Add(this.materialLabel2);
+            this.panelCart.Controls.Add(this.btnClearOrderList);
+            this.panelCart.Controls.Add(this.dataGridViewOrderList);
+            this.panelCart.Controls.Add(this.groupBoxPayment);
+            this.panelCart.Controls.Add(this.lblTotalItems);
+            this.panelCart.Controls.Add(this.lblTotalItemInOrderList);
+            this.panelCart.Controls.Add(this.materialLabel3);
+            this.panelCart.Controls.Add(this.lblTotalInOrderList);
+            this.panelCart.Controls.Add(this.btnSaveToDraft);
+            this.panelCart.Controls.Add(this.btnConfirmOrder);
             this.panelCart.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelCart.Location = new System.Drawing.Point(904, 14);
+            this.panelCart.Location = new System.Drawing.Point(912, 14);
             this.panelCart.Name = "panelCart";
-            this.panelCart.Size = new System.Drawing.Size(320, 731);
+            this.panelCart.Size = new System.Drawing.Size(454, 731);
             this.panelCart.TabIndex = 1;
             // 
-            // materialLabel4
+            // materialLabel1
             // 
-            this.materialLabel4.AutoSize = true;
-            this.materialLabel4.Depth = 0;
-            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel4.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
-            this.materialLabel4.Location = new System.Drawing.Point(20, 580);
-            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(292, 29);
-            this.materialLabel4.TabIndex = 102;
-            this.materialLabel4.Text = "Total:                       PHP 300";
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            this.materialLabel1.Location = new System.Drawing.Point(20, 20);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(89, 24);
+            this.materialLabel1.TabIndex = 97;
+            this.materialLabel1.Text = "Order List";
             // 
-            // materialLabel3
+            // lblOrderId
             // 
-            this.materialLabel3.AutoSize = true;
-            this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel3.Location = new System.Drawing.Point(270, 10);
-            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(47, 19);
-            this.materialLabel3.TabIndex = 101;
-            this.materialLabel3.Text = "#1234";
+            this.lblOrderId.AutoSize = true;
+            this.lblOrderId.Depth = 0;
+            this.lblOrderId.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblOrderId.Location = new System.Drawing.Point(384, 10);
+            this.lblOrderId.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblOrderId.Name = "lblOrderId";
+            this.lblOrderId.Size = new System.Drawing.Size(47, 19);
+            this.lblOrderId.TabIndex = 101;
+            this.lblOrderId.Text = "#1234";
             // 
             // materialLabel2
             // 
@@ -298,6 +290,25 @@
             this.materialLabel2.Size = new System.Drawing.Size(177, 19);
             this.materialLabel2.TabIndex = 101;
             this.materialLabel2.Text = "Customer: Mark Gregorio";
+            // 
+            // btnClearOrderList
+            // 
+            this.btnClearOrderList.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnClearOrderList.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnClearOrderList.Depth = 0;
+            this.btnClearOrderList.HighEmphasis = true;
+            this.btnClearOrderList.Icon = null;
+            this.btnClearOrderList.Location = new System.Drawing.Point(364, 50);
+            this.btnClearOrderList.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnClearOrderList.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnClearOrderList.Name = "btnClearOrderList";
+            this.btnClearOrderList.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnClearOrderList.Size = new System.Drawing.Size(66, 36);
+            this.btnClearOrderList.TabIndex = 96;
+            this.btnClearOrderList.Text = "Clear";
+            this.btnClearOrderList.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnClearOrderList.UseAccentColor = true;
+            this.btnClearOrderList.UseVisualStyleBackColor = true;
             // 
             // dataGridViewOrderList
             // 
@@ -314,6 +325,8 @@
             this.dataGridViewOrderList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewOrderList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnProduct,
+            this.Size,
+            this.AddOns,
             this.ColumnQty,
             this.ColumnPrice});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -340,7 +353,7 @@
             this.dataGridViewOrderList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewOrderList.RowHeadersWidth = 25;
             this.dataGridViewOrderList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridViewOrderList.Size = new System.Drawing.Size(300, 460);
+            this.dataGridViewOrderList.Size = new System.Drawing.Size(430, 332);
             this.dataGridViewOrderList.TabIndex = 100;
             // 
             // ColumnProduct
@@ -348,6 +361,17 @@
             this.ColumnProduct.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ColumnProduct.HeaderText = "Product Name";
             this.ColumnProduct.Name = "ColumnProduct";
+            // 
+            // Size
+            // 
+            this.Size.HeaderText = "Size";
+            this.Size.Name = "Size";
+            this.Size.Width = 65;
+            // 
+            // AddOns
+            // 
+            this.AddOns.HeaderText = "AddOns";
+            this.AddOns.Name = "AddOns";
             // 
             // ColumnQty
             // 
@@ -361,262 +385,207 @@
             this.ColumnPrice.Name = "ColumnPrice";
             this.ColumnPrice.Width = 75;
             // 
-            // materialLabel1
+            // groupBoxPayment
             // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.materialLabel1.Location = new System.Drawing.Point(20, 20);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(89, 24);
-            this.materialLabel1.TabIndex = 97;
-            this.materialLabel1.Text = "Order List";
+            this.groupBoxPayment.Controls.Add(this.cmbPaymentStatus);
+            this.groupBoxPayment.Controls.Add(this.lblPaymentStatus);
+            this.groupBoxPayment.Controls.Add(this.cmbPaymentMethod);
+            this.groupBoxPayment.Controls.Add(this.lblPaymentMethod);
+            this.groupBoxPayment.Location = new System.Drawing.Point(8, 456);
+            this.groupBoxPayment.Name = "groupBoxPayment";
+            this.groupBoxPayment.Size = new System.Drawing.Size(430, 140);
+            this.groupBoxPayment.TabIndex = 103;
+            this.groupBoxPayment.TabStop = false;
+            this.groupBoxPayment.Text = "Payment";
             // 
-            // materialButton4
+            // cmbPaymentStatus
             // 
-            this.materialButton4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButton4.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.materialButton4.Depth = 0;
-            this.materialButton4.HighEmphasis = true;
-            this.materialButton4.Icon = null;
-            this.materialButton4.Location = new System.Drawing.Point(250, 50);
-            this.materialButton4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialButton4.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialButton4.Name = "materialButton4";
-            this.materialButton4.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton4.Size = new System.Drawing.Size(66, 36);
-            this.materialButton4.TabIndex = 96;
-            this.materialButton4.Text = "Clear";
-            this.materialButton4.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialButton4.UseAccentColor = true;
-            this.materialButton4.UseVisualStyleBackColor = true;
+            this.cmbPaymentStatus.AutoResize = false;
+            this.cmbPaymentStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cmbPaymentStatus.Depth = 0;
+            this.cmbPaymentStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbPaymentStatus.DropDownHeight = 174;
+            this.cmbPaymentStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPaymentStatus.DropDownWidth = 121;
+            this.cmbPaymentStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cmbPaymentStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cmbPaymentStatus.FormattingEnabled = true;
+            this.cmbPaymentStatus.Hint = "Choose payment status";
+            this.cmbPaymentStatus.IntegralHeight = false;
+            this.cmbPaymentStatus.ItemHeight = 43;
+            this.cmbPaymentStatus.Items.AddRange(new object[] {
+            "Pending",
+            "Partial",
+            "Paid"});
+            this.cmbPaymentStatus.Location = new System.Drawing.Point(160, 80);
+            this.cmbPaymentStatus.MaxDropDownItems = 4;
+            this.cmbPaymentStatus.MouseState = MaterialSkin.MouseState.OUT;
+            this.cmbPaymentStatus.Name = "cmbPaymentStatus";
+            this.cmbPaymentStatus.Size = new System.Drawing.Size(250, 49);
+            this.cmbPaymentStatus.StartIndex = 0;
+            this.cmbPaymentStatus.TabIndex = 105;
             // 
-            // materialButton3
+            // lblPaymentStatus
             // 
-            this.materialButton3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButton3.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.materialButton3.Depth = 0;
-            this.materialButton3.HighEmphasis = true;
-            this.materialButton3.Icon = null;
-            this.materialButton3.Location = new System.Drawing.Point(134, 680);
-            this.materialButton3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialButton3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialButton3.Name = "materialButton3";
-            this.materialButton3.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton3.Size = new System.Drawing.Size(77, 36);
-            this.materialButton3.TabIndex = 96;
-            this.materialButton3.Text = "Cancel";
-            this.materialButton3.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialButton3.UseAccentColor = true;
-            this.materialButton3.UseVisualStyleBackColor = true;
+            this.lblPaymentStatus.AutoSize = true;
+            this.lblPaymentStatus.Depth = 0;
+            this.lblPaymentStatus.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblPaymentStatus.Location = new System.Drawing.Point(20, 90);
+            this.lblPaymentStatus.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblPaymentStatus.Name = "lblPaymentStatus";
+            this.lblPaymentStatus.Size = new System.Drawing.Size(114, 19);
+            this.lblPaymentStatus.TabIndex = 104;
+            this.lblPaymentStatus.Text = "Payment Status";
             // 
-            // materialButton1
+            // cmbPaymentMethod
             // 
-            this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.materialButton1.Depth = 0;
-            this.materialButton1.HighEmphasis = true;
-            this.materialButton1.Icon = null;
-            this.materialButton1.Location = new System.Drawing.Point(224, 680);
-            this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialButton1.Name = "materialButton1";
-            this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton1.Size = new System.Drawing.Size(86, 36);
-            this.materialButton1.TabIndex = 95;
-            this.materialButton1.Text = "Confirm";
-            this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialButton1.UseAccentColor = false;
-            this.materialButton1.UseVisualStyleBackColor = true;
+            this.cmbPaymentMethod.AutoResize = false;
+            this.cmbPaymentMethod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cmbPaymentMethod.Depth = 0;
+            this.cmbPaymentMethod.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbPaymentMethod.DropDownHeight = 174;
+            this.cmbPaymentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPaymentMethod.DropDownWidth = 121;
+            this.cmbPaymentMethod.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cmbPaymentMethod.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cmbPaymentMethod.FormattingEnabled = true;
+            this.cmbPaymentMethod.Hint = "Choose payment method";
+            this.cmbPaymentMethod.IntegralHeight = false;
+            this.cmbPaymentMethod.ItemHeight = 43;
+            this.cmbPaymentMethod.Items.AddRange(new object[] {
+            "Cash",
+            "GCash",
+            "Maya",
+            "Card"});
+            this.cmbPaymentMethod.Location = new System.Drawing.Point(160, 30);
+            this.cmbPaymentMethod.MaxDropDownItems = 4;
+            this.cmbPaymentMethod.MouseState = MaterialSkin.MouseState.OUT;
+            this.cmbPaymentMethod.Name = "cmbPaymentMethod";
+            this.cmbPaymentMethod.Size = new System.Drawing.Size(250, 49);
+            this.cmbPaymentMethod.StartIndex = 0;
+            this.cmbPaymentMethod.TabIndex = 103;
             // 
-            // dataGridViewTextBoxColumn1
+            // lblPaymentMethod
             // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Product Name";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.lblPaymentMethod.AutoSize = true;
+            this.lblPaymentMethod.Depth = 0;
+            this.lblPaymentMethod.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblPaymentMethod.Location = new System.Drawing.Point(20, 40);
+            this.lblPaymentMethod.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblPaymentMethod.Name = "lblPaymentMethod";
+            this.lblPaymentMethod.Size = new System.Drawing.Size(122, 19);
+            this.lblPaymentMethod.TabIndex = 102;
+            this.lblPaymentMethod.Text = "Payment Method";
             // 
-            // dataGridViewTextBoxColumn2
+            // lblTotalItems
             // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Qty";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 50;
+            this.lblTotalItems.AutoSize = true;
+            this.lblTotalItems.Depth = 0;
+            this.lblTotalItems.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.lblTotalItems.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
+            this.lblTotalItems.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblTotalItems.Location = new System.Drawing.Point(16, 608);
+            this.lblTotalItems.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblTotalItems.Name = "lblTotalItems";
+            this.lblTotalItems.Size = new System.Drawing.Size(123, 29);
+            this.lblTotalItems.TabIndex = 102;
+            this.lblTotalItems.Text = "Total Price:";
             // 
-            // dataGridViewTextBoxColumn3
+            // lblTotalItemInOrderList
             // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Price";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Width = 75;
+            this.lblTotalItemInOrderList.Depth = 0;
+            this.lblTotalItemInOrderList.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.lblTotalItemInOrderList.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
+            this.lblTotalItemInOrderList.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblTotalItemInOrderList.Location = new System.Drawing.Point(144, 608);
+            this.lblTotalItemInOrderList.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblTotalItemInOrderList.Name = "lblTotalItemInOrderList";
+            this.lblTotalItemInOrderList.Size = new System.Drawing.Size(293, 29);
+            this.lblTotalItemInOrderList.TabIndex = 102;
+            this.lblTotalItemInOrderList.Text = "P 100";
+            this.lblTotalItemInOrderList.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // productWidget20
+            // materialLabel3
             // 
-            this.productWidget20.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.productWidget20.Location = new System.Drawing.Point(3, 3);
-            this.productWidget20.Name = "productWidget20";
-            this.productWidget20.Size = new System.Drawing.Size(160, 196);
-            this.productWidget20.TabIndex = 0;
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel3.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
+            this.materialLabel3.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.materialLabel3.Location = new System.Drawing.Point(16, 640);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(123, 29);
+            this.materialLabel3.TabIndex = 102;
+            this.materialLabel3.Text = "Total Price:";
             // 
-            // productWidget21
+            // lblTotalInOrderList
             // 
-            this.productWidget21.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.productWidget21.Location = new System.Drawing.Point(169, 3);
-            this.productWidget21.Name = "productWidget21";
-            this.productWidget21.Size = new System.Drawing.Size(160, 196);
-            this.productWidget21.TabIndex = 1;
+            this.lblTotalInOrderList.Depth = 0;
+            this.lblTotalInOrderList.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.lblTotalInOrderList.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
+            this.lblTotalInOrderList.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblTotalInOrderList.Location = new System.Drawing.Point(144, 640);
+            this.lblTotalInOrderList.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblTotalInOrderList.Name = "lblTotalInOrderList";
+            this.lblTotalInOrderList.Size = new System.Drawing.Size(293, 29);
+            this.lblTotalInOrderList.TabIndex = 102;
+            this.lblTotalInOrderList.Text = "P 100";
+            this.lblTotalInOrderList.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // productWidget22
+            // btnSaveToDraft
             // 
-            this.productWidget22.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.productWidget22.Location = new System.Drawing.Point(335, 3);
-            this.productWidget22.Name = "productWidget22";
-            this.productWidget22.Size = new System.Drawing.Size(160, 196);
-            this.productWidget22.TabIndex = 2;
+            this.btnSaveToDraft.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSaveToDraft.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnSaveToDraft.Depth = 0;
+            this.btnSaveToDraft.HighEmphasis = true;
+            this.btnSaveToDraft.Icon = null;
+            this.btnSaveToDraft.Location = new System.Drawing.Point(264, 680);
+            this.btnSaveToDraft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnSaveToDraft.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnSaveToDraft.Name = "btnSaveToDraft";
+            this.btnSaveToDraft.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnSaveToDraft.Size = new System.Drawing.Size(77, 36);
+            this.btnSaveToDraft.TabIndex = 96;
+            this.btnSaveToDraft.Text = "Cancel";
+            this.btnSaveToDraft.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnSaveToDraft.UseAccentColor = true;
+            this.btnSaveToDraft.UseVisualStyleBackColor = true;
             // 
-            // productWidget23
+            // btnConfirmOrder
             // 
-            this.productWidget23.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.productWidget23.Location = new System.Drawing.Point(501, 3);
-            this.productWidget23.Name = "productWidget23";
-            this.productWidget23.Size = new System.Drawing.Size(160, 196);
-            this.productWidget23.TabIndex = 3;
+            this.btnConfirmOrder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnConfirmOrder.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnConfirmOrder.Depth = 0;
+            this.btnConfirmOrder.HighEmphasis = true;
+            this.btnConfirmOrder.Icon = null;
+            this.btnConfirmOrder.Location = new System.Drawing.Point(354, 680);
+            this.btnConfirmOrder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnConfirmOrder.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnConfirmOrder.Name = "btnConfirmOrder";
+            this.btnConfirmOrder.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnConfirmOrder.Size = new System.Drawing.Size(86, 36);
+            this.btnConfirmOrder.TabIndex = 95;
+            this.btnConfirmOrder.Text = "Confirm";
+            this.btnConfirmOrder.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnConfirmOrder.UseAccentColor = false;
+            this.btnConfirmOrder.UseVisualStyleBackColor = true;
+            this.btnConfirmOrder.Click += new System.EventHandler(this.btnConfirmOrder_Click);
             // 
-            // productWidget24
+            // panelSeparator
             // 
-            this.productWidget24.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.productWidget24.Location = new System.Drawing.Point(3, 205);
-            this.productWidget24.Name = "productWidget24";
-            this.productWidget24.Size = new System.Drawing.Size(160, 196);
-            this.productWidget24.TabIndex = 4;
-            // 
-            // productWidget25
-            // 
-            this.productWidget25.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.productWidget25.Location = new System.Drawing.Point(169, 205);
-            this.productWidget25.Name = "productWidget25";
-            this.productWidget25.Size = new System.Drawing.Size(160, 196);
-            this.productWidget25.TabIndex = 5;
-            // 
-            // productWidget26
-            // 
-            this.productWidget26.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.productWidget26.Location = new System.Drawing.Point(335, 205);
-            this.productWidget26.Name = "productWidget26";
-            this.productWidget26.Size = new System.Drawing.Size(160, 196);
-            this.productWidget26.TabIndex = 6;
-            // 
-            // productWidget27
-            // 
-            this.productWidget27.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.productWidget27.Location = new System.Drawing.Point(501, 205);
-            this.productWidget27.Name = "productWidget27";
-            this.productWidget27.Size = new System.Drawing.Size(160, 196);
-            this.productWidget27.TabIndex = 7;
-            // 
-            // productWidget28
-            // 
-            this.productWidget28.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.productWidget28.Location = new System.Drawing.Point(3, 407);
-            this.productWidget28.Name = "productWidget28";
-            this.productWidget28.Size = new System.Drawing.Size(160, 196);
-            this.productWidget28.TabIndex = 8;
-            // 
-            // productWidget29
-            // 
-            this.productWidget29.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.productWidget29.Location = new System.Drawing.Point(169, 407);
-            this.productWidget29.Name = "productWidget29";
-            this.productWidget29.Size = new System.Drawing.Size(160, 196);
-            this.productWidget29.TabIndex = 9;
-            // 
-            // productWidget30
-            // 
-            this.productWidget30.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.productWidget30.Location = new System.Drawing.Point(335, 407);
-            this.productWidget30.Name = "productWidget30";
-            this.productWidget30.Size = new System.Drawing.Size(160, 196);
-            this.productWidget30.TabIndex = 10;
-            // 
-            // productWidget31
-            // 
-            this.productWidget31.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.productWidget31.Location = new System.Drawing.Point(501, 407);
-            this.productWidget31.Name = "productWidget31";
-            this.productWidget31.Size = new System.Drawing.Size(160, 196);
-            this.productWidget31.TabIndex = 11;
-            // 
-            // productWidget32
-            // 
-            this.productWidget32.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.productWidget32.Location = new System.Drawing.Point(3, 609);
-            this.productWidget32.Name = "productWidget32";
-            this.productWidget32.Size = new System.Drawing.Size(160, 196);
-            this.productWidget32.TabIndex = 12;
-            // 
-            // productWidget33
-            // 
-            this.productWidget33.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.productWidget33.Location = new System.Drawing.Point(169, 609);
-            this.productWidget33.Name = "productWidget33";
-            this.productWidget33.Size = new System.Drawing.Size(160, 196);
-            this.productWidget33.TabIndex = 13;
-            // 
-            // productWidget34
-            // 
-            this.productWidget34.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.productWidget34.Location = new System.Drawing.Point(335, 609);
-            this.productWidget34.Name = "productWidget34";
-            this.productWidget34.Size = new System.Drawing.Size(160, 196);
-            this.productWidget34.TabIndex = 14;
-            // 
-            // productWidget35
-            // 
-            this.productWidget35.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.productWidget35.Location = new System.Drawing.Point(501, 609);
-            this.productWidget35.Name = "productWidget35";
-            this.productWidget35.Size = new System.Drawing.Size(160, 196);
-            this.productWidget35.TabIndex = 15;
-            // 
-            // categoryButtonOrdering6
-            // 
-            this.categoryButtonOrdering6.Location = new System.Drawing.Point(18, 13);
-            this.categoryButtonOrdering6.Name = "categoryButtonOrdering6";
-            this.categoryButtonOrdering6.Size = new System.Drawing.Size(161, 57);
-            this.categoryButtonOrdering6.TabIndex = 0;
-            // 
-            // categoryButtonOrdering7
-            // 
-            this.categoryButtonOrdering7.Location = new System.Drawing.Point(18, 76);
-            this.categoryButtonOrdering7.Name = "categoryButtonOrdering7";
-            this.categoryButtonOrdering7.Size = new System.Drawing.Size(161, 57);
-            this.categoryButtonOrdering7.TabIndex = 1;
-            // 
-            // categoryButtonOrdering8
-            // 
-            this.categoryButtonOrdering8.Location = new System.Drawing.Point(18, 139);
-            this.categoryButtonOrdering8.Name = "categoryButtonOrdering8";
-            this.categoryButtonOrdering8.Size = new System.Drawing.Size(161, 57);
-            this.categoryButtonOrdering8.TabIndex = 2;
-            // 
-            // categoryButtonOrdering9
-            // 
-            this.categoryButtonOrdering9.Location = new System.Drawing.Point(18, 202);
-            this.categoryButtonOrdering9.Name = "categoryButtonOrdering9";
-            this.categoryButtonOrdering9.Size = new System.Drawing.Size(161, 57);
-            this.categoryButtonOrdering9.TabIndex = 3;
-            // 
-            // categoryButtonOrdering10
-            // 
-            this.categoryButtonOrdering10.Location = new System.Drawing.Point(18, 265);
-            this.categoryButtonOrdering10.Name = "categoryButtonOrdering10";
-            this.categoryButtonOrdering10.Size = new System.Drawing.Size(161, 57);
-            this.categoryButtonOrdering10.TabIndex = 4;
+            this.panelSeparator.BackColor = System.Drawing.Color.Gray;
+            this.panelSeparator.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelSeparator.Location = new System.Drawing.Point(200, 14);
+            this.panelSeparator.Name = "panelSeparator";
+            this.panelSeparator.Size = new System.Drawing.Size(1, 731);
+            this.panelSeparator.TabIndex = 6;
             // 
             // MenuOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1244, 786);
+            this.ClientSize = new System.Drawing.Size(1386, 786);
             this.Controls.Add(this.materialCard1);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
             this.Name = "MenuOrderForm";
@@ -628,59 +597,78 @@
             this.panel2.PerformLayout();
             this.panelSearch.ResumeLayout(false);
             this.panelSearch.PerformLayout();
-            this.flPanelProductVariantsMenu.ResumeLayout(false);
-            this.flowLayoutPanelCategpries.ResumeLayout(false);
             this.panelCart.ResumeLayout(false);
             this.panelCart.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrderList)).EndInit();
+            this.groupBoxPayment.ResumeLayout(false);
+            this.groupBoxPayment.PerformLayout();
             this.ResumeLayout(false);
 
         }
-        #endregion
-        private MaterialSkin.Controls.MaterialCard materialCard1;
+
+
+
+        #endregion
+
+
+
+        private MaterialSkin.Controls.MaterialCard materialCard1;
+
         private System.Windows.Forms.Panel panelCart;
-        private MaterialSkin.Controls.MaterialLabel materialLabel4;
-        private MaterialSkin.Controls.MaterialLabel materialLabel3;
+
+        private MaterialSkin.Controls.MaterialLabel lblTotalInOrderList;
+
+        private MaterialSkin.Controls.MaterialLabel lblOrderId;
+
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
+
         private System.Windows.Forms.DataGridView dataGridViewOrderList;
+
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnProduct;
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn Size;
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn AddOns;
+
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnQty;
+
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPrice;
+
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
-        private MaterialSkin.Controls.MaterialButton materialButton4;
-        private MaterialSkin.Controls.MaterialButton materialButton3;
-        private MaterialSkin.Controls.MaterialButton materialButton1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+
+        private MaterialSkin.Controls.MaterialButton btnClearOrderList;
+
+        private MaterialSkin.Controls.MaterialButton btnSaveToDraft;
+
+        private MaterialSkin.Controls.MaterialButton btnConfirmOrder;
+
         private System.Windows.Forms.Panel panelSearch;
-        private MaterialSkin.Controls.MaterialButton materialButton2;
-        private MaterialSkin.Controls.MaterialTextBox2 materialTextBox21;
+
+        private MaterialSkin.Controls.MaterialButton btnSearch;
+
+        private MaterialSkin.Controls.MaterialTextBox2 txtBoxSearchVariant;
+
         private System.Windows.Forms.FlowLayoutPanel flPanelProductVariantsMenu;
+
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelCategpries;
-        private System.Windows.Forms.Button button1;
+
         private System.Windows.Forms.Panel panel2;
+
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
-        private Controls.ProductWidget productWidget20;
-        private Controls.ProductWidget productWidget21;
-        private Controls.ProductWidget productWidget22;
-        private Controls.ProductWidget productWidget23;
-        private Controls.ProductWidget productWidget24;
-        private Controls.ProductWidget productWidget25;
-        private Controls.ProductWidget productWidget26;
-        private Controls.ProductWidget productWidget27;
-        private Controls.ProductWidget productWidget28;
-        private Controls.ProductWidget productWidget29;
-        private Controls.ProductWidget productWidget30;
-        private Controls.ProductWidget productWidget31;
-        private Controls.ProductWidget productWidget32;
-        private Controls.ProductWidget productWidget33;
-        private Controls.ProductWidget productWidget34;
-        private Controls.ProductWidget productWidget35;
-        private Controls.CategoryButtonOrdering categoryButtonOrdering6;
-        private Controls.CategoryButtonOrdering categoryButtonOrdering7;
-        private Controls.CategoryButtonOrdering categoryButtonOrdering8;
-        private Controls.CategoryButtonOrdering categoryButtonOrdering9;
-        private Controls.CategoryButtonOrdering categoryButtonOrdering10;
+        private Panel panelSeparator;
+        private GroupBox groupBoxPayment;
+
+        // ... other controls ...
+
+        private MaterialSkin.Controls.MaterialLabel lblPaymentMethod;
+        private MaterialSkin.Controls.MaterialComboBox cmbPaymentMethod;
+        private MaterialSkin.Controls.MaterialLabel lblPaymentStatus;
+        private MaterialSkin.Controls.MaterialComboBox cmbPaymentStatus;
+        private MaterialSkin.Controls.MaterialLabel lblTotalItems;
+        private MaterialSkin.Controls.MaterialLabel materialLabel3;
+        private MaterialSkin.Controls.MaterialLabel lblTotalItemInOrderList;
+
+        // ... other controls ...
     }
+
 }

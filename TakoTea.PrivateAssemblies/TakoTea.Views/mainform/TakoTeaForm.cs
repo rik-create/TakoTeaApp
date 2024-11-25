@@ -4,9 +4,8 @@ using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
 using TakoTea.Interfaces;
-using TakoTea.Views.Items.Item_Modals;
-
-using TakoTea.View.Order;
+using TakoTea.View.Items.Item_Modals;
+using TakoTea.View.Orders;
 using TakoTea.View.Product.Product_Modals;
 namespace TakoTea.Views.MainForm
 {

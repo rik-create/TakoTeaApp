@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using TakoTea.Configurations;
 namespace TakoTea.Controls
 {
     public partial class CategoryButtonOrdering : UserControl
@@ -7,9 +8,9 @@ namespace TakoTea.Controls
         public CategoryButtonOrdering()
         {
             InitializeComponent();
+            buttonCategory.BackColor = ThemeConfigurator.GetCustomAccentColor();
+            buttonCategory.ForeColor = ThemeConfigurator.GetTextColor();
         }
-        private void materialButton1_Click(object sender, EventArgs e)
-        {
-        }
+      
     }
 }
