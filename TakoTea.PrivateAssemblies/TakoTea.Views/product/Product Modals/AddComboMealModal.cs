@@ -46,7 +46,7 @@ namespace TakoTea.View.Product.Product_Modals
 
         private void PopulateVariantList()
         {
-            // Get the list of ingredients from the service
+            // Get the list of ingredients from the productsService
             var variants = productsService.GetAllProductVariants();
 
             // Define column headers for the ListView

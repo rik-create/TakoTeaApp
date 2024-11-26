@@ -24,6 +24,7 @@ namespace TakoTea.Models
         public string CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string AddOns { get; set; }
+        public string Size { get; set; }
     
         public virtual OrderModel OrderModel { get; set; }
     }

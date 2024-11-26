@@ -25,53 +25,48 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrdersQueueForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrdersQueueForm));
-            this.miniToolStrip = new System.Windows.Forms.BindingNavigator();
+            this.miniToolStrip = new System.Windows.Forms.BindingNavigator(this.components);
             this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panelItemList = new System.Windows.Forms.Panel();
-            this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.dataGridViewStockLevels = new System.Windows.Forms.DataGridView();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
-            this.materialComboBox1 = new MaterialSkin.Controls.MaterialComboBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
-            this.panelExportButtons = new System.Windows.Forms.Panel();
-            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBoxExportExcel = new System.Windows.Forms.PictureBox();
-            this.pictureBoxExportPdf = new System.Windows.Forms.PictureBox();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.dgViewOrderQueue = new System.Windows.Forms.DataGridView();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.btnProcessOrder = new MaterialSkin.Controls.MaterialButton();
+            this.pbCompleted = new System.Windows.Forms.PictureBox();
+            this.pbCancelled = new System.Windows.Forms.PictureBox();
+            this.cmbStatus = new MaterialSkin.Controls.MaterialComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).BeginInit();
             this.materialCard2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panelItemList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStockLevels)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgViewOrderQueue)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCompleted)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCancelled)).BeginInit();
             this.panel1.SuspendLayout();
-            this.panelExportButtons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportExcel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportPdf)).BeginInit();
             this.SuspendLayout();
             // 
             // miniToolStrip
@@ -104,7 +99,6 @@
             this.materialCard2.Controls.Add(this.flowLayoutPanel1);
             this.materialCard2.Controls.Add(this.panel3);
             this.materialCard2.Controls.Add(this.panel1);
-            this.materialCard2.Controls.Add(this.panelExportButtons);
             this.materialCard2.Controls.Add(this.materialLabel2);
             this.materialCard2.Controls.Add(this.materialLabel1);
             this.materialCard2.Depth = 0;
@@ -133,7 +127,7 @@
             // 
             this.panelItemList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelItemList.Controls.Add(this.bindingNavigator1);
-            this.panelItemList.Controls.Add(this.dataGridViewStockLevels);
+            this.panelItemList.Controls.Add(this.dgViewOrderQueue);
             this.panelItemList.Location = new System.Drawing.Point(3, 3);
             this.panelItemList.Name = "panelItemList";
             this.panelItemList.Size = new System.Drawing.Size(1127, 521);
@@ -168,191 +162,6 @@
             this.bindingNavigator1.TabIndex = 9;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
-            this.bindingNavigatorCountItem.Text = "of {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
-            // 
-            // bindingNavigatorSeparator
-            // 
-            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorPositionItem
-            // 
-            this.bindingNavigatorPositionItem.AccessibleName = "Position";
-            this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
-            this.bindingNavigatorPositionItem.Text = "0";
-            this.bindingNavigatorPositionItem.ToolTipText = "Current position";
-            // 
-            // bindingNavigatorSeparator1
-            // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // dataGridViewStockLevels
-            // 
-            this.dataGridViewStockLevels.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewStockLevels.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridViewStockLevels.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewStockLevels.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewStockLevels.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewStockLevels.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewStockLevels.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewStockLevels.EnableHeadersVisualStyles = false;
-            this.dataGridViewStockLevels.Location = new System.Drawing.Point(0, 0);
-            this.dataGridViewStockLevels.Name = "dataGridViewStockLevels";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewStockLevels.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridViewStockLevels.Size = new System.Drawing.Size(1125, 519);
-            this.dataGridViewStockLevels.TabIndex = 5;
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.materialButton1);
-            this.panel3.Controls.Add(this.pictureBox2);
-            this.panel3.Controls.Add(this.pictureBox1);
-            this.panel3.Controls.Add(this.materialComboBox1);
-            this.panel3.Location = new System.Drawing.Point(20, 70);
-            this.panel3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 8);
-            this.panel3.Name = "panel3";
-            this.panel3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
-            this.panel3.Size = new System.Drawing.Size(1150, 70);
-            this.panel3.TabIndex = 104;
-            // 
-            // materialButton1
-            // 
-            this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.materialButton1.Depth = 0;
-            this.materialButton1.HighEmphasis = true;
-            this.materialButton1.Icon = null;
-            this.materialButton1.Location = new System.Drawing.Point(870, 20);
-            this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialButton1.Name = "materialButton1";
-            this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton1.Size = new System.Drawing.Size(136, 36);
-            this.materialButton1.TabIndex = 98;
-            this.materialButton1.Text = "Process order";
-            this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialButton1.UseAccentColor = true;
-            this.materialButton1.UseVisualStyleBackColor = true;
-            // 
-            // materialComboBox1
-            // 
-            this.materialComboBox1.AutoResize = false;
-            this.materialComboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialComboBox1.Depth = 0;
-            this.materialComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.materialComboBox1.DropDownHeight = 174;
-            this.materialComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.materialComboBox1.DropDownWidth = 121;
-            this.materialComboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialComboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialComboBox1.FormattingEnabled = true;
-            this.materialComboBox1.Hint = "Filter by status";
-            this.materialComboBox1.IntegralHeight = false;
-            this.materialComboBox1.ItemHeight = 43;
-            this.materialComboBox1.Location = new System.Drawing.Point(20, 10);
-            this.materialComboBox1.MaxDropDownItems = 4;
-            this.materialComboBox1.MouseState = MaterialSkin.MouseState.OUT;
-            this.materialComboBox1.Name = "materialComboBox1";
-            this.materialComboBox1.Size = new System.Drawing.Size(300, 49);
-            this.materialComboBox1.StartIndex = 0;
-            this.materialComboBox1.TabIndex = 0;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.materialLabel4);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(14, 14);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1161, 46);
-            this.panel1.TabIndex = 101;
-            // 
-            // materialLabel4
-            // 
-            this.materialLabel4.AutoSize = true;
-            this.materialLabel4.Depth = 0;
-            this.materialLabel4.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel4.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.materialLabel4.Location = new System.Drawing.Point(535, 10);
-            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(114, 24);
-            this.materialLabel4.TabIndex = 0;
-            this.materialLabel4.Text = "Order Queue";
-            this.materialLabel4.Click += new System.EventHandler(this.materialLabel4_Click);
-            // 
-            // panelExportButtons
-            // 
-            this.panelExportButtons.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelExportButtons.Controls.Add(this.pictureBoxExportExcel);
-            this.panelExportButtons.Controls.Add(this.pictureBoxExportPdf);
-            this.panelExportButtons.Location = new System.Drawing.Point(1080, 660);
-            this.panelExportButtons.Name = "panelExportButtons";
-            this.panelExportButtons.Size = new System.Drawing.Size(76, 38);
-            this.panelExportButtons.TabIndex = 98;
-            // 
-            // materialLabel2
-            // 
-            this.materialLabel2.AutoSize = true;
-            this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.Location = new System.Drawing.Point(30, 680);
-            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(141, 19);
-            this.materialLabel2.TabIndex = 95;
-            this.materialLabel2.Text = "In-Process Orders: 2";
-            // 
-            // materialLabel1
-            // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(30, 660);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(126, 19);
-            this.materialLabel1.TabIndex = 94;
-            this.materialLabel1.Text = "Pending Orders: 5";
-            // 
             // bindingNavigatorAddNewItem
             // 
             this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -361,6 +170,13 @@
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorAddNewItem.Text = "Add new";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
+            this.bindingNavigatorCountItem.Text = "of {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
             // 
             // bindingNavigatorDeleteItem
             // 
@@ -389,6 +205,26 @@
             this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMovePreviousItem.Text = "Move previous";
             // 
+            // bindingNavigatorSeparator
+            // 
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorPositionItem
+            // 
+            this.bindingNavigatorPositionItem.AccessibleName = "Position";
+            this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
+            this.bindingNavigatorPositionItem.Text = "0";
+            this.bindingNavigatorPositionItem.ToolTipText = "Current position";
+            // 
+            // bindingNavigatorSeparator1
+            // 
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
             // bindingNavigatorMoveNextItem
             // 
             this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -407,43 +243,173 @@
             this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveLastItem.Text = "Move last";
             // 
-            // pictureBox2
+            // bindingNavigatorSeparator2
             // 
-            this.pictureBox2.Image = global::TakoTea.Views.Properties.Resources._checked;
-            this.pictureBox2.Location = new System.Drawing.Point(1030, 20);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(40, 40);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 97;
-            this.pictureBox2.TabStop = false;
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // pictureBox1
+            // dgViewOrderQueue
             // 
-            this.pictureBox1.Image = global::TakoTea.Views.Properties.Resources.multiply;
-            this.pictureBox1.Location = new System.Drawing.Point(1080, 20);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 96;
-            this.pictureBox1.TabStop = false;
+            this.dgViewOrderQueue.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgViewOrderQueue.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgViewOrderQueue.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgViewOrderQueue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgViewOrderQueue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgViewOrderQueue.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgViewOrderQueue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgViewOrderQueue.EnableHeadersVisualStyles = false;
+            this.dgViewOrderQueue.Location = new System.Drawing.Point(0, 0);
+            this.dgViewOrderQueue.Name = "dgViewOrderQueue";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgViewOrderQueue.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgViewOrderQueue.Size = new System.Drawing.Size(1125, 519);
+            this.dgViewOrderQueue.TabIndex = 5;
             // 
-            // pictureBoxExportExcel
+            // panel3
             // 
-            this.pictureBoxExportExcel.Location = new System.Drawing.Point(3, 5);
-            this.pictureBoxExportExcel.Name = "pictureBoxExportExcel";
-            this.pictureBoxExportExcel.Size = new System.Drawing.Size(33, 27);
-            this.pictureBoxExportExcel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxExportExcel.TabIndex = 96;
-            this.pictureBoxExportExcel.TabStop = false;
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.btnProcessOrder);
+            this.panel3.Controls.Add(this.pbCompleted);
+            this.panel3.Controls.Add(this.pbCancelled);
+            this.panel3.Controls.Add(this.cmbStatus);
+            this.panel3.Location = new System.Drawing.Point(20, 70);
+            this.panel3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 8);
+            this.panel3.Name = "panel3";
+            this.panel3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
+            this.panel3.Size = new System.Drawing.Size(1150, 70);
+            this.panel3.TabIndex = 104;
             // 
-            // pictureBoxExportPdf
+            // btnProcessOrder
             // 
-            this.pictureBoxExportPdf.Location = new System.Drawing.Point(38, 5);
-            this.pictureBoxExportPdf.Name = "pictureBoxExportPdf";
-            this.pictureBoxExportPdf.Size = new System.Drawing.Size(33, 27);
-            this.pictureBoxExportPdf.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxExportPdf.TabIndex = 97;
-            this.pictureBoxExportPdf.TabStop = false;
+            this.btnProcessOrder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnProcessOrder.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnProcessOrder.Depth = 0;
+            this.btnProcessOrder.HighEmphasis = true;
+            this.btnProcessOrder.Icon = null;
+            this.btnProcessOrder.Location = new System.Drawing.Point(870, 20);
+            this.btnProcessOrder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnProcessOrder.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnProcessOrder.Name = "btnProcessOrder";
+            this.btnProcessOrder.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnProcessOrder.Size = new System.Drawing.Size(136, 36);
+            this.btnProcessOrder.TabIndex = 98;
+            this.btnProcessOrder.Text = "Process order";
+            this.btnProcessOrder.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnProcessOrder.UseAccentColor = true;
+            this.btnProcessOrder.UseVisualStyleBackColor = true;
+            // 
+            // pbCompleted
+            // 
+            this.pbCompleted.Image = global::TakoTea.Views.Properties.Resources._checked;
+            this.pbCompleted.Location = new System.Drawing.Point(1030, 20);
+            this.pbCompleted.Name = "pbCompleted";
+            this.pbCompleted.Size = new System.Drawing.Size(40, 40);
+            this.pbCompleted.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbCompleted.TabIndex = 97;
+            this.pbCompleted.TabStop = false;
+            // 
+            // pbCancelled
+            // 
+            this.pbCancelled.Image = global::TakoTea.Views.Properties.Resources.multiply;
+            this.pbCancelled.Location = new System.Drawing.Point(1080, 20);
+            this.pbCancelled.Name = "pbCancelled";
+            this.pbCancelled.Size = new System.Drawing.Size(40, 40);
+            this.pbCancelled.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbCancelled.TabIndex = 96;
+            this.pbCancelled.TabStop = false;
+            // 
+            // cmbStatus
+            // 
+            this.cmbStatus.AutoResize = false;
+            this.cmbStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cmbStatus.Depth = 0;
+            this.cmbStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbStatus.DropDownHeight = 174;
+            this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbStatus.DropDownWidth = 121;
+            this.cmbStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cmbStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cmbStatus.FormattingEnabled = true;
+            this.cmbStatus.Hint = "Filter by status";
+            this.cmbStatus.IntegralHeight = false;
+            this.cmbStatus.ItemHeight = 43;
+            this.cmbStatus.Location = new System.Drawing.Point(20, 10);
+            this.cmbStatus.MaxDropDownItems = 4;
+            this.cmbStatus.MouseState = MaterialSkin.MouseState.OUT;
+            this.cmbStatus.Name = "cmbStatus";
+            this.cmbStatus.Size = new System.Drawing.Size(300, 49);
+            this.cmbStatus.StartIndex = 0;
+            this.cmbStatus.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.materialLabel4);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(14, 14);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1161, 46);
+            this.panel1.TabIndex = 101;
+            // 
+            // materialLabel4
+            // 
+            this.materialLabel4.AutoSize = true;
+            this.materialLabel4.Depth = 0;
+            this.materialLabel4.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel4.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            this.materialLabel4.Location = new System.Drawing.Point(535, 10);
+            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel4.Name = "materialLabel4";
+            this.materialLabel4.Size = new System.Drawing.Size(114, 24);
+            this.materialLabel4.TabIndex = 0;
+            this.materialLabel4.Text = "Order Queue";
+            this.materialLabel4.Click += new System.EventHandler(this.materialLabel4_Click);
+            // 
+            // materialLabel2
+            // 
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel2.Location = new System.Drawing.Point(30, 680);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(141, 19);
+            this.materialLabel2.TabIndex = 95;
+            this.materialLabel2.Text = "In-Process Orders: 2";
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel1.Location = new System.Drawing.Point(30, 660);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(126, 19);
+            this.materialLabel1.TabIndex = 94;
+            this.materialLabel1.Text = "Pending Orders: 5";
             // 
             // OrdersQueueForm
             // 
@@ -464,24 +430,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStockLevels)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgViewOrderQueue)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCompleted)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCancelled)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panelExportButtons.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportExcel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportPdf)).EndInit();
             this.ResumeLayout(false);
+
         }
         #endregion
         private System.Windows.Forms.BindingNavigator miniToolStrip;
         private MaterialSkin.Controls.MaterialCard materialCard2;
-        private System.Windows.Forms.Panel panelExportButtons;
-        private System.Windows.Forms.PictureBox pictureBoxExportExcel;
-        private System.Windows.Forms.PictureBox pictureBoxExportPdf;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private System.Windows.Forms.Panel panel1;
@@ -501,10 +462,10 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private System.Windows.Forms.DataGridView dataGridViewStockLevels;
-        private MaterialSkin.Controls.MaterialComboBox materialComboBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private MaterialSkin.Controls.MaterialButton materialButton1;
+        private System.Windows.Forms.DataGridView dgViewOrderQueue;
+        private MaterialSkin.Controls.MaterialComboBox cmbStatus;
+        private System.Windows.Forms.PictureBox pbCompleted;
+        private System.Windows.Forms.PictureBox pbCancelled;
+        private MaterialSkin.Controls.MaterialButton btnProcessOrder;
     }
 }

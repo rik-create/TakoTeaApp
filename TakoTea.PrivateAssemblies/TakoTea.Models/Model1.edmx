@@ -13,6 +13,8 @@
           <Property Name="AddOnName" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="AdditionalPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="UseForProductID" Type="int" />
+          <Property Name="IngredientID" Type="int" />
+          <Property Name="QuantityUsedPerProduct" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Batch">
           <Key>
@@ -119,6 +121,7 @@
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="AddOns" Type="varchar(max)" />
+          <Property Name="Size" Type="nchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="OrderModel">
           <Key>
@@ -134,6 +137,7 @@
           <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="OrderStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -206,6 +210,19 @@
           <Property Name="AdjustmentDate" Type="datetime" Nullable="false" />
           <Property Name="PreviousQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="NewQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StockLevelLogs">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BatchID" Type="int" Nullable="false" />
+          <Property Name="IngredientID" Type="int" Nullable="false" />
+          <Property Name="OldStockLevel" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="NewStockLevel" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="QuantityChanged" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Action" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK__Batch__Ingredien__59063A47">
           <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="0..1">
@@ -327,6 +344,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__StockLeve__Batch__58D1301D">
+          <End Role="Batch" Type="Self.Batch" Multiplicity="1" />
+          <End Role="StockLevelLogs" Type="Self.StockLevelLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchID" />
+            </Principal>
+            <Dependent Role="StockLevelLogs">
+              <PropertyRef Name="BatchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StockLeve__Ingre__59C55456">
+          <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="1" />
+          <End Role="StockLevelLogs" Type="Self.StockLevelLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredient">
+              <PropertyRef Name="IngredientID" />
+            </Principal>
+            <Dependent Role="StockLevelLogs">
+              <PropertyRef Name="IngredientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AddOns_Ingredient">
+          <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="0..1" />
+          <End Role="AddOns" Type="Self.AddOns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredient">
+              <PropertyRef Name="IngredientID" />
+            </Principal>
+            <Dependent Role="AddOns">
+              <PropertyRef Name="IngredientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_AddOns_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -406,6 +459,7 @@
           <EntitySet Name="ProductVariants" EntityType="Self.ProductVariants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Receipt" EntityType="Self.Receipt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockAdjustmentLog" EntityType="Self.StockAdjustmentLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StockLevelLogs" EntityType="Self.StockLevelLogs" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Batch__Ingredien__59063A47" Association="Self.FK__Batch__Ingredien__59063A47">
             <End Role="Ingredient" EntitySet="Ingredient" />
             <End Role="Batch" EntitySet="Batch" />
@@ -441,6 +495,18 @@
           <AssociationSet Name="FK__StockAdju__Ingre__6FE99F9F" Association="Self.FK__StockAdju__Ingre__6FE99F9F">
             <End Role="Ingredient" EntitySet="Ingredient" />
             <End Role="StockAdjustmentLog" EntitySet="StockAdjustmentLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StockLeve__Batch__58D1301D" Association="Self.FK__StockLeve__Batch__58D1301D">
+            <End Role="Batch" EntitySet="Batch" />
+            <End Role="StockLevelLogs" EntitySet="StockLevelLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StockLeve__Ingre__59C55456" Association="Self.FK__StockLeve__Ingre__59C55456">
+            <End Role="Ingredient" EntitySet="Ingredient" />
+            <End Role="StockLevelLogs" EntitySet="StockLevelLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AddOns_Ingredient" Association="Self.FK_AddOns_Ingredient">
+            <End Role="Ingredient" EntitySet="Ingredient" />
+            <End Role="AddOns" EntitySet="AddOns" />
           </AssociationSet>
           <AssociationSet Name="FK_AddOns_Product" Association="Self.FK_AddOns_Product">
             <End Role="Product" EntitySet="Product" />
@@ -483,6 +549,7 @@
           <Property Name="BatchCost" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <NavigationProperty Name="Ingredient" Relationship="Self.FK__Batch__Ingredien__59063A47" FromRole="Batch" ToRole="Ingredient" />
           <Property Name="StockLevel" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="StockLevelLogs" Relationship="TakoTeaModel.FK__StockLeve__Batch__58D1301D" FromRole="Batch" ToRole="StockLevelLog" />
         </EntityType>
         <EntityType Name="Ingredient">
           <Key>
@@ -506,6 +573,8 @@
           <Property Name="IngredientCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ProductVariantIngredients" Relationship="TakoTeaModel.FK__ProductVa__Ingre__0D7A0286" FromRole="Ingredient" ToRole="ProductVariantIngredient" />
           <Property Name="MeasuringUnit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AddOns" Relationship="TakoTeaModel.FK_AddOns_Ingredient" FromRole="Ingredient" ToRole="AddOn" />
+          <NavigationProperty Name="StockLevelLogs" Relationship="TakoTeaModel.FK__StockLeve__Ingre__59C55456" FromRole="Ingredient" ToRole="StockLevelLog" />
         </EntityType>
         <EntityType Name="IngredientProductLink">
           <Key>
@@ -691,6 +760,19 @@
             <End Role="OrderModel" EntitySet="OrderModels" />
             <End Role="Receipt" EntitySet="Receipts" />
           </AssociationSet>
+          <AssociationSet Name="FK_AddOns_Ingredient" Association="TakoTeaModel.FK_AddOns_Ingredient">
+            <End Role="Ingredient" EntitySet="Ingredients" />
+            <End Role="AddOn" EntitySet="AddOns" />
+          </AssociationSet>
+          <EntitySet Name="StockLevelLogs" EntityType="TakoTeaModel.StockLevelLog" />
+          <AssociationSet Name="FK__StockLeve__Batch__58D1301D" Association="TakoTeaModel.FK__StockLeve__Batch__58D1301D">
+            <End Role="Batch" EntitySet="Batches" />
+            <End Role="StockLevelLog" EntitySet="StockLevelLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StockLeve__Ingre__59C55456" Association="TakoTeaModel.FK__StockLeve__Ingre__59C55456">
+            <End Role="Ingredient" EntitySet="Ingredients" />
+            <End Role="StockLevelLog" EntitySet="StockLevelLogs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ProductVariantIngredient">
           <Key>
@@ -824,6 +906,9 @@
           <Property Name="AdditionalPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="UseForProductID" Type="Int32" />
           <NavigationProperty Name="Product" Relationship="TakoTeaModel.FK_AddOns_Product" FromRole="AddOn" ToRole="Product" />
+          <Property Name="IngredientID" Type="Int32" />
+          <Property Name="QuantityUsedPerProduct" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Ingredient" Relationship="TakoTeaModel.FK_AddOns_Ingredient" FromRole="AddOn" ToRole="Ingredient" />
         </EntityType>
         <EntityType Name="DraftOrder">
           <Key>
@@ -868,6 +953,7 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="AddOns" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="OrderModel" Relationship="TakoTeaModel.FK_OrderItem_Order1" FromRole="OrderItem" ToRole="OrderModel" />
+          <Property Name="Size" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Receipt">
           <Key>
@@ -928,6 +1014,7 @@
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="OrderItems" Relationship="TakoTeaModel.FK_OrderItem_Order1" FromRole="OrderModel" ToRole="OrderItem" />
           <NavigationProperty Name="Receipts" Relationship="TakoTeaModel.FK_Receipt_Order1" FromRole="OrderModel" ToRole="Receipt" />
+          <Property Name="OrderStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_OrderItem_Order1">
           <End Type="TakoTeaModel.OrderModel" Role="OrderModel" Multiplicity="1" />
@@ -950,6 +1037,57 @@
             </Principal>
             <Dependent Role="Receipt">
               <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AddOns_Ingredient">
+          <End Type="TakoTeaModel.Ingredient" Role="Ingredient" Multiplicity="0..1" />
+          <End Type="TakoTeaModel.AddOn" Role="AddOn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredient">
+              <PropertyRef Name="IngredientID" />
+            </Principal>
+            <Dependent Role="AddOn">
+              <PropertyRef Name="IngredientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StockLevelLog">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BatchID" Type="Int32" Nullable="false" />
+          <Property Name="IngredientID" Type="Int32" Nullable="false" />
+          <Property Name="OldStockLevel" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="NewStockLevel" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="QuantityChanged" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Action" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Batch" Relationship="TakoTeaModel.FK__StockLeve__Batch__58D1301D" FromRole="StockLevelLog" ToRole="Batch" />
+          <NavigationProperty Name="Ingredient" Relationship="TakoTeaModel.FK__StockLeve__Ingre__59C55456" FromRole="StockLevelLog" ToRole="Ingredient" />
+        </EntityType>
+        <Association Name="FK__StockLeve__Batch__58D1301D">
+          <End Type="TakoTeaModel.Batch" Role="Batch" Multiplicity="1" />
+          <End Type="TakoTeaModel.StockLevelLog" Role="StockLevelLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchID" />
+            </Principal>
+            <Dependent Role="StockLevelLog">
+              <PropertyRef Name="BatchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StockLeve__Ingre__59C55456">
+          <End Type="TakoTeaModel.Ingredient" Role="Ingredient" Multiplicity="1" />
+          <End Type="TakoTeaModel.StockLevelLog" Role="StockLevelLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredient">
+              <PropertyRef Name="IngredientID" />
+            </Principal>
+            <Dependent Role="StockLevelLog">
+              <PropertyRef Name="IngredientID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1093,6 +1231,8 @@
           <EntitySetMapping Name="AddOns">
             <EntityTypeMapping TypeName="TakoTeaModel.AddOn">
               <MappingFragment StoreEntitySet="AddOns">
+                <ScalarProperty Name="QuantityUsedPerProduct" ColumnName="QuantityUsedPerProduct" />
+                <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
                 <ScalarProperty Name="UseForProductID" ColumnName="UseForProductID" />
                 <ScalarProperty Name="AdditionalPrice" ColumnName="AdditionalPrice" />
                 <ScalarProperty Name="AddOnName" ColumnName="AddOnName" />
@@ -1131,6 +1271,7 @@
           <EntitySetMapping Name="OrderItems">
             <EntityTypeMapping TypeName="TakoTeaModel.OrderItem">
               <MappingFragment StoreEntitySet="OrderItem">
+                <ScalarProperty Name="Size" ColumnName="Size" />
                 <ScalarProperty Name="AddOns" ColumnName="AddOns" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -1164,6 +1305,7 @@
           <EntitySetMapping Name="OrderModels">
             <EntityTypeMapping TypeName="TakoTeaModel.OrderModel">
               <MappingFragment StoreEntitySet="OrderModel">
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -1174,6 +1316,20 @@
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
                 <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockLevelLogs">
+            <EntityTypeMapping TypeName="TakoTeaModel.StockLevelLog">
+              <MappingFragment StoreEntitySet="StockLevelLogs">
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="QuantityChanged" ColumnName="QuantityChanged" />
+                <ScalarProperty Name="NewStockLevel" ColumnName="NewStockLevel" />
+                <ScalarProperty Name="OldStockLevel" ColumnName="OldStockLevel" />
+                <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

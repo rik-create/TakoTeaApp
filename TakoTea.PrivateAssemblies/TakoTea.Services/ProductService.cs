@@ -15,17 +15,87 @@ namespace TakoTea.Services
         {
             _context = new Entities();
         }
-        public void UpdateBatchStockLevel(int ingredientId, decimal quantityUsed)
+        public void UpdateBatchStockLevel(int ingredientId, decimal quantityUsed, string action)
         {
-            using (var context = new Entities())
+
+            var batches = _context.Batches
+                .Where(b => b.IngredientID == ingredientId && b.StockLevel > 0)
+                .OrderBy(b => b.ExpirationDate)
+                .ToList();
+
+            decimal remainingQuantity = quantityUsed;
+
+            foreach (var batch in batches)
             {
-                var batch = context.Batches.FirstOrDefault(b => b.IngredientID == ingredientId);
-                if (batch != null)
+                decimal originalStockLevel = batch.StockLevel; // Store the original stock level
+
+                if (batch.StockLevel >= remainingQuantity)
                 {
-                    batch.StockLevel -= quantityUsed;
-                    context.SaveChanges();
+                    batch.StockLevel -= remainingQuantity;
+                    _context.SaveChanges();
+
+                    // Log the stock level update
+                    LogStockLevelUpdate(batch.BatchID, ingredientId, originalStockLevel, batch.StockLevel, remainingQuantity, action);
+
+                    break;
+                }
+                else
+                {
+                    remainingQuantity -= batch.StockLevel;
+                    batch.StockLevel = 0;
+                    _context.SaveChanges();
+
+                    // Log the stock level update
+                    LogStockLevelUpdate(batch.BatchID, ingredientId, originalStockLevel, batch.StockLevel, batch.StockLevel, action);
                 }
             }
+        }
+        public string GetSizeByVariantId(int variantId)
+        {
+            var size = _context.ProductVariants
+                .Where(pv => pv.ProductVariantID == variantId)
+                .Select(pv => pv.Size)
+                .FirstOrDefault();
+
+            return size; // Or handle the case where no size is found
+        }
+        private void LogStockLevelUpdate(int batchId, int ingredientId, decimal oldStockLevel, decimal newStockLevel, decimal quantityChanged, string action)
+        {
+
+            var stockLog = new StockLevelLog
+            {
+                BatchID = batchId,
+                IngredientID = ingredientId,
+                OldStockLevel = oldStockLevel,
+                NewStockLevel = newStockLevel,
+                QuantityChanged = quantityChanged,
+                Action = action,
+                Timestamp = DateTime.Now
+            };
+
+            _context.StockLevelLogs.Add(stockLog);
+            _context.SaveChanges();
+        }
+        // Method to get IngredientID and QuantityPerVariant by ProductVariantIngredientID
+        public (int IngredientID, decimal QuantityPerVariant) GetIngredientAndQuantity(int productVariantIngredientId)
+        {
+            var ingredient = _context.ProductVariantIngredients
+                .Where(pvi => pvi.ProductVariantIngredientID == productVariantIngredientId)
+                .Select(pvi => new { pvi.IngredientID, pvi.QuantityPerVariant })
+                .FirstOrDefault();
+
+            if (ingredient != null)
+                return (ingredient.IngredientID, ingredient.QuantityPerVariant);
+            else
+                return (0, 0); // Or handle the case where no ingredient is found
+        }
+
+        public List<int> GetProductVariantIngredientIds(int productVariantId)
+        {
+            return _context.ProductVariantIngredients
+                .Where(pvi => pvi.ProductVariantID == productVariantId)
+                .Select(pvi => pvi.ProductVariantIngredientID)
+                .ToList();
         }
         public int GetNewComboMealID(string comboMealName)
         {
@@ -108,6 +178,17 @@ namespace TakoTea.Services
                 return product.ProductName;
             }
         }
+        public string GetProductVariantNameById(int productVariantId)
+        {
+            using (var context = new Entities())
+            {
+                var product = context.ProductVariants.FirstOrDefault(p => p.ProductVariantID == productVariantId);
+                if (product == null)
+                    throw new Exception($"Product with ID '{productVariantId}' not found.");
+
+                return product.VariantName;
+            }
+        }
 
 
         public void AddProductVariantIngredient(ProductVariantIngredient productVariantIngredient)
@@ -158,6 +239,14 @@ namespace TakoTea.Services
             }
         }
 
+        public int GetNextProductVariantId()
+        {
+
+            // Find the maximum existing ProductVariantID
+            int maxId = _context.ProductVariants.Any() ? _context.ProductVariants.Max(pv => pv.ProductVariantID) : 0;
+
+            return maxId + 1; // Increment the max ID to get the next ID
+        }
         public List<ProductVariant> GetLinkedProductVariants(int productId)
         {
             return _context.ProductVariants.Where(v => v.ProductID == productId).ToList();

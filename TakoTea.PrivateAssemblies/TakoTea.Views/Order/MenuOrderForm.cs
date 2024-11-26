@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Controls;
 using TakoTea.Models;
+using TakoTea.Services;
 using TakoTea.Views.Order;
 using TakoTea.Views.Order.Order_Modals;
 namespace TakoTea.View.Orders
@@ -14,15 +15,19 @@ namespace TakoTea.View.Orders
     public partial class MenuOrderForm : MaterialForm
     {
         MenuOrderFormService _service;
+        ProductsService productsService;
+        private Entities _context;
         public MenuOrderForm()
         {
             InitializeComponent();
             _service = new MenuOrderFormService();
+            _context = new Entities();
 
 
             OrderEntryModal orderEntryModal = new OrderEntryModal(dataGridViewOrderList);
             orderEntryModal.Show();
             orderEntryModal.Close();
+            productsService = new ProductsService();
 
 
             // ... rest of the code ...
@@ -32,10 +37,85 @@ namespace TakoTea.View.Orders
 
 
             dataGridViewOrderList.CellValueChanged += dataGridViewOrderList_CellValueChanged;
+            dataGridViewOrderList.CellDoubleClick += dataGridViewOrderList_CellDoubleClick; // Register the event handler
 
             dataGridViewOrderList.RowsAdded += dataGridViewOrderList_RowsAdded;
 
         }
+
+
+        // In your MenuOrderForm class
+
+        private void dataGridViewOrderList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if a valid row was double-clicked (not the header or new row)
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && !dataGridViewOrderList.Rows[e.RowIndex].IsNewRow)
+            {
+                // Get the data from the selected row
+                string productName = dataGridViewOrderList.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string size = dataGridViewOrderList.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string addOns = dataGridViewOrderList.Rows[e.RowIndex].Cells[2].Value.ToString();
+                int quantity = Convert.ToInt32(dataGridViewOrderList.Rows[e.RowIndex].Cells[3].Value);
+                decimal totalPrice = Convert.ToDecimal(dataGridViewOrderList.Rows[e.RowIndex].Cells[4].Value);
+
+                // Determine if it's a combo meal or product variant
+                bool isComboMeal = string.IsNullOrEmpty(size);
+
+                // Create and show the OrderEntryModal
+                using (OrderEntryModal orderEntryModal = new OrderEntryModal(dataGridViewOrderList))
+                {
+                    if (isComboMeal)
+                    {
+                        // If it's a combo meal, find and set the combo meal data
+                        var comboMeal = _context.ComboMeals.FirstOrDefault(cm => cm.ComboMealName == productName);
+                        if (comboMeal != null)
+                        {
+                            orderEntryModal.SetComboMealData(comboMeal);
+                        }
+                    }
+                    else
+                    {
+                        // If it's a product variant, find and set the product variant data
+                        var productVariant = _context.ProductVariants.FirstOrDefault(pv => pv.VariantName == productName && pv.Size == size);
+                        if (productVariant != null)
+                        {
+                            orderEntryModal.SetProductData(productVariant);
+
+                            // Set the selected add-ons in the modal
+                            for (int i = 0; i < orderEntryModal.chckListBoxAddOns.Items.Count; i++)
+                            {
+                                string addOnItemName = orderEntryModal.chckListBoxAddOns.Items[i].ToString().Split(new[] { " - " }, StringSplitOptions.None)[0];
+                                if (addOns.Contains(addOnItemName))
+                                {
+                                    orderEntryModal.chckListBoxAddOns.SetItemChecked(i, true);
+                                }
+                            }
+                        }
+                    }
+
+                    // Set the quantity in the modal
+                    orderEntryModal.numericUpDownQuantity.Value = quantity;
+
+                    // Show the modal
+                    orderEntryModal.ShowDialog();
+                    if (orderEntryModal.AddToDgViewOrderListClicked)
+                    {
+                        // Remove the original row from the DataGridView
+
+                        // Update the total price
+                        UpdateTotalInOrderList();
+                    }
+                }
+
+
+            }
+        }
+
+        // In your form's constructor or InitializeComponent method:
+        // ... other initialization code ...
+
+
+// ... rest of the code ...
 
         private void dataGridViewOrderList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
@@ -56,7 +136,7 @@ namespace TakoTea.View.Orders
             // In your parent form's constructor or InitializeComponent method:
 
             // ... other initialization code ...
-
+            dataGridViewOrderList.Rows.Clear();
             btnClearOrderList.Click += buttonClearOrderList_Click;
             _service.PopulateCategories(flowLayoutPanelCategpries, dataGridViewOrderList, flPanelProductVariantsMenu);
             UpdateTotalInOrderList();
@@ -85,7 +165,24 @@ namespace TakoTea.View.Orders
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            MenuOrderForm_Load(sender, e);
+            // Assuming you have an instance of your productsService class called `_service`
+
+            // Get the ProductVariantIngredientIDs for a specific ProductVariantID (e.g., 123)
+            int productVariantId = 12;
+            var productVariantIngredientIds = productsService.GetProductVariantIngredientIds(productVariantId);
+
+            // Display the IDs in a message box
+            MessageBox.Show("ProductVariantIngredientIDs: " + string.Join(", ", productVariantIngredientIds));
+
+            // Get the IngredientID and QuantityPerVariant for a specific ProductVariantIngredientID (e.g., 456)
+            int productVariantIngredientId = 1;
+
+
+            var (ingredientId, quantityPerVariant) = productsService.GetIngredientAndQuantity(productVariantIngredientId);
+
+
+
+            MessageBox.Show($"Ingredient ID: {ingredientId}, Quantity per Variant: {quantityPerVariant}");
         }
 
 
@@ -138,14 +235,21 @@ namespace TakoTea.View.Orders
         {
 
 
-            // Call the ConfirmOrder method in the service class
+            // Call the ConfirmOrder method in the productsService class
             _service.ConfirmOrder(
                 dataGridViewOrderList,
                 lblTotalInOrderList,
                 lblOrderId,
                 cmbPaymentMethod,
-                cmbPaymentStatus
+                cmbPaymentStatus,
+                cmbOrderStatus
             );
+
+
+            _service.GenerateReceipt((int.Parse(lblOrderId.Text)));
+
+
+            lblOrderId.Text = _service.GenerateNewOrderId().ToString();
 
             // Optionally, perform additional actions after confirming the order
             // For example:
@@ -153,6 +257,18 @@ namespace TakoTea.View.Orders
             // - Generate a receipt: _service.GenerateReceipt(orderId);
             // - Reset the form
             // - etc.
+        }
+
+        private void btnSearch_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnGoToOrderQueue_Click(object sender, EventArgs e)
+        {
+            OrdersQueueForm ordersQueueForm = new OrdersQueueForm();
+            ordersQueueForm.Show();
+
         }
     }
 }

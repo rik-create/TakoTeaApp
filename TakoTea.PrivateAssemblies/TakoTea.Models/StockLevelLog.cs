@@ -12,16 +12,18 @@ namespace TakoTea.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AddOn
+    public partial class StockLevelLog
     {
-        public int Id { get; set; }
-        public string AddOnName { get; set; }
-        public decimal AdditionalPrice { get; set; }
-        public Nullable<int> UseForProductID { get; set; }
-        public Nullable<int> IngredientID { get; set; }
-        public Nullable<decimal> QuantityUsedPerProduct { get; set; }
+        public int LogID { get; set; }
+        public int BatchID { get; set; }
+        public int IngredientID { get; set; }
+        public decimal OldStockLevel { get; set; }
+        public decimal NewStockLevel { get; set; }
+        public decimal QuantityChanged { get; set; }
+        public string Action { get; set; }
+        public System.DateTime Timestamp { get; set; }
     
-        public virtual Product Product { get; set; }
+        public virtual Batch Batch { get; set; }
         public virtual Ingredient Ingredient { get; set; }
     }
 }

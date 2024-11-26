@@ -15,11 +15,10 @@ namespace TakoTea.View.Product.Product_Modals
 {
     public partial class AddProductModal : MaterialForm
     {
-        //TODO: PRODUCTVARIANTINGREDIENT LINK
 
         private readonly IInventoryService _inventoryService;
         private int selectedRowIndex = -1;
-        private readonly IProductsService _productsService;
+        private readonly ProductsService _productsService;
         public AddProductModal()
         {
             InitializeComponent();
@@ -78,13 +77,19 @@ namespace TakoTea.View.Product.Product_Modals
         // Handle Add New Row button click
         private void btnAddNewRow_Click(object sender, EventArgs e)
         {
-            // Add a new empty row
-            int rowIndex = dgViewAddingMultipleProductVariants.Rows.Add();
+            // Check if the last row is a new, uncommitted row
+            if (dgViewAddingMultipleProductVariants.Rows.Count > 0 &&
+                dgViewAddingMultipleProductVariants.Rows[dgViewAddingMultipleProductVariants.Rows.Count - 1].IsNewRow)
+            {
+                // If the last row is a new row, don't allow adding another
+                MessageBox.Show("Please fill the current row before adding a new one.");
+                return;
+            }
 
-            // Set the height of the newly added row
+            // If there's no new row, add an empty row
+            int rowIndex = dgViewAddingMultipleProductVariants.Rows.Add();
             dgViewAddingMultipleProductVariants.Rows[rowIndex].Height = 100;
         }
-
 
         // Handle Duplicate Row button click
         private void btnDuplicateRow_Click(object sender, EventArgs e)
@@ -215,7 +220,7 @@ namespace TakoTea.View.Product.Product_Modals
 
         private void PopulateIngredientsList()
         {
-            // Get the list of ingredients from the service
+            // Get the list of ingredients from the productsService
             var ingredients = _inventoryService.GetAllIngredients();
             
 
@@ -353,7 +358,7 @@ namespace TakoTea.View.Product.Product_Modals
                     dgViewAddingMultipleProductVariants.Rows[selectedRowIndex].Cells["ColumnIngredients"].Value = currentIngredients;
 
                     // Clear the quantity input after adding the ingredients
-                    numericUpDownIngredientsQuantity.Value = 0;
+                    numericUpDownIngredientsQuantity.Value = numericUpDownIngredientsQuantity.Minimum;
 
                     // Optionally, clear the ListView selection after adding
                     listViewIngredients.SelectedItems.Clear();
@@ -492,7 +497,6 @@ namespace TakoTea.View.Product.Product_Modals
                 };
 
 
-                //TODO: PRODUCTVARIANTINGREDIENT LINK
 
                 // Add the product variant to the list
                 productVariantsToSave.Add(productVariant);
@@ -514,15 +518,16 @@ namespace TakoTea.View.Product.Product_Modals
                             decimal quantity = Convert.ToDecimal(match.Groups[2].Value); // Quantity (number)
                             string measuringUnit = match.Groups[4].Value; // Measuring unit (e.g., kg, liter)
 
-                            // Find the ingredient ID from the Ingredients table (you can use a service to get the ID based on the name)
+                            // Find the ingredient ID from the Ingredients table (you can use a productsService to get the ID based on the name)
                             int ingredientId = _inventoryService.GetIngredientIdByName(ingredientName);
 
                             // Create ProductVariantIngredient entries
                             ProductVariantIngredient productVariantIngredient = new ProductVariantIngredient
                             {
+                                ProductVariantID = _productsService.GetNextProductVariantId(), // Get the next ID
                                 IngredientID = ingredientId,
                                 QuantityPerVariant = quantity,
-                                MeasuringUnit = measuringUnit, // Store the measuring unit
+                                MeasuringUnit = measuringUnit
                             };
 
                             // Add the ingredient association to the list
@@ -538,26 +543,23 @@ namespace TakoTea.View.Product.Product_Modals
 
             }
 
-            // Now save the product variants (call the service method)
+            // Now save the product variants (call the productsService method)
             try
             {
-                //TODO: PRODUCTVARIANTINGREDIENT LINK
 
                 // First, save the product variants
                 _productsService.AddMultipleProductVariants(productVariantsToSave);
 
-                // After product variants are saved, you can associate the ingredients
                 foreach (var productVariant in productVariantsToSave)
                 {
-                    // Get the ProductVariantID after it has been saved
                     foreach (var ingredient in productVariantIngredientsToSave)
                     {
-                        // Assuming the productVariant has a valid ProductVariantID
-/*                        ingredient.ProductVariantID = productVariant.ProductVariantID;
-*/
+                        // Assuming the productVariant has a valid ProductVariantID after being saved
+                        ingredient.ProductVariantID = productVariant.ProductVariantID;
+
                         // Save each product variant ingredient association
-/*                        _productsService.AddProductVariantIngredient(ingredient);
-*/                    }
+                        _productsService.AddProductVariantIngredient(ingredient);
+                    }
                 }
 
                 MessageBox.Show("All product variants have been saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

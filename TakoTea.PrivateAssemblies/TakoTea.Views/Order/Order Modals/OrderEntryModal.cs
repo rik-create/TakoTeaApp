@@ -15,10 +15,12 @@ namespace TakoTea.Views.Order.Order_Modals
     public partial class OrderEntryModal : MaterialForm
     {
 
+        public bool AddToDgViewOrderListClicked { get; set; } = false;
 
         private readonly Entities _context;
         //TODO : handle addons feautures and determine the price base on selected size and selected addons
         private DataGridView parentDataGridView;
+        string initialPrice = "0";
 
         public OrderEntryModal(DataGridView dataGridView)
         {
@@ -36,7 +38,6 @@ namespace TakoTea.Views.Order.Order_Modals
 
             chckListBoxAddOns.CheckOnClick = true;
             numericUpDownQuantity.Minimum = 1;
-
             // ... rest of the code ...
 
         }
@@ -45,6 +46,7 @@ namespace TakoTea.Views.Order.Order_Modals
         private void cmbSizes_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateTotalPrice();
+            CheckIfProductExistsInOrderList();
         }
 
         private void chckListBoxAddOns_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -58,13 +60,16 @@ namespace TakoTea.Views.Order.Order_Modals
 
         private void PopulateAddOns()
         {
-            // 1. Fetch add-ons from the database
-            List<AddOn> addOns = _context.AddOns.ToList();
+            // Fetch add-ons from the database that have matching batches with StockLevel > 0
+            var addOns = _context.AddOns
+                .Where(a => a.IngredientID != null &&
+                            _context.Batches.Any(b => b.IngredientID == a.IngredientID && b.StockLevel > 0))
+                .ToList();
 
-            // 2. Clear existing items in the CheckedListBox
+            // Clear existing items in the CheckedListBox
             chckListBoxAddOns.Items.Clear();
 
-            // 3. Add each add-on to the CheckedListBox with the desired format
+            // Add each eligible add-on to the CheckedListBox
             foreach (var addOn in addOns)
             {
                 string displayText = $"{addOn.AddOnName} - {addOn.AdditionalPrice:F2}";
@@ -91,11 +96,32 @@ namespace TakoTea.Views.Order.Order_Modals
             }
         }
 
+        public void SetComboMealData(ComboMeal comboMeal)
+        {
+            if (comboMeal != null)
+            {
+                productCard.titleLabel.Text = comboMeal.ComboMealName;
+                numericUpDownQuantity.Value = 1;
 
+                // ... (Image loading for comboMeal, if needed) ...
+
+                // Hide size and add-on controls
+                cmbSizes.Visible = false;
+                chckListBoxAddOns.Visible = false;
+                lblAddons.Visible = false;
+                lvlSizes.Visible = false;
+
+                // Set the total price to the combo meal's discounted price
+                lblTotalPrice.Text = $"₱{comboMeal.DiscountedPrice:F2}";
+                initialPrice = comboMeal.DiscountedPrice.ToString();
+            }
+        }
         public void SetProductData(ProductVariant productVariant)
         {
             if (productVariant != null)
             {
+
+
                 // Set the product details in the modal controls
                 productCard.titleLabel.Text = productVariant.VariantName;
                 numericUpDownQuantity.Value = 1; // Default quantity to 1
@@ -138,41 +164,106 @@ namespace TakoTea.Views.Order.Order_Modals
 
 
         private void UpdateTotalPrice()
+
         {
+
             decimal price = 0;
 
+
+
             // Get price from selected size
-            if (cmbSizes.SelectedItem != null)
+
+
+            if (!cmbSizes.Visible)
             {
-                string selectedSizeWithPrice = cmbSizes.SelectedItem.ToString();
-                string[] parts = selectedSizeWithPrice.Split(new[] { " - ₱" }, StringSplitOptions.None);
-                if (parts.Length == 2 && decimal.TryParse(parts[1], out decimal sizePrice))
-                {
-                    price += sizePrice;
-                }
+                price = decimal.Parse(initialPrice);
             }
+
+            if (cmbSizes.SelectedItem != null)
+
+            {
+                price = 0;
+                string selectedSizeWithPrice = cmbSizes.SelectedItem.ToString();
+
+                string[] parts = selectedSizeWithPrice.Split(new[] { " - ₱" }, StringSplitOptions.None);
+
+                if (parts.Length == 2 && decimal.TryParse(parts[1], out decimal sizePrice))
+
+                {
+
+                    price += sizePrice;
+
+                }
+
+            }
+
+
 
             // Add prices from selected add-ons
+
             foreach (var item in chckListBoxAddOns.CheckedItems)
+
             {
+
                 string addOnWithPrice = item.ToString();
+
                 string[] parts = addOnWithPrice.Split(new[] { " - " }, StringSplitOptions.None);
+
                 if (parts.Length == 2 && decimal.TryParse(parts[1], out decimal addOnPrice))
+
                 {
+
                     price += addOnPrice;
+
                 }
+
             }
 
+
+
             // Calculate total price including quantity
+
             lblTotalPrice.Text = $"₱{(price * numericUpDownQuantity.Value):F2}";
+
         }
-
-
 
         // Handle quantity change event if needed
         private void numericUpDownQuantity_ValueChanged(object sender, EventArgs e)
         {
             UpdateTotalPrice(); // Recalculate total price when quantity changes
+        }
+        //Todo: adding combo meal to dgOrderList
+
+        private void CheckIfProductExistsInOrderList()
+        {
+            // Get the selected product name, size, and add-ons
+            string productName = productCard.titleLabel.Text; // Assuming this holds the product name
+            string selectedSize = cmbSizes.SelectedItem?.ToString() ?? string.Empty;
+
+            // Remove " - ₱" and anything after it
+            if (selectedSize.Contains(" - ₱"))
+            {
+                selectedSize = selectedSize.Substring(0, selectedSize.IndexOf(" - ₱"));
+            }
+            string selectedAddOns = string.Join(", ", chckListBoxAddOns.CheckedItems.Cast<string>()); // Combine selected add-ons into a string
+
+            // Loop through rows in the DataGridView
+            foreach (DataGridViewRow row in parentDataGridView.Rows)
+            {
+                string rowProductName = row.Cells["ColumnProduct"].Value?.ToString() ?? string.Empty; // Replace with actual column name
+                string rowSize = row.Cells["Size"].Value?.ToString() ?? string.Empty; // Replace with actual column name
+                string rowAddOns = row.Cells["AddOns"].Value?.ToString() ?? string.Empty; // Replace with actual column name
+
+                // Check if product name, size, and add-ons match
+                if (rowProductName == productName && rowSize == selectedSize && rowAddOns == selectedAddOns)
+                {
+                    // Update the quantity in numericUpDownQuantity
+                    int quantity = Convert.ToInt32(row.Cells["ColumnQty"].Value); // Replace with actual column name
+                    numericUpDownQuantity.Value = quantity;
+                    return; // Exit the method if a match is found
+                }
+            }
+
         }
 
 
@@ -182,14 +273,12 @@ namespace TakoTea.Views.Order.Order_Modals
 
             if (parentDataGridView != null)
             {
-                // Get the product name and format it
                 string productName = productCard.titleLabel.Text;
-                string selectedSize = cmbSizes.SelectedItem?.ToString().Split(new[] { " - ₱" }, StringSplitOptions.None)[0] ?? ""; string selectedAddOns = string.Join(", ", chckListBoxAddOns.CheckedItems.Cast<object>().Select(item => item.ToString().Split(new[] { " - " }, StringSplitOptions.None)[0]));
-
+                string selectedSize = cmbSizes.Visible ? cmbSizes.SelectedItem?.ToString().Split(new[] { " - ₱" }, StringSplitOptions.None)[0] ?? "" : "";
+                string selectedAddOns = chckListBoxAddOns.Visible ? string.Join(", ", chckListBoxAddOns.CheckedItems.Cast<object>().Select(item => item.ToString().Split(new[] { " - " }, StringSplitOptions.None)[0])) : "";
 
                 int quantity = (int)numericUpDownQuantity.Value;
                 decimal price = Convert.ToDecimal(lblTotalPrice.Text.Substring(1));
-                decimal totalPrice = price * quantity;
 
                 bool found = false;
                 foreach (DataGridViewRow row in parentDataGridView.Rows)
@@ -200,13 +289,10 @@ namespace TakoTea.Views.Order.Order_Modals
 
                     if (rowProductName == productName && rowSize == selectedSize && rowAddOns == selectedAddOns)
                     {
-                        // Update the existing row's quantity and total price
-                        int existingQuantity = Convert.ToInt32(row.Cells[3].Value);
-                        int newQuantity = existingQuantity + quantity;
-                        decimal newTotalPrice = newQuantity * price;
+                
 
-                        row.Cells[3].Value = newQuantity;
-                        row.Cells[4].Value = newTotalPrice;
+                        row.Cells[3].Value = quantity;
+                        row.Cells[4].Value = price;
                         found = true;
                         break;
                     }
@@ -215,11 +301,12 @@ namespace TakoTea.Views.Order.Order_Modals
                 if (!found)
                 {
                     // Add a new row if no matching row was found
-                    parentDataGridView.Rows.Add(productName, selectedSize, selectedAddOns, quantity, totalPrice);
+                    parentDataGridView.Rows.Add(productName, selectedSize, selectedAddOns, quantity, price);
                 }
 
                         this.Close();
 
+                AddToDgViewOrderListClicked = true; // Set the flag to true
 
             }
             else
@@ -229,5 +316,17 @@ namespace TakoTea.Views.Order.Order_Modals
 
             this.Close();
         }
+
+        private void lblTotalPrice_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chckListBoxAddOns_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CheckIfProductExistsInOrderList();
+        }
+
+      
     }
     }

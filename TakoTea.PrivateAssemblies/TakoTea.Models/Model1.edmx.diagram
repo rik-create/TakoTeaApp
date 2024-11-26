@@ -35,6 +35,10 @@
         <EntityTypeShape EntityType="TakoTeaModel.OrderModel" Width="1.5" PointX="5.375" PointY="11.25" />
         <AssociationConnector Association="TakoTeaModel.FK_OrderItem_Order1" />
         <AssociationConnector Association="TakoTeaModel.FK_Receipt_Order1" />
+        <AssociationConnector Association="TakoTeaModel.FK_AddOns_Ingredient" />
+        <EntityTypeShape EntityType="TakoTeaModel.StockLevelLog" Width="1.5" PointX="8.25" PointY="9.125" />
+        <AssociationConnector Association="TakoTeaModel.FK__StockLeve__Batch__58D1301D" />
+        <AssociationConnector Association="TakoTeaModel.FK__StockLeve__Ingre__59C55456" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

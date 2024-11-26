@@ -15,9 +15,8 @@ namespace TakoTea.View.Items.Item_Modals
 {
     public partial class AddItemModal : MaterialForm
     {
-        private readonly IInventoryService _inventoryService;
+        private readonly InventoryService _inventoryService;
         private readonly ProductsService productsService;
-
         public AddItemModal()
         {
             InitializeComponent();
@@ -56,6 +55,7 @@ namespace TakoTea.View.Items.Item_Modals
             cmbboxStorageCondition.SelectedItem = "Cool & Dry"; // Assuming this is one of the options
             cmbTypeOfIngredient.SelectedItem = "Spice"; // Assuming "Spice" is one of the ingredient types
             cmbMeasuringUnit.SelectedItem = "Grams";
+            numericUpDownQuantityUsedPerProduct.Value = 1;
 
             // Determine if the item is an "Add On"
             bool isAddOn = chkIsAddOn.Checked; // Use the CheckBox 
@@ -67,13 +67,15 @@ namespace TakoTea.View.Items.Item_Modals
                 {
                     AddOnName = txtBoxName.Text,
                     AdditionalPrice = numericUpDownAddOnPrice.Value,
-            UseForProductID = (int)cmbAddOnFor.SelectedValue // Get the ProductID from the ComboBox
+                    UseForProductID = (int)cmbAddOnFor.SelectedValue,// Get the ProductID from the ComboBox
+                    QuantityUsedPerProduct = numericUpDownQuantityUsedPerProduct.Value,
+                    IngredientID = _inventoryService.GetNextIngredientId()
                 };
 
                 // Add the add-on to the inventory
                 try
                 {
-                    _inventoryService.AddAddon(addOn); // Modify the service as needed for EF
+                    _inventoryService.AddAddon(addOn); // Modify the productsService as needed for EF
                 }
                 catch (Exception ex)
                 {
@@ -99,7 +101,7 @@ namespace TakoTea.View.Items.Item_Modals
             // Try to add the ingredient to the inventory
             try
             {
-                _inventoryService.AddIngredient(ingredient); // Modify the service as needed for EF
+                _inventoryService.AddIngredient(ingredient); // Modify the productsService as needed for EF
                 _ = MessageBox.Show("Ingredient and batch added successfully.");
             }
             catch (Exception ex)
@@ -149,6 +151,11 @@ namespace TakoTea.View.Items.Item_Modals
                 cmbAddOnFor.Visible = false;
                 lblAddOnFor.Visible = false;
             }
+        }
+
+        private void groupBoxOther_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

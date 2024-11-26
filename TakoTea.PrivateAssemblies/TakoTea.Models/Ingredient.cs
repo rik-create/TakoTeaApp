@@ -21,6 +21,8 @@ namespace TakoTea.Models
             this.IngredientProductLinks = new HashSet<IngredientProductLink>();
             this.StockAdjustmentLogs = new HashSet<StockAdjustmentLog>();
             this.ProductVariantIngredients = new HashSet<ProductVariantIngredient>();
+            this.AddOns = new HashSet<AddOn>();
+            this.StockLevelLogs = new HashSet<StockLevelLog>();
         }
     
         public int IngredientID { get; set; }
@@ -46,5 +48,9 @@ namespace TakoTea.Models
         public virtual ICollection<StockAdjustmentLog> StockAdjustmentLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductVariantIngredient> ProductVariantIngredients { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AddOn> AddOns { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StockLevelLog> StockLevelLogs { get; set; }
     }
 }

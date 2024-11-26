@@ -27,6 +27,14 @@ namespace TakoTea.Services
                 context.SaveChanges();
             }
         }
+        public int GetNextIngredientId()
+        {
+
+            // Find the maximum existing IngredientID
+            int maxId = _context.Ingredients.Any() ? _context.Ingredients.Max(i => i.IngredientID) : 0;
+
+            return maxId + 1; // Increment the max ID to get the next ID
+        }
         public void AddAddon(AddOn addOn)
         {
             // Add the AddOn to the DbSet

@@ -31,7 +31,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.groupBoxOther = new System.Windows.Forms.GroupBox();
+            this.numericUpDownQuantityUsedPerProduct = new System.Windows.Forms.NumericUpDown();
             this.materialLabel12 = new MaterialSkin.Controls.MaterialLabel();
             this.lblAdditionalPrice = new MaterialSkin.Controls.MaterialLabel();
             this.lblAddOnFor = new MaterialSkin.Controls.MaterialLabel();
@@ -66,6 +68,7 @@
             this.materialCard1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.groupBoxOther.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantityUsedPerProduct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAddOnPrice)).BeginInit();
             this.groupBoxImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImg)).BeginInit();
@@ -81,7 +84,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(886, 676);
+            this.panel1.Size = new System.Drawing.Size(886, 708);
             this.panel1.TabIndex = 2;
             // 
             // materialCard1
@@ -98,24 +101,39 @@
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard1.Size = new System.Drawing.Size(886, 676);
+            this.materialCard1.Size = new System.Drawing.Size(886, 708);
             this.materialCard1.TabIndex = 18;
             // 
             // panel4
             // 
             this.panel4.AutoScroll = true;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.materialLabel3);
             this.panel4.Controls.Add(this.groupBoxOther);
             this.panel4.Controls.Add(this.groupBoxImage);
             this.panel4.Controls.Add(this.groupBoxBasicInfo);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(14, 60);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(858, 539);
+            this.panel4.Size = new System.Drawing.Size(858, 571);
             this.panel4.TabIndex = 103;
+            // 
+            // materialLabel3
+            // 
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel3.Location = new System.Drawing.Point(568, 484);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(178, 19);
+            this.materialLabel3.TabIndex = 100;
+            this.materialLabel3.Text = "QuantityUsedPerProduct ";
+            this.materialLabel3.Visible = false;
             // 
             // groupBoxOther
             // 
+            this.groupBoxOther.Controls.Add(this.numericUpDownQuantityUsedPerProduct);
             this.groupBoxOther.Controls.Add(this.materialLabel12);
             this.groupBoxOther.Controls.Add(this.lblAdditionalPrice);
             this.groupBoxOther.Controls.Add(this.lblAddOnFor);
@@ -128,10 +146,35 @@
             this.groupBoxOther.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.groupBoxOther.Location = new System.Drawing.Point(410, 236);
             this.groupBoxOther.Name = "groupBoxOther";
-            this.groupBoxOther.Size = new System.Drawing.Size(420, 250);
+            this.groupBoxOther.Size = new System.Drawing.Size(420, 324);
             this.groupBoxOther.TabIndex = 74;
             this.groupBoxOther.TabStop = false;
             this.groupBoxOther.Text = "Other";
+            this.groupBoxOther.Enter += new System.EventHandler(this.groupBoxOther_Enter);
+            // 
+            // numericUpDownQuantityUsedPerProduct
+            // 
+            this.numericUpDownQuantityUsedPerProduct.DecimalPlaces = 2;
+            this.numericUpDownQuantityUsedPerProduct.Location = new System.Drawing.Point(160, 280);
+            this.numericUpDownQuantityUsedPerProduct.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDownQuantityUsedPerProduct.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numericUpDownQuantityUsedPerProduct.Name = "numericUpDownQuantityUsedPerProduct";
+            this.numericUpDownQuantityUsedPerProduct.Size = new System.Drawing.Size(120, 26);
+            this.numericUpDownQuantityUsedPerProduct.TabIndex = 100;
+            this.numericUpDownQuantityUsedPerProduct.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numericUpDownQuantityUsedPerProduct.Visible = false;
             // 
             // materialLabel12
             // 
@@ -150,7 +193,7 @@
             this.lblAdditionalPrice.AutoSize = true;
             this.lblAdditionalPrice.Depth = 0;
             this.lblAdditionalPrice.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblAdditionalPrice.Location = new System.Drawing.Point(163, 175);
+            this.lblAdditionalPrice.Location = new System.Drawing.Point(160, 175);
             this.lblAdditionalPrice.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblAdditionalPrice.Name = "lblAdditionalPrice";
             this.lblAdditionalPrice.Size = new System.Drawing.Size(112, 19);
@@ -219,15 +262,25 @@
             // numericUpDownAddOnPrice
             // 
             this.numericUpDownAddOnPrice.DecimalPlaces = 2;
-            this.numericUpDownAddOnPrice.Location = new System.Drawing.Point(163, 207);
+            this.numericUpDownAddOnPrice.Location = new System.Drawing.Point(160, 207);
             this.numericUpDownAddOnPrice.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
+            this.numericUpDownAddOnPrice.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.numericUpDownAddOnPrice.Name = "numericUpDownAddOnPrice";
             this.numericUpDownAddOnPrice.Size = new System.Drawing.Size(120, 26);
             this.numericUpDownAddOnPrice.TabIndex = 98;
+            this.numericUpDownAddOnPrice.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.numericUpDownAddOnPrice.Visible = false;
             // 
             // cmbAddOnFor
@@ -266,7 +319,7 @@
             this.groupBoxImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.groupBoxImage.Location = new System.Drawing.Point(20, 236);
             this.groupBoxImage.Name = "groupBoxImage";
-            this.groupBoxImage.Size = new System.Drawing.Size(384, 250);
+            this.groupBoxImage.Size = new System.Drawing.Size(384, 324);
             this.groupBoxImage.TabIndex = 73;
             this.groupBoxImage.TabStop = false;
             this.groupBoxImage.Text = "Image";
@@ -537,7 +590,7 @@
             this.panel3.Controls.Add(this.btnConfirm);
             this.panel3.Controls.Add(this.btnCancel);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(14, 599);
+            this.panel3.Location = new System.Drawing.Point(14, 631);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(858, 63);
             this.panel3.TabIndex = 102;
@@ -609,7 +662,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 703);
+            this.ClientSize = new System.Drawing.Size(892, 735);
             this.Controls.Add(this.panel1);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
             this.Name = "AddItemModal";
@@ -618,8 +671,10 @@
             this.panel1.ResumeLayout(false);
             this.materialCard1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.groupBoxOther.ResumeLayout(false);
             this.groupBoxOther.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantityUsedPerProduct)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAddOnPrice)).EndInit();
             this.groupBoxImage.ResumeLayout(false);
             this.groupBoxImage.PerformLayout();
@@ -669,6 +724,7 @@
         private MaterialSkin.Controls.MaterialButton btnResetIngredientImg;
         private MaterialSkin.Controls.MaterialButton btnBrowseForIngredientImg;
         private System.Windows.Forms.PictureBox pictureBoxImg;
-
+        private MaterialSkin.Controls.MaterialLabel materialLabel3;
+        private System.Windows.Forms.NumericUpDown numericUpDownQuantityUsedPerProduct;
     }
 }

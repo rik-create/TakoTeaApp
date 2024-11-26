@@ -73,7 +73,7 @@ namespace TakoTea.Views.Items
                 // Add the add-on to the inventory
                 try
                 {
-                    _inventoryService.AddAddon(addOn); // Modify the service as needed for EF
+                    _inventoryService.AddAddon(addOn); // Modify the productsService as needed for EF
                 }
                 catch (Exception ex)
                 {
@@ -99,7 +99,7 @@ namespace TakoTea.Views.Items
             // Try to add the ingredient to the inventory
             try
             {
-                _inventoryService.AddIngredient(ingredient); // Modify the service as needed for EF
+                _inventoryService.AddIngredient(ingredient); // Modify the productsService as needed for EF
                 _ = MessageBox.Show("Ingredient and batch added successfully.");
             }
             catch (Exception ex)

@@ -1,42 +1,73 @@
 ﻿using System.Windows.Forms;
 
-namespace TakoTea.Views.Order.Order_Modals
-{
-    partial class OrderEntryModal
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+
+namespace TakoTea.Views.Order.Order_Modals
+
+{
+
+    partial class OrderEntryModal
+
+    {
+
+        /// <summary>
+
+        /// Required designer variable.
+
+        /// </summary>
+
+        private System.ComponentModel.IContainer components = null;
+
+
+
+        /// <summary>
+
+        /// Clean up any resources being used.
+
+        /// </summary>
+
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+
+        protected override void Dispose(bool disposing)
+
         {
+
             if (disposing && (components != null))
+
             {
+
                 components.Dispose();
+
             }
+
             base.Dispose(disposing);
+
         }
 
-        #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
+
+        #region Windows Form Designer generated code
+
+
+
+        /// <summary>
+
+        /// Required method for Designer support - do not modify
+
+        /// the contents of this method with the code editor.
+
+        /// </summary>
+
+        private void InitializeComponent()
+
         {
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.groupBoxProduct = new System.Windows.Forms.GroupBox();
             this.productCard = new TakoTea.Controls.TakoyakiItemControl();
-            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.lvlSizes = new MaterialSkin.Controls.MaterialLabel();
             this.cmbSizes = new MaterialSkin.Controls.MaterialComboBox();
             this.chckListBoxAddOns = new System.Windows.Forms.CheckedListBox();
-            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblAddons = new MaterialSkin.Controls.MaterialLabel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -64,43 +95,44 @@ namespace TakoTea.Views.Order.Order_Modals
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard1.Size = new System.Drawing.Size(528, 423);
+            this.materialCard1.Size = new System.Drawing.Size(528, 362);
             this.materialCard1.TabIndex = 0;
             // 
             // groupBoxProduct
             // 
             this.groupBoxProduct.Controls.Add(this.productCard);
-            this.groupBoxProduct.Controls.Add(this.materialLabel3);
+            this.groupBoxProduct.Controls.Add(this.lvlSizes);
             this.groupBoxProduct.Controls.Add(this.cmbSizes);
             this.groupBoxProduct.Controls.Add(this.chckListBoxAddOns);
-            this.groupBoxProduct.Controls.Add(this.materialLabel2);
+            this.groupBoxProduct.Controls.Add(this.lblAddons);
             this.groupBoxProduct.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxProduct.Location = new System.Drawing.Point(14, 60);
             this.groupBoxProduct.Name = "groupBoxProduct";
-            this.groupBoxProduct.Size = new System.Drawing.Size(500, 310);
+            this.groupBoxProduct.Size = new System.Drawing.Size(500, 249);
             this.groupBoxProduct.TabIndex = 103;
             this.groupBoxProduct.TabStop = false;
             this.groupBoxProduct.Text = "Product";
             // 
             // productCard
             // 
-            this.productCard.BackColor = System.Drawing.Color.White;
-            this.productCard.Location = new System.Drawing.Point(64, 32);
+            this.productCard.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.productCard.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.productCard.Location = new System.Drawing.Point(24, 16);
             this.productCard.Name = "productCard";
             this.productCard.Padding = new System.Windows.Forms.Padding(5);
-            this.productCard.Size = new System.Drawing.Size(350, 75);
-            this.productCard.TabIndex = 133;
+            this.productCard.Size = new System.Drawing.Size(200, 100);
+            this.productCard.TabIndex = 135;
             // 
-            // materialLabel3
+            // lvlSizes
             // 
-            this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel3.Location = new System.Drawing.Point(60, 120);
-            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(40, 23);
-            this.materialLabel3.TabIndex = 1;
-            this.materialLabel3.Text = "Sizes";
+            this.lvlSizes.Depth = 0;
+            this.lvlSizes.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lvlSizes.Location = new System.Drawing.Point(24, 136);
+            this.lvlSizes.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lvlSizes.Name = "lvlSizes";
+            this.lvlSizes.Size = new System.Drawing.Size(40, 23);
+            this.lvlSizes.TabIndex = 1;
+            this.lvlSizes.Text = "Sizes";
             // 
             // cmbSizes
             // 
@@ -117,11 +149,11 @@ namespace TakoTea.Views.Order.Order_Modals
             this.cmbSizes.Hint = "Choose size";
             this.cmbSizes.IntegralHeight = false;
             this.cmbSizes.ItemHeight = 43;
-            this.cmbSizes.Location = new System.Drawing.Point(60, 150);
+            this.cmbSizes.Location = new System.Drawing.Point(24, 168);
             this.cmbSizes.MaxDropDownItems = 4;
             this.cmbSizes.MouseState = MaterialSkin.MouseState.OUT;
             this.cmbSizes.Name = "cmbSizes";
-            this.cmbSizes.Size = new System.Drawing.Size(360, 49);
+            this.cmbSizes.Size = new System.Drawing.Size(196, 49);
             this.cmbSizes.StartIndex = 0;
             this.cmbSizes.TabIndex = 132;
             // 
@@ -131,21 +163,22 @@ namespace TakoTea.Views.Order.Order_Modals
             this.chckListBoxAddOns.CheckOnClick = true;
             this.chckListBoxAddOns.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.chckListBoxAddOns.FormattingEnabled = true;
-            this.chckListBoxAddOns.Location = new System.Drawing.Point(64, 240);
+            this.chckListBoxAddOns.Location = new System.Drawing.Point(240, 56);
             this.chckListBoxAddOns.Name = "chckListBoxAddOns";
-            this.chckListBoxAddOns.Size = new System.Drawing.Size(360, 60);
+            this.chckListBoxAddOns.Size = new System.Drawing.Size(232, 160);
             this.chckListBoxAddOns.TabIndex = 134;
+            this.chckListBoxAddOns.SelectedIndexChanged += new System.EventHandler(this.chckListBoxAddOns_SelectedIndexChanged);
             // 
-            // materialLabel2
+            // lblAddons
             // 
-            this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.Location = new System.Drawing.Point(60, 210);
-            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(240, 23);
-            this.materialLabel2.TabIndex = 1;
-            this.materialLabel2.Text = " Add Ons (Optional, max 4)";
+            this.lblAddons.Depth = 0;
+            this.lblAddons.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblAddons.Location = new System.Drawing.Point(240, 24);
+            this.lblAddons.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblAddons.Name = "lblAddons";
+            this.lblAddons.Size = new System.Drawing.Size(240, 23);
+            this.lblAddons.TabIndex = 1;
+            this.lblAddons.Text = " Add Ons (Optional, max 4)";
             // 
             // panel2
             // 
@@ -178,7 +211,7 @@ namespace TakoTea.Views.Order.Order_Modals
             this.panel1.Controls.Add(this.lblTotalPrice);
             this.panel1.Controls.Add(this.numericUpDownQuantity);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(14, 370);
+            this.panel1.Location = new System.Drawing.Point(14, 309);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(500, 39);
             this.panel1.TabIndex = 1;
@@ -202,7 +235,8 @@ namespace TakoTea.Views.Order.Order_Modals
             this.lblTotalPrice.Name = "lblTotalPrice";
             this.lblTotalPrice.Size = new System.Drawing.Size(70, 23);
             this.lblTotalPrice.TabIndex = 1;
-            this.lblTotalPrice.Text = "PHP 200";
+            this.lblTotalPrice.Text = "₱200";
+            this.lblTotalPrice.Click += new System.EventHandler(this.lblTotalPrice_Click);
             // 
             // numericUpDownQuantity
             // 
@@ -216,7 +250,7 @@ namespace TakoTea.Views.Order.Order_Modals
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(534, 450);
+            this.ClientSize = new System.Drawing.Size(534, 389);
             this.Controls.Add(this.materialCard1);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
             this.Name = "OrderEntryModal";
@@ -232,20 +266,35 @@ namespace TakoTea.Views.Order.Order_Modals
 
         }
 
-        #endregion
 
-        private MaterialSkin.Controls.MaterialCard materialCard1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnAddToDgViewOrderList;
-        private MaterialSkin.Controls.MaterialLabel lblTotalPrice;
-        private System.Windows.Forms.NumericUpDown numericUpDownQuantity;
-        private System.Windows.Forms.Panel panel2;
-        private MaterialSkin.Controls.MaterialLabel materialLabel4;
-        private System.Windows.Forms.GroupBox groupBoxProduct;
-        private Controls.TakoyakiItemControl productCard;
-        private MaterialSkin.Controls.MaterialLabel materialLabel3;
-        private MaterialSkin.Controls.MaterialComboBox cmbSizes;
-        private System.Windows.Forms.CheckedListBox chckListBoxAddOns;
-        private MaterialSkin.Controls.MaterialLabel materialLabel2;
+
+        #endregion
+
+
+
+        public MaterialSkin.Controls.MaterialCard materialCard1;
+
+        public System.Windows.Forms.Panel panel1;
+
+        public System.Windows.Forms.Button btnAddToDgViewOrderList;
+
+        public MaterialSkin.Controls.MaterialLabel lblTotalPrice;
+
+        public System.Windows.Forms.NumericUpDown numericUpDownQuantity;
+
+        public System.Windows.Forms.Panel panel2;
+
+        public MaterialSkin.Controls.MaterialLabel materialLabel4;
+
+        public System.Windows.Forms.GroupBox groupBoxProduct;
+
+        public MaterialSkin.Controls.MaterialLabel lvlSizes;
+
+        public MaterialSkin.Controls.MaterialComboBox cmbSizes;
+
+        public MaterialSkin.Controls.MaterialLabel lblAddons;
+        public   Controls.TakoyakiItemControl productCard;
+        public CheckedListBox chckListBoxAddOns;
     }
+
 }

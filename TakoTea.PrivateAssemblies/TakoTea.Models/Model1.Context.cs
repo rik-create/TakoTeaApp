@@ -20,8 +20,8 @@ namespace TakoTea.Models
       : base("metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=\"data source=DESKTOP-BJ889Q2\\SQLEXPRESS;initial catalog=TakoTea;integrated security=True;encrypt=False;MultipleActiveResultSets=True;App=EntityFramework\"")
         {
         }
-
-
+    
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -43,5 +43,6 @@ namespace TakoTea.Models
         public virtual DbSet<OrderItem> OrderItems { get; set; }
         public virtual DbSet<Receipt> Receipts { get; set; }
         public virtual DbSet<OrderModel> OrderModels { get; set; }
+        public virtual DbSet<StockLevelLog> StockLevelLogs { get; set; }
     }
 }

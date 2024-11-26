@@ -82,6 +82,8 @@ namespace TakoTea.View.Orders
             this.ColumnQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBoxPayment = new System.Windows.Forms.GroupBox();
+            this.cmbOrderStatus = new MaterialSkin.Controls.MaterialComboBox();
+            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.cmbPaymentStatus = new MaterialSkin.Controls.MaterialComboBox();
             this.lblPaymentStatus = new MaterialSkin.Controls.MaterialLabel();
             this.cmbPaymentMethod = new MaterialSkin.Controls.MaterialComboBox();
@@ -93,6 +95,7 @@ namespace TakoTea.View.Orders
             this.btnSaveToDraft = new MaterialSkin.Controls.MaterialButton();
             this.btnConfirmOrder = new MaterialSkin.Controls.MaterialButton();
             this.panelSeparator = new System.Windows.Forms.Panel();
+            this.btnGoToOrderQueue = new MaterialSkin.Controls.MaterialButton();
             this.materialCard1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelSearch.SuspendLayout();
@@ -150,6 +153,7 @@ namespace TakoTea.View.Orders
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.panelSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelSearch.Controls.Add(this.btnGoToOrderQueue);
             this.panelSearch.Controls.Add(this.btnSearch);
             this.panelSearch.Controls.Add(this.txtBoxSearchVariant);
             this.panelSearch.Location = new System.Drawing.Point(216, 60);
@@ -175,6 +179,7 @@ namespace TakoTea.View.Orders
             this.btnSearch.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnSearch.UseAccentColor = false;
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click_1);
             // 
             // txtBoxSearchVariant
             // 
@@ -298,7 +303,7 @@ namespace TakoTea.View.Orders
             this.btnClearOrderList.Depth = 0;
             this.btnClearOrderList.HighEmphasis = true;
             this.btnClearOrderList.Icon = null;
-            this.btnClearOrderList.Location = new System.Drawing.Point(364, 50);
+            this.btnClearOrderList.Location = new System.Drawing.Point(364, 32);
             this.btnClearOrderList.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnClearOrderList.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnClearOrderList.Name = "btnClearOrderList";
@@ -338,9 +343,10 @@ namespace TakoTea.View.Orders
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewOrderList.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewOrderList.EnableHeadersVisualStyles = false;
-            this.dataGridViewOrderList.Location = new System.Drawing.Point(10, 100);
+            this.dataGridViewOrderList.Location = new System.Drawing.Point(10, 80);
             this.dataGridViewOrderList.MultiSelect = false;
             this.dataGridViewOrderList.Name = "dataGridViewOrderList";
+            this.dataGridViewOrderList.ReadOnly = true;
             this.dataGridViewOrderList.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataGridViewOrderList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -353,7 +359,7 @@ namespace TakoTea.View.Orders
             this.dataGridViewOrderList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewOrderList.RowHeadersWidth = 25;
             this.dataGridViewOrderList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridViewOrderList.Size = new System.Drawing.Size(430, 332);
+            this.dataGridViewOrderList.Size = new System.Drawing.Size(430, 316);
             this.dataGridViewOrderList.TabIndex = 100;
             // 
             // ColumnProduct
@@ -361,42 +367,89 @@ namespace TakoTea.View.Orders
             this.ColumnProduct.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ColumnProduct.HeaderText = "Product Name";
             this.ColumnProduct.Name = "ColumnProduct";
+            this.ColumnProduct.ReadOnly = true;
             // 
             // Size
             // 
             this.Size.HeaderText = "Size";
             this.Size.Name = "Size";
+            this.Size.ReadOnly = true;
             this.Size.Width = 65;
             // 
             // AddOns
             // 
             this.AddOns.HeaderText = "AddOns";
             this.AddOns.Name = "AddOns";
+            this.AddOns.ReadOnly = true;
             // 
             // ColumnQty
             // 
             this.ColumnQty.HeaderText = "Qty";
             this.ColumnQty.Name = "ColumnQty";
+            this.ColumnQty.ReadOnly = true;
             this.ColumnQty.Width = 50;
             // 
             // ColumnPrice
             // 
             this.ColumnPrice.HeaderText = "Price";
             this.ColumnPrice.Name = "ColumnPrice";
+            this.ColumnPrice.ReadOnly = true;
             this.ColumnPrice.Width = 75;
             // 
             // groupBoxPayment
             // 
+            this.groupBoxPayment.Controls.Add(this.cmbOrderStatus);
+            this.groupBoxPayment.Controls.Add(this.materialLabel4);
             this.groupBoxPayment.Controls.Add(this.cmbPaymentStatus);
             this.groupBoxPayment.Controls.Add(this.lblPaymentStatus);
             this.groupBoxPayment.Controls.Add(this.cmbPaymentMethod);
             this.groupBoxPayment.Controls.Add(this.lblPaymentMethod);
-            this.groupBoxPayment.Location = new System.Drawing.Point(8, 456);
+            this.groupBoxPayment.Location = new System.Drawing.Point(8, 400);
             this.groupBoxPayment.Name = "groupBoxPayment";
-            this.groupBoxPayment.Size = new System.Drawing.Size(430, 140);
+            this.groupBoxPayment.Size = new System.Drawing.Size(430, 196);
             this.groupBoxPayment.TabIndex = 103;
             this.groupBoxPayment.TabStop = false;
             this.groupBoxPayment.Text = "Payment";
+            // 
+            // cmbOrderStatus
+            // 
+            this.cmbOrderStatus.AutoResize = false;
+            this.cmbOrderStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cmbOrderStatus.Depth = 0;
+            this.cmbOrderStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbOrderStatus.DropDownHeight = 174;
+            this.cmbOrderStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbOrderStatus.DropDownWidth = 121;
+            this.cmbOrderStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cmbOrderStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cmbOrderStatus.FormattingEnabled = true;
+            this.cmbOrderStatus.Hint = "Choose order status";
+            this.cmbOrderStatus.IntegralHeight = false;
+            this.cmbOrderStatus.ItemHeight = 43;
+            this.cmbOrderStatus.Items.AddRange(new object[] {
+            "New",
+            "Processing",
+            "Completed",
+            "Cancelled"});
+            this.cmbOrderStatus.Location = new System.Drawing.Point(160, 128);
+            this.cmbOrderStatus.MaxDropDownItems = 4;
+            this.cmbOrderStatus.MouseState = MaterialSkin.MouseState.OUT;
+            this.cmbOrderStatus.Name = "cmbOrderStatus";
+            this.cmbOrderStatus.Size = new System.Drawing.Size(250, 49);
+            this.cmbOrderStatus.StartIndex = 0;
+            this.cmbOrderStatus.TabIndex = 107;
+            // 
+            // materialLabel4
+            // 
+            this.materialLabel4.AutoSize = true;
+            this.materialLabel4.Depth = 0;
+            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel4.Location = new System.Drawing.Point(20, 138);
+            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel4.Name = "materialLabel4";
+            this.materialLabel4.Size = new System.Drawing.Size(89, 19);
+            this.materialLabel4.TabIndex = 106;
+            this.materialLabel4.Text = "Order Status";
             // 
             // cmbPaymentStatus
             // 
@@ -581,6 +634,26 @@ namespace TakoTea.View.Orders
             this.panelSeparator.Size = new System.Drawing.Size(1, 731);
             this.panelSeparator.TabIndex = 6;
             // 
+            // btnGoToOrderQueue
+            // 
+            this.btnGoToOrderQueue.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnGoToOrderQueue.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnGoToOrderQueue.Depth = 0;
+            this.btnGoToOrderQueue.HighEmphasis = true;
+            this.btnGoToOrderQueue.Icon = null;
+            this.btnGoToOrderQueue.Location = new System.Drawing.Point(568, 8);
+            this.btnGoToOrderQueue.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnGoToOrderQueue.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnGoToOrderQueue.Name = "btnGoToOrderQueue";
+            this.btnGoToOrderQueue.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnGoToOrderQueue.Size = new System.Drawing.Size(118, 36);
+            this.btnGoToOrderQueue.TabIndex = 97;
+            this.btnGoToOrderQueue.Text = "Order Queue";
+            this.btnGoToOrderQueue.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnGoToOrderQueue.UseAccentColor = false;
+            this.btnGoToOrderQueue.UseVisualStyleBackColor = true;
+            this.btnGoToOrderQueue.Click += new System.EventHandler(this.btnGoToOrderQueue_Click);
+            // 
             // MenuOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -667,6 +740,9 @@ namespace TakoTea.View.Orders
         private MaterialSkin.Controls.MaterialLabel lblTotalItems;
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private MaterialSkin.Controls.MaterialLabel lblTotalItemInOrderList;
+        private MaterialSkin.Controls.MaterialComboBox cmbOrderStatus;
+        private MaterialSkin.Controls.MaterialLabel materialLabel4;
+        private MaterialSkin.Controls.MaterialButton btnGoToOrderQueue;
 
         // ... other controls ...
     }

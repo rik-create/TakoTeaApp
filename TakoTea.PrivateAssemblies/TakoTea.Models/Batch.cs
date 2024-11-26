@@ -14,6 +14,12 @@ namespace TakoTea.Models
     
     public partial class Batch
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Batch()
+        {
+            this.StockLevelLogs = new HashSet<StockLevelLog>();
+        }
+    
         public int BatchID { get; set; }
         public string BatchNumber { get; set; }
         public Nullable<int> IngredientID { get; set; }
@@ -27,5 +33,7 @@ namespace TakoTea.Models
         public decimal StockLevel { get; set; }
     
         public virtual Ingredient Ingredient { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StockLevelLog> StockLevelLogs { get; set; }
     }
 }
