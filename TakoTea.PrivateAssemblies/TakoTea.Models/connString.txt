@@ -1,1 +1,1 @@
-﻿"metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=\"data source=DESKTOP-BJ889Q2\\SQLEXPRESS;initial catalog=TakoTea;integrated security=True;encrypt=False;MultipleActiveResultSets=True;App=EntityFramework\""
+﻿metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string="data source=192.168.100.12,1433;initial catalog=TakoTea;user id=erick;password=1234;encrypt=False;MultipleActiveResultSets=True;App=EntityFramework"
