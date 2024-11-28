@@ -18,10 +18,9 @@ namespace TakoTea.Models
         public string AddOnName { get; set; }
         public decimal AdditionalPrice { get; set; }
         public Nullable<int> UseForProductID { get; set; }
-        public Nullable<int> IngredientID { get; set; }
         public Nullable<decimal> QuantityUsedPerProduct { get; set; }
+        public Nullable<int> IngredientID { get; set; }
     
         public virtual Product Product { get; set; }
-        public virtual Ingredient Ingredient { get; set; }
     }
 }

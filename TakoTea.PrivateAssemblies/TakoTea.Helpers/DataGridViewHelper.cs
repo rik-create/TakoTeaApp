@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.IO;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 using TakoTea.Configurations;
+using TakoTea.Models;
 namespace TakoTea.Helpers
 {
     public static class DataGridViewHelper
@@ -181,7 +184,40 @@ namespace TakoTea.Helpers
             };
         }
 
+        public static void AddButtonToLastRow(
+      DataGridView dataGridView,
+      string buttonColumnName,
+      string buttonText,
+      Color? backgroundColor = null,
+      Color? foregroundColor = null)
+        {
+            // Create a button column
+            DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn
+            {
+                Name = buttonColumnName,
+                HeaderText = "Action",
+                Text = buttonText,
+                UseColumnTextForButtonValue = true,
+                FlatStyle = FlatStyle.Flat // Use Flat style to enable background color customization
+            };
 
+            // Apply custom colors if provided
+            if (backgroundColor.HasValue)
+            {
+                buttonColumn.DefaultCellStyle.BackColor = backgroundColor.Value;
+            }
+            if (foregroundColor.HasValue)
+            {
+                buttonColumn.DefaultCellStyle.ForeColor = foregroundColor.Value;
+            }
+
+            // Add the button column if it does not already exist
+            if (!dataGridView.Columns.Contains(buttonColumnName))
+            {
+                _ = dataGridView.Columns.Add(buttonColumn);
+            }
+    
+        }
         public static void AddButtonToLastRow(
             DataGridView dataGridView,
             string buttonColumnName,
@@ -247,37 +283,33 @@ namespace TakoTea.Helpers
 
 
 
-
-        public static void AddButtonsToLastRow(
-    DataGridView dataGridView,
-    List<(string buttonColumnName, string buttonText, Action<int> onButtonClick)> buttons)
+        public static void AddButtonsToLastRow(DataGridView dataGridView, string buttonColumnName, string buttonText, Action<int> buttonClickAction)
         {
-            foreach (var (buttonColumnName, buttonText, onButtonClick) in buttons)
+            // Check if the column already exists to avoid duplicates
+            if (!dataGridView.Columns.Contains(buttonColumnName))
             {
-                // Create the button column if it doesn't already exist
-                if (!dataGridView.Columns.Contains(buttonColumnName))
-                {
-                    var buttonColumn = new DataGridViewButtonColumn
-                    {
-                        Name = buttonColumnName,
-                        HeaderText = "Action",
-                        Text = buttonText,
-                        UseColumnTextForButtonValue = true
-                    };
-                    _ = dataGridView.Columns.Add(buttonColumn);
-                }
+                // Create a new DataGridViewButtonColumn
+                DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
+                buttonColumn.HeaderText = "";
+                buttonColumn.Name = buttonColumnName;
+                buttonColumn.Text = buttonText;
+                buttonColumn.UseColumnTextForButtonValue = true;
+                buttonColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells; // Auto size the button column
 
-                // Attach the click event for the button
-                dataGridView.CellContentClick += (sender, e) =>
-                {
-                    if (e.ColumnIndex == dataGridView.Columns[buttonColumnName].Index)
-                    {
-                        onButtonClick?.Invoke(e.RowIndex);
-                    }
-                };
+                // Add the button column to the DataGridView
+                dataGridView.Columns.Add(buttonColumn);
             }
-        }
 
+            // Handle the CellClick event of the DataGridView
+            dataGridView.CellClick += (sender, e) =>
+            {
+                if (e.ColumnIndex == dataGridView.Columns[buttonColumnName].Index && e.RowIndex >= 0)
+                {
+                    buttonClickAction(e.RowIndex); // Pass the rowIndex to the action
+                }
+            };
+        }
+      
         public static void UpdateGrid<T>(DataGridView dataGridView, BindingSource bindingSource, List<T> data)
         {
             // Clear existing data in the BindingSource
@@ -347,42 +379,36 @@ namespace TakoTea.Helpers
         {
             try
             {
-                // Check if the column already exists to avoid duplicates
                 const string columnName = "ImageColumn";
                 if (!dataGridView.Columns.Contains(columnName))
                 {
-                    // Create a new DataGridViewImageColumn
                     var imageColumn = new DataGridViewImageColumn
                     {
                         Name = columnName,
                         HeaderText = "Image",
                         AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                     };
-
-                    // Add the image column to the DataGridView
                     dataGridView.Columns.Add(imageColumn);
                 }
 
-                // Loop through all rows and set the image based on the ImagePath column
                 foreach (DataGridViewRow row in dataGridView.Rows)
                 {
-                    if (!row.IsNewRow) // Ensure it's not the new row
+                    if (!row.IsNewRow)
                     {
-                        var imagePath = row.Cells[imagePathColumnName]?.Value?.ToString();
-                        if (!string.IsNullOrEmpty(imagePath) && System.IO.File.Exists(imagePath))
+                        // Assuming the 'imagePathColumnName' column holds the image data as a byte array
+                        byte[] imageData = (byte[])row.Cells[imagePathColumnName].Value;
+
+                        if (imageData != null && imageData.Length > 0)
                         {
-                            // Load the image from the file path
-                            Image originalImage = Image.FromFile(imagePath);
-
-                            // Resize the image to the specified dimensions
-                            Image resizedImage = new Bitmap(originalImage, new Size(imageWidth, imageHeight));
-
-                            // Set the resized image in the DataGridView cell
-                            row.Cells[columnName].Value = resizedImage;
+                            using (MemoryStream ms = new MemoryStream(imageData))
+                            {
+                                Image originalImage = Image.FromStream(ms);
+                                Image resizedImage = new Bitmap(originalImage, new Size(imageWidth, imageHeight));
+                                row.Cells[columnName].Value = resizedImage;
+                            }
                         }
                         else
                         {
-                            // Set a placeholder or null if the path is invalid
                             row.Cells[columnName].Value = null;
                         }
                     }
@@ -434,76 +460,104 @@ namespace TakoTea.Helpers
         }
         public static void ApplyDataGridViewStylesWithWrite(DataGridView dataGridView)
         {
-
+            // Disable default visual styles for more control over appearance
             dataGridView.EnableHeadersVisualStyles = false;
-            // Set background color and text color for DataGridView
-            dataGridView.BackgroundColor = Color.White;
-            dataGridView.DefaultCellStyle.BackColor = Color.White;
-            dataGridView.DefaultCellStyle.ForeColor = ThemeConfigurator.GetPrimaryColor(); // Set text color to black
 
-            // Set the primary color for the header in DataGridView
-            dataGridView.ColumnHeadersDefaultCellStyle.BackColor = ThemeConfigurator.GetCustomAccentColor();
+            // Set the base colors for the DataGridView
+            dataGridView.BackgroundColor = Color.WhiteSmoke; // Softer background color
+            dataGridView.DefaultCellStyle.BackColor = Color.WhiteSmoke;
+            dataGridView.DefaultCellStyle.ForeColor = Color.FromArgb(64, 64, 64); // Dark gray text for better contrast
+
+            // Style the column headers
+            dataGridView.ColumnHeadersDefaultCellStyle.BackColor = ThemeConfigurator.GetCustomAccentColor(); // Use your accent color
             dataGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
 
-            // Set the accent color for selected rows in DataGridView
+            // Use a slightly smaller and a more readable font
+            dataGridView.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+
+            // Style selected rows for better visibility
             dataGridView.DefaultCellStyle.SelectionForeColor = Color.White;
-            dataGridView.DefaultCellStyle.SelectionBackColor = ThemeConfigurator.GetPrimaryColor();
+            dataGridView.DefaultCellStyle.SelectionBackColor = ThemeConfigurator.GetPrimaryColor(); // Use your primary color
 
-
-
-            // Set grid line color in DataGridView (optional)
+            // Add subtle grid lines (optional)
             dataGridView.GridColor = Color.LightGray;
-            dataGridView.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal; // Optional: Add horizontal lines between rows
+            dataGridView.CellBorderStyle = DataGridViewCellBorderStyle.Single;
 
-            // Set Font for the DataGridView
-            dataGridView.DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular);
+            // Set the default font for the DataGridView
+            dataGridView.DefaultCellStyle.Font = new Font("Segoe UI", 11, FontStyle.Regular); // More readable font
 
-            // Set BorderStyle for the DataGridView
+            // Remove the default border
             dataGridView.BorderStyle = BorderStyle.None;
 
-            // Set ForeColor using the primary color from the theme
-            dataGridView.ForeColor = ThemeConfigurator.GetPrimaryColor();
-
+            // Configure sizing and behavior
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView.ReadOnly = false;
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
 
-        }
 
+        }
+        public static void DeleteSelectedRows<T>(DataGridView dataGridView, string idColumnName) where T : class
+        {
+            if (dataGridView.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select at least one row to delete.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (MessageBox.Show("Are you sure you want to delete the selected rows?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                 var context = new Entities();
+                foreach (DataGridViewRow row in dataGridView.SelectedRows)
+                {
+                    int id = Convert.ToInt32(row.Cells[idColumnName].Value);
+                    var entity = context.Set<T>().Find(id);
+                    if (entity != null)
+                    {
+                        context.Set<T>().Remove(entity);
+                    }
+                }
+                context.SaveChanges();
+
+                // Refresh the DataGridView (you might need to adjust this based on your actual refresh logic)
+                // dataGridView.DataSource = context.Set<T>().ToList(); 
+            }
+        }
+   
         public static void ApplyDataGridViewStyles(DataGridView dataGridView)
         {
 
+            // Disable default visual styles for more control over appearance
             dataGridView.EnableHeadersVisualStyles = false;
-            // Set background color and text color for DataGridView
-            dataGridView.BackgroundColor = Color.White;
-            dataGridView.DefaultCellStyle.BackColor = Color.White;
-            dataGridView.DefaultCellStyle.ForeColor = ThemeConfigurator.GetPrimaryColor(); // Set text color to black
 
-            // Set the primary color for the header in DataGridView
-            dataGridView.ColumnHeadersDefaultCellStyle.BackColor = ThemeConfigurator.GetCustomAccentColor();
+            // Set the base colors for the DataGridView
+            dataGridView.BackgroundColor = Color.WhiteSmoke; // Softer background color
+            dataGridView.DefaultCellStyle.BackColor = Color.WhiteSmoke;
+            dataGridView.DefaultCellStyle.ForeColor = Color.FromArgb(64, 64, 64); // Dark gray text for better contrast
+
+            // Style the column headers
+            dataGridView.ColumnHeadersDefaultCellStyle.BackColor = ThemeConfigurator.GetCustomAccentColor(); // Use your accent color
             dataGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
 
-            // Set the accent color for selected rows in DataGridView
+            // Use a slightly smaller and a more readable font
+            dataGridView.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+
+            // Style selected rows for better visibility
             dataGridView.DefaultCellStyle.SelectionForeColor = Color.White;
-            dataGridView.DefaultCellStyle.SelectionBackColor = ThemeConfigurator.GetPrimaryColor();
+            dataGridView.DefaultCellStyle.SelectionBackColor = ThemeConfigurator.GetPrimaryColor(); // Use your primary color
 
-
-
-            // Set grid line color in DataGridView (optional)
+            // Add subtle grid lines (optional)
             dataGridView.GridColor = Color.LightGray;
-            dataGridView.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal; // Optional: Add horizontal lines between rows
+            dataGridView.CellBorderStyle = DataGridViewCellBorderStyle.Single;
 
-            // Set Font for the DataGridView
-            dataGridView.DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular);
+            // Set the default font for the DataGridView
+            dataGridView.DefaultCellStyle.Font = new Font("Segoe UI", 11, FontStyle.Regular); // More readable font
 
-            // Set BorderStyle for the DataGridView
+            // Remove the default border
             dataGridView.BorderStyle = BorderStyle.None;
 
-            // Set ForeColor using the primary color from the theme
-            dataGridView.ForeColor = ThemeConfigurator.GetPrimaryColor();
-
+            // Configure sizing and behavior
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView.ReadOnly = true;
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;

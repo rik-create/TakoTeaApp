@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using TakoTea.Interfaces;
+using TakoTea.Product;
 using TakoTea.View.Batches;
 using TakoTea.View.Orders;
 using TakoTea.View.Product;
@@ -20,7 +21,7 @@ namespace TakoTea.Views
                 case "Dashboard":
                     return new DashboardForm();
                 case "Product":
-                    return new ProductCategoryForm();
+                    return new ProductListForm();
                 case "Sales":
                     return new AddSalesEntryModal();
                 case "Item":

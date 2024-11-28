@@ -12,18 +12,14 @@ namespace TakoTea.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class StockLevelLog
+    public partial class IngredientChangeLog
     {
         public int LogID { get; set; }
-        public int BatchID { get; set; }
         public int IngredientID { get; set; }
-        public decimal OldStockLevel { get; set; }
-        public decimal NewStockLevel { get; set; }
-        public decimal QuantityChanged { get; set; }
         public string Action { get; set; }
+        public string Description { get; set; }
         public System.DateTime Timestamp { get; set; }
     
         public virtual Ingredient Ingredient { get; set; }
-        public virtual Batch Batch { get; set; }
     }
 }

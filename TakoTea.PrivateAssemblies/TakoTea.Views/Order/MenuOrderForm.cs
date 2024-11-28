@@ -1,8 +1,10 @@
 ﻿using MaterialSkin.Controls;
+using Org.BouncyCastle.Cmp;
 using System;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Controls;
@@ -16,24 +18,25 @@ namespace TakoTea.View.Orders
     {
         MenuOrderFormService _service;
         ProductsService productsService;
-        private Entities _context;
+        private Entities context;
         public MenuOrderForm()
         {
             InitializeComponent();
             _service = new MenuOrderFormService();
-            _context = new Entities();
-
+            context = new Entities();
+            lblTotalItemInOrderList.Text = "0";
 
             OrderEntryModal orderEntryModal = new OrderEntryModal(dataGridViewOrderList);
             orderEntryModal.Show();
             orderEntryModal.Close();
             productsService = new ProductsService();
 
+            dgvDraftOrders.CellClick += dgvDraftOrders_CellClick; // Register the event handler
+
 
             // ... rest of the code ...
             this.Load += MenuOrderForm_Load; // Register the Load event handler
             txtBoxSearchVariant.TextChanged += txtBoxSearchVariant_TextChanged;
-            btnSearch.Click += btnSearch_Click;
 
 
             dataGridViewOrderList.CellValueChanged += dataGridViewOrderList_CellValueChanged;
@@ -41,6 +44,131 @@ namespace TakoTea.View.Orders
 
             dataGridViewOrderList.RowsAdded += dataGridViewOrderList_RowsAdded;
 
+            // Add a ContextMenuStrip to your form
+            ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+            ToolStripMenuItem deleteMenuItem = new ToolStripMenuItem("Delete");
+            contextMenuStrip.Items.Add(deleteMenuItem);
+
+            // Attach the ContextMenuStrip to the DataGridView
+            dgvDraftOrders.ContextMenuStrip = contextMenuStrip;
+
+            // Handle the delete menu item click
+            deleteMenuItem.Click += deleteMenuItem_Click;
+        }
+
+        // Assuming you have a DataGridView named dgvDraftOrders and a Button named btnLoadDraft
+
+        private void PopulateDraftOrdersDataGridView()
+        {
+            var draftOrders = context.DraftOrders.Select(o => new
+            {
+                o.DraftOrderId,
+                o.CreatedDate,
+                o.CustomerName,
+                o.TotalAmount
+            }).ToList();
+
+            // Check if the column already exists before adding it
+            if (!dgvDraftOrders.Columns.Contains("LoadButtonColumn"))
+            {
+                dgvDraftOrders.DataSource = draftOrders;
+                DataGridViewButtonColumn loadButtonColumn = new DataGridViewButtonColumn();
+                loadButtonColumn.HeaderText = "";
+                loadButtonColumn.Name = "LoadButtonColumn";
+                loadButtonColumn.Text = "Load";
+                loadButtonColumn.UseColumnTextForButtonValue = true;
+                dgvDraftOrders.Columns.Add(loadButtonColumn);
+            }
+            dgvDraftOrders.DataSource = draftOrders;
+
+
+        }
+
+        private void deleteMenuItem_Click(object sender, EventArgs e)
+        {
+            // Confirmation before deleting
+            if (MessageBox.Show("Are you sure you want to delete the selected draft orders?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                foreach (DataGridViewRow row in dgvDraftOrders.SelectedRows)
+                {
+                    int draftOrderId = Convert.ToInt32(row.Cells["DraftOrderId"].Value);
+
+                    // Delete from the database
+                    var draftOrder = context.DraftOrders.Find(draftOrderId);
+                    if (draftOrder != null)
+                    {
+                        context.DraftOrders.Remove(draftOrder);
+                        context.SaveChanges();
+                    }
+                }
+
+                // Refresh the DataGridView
+                PopulateDraftOrdersDataGridView();
+            }
+        }
+
+        private void dgvDraftOrders_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if the clicked cell is in the LoadButtonColumn
+            if (e.ColumnIndex == dgvDraftOrders.Columns["LoadButtonColumn"].Index && e.RowIndex >= 0)
+            {
+                // Confirmation
+                if (MessageBox.Show("Are you sure you want to load this draft order?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    int draftOrderId = Convert.ToInt32(dgvDraftOrders.Rows[e.RowIndex].Cells["DraftOrderId"].Value);
+
+
+                    _service.LoadDraftOrder(draftOrderId, dataGridViewOrderList, lblTotalInOrderList);
+
+                    // Delete the draft from the database
+                    var draftOrder = context.DraftOrders.Find(draftOrderId);
+                    if (draftOrder != null)
+                    {
+                        context.DraftOrders.Remove(draftOrder);
+                        context.SaveChanges();
+                    }
+
+                }
+
+            }
+
+            PopulateDraftOrdersDataGridView();
+        }
+
+        private void btnSaveDraft_Click(object sender, EventArgs e)
+        {
+            string customerName = lblCustomer.Text; // Assuming you have a TextBox for customer name
+            string paymentMethod = cmbPaymentMethod.SelectedItem.ToString(); // Assuming you have a ComboBox for payment method
+            string totalAmount = lblTotalInOrderList.Text.Substring(1);
+
+            _service.SaveDraftOrder(dataGridViewOrderList, totalAmount, customerName, paymentMethod);
+            MessageBox.Show("Draft order saved successfully.");
+            dataGridViewOrderList.Rows.Clear();
+
+        }
+
+
+        private void btnViewDraftOrders_Click(object sender, EventArgs e)
+        {
+            if (btnViewDraftOrders.Text == "View Draft Orders")
+            {
+                // Show draft orders
+                btnViewDraftOrders.Text = "Close Draft Orders";
+                flPanelProductVariantsMenu.Hide();
+                dgvDraftOrders.Show();
+                PopulateDraftOrdersDataGridView();
+
+                // Load draft orders into dgvDraftOrders (replace with your actual logic)
+                /*                LoadDraftOrders();
+                */
+              }
+            else
+            {
+                // Close draft orders view
+                btnViewDraftOrders.Text = "View Draft Orders";
+                flPanelProductVariantsMenu.Show();
+                dgvDraftOrders.Hide();
+            }
         }
 
 
@@ -67,7 +195,7 @@ namespace TakoTea.View.Orders
                     if (isComboMeal)
                     {
                         // If it's a combo meal, find and set the combo meal data
-                        var comboMeal = _context.ComboMeals.FirstOrDefault(cm => cm.ComboMealName == productName);
+                        var comboMeal = context.ComboMeals.FirstOrDefault(cm => cm.ComboMealName == productName);
                         if (comboMeal != null)
                         {
                             orderEntryModal.SetComboMealData(comboMeal);
@@ -76,7 +204,7 @@ namespace TakoTea.View.Orders
                     else
                     {
                         // If it's a product variant, find and set the product variant data
-                        var productVariant = _context.ProductVariants.FirstOrDefault(pv => pv.VariantName == productName && pv.Size == size);
+                        var productVariant = context.ProductVariants.FirstOrDefault(pv => pv.VariantName == productName && pv.Size == size);
                         if (productVariant != null)
                         {
                             orderEntryModal.SetProductData(productVariant);
@@ -123,6 +251,7 @@ namespace TakoTea.View.Orders
             if (e.ColumnIndex == 4)
             {
                 UpdateTotalInOrderList();
+                UpdateTotalItemsInOrderList();
             }
 
         }
@@ -148,6 +277,7 @@ namespace TakoTea.View.Orders
         private void dataGridViewOrderList_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             UpdateTotalInOrderList();
+            UpdateTotalItemsInOrderList();
         }
 
         // In your parent form class (where the parentDataGridView is located)
@@ -156,6 +286,8 @@ namespace TakoTea.View.Orders
         {
             dataGridViewOrderList.Rows.Clear();
             UpdateTotalInOrderList();
+            UpdateTotalItemsInOrderList();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -190,6 +322,21 @@ namespace TakoTea.View.Orders
         {
             
 
+        }
+
+        private void UpdateTotalItemsInOrderList()
+        {
+            int totalItems = 0;
+
+            foreach (DataGridViewRow row in dataGridViewOrderList.Rows)
+            {
+                if (!row.IsNewRow && row.Cells["ColumnQty"].Value != null) // Assuming "Quantity" is the column name
+                {
+                    totalItems += Convert.ToInt32(row.Cells["ColumnQty"].Value);
+                }
+            }
+
+            lblTotalItemInOrderList.Text = totalItems.ToString();
         }
         public void UpdateTotalInOrderList()
         {

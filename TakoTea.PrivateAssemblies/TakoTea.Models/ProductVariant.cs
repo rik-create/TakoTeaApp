@@ -17,8 +17,8 @@ namespace TakoTea.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ProductVariant()
         {
-            this.ProductVariantIngredients = new HashSet<ProductVariantIngredient>();
             this.ComboMealVariants = new HashSet<ComboMealVariant>();
+            this.ProductVariantIngredients = new HashSet<ProductVariantIngredient>();
         }
     
         public int ProductVariantID { get; set; }
@@ -30,14 +30,14 @@ namespace TakoTea.Models
         public Nullable<bool> IsActive { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
-        public string ImagePath { get; set; }
+        public byte[] ImagePath { get; set; }
         public string Instructions { get; set; }
         public string Ingredients { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ComboMealVariant> ComboMealVariants { get; set; }
         public virtual Product Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductVariantIngredient> ProductVariantIngredients { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ComboMealVariant> ComboMealVariants { get; set; }
     }
 }

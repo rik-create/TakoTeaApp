@@ -25,12 +25,11 @@ namespace TakoTea.Models
         public Nullable<int> IngredientID { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
-        public decimal ReorderLevel { get; set; }
+        public decimal StockLevel { get; set; }
         public Nullable<System.DateTime> ExpirationDate { get; set; }
         public string Supplier { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public decimal BatchCost { get; set; }
-        public decimal StockLevel { get; set; }
     
         public virtual Ingredient Ingredient { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

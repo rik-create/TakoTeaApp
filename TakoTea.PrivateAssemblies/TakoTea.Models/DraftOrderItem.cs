@@ -23,6 +23,7 @@ namespace TakoTea.Models
         public Nullable<decimal> TotalPrice { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
+        public string AddOns { get; set; }
     
         public virtual DraftOrder DraftOrder { get; set; }
     }

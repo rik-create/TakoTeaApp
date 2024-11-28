@@ -13,8 +13,8 @@
           <Property Name="AddOnName" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="AdditionalPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="UseForProductID" Type="int" />
-          <Property Name="IngredientID" Type="int" />
           <Property Name="QuantityUsedPerProduct" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IngredientID" Type="int" />
         </EntityType>
         <EntityType Name="Batch">
           <Key>
@@ -26,7 +26,6 @@
           <Property Name="CreatedAt" Type="datetime" />
           <Property Name="UpdatedAt" Type="datetime" />
           <Property Name="StockLevel" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="ReorderLevel" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="ExpirationDate" Type="date" />
           <Property Name="Supplier" Type="varchar" MaxLength="255" />
           <Property Name="IsActive" Type="bit" />
@@ -62,9 +61,9 @@
           <Property Name="CustomerName" Type="nvarchar" MaxLength="100" />
           <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
-          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="DraftOrderItem">
           <Key>
@@ -78,7 +77,8 @@
           <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="TotalPrice" Type="decimal" Precision="29" Scale="2" StoreGeneratedPattern="Computed" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="AddOns" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Ingredient">
           <Key>
@@ -88,7 +88,7 @@
           <Property Name="IngredientName" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="BrandName" Type="varchar" MaxLength="255" />
           <Property Name="Description" Type="text" />
-          <Property Name="IngredientImage" Type="varchar" MaxLength="255" />
+          <Property Name="IngredientImage" Type="varbinary(max)" />
           <Property Name="IsAddOn" Type="bit" />
           <Property Name="TypeOfIngredient" Type="varchar" MaxLength="100" />
           <Property Name="IsActive" Type="bit" />
@@ -98,6 +98,16 @@
           <Property Name="LowLevel" Type="decimal" Precision="18" Scale="2" />
           <Property Name="IngredientCategory" Type="varchar" MaxLength="50" />
           <Property Name="MeasuringUnit" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="IngredientChangeLogs">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IngredientID" Type="int" Nullable="false" />
+          <Property Name="Action" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="text" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="IngredientProductLink">
           <Key>
@@ -178,7 +188,7 @@
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedAt" Type="datetime" />
           <Property Name="UpdatedAt" Type="datetime" />
-          <Property Name="ImagePath" Type="varchar(max)" />
+          <Property Name="ImagePath" Type="varbinary(max)" />
           <Property Name="Instructions" Type="varchar(max)" />
           <Property Name="Ingredients" Type="varchar(max)" />
         </EntityType>
@@ -224,7 +234,7 @@
           <Property Name="Action" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Timestamp" Type="datetime" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Batch__Ingredien__59063A47">
+        <Association Name="FK__Batch__Ingredien__6CD828CA">
           <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -250,7 +260,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Ingredien__Ingre__5FB337D6">
+        <Association Name="FK__Ingredien__Ingre__6EC0713C">
           <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -260,6 +270,18 @@
               <PropertyRef Name="IngredientID" />
             </Principal>
             <Dependent Role="IngredientProductLink">
+              <PropertyRef Name="IngredientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ingredien__Ingre__756D6ECB">
+          <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="1" />
+          <End Role="IngredientChangeLogs" Type="Self.IngredientChangeLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredient">
+              <PropertyRef Name="IngredientID" />
+            </Principal>
+            <Dependent Role="IngredientChangeLogs">
               <PropertyRef Name="IngredientID" />
             </Dependent>
           </ReferentialConstraint>
@@ -290,7 +312,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductVa__Ingre__0D7A0286">
+        <Association Name="FK__ProductVa__Ingre__6AEFE058">
           <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -304,7 +326,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductVa__Produ__04E4BC85">
+        <Association Name="FK__ProductVa__Produ__6442E2C9">
           <End Role="Product" Type="Self.Product" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -318,7 +340,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductVa__Produ__0C85DE4D">
+        <Association Name="FK__ProductVa__Produ__65370702">
           <End Role="ProductVariants" Type="Self.ProductVariants" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -332,7 +354,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StockAdju__Ingre__6FE99F9F">
+        <Association Name="FK__StockAdju__Ingre__6FB49575">
           <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="1" />
           <End Role="StockAdjustmentLog" Type="Self.StockAdjustmentLog" Multiplicity="*" />
           <ReferentialConstraint>
@@ -356,7 +378,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StockLeve__Ingre__59C55456">
+        <Association Name="FK__StockLeve__Ingre__6DCC4D03">
           <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="1" />
           <End Role="StockLevelLogs" Type="Self.StockLevelLogs" Multiplicity="*" />
           <ReferentialConstraint>
@@ -364,18 +386,6 @@
               <PropertyRef Name="IngredientID" />
             </Principal>
             <Dependent Role="StockLevelLogs">
-              <PropertyRef Name="IngredientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AddOns_Ingredient">
-          <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="0..1" />
-          <End Role="AddOns" Type="Self.AddOns" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ingredient">
-              <PropertyRef Name="IngredientID" />
-            </Principal>
-            <Dependent Role="AddOns">
               <PropertyRef Name="IngredientID" />
             </Dependent>
           </ReferentialConstraint>
@@ -407,7 +417,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DraftOrderItem_DraftOrder">
-          <End Role="DraftOrder" Type="Self.DraftOrder" Multiplicity="1" />
+          <End Role="DraftOrder" Type="Self.DraftOrder" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="DraftOrderItem" Type="Self.DraftOrderItem" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DraftOrder">
@@ -450,6 +462,7 @@
           <EntitySet Name="DraftOrder" EntityType="Self.DraftOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DraftOrderItem" EntityType="Self.DraftOrderItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ingredient" EntityType="Self.Ingredient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IngredientChangeLogs" EntityType="Self.IngredientChangeLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IngredientProductLink" EntityType="Self.IngredientProductLink" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderItem" EntityType="Self.OrderItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderModel" EntityType="Self.OrderModel" Schema="dbo" store:Type="Tables" />
@@ -460,7 +473,7 @@
           <EntitySet Name="Receipt" EntityType="Self.Receipt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockAdjustmentLog" EntityType="Self.StockAdjustmentLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockLevelLogs" EntityType="Self.StockLevelLogs" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Batch__Ingredien__59063A47" Association="Self.FK__Batch__Ingredien__59063A47">
+          <AssociationSet Name="FK__Batch__Ingredien__6CD828CA" Association="Self.FK__Batch__Ingredien__6CD828CA">
             <End Role="Ingredient" EntitySet="Ingredient" />
             <End Role="Batch" EntitySet="Batch" />
           </AssociationSet>
@@ -468,9 +481,13 @@
             <End Role="ComboMeals" EntitySet="ComboMeals" />
             <End Role="ComboMealVariants" EntitySet="ComboMealVariants" />
           </AssociationSet>
-          <AssociationSet Name="FK__Ingredien__Ingre__5FB337D6" Association="Self.FK__Ingredien__Ingre__5FB337D6">
+          <AssociationSet Name="FK__Ingredien__Ingre__6EC0713C" Association="Self.FK__Ingredien__Ingre__6EC0713C">
             <End Role="Ingredient" EntitySet="Ingredient" />
             <End Role="IngredientProductLink" EntitySet="IngredientProductLink" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ingredien__Ingre__756D6ECB" Association="Self.FK__Ingredien__Ingre__756D6ECB">
+            <End Role="Ingredient" EntitySet="Ingredient" />
+            <End Role="IngredientChangeLogs" EntitySet="IngredientChangeLogs" />
           </AssociationSet>
           <AssociationSet Name="FK__Ingredien__Produ__60A75C0F" Association="Self.FK__Ingredien__Produ__60A75C0F">
             <End Role="Product" EntitySet="Product" />
@@ -480,19 +497,19 @@
             <End Role="ProductCategory" EntitySet="ProductCategory" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProductVa__Ingre__0D7A0286" Association="Self.FK__ProductVa__Ingre__0D7A0286">
+          <AssociationSet Name="FK__ProductVa__Ingre__6AEFE058" Association="Self.FK__ProductVa__Ingre__6AEFE058">
             <End Role="Ingredient" EntitySet="Ingredient" />
             <End Role="ProductVariantIngredients" EntitySet="ProductVariantIngredients" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProductVa__Produ__04E4BC85" Association="Self.FK__ProductVa__Produ__04E4BC85">
+          <AssociationSet Name="FK__ProductVa__Produ__6442E2C9" Association="Self.FK__ProductVa__Produ__6442E2C9">
             <End Role="Product" EntitySet="Product" />
             <End Role="ProductVariants" EntitySet="ProductVariants" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProductVa__Produ__0C85DE4D" Association="Self.FK__ProductVa__Produ__0C85DE4D">
+          <AssociationSet Name="FK__ProductVa__Produ__65370702" Association="Self.FK__ProductVa__Produ__65370702">
             <End Role="ProductVariants" EntitySet="ProductVariants" />
             <End Role="ProductVariantIngredients" EntitySet="ProductVariantIngredients" />
           </AssociationSet>
-          <AssociationSet Name="FK__StockAdju__Ingre__6FE99F9F" Association="Self.FK__StockAdju__Ingre__6FE99F9F">
+          <AssociationSet Name="FK__StockAdju__Ingre__6FB49575" Association="Self.FK__StockAdju__Ingre__6FB49575">
             <End Role="Ingredient" EntitySet="Ingredient" />
             <End Role="StockAdjustmentLog" EntitySet="StockAdjustmentLog" />
           </AssociationSet>
@@ -500,13 +517,9 @@
             <End Role="Batch" EntitySet="Batch" />
             <End Role="StockLevelLogs" EntitySet="StockLevelLogs" />
           </AssociationSet>
-          <AssociationSet Name="FK__StockLeve__Ingre__59C55456" Association="Self.FK__StockLeve__Ingre__59C55456">
+          <AssociationSet Name="FK__StockLeve__Ingre__6DCC4D03" Association="Self.FK__StockLeve__Ingre__6DCC4D03">
             <End Role="Ingredient" EntitySet="Ingredient" />
             <End Role="StockLevelLogs" EntitySet="StockLevelLogs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AddOns_Ingredient" Association="Self.FK_AddOns_Ingredient">
-            <End Role="Ingredient" EntitySet="Ingredient" />
-            <End Role="AddOns" EntitySet="AddOns" />
           </AssociationSet>
           <AssociationSet Name="FK_AddOns_Product" Association="Self.FK_AddOns_Product">
             <End Role="Product" EntitySet="Product" />
@@ -533,49 +546,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TakoTeaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Batch">
-          <Key>
-            <PropertyRef Name="BatchID" />
-          </Key>
-          <Property Name="BatchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BatchNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IngredientID" Type="Int32" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
-          <Property Name="ReorderLevel" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="ExpirationDate" Type="DateTime" Precision="0" />
-          <Property Name="Supplier" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="BatchCost" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <NavigationProperty Name="Ingredient" Relationship="Self.FK__Batch__Ingredien__59063A47" FromRole="Batch" ToRole="Ingredient" />
-          <Property Name="StockLevel" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <NavigationProperty Name="StockLevelLogs" Relationship="TakoTeaModel.FK__StockLeve__Batch__58D1301D" FromRole="Batch" ToRole="StockLevelLog" />
-        </EntityType>
-        <EntityType Name="Ingredient">
-          <Key>
-            <PropertyRef Name="IngredientID" />
-          </Key>
-          <Property Name="IngredientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IngredientName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="BrandName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IngredientImage" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="IsAddOn" Type="Boolean" />
-          <Property Name="TypeOfIngredient" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="AllergyInformation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="StorageConditions" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Batches" Relationship="Self.FK__Batch__Ingredien__59063A47" FromRole="Ingredient" ToRole="Batch" />
-          <NavigationProperty Name="IngredientProductLinks" Relationship="Self.FK__Ingredien__Ingre__5FB337D6" FromRole="Ingredient" ToRole="IngredientProductLink" />
-          <NavigationProperty Name="StockAdjustmentLogs" Relationship="Self.FK__StockAdju__Ingre__6FE99F9F" FromRole="Ingredient" ToRole="StockAdjustmentLog" />
-          <Property Name="LowLevel" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="StockLevel" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="IngredientCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ProductVariantIngredients" Relationship="TakoTeaModel.FK__ProductVa__Ingre__0D7A0286" FromRole="Ingredient" ToRole="ProductVariantIngredient" />
-          <Property Name="MeasuringUnit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="AddOns" Relationship="TakoTeaModel.FK_AddOns_Ingredient" FromRole="Ingredient" ToRole="AddOn" />
-          <NavigationProperty Name="StockLevelLogs" Relationship="TakoTeaModel.FK__StockLeve__Ingre__59C55456" FromRole="Ingredient" ToRole="StockLevelLog" />
-        </EntityType>
         <EntityType Name="IngredientProductLink">
           <Key>
             <PropertyRef Name="ID" />
@@ -583,8 +553,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IngredientID" Type="Int32" />
           <Property Name="ProductID" Type="Int32" />
-          <NavigationProperty Name="Ingredient" Relationship="Self.FK__Ingredien__Ingre__5FB337D6" FromRole="IngredientProductLink" ToRole="Ingredient" />
           <NavigationProperty Name="Product" Relationship="Self.FK__Ingredien__Produ__60A75C0F" FromRole="IngredientProductLink" ToRole="Product" />
+          <NavigationProperty Name="Ingredient" Relationship="TakoTeaModel.FK__Ingredien__Ingre__6EC0713C" FromRole="IngredientProductLink" ToRole="Ingredient" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -596,7 +566,7 @@
           <NavigationProperty Name="IngredientProductLinks" Relationship="Self.FK__Ingredien__Produ__60A75C0F" FromRole="Product" ToRole="IngredientProductLink" />
           <NavigationProperty Name="ProductCategory" Relationship="Self.FK__Product__Product__4CA06362" FromRole="Product" ToRole="ProductCategory" />
           <Property Name="ProductImage" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ProductVariants" Relationship="TakoTeaModel.FK__ProductVa__Produ__04E4BC85" FromRole="Product" ToRole="ProductVariant" />
+          <NavigationProperty Name="ProductVariants" Relationship="TakoTeaModel.FK__ProductVa__Produ__6442E2C9" FromRole="Product" ToRole="ProductVariant" />
           <NavigationProperty Name="AddOns" Relationship="TakoTeaModel.FK_AddOns_Product" FromRole="Product" ToRole="AddOn" />
         </EntityType>
         <EntityType Name="ProductCategory">
@@ -619,48 +589,8 @@
           <Property Name="AdjustmentDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PreviousQuantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="NewQuantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <NavigationProperty Name="Ingredient" Relationship="Self.FK__StockAdju__Ingre__6FE99F9F" FromRole="StockAdjustmentLog" ToRole="Ingredient" />
+          <NavigationProperty Name="Ingredient" Relationship="TakoTeaModel.FK__StockAdju__Ingre__6FB49575" FromRole="StockAdjustmentLog" ToRole="Ingredient" />
         </EntityType>
-        <Association Name="FK__Batch__Ingredien__59063A47">
-          <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Batch" Type="Self.Batch" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ingredient">
-              <PropertyRef Name="IngredientID" />
-            </Principal>
-            <Dependent Role="Batch">
-              <PropertyRef Name="IngredientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Ingredien__Ingre__5FB337D6">
-          <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="IngredientProductLink" Type="Self.IngredientProductLink" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ingredient">
-              <PropertyRef Name="IngredientID" />
-            </Principal>
-            <Dependent Role="IngredientProductLink">
-              <PropertyRef Name="IngredientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StockAdju__Ingre__6FE99F9F">
-          <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="1" />
-          <End Role="StockAdjustmentLog" Type="Self.StockAdjustmentLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ingredient">
-              <PropertyRef Name="IngredientID" />
-            </Principal>
-            <Dependent Role="StockAdjustmentLog">
-              <PropertyRef Name="IngredientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Ingredien__Produ__60A75C0F">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -688,24 +618,10 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Batches" EntityType="Self.Batch" />
-          <EntitySet Name="Ingredients" EntityType="Self.Ingredient" />
           <EntitySet Name="IngredientProductLinks" EntityType="Self.IngredientProductLink" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
           <EntitySet Name="StockAdjustmentLogs" EntityType="Self.StockAdjustmentLog" />
-          <AssociationSet Name="FK__Batch__Ingredien__59063A47" Association="Self.FK__Batch__Ingredien__59063A47">
-            <End Role="Ingredient" EntitySet="Ingredients" />
-            <End Role="Batch" EntitySet="Batches" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Ingredien__Ingre__5FB337D6" Association="Self.FK__Ingredien__Ingre__5FB337D6">
-            <End Role="Ingredient" EntitySet="Ingredients" />
-            <End Role="IngredientProductLink" EntitySet="IngredientProductLinks" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StockAdju__Ingre__6FE99F9F" Association="Self.FK__StockAdju__Ingre__6FE99F9F">
-            <End Role="Ingredient" EntitySet="Ingredients" />
-            <End Role="StockAdjustmentLog" EntitySet="StockAdjustmentLogs" />
-          </AssociationSet>
           <AssociationSet Name="FK__Ingredien__Produ__60A75C0F" Association="Self.FK__Ingredien__Produ__60A75C0F">
             <End Role="Product" EntitySet="Products" />
             <End Role="IngredientProductLink" EntitySet="IngredientProductLinks" />
@@ -715,42 +631,15 @@
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
           <EntitySet Name="ProductVariantIngredients" EntityType="TakoTeaModel.ProductVariantIngredient" />
-          <EntitySet Name="ProductVariants" EntityType="TakoTeaModel.ProductVariant" />
-          <AssociationSet Name="FK__ProductVa__Ingre__0D7A0286" Association="TakoTeaModel.FK__ProductVa__Ingre__0D7A0286">
-            <End Role="Ingredient" EntitySet="Ingredients" />
-            <End Role="ProductVariantIngredient" EntitySet="ProductVariantIngredients" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ProductVa__Produ__04E4BC85" Association="TakoTeaModel.FK__ProductVa__Produ__04E4BC85">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="ProductVariant" EntitySet="ProductVariants" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ProductVa__Produ__0C85DE4D" Association="TakoTeaModel.FK__ProductVa__Produ__0C85DE4D">
-            <End Role="ProductVariant" EntitySet="ProductVariants" />
-            <End Role="ProductVariantIngredient" EntitySet="ProductVariantIngredients" />
-          </AssociationSet>
           <EntitySet Name="ComboMeals" EntityType="TakoTeaModel.ComboMeal" />
           <EntitySet Name="ComboMealVariants" EntityType="TakoTeaModel.ComboMealVariant" />
           <AssociationSet Name="FK__ComboMeal__Combo__14270015" Association="TakoTeaModel.FK__ComboMeal__Combo__14270015">
             <End Role="ComboMeal" EntitySet="ComboMeals" />
             <End Role="ComboMealVariant" EntitySet="ComboMealVariants" />
           </AssociationSet>
-          <AssociationSet Name="FK_ComboMealVariants_ProductVariantID" Association="TakoTeaModel.FK_ComboMealVariants_ProductVariantID">
-            <End Role="ProductVariant" EntitySet="ProductVariants" />
-            <End Role="ComboMealVariant" EntitySet="ComboMealVariants" />
-          </AssociationSet>
-          <EntitySet Name="AddOns" EntityType="TakoTeaModel.AddOn" />
           <EntitySet Name="DraftOrders" EntityType="TakoTeaModel.DraftOrder" />
-          <EntitySet Name="DraftOrderItems" EntityType="TakoTeaModel.DraftOrderItem" />
           <EntitySet Name="OrderItems" EntityType="TakoTeaModel.OrderItem" />
           <EntitySet Name="Receipts" EntityType="TakoTeaModel.Receipt" />
-          <AssociationSet Name="FK_AddOns_Product" Association="TakoTeaModel.FK_AddOns_Product">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="AddOn" EntitySet="AddOns" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DraftOrderItem_DraftOrder" Association="TakoTeaModel.FK_DraftOrderItem_DraftOrder">
-            <End Role="DraftOrder" EntitySet="DraftOrders" />
-            <End Role="DraftOrderItem" EntitySet="DraftOrderItems" />
-          </AssociationSet>
           <EntitySet Name="OrderModels" EntityType="TakoTeaModel.OrderModel" />
           <AssociationSet Name="FK_OrderItem_Order1" Association="TakoTeaModel.FK_OrderItem_Order1">
             <End Role="OrderModel" EntitySet="OrderModels" />
@@ -760,17 +649,59 @@
             <End Role="OrderModel" EntitySet="OrderModels" />
             <End Role="Receipt" EntitySet="Receipts" />
           </AssociationSet>
-          <AssociationSet Name="FK_AddOns_Ingredient" Association="TakoTeaModel.FK_AddOns_Ingredient">
-            <End Role="Ingredient" EntitySet="Ingredients" />
-            <End Role="AddOn" EntitySet="AddOns" />
-          </AssociationSet>
           <EntitySet Name="StockLevelLogs" EntityType="TakoTeaModel.StockLevelLog" />
-          <AssociationSet Name="FK__StockLeve__Batch__58D1301D" Association="TakoTeaModel.FK__StockLeve__Batch__58D1301D">
-            <End Role="Batch" EntitySet="Batches" />
+          <EntitySet Name="ProductVariants" EntityType="TakoTeaModel.ProductVariant" />
+          <AssociationSet Name="FK_ComboMealVariants_ProductVariantID" Association="TakoTeaModel.FK_ComboMealVariants_ProductVariantID">
+            <End Role="ProductVariant" EntitySet="ProductVariants" />
+            <End Role="ComboMealVariant" EntitySet="ComboMealVariants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductVa__Produ__6442E2C9" Association="TakoTeaModel.FK__ProductVa__Produ__6442E2C9">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductVariant" EntitySet="ProductVariants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductVa__Produ__65370702" Association="TakoTeaModel.FK__ProductVa__Produ__65370702">
+            <End Role="ProductVariant" EntitySet="ProductVariants" />
+            <End Role="ProductVariantIngredient" EntitySet="ProductVariantIngredients" />
+          </AssociationSet>
+          <EntitySet Name="Ingredients" EntityType="TakoTeaModel.Ingredient" />
+          <AssociationSet Name="FK__Ingredien__Ingre__6EC0713C" Association="TakoTeaModel.FK__Ingredien__Ingre__6EC0713C">
+            <End Role="Ingredient" EntitySet="Ingredients" />
+            <End Role="IngredientProductLink" EntitySet="IngredientProductLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductVa__Ingre__6AEFE058" Association="TakoTeaModel.FK__ProductVa__Ingre__6AEFE058">
+            <End Role="Ingredient" EntitySet="Ingredients" />
+            <End Role="ProductVariantIngredient" EntitySet="ProductVariantIngredients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StockAdju__Ingre__6FB49575" Association="TakoTeaModel.FK__StockAdju__Ingre__6FB49575">
+            <End Role="Ingredient" EntitySet="Ingredients" />
+            <End Role="StockAdjustmentLog" EntitySet="StockAdjustmentLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StockLeve__Ingre__6DCC4D03" Association="TakoTeaModel.FK__StockLeve__Ingre__6DCC4D03">
+            <End Role="Ingredient" EntitySet="Ingredients" />
             <End Role="StockLevelLog" EntitySet="StockLevelLogs" />
           </AssociationSet>
-          <AssociationSet Name="FK__StockLeve__Ingre__59C55456" Association="TakoTeaModel.FK__StockLeve__Ingre__59C55456">
+          <EntitySet Name="DraftOrderItems" EntityType="TakoTeaModel.DraftOrderItem" />
+          <AssociationSet Name="FK_DraftOrderItem_DraftOrder" Association="TakoTeaModel.FK_DraftOrderItem_DraftOrder">
+            <End Role="DraftOrder" EntitySet="DraftOrders" />
+            <End Role="DraftOrderItem" EntitySet="DraftOrderItems" />
+          </AssociationSet>
+          <EntitySet Name="AddOns" EntityType="TakoTeaModel.AddOn" />
+          <AssociationSet Name="FK_AddOns_Product" Association="TakoTeaModel.FK_AddOns_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="AddOn" EntitySet="AddOns" />
+          </AssociationSet>
+          <EntitySet Name="IngredientChangeLogs" EntityType="TakoTeaModel.IngredientChangeLog" />
+          <AssociationSet Name="FK__Ingredien__Ingre__756D6ECB" Association="TakoTeaModel.FK__Ingredien__Ingre__756D6ECB">
             <End Role="Ingredient" EntitySet="Ingredients" />
+            <End Role="IngredientChangeLog" EntitySet="IngredientChangeLogs" />
+          </AssociationSet>
+          <EntitySet Name="Batches" EntityType="TakoTeaModel.Batch" />
+          <AssociationSet Name="FK__Batch__Ingredien__6CD828CA" Association="TakoTeaModel.FK__Batch__Ingredien__6CD828CA">
+            <End Role="Ingredient" EntitySet="Ingredients" />
+            <End Role="Batch" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StockLeve__Batch__58D1301D" Association="TakoTeaModel.FK__StockLeve__Batch__58D1301D">
+            <End Role="Batch" EntitySet="Batches" />
             <End Role="StockLevelLog" EntitySet="StockLevelLogs" />
           </AssociationSet>
         </EntityContainer>
@@ -782,72 +713,10 @@
           <Property Name="ProductVariantID" Type="Int32" Nullable="false" />
           <Property Name="IngredientID" Type="Int32" Nullable="false" />
           <Property Name="QuantityPerVariant" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <NavigationProperty Name="Ingredient" Relationship="TakoTeaModel.FK__ProductVa__Ingre__0D7A0286" FromRole="ProductVariantIngredient" ToRole="Ingredient" />
-          <NavigationProperty Name="ProductVariant" Relationship="TakoTeaModel.FK__ProductVa__Produ__0C85DE4D" FromRole="ProductVariantIngredient" ToRole="ProductVariant" />
           <Property Name="MeasuringUnit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ProductVariant" Relationship="TakoTeaModel.FK__ProductVa__Produ__65370702" FromRole="ProductVariantIngredient" ToRole="ProductVariant" />
+          <NavigationProperty Name="Ingredient" Relationship="TakoTeaModel.FK__ProductVa__Ingre__6AEFE058" FromRole="ProductVariantIngredient" ToRole="Ingredient" />
         </EntityType>
-        <EntityType Name="ProductVariant">
-          <Key>
-            <PropertyRef Name="ProductVariantID" />
-          </Key>
-          <Property Name="ProductVariantID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="VariantName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Size" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="StockLevel" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Product" Relationship="TakoTeaModel.FK__ProductVa__Produ__04E4BC85" FromRole="ProductVariant" ToRole="Product" />
-          <NavigationProperty Name="ProductVariantIngredients" Relationship="TakoTeaModel.FK__ProductVa__Produ__0C85DE4D" FromRole="ProductVariant" ToRole="ProductVariantIngredient" />
-          <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Instructions" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Ingredients" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ComboMealVariants" Relationship="TakoTeaModel.FK_ComboMealVariants_ProductVariantID" FromRole="ProductVariant" ToRole="ComboMealVariant" />
-        </EntityType>
-        <Association Name="FK__ProductVa__Ingre__0D7A0286">
-          <End Type="TakoTeaModel.Ingredient" Role="Ingredient" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="TakoTeaModel.ProductVariantIngredient" Role="ProductVariantIngredient" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ingredient">
-              <PropertyRef Name="IngredientID" />
-            </Principal>
-            <Dependent Role="ProductVariantIngredient">
-              <PropertyRef Name="IngredientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ProductVa__Produ__04E4BC85">
-          <End Type="TakoTeaModel.Product" Role="Product" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="TakoTeaModel.ProductVariant" Role="ProductVariant" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="ProductID" />
-            </Principal>
-            <Dependent Role="ProductVariant">
-              <PropertyRef Name="ProductID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ProductVa__Produ__0C85DE4D">
-          <End Type="TakoTeaModel.ProductVariant" Role="ProductVariant" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="TakoTeaModel.ProductVariantIngredient" Role="ProductVariantIngredient" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductVariant">
-              <PropertyRef Name="ProductVariantID" />
-            </Principal>
-            <Dependent Role="ProductVariantIngredient">
-              <PropertyRef Name="ProductVariantID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="ComboMeal">
           <Key>
             <PropertyRef Name="ComboMealID" />
@@ -885,31 +754,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ComboMealVariants_ProductVariantID">
-          <End Type="TakoTeaModel.ProductVariant" Role="ProductVariant" Multiplicity="0..1" />
-          <End Type="TakoTeaModel.ComboMealVariant" Role="ComboMealVariant" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductVariant">
-              <PropertyRef Name="ProductVariantID" />
-            </Principal>
-            <Dependent Role="ComboMealVariant">
-              <PropertyRef Name="ProductVariantID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="AddOn">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AddOnName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="AdditionalPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="UseForProductID" Type="Int32" />
-          <NavigationProperty Name="Product" Relationship="TakoTeaModel.FK_AddOns_Product" FromRole="AddOn" ToRole="Product" />
-          <Property Name="IngredientID" Type="Int32" />
-          <Property Name="QuantityUsedPerProduct" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="Ingredient" Relationship="TakoTeaModel.FK_AddOns_Ingredient" FromRole="AddOn" ToRole="Ingredient" />
-        </EntityType>
         <EntityType Name="DraftOrder">
           <Key>
             <PropertyRef Name="DraftOrderId" />
@@ -918,25 +762,10 @@
           <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
           <NavigationProperty Name="DraftOrderItems" Relationship="TakoTeaModel.FK_DraftOrderItem_DraftOrder" FromRole="DraftOrder" ToRole="DraftOrderItem" />
-        </EntityType>
-        <EntityType Name="DraftOrderItem">
-          <Key>
-            <PropertyRef Name="DraftOrderItemId" />
-          </Key>
-          <Property Name="DraftOrderItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DraftOrderId" Type="Int32" Nullable="false" />
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ProductVariantId" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="TotalPrice" Type="Decimal" Precision="29" Scale="2" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="DraftOrder" Relationship="TakoTeaModel.FK_DraftOrderItem_DraftOrder" FromRole="DraftOrderItem" ToRole="DraftOrder" />
         </EntityType>
         <EntityType Name="OrderItem">
           <Key>
@@ -972,32 +801,6 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="OrderModel" Relationship="TakoTeaModel.FK_Receipt_Order1" FromRole="Receipt" ToRole="OrderModel" />
         </EntityType>
-        <Association Name="FK_AddOns_Product">
-          <End Type="TakoTeaModel.Product" Role="Product" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="TakoTeaModel.AddOn" Role="AddOn" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="ProductID" />
-            </Principal>
-            <Dependent Role="AddOn">
-              <PropertyRef Name="UseForProductID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DraftOrderItem_DraftOrder">
-          <End Type="TakoTeaModel.DraftOrder" Role="DraftOrder" Multiplicity="1" />
-          <End Type="TakoTeaModel.DraftOrderItem" Role="DraftOrderItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DraftOrder">
-              <PropertyRef Name="DraftOrderId" />
-            </Principal>
-            <Dependent Role="DraftOrderItem">
-              <PropertyRef Name="DraftOrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="OrderModel">
           <Key>
             <PropertyRef Name="OrderId" />
@@ -1040,18 +843,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_AddOns_Ingredient">
-          <End Type="TakoTeaModel.Ingredient" Role="Ingredient" Multiplicity="0..1" />
-          <End Type="TakoTeaModel.AddOn" Role="AddOn" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ingredient">
-              <PropertyRef Name="IngredientID" />
-            </Principal>
-            <Dependent Role="AddOn">
-              <PropertyRef Name="IngredientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="StockLevelLog">
           <Key>
             <PropertyRef Name="LogID" />
@@ -1064,9 +855,254 @@
           <Property Name="QuantityChanged" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="Action" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Ingredient" Relationship="TakoTeaModel.FK__StockLeve__Ingre__6DCC4D03" FromRole="StockLevelLog" ToRole="Ingredient" />
           <NavigationProperty Name="Batch" Relationship="TakoTeaModel.FK__StockLeve__Batch__58D1301D" FromRole="StockLevelLog" ToRole="Batch" />
-          <NavigationProperty Name="Ingredient" Relationship="TakoTeaModel.FK__StockLeve__Ingre__59C55456" FromRole="StockLevelLog" ToRole="Ingredient" />
         </EntityType>
+        <EntityType Name="ProductVariant">
+          <Key>
+            <PropertyRef Name="ProductVariantID" />
+          </Key>
+          <Property Name="ProductVariantID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="VariantName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="StockLevel" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+          <Property Name="ImagePath" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Instructions" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Ingredients" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ComboMealVariants" Relationship="TakoTeaModel.FK_ComboMealVariants_ProductVariantID" FromRole="ProductVariant" ToRole="ComboMealVariant" />
+          <NavigationProperty Name="Product" Relationship="TakoTeaModel.FK__ProductVa__Produ__6442E2C9" FromRole="ProductVariant" ToRole="Product" />
+          <NavigationProperty Name="ProductVariantIngredients" Relationship="TakoTeaModel.FK__ProductVa__Produ__65370702" FromRole="ProductVariant" ToRole="ProductVariantIngredient" />
+        </EntityType>
+        <Association Name="FK_ComboMealVariants_ProductVariantID">
+          <End Type="TakoTeaModel.ProductVariant" Role="ProductVariant" Multiplicity="0..1" />
+          <End Type="TakoTeaModel.ComboMealVariant" Role="ComboMealVariant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductVariant">
+              <PropertyRef Name="ProductVariantID" />
+            </Principal>
+            <Dependent Role="ComboMealVariant">
+              <PropertyRef Name="ProductVariantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductVa__Produ__6442E2C9">
+          <End Type="TakoTeaModel.Product" Role="Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TakoTeaModel.ProductVariant" Role="ProductVariant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductVariant">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductVa__Produ__65370702">
+          <End Type="TakoTeaModel.ProductVariant" Role="ProductVariant" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TakoTeaModel.ProductVariantIngredient" Role="ProductVariantIngredient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductVariant">
+              <PropertyRef Name="ProductVariantID" />
+            </Principal>
+            <Dependent Role="ProductVariantIngredient">
+              <PropertyRef Name="ProductVariantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Ingredient">
+          <Key>
+            <PropertyRef Name="IngredientID" />
+          </Key>
+          <Property Name="IngredientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IngredientName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BrandName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IngredientImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IsAddOn" Type="Boolean" />
+          <Property Name="TypeOfIngredient" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="AllergyInformation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StorageConditions" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="StockLevel" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="LowLevel" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IngredientCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MeasuringUnit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="IngredientProductLinks" Relationship="TakoTeaModel.FK__Ingredien__Ingre__6EC0713C" FromRole="Ingredient" ToRole="IngredientProductLink" />
+          <NavigationProperty Name="ProductVariantIngredients" Relationship="TakoTeaModel.FK__ProductVa__Ingre__6AEFE058" FromRole="Ingredient" ToRole="ProductVariantIngredient" />
+          <NavigationProperty Name="StockAdjustmentLogs" Relationship="TakoTeaModel.FK__StockAdju__Ingre__6FB49575" FromRole="Ingredient" ToRole="StockAdjustmentLog" />
+          <NavigationProperty Name="StockLevelLogs" Relationship="TakoTeaModel.FK__StockLeve__Ingre__6DCC4D03" FromRole="Ingredient" ToRole="StockLevelLog" />
+          <NavigationProperty Name="IngredientChangeLogs" Relationship="TakoTeaModel.FK__Ingredien__Ingre__756D6ECB" FromRole="Ingredient" ToRole="IngredientChangeLog" />
+          <NavigationProperty Name="Batches" Relationship="TakoTeaModel.FK__Batch__Ingredien__6CD828CA" FromRole="Ingredient" ToRole="Batch" />
+        </EntityType>
+        <Association Name="FK__Ingredien__Ingre__6EC0713C">
+          <End Type="TakoTeaModel.Ingredient" Role="Ingredient" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TakoTeaModel.IngredientProductLink" Role="IngredientProductLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredient">
+              <PropertyRef Name="IngredientID" />
+            </Principal>
+            <Dependent Role="IngredientProductLink">
+              <PropertyRef Name="IngredientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductVa__Ingre__6AEFE058">
+          <End Type="TakoTeaModel.Ingredient" Role="Ingredient" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TakoTeaModel.ProductVariantIngredient" Role="ProductVariantIngredient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredient">
+              <PropertyRef Name="IngredientID" />
+            </Principal>
+            <Dependent Role="ProductVariantIngredient">
+              <PropertyRef Name="IngredientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StockAdju__Ingre__6FB49575">
+          <End Type="TakoTeaModel.Ingredient" Role="Ingredient" Multiplicity="1" />
+          <End Type="TakoTeaModel.StockAdjustmentLog" Role="StockAdjustmentLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredient">
+              <PropertyRef Name="IngredientID" />
+            </Principal>
+            <Dependent Role="StockAdjustmentLog">
+              <PropertyRef Name="IngredientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StockLeve__Ingre__6DCC4D03">
+          <End Type="TakoTeaModel.Ingredient" Role="Ingredient" Multiplicity="1" />
+          <End Type="TakoTeaModel.StockLevelLog" Role="StockLevelLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredient">
+              <PropertyRef Name="IngredientID" />
+            </Principal>
+            <Dependent Role="StockLevelLog">
+              <PropertyRef Name="IngredientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DraftOrderItem">
+          <Key>
+            <PropertyRef Name="DraftOrderItemId" />
+          </Key>
+          <Property Name="DraftOrderItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DraftOrderId" Type="Int32" Nullable="false" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProductVariantId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="29" Scale="2" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="DraftOrder" Relationship="TakoTeaModel.FK_DraftOrderItem_DraftOrder" FromRole="DraftOrderItem" ToRole="DraftOrder" />
+          <Property Name="AddOns" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_DraftOrderItem_DraftOrder">
+          <End Type="TakoTeaModel.DraftOrder" Role="DraftOrder" Multiplicity="1" />
+          <End Type="TakoTeaModel.DraftOrderItem" Role="DraftOrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DraftOrder">
+              <PropertyRef Name="DraftOrderId" />
+            </Principal>
+            <Dependent Role="DraftOrderItem">
+              <PropertyRef Name="DraftOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AddOn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AddOnName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AdditionalPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="UseForProductID" Type="Int32" />
+          <Property Name="QuantityUsedPerProduct" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Product" Relationship="TakoTeaModel.FK_AddOns_Product" FromRole="AddOn" ToRole="Product" />
+          <Property Name="IngredientID" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_AddOns_Product">
+          <End Type="TakoTeaModel.Product" Role="Product" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TakoTeaModel.AddOn" Role="AddOn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="AddOn">
+              <PropertyRef Name="UseForProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="IngredientChangeLog">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IngredientID" Type="Int32" Nullable="false" />
+          <Property Name="Action" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Ingredient" Relationship="TakoTeaModel.FK__Ingredien__Ingre__756D6ECB" FromRole="IngredientChangeLog" ToRole="Ingredient" />
+        </EntityType>
+        <Association Name="FK__Ingredien__Ingre__756D6ECB">
+          <End Type="TakoTeaModel.Ingredient" Role="Ingredient" Multiplicity="1" />
+          <End Type="TakoTeaModel.IngredientChangeLog" Role="IngredientChangeLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredient">
+              <PropertyRef Name="IngredientID" />
+            </Principal>
+            <Dependent Role="IngredientChangeLog">
+              <PropertyRef Name="IngredientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Batch">
+          <Key>
+            <PropertyRef Name="BatchID" />
+          </Key>
+          <Property Name="BatchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BatchNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IngredientID" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+          <Property Name="StockLevel" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="ExpirationDate" Type="DateTime" Precision="0" />
+          <Property Name="Supplier" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="BatchCost" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="Ingredient" Relationship="TakoTeaModel.FK__Batch__Ingredien__6CD828CA" FromRole="Batch" ToRole="Ingredient" />
+          <NavigationProperty Name="StockLevelLogs" Relationship="TakoTeaModel.FK__StockLeve__Batch__58D1301D" FromRole="Batch" ToRole="StockLevelLog" />
+        </EntityType>
+        <Association Name="FK__Batch__Ingredien__6CD828CA">
+          <End Type="TakoTeaModel.Ingredient" Role="Ingredient" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TakoTeaModel.Batch" Role="Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingredient">
+              <PropertyRef Name="IngredientID" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="IngredientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__StockLeve__Batch__58D1301D">
           <End Type="TakoTeaModel.Batch" Role="Batch" Multiplicity="1" />
           <End Type="TakoTeaModel.StockLevelLog" Role="StockLevelLog" Multiplicity="*" />
@@ -1079,61 +1115,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StockLeve__Ingre__59C55456">
-          <End Type="TakoTeaModel.Ingredient" Role="Ingredient" Multiplicity="1" />
-          <End Type="TakoTeaModel.StockLevelLog" Role="StockLevelLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ingredient">
-              <PropertyRef Name="IngredientID" />
-            </Principal>
-            <Dependent Role="StockLevelLog">
-              <PropertyRef Name="IngredientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TakoTeaModelStoreContainer" CdmEntityContainer="Entities">
-          <EntitySetMapping Name="Batches">
-            <EntityTypeMapping TypeName="TakoTeaModel.Batch">
-              <MappingFragment StoreEntitySet="Batch">
-                <ScalarProperty Name="StockLevel" ColumnName="StockLevel" />
-                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
-                <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
-                <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
-                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
-                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="BatchCost" ColumnName="BatchCost" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Ingredients">
-            <EntityTypeMapping TypeName="TakoTeaModel.Ingredient">
-              <MappingFragment StoreEntitySet="Ingredient">
-                <ScalarProperty Name="MeasuringUnit" ColumnName="MeasuringUnit" />
-                <ScalarProperty Name="IngredientCategory" ColumnName="IngredientCategory" />
-                <ScalarProperty Name="StockLevel" ColumnName="StockLevel" />
-                <ScalarProperty Name="LowLevel" ColumnName="LowLevel" />
-                <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
-                <ScalarProperty Name="IngredientName" ColumnName="IngredientName" />
-                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="IngredientImage" ColumnName="IngredientImage" />
-                <ScalarProperty Name="IsAddOn" ColumnName="IsAddOn" />
-                <ScalarProperty Name="TypeOfIngredient" ColumnName="TypeOfIngredient" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="AllergyInformation" ColumnName="AllergyInformation" />
-                <ScalarProperty Name="StorageConditions" ColumnName="StorageConditions" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="IngredientProductLinks">
             <EntityTypeMapping TypeName="TakoTeaModel.IngredientProductLink">
               <MappingFragment StoreEntitySet="IngredientProductLink">
@@ -1186,24 +1173,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProductVariants">
-            <EntityTypeMapping TypeName="TakoTeaModel.ProductVariant">
-              <MappingFragment StoreEntitySet="ProductVariants">
-                <ScalarProperty Name="Ingredients" ColumnName="Ingredients" />
-                <ScalarProperty Name="Instructions" ColumnName="Instructions" />
-                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="StockLevel" ColumnName="StockLevel" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="VariantName" ColumnName="VariantName" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="ProductVariantID" ColumnName="ProductVariantID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ComboMeals">
             <EntityTypeMapping TypeName="TakoTeaModel.ComboMeal">
               <MappingFragment StoreEntitySet="ComboMeals">
@@ -1228,18 +1197,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AddOns">
-            <EntityTypeMapping TypeName="TakoTeaModel.AddOn">
-              <MappingFragment StoreEntitySet="AddOns">
-                <ScalarProperty Name="QuantityUsedPerProduct" ColumnName="QuantityUsedPerProduct" />
-                <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
-                <ScalarProperty Name="UseForProductID" ColumnName="UseForProductID" />
-                <ScalarProperty Name="AdditionalPrice" ColumnName="AdditionalPrice" />
-                <ScalarProperty Name="AddOnName" ColumnName="AddOnName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DraftOrders">
             <EntityTypeMapping TypeName="TakoTeaModel.DraftOrder">
               <MappingFragment StoreEntitySet="DraftOrder">
@@ -1250,21 +1207,6 @@
                 <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
                 <ScalarProperty Name="DraftOrderId" ColumnName="DraftOrderId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DraftOrderItems">
-            <EntityTypeMapping TypeName="TakoTeaModel.DraftOrderItem">
-              <MappingFragment StoreEntitySet="DraftOrderItem">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="ProductVariantId" ColumnName="ProductVariantId" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="DraftOrderId" ColumnName="DraftOrderId" />
-                <ScalarProperty Name="DraftOrderItemId" ColumnName="DraftOrderItemId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1330,6 +1272,99 @@
                 <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
                 <ScalarProperty Name="BatchID" ColumnName="BatchID" />
                 <ScalarProperty Name="LogID" ColumnName="LogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductVariants">
+            <EntityTypeMapping TypeName="TakoTeaModel.ProductVariant">
+              <MappingFragment StoreEntitySet="ProductVariants">
+                <ScalarProperty Name="Ingredients" ColumnName="Ingredients" />
+                <ScalarProperty Name="Instructions" ColumnName="Instructions" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="StockLevel" ColumnName="StockLevel" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="VariantName" ColumnName="VariantName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductVariantID" ColumnName="ProductVariantID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ingredients">
+            <EntityTypeMapping TypeName="TakoTeaModel.Ingredient">
+              <MappingFragment StoreEntitySet="Ingredient">
+                <ScalarProperty Name="MeasuringUnit" ColumnName="MeasuringUnit" />
+                <ScalarProperty Name="IngredientCategory" ColumnName="IngredientCategory" />
+                <ScalarProperty Name="LowLevel" ColumnName="LowLevel" />
+                <ScalarProperty Name="StockLevel" ColumnName="StockLevel" />
+                <ScalarProperty Name="StorageConditions" ColumnName="StorageConditions" />
+                <ScalarProperty Name="AllergyInformation" ColumnName="AllergyInformation" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="TypeOfIngredient" ColumnName="TypeOfIngredient" />
+                <ScalarProperty Name="IsAddOn" ColumnName="IsAddOn" />
+                <ScalarProperty Name="IngredientImage" ColumnName="IngredientImage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="IngredientName" ColumnName="IngredientName" />
+                <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DraftOrderItems">
+            <EntityTypeMapping TypeName="TakoTeaModel.DraftOrderItem">
+              <MappingFragment StoreEntitySet="DraftOrderItem">
+                <ScalarProperty Name="AddOns" ColumnName="AddOns" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductVariantId" ColumnName="ProductVariantId" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="DraftOrderId" ColumnName="DraftOrderId" />
+                <ScalarProperty Name="DraftOrderItemId" ColumnName="DraftOrderItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AddOns">
+            <EntityTypeMapping TypeName="TakoTeaModel.AddOn">
+              <MappingFragment StoreEntitySet="AddOns">
+                <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
+                <ScalarProperty Name="QuantityUsedPerProduct" ColumnName="QuantityUsedPerProduct" />
+                <ScalarProperty Name="UseForProductID" ColumnName="UseForProductID" />
+                <ScalarProperty Name="AdditionalPrice" ColumnName="AdditionalPrice" />
+                <ScalarProperty Name="AddOnName" ColumnName="AddOnName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IngredientChangeLogs">
+            <EntityTypeMapping TypeName="TakoTeaModel.IngredientChangeLog">
+              <MappingFragment StoreEntitySet="IngredientChangeLogs">
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Batches">
+            <EntityTypeMapping TypeName="TakoTeaModel.Batch">
+              <MappingFragment StoreEntitySet="Batch">
+                <ScalarProperty Name="BatchCost" ColumnName="BatchCost" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="StockLevel" ColumnName="StockLevel" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
+                <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

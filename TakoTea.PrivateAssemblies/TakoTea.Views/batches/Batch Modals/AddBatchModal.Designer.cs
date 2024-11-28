@@ -35,16 +35,12 @@
             this.lblIngredientId = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialTextBox21 = new MaterialSkin.Controls.MaterialTextBox2();
+            this.txtBoxIngredientName = new MaterialSkin.Controls.MaterialTextBox2();
             this.txtBoxBatchNumber = new MaterialSkin.Controls.MaterialTextBox2();
-            this.numericUpDownLowLevel = new System.Windows.Forms.NumericUpDown();
-            this.materialLabel14 = new MaterialSkin.Controls.MaterialLabel();
             this.label1 = new System.Windows.Forms.Label();
-            this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblQuantity = new MaterialSkin.Controls.MaterialLabel();
             this.numericUpDownQuantity = new System.Windows.Forms.NumericUpDown();
-            this.cmbBoxMeasuringUnit = new MaterialSkin.Controls.MaterialComboBox();
             this.lblCost = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
             this.numericUpDownCost = new System.Windows.Forms.NumericUpDown();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnAdd = new MaterialSkin.Controls.MaterialButton();
@@ -57,7 +53,6 @@
             this.materialCard1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLowLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCost)).BeginInit();
             this.panel3.SuspendLayout();
@@ -71,7 +66,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(886, 531);
+            this.panel1.Size = new System.Drawing.Size(700, 438);
             this.panel1.TabIndex = 2;
             // 
             // materialCard1
@@ -89,7 +84,7 @@
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard1.Size = new System.Drawing.Size(886, 531);
+            this.materialCard1.Size = new System.Drawing.Size(700, 438);
             this.materialCard1.TabIndex = 18;
             // 
             // panel4
@@ -100,7 +95,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(14, 60);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(858, 394);
+            this.panel4.Size = new System.Drawing.Size(672, 311);
             this.panel4.TabIndex = 103;
             // 
             // groupBox3
@@ -110,30 +105,26 @@
             this.groupBox3.Controls.Add(this.lblIngredientId);
             this.groupBox3.Controls.Add(this.materialLabel1);
             this.groupBox3.Controls.Add(this.materialLabel8);
-            this.groupBox3.Controls.Add(this.materialTextBox21);
+            this.groupBox3.Controls.Add(this.txtBoxIngredientName);
             this.groupBox3.Controls.Add(this.txtBoxBatchNumber);
-            this.groupBox3.Controls.Add(this.numericUpDownLowLevel);
-            this.groupBox3.Controls.Add(this.materialLabel14);
             this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Controls.Add(this.materialLabel6);
+            this.groupBox3.Controls.Add(this.lblQuantity);
             this.groupBox3.Controls.Add(this.numericUpDownQuantity);
-            this.groupBox3.Controls.Add(this.cmbBoxMeasuringUnit);
             this.groupBox3.Controls.Add(this.lblCost);
-            this.groupBox3.Controls.Add(this.materialLabel7);
             this.groupBox3.Controls.Add(this.numericUpDownCost);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.groupBox3.Location = new System.Drawing.Point(20, 10);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(810, 414);
+            this.groupBox3.Size = new System.Drawing.Size(636, 278);
             this.groupBox3.TabIndex = 72;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Batch Information";
             // 
             // dateTimePickerExpiration
             // 
-            this.dateTimePickerExpiration.Location = new System.Drawing.Point(440, 72);
+            this.dateTimePickerExpiration.Location = new System.Drawing.Point(328, 64);
             this.dateTimePickerExpiration.Name = "dateTimePickerExpiration";
-            this.dateTimePickerExpiration.Size = new System.Drawing.Size(330, 26);
+            this.dateTimePickerExpiration.Size = new System.Drawing.Size(288, 26);
             this.dateTimePickerExpiration.TabIndex = 111;
             // 
             // materialLabel9
@@ -141,7 +132,7 @@
             this.materialLabel9.AutoSize = true;
             this.materialLabel9.Depth = 0;
             this.materialLabel9.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel9.Location = new System.Drawing.Point(440, 37);
+            this.materialLabel9.Location = new System.Drawing.Point(328, 32);
             this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel9.Name = "materialLabel9";
             this.materialLabel9.Size = new System.Drawing.Size(109, 19);
@@ -150,22 +141,22 @@
             // 
             // lblIngredientId
             // 
-            this.lblIngredientId.AutoSize = true;
             this.lblIngredientId.Depth = 0;
             this.lblIngredientId.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblIngredientId.Location = new System.Drawing.Point(96, 136);
+            this.lblIngredientId.Location = new System.Drawing.Point(96, 32);
             this.lblIngredientId.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblIngredientId.Name = "lblIngredientId";
-            this.lblIngredientId.Size = new System.Drawing.Size(37, 19);
+            this.lblIngredientId.Size = new System.Drawing.Size(120, 19);
             this.lblIngredientId.TabIndex = 110;
             this.lblIngredientId.Text = "2001";
+            this.lblIngredientId.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // materialLabel1
             // 
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(16, 136);
+            this.materialLabel1.Location = new System.Drawing.Point(16, 32);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(75, 19);
@@ -177,41 +168,41 @@
             this.materialLabel8.AutoSize = true;
             this.materialLabel8.Depth = 0;
             this.materialLabel8.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel8.Location = new System.Drawing.Point(16, 37);
+            this.materialLabel8.Location = new System.Drawing.Point(24, 128);
             this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel8.Name = "materialLabel8";
             this.materialLabel8.Size = new System.Drawing.Size(102, 19);
             this.materialLabel8.TabIndex = 110;
             this.materialLabel8.Text = "Batch Number";
             // 
-            // materialTextBox21
+            // txtBoxIngredientName
             // 
-            this.materialTextBox21.AnimateReadOnly = false;
-            this.materialTextBox21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.materialTextBox21.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.materialTextBox21.Depth = 0;
-            this.materialTextBox21.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialTextBox21.HideSelection = true;
-            this.materialTextBox21.Hint = "Ingredient Name";
-            this.materialTextBox21.LeadingIcon = null;
-            this.materialTextBox21.Location = new System.Drawing.Point(16, 171);
-            this.materialTextBox21.MaxLength = 32767;
-            this.materialTextBox21.MouseState = MaterialSkin.MouseState.OUT;
-            this.materialTextBox21.Name = "materialTextBox21";
-            this.materialTextBox21.PasswordChar = '\0';
-            this.materialTextBox21.PrefixSuffixText = null;
-            this.materialTextBox21.ReadOnly = false;
-            this.materialTextBox21.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.materialTextBox21.SelectedText = "";
-            this.materialTextBox21.SelectionLength = 0;
-            this.materialTextBox21.SelectionStart = 0;
-            this.materialTextBox21.ShortcutsEnabled = true;
-            this.materialTextBox21.Size = new System.Drawing.Size(360, 48);
-            this.materialTextBox21.TabIndex = 108;
-            this.materialTextBox21.TabStop = false;
-            this.materialTextBox21.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.materialTextBox21.TrailingIcon = null;
-            this.materialTextBox21.UseSystemPasswordChar = false;
+            this.txtBoxIngredientName.AnimateReadOnly = false;
+            this.txtBoxIngredientName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtBoxIngredientName.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtBoxIngredientName.Depth = 0;
+            this.txtBoxIngredientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtBoxIngredientName.HideSelection = true;
+            this.txtBoxIngredientName.Hint = "Ingredient Name";
+            this.txtBoxIngredientName.LeadingIcon = null;
+            this.txtBoxIngredientName.Location = new System.Drawing.Point(16, 67);
+            this.txtBoxIngredientName.MaxLength = 32767;
+            this.txtBoxIngredientName.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtBoxIngredientName.Name = "txtBoxIngredientName";
+            this.txtBoxIngredientName.PasswordChar = '\0';
+            this.txtBoxIngredientName.PrefixSuffixText = null;
+            this.txtBoxIngredientName.ReadOnly = true;
+            this.txtBoxIngredientName.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtBoxIngredientName.SelectedText = "";
+            this.txtBoxIngredientName.SelectionLength = 0;
+            this.txtBoxIngredientName.SelectionStart = 0;
+            this.txtBoxIngredientName.ShortcutsEnabled = true;
+            this.txtBoxIngredientName.Size = new System.Drawing.Size(288, 48);
+            this.txtBoxIngredientName.TabIndex = 108;
+            this.txtBoxIngredientName.TabStop = false;
+            this.txtBoxIngredientName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtBoxIngredientName.TrailingIcon = null;
+            this.txtBoxIngredientName.UseSystemPasswordChar = false;
             // 
             // txtBoxBatchNumber
             // 
@@ -223,7 +214,7 @@
             this.txtBoxBatchNumber.HideSelection = true;
             this.txtBoxBatchNumber.Hint = "Enter Batch Number";
             this.txtBoxBatchNumber.LeadingIcon = null;
-            this.txtBoxBatchNumber.Location = new System.Drawing.Point(16, 72);
+            this.txtBoxBatchNumber.Location = new System.Drawing.Point(24, 152);
             this.txtBoxBatchNumber.MaxLength = 32767;
             this.txtBoxBatchNumber.MouseState = MaterialSkin.MouseState.OUT;
             this.txtBoxBatchNumber.Name = "txtBoxBatchNumber";
@@ -235,39 +226,13 @@
             this.txtBoxBatchNumber.SelectionLength = 0;
             this.txtBoxBatchNumber.SelectionStart = 0;
             this.txtBoxBatchNumber.ShortcutsEnabled = true;
-            this.txtBoxBatchNumber.Size = new System.Drawing.Size(360, 48);
+            this.txtBoxBatchNumber.Size = new System.Drawing.Size(288, 48);
             this.txtBoxBatchNumber.TabIndex = 108;
             this.txtBoxBatchNumber.TabStop = false;
             this.txtBoxBatchNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.toolTip1.SetToolTip(this.txtBoxBatchNumber, "e.g <ingredient>31-12-2024");
             this.txtBoxBatchNumber.TrailingIcon = null;
             this.txtBoxBatchNumber.UseSystemPasswordChar = false;
-            // 
-            // numericUpDownLowLevel
-            // 
-            this.numericUpDownLowLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownLowLevel.Location = new System.Drawing.Point(16, 352);
-            this.numericUpDownLowLevel.Maximum = new decimal(new int[] {
-            500000,
-            0,
-            0,
-            0});
-            this.numericUpDownLowLevel.Name = "numericUpDownLowLevel";
-            this.numericUpDownLowLevel.Size = new System.Drawing.Size(360, 31);
-            this.numericUpDownLowLevel.TabIndex = 106;
-            this.toolTip1.SetToolTip(this.numericUpDownLowLevel, " A predefined threshold that triggers an automatic reorder or low stock notificat" +
-        "ion.");
-            // 
-            // materialLabel14
-            // 
-            this.materialLabel14.AutoSize = true;
-            this.materialLabel14.Depth = 0;
-            this.materialLabel14.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel14.Location = new System.Drawing.Point(16, 320);
-            this.materialLabel14.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel14.Name = "materialLabel14";
-            this.materialLabel14.Size = new System.Drawing.Size(177, 19);
-            this.materialLabel14.TabIndex = 105;
-            this.materialLabel14.Text = "Stock Reorder/Low Level";
             // 
             // label1
             // 
@@ -278,79 +243,42 @@
             this.label1.TabIndex = 69;
             this.label1.Text = "Cost per unit: PHP 1";
             // 
-            // materialLabel6
+            // lblQuantity
             // 
-            this.materialLabel6.AutoSize = true;
-            this.materialLabel6.Depth = 0;
-            this.materialLabel6.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel6.Location = new System.Drawing.Point(440, 214);
-            this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel6.Name = "materialLabel6";
-            this.materialLabel6.Size = new System.Drawing.Size(61, 19);
-            this.materialLabel6.TabIndex = 67;
-            this.materialLabel6.Text = "Quantity";
+            this.lblQuantity.AutoSize = true;
+            this.lblQuantity.Depth = 0;
+            this.lblQuantity.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblQuantity.Location = new System.Drawing.Point(328, 101);
+            this.lblQuantity.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblQuantity.Name = "lblQuantity";
+            this.lblQuantity.Size = new System.Drawing.Size(61, 19);
+            this.lblQuantity.TabIndex = 67;
+            this.lblQuantity.Text = "Quantity";
             // 
             // numericUpDownQuantity
             // 
             this.numericUpDownQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownQuantity.Location = new System.Drawing.Point(440, 249);
+            this.numericUpDownQuantity.Location = new System.Drawing.Point(328, 128);
             this.numericUpDownQuantity.Maximum = new decimal(new int[] {
             500000,
             0,
             0,
             0});
             this.numericUpDownQuantity.Name = "numericUpDownQuantity";
-            this.numericUpDownQuantity.Size = new System.Drawing.Size(360, 31);
+            this.numericUpDownQuantity.Size = new System.Drawing.Size(288, 31);
             this.numericUpDownQuantity.TabIndex = 66;
-            // 
-            // cmbBoxMeasuringUnit
-            // 
-            this.cmbBoxMeasuringUnit.AutoResize = false;
-            this.cmbBoxMeasuringUnit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cmbBoxMeasuringUnit.Depth = 0;
-            this.cmbBoxMeasuringUnit.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cmbBoxMeasuringUnit.DropDownHeight = 174;
-            this.cmbBoxMeasuringUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBoxMeasuringUnit.DropDownWidth = 121;
-            this.cmbBoxMeasuringUnit.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.cmbBoxMeasuringUnit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cmbBoxMeasuringUnit.FormattingEnabled = true;
-            this.cmbBoxMeasuringUnit.Hint = "Choose measuring unit";
-            this.cmbBoxMeasuringUnit.IntegralHeight = false;
-            this.cmbBoxMeasuringUnit.ItemHeight = 43;
-            this.cmbBoxMeasuringUnit.Location = new System.Drawing.Point(440, 149);
-            this.cmbBoxMeasuringUnit.MaxDropDownItems = 4;
-            this.cmbBoxMeasuringUnit.MouseState = MaterialSkin.MouseState.OUT;
-            this.cmbBoxMeasuringUnit.Name = "cmbBoxMeasuringUnit";
-            this.cmbBoxMeasuringUnit.Size = new System.Drawing.Size(360, 49);
-            this.cmbBoxMeasuringUnit.StartIndex = 0;
-            this.cmbBoxMeasuringUnit.TabIndex = 61;
-            this.toolTip1.SetToolTip(this.cmbBoxMeasuringUnit, "The unit of measurement used for the ingredient (e.g., grams, kilograms, liters, " +
-        "cups).");
             // 
             // lblCost
             // 
             this.lblCost.AutoSize = true;
             this.lblCost.Depth = 0;
             this.lblCost.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblCost.Location = new System.Drawing.Point(16, 235);
+            this.lblCost.Location = new System.Drawing.Point(24, 208);
             this.lblCost.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblCost.Name = "lblCost";
             this.lblCost.Size = new System.Drawing.Size(33, 19);
             this.lblCost.TabIndex = 60;
             this.lblCost.Text = "Cost";
-            // 
-            // materialLabel7
-            // 
-            this.materialLabel7.AutoSize = true;
-            this.materialLabel7.Depth = 0;
-            this.materialLabel7.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel7.Location = new System.Drawing.Point(440, 114);
-            this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel7.Name = "materialLabel7";
-            this.materialLabel7.Size = new System.Drawing.Size(108, 19);
-            this.materialLabel7.TabIndex = 57;
-            this.materialLabel7.Text = "Measuring Unit";
             // 
             // numericUpDownCost
             // 
@@ -360,14 +288,14 @@
             0,
             0,
             65536});
-            this.numericUpDownCost.Location = new System.Drawing.Point(16, 270);
+            this.numericUpDownCost.Location = new System.Drawing.Point(24, 232);
             this.numericUpDownCost.Maximum = new decimal(new int[] {
             500000,
             0,
             0,
             0});
             this.numericUpDownCost.Name = "numericUpDownCost";
-            this.numericUpDownCost.Size = new System.Drawing.Size(358, 31);
+            this.numericUpDownCost.Size = new System.Drawing.Size(288, 31);
             this.numericUpDownCost.TabIndex = 56;
             this.toolTip1.SetToolTip(this.numericUpDownCost, "Overall Batch Cost");
             // 
@@ -378,9 +306,9 @@
             this.panel3.Controls.Add(this.btnAdd);
             this.panel3.Controls.Add(this.btnCancel);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(14, 454);
+            this.panel3.Location = new System.Drawing.Point(14, 371);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(858, 63);
+            this.panel3.Size = new System.Drawing.Size(672, 53);
             this.panel3.TabIndex = 102;
             // 
             // btnAdd
@@ -390,7 +318,7 @@
             this.btnAdd.Depth = 0;
             this.btnAdd.HighEmphasis = true;
             this.btnAdd.Icon = null;
-            this.btnAdd.Location = new System.Drawing.Point(664, 10);
+            this.btnAdd.Location = new System.Drawing.Point(472, 8);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnAdd.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnAdd.Name = "btnAdd";
@@ -410,7 +338,7 @@
             this.btnCancel.Depth = 0;
             this.btnCancel.HighEmphasis = true;
             this.btnCancel.Icon = null;
-            this.btnCancel.Location = new System.Drawing.Point(760, 10);
+            this.btnCancel.Location = new System.Drawing.Point(568, 8);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnCancel.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCancel.Name = "btnCancel";
@@ -431,7 +359,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(14, 14);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(858, 46);
+            this.panel2.Size = new System.Drawing.Size(672, 46);
             this.panel2.TabIndex = 101;
             // 
             // materialLabel5
@@ -440,7 +368,7 @@
             this.materialLabel5.Depth = 0;
             this.materialLabel5.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel5.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.materialLabel5.Location = new System.Drawing.Point(382, 10);
+            this.materialLabel5.Location = new System.Drawing.Point(289, 10);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
             this.materialLabel5.Size = new System.Drawing.Size(93, 24);
@@ -470,7 +398,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 558);
+            this.ClientSize = new System.Drawing.Size(706, 465);
             this.Controls.Add(this.panel1);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
             this.Name = "AddBatchModal";
@@ -482,7 +410,6 @@
             this.panel4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLowLevel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCost)).EndInit();
             this.panel3.ResumeLayout(false);
@@ -499,11 +426,9 @@
         public System.Windows.Forms.Panel panel2;
         public MaterialSkin.Controls.MaterialLabel materialLabel5;
         public System.Windows.Forms.Panel panel4;
-        public MaterialSkin.Controls.MaterialLabel materialLabel6;
+        public MaterialSkin.Controls.MaterialLabel lblQuantity;
         public System.Windows.Forms.NumericUpDown numericUpDownQuantity;
-        public MaterialSkin.Controls.MaterialComboBox cmbBoxMeasuringUnit;
         public MaterialSkin.Controls.MaterialLabel lblCost;
-        public MaterialSkin.Controls.MaterialLabel materialLabel7;
         public System.Windows.Forms.NumericUpDown numericUpDownCost;
         public System.Windows.Forms.Panel panel3;
         public MaterialSkin.Controls.MaterialButton btnAdd;
@@ -515,10 +440,8 @@
         public MaterialSkin.Controls.MaterialLabel materialLabel9;
         public MaterialSkin.Controls.MaterialLabel materialLabel8;
         public MaterialSkin.Controls.MaterialTextBox2 txtBoxBatchNumber;
-        public System.Windows.Forms.NumericUpDown numericUpDownLowLevel;
-        public MaterialSkin.Controls.MaterialLabel materialLabel14;
         public MaterialSkin.Controls.MaterialLabel materialLabel1;
-        public MaterialSkin.Controls.MaterialTextBox2 materialTextBox21;
+        public MaterialSkin.Controls.MaterialTextBox2 txtBoxIngredientName;
         public MaterialSkin.Controls.MaterialLabel lblIngredientId;
     }
 }

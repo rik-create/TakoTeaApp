@@ -109,19 +109,36 @@ namespace TakoTea.Repository
 
         public DataTable GetCurrentStockLevels()
         {
-            string query = @"
-    SELECT 
-        i.IngredientID, 
-        i.IngredientName,
-        b.QuantityInStock,
-        b.ReorderLevel
-    FROM 
-        Ingredient i
-    JOIN 
-        Batch b ON i.IngredientID = b.IngredientID
-    WHERE 
-        b.IsActive = 1";
-            return _dao.ExecuteQuery(query);
+            try
+            {
+                var query = from ingredient in _context.Ingredients
+                            join batch in _context.Batches on ingredient.IngredientID equals batch.IngredientID
+                            where batch.IsActive == true
+                            select new
+                            {
+                                ingredient.IngredientID,
+                                ingredient.IngredientName,
+                                batch.StockLevel,
+                                ingredient.LowLevel
+                            };
+
+                var dataTable = new DataTable();
+                dataTable.Columns.Add("IngredientID", typeof(int));
+                dataTable.Columns.Add("IngredientName", typeof(string));
+                dataTable.Columns.Add("StockLevel", typeof(decimal));
+                dataTable.Columns.Add("ReorderLevel", typeof(decimal));
+
+                foreach (var item in query)
+                {
+                    dataTable.Rows.Add(item.IngredientID, item.IngredientName, item.StockLevel, item.LowLevel);
+                }
+
+                return dataTable;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error loading current stock levels: " + ex.Message);
+            }
         }
 
         // Method to get a batch by its ID

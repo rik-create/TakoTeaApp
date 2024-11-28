@@ -1,10 +1,16 @@
 ﻿using LiveCharts.Wpf;
+using Microsoft.ReportingServices.ReportProcessing.OnDemandReportObjectModel;
+using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
+using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using MailKit.Net.Smtp;
+using MailKit.Security;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +35,11 @@ namespace TakoTea.Views.Order
             _context = new Entities();
             productsService = new ProductsService();
         }
-
+        public int GetLatestDraftOrderId()
+        {
+            int? maxDraftOrderId = _context.DraftOrders.Max(o => (int?)o.DraftOrderId);
+            return (maxDraftOrderId ?? 0);
+        }
         public int UpdateStockLevelsCallCount { get; private set; } // Add a counter
 
         public void AddToOrderList(string productName, int quantity, decimal price)
@@ -191,30 +201,36 @@ namespace TakoTea.Views.Order
 
         public void LoadMenuVariantsByCategory(string categoryName, FlowLayoutPanel flPanelProductVariantsMenu, DataGridView dg)
         {
-            // ... (Null checks and clearing the FlowLayoutPanel - same as before) ...
+            if (flPanelProductVariantsMenu == null)
+            {
+                throw new ArgumentNullException(nameof(flPanelProductVariantsMenu));
+            }
+
+            if (_context == null)
+            {
+                throw new ArgumentNullException(nameof(_context));
+            }
 
             var productVariants = _context.ProductVariants
-                .Where(pv => pv.Product.ProductName == categoryName) // Filter by category
+                .Where(pv => pv.Product.ProductName == categoryName)
                 .GroupBy(pv => pv.VariantName)
                 .Select(g => g.FirstOrDefault())
                 .ToList();
 
             flPanelProductVariantsMenu.Controls.Clear();
+
             if (productVariants.Count == 0)
             {
-                Label noVariantsLabel = new Label();
+                Label noVariantsLabel = new Label(); // Declare and initialize the label first
                 noVariantsLabel.Text = $"No variants available for {categoryName}.";
                 noVariantsLabel.AutoSize = true;
+                noVariantsLabel.Font = new Font(noVariantsLabel.Font.FontFamily, 14, FontStyle.Regular);
 
-                // Center the label within the panel
+                // Now you can use noVariantsLabel.Width and noVariantsLabel.Height
                 noVariantsLabel.Location = new Point(
                     (flPanelProductVariantsMenu.ClientSize.Width - noVariantsLabel.Width) / 2,
                     (flPanelProductVariantsMenu.ClientSize.Height - noVariantsLabel.Height) / 2
                 );
-
-                // Increase the font size
-                noVariantsLabel.Font = new Font(noVariantsLabel.Font.FontFamily, 14, FontStyle.Regular);
-
                 flPanelProductVariantsMenu.Controls.Add(noVariantsLabel);
             }
             else
@@ -227,19 +243,15 @@ namespace TakoTea.Views.Order
                         lblProductCategory = { Text = productsService.GetProductNameById(productVariant.ProductID) }
                     };
 
-                    if (!string.IsNullOrEmpty(productVariant.ImagePath))
+                    if (productVariant.ImagePath?.Length > 0)
                     {
                         try
                         {
-                            if (File.Exists(productVariant.ImagePath))
+                            using (MemoryStream ms = new MemoryStream(productVariant.ImagePath))
                             {
-                                productWidget.pictureBoxProduct.Image = Image.FromFile(productVariant.ImagePath);
-                                productWidget.pictureBoxProduct.SizeMode = PictureBoxSizeMode.Zoom;
+                                productWidget.pictureBoxProduct.Image = Image.FromStream(ms);
                             }
-                            else
-                            {
-                                productWidget.pictureBoxProduct.Image = Properties.Resources.multiply;
-                            }
+                            productWidget.pictureBoxProduct.SizeMode = PictureBoxSizeMode.Zoom;
                         }
                         catch (Exception ex)
                         {
@@ -249,11 +261,9 @@ namespace TakoTea.Views.Order
 
                     productWidget.pictureBoxProduct.Click += (sender, e) =>
                     {
-                        using (OrderEntryModal orderEntryModal = new OrderEntryModal(dg))
-                        {
-                            orderEntryModal.SetProductData(productVariant);
-                            orderEntryModal.ShowDialog();
-                        }
+                         var orderEntryModal = new OrderEntryModal(dg);
+                        orderEntryModal.SetProductData(productVariant);
+                        orderEntryModal.ShowDialog();
                     };
 
                     ToolTip toolTip = new ToolTip();
@@ -262,7 +272,6 @@ namespace TakoTea.Views.Order
                     flPanelProductVariantsMenu.Controls.Add(productWidget);
                 }
             }
-
         }
         // In your productsService class
 
@@ -299,7 +308,7 @@ namespace TakoTea.Views.Order
 
             foreach (var variant in productVariants)
             {
-                flPanelProductVariantsMenu.Controls.Add(CreateProductWidget(variant, dg, "Product"));
+                flPanelProductVariantsMenu.Controls.Add(CreateProductWidget(variant, dg));
             }
 
             var comboMeals = _context.ComboMeals.ToList();
@@ -309,28 +318,44 @@ namespace TakoTea.Views.Order
                 flPanelProductVariantsMenu.Controls.Add(CreateProductWidget(comboMeal, dg));
             }
         }
-
-        private ProductWidget CreateProductWidget(ProductVariant productVariant, DataGridView dg, string category = "Product")
+        // If using .NET Framework 4.8 or earlier, use this method instead:
+        private bool IsBase64String(string base64String)
         {
+            // Credit: https://stackoverflow.com/a/33557841
+            if (string.IsNullOrEmpty(base64String) || base64String.Length % 4 != 0
+               || base64String.Contains(" ") || base64String.Contains("\t") || base64String.Contains("\r") || base64String.Contains("\n"))
+                return false;
+
+            try
+            {
+                Convert.FromBase64String(base64String);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        private ProductWidget CreateProductWidget(ProductVariant productVariant, DataGridView dg)
+        {
+            // Initialize the ProductWidget with product variant name and category
             var productWidget = new ProductWidget
             {
                 lblProductName = { Text = productVariant.VariantName },
-                lblProductCategory = { Text = category }
+                lblProductCategory = { Text = productsService.GetProductNameById(productVariant.ProductID) }
             };
 
-            if (!string.IsNullOrEmpty(productVariant.ImagePath))
+            // Check if the ImagePath is not empty
+            if (productVariant.ImagePath?.Length > 0) // Check if ImagePath is not null and has data
             {
                 try
                 {
-                    if (File.Exists(productVariant.ImagePath))
+                    // Create an Image from the byte array in ImagePath
+                    using (MemoryStream ms = new MemoryStream(productVariant.ImagePath))
                     {
-                        productWidget.pictureBoxProduct.Image = Image.FromFile(productVariant.ImagePath);
-                        productWidget.pictureBoxProduct.SizeMode = PictureBoxSizeMode.Zoom;
+                        productWidget.pictureBoxProduct.Image = Image.FromStream(ms);
                     }
-                    else
-                    {
-                        productWidget.pictureBoxProduct.Image = Properties.Resources.multiply;
-                    }
+                    productWidget.pictureBoxProduct.SizeMode = PictureBoxSizeMode.Zoom;
                 }
                 catch (Exception ex)
                 {
@@ -338,6 +363,7 @@ namespace TakoTea.Views.Order
                 }
             }
 
+            // Handle the click event of the product's picture box
             productWidget.pictureBoxProduct.Click += (sender, e) =>
             {
                 using (var orderEntryModal = new OrderEntryModal(dg))
@@ -345,9 +371,9 @@ namespace TakoTea.Views.Order
                     orderEntryModal.SetProductData(productVariant);
                     orderEntryModal.ShowDialog();
                 }
-                    
             };
 
+            // Set the tooltip for the product's picture box
             ToolTip toolTip = new ToolTip();
             toolTip.SetToolTip(productWidget.pictureBoxProduct, productVariant.VariantName);
 
@@ -398,43 +424,35 @@ namespace TakoTea.Views.Order
         public void FilterAndDisplayUniqueVariants(string searchText, FlowLayoutPanel flPanelProductVariantsMenu, DataGridView dg)
         {
             if (flPanelProductVariantsMenu == null)
+            {
                 throw new ArgumentNullException(nameof(flPanelProductVariantsMenu));
+            }
 
-
-            // Filter product variants by search text and group by VariantName to ensure uniqueness
             var filteredVariants = _context.ProductVariants
-                  .Where(pv => pv.VariantName.ToLower().Contains(searchText.Trim().ToLower()))
-                  .GroupBy(pv => pv.VariantName)  // Group by VariantName to remove duplicates
-                  .Select(g => g.FirstOrDefault()) // Take only the first variant in each group
-                  .ToList();
-
-
+                .Where(pv => pv.VariantName.ToLower().Contains(searchText.Trim().ToLower()))
+                .GroupBy(pv => pv.VariantName)
+                .Select(g => g.FirstOrDefault())
+                .ToList();
 
             flPanelProductVariantsMenu.Controls.Clear();
 
             foreach (var variant in filteredVariants)
             {
-                // Create and configure ProductWidgets for each unique variant
                 var productWidget = new ProductWidget
                 {
                     lblProductName = { Text = variant.VariantName },
                     lblProductCategory = { Text = productsService.GetProductNameById(variant.ProductID) }
                 };
 
-                // Load the image into the PictureBox 
-                if (!string.IsNullOrEmpty(variant.ImagePath))
+                if (variant.ImagePath?.Length > 0)
                 {
                     try
                     {
-                        if (File.Exists(variant.ImagePath))
+                        using (MemoryStream ms = new MemoryStream(variant.ImagePath))
                         {
-                            productWidget.pictureBoxProduct.Image = Image.FromFile(variant.ImagePath);
-                            productWidget.pictureBoxProduct.SizeMode = PictureBoxSizeMode.Zoom;
+                            productWidget.pictureBoxProduct.Image = Image.FromStream(ms);
                         }
-                        else
-                        {
-                            productWidget.pictureBoxProduct.Image = Properties.Resources.multiply;
-                        }
+                        productWidget.pictureBoxProduct.SizeMode = PictureBoxSizeMode.Zoom;
                     }
                     catch (Exception ex)
                     {
@@ -442,28 +460,19 @@ namespace TakoTea.Views.Order
                     }
                 }
 
-                // Add click or event handlers for interaction
                 productWidget.pictureBoxProduct.Click += (sender, e) =>
                 {
-                    // Create and show the OrderEntryModal
-                    using (OrderEntryModal orderEntryModal = new OrderEntryModal(dg))
-                    {
-                        // Pass productVariant data to OrderEntryModal
-                        orderEntryModal.SetProductData(variant);
-
-                        // Show the modal
-                        orderEntryModal.ShowDialog();
-                    }
+                    var orderEntryModal = new OrderEntryModal(dg);
+                    orderEntryModal.SetProductData(variant);
+                    orderEntryModal.ShowDialog();
                 };
 
-                // Optional: Add a tooltip
                 ToolTip toolTip = new ToolTip();
                 toolTip.SetToolTip(productWidget.pictureBoxProduct, variant.VariantName);
 
                 flPanelProductVariantsMenu.Controls.Add(productWidget);
             }
         }
-
         public void LogActivity(string activityType, string description)
         {
             throw new NotImplementedException();
@@ -479,14 +488,200 @@ namespace TakoTea.Views.Order
             throw new NotImplementedException();
         }
 
-        public void SaveDraftOrder(int draftOrderId, List<OrderItem> items, decimal totalAmount, string customerName, string paymentMethod)
+        public void SaveDraftOrder(DataGridView dataGridViewOrderList, string totalAmount, string customerName, string paymentMethod)
         {
-            throw new NotImplementedException();
+            using (var context = new Entities())
+            {
+                var draftOrder = new DraftOrder
+                {
+                    CreatedDate = DateTime.Now,
+                    CustomerName = customerName,
+                    TotalAmount = decimal.Parse(totalAmount)
+                };
+
+
+                if (draftOrder.DraftOrderId == 0)
+                {
+                    context.DraftOrders.Add(draftOrder);
+                }
+
+                context.DraftOrders.Add(draftOrder);
+                context.SaveChanges();
+
+                MenuOrderFormService menuOrderForm = new MenuOrderFormService();
+                int draftOrderId = menuOrderForm.GetLatestDraftOrderId(); // Assuming you have a method to generate the next draft order ID
+
+                context.DraftOrderItems.RemoveRange(context.DraftOrderItems.Where(i => i.DraftOrderId == draftOrderId));
+
+                foreach (DataGridViewRow row in dataGridViewOrderList.Rows)
+                {
+                    if (row.IsNewRow)
+                        continue;
+
+                    string productName = row.Cells[0].Value.ToString();
+                    string sizeId = row.Cells[1].Value?.ToString() ?? string.Empty;
+                    string AddOns = row.Cells[2].Value.ToString();
+                    int variantId = string.IsNullOrEmpty(sizeId)
+                        ? _context.ComboMealVariants.FirstOrDefault(cmv => cmv.ComboMeal.ComboMealName == productName)?.ComboMealVariantID ?? 0
+                        : productsService.GetProductVariantId(productName, sizeId);
+
+                    var draftOrderItem = new DraftOrderItem
+                    {
+                        DraftOrderId = draftOrderId,
+                        ProductName = productName,
+                        ProductVariantId = variantId,
+                        Quantity = Convert.ToInt32(row.Cells[3].Value),
+                        Price = Convert.ToDecimal(row.Cells[4].Value),
+                        CreatedBy = "System",
+                        CreatedDate = DateTime.Now,
+                        AddOns = AddOns
+
+                    };
+
+                    context.DraftOrderItems.Add(draftOrderItem);
+                }
+
+                context.SaveChanges();
+            }
         }
 
-        public void SendDigitalReceipt(int orderId, string customerContact)
+        public void LoadDraftOrder(int draftOrderId, DataGridView dataGridViewOrderList, Label lblTotalInOrderList)
         {
-            throw new NotImplementedException();
+            using (var context = new Entities())
+            {
+                var draftOrder = context.DraftOrders.Include(o => o.DraftOrderItems).FirstOrDefault(o => o.DraftOrderId == draftOrderId);
+
+                if (draftOrder == null)
+                {
+                    return;
+                }
+
+                dataGridViewOrderList.Rows.Clear();
+
+                foreach (var item in draftOrder.DraftOrderItems)
+                {
+                    dataGridViewOrderList.Rows.Add(
+                        item.ProductName,
+                        productsService.GetSizeByVariantId(item.ProductVariantId),
+                        item.AddOns,
+                        item.Quantity,
+                        item.Price
+                    );
+                }
+
+                lblTotalInOrderList.Text = $"₱{draftOrder.TotalAmount:F2}";
+            }
+        }
+        private byte[] ImageToByteArray(Image image)
+        {
+            using (var ms = new MemoryStream())
+            {
+                // Specify the image format explicitly
+                image.Save(ms, ImageFormat.Png); // Or another format like ImageFormat.Jpeg
+                return ms.ToArray();
+            }
+        }
+
+        private string GenerateReceiptContent(int orderId)
+        {
+
+            var order = _context.OrderModels
+                .Include(o => o.OrderItems)
+                .FirstOrDefault(o => o.OrderId == orderId);
+
+            if (order == null)
+            {
+                return $"Order with ID {orderId} not found."; // Return an error message
+            }
+
+            var receiptContent = new StringBuilder();
+
+            receiptContent.AppendLine("TakoTea".PadLeft(24) + "\n");
+            receiptContent.AppendLine("=".PadRight(42, '='));
+            receiptContent.AppendLine("Order Receipt".PadLeft(27));
+            receiptContent.AppendLine("=".PadRight(42, '=') + "\n");
+
+            receiptContent.AppendLine($"Order ID: {order.OrderId}");
+            receiptContent.AppendLine($"Order Date: {order.OrderDate:yyyy-MM-dd HH:mm:ss}");
+
+            if (!string.IsNullOrEmpty(order.CustomerName))
+            {
+                receiptContent.AppendLine($"Customer: {order.CustomerName}");
+            }
+
+            receiptContent.AppendLine($"Payment Method: {order.PaymentMethod}");
+            receiptContent.AppendLine($"Payment Status: {order.PaymentStatus}");
+
+            receiptContent.AppendLine("\nItems:");
+            foreach (var item in order.OrderItems)
+            {
+                receiptContent.AppendLine($"- {item.ProductName,-15} {item.Quantity} x {item.Price,8:C} = {item.TotalPrice,9:C}");
+
+                if (!string.IsNullOrEmpty(item.AddOns))
+                {
+                    receiptContent.AppendLine($"  Add-ons: {item.AddOns}");
+                }
+            }
+
+            receiptContent.AppendLine("=".PadRight(42, '='));
+            receiptContent.AppendLine($"Total: {order.TotalAmount,35:C}");
+
+            return receiptContent.ToString();
+        }
+
+
+        public void SendDigitalReceipt(int orderId, string customerEmail)
+        {
+
+            string receiptContent = GenerateReceiptContent(orderId);    
+            ReceiptForm receiptForm = new ReceiptForm(orderId); // Assuming ReceiptForm has a constructor that takes orderId
+    receiptForm.lblReceiptContent.Text = receiptContent.ToString();
+
+    // Capture the form as an image
+    Bitmap bmp = new Bitmap(receiptForm.Width, receiptForm.Height);
+    receiptForm.DrawToBitmap(bmp, new Rectangle(0, 0, receiptForm.Width, receiptForm.Height));
+
+
+            var imageAttachment = new MimePart("image", "png")
+            {   
+                Content = new MimeContent(new MemoryStream(ImageToByteArray(bmp))),
+                ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+                ContentTransferEncoding = ContentEncoding.Base64,
+                FileName
+= "Receipt.png"
+            };
+
+            // Create the email message
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Tako Tea", "takotea9@gmail.com"));
+            message.To.Add(new MailboxAddress("Recipient Name", customerEmail));
+            message.Subject
+     = "Email from MailKit with Gmail";
+            message.Body = new TextPart("plain")
+            {
+                Text = "This email was sent using MailKit with Gmail."
+            };
+
+            var multipart = new Multipart("mixed");
+            multipart.Add(message.Body); // Add the original text part
+            multipart.Add(imageAttachment);
+            message.Body = multipart;
+
+
+
+            // Connect to the Gmail SMTP server
+            using (var client = new SmtpClient())
+            {
+                client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+
+                // Use your Gmail email address and app password
+                client.Authenticate("takotea9@gmail.com", "rhdl vljl ztfn xzui");
+
+                client.Send(message);
+                client.Disconnect(true);
+            }
+
+            MessageBox.Show("Email sent successfully!");
         }
 
 

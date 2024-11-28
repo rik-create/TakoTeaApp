@@ -1,9 +1,11 @@
 ﻿using MaterialSkin.Controls;
 using System;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
+using TakoTea.Models;
 using TakoTea.Repository;
 using TakoTea.View.Stock.Stock_Modal;
 using TakoTea.Views.Stock.Stock_Modal;
@@ -21,7 +23,7 @@ namespace TakoTea.Views.Stock
             InitializeComponent();
             _dao = new DataAccessObject();
 
-            _ingredientRepository = ingredientRepository ?? new IngredientRepository(_dao);
+            _ingredientRepository = ingredientRepository ?? new IngredientRepository(new Models.Entities());
             _bindingSource = new BindingSource();
             ThemeConfigurator.ApplyDarkTheme(this);
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
@@ -34,23 +36,30 @@ namespace TakoTea.Views.Stock
         }
         private void LoadData()
         {
-            try
-            {
-                // Get the stock data
-                DataTable stockData = _ingredientRepository.GetCurrentStockLevels();
-                if (stockData == null)
-                {
-                    DialogHelper.ShowError("Failed to load stock data.");
-                    return;
-                }
-                // Use the BindDataToGridView helper to bind data to DataGridView and refresh it
-                DataGridViewHelper.BindDataToGridView(dataGridViewStockLevels, _bindingSource, stockData);
-                DataGridViewHelper.BindNavigatorToBindingSource(bindingNavigatorStockLevels, _bindingSource);
-            }
-            catch (Exception ex)
-            {
-                DialogHelper.ShowError("Error loading data: " + ex.Message);
-            }
+            // Retrieve both Product and ProductVariant data
+            var productVariantsWithProductName = _ingredientRepository.GetAllIngredients()
+                .Join(_ingredientRepository.GetAllBatch(),
+                    i => i.IngredientID,        // Key from ProductVariant
+                    b => b.IngredientID,          // Key from Product
+                    (i, b) => new
+                    {
+                        i.IngredientName,         // Product name from Product table
+                        i.StockLevel,
+                        i.LowLevel
+                      
+                    })
+                .ToList();  // Execute and retrieve the data
+
+            // Bind the data to the DataGridView
+            DataGridViewHelper.LoadData(
+                dataRetrievalFunc: () => productVariantsWithProductName,
+                dataGridView: dataGridViewStockLevels,
+                bindingSource: _bindingSource,
+                bindingNavigator: bindingNavigatorStockLevels,
+                errorMessage: "Failed to load product variants."
+            );
+
+        
         }
         private void HandleButtonClick(int rowIndex)
         {
@@ -73,6 +82,12 @@ namespace TakoTea.Views.Stock
         }
         private void button1_Click(object sender, EventArgs e)
         {
+        }
+
+        private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
+        {
+            DataGridViewHelper.DeleteSelectedRows<Ingredient>(dataGridViewStockLevels, "IngredientID");
+
         }
     }
 

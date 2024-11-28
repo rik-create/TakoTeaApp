@@ -256,6 +256,7 @@ namespace TakoTea.Views.Order.Order_Modals
             this.Name = "OrderEntryModal";
             this.Padding = new System.Windows.Forms.Padding(3, 24, 3, 3);
             this.Text = "OrderEntryModal";
+            this.Load += new System.EventHandler(this.OrderEntryModal_Load);
             this.materialCard1.ResumeLayout(false);
             this.groupBoxProduct.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

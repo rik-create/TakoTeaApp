@@ -1,5 +1,6 @@
 ﻿using MaterialSkin.Controls;
 using System;
+using System.IO;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
@@ -194,6 +195,19 @@ namespace TakoTea.Views.MainForm
         {
             toolStripQuickAccess.Visible = !toolStripQuickAccess.Visible;
             toolStripQuickAccess.Enabled = toolStripQuickAccess.Visible;
+            // Get the base directory of your application
+            // Get the base directory of your application
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+            // Navigate up three levels to reach the project directory
+            string projectDirectory = Directory.GetParent(Directory.GetParent(Directory.GetParent(baseDirectory).FullName).FullName).FullName;
+
+            // Construct the image directory relative to the project directory
+            string imageDirectory = Path.Combine(projectDirectory, "Resources");
+
+            // ... (Rest of the code remains the same) ...
+
+            MessageBox.Show(imageDirectory);
         }
         private void toolStripBtnNewOrder_Click(object sender, EventArgs e)
         {

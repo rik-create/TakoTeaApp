@@ -10,6 +10,9 @@ using TakoTea.Repository;
 using TakoTea.View.Items.Item_Modals;
 using TakoTea.Views.Batches.Batch_Modals;
 using TakoTea.Interfaces;
+using TakoTea.Views.Batches;
+using TakoTea.Models;
+using TakoTea.Services;
 namespace TakoTea.Views.Items
 {
     public partial class IngredientListForm : MaterialForm
@@ -17,6 +20,7 @@ namespace TakoTea.Views.Items
         private readonly BatchRepository _batchRepo;
         private readonly DataAccessObject _dao;
         private readonly IngredientRepository ingredientRepository;
+        private readonly InventoryService _inventoryService;
         public IngredientListForm()
         {
             InitializeComponent();
@@ -24,8 +28,14 @@ namespace TakoTea.Views.Items
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
             _dao = new DataAccessObject();
             _batchRepo = new BatchRepository(_dao);
-            ingredientRepository = new IngredientRepository(_dao);
+            ingredientRepository = new IngredientRepository(new Entities()); // Fix: Pass an instance of Entities
             DataGridViewHelper.ApplyDefaultStyles(dataGridViewIngredients);
+            dataGridViewIngredients.CellClick += dataGridViewIngredients_CellClick;
+            DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewIngredients);
+            _inventoryService = new InventoryService();
+
+
+            bindingNavigatorDeleteItem.Click += bindingNavigatorDeleteItem_Click;
 
         }
         private void LoadData()
@@ -35,7 +45,7 @@ namespace TakoTea.Views.Items
             try
             {
                 // Get the stock data
-                var ingredients = ingredientRepository.GetAllIngredients();
+                var ingredients = ingredientRepository.GetAllIngredient();
                 if (ingredients == null)
                 {
                     DialogHelper.ShowError("Failed to load ingredients data.");
@@ -47,10 +57,33 @@ namespace TakoTea.Views.Items
                 DataGridViewHelper.BindNavigatorToBindingSource(bindingNavigatorBatch, bindingSource1);
 
 
+           
+                
+
+
             }
             catch (Exception ex)
             {
                 DialogHelper.ShowError("Error loading data: " + ex.Message);
+            }
+        }
+        private void dataGridViewIngredients_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dataGridViewIngredients.Columns["CreateBatchButtonColumn"].Index && e.RowIndex >= 0)
+            {
+                // Get the IngredientID and IngredientName from the selected row
+                int ingredientId = Convert.ToInt32(dataGridViewIngredients.Rows[e.RowIndex].Cells["IngredientID"].Value); // Assuming "IngredientID" is the column name
+                string ingredientName = dataGridViewIngredients.Rows[e.RowIndex].Cells["IngredientName"].Value.ToString(); // Assuming "IngredientName" is the column name
+                
+
+                string  measuringUnit = ingredientRepository.GetAllIngredients().Find(x => x.IngredientID == ingredientId).MeasuringUnit;
+                // Create and show the AddBatchModal
+                AddBatchModal addBatchModal = new AddBatchModal();
+                addBatchModal.lblIngredientId.Text = ingredientId.ToString();
+                addBatchModal.txtBoxIngredientName.Text = ingredientName;
+                addBatchModal.lblQuantity.Text = $"Quantity in {measuringUnit}"; // Set the label text
+
+                addBatchModal.ShowDialog();
             }
         }
         private void btnShowFilter_Click(object sender, EventArgs e)
@@ -68,6 +101,29 @@ namespace TakoTea.Views.Items
         {
          
         }
+
+        private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewIngredients.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select at least one row to delete.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (MessageBox.Show("Are you sure you want to delete the selected rows?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                foreach (DataGridViewRow row in dataGridViewIngredients.SelectedRows)
+                {
+                    int ingredientId = Convert.ToInt32(row.Cells["IngredientID"].Value);
+
+                    // Delete the ingredient from the database
+                    _inventoryService.DeleteIngredient(ingredientId);
+                }
+
+                // Refresh the DataGridView
+                LoadData();
+            }
+        }
         private void BatchListForm_Load(object sender, EventArgs e)
         {
 
@@ -79,7 +135,9 @@ namespace TakoTea.Views.Items
         {
             base.OnLoad(e);
             LoadData();
-            DataGridViewHelper.AddButtonToLastRow(dataGridViewIngredients, "Edit", "Edit", HandleEditButtonClick, ThemeConfigurator.GetPrimaryColor(), ThemeConfigurator.GetTextColor());
+            DataGridViewHelper.AddButtonToLastRow(dataGridViewIngredients, "CreateBatchButtonColumn", "Create Batch", ThemeConfigurator.GetAccentColor(), ThemeConfigurator.GetTextColor());
+
+            DataGridViewHelper.AddButtonToLastRow(dataGridViewIngredients, "EditIngredientButtonColumn", "Edit", HandleEditButtonClick, ThemeConfigurator.GetPrimaryColor(), ThemeConfigurator.GetTextColor());
             DataGridViewHelper.AddButtonToLastRow(dataGridViewIngredients, "View More", "View More", HandleViewMoreButtonClick, ThemeConfigurator.GetAccentColor(), ThemeConfigurator.GetTextColor());
 
         }
@@ -87,7 +145,13 @@ namespace TakoTea.Views.Items
 
         private void HandleEditButtonClick(int rowIndex)
         {
+            // Get the IngredientID from the selected row
+            int ingredientId = Convert.ToInt32(dataGridViewIngredients.Rows[rowIndex].Cells["IngredientID"].Value);
 
+            // Create and show the EditIngredientModal
+            EditIngredientModal editIngredientModal = new EditIngredientModal(ingredientId); // Assuming EditIngredientModal has a constructor that takes the IngredientID
+            editIngredientModal.ShowDialog();
+            LoadData();
         }
 
         private void HandleViewMoreButtonClick(int rowIndex)
@@ -114,6 +178,45 @@ namespace TakoTea.Views.Items
         private void pBoxShowFilter_Click(object sender, EventArgs e)
         {
             FilterPanelHelper.ToggleFilterPanel(panelFilteringComponents, btnHideFilters, pBoxShowFilter, true);
+        }
+
+        private void pbImportIngredients_Click(object sender, EventArgs e)
+        {
+             OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "CSV Files|*.csv"
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    _inventoryService.ImportIngredientsFromCsv(openFileDialog.FileName);
+                    MessageBox.Show("Ingredients imported successfully.");
+                    LoadData();
+
+                    // Refresh the DataGridView or other UI elements as needed
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error importing ingredients: {ex.Message}");
+                }
+            }
+        }
+
+        private void pictureBoxExportCsvIngredients_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBoxExportAll_Click(object sender, EventArgs e)
+        {
+            ExportHelper.ExportToCsv<Ingredient>();
+        }
+
+        private void btnExportSelectedItems_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

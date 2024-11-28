@@ -35,7 +35,6 @@ namespace TakoTea.Views.DataLoaders.Modals
                 editBatchModal.txtBoxBatchNumber.Text = batch.BatchNumber;
                 editBatchModal.numericUpDownQuantity.Value = batch.QuantityInStock;
                 editBatchModal.numericUpDownCost.Value = batch.BatchCost;
-                editBatchModal.numericUpDownLowLevel.Value = batch.ReorderLevel;
                 editBatchModal.dateTimePickerExpiration.Value = batch.ExpirationDate;
 
                 // Load IngredientModel Functions and Allergens
@@ -51,7 +50,6 @@ namespace TakoTea.Views.DataLoaders.Modals
                 editBatchModal.txtBoxBatchNumber.Text = _originalBatch.BatchNumber;
                 editBatchModal.numericUpDownQuantity.Value = _originalBatch.QuantityInStock;
                 editBatchModal.numericUpDownCost.Value = _originalBatch.BatchCost;
-                editBatchModal.numericUpDownLowLevel.Value = _originalBatch.ReorderLevel;
                 editBatchModal.dateTimePickerExpiration.Value = _originalBatch.ExpirationDate;
 
 

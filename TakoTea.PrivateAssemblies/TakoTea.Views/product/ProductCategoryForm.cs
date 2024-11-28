@@ -1,7 +1,9 @@
 ﻿using MaterialSkin.Controls;
 using System;
 using TakoTea.Configurations;
+using TakoTea.Helpers;
 using TakoTea.Interfaces;
+using TakoTea.Models;
 using TakoTea.Repository;
 using TakoTea.Services;
 using TakoTea.View.Product.Product_Modals;
@@ -25,6 +27,12 @@ namespace TakoTea.View.Product
         {
             AddProductCategoryModal addProductCategoryModal = new AddProductCategoryModal(service);
             _ = addProductCategoryModal.ShowDialog();
+        }
+
+        private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
+        {
+            DataGridViewHelper.DeleteSelectedRows<TakoTea.Models.Product>(dataGridViewProductList, "ProductID");
+
         }
     }
 }

@@ -17,11 +17,14 @@ namespace TakoTea.Views.Batches
         private readonly IngredientRepository _ingredientRepository;
         private readonly BatchService batchService;
         private readonly DataAccessObject _dao;
+        private readonly Entities context;
+
         public AddBatchModal()
         {
             InitializeComponent();
             _dao = new DataAccessObject();
-            _ingredientRepository = new IngredientRepository(_dao);
+            context = new Entities();
+            _ingredientRepository = new IngredientRepository(context);
             batchService = new BatchService();
             SetDecimalPlacesForAllNumericUpDowns(this, 1);
         }
@@ -47,9 +50,7 @@ namespace TakoTea.Views.Batches
         {
             try
             {
-                txtBoxBatchNumber.Text = "Batch002"; lblIngredientId.Text = "2005";
                 dateTimePickerExpiration.Value = DateTime.Now.AddMonths(6);
-                numericUpDownQuantity.Value = 50; numericUpDownLowLevel.Value = 10; numericUpDownCost.Value = 100.5m; 
                 
                 
                 var batch = new Batch
@@ -61,7 +62,6 @@ namespace TakoTea.Views.Batches
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now,
                     StockLevel = numericUpDownQuantity.Value,
-                    ReorderLevel = numericUpDownLowLevel.Value,
                     ExpirationDate = string.IsNullOrEmpty(dateTimePickerExpiration.Text)
                                      ? (DateTime?)null
                                      : dateTimePickerExpiration.Value,

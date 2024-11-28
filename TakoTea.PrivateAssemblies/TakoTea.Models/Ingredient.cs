@@ -17,40 +17,40 @@ namespace TakoTea.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Ingredient()
         {
-            this.Batches = new HashSet<Batch>();
             this.IngredientProductLinks = new HashSet<IngredientProductLink>();
-            this.StockAdjustmentLogs = new HashSet<StockAdjustmentLog>();
             this.ProductVariantIngredients = new HashSet<ProductVariantIngredient>();
-            this.AddOns = new HashSet<AddOn>();
+            this.StockAdjustmentLogs = new HashSet<StockAdjustmentLog>();
             this.StockLevelLogs = new HashSet<StockLevelLog>();
+            this.IngredientChangeLogs = new HashSet<IngredientChangeLog>();
+            this.Batches = new HashSet<Batch>();
         }
     
         public int IngredientID { get; set; }
         public string IngredientName { get; set; }
         public string BrandName { get; set; }
         public string Description { get; set; }
-        public string IngredientImage { get; set; }
+        public byte[] IngredientImage { get; set; }
         public Nullable<bool> IsAddOn { get; set; }
         public string TypeOfIngredient { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public string AllergyInformation { get; set; }
         public string StorageConditions { get; set; }
-        public Nullable<decimal> LowLevel { get; set; }
         public Nullable<decimal> StockLevel { get; set; }
+        public Nullable<decimal> LowLevel { get; set; }
         public string IngredientCategory { get; set; }
         public string MeasuringUnit { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Batch> Batches { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IngredientProductLink> IngredientProductLinks { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StockAdjustmentLog> StockAdjustmentLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductVariantIngredient> ProductVariantIngredients { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AddOn> AddOns { get; set; }
+        public virtual ICollection<StockAdjustmentLog> StockAdjustmentLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockLevelLog> StockLevelLogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IngredientChangeLog> IngredientChangeLogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Batch> Batches { get; set; }
     }
 }

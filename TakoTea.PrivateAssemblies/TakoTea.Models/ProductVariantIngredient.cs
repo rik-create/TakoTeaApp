@@ -20,7 +20,7 @@ namespace TakoTea.Models
         public decimal QuantityPerVariant { get; set; }
         public string MeasuringUnit { get; set; }
     
-        public virtual Ingredient Ingredient { get; set; }
         public virtual ProductVariant ProductVariant { get; set; }
+        public virtual Ingredient Ingredient { get; set; }
     }
 }

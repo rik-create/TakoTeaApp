@@ -120,43 +120,47 @@ namespace TakoTea.Views.Order.Order_Modals
         {
             if (productVariant != null)
             {
-
-
-                // Set the product details in the modal controls
+                // Set product details
                 productCard.titleLabel.Text = productVariant.VariantName;
-                numericUpDownQuantity.Value = 1; // Default quantity to 1
+                numericUpDownQuantity.Value = 1;
 
-                // Set the image in a control
-                if (!string.IsNullOrEmpty(productVariant.ImagePath) && File.Exists(productVariant.ImagePath))
+                // Set product image (handling blob data)
+                if (productVariant.ImagePath?.Length > 0)
                 {
-                    productCard.pictureBoxProductIcon.Image = Image.FromFile(productVariant.ImagePath);
-                    productCard.pictureBoxProductIcon.SizeMode = PictureBoxSizeMode.Zoom; // Adjust image size mode
+                    try
+                    {
+                         MemoryStream ms = new MemoryStream(productVariant.ImagePath);
+                        productCard.pictureBoxProductIcon.Image = Image.FromStream(ms);
+                        productCard.pictureBoxProductIcon.SizeMode = PictureBoxSizeMode.Zoom;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Failed to load image: {ex.Message}");
+                        // Consider setting a default image or handling the error appropriately
+                    }
                 }
                 else
                 {
-                    productCard.pictureBoxProductIcon.Image = Properties.Resources.multiply; // Default image
+                    productCard.pictureBoxProductIcon.Image = Properties.Resources.multiply;
                 }
 
-                // Fetch all sizes related to the product variant name
+                // Fetch and populate sizes
                 var sizesAndPrices = GetSizesAndPricesByVariantName(productVariant.VariantName);
-
-                // Clear and populate the size combo box
                 cmbSizes.Items.Clear();
                 foreach (var sizePrice in sizesAndPrices)
                 {
                     cmbSizes.Items.Add($"{sizePrice.Size} - ₱{sizePrice.Price:F2}");
                 }
 
-                // Set default selection
                 if (cmbSizes.Items.Count > 0)
                 {
-                    cmbSizes.SelectedIndex = 0; // Select the first size by default
+                    cmbSizes.SelectedIndex = 0;
                 }
 
-                // Populate add-ons in the checked list box
+                // Populate add-ons
                 PopulateAddOns();
 
-                // Update total price based on size and quantity
+                // Update total price
                 UpdateTotalPrice();
             }
         }
@@ -327,6 +331,10 @@ namespace TakoTea.Views.Order.Order_Modals
             CheckIfProductExistsInOrderList();
         }
 
-      
+        private void OrderEntryModal_Load(object sender, EventArgs e)
+        {
+            CheckIfProductExistsInOrderList();
+
+        }
     }
     }

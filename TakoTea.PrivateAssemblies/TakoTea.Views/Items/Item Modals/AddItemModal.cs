@@ -9,6 +9,8 @@ using TakoTea.Interfaces;
 using TakoTea.Services;
 using TakoTea.Models;
 using System.Net.Security;
+using System.IO;
+using TakoTea.Views.Batches;
 
 
 namespace TakoTea.View.Items.Item_Modals
@@ -17,6 +19,7 @@ namespace TakoTea.View.Items.Item_Modals
     {
         private readonly InventoryService _inventoryService;
         private readonly ProductsService productsService;
+        private readonly Entities _context;
         public AddItemModal()
         {
             InitializeComponent();
@@ -25,9 +28,19 @@ namespace TakoTea.View.Items.Item_Modals
             ModalSettingsConfigurator.ApplyStandardModalSettings(this);
             PopulateAllergens(materialCheckedListBoxAllergens);
             productsService = new ProductsService();
+            _context = new Entities();
             PopulateComboboxUseFor();
-
-
+            numericUpDownAddOnPrice.Visible = true;
+            lblAdditionalPrice.Visible = true;
+            cmbAddOnFor.Visible = true;
+            lblAddOnFor.Visible = true;
+            numericUpDownAddOnPrice.Enabled = false;
+            lblAdditionalPrice.Enabled = false;
+            cmbAddOnFor.Enabled = false;
+            lblAddOnFor.Enabled = false;
+            numericUpDownQuantityUsedPerProduct.Enabled = false;
+            materialLabel3.Enabled = false;
+            materialCheckedListBoxAllergens.CheckOnClick = true;
         }// The value to bind (ProductID)
          //
          //
@@ -42,73 +55,73 @@ namespace TakoTea.View.Items.Item_Modals
             cmbAddOnFor.ValueMember = "ProductID";
             cmbAddOnFor.Visible = false;
         }
+        private void OpenAddBatchModal(Ingredient ingredient)
+        {
+            AddBatchModal addBatchModal = new AddBatchModal();
+            addBatchModal.lblIngredientId.Text = ingredient.IngredientID.ToString();
+            addBatchModal.txtBoxIngredientName.Text = ingredient.IngredientName;
+            addBatchModal.lblQuantity.Text = ingredient.MeasuringUnit;
+            addBatchModal.ShowDialog();
+        }
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            // Temporary message, replace with actual processing
             _ = MessageBox.Show("Processing...");
 
-            // Simulating form data
-            txtBoxName.Text = "Test Ingredient";
-            txtBoxBrandName.Text = "Test Brand";
-            txtBoxItemDescription.Text = "A description of the test ingredient for testing purposes.";
-            pictureBoxImg.ImageLocation = @"C:\path\to\image.jpg"; // Path to a test image
-            cmbboxStorageCondition.SelectedItem = "Cool & Dry"; // Assuming this is one of the options
-            cmbTypeOfIngredient.SelectedItem = "Spice"; // Assuming "Spice" is one of the ingredient types
-            cmbMeasuringUnit.SelectedItem = "Grams";
-            numericUpDownQuantityUsedPerProduct.Value = 1;
-
-            // Determine if the item is an "Add On"
-            bool isAddOn = chkIsAddOn.Checked; // Use the CheckBox 
-
-            // If it's an add-on, create the AddOn object and add it
-            if (isAddOn)
+            // Load the image into a byte array
+            byte[] imageData;
+            using (var ms = new MemoryStream())
             {
-                var addOn = new AddOn
-                {
-                    AddOnName = txtBoxName.Text,
-                    AdditionalPrice = numericUpDownAddOnPrice.Value,
-                    UseForProductID = (int)cmbAddOnFor.SelectedValue,// Get the ProductID from the ComboBox
-                    QuantityUsedPerProduct = numericUpDownQuantityUsedPerProduct.Value,
-                    IngredientID = _inventoryService.GetNextIngredientId()
-                };
+                pictureBoxImg.Image.Save(ms, pictureBoxImg.Image.RawFormat);
+                imageData = ms.ToArray();
+            }
 
-                // Add the add-on to the inventory
+            bool isAddOn = chkIsAddOn.Checked;
+
+            using (var transaction = _context.Database.BeginTransaction())
+            {
                 try
                 {
-                    _inventoryService.AddAddon(addOn); // Modify the productsService as needed for EF
+                    if (isAddOn)
+                    {
+                        var addOn = new AddOn
+                        {
+                            AddOnName = txtBoxName.Text,
+                            AdditionalPrice = numericUpDownAddOnPrice.Value,
+                            UseForProductID = (int)cmbAddOnFor.SelectedValue,
+                            IngredientID = _inventoryService.GetNextIngredientId()
+                        };
+
+                        _inventoryService.AddAddon(addOn);
+                    }
+
+                    var ingredient = new Ingredient
+                    {
+                        IngredientName = txtBoxName.Text,
+                        BrandName = txtBoxBrandName.Text,
+                        Description = txtBoxItemDescription.Text,
+                        IngredientImage = imageData,
+                        IsAddOn = isAddOn,
+                        StorageConditions = cmbboxStorageCondition.SelectedItem?.ToString() ?? "",
+                        TypeOfIngredient = cmbTypeOfIngredient.SelectedItem?.ToString() ?? "",
+                        IsActive = true,
+                        MeasuringUnit = cmbMeasuringUnit.SelectedItem?.ToString() ?? "",
+                        AllergyInformation = string.Join(", ", CheckedListBoxHelper.GetCheckedItemsFromIterator(materialCheckedListBoxAllergens))
+                    };
+
+                    _inventoryService.AddIngredient(ingredient);
+                    transaction.Commit();
+
+                    _ = MessageBox.Show("Ingredient added successfully.");
+                    OpenAddBatchModal(ingredient);
                 }
                 catch (Exception ex)
                 {
-                    _ = MessageBox.Show("Error adding add-on: " + ex.Message);
+                    transaction.Rollback();
+                    _ = MessageBox.Show("Error adding item: " + ex.Message);
                 }
             }
-
-            // Create the ingredient entity
-            var ingredient = new Ingredient
-            {
-                IngredientName = txtBoxName.Text,
-                BrandName = txtBoxBrandName.Text,
-                Description = txtBoxItemDescription.Text,
-                IngredientImage = pictureBoxImg.ImageLocation,
-                IsAddOn = isAddOn, // Use the value from the radio button check
-                StorageConditions = cmbboxStorageCondition.SelectedItem?.ToString() ?? "",
-                TypeOfIngredient = cmbTypeOfIngredient.SelectedItem?.ToString() ?? "",
-                IsActive = true,
-                MeasuringUnit = cmbMeasuringUnit.SelectedItem?.ToString() ?? "",
-                AllergyInformation = string.Join(", ", CheckedListBoxHelper.GetCheckedItemsFromIterator(materialCheckedListBoxAllergens)),
-            };
-
-            // Try to add the ingredient to the inventory
-            try
-            {
-                _inventoryService.AddIngredient(ingredient); // Modify the productsService as needed for EF
-                _ = MessageBox.Show("Ingredient and batch added successfully.");
-            }
-            catch (Exception ex)
-            {
-                _ = MessageBox.Show("Error adding item: " + ex.Message);
-            }
         }
+
 
 
 
@@ -139,17 +152,22 @@ namespace TakoTea.View.Items.Item_Modals
             // Check if the CheckBox is checked
             if (chkIsAddOn.Checked)
             {
-                numericUpDownAddOnPrice.Visible = true;
-                lblAdditionalPrice.Visible = true;
-                cmbAddOnFor.Visible = true;
-                lblAddOnFor.Visible = true;
+                numericUpDownAddOnPrice.Enabled = true;
+                lblAdditionalPrice.Enabled = true;
+                cmbAddOnFor.Enabled = true;
+                lblAddOnFor.Enabled = true;
+                numericUpDownQuantityUsedPerProduct.Enabled = true;
+                materialLabel3.Enabled = true;
             }
             else
             {
-                numericUpDownAddOnPrice.Visible = false;
-                lblAdditionalPrice.Visible = false;
-                cmbAddOnFor.Visible = false;
-                lblAddOnFor.Visible = false;
+                numericUpDownAddOnPrice.Enabled = false;
+                lblAdditionalPrice.Enabled = false;
+                cmbAddOnFor.Enabled = false;
+                lblAddOnFor.Enabled = false;
+                numericUpDownQuantityUsedPerProduct.Enabled = false;
+                materialLabel3.Enabled = false;
+
             }
         }
 

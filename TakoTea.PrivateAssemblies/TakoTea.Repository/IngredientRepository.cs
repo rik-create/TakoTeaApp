@@ -8,23 +8,36 @@ using System.Runtime.Remoting.Contexts;
 using TakoTea.Database;
 using TakoTea.Interfaces;
 using TakoTea.Models;
+using System.Windows.Forms;
 namespace TakoTea.Repository
 {
     public class IngredientRepository : IIngredientRepository
     {
-        private readonly SqlConnection _connection;
-        private readonly DataAccessObject _dao;
         private readonly Entities _context;
-        public IngredientRepository(DataAccessObject _dao)
+
+        public IngredientRepository(Entities context)
         {
-            _connection = DatabaseConnection.GetConnection();
-            this._dao = _dao;
-            _context = new Entities();
+            _context = context;
         }
 
+        public List<Batch> GetAllBatch()
+        {
+            try
+            {
+                // Simply retrieve all product variants without any projection
+                var batchList = _context.Batches.ToList();
+
+                return batchList;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error loading Batches: " + ex.Message);
+            }
+        }
+
+
         // Method to load ingredient data
-        // Method to load ingredient data
-        public List<object> GetAllIngredients()
+        public List<object> GetAllIngredient()
         {
             try
             {
@@ -49,83 +62,73 @@ namespace TakoTea.Repository
             }
         }
 
-
-
-
-        public DataTable GetCurrentStockLevels()
+        public List<Ingredient> GetAllIngredients()
         {
-            string query = @"
-    SELECT 
-        b.BatchID,
-        i.IngredientID, 
-        i.IngredientName,
-        b.QuantityInStock,
-        b.ReorderLevel
-    FROM 
-        Ingredient i
-    JOIN 
-        Batch b ON i.IngredientID = b.IngredientID
-    WHERE 
-        b.IsActive = 1";
-            return _dao.ExecuteQuery(query);
+            try
+            {
+                // Simply retrieve all product variants without any projection
+                var ingredient = _context.Ingredients.ToList();
+
+                return ingredient;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error loading ingredient: " + ex.Message);
+            }
+
         }
+ 
+
         public void UpdateStockLevel(int ingredientID, decimal newQuantity)
         {
             const string query = @"
-        UPDATE Batch
-        SET QuantityInStock = @NewQuantity
-        WHERE IngredientID = @IngredientID;
-    ";
-            // Use a using statement to handle the connection lifecycle
-            using (SqlConnection connection = DatabaseConnection.GetConnection())
-            {
-                if (connection.State != ConnectionState.Open)
-                {
-                    connection.Open();
-                }
-                _ = connection.Execute(query, new { IngredientID = ingredientID, NewQuantity = newQuantity });
-            }
+                    UPDATE Batch
+                    SET QuantityInStock = @NewQuantity
+                    WHERE IngredientID = @IngredientID";
+            _context.Database.ExecuteSqlCommand(query, new SqlParameter("@IngredientID", ingredientID), new SqlParameter("@NewQuantity", newQuantity));
         }
-        public IngredientModel GetIngredientById(int ingredientId)
-        {
-            string query = "SELECT * FROM IngredientModel WHERE IngredientID = @IngredientID";
-            return _connection.QuerySingleOrDefault<IngredientModel>(query, new { IngredientID = ingredientId });
-        }
+
+
         public string GetIngredientNameById(int ingredientId)
         {
-            string query = "SELECT IngredientName FROM IngredientModel WHERE IngredientID = @IngredientID";
-            return _connection.QueryFirstOrDefault<string>(query, new { IngredientID = ingredientId });
+            return _context.Ingredients
+                .Where(i => i.IngredientID == ingredientId)
+                .Select(i => i.IngredientName)
+                .FirstOrDefault();
         }
+
         public decimal GetPreviousQuantity(int ingredientId)
         {
-            string query = "SELECT QuantityInStock FROM Batch WHERE IngredientID = @IngredientID AND IsActive = 1";
-            return _connection.QueryFirstOrDefault<decimal>(query, new { IngredientID = ingredientId });
+            return _context.Batches
+                .Where(b => b.IngredientID == ingredientId && b.IsActive == true)
+                .Select(b => b.StockLevel)
+                .FirstOrDefault();
         }
 
         public int GetIngredientIdUsingBatch(int batchId)
         {
-            string query = "SELECT IngredientID FROM Batches WHERE BatchID = @BatchID";
-            var parameters = new SqlParameter[]
-            {
-            new SqlParameter("@BatchID", batchId)
-            };
-
-            var result = _dao.ExecuteQuery<int>(query, parameters);
-            return result.FirstOrDefault();
+            return (int)_context.Batches
+                .Where(b => b.BatchID == batchId)
+                .Select(b => b.IngredientID)
+                .FirstOrDefault();
         }
-
 
         public string GetIngredientName(int ingredientId)
         {
-            string query = "SELECT Name FROM Ingredients WHERE IngredientID = @IngredientID";
-            var parameters = new SqlParameter[]
-            {
-            new SqlParameter("@IngredientID", ingredientId)
-            };
-
-            var result = _dao.ExecuteQuery<string>(query, parameters);
-            return result.FirstOrDefault();
+            return _context.Ingredients
+                .Where(i => i.IngredientID == ingredientId)
+                .Select(i => i.IngredientName)
+                .FirstOrDefault();
         }
 
+        public IngredientModel GetIngredientById(int ingredientId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DataTable GetCurrentStockLevels()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -27,6 +27,8 @@ namespace TakoTea.Product
             _dataAccessObject = new DataAccessObject();
             _productService = new ProductsService();
             DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewProductList);
+            LoadData();
+            DataGridViewHelper.HideColumn(dataGridViewProductList, "ProductVariantID");
         }
 
         protected override void OnLoad(EventArgs e)
@@ -35,6 +37,9 @@ namespace TakoTea.Product
             LoadData();
             PopulateProductCheckedListBox();
         }
+
+
+
 
         private void LoadData()
         {
@@ -45,6 +50,7 @@ namespace TakoTea.Product
                     p => p.ProductID,          // Key from Product
                     (pv, p) => new
                     {
+                        pv.ProductVariantID,
                         p.ProductName,         // Product name from Product table
                         pv.VariantName,
                         pv.Size,
@@ -53,6 +59,10 @@ namespace TakoTea.Product
                         pv.ImagePath
                     })
                 .ToList();  // Execute and retrieve the data
+
+
+
+           
 
             // Bind the data to the DataGridView
             DataGridViewHelper.LoadData(
@@ -106,6 +116,7 @@ namespace TakoTea.Product
             AddProductModal addProductModal = new AddProductModal();
             _ = addProductModal.ShowDialog();
             ThemeConfigurator.ApplyDarkTheme(this);
+            LoadData();
         }
 
         private void btnAddComboMeal_Click(object sender, EventArgs e)
@@ -192,6 +203,22 @@ namespace TakoTea.Product
         {
             LoadData();
             PopulateProductCheckedListBox();
+        }
+
+        private void materialCard1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
+        {
+            DataGridViewHelper.DeleteSelectedRows<ProductVariant>(dataGridViewProductList, "ProductVariantID");
+            LoadData();
+        }
+
+        private void dataGridViewProductList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 

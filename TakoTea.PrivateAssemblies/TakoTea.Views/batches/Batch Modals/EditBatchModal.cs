@@ -25,12 +25,11 @@ namespace TakoTea.Views.Batches
         {
             InitializeComponent();
             _dao = new DataAccessObject();
-            _ingredientRepository = new IngredientRepository(_dao);
-
+            _ingredientRepository = new IngredientRepository(new Entities()); // Fix: Pass an instance of Entities
 
             _batchId = batchId;
-            
         }
+
 
 
         private void EditBatchModal_Load(object sender, EventArgs e)

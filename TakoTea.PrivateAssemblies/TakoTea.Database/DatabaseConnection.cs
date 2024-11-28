@@ -6,7 +6,11 @@ namespace TakoTea.Database
     public static class DatabaseConnection
     {
         private static SqlConnection _connection;
-        private static readonly string _connectionString = "Data Source=DESKTOP-BJ889Q2\\SQLEXPRESS;Initial Catalog=TakoTea;Integrated Security=True;";
+        private static readonly string _connectionString = "data source=192.168.100.12,1433;initial catalog=TakoTea;user id=erick;password=1234;encrypt=False;MultipleActiveResultSets=True;Integrated Security=True;";
+
+
+
+
         public static SqlConnection GetConnection()
         {
             if (_connection == null || _connection.State == ConnectionState.Closed)

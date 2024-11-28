@@ -28,12 +28,15 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductCategoryForm));
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            this.floatingActionButtonAddProduct = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.panelExportButtons = new System.Windows.Forms.Panel();
             this.materialLabel22 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel18 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel19 = new MaterialSkin.Controls.MaterialLabel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.materialButton2 = new MaterialSkin.Controls.MaterialButton();
             this.materialLabel20 = new MaterialSkin.Controls.MaterialLabel();
             this.materialRadioButton1 = new MaterialSkin.Controls.MaterialRadioButton();
@@ -46,9 +49,6 @@
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dataGridViewProductList = new System.Windows.Forms.DataGridView();
-            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.floatingActionButtonAddProduct = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.pictureBoxExportExcel = new System.Windows.Forms.PictureBox();
             this.pictureBoxExportPdf = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -91,6 +91,18 @@
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard1.Size = new System.Drawing.Size(1191, 783);
             this.materialCard1.TabIndex = 38;
+            // 
+            // floatingActionButtonAddProduct
+            // 
+            this.floatingActionButtonAddProduct.Depth = 0;
+            this.floatingActionButtonAddProduct.Icon = null;
+            this.floatingActionButtonAddProduct.Location = new System.Drawing.Point(1090, 140);
+            this.floatingActionButtonAddProduct.MouseState = MaterialSkin.MouseState.HOVER;
+            this.floatingActionButtonAddProduct.Name = "floatingActionButtonAddProduct";
+            this.floatingActionButtonAddProduct.Size = new System.Drawing.Size(62, 61);
+            this.floatingActionButtonAddProduct.TabIndex = 101;
+            this.floatingActionButtonAddProduct.UseVisualStyleBackColor = true;
+            this.floatingActionButtonAddProduct.Click += new System.EventHandler(this.floatingActionButtonAddProduct_Click);
             // 
             // panelExportButtons
             // 
@@ -166,6 +178,26 @@
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(1124, 117);
             this.panel10.TabIndex = 97;
+            // 
+            // dateTimePicker3
+            // 
+            this.dateTimePicker3.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker3.Location = new System.Drawing.Point(190, 70);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.Size = new System.Drawing.Size(159, 26);
+            this.dateTimePicker3.TabIndex = 128;
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker2.Location = new System.Drawing.Point(20, 70);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(159, 26);
+            this.dateTimePicker2.TabIndex = 127;
             // 
             // materialButton2
             // 
@@ -325,37 +357,6 @@
             this.dataGridViewProductList.Size = new System.Drawing.Size(1124, 504);
             this.dataGridViewProductList.TabIndex = 5;
             // 
-            // dateTimePicker3
-            // 
-            this.dateTimePicker3.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker3.Location = new System.Drawing.Point(190, 70);
-            this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(159, 26);
-            this.dateTimePicker3.TabIndex = 128;
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker2.Location = new System.Drawing.Point(20, 70);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(159, 26);
-            this.dateTimePicker2.TabIndex = 127;
-            // 
-            // floatingActionButtonAddProduct
-            // 
-            this.floatingActionButtonAddProduct.Depth = 0;
-            this.floatingActionButtonAddProduct.Location = new System.Drawing.Point(1090, 140);
-            this.floatingActionButtonAddProduct.MouseState = MaterialSkin.MouseState.HOVER;
-            this.floatingActionButtonAddProduct.Name = "floatingActionButtonAddProduct";
-            this.floatingActionButtonAddProduct.Size = new System.Drawing.Size(62, 61);
-            this.floatingActionButtonAddProduct.TabIndex = 101;
-            this.floatingActionButtonAddProduct.UseVisualStyleBackColor = true;
-            this.floatingActionButtonAddProduct.Click += new System.EventHandler(this.floatingActionButtonAddProduct_Click);
-            // 
             // pictureBoxExportExcel
             // 
             this.pictureBoxExportExcel.Location = new System.Drawing.Point(3, 5);
@@ -394,12 +395,12 @@
             // 
             // bindingNavigatorDeleteItem
             // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
             this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
             this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(60, 22);
             this.bindingNavigatorDeleteItem.Text = "Delete";
+            this.bindingNavigatorDeleteItem.Click += new System.EventHandler(this.bindingNavigatorDeleteItem_Click);
             // 
             // bindingNavigatorMoveFirstItem
             // 
@@ -463,6 +464,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportPdf)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+
         }
         #endregion
         private MaterialSkin.Controls.MaterialCard materialCard1;

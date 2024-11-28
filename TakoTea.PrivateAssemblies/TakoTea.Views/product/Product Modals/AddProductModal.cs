@@ -1,7 +1,9 @@
 ﻿using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -29,8 +31,10 @@ namespace TakoTea.View.Product.Product_Modals
 
             DataGridViewHelper.FormatListView(listViewIngredients);
             DataGridViewHelper.ApplyDataGridViewStylesWithWrite(dgViewAddingMultipleProductVariants);
-        }
 
+            DataGridViewHelper.AddButtonsToLastRow(dgViewAddingMultipleProductVariants, "ClearIngredients","Clear Ingredients", ClearIngredientsInSelectedRowIndex);
+        }
+    
         private void InitializeProductComboBoxColumn()
         {
             try
@@ -78,18 +82,35 @@ namespace TakoTea.View.Product.Product_Modals
         private void btnAddNewRow_Click(object sender, EventArgs e)
         {
             // Check if the last row is a new, uncommitted row
-            if (dgViewAddingMultipleProductVariants.Rows.Count > 0 &&
-                dgViewAddingMultipleProductVariants.Rows[dgViewAddingMultipleProductVariants.Rows.Count - 1].IsNewRow)
+            if (dgViewAddingMultipleProductVariants.Rows.Count > 0)
             {
-                // If the last row is a new row, don't allow adding another
-                MessageBox.Show("Please fill the current row before adding a new one.");
-                return;
-            }
+                var lastRow = dgViewAddingMultipleProductVariants.Rows[dgViewAddingMultipleProductVariants.Rows.Count - 1];
+
+                // Check if the first cell (column index 0) of the last row is empty
+                if (lastRow.Cells[0].Value == null || string.IsNullOrWhiteSpace(lastRow.Cells[0].Value.ToString()) ||
+                    lastRow.Cells[1].Value == null || string.IsNullOrWhiteSpace(lastRow.Cells[1].Value.ToString()) ||
+                    lastRow.Cells[2].Value == null || string.IsNullOrWhiteSpace(lastRow.Cells[2].Value.ToString()) ||
+                    lastRow.Cells[3].Value == null || string.IsNullOrWhiteSpace(lastRow.Cells[3].Value.ToString()) ||
+                    lastRow.Cells[4].Value == null || string.IsNullOrWhiteSpace(lastRow.Cells[4].Value.ToString()) ||
+                    lastRow.Cells[5].Value == null || string.IsNullOrWhiteSpace(lastRow.Cells[5].Value.ToString()))
+                {
+                    MessageBox.Show("Please fill the current row before adding a new one.");
+                    return;
+                }
+                    MessageBox.Show("Please fill the current row before adding a new one.");
+                    return;
+                }
 
             // If there's no new row, add an empty row
             int rowIndex = dgViewAddingMultipleProductVariants.Rows.Add();
             dgViewAddingMultipleProductVariants.Rows[rowIndex].Height = 100;
         }
+
+            
+  
+
+
+            
 
         // Handle Duplicate Row button click
         private void btnDuplicateRow_Click(object sender, EventArgs e)
@@ -129,50 +150,44 @@ namespace TakoTea.View.Product.Product_Modals
         // Handle uploading an image to the selected row
         private void btnUploadImgToSelectedRow_Click(object sender, EventArgs e)
         {
-            // Ensure a cell is selected
-            if (dgViewAddingMultipleProductVariants.CurrentCell != null)
+            if (dgViewAddingMultipleProductVariants.CurrentCell == null)
             {
-                // Get the selected row based on the currently selected cell
-                int rowIndex = dgViewAddingMultipleProductVariants.CurrentCell.RowIndex;
-                var selectedRow = dgViewAddingMultipleProductVariants.Rows[rowIndex];
-
-                using (OpenFileDialog openFileDialog = new OpenFileDialog())
-                {
-                    openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;";
-                    if (openFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        // Get the image file path
-                        string imagePath = openFileDialog.FileName;
-
-                        // Load the image from the file
-                        if (System.IO.File.Exists(imagePath))
-                        {
-                            Image originalImage = Image.FromFile(imagePath);
-
-                            // Resize the image to 48x48
-                            Image resizedImage = new Bitmap(originalImage, new Size(48, 48));
-
-                            // Set the resized image in the DataGridView cell
-                            selectedRow.Cells["ColumnImage"].Value = resizedImage;
-
-                            // Store the image path in the ImagePathColumn
-                            selectedRow.Cells["ImagePathColumn"].Value = imagePath;
-
-                            // Hide the ImagePathColumn after setting the value
-                            dgViewAddingMultipleProductVariants.Columns["ImagePathColumn"].Visible = false;
-                        }
-                        else
-                        {
-                            // Handle the case where the image does not exist
-                            MessageBox.Show("The selected image does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                // Handle the case where no cell is selected
                 MessageBox.Show("Please select a row first.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int rowIndex = dgViewAddingMultipleProductVariants.CurrentCell.RowIndex;
+            var selectedRow = dgViewAddingMultipleProductVariants.Rows[rowIndex];
+
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;"
+            };
+
+            if (openFileDialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            try
+            {
+                var imageStream = new MemoryStream();
+                Image originalImage = Image.FromFile(openFileDialog.FileName);
+                originalImage.Save(imageStream, originalImage.RawFormat); // Save image to memory stream
+                byte[] imageBytes = imageStream.ToArray(); // Convert to byte array
+
+                // Store the imageBytes in the ImagePathColumn (which should be a BLOB type in your database)
+                selectedRow.Cells["ImagePathColumn"].Value = imageBytes;
+
+                // Optionally, display a resized image in the DataGridView cell
+                Image resizedImage = new Bitmap(originalImage, new Size(48, 48));
+                selectedRow.Cells["ColumnImage"].Value = resizedImage;
+
+                dgViewAddingMultipleProductVariants.Columns["ImagePathColumn"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error uploading image: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -220,18 +235,17 @@ namespace TakoTea.View.Product.Product_Modals
 
         private void PopulateIngredientsList()
         {
-            // Get the list of ingredients from the productsService
-            var ingredients = _inventoryService.GetAllIngredients();
-            
+            var ingredients = _inventoryService.GetAllIngredients()
+                                               .Where(i => !i.IsAddOn.Value) // Filter out add-ons
+                                               .ToList();
 
-            // Define column headers for the ListView
             var columnHeaders = new List<string> { "Ingredient", "ID", "Measuring Unit" };
 
-            // Use the reusable helper method
             DataGridViewHelper.PopulateListView(
                 listViewIngredients,
                 ingredients,
-                columnHeaders, 330,
+                columnHeaders,
+                330,
                 ingredient => new List<string>
                 {
             ingredient.IngredientName,
@@ -240,8 +254,6 @@ namespace TakoTea.View.Product.Product_Modals
                 }
             );
         }
-
-
 
 
 
@@ -276,6 +288,8 @@ namespace TakoTea.View.Product.Product_Modals
                             listViewIngredients.Visible = true;
                             textBoxSearchIngredients.Visible = true;
                             pbSearch.Visible = true;
+                            btnUndoRecentlyAddedIngredients.Visible = true;
+
                             numericUpDownIngredientsQuantity.Visible = true;
                             btnAddIngredientsToDgView.Visible = true;
                             buttonCloseIngredientsList.Visible = true;
@@ -381,7 +395,9 @@ namespace TakoTea.View.Product.Product_Modals
 
             // Filter ListView items based on search term
             listViewIngredients.Items.Clear();
-            var filteredIngredients = _inventoryService.GetAllIngredients().Where(i => i.IngredientName.ToLower().Contains(searchTerm)).ToList();
+            var filteredIngredients = _inventoryService.GetAllIngredients()
+                                                       .Where(i => i.IngredientName.ToLower().Contains(searchTerm) && !i.IsAddOn.GetValueOrDefault())
+                                                       .ToList();
             foreach (var ingredient in filteredIngredients)
             {
                 ListViewItem item = new ListViewItem(ingredient.IngredientName); // The name of the ingredient
@@ -412,6 +428,9 @@ namespace TakoTea.View.Product.Product_Modals
             buttonAddNewRow.Visible = true;
             btnDelete.Visible = true;
             btnDuplicateRow.Visible = true;
+
+
+            btnUndoRecentlyAddedIngredients.Visible = false;
 
         }
 
@@ -448,25 +467,21 @@ namespace TakoTea.View.Product.Product_Modals
 
         private void btnSaveAll_Click(object sender, EventArgs e)
         {
-            // List to hold all product variants to be saved
             List<ProductVariant> productVariantsToSave = new List<ProductVariant>();
             List<ProductVariantIngredient> productVariantIngredientsToSave = new List<ProductVariantIngredient>();
 
-            // Loop through each row in the DataGridView
             foreach (DataGridViewRow row in dgViewAddingMultipleProductVariants.Rows)
             {
-                // Skip the new empty row
-                if (row.IsNewRow) continue;
+                if (row.IsNewRow)
+                    continue;
 
-                // Extract values from the cells
                 string variantName = row.Cells[VariantName.Index].Value?.ToString();
                 string size = row.Cells[ColumnSize.Index].Value?.ToString();
                 decimal price = Convert.ToDecimal(row.Cells[ColumnPrice.Index].Value ?? 0);
                 string ingredients = row.Cells[ColumnIngredients.Index].Value?.ToString();
                 string instructions = row.Cells[ColumnInstructions.Index].Value?.ToString();
-                string category = row.Cells[ColumnProduct.Index].Value?.ToString();
                 string selectedProductName = row.Cells[ColumnProduct.Index].Value?.ToString();
-                string imagePath = row.Cells["ImagePathColumn"].Value?.ToString();
+                byte[] imageData = (byte[])row.Cells["ImagePathColumn"].Value;
 
                 if (string.IsNullOrWhiteSpace(selectedProductName))
                 {
@@ -475,16 +490,13 @@ namespace TakoTea.View.Product.Product_Modals
                 }
 
                 int productId = _productsService.GetProductIdByName(selectedProductName);
-                /*                string imagePath = row.Cells[ColumnImage.Index].Value?.ToString(); // Use image path (stored as string)
-                */
-           // Validation (You can add more validation checks here)
+
                 if (string.IsNullOrWhiteSpace(variantName) || string.IsNullOrWhiteSpace(size))
                 {
                     MessageBox.Show("Please fill out all required fields (Variant Name, Size).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return; // Stop execution if validation fails
+                    return;
                 }
 
-                // Create a new ProductVariant model to save
                 ProductVariant productVariant = new ProductVariant
                 {
                     VariantName = variantName,
@@ -493,77 +505,61 @@ namespace TakoTea.View.Product.Product_Modals
                     Price = price,
                     Ingredients = ingredients,
                     Instructions = instructions,
-                    ImagePath = imagePath // Save the image path
+                    ImagePath = imageData // Directly store the byte array
                 };
 
-
-
-                // Add the product variant to the list
                 productVariantsToSave.Add(productVariant);
 
                 if (!string.IsNullOrWhiteSpace(ingredients))
                 {
-                    var ingredientList = ingredients.Split(','); // Assuming ingredients are comma-separated
+                    var ingredientList = ingredients.Split(',');
 
                     foreach (var ingredient in ingredientList)
                     {
                         var ingredientTrimmed = ingredient.Trim();
-
-                        // Use Regex to extract IngredientName, Quantity, and MeasuringUnit
                         var match = Regex.Match(ingredientTrimmed, @"^(.+?)\s+(\d+(\.\d+)?)\s+(\S+)$");
 
                         if (match.Success)
                         {
-                            string ingredientName = match.Groups[1].Value; // Ingredient name (can have spaces)
-                            decimal quantity = Convert.ToDecimal(match.Groups[2].Value); // Quantity (number)
-                            string measuringUnit = match.Groups[4].Value; // Measuring unit (e.g., kg, liter)
-
-                            // Find the ingredient ID from the Ingredients table (you can use a productsService to get the ID based on the name)
+                            string ingredientName = match.Groups[1].Value;
+                            decimal quantity = Convert.ToDecimal(match.Groups[2].Value);
+                            string measuringUnit = match.Groups[4].Value;
                             int ingredientId = _inventoryService.GetIngredientIdByName(ingredientName);
 
-                            // Create ProductVariantIngredient entries
                             ProductVariantIngredient productVariantIngredient = new ProductVariantIngredient
                             {
-                                ProductVariantID = _productsService.GetNextProductVariantId(), // Get the next ID
+                                // Assuming GetNextProductVariantId returns the correct ID for the current variant
+                                ProductVariantID = _productsService.GetNextProductVariantId(),
                                 IngredientID = ingredientId,
                                 QuantityPerVariant = quantity,
                                 MeasuringUnit = measuringUnit
                             };
 
-                            // Add the ingredient association to the list
                             productVariantIngredientsToSave.Add(productVariantIngredient);
                         }
                         else
                         {
-                            // Handle parsing errors (e.g., log, skip, or show a message)
                             MessageBox.Show($"Invalid ingredient format: {ingredientTrimmed}. Expected format: 'IngredientName Quantity MeasuringUnit'.", "Parsing Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                 }
-
             }
 
-            // Now save the product variants (call the productsService method)
             try
             {
-
-                // First, save the product variants
                 _productsService.AddMultipleProductVariants(productVariantsToSave);
 
                 foreach (var productVariant in productVariantsToSave)
                 {
                     foreach (var ingredient in productVariantIngredientsToSave)
                     {
-                        // Assuming the productVariant has a valid ProductVariantID after being saved
                         ingredient.ProductVariantID = productVariant.ProductVariantID;
-
-                        // Save each product variant ingredient association
                         _productsService.AddProductVariantIngredient(ingredient);
                     }
                 }
 
                 MessageBox.Show("All product variants have been saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Close(); // Close the modal after saving
+                Close();
             }
             catch (Exception ex)
             {
@@ -579,6 +575,14 @@ namespace TakoTea.View.Product.Product_Modals
 
                 // Optionally, you can clear the previous ingredients value after undo
                 previousIngredients = "";
+            }
+        }
+        private void ClearIngredientsInSelectedRowIndex(int selectedRowIndex)
+        {
+            if (selectedRowIndex >= 0 && selectedRowIndex < dgViewAddingMultipleProductVariants.Rows.Count)
+            {
+                var selectedRow = dgViewAddingMultipleProductVariants.Rows[selectedRowIndex];
+                selectedRow.Cells["ColumnIngredients"].Value = string.Empty;
             }
         }
 

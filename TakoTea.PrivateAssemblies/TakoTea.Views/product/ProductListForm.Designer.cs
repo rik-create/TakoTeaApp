@@ -26,18 +26,27 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductListForm));
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.panel1 = new System.Windows.Forms.Panel();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            this.pbReloadForm = new System.Windows.Forms.PictureBox();
             this.panelExportButtons = new System.Windows.Forms.Panel();
+            this.pictureBoxExportExcel = new System.Windows.Forms.PictureBox();
+            this.pictureBoxExportPdf = new System.Windows.Forms.PictureBox();
             this.materialLabel22 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel18 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel19 = new MaterialSkin.Controls.MaterialLabel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnAddComboMeal = new MaterialSkin.Controls.MaterialButton();
+            this.floatingActionButtonAddProduct = new MaterialSkin.Controls.MaterialFloatingActionButton();
+            this.pbSearch = new System.Windows.Forms.PictureBox();
+            this.pBoxShowFilter = new System.Windows.Forms.PictureBox();
             this.btnHideFilters = new MaterialSkin.Controls.MaterialButton();
             this.txtBoxSearchForVariants = new MaterialSkin.Controls.MaterialTextBox2();
             this.panelFilteringComponents = new System.Windows.Forms.Panel();
@@ -53,39 +62,33 @@
             this.panelItemList = new System.Windows.Forms.Panel();
             this.dataGridViewProductList = new System.Windows.Forms.DataGridView();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.pbReloadForm = new System.Windows.Forms.PictureBox();
-            this.pictureBoxExportExcel = new System.Windows.Forms.PictureBox();
-            this.pictureBoxExportPdf = new System.Windows.Forms.PictureBox();
-            this.floatingActionButtonAddProduct = new MaterialSkin.Controls.MaterialFloatingActionButton();
-            this.pbSearch = new System.Windows.Forms.PictureBox();
-            this.pBoxShowFilter = new System.Windows.Forms.PictureBox();
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.materialCard1.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbReloadForm)).BeginInit();
             this.panelExportButtons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportExcel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportPdf)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxShowFilter)).BeginInit();
             this.panelFilteringComponents.SuspendLayout();
             this.panelItemList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProductList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbReloadForm)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportExcel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportPdf)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBoxShowFilter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -118,19 +121,20 @@
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard1.Size = new System.Drawing.Size(1191, 768);
+            this.materialCard1.Size = new System.Drawing.Size(1191, 715);
             this.materialCard1.TabIndex = 37;
+            this.materialCard1.Paint += new System.Windows.Forms.PaintEventHandler(this.materialCard1_Paint);
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel1.BackColor = System.Drawing.Color.Firebrick;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.materialLabel4);
             this.panel1.Controls.Add(this.pbReloadForm);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(14, 14);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1146, 46);
+            this.panel1.Size = new System.Drawing.Size(1163, 46);
             this.panel1.TabIndex = 105;
             // 
             // materialLabel4
@@ -146,21 +150,50 @@
             this.materialLabel4.TabIndex = 0;
             this.materialLabel4.Text = "Product Variants";
             // 
+            // pbReloadForm
+            // 
+            this.pbReloadForm.Image = global::TakoTea.Views.Properties.Resources.restart1;
+            this.pbReloadForm.Location = new System.Drawing.Point(1101, 5);
+            this.pbReloadForm.Name = "pbReloadForm";
+            this.pbReloadForm.Size = new System.Drawing.Size(27, 27);
+            this.pbReloadForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbReloadForm.TabIndex = 97;
+            this.pbReloadForm.TabStop = false;
+            this.pbReloadForm.Click += new System.EventHandler(this.pbReloadForm_Click);
+            // 
             // panelExportButtons
             // 
             this.panelExportButtons.Controls.Add(this.pictureBoxExportExcel);
             this.panelExportButtons.Controls.Add(this.pictureBoxExportPdf);
-            this.panelExportButtons.Location = new System.Drawing.Point(1072, 720);
+            this.panelExportButtons.Location = new System.Drawing.Point(1080, 664);
             this.panelExportButtons.Name = "panelExportButtons";
             this.panelExportButtons.Size = new System.Drawing.Size(76, 38);
             this.panelExportButtons.TabIndex = 104;
+            // 
+            // pictureBoxExportExcel
+            // 
+            this.pictureBoxExportExcel.Location = new System.Drawing.Point(3, 5);
+            this.pictureBoxExportExcel.Name = "pictureBoxExportExcel";
+            this.pictureBoxExportExcel.Size = new System.Drawing.Size(33, 27);
+            this.pictureBoxExportExcel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxExportExcel.TabIndex = 96;
+            this.pictureBoxExportExcel.TabStop = false;
+            // 
+            // pictureBoxExportPdf
+            // 
+            this.pictureBoxExportPdf.Location = new System.Drawing.Point(38, 5);
+            this.pictureBoxExportPdf.Name = "pictureBoxExportPdf";
+            this.pictureBoxExportPdf.Size = new System.Drawing.Size(33, 27);
+            this.pictureBoxExportPdf.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxExportPdf.TabIndex = 97;
+            this.pictureBoxExportPdf.TabStop = false;
             // 
             // materialLabel22
             // 
             this.materialLabel22.AutoSize = true;
             this.materialLabel22.Depth = 0;
             this.materialLabel22.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel22.Location = new System.Drawing.Point(30, 710);
+            this.materialLabel22.Location = new System.Drawing.Point(24, 664);
             this.materialLabel22.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel22.Name = "materialLabel22";
             this.materialLabel22.Size = new System.Drawing.Size(116, 19);
@@ -185,7 +218,7 @@
             this.materialLabel19.AutoSize = true;
             this.materialLabel19.Depth = 0;
             this.materialLabel19.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel19.Location = new System.Drawing.Point(24, 728);
+            this.materialLabel19.Location = new System.Drawing.Point(24, 688);
             this.materialLabel19.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel19.Name = "materialLabel19";
             this.materialLabel19.Size = new System.Drawing.Size(189, 19);
@@ -203,7 +236,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(16, 64);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1160, 640);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1168, 584);
             this.flowLayoutPanel1.TabIndex = 99;
             // 
             // panel3
@@ -220,7 +253,7 @@
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 8);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
-            this.panel3.Size = new System.Drawing.Size(1133, 60);
+            this.panel3.Size = new System.Drawing.Size(1141, 60);
             this.panel3.TabIndex = 144;
             // 
             // btnAddComboMeal
@@ -242,6 +275,41 @@
             this.btnAddComboMeal.UseAccentColor = true;
             this.btnAddComboMeal.UseVisualStyleBackColor = true;
             this.btnAddComboMeal.Click += new System.EventHandler(this.btnAddComboMeal_Click);
+            // 
+            // floatingActionButtonAddProduct
+            // 
+            this.floatingActionButtonAddProduct.Depth = 0;
+            this.floatingActionButtonAddProduct.Icon = global::TakoTea.Views.Properties.Resources.plus_white;
+            this.floatingActionButtonAddProduct.Location = new System.Drawing.Point(904, 8);
+            this.floatingActionButtonAddProduct.Mini = true;
+            this.floatingActionButtonAddProduct.MouseState = MaterialSkin.MouseState.HOVER;
+            this.floatingActionButtonAddProduct.Name = "floatingActionButtonAddProduct";
+            this.floatingActionButtonAddProduct.Size = new System.Drawing.Size(40, 40);
+            this.floatingActionButtonAddProduct.TabIndex = 101;
+            this.floatingActionButtonAddProduct.UseVisualStyleBackColor = true;
+            this.floatingActionButtonAddProduct.Click += new System.EventHandler(this.floatingActionButtonAddProduct_Click);
+            // 
+            // pbSearch
+            // 
+            this.pbSearch.Image = global::TakoTea.Views.Properties.Resources.search;
+            this.pbSearch.Location = new System.Drawing.Point(296, 8);
+            this.pbSearch.Name = "pbSearch";
+            this.pbSearch.Size = new System.Drawing.Size(40, 40);
+            this.pbSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbSearch.TabIndex = 97;
+            this.pbSearch.TabStop = false;
+            this.pbSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // pBoxShowFilter
+            // 
+            this.pBoxShowFilter.Image = global::TakoTea.Views.Properties.Resources.filter;
+            this.pBoxShowFilter.Location = new System.Drawing.Point(414, 9);
+            this.pBoxShowFilter.Name = "pBoxShowFilter";
+            this.pBoxShowFilter.Size = new System.Drawing.Size(40, 40);
+            this.pBoxShowFilter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pBoxShowFilter.TabIndex = 96;
+            this.pBoxShowFilter.TabStop = false;
+            this.pBoxShowFilter.Click += new System.EventHandler(this.pBoxShowFilter_Click);
             // 
             // btnHideFilters
             // 
@@ -309,7 +377,7 @@
             this.panelFilteringComponents.Enabled = false;
             this.panelFilteringComponents.Location = new System.Drawing.Point(3, 74);
             this.panelFilteringComponents.Name = "panelFilteringComponents";
-            this.panelFilteringComponents.Size = new System.Drawing.Size(1133, 190);
+            this.panelFilteringComponents.Size = new System.Drawing.Size(1141, 174);
             this.panelFilteringComponents.TabIndex = 145;
             this.panelFilteringComponents.Visible = false;
             // 
@@ -442,30 +510,58 @@
             // 
             // panelItemList
             // 
+            this.panelItemList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelItemList.Controls.Add(this.dataGridViewProductList);
             this.panelItemList.Controls.Add(this.bindingNavigator1);
-            this.panelItemList.Location = new System.Drawing.Point(3, 270);
+            this.panelItemList.Location = new System.Drawing.Point(3, 254);
             this.panelItemList.Name = "panelItemList";
-            this.panelItemList.Size = new System.Drawing.Size(1133, 450);
+            this.panelItemList.Size = new System.Drawing.Size(1141, 509);
             this.panelItemList.TabIndex = 143;
             // 
             // dataGridViewProductList
             // 
-            this.dataGridViewProductList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dataGridViewProductList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewProductList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridViewProductList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewProductList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewProductList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewProductList.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewProductList.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridViewProductList.EnableHeadersVisualStyles = false;
-            this.dataGridViewProductList.Location = new System.Drawing.Point(0, 24);
+            this.dataGridViewProductList.Location = new System.Drawing.Point(0, 27);
             this.dataGridViewProductList.Name = "dataGridViewProductList";
-            this.dataGridViewProductList.Size = new System.Drawing.Size(1133, 426);
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewProductList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewProductList.Size = new System.Drawing.Size(1139, 480);
             this.dataGridViewProductList.TabIndex = 10;
+            this.dataGridViewProductList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProductList_CellContentClick);
             // 
             // bindingNavigator1
             // 
             this.bindingNavigator1.AddNewItem = this.bindingNavigatorAddNewItem;
             this.bindingNavigator1.BackColor = System.Drawing.SystemColors.Control;
             this.bindingNavigator1.CountItem = this.bindingNavigatorCountItem;
-            this.bindingNavigator1.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.bindingNavigator1.DeleteItem = null;
             this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bindingNavigatorMoveFirstItem,
             this.bindingNavigatorMovePreviousItem,
@@ -485,9 +581,18 @@
             this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator1.Size = new System.Drawing.Size(1133, 25);
+            this.bindingNavigator1.Size = new System.Drawing.Size(1139, 25);
             this.bindingNavigator1.TabIndex = 9;
             this.bindingNavigator1.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "Add new";
             // 
             // bindingNavigatorCountItem
             // 
@@ -495,6 +600,33 @@
             this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
             this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(60, 22);
+            this.bindingNavigatorDeleteItem.Text = "Delete";
+            this.bindingNavigatorDeleteItem.Click += new System.EventHandler(this.bindingNavigatorDeleteItem_Click);
+            // 
+            // bindingNavigatorMoveFirstItem
+            // 
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem.Text = "Move first";
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
             // 
             // bindingNavigatorSeparator
             // 
@@ -516,111 +648,6 @@
             this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
             this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // pbReloadForm
-            // 
-            this.pbReloadForm.Image = global::TakoTea.Views.Properties.Resources.restart1;
-            this.pbReloadForm.Location = new System.Drawing.Point(1101, 5);
-            this.pbReloadForm.Name = "pbReloadForm";
-            this.pbReloadForm.Size = new System.Drawing.Size(27, 27);
-            this.pbReloadForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbReloadForm.TabIndex = 97;
-            this.pbReloadForm.TabStop = false;
-            this.pbReloadForm.Click += new System.EventHandler(this.pbReloadForm_Click);
-            // 
-            // pictureBoxExportExcel
-            // 
-            this.pictureBoxExportExcel.Location = new System.Drawing.Point(3, 5);
-            this.pictureBoxExportExcel.Name = "pictureBoxExportExcel";
-            this.pictureBoxExportExcel.Size = new System.Drawing.Size(33, 27);
-            this.pictureBoxExportExcel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxExportExcel.TabIndex = 96;
-            this.pictureBoxExportExcel.TabStop = false;
-            // 
-            // pictureBoxExportPdf
-            // 
-            this.pictureBoxExportPdf.Location = new System.Drawing.Point(38, 5);
-            this.pictureBoxExportPdf.Name = "pictureBoxExportPdf";
-            this.pictureBoxExportPdf.Size = new System.Drawing.Size(33, 27);
-            this.pictureBoxExportPdf.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxExportPdf.TabIndex = 97;
-            this.pictureBoxExportPdf.TabStop = false;
-            // 
-            // floatingActionButtonAddProduct
-            // 
-            this.floatingActionButtonAddProduct.Depth = 0;
-            this.floatingActionButtonAddProduct.Icon = global::TakoTea.Views.Properties.Resources.plus;
-            this.floatingActionButtonAddProduct.Location = new System.Drawing.Point(904, 8);
-            this.floatingActionButtonAddProduct.Mini = true;
-            this.floatingActionButtonAddProduct.MouseState = MaterialSkin.MouseState.HOVER;
-            this.floatingActionButtonAddProduct.Name = "floatingActionButtonAddProduct";
-            this.floatingActionButtonAddProduct.Size = new System.Drawing.Size(40, 40);
-            this.floatingActionButtonAddProduct.TabIndex = 101;
-            this.floatingActionButtonAddProduct.UseVisualStyleBackColor = true;
-            this.floatingActionButtonAddProduct.Click += new System.EventHandler(this.floatingActionButtonAddProduct_Click);
-            // 
-            // pbSearch
-            // 
-            this.pbSearch.Image = global::TakoTea.Views.Properties.Resources.search;
-            this.pbSearch.Location = new System.Drawing.Point(296, 8);
-            this.pbSearch.Name = "pbSearch";
-            this.pbSearch.Size = new System.Drawing.Size(40, 40);
-            this.pbSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbSearch.TabIndex = 97;
-            this.pbSearch.TabStop = false;
-            this.pbSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // pBoxShowFilter
-            // 
-            this.pBoxShowFilter.Image = global::TakoTea.Views.Properties.Resources.filter;
-            this.pBoxShowFilter.Location = new System.Drawing.Point(414, 9);
-            this.pBoxShowFilter.Name = "pBoxShowFilter";
-            this.pBoxShowFilter.Size = new System.Drawing.Size(40, 40);
-            this.pBoxShowFilter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pBoxShowFilter.TabIndex = 96;
-            this.pBoxShowFilter.TabStop = false;
-            this.pBoxShowFilter.Click += new System.EventHandler(this.pBoxShowFilter_Click);
-            // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "Add new";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "Delete";
-            // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveFirstItem.Text = "Move first";
-            // 
-            // bindingNavigatorMovePreviousItem
-            // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
-            // 
             // bindingNavigatorMoveNextItem
             // 
             this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -639,12 +666,17 @@
             this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveLastItem.Text = "Move last";
             // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // ProductListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1197, 771);
+            this.ClientSize = new System.Drawing.Size(1197, 718);
             this.Controls.Add(this.materialCard1);
             this.Controls.Add(this.materialLabel2);
             this.DrawerWidth = 0;
@@ -656,10 +688,15 @@
             this.materialCard1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbReloadForm)).EndInit();
             this.panelExportButtons.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportExcel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportPdf)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxShowFilter)).EndInit();
             this.panelFilteringComponents.ResumeLayout(false);
             this.panelFilteringComponents.PerformLayout();
             this.panelItemList.ResumeLayout(false);
@@ -668,11 +705,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbReloadForm)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportExcel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportPdf)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBoxShowFilter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -710,7 +742,6 @@
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private MaterialSkin.Controls.MaterialButton btnAddComboMeal;
         private System.Windows.Forms.BindingSource bindingSource;
-        private System.Windows.Forms.DataGridView dataGridViewProductList;
         private System.Windows.Forms.CheckedListBox chkListBoxProducts;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox pbSearch;
@@ -723,5 +754,6 @@
         private System.Windows.Forms.Panel panel1;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private System.Windows.Forms.PictureBox pbReloadForm;
+        private System.Windows.Forms.DataGridView dataGridViewProductList;
     }
 }

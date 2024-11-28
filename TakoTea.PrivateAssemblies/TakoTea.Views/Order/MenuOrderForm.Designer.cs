@@ -1,79 +1,80 @@
-﻿using System.Windows.Forms;
+﻿    using System.Windows.Forms;
 
-namespace TakoTea.View.Orders
-
-{
-
-    partial class MenuOrderForm
+    namespace TakoTea.View.Orders
 
     {
 
-        /// <summary>
-
-        /// Required designer variable.
-
-        /// </summary>
-
-        private System.ComponentModel.IContainer components = null;
-
-
-
-        /// <summary>
-
-        /// Clean up any resources being used.
-
-        /// </summary>
-
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-
-        protected override void Dispose(bool disposing)
+        partial class MenuOrderForm
 
         {
 
-            if (disposing && (components != null))
+            /// <summary>
+
+            /// Required designer variable.
+
+            /// </summary>
+
+            private System.ComponentModel.IContainer components = null;
+
+
+
+            /// <summary>
+
+            /// Clean up any resources being used.
+
+            /// </summary>
+
+            /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+
+            protected override void Dispose(bool disposing)
 
             {
 
-                components.Dispose();
+                if (disposing && (components != null))
+
+                {
+
+                    components.Dispose();
+
+                }
+
+                base.Dispose(disposing);
 
             }
 
-            base.Dispose(disposing);
-
-        }
 
 
-
-        #region Windows Form Designer generated code
+            #region Windows Form Designer generated code
 
 
 
-        /// <summary>
+            /// <summary>
 
-        /// Required method for Designer support - do not modify
+            /// Required method for Designer support - do not modify
 
-        /// the contents of this method with the code editor.
+            /// the contents of this method with the code editor.
 
-        /// </summary>
+            /// </summary>
 
-        private void InitializeComponent()
+            private void InitializeComponent()
 
-        {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.panel2 = new System.Windows.Forms.Panel();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.panelSearch = new System.Windows.Forms.Panel();
-            this.btnSearch = new MaterialSkin.Controls.MaterialButton();
+            this.btnViewDraftOrders = new MaterialSkin.Controls.MaterialButton();
+            this.btnGoToOrderQueue = new MaterialSkin.Controls.MaterialButton();
             this.txtBoxSearchVariant = new MaterialSkin.Controls.MaterialTextBox2();
             this.flPanelProductVariantsMenu = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanelCategpries = new System.Windows.Forms.FlowLayoutPanel();
             this.panelCart = new System.Windows.Forms.Panel();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.lblOrderId = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblCustomer = new MaterialSkin.Controls.MaterialLabel();
             this.btnClearOrderList = new MaterialSkin.Controls.MaterialButton();
             this.dataGridViewOrderList = new System.Windows.Forms.DataGridView();
             this.ColumnProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -94,14 +95,15 @@ namespace TakoTea.View.Orders
             this.lblTotalInOrderList = new MaterialSkin.Controls.MaterialLabel();
             this.btnSaveToDraft = new MaterialSkin.Controls.MaterialButton();
             this.btnConfirmOrder = new MaterialSkin.Controls.MaterialButton();
+            this.dgvDraftOrders = new System.Windows.Forms.DataGridView();
             this.panelSeparator = new System.Windows.Forms.Panel();
-            this.btnGoToOrderQueue = new MaterialSkin.Controls.MaterialButton();
             this.materialCard1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelSearch.SuspendLayout();
             this.panelCart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrderList)).BeginInit();
             this.groupBoxPayment.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDraftOrders)).BeginInit();
             this.SuspendLayout();
             // 
             // materialCard1
@@ -112,6 +114,7 @@ namespace TakoTea.View.Orders
             this.materialCard1.Controls.Add(this.flPanelProductVariantsMenu);
             this.materialCard1.Controls.Add(this.flowLayoutPanelCategpries);
             this.materialCard1.Controls.Add(this.panelCart);
+            this.materialCard1.Controls.Add(this.dgvDraftOrders);
             this.materialCard1.Depth = 0;
             this.materialCard1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -153,33 +156,53 @@ namespace TakoTea.View.Orders
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.panelSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelSearch.Controls.Add(this.btnViewDraftOrders);
             this.panelSearch.Controls.Add(this.btnGoToOrderQueue);
-            this.panelSearch.Controls.Add(this.btnSearch);
             this.panelSearch.Controls.Add(this.txtBoxSearchVariant);
             this.panelSearch.Location = new System.Drawing.Point(216, 60);
             this.panelSearch.Name = "panelSearch";
             this.panelSearch.Size = new System.Drawing.Size(698, 56);
             this.panelSearch.TabIndex = 5;
             // 
-            // btnSearch
+            // btnViewDraftOrders
             // 
-            this.btnSearch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSearch.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnSearch.Depth = 0;
-            this.btnSearch.HighEmphasis = true;
-            this.btnSearch.Icon = null;
-            this.btnSearch.Location = new System.Drawing.Point(350, 10);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnSearch.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnSearch.Size = new System.Drawing.Size(78, 36);
-            this.btnSearch.TabIndex = 97;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnSearch.UseAccentColor = false;
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click_1);
+            this.btnViewDraftOrders.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnViewDraftOrders.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnViewDraftOrders.Depth = 0;
+            this.btnViewDraftOrders.HighEmphasis = true;
+            this.btnViewDraftOrders.Icon = null;
+            this.btnViewDraftOrders.Location = new System.Drawing.Point(376, 8);
+            this.btnViewDraftOrders.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnViewDraftOrders.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnViewDraftOrders.Name = "btnViewDraftOrders";
+            this.btnViewDraftOrders.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnViewDraftOrders.Size = new System.Drawing.Size(165, 36);
+            this.btnViewDraftOrders.TabIndex = 98;
+            this.btnViewDraftOrders.Text = "View Draft Orders";
+            this.btnViewDraftOrders.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnViewDraftOrders.UseAccentColor = true;
+            this.btnViewDraftOrders.UseVisualStyleBackColor = true;
+            this.btnViewDraftOrders.Click += new System.EventHandler(this.btnViewDraftOrders_Click);
+            // 
+            // btnGoToOrderQueue
+            // 
+            this.btnGoToOrderQueue.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnGoToOrderQueue.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnGoToOrderQueue.Depth = 0;
+            this.btnGoToOrderQueue.HighEmphasis = true;
+            this.btnGoToOrderQueue.Icon = null;
+            this.btnGoToOrderQueue.Location = new System.Drawing.Point(560, 8);
+            this.btnGoToOrderQueue.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnGoToOrderQueue.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnGoToOrderQueue.Name = "btnGoToOrderQueue";
+            this.btnGoToOrderQueue.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnGoToOrderQueue.Size = new System.Drawing.Size(118, 36);
+            this.btnGoToOrderQueue.TabIndex = 97;
+            this.btnGoToOrderQueue.Text = "Order Queue";
+            this.btnGoToOrderQueue.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnGoToOrderQueue.UseAccentColor = false;
+            this.btnGoToOrderQueue.UseVisualStyleBackColor = true;
+            this.btnGoToOrderQueue.Click += new System.EventHandler(this.btnGoToOrderQueue_Click);
             // 
             // txtBoxSearchVariant
             // 
@@ -223,7 +246,6 @@ namespace TakoTea.View.Orders
             this.flPanelProductVariantsMenu.Padding = new System.Windows.Forms.Padding(10);
             this.flPanelProductVariantsMenu.Size = new System.Drawing.Size(696, 630);
             this.flPanelProductVariantsMenu.TabIndex = 4;
-            this.flPanelProductVariantsMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.flPanelProductVariantsMenu_Paint);
             // 
             // flowLayoutPanelCategpries
             // 
@@ -243,7 +265,7 @@ namespace TakoTea.View.Orders
             this.panelCart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelCart.Controls.Add(this.materialLabel1);
             this.panelCart.Controls.Add(this.lblOrderId);
-            this.panelCart.Controls.Add(this.materialLabel2);
+            this.panelCart.Controls.Add(this.lblCustomer);
             this.panelCart.Controls.Add(this.btnClearOrderList);
             this.panelCart.Controls.Add(this.dataGridViewOrderList);
             this.panelCart.Controls.Add(this.groupBoxPayment);
@@ -284,17 +306,17 @@ namespace TakoTea.View.Orders
             this.lblOrderId.TabIndex = 101;
             this.lblOrderId.Text = "#1234";
             // 
-            // materialLabel2
+            // lblCustomer
             // 
-            this.materialLabel2.AutoSize = true;
-            this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.Location = new System.Drawing.Point(20, 50);
-            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(177, 19);
-            this.materialLabel2.TabIndex = 101;
-            this.materialLabel2.Text = "Customer: Mark Gregorio";
+            this.lblCustomer.AutoSize = true;
+            this.lblCustomer.Depth = 0;
+            this.lblCustomer.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblCustomer.Location = new System.Drawing.Point(20, 50);
+            this.lblCustomer.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblCustomer.Name = "lblCustomer";
+            this.lblCustomer.Size = new System.Drawing.Size(177, 19);
+            this.lblCustomer.TabIndex = 101;
+            this.lblCustomer.Text = "Customer: Mark Gregorio";
             // 
             // btnClearOrderList
             // 
@@ -319,14 +341,14 @@ namespace TakoTea.View.Orders
             // 
             this.dataGridViewOrderList.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridViewOrderList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewOrderList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewOrderList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.dataGridViewOrderList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewOrderList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnProduct,
@@ -334,14 +356,14 @@ namespace TakoTea.View.Orders
             this.AddOns,
             this.ColumnQty,
             this.ColumnPrice});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewOrderList.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewOrderList.DefaultCellStyle = dataGridViewCellStyle17;
             this.dataGridViewOrderList.EnableHeadersVisualStyles = false;
             this.dataGridViewOrderList.Location = new System.Drawing.Point(10, 80);
             this.dataGridViewOrderList.MultiSelect = false;
@@ -349,14 +371,14 @@ namespace TakoTea.View.Orders
             this.dataGridViewOrderList.ReadOnly = true;
             this.dataGridViewOrderList.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataGridViewOrderList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewOrderList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewOrderList.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
             this.dataGridViewOrderList.RowHeadersWidth = 25;
             this.dataGridViewOrderList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridViewOrderList.Size = new System.Drawing.Size(430, 316);
@@ -540,9 +562,9 @@ namespace TakoTea.View.Orders
             this.lblTotalItems.Location = new System.Drawing.Point(16, 608);
             this.lblTotalItems.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTotalItems.Name = "lblTotalItems";
-            this.lblTotalItems.Size = new System.Drawing.Size(123, 29);
+            this.lblTotalItems.Size = new System.Drawing.Size(129, 29);
             this.lblTotalItems.TabIndex = 102;
-            this.lblTotalItems.Text = "Total Price:";
+            this.lblTotalItems.Text = "Total Items:";
             // 
             // lblTotalItemInOrderList
             // 
@@ -593,17 +615,18 @@ namespace TakoTea.View.Orders
             this.btnSaveToDraft.Depth = 0;
             this.btnSaveToDraft.HighEmphasis = true;
             this.btnSaveToDraft.Icon = null;
-            this.btnSaveToDraft.Location = new System.Drawing.Point(264, 680);
+            this.btnSaveToDraft.Location = new System.Drawing.Point(256, 680);
             this.btnSaveToDraft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnSaveToDraft.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSaveToDraft.Name = "btnSaveToDraft";
             this.btnSaveToDraft.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnSaveToDraft.Size = new System.Drawing.Size(77, 36);
+            this.btnSaveToDraft.Size = new System.Drawing.Size(90, 36);
             this.btnSaveToDraft.TabIndex = 96;
-            this.btnSaveToDraft.Text = "Cancel";
+            this.btnSaveToDraft.Text = "To Draft";
             this.btnSaveToDraft.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnSaveToDraft.UseAccentColor = true;
             this.btnSaveToDraft.UseVisualStyleBackColor = true;
+            this.btnSaveToDraft.Click += new System.EventHandler(this.btnSaveDraft_Click);
             // 
             // btnConfirmOrder
             // 
@@ -625,6 +648,14 @@ namespace TakoTea.View.Orders
             this.btnConfirmOrder.UseVisualStyleBackColor = true;
             this.btnConfirmOrder.Click += new System.EventHandler(this.btnConfirmOrder_Click);
             // 
+            // dgvDraftOrders
+            // 
+            this.dgvDraftOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvDraftOrders.Location = new System.Drawing.Point(224, 128);
+            this.dgvDraftOrders.Name = "dgvDraftOrders";
+            this.dgvDraftOrders.Size = new System.Drawing.Size(680, 616);
+            this.dgvDraftOrders.TabIndex = 0;
+            // 
             // panelSeparator
             // 
             this.panelSeparator.BackColor = System.Drawing.Color.Gray;
@@ -633,26 +664,6 @@ namespace TakoTea.View.Orders
             this.panelSeparator.Name = "panelSeparator";
             this.panelSeparator.Size = new System.Drawing.Size(1, 731);
             this.panelSeparator.TabIndex = 6;
-            // 
-            // btnGoToOrderQueue
-            // 
-            this.btnGoToOrderQueue.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnGoToOrderQueue.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnGoToOrderQueue.Depth = 0;
-            this.btnGoToOrderQueue.HighEmphasis = true;
-            this.btnGoToOrderQueue.Icon = null;
-            this.btnGoToOrderQueue.Location = new System.Drawing.Point(568, 8);
-            this.btnGoToOrderQueue.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnGoToOrderQueue.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnGoToOrderQueue.Name = "btnGoToOrderQueue";
-            this.btnGoToOrderQueue.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnGoToOrderQueue.Size = new System.Drawing.Size(118, 36);
-            this.btnGoToOrderQueue.TabIndex = 97;
-            this.btnGoToOrderQueue.Text = "Order Queue";
-            this.btnGoToOrderQueue.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnGoToOrderQueue.UseAccentColor = false;
-            this.btnGoToOrderQueue.UseVisualStyleBackColor = true;
-            this.btnGoToOrderQueue.Click += new System.EventHandler(this.btnGoToOrderQueue_Click);
             // 
             // MenuOrderForm
             // 
@@ -675,76 +686,78 @@ namespace TakoTea.View.Orders
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrderList)).EndInit();
             this.groupBoxPayment.ResumeLayout(false);
             this.groupBoxPayment.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDraftOrders)).EndInit();
             this.ResumeLayout(false);
 
-        }
+            }
 
 
 
-        #endregion
+            #endregion
 
 
 
-        private MaterialSkin.Controls.MaterialCard materialCard1;
+            private MaterialSkin.Controls.MaterialCard materialCard1;
 
-        private System.Windows.Forms.Panel panelCart;
+            private System.Windows.Forms.Panel panelCart;
 
-        private MaterialSkin.Controls.MaterialLabel lblTotalInOrderList;
+            private MaterialSkin.Controls.MaterialLabel lblTotalInOrderList;
 
-        private MaterialSkin.Controls.MaterialLabel lblOrderId;
+            private MaterialSkin.Controls.MaterialLabel lblOrderId;
 
-        private MaterialSkin.Controls.MaterialLabel materialLabel2;
+            private MaterialSkin.Controls.MaterialLabel lblCustomer;
 
-        private System.Windows.Forms.DataGridView dataGridViewOrderList;
+            private System.Windows.Forms.DataGridView dataGridViewOrderList;
 
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnProduct;
+            private System.Windows.Forms.DataGridViewTextBoxColumn ColumnProduct;
 
-        private System.Windows.Forms.DataGridViewTextBoxColumn Size;
+            private System.Windows.Forms.DataGridViewTextBoxColumn Size;
 
-        private System.Windows.Forms.DataGridViewTextBoxColumn AddOns;
+            private System.Windows.Forms.DataGridViewTextBoxColumn AddOns;
 
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnQty;
+            private System.Windows.Forms.DataGridViewTextBoxColumn ColumnQty;
 
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPrice;
+            private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPrice;
 
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+            private MaterialSkin.Controls.MaterialLabel materialLabel1;
 
-        private MaterialSkin.Controls.MaterialButton btnClearOrderList;
+            private MaterialSkin.Controls.MaterialButton btnClearOrderList;
 
-        private MaterialSkin.Controls.MaterialButton btnSaveToDraft;
+            private MaterialSkin.Controls.MaterialButton btnSaveToDraft;
 
-        private MaterialSkin.Controls.MaterialButton btnConfirmOrder;
+            private MaterialSkin.Controls.MaterialButton btnConfirmOrder;
 
-        private System.Windows.Forms.Panel panelSearch;
+            private System.Windows.Forms.Panel panelSearch;
 
-        private MaterialSkin.Controls.MaterialButton btnSearch;
+            private MaterialSkin.Controls.MaterialTextBox2 txtBoxSearchVariant;
 
-        private MaterialSkin.Controls.MaterialTextBox2 txtBoxSearchVariant;
+            private System.Windows.Forms.FlowLayoutPanel flPanelProductVariantsMenu;
 
-        private System.Windows.Forms.FlowLayoutPanel flPanelProductVariantsMenu;
+            private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelCategpries;
 
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelCategpries;
+            private System.Windows.Forms.Panel panel2;
 
-        private System.Windows.Forms.Panel panel2;
+            private MaterialSkin.Controls.MaterialLabel materialLabel5;
+            private Panel panelSeparator;
+            private GroupBox groupBoxPayment;
 
-        private MaterialSkin.Controls.MaterialLabel materialLabel5;
-        private Panel panelSeparator;
-        private GroupBox groupBoxPayment;
+            // ... other controls ...
 
-        // ... other controls ...
+            private MaterialSkin.Controls.MaterialLabel lblPaymentMethod;
+            private MaterialSkin.Controls.MaterialComboBox cmbPaymentMethod;
+            private MaterialSkin.Controls.MaterialLabel lblPaymentStatus;
+            private MaterialSkin.Controls.MaterialComboBox cmbPaymentStatus;
+            private MaterialSkin.Controls.MaterialLabel lblTotalItems;
+            private MaterialSkin.Controls.MaterialLabel materialLabel3;
+            private MaterialSkin.Controls.MaterialLabel lblTotalItemInOrderList;
+            private MaterialSkin.Controls.MaterialComboBox cmbOrderStatus;
+            private MaterialSkin.Controls.MaterialLabel materialLabel4;
+            private MaterialSkin.Controls.MaterialButton btnGoToOrderQueue;
+        private MaterialSkin.Controls.MaterialButton btnViewDraftOrders;
+        private DataGridView dgvDraftOrders;
 
-        private MaterialSkin.Controls.MaterialLabel lblPaymentMethod;
-        private MaterialSkin.Controls.MaterialComboBox cmbPaymentMethod;
-        private MaterialSkin.Controls.MaterialLabel lblPaymentStatus;
-        private MaterialSkin.Controls.MaterialComboBox cmbPaymentStatus;
-        private MaterialSkin.Controls.MaterialLabel lblTotalItems;
-        private MaterialSkin.Controls.MaterialLabel materialLabel3;
-        private MaterialSkin.Controls.MaterialLabel lblTotalItemInOrderList;
-        private MaterialSkin.Controls.MaterialComboBox cmbOrderStatus;
-        private MaterialSkin.Controls.MaterialLabel materialLabel4;
-        private MaterialSkin.Controls.MaterialButton btnGoToOrderQueue;
 
         // ... other controls ...
     }
 
-}
+    }
