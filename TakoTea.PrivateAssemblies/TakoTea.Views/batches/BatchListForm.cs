@@ -23,7 +23,8 @@ namespace TakoTea.View.Batches
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
             _dao = new DataAccessObject();
             _batchRepo = new BatchRepository(_dao);
-            DataGridViewHelper.ApplyDefaultStyles(dataGridViewBatch);
+            DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewBatch);
+
 
         }
         private void LoadData()
@@ -64,23 +65,11 @@ namespace TakoTea.View.Batches
         {
             base.OnLoad(e);
             LoadData();
-            DataGridViewHelper.AddButtonToLastRow(dataGridViewBatch, "Edit", "Edit", HandleEditButtonClick, ThemeConfigurator.GetPrimaryColor(), ThemeConfigurator.GetTextColor());
-            DataGridViewHelper.AddButtonToLastRow(dataGridViewBatch, "View More", "View More", HandleViewMoreButtonClick, ThemeConfigurator.GetAccentColor(), ThemeConfigurator.GetTextColor());
 
         }
 
 
-        private void HandleEditButtonClick(int rowIndex)
-        {
-
-        }
-
-        private void HandleViewMoreButtonClick(int rowIndex)
-        {
-
-        }
-
-
+     
 
 
 

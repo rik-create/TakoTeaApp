@@ -27,6 +27,7 @@ namespace TakoTea.Views.Stock
             _bindingSource = new BindingSource();
             ThemeConfigurator.ApplyDarkTheme(this);
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
+            DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewStockLevels);
         }
         protected override void OnLoad(EventArgs e)
         {
@@ -43,6 +44,7 @@ namespace TakoTea.Views.Stock
                     b => b.IngredientID,          // Key from Product
                     (i, b) => new
                     {
+                        b.BatchID,
                         i.IngredientName,         // Product name from Product table
                         i.StockLevel,
                         i.LowLevel
@@ -58,6 +60,8 @@ namespace TakoTea.Views.Stock
                 bindingNavigator: bindingNavigatorStockLevels,
                 errorMessage: "Failed to load product variants."
             );
+
+            DataGridViewHelper.HideColumn(dataGridViewStockLevels, "BatchID");
 
         
         }

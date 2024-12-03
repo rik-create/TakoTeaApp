@@ -55,8 +55,8 @@ namespace TakoTea.Views.Items
 
                 DataGridViewHelper.BindDataToGridView(dataGridViewIngredients, bindingSource1, ingredients);
                 DataGridViewHelper.BindNavigatorToBindingSource(bindingNavigatorBatch, bindingSource1);
-
-
+/*                DataGridViewHelper.HideColumn(dataGridViewIngredients, "IngredientID");
+*/
            
                 
 
@@ -84,6 +84,8 @@ namespace TakoTea.Views.Items
                 addBatchModal.lblQuantity.Text = $"Quantity in {measuringUnit}"; // Set the label text
 
                 addBatchModal.ShowDialog();
+
+                LoadData();
             }
         }
         private void btnShowFilter_Click(object sender, EventArgs e)

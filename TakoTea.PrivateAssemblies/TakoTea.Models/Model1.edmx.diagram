@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="102d72a12c2648348c092c10af13695f" Name="Diagram1" ZoomLevel="66">
+      <Diagram DiagramId="102d72a12c2648348c092c10af13695f" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="TakoTeaModel.IngredientProductLink" Width="1.5" PointX="6" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TakoTeaModel.Product" Width="2.125" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TakoTeaModel.ProductCategory" Width="1.5" PointX="1.5" PointY="1.125" IsExpanded="true" />
@@ -40,6 +40,11 @@
         <EntityTypeShape EntityType="TakoTeaModel.Batch" Width="1.5" PointX="3" PointY="6.75" />
         <AssociationConnector Association="TakoTeaModel.FK__Batch__Ingredien__6CD828CA" />
         <AssociationConnector Association="TakoTeaModel.FK__StockLeve__Batch__58D1301D" />
+        <EntityTypeShape EntityType="TakoTeaModel.PaymentMethod" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="TakoTeaModel.User" Width="1.5" PointX="13.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TakoTeaModel.Setting" Width="1.5" PointX="13.375" PointY="8.75" />
+        <EntityTypeShape EntityType="TakoTeaModel.ActivityLog" Width="1.5" PointX="13.375" PointY="12.75" />
+        <EntityTypeShape EntityType="TakoTeaModel.Log" Width="1.5" PointX="15.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

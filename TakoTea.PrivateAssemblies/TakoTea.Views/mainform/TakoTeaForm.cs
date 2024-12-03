@@ -1,13 +1,25 @@
-﻿using MaterialSkin.Controls;
+﻿using MailKit.Net.Smtp;
+using MailKit.Security;
+using MaterialSkin.Controls;
+using Microsoft.SqlServer.Management.Smo;
+using MimeKit;
 using System;
 using System.IO;
+using System.Linq;
+using System.Runtime.Remoting.Contexts;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
 using TakoTea.Interfaces;
+using TakoTea.Models;
+using TakoTea.Repository;
 using TakoTea.View.Items.Item_Modals;
 using TakoTea.View.Orders;
 using TakoTea.View.Product.Product_Modals;
+using TakoTea.Views.mainform;
+using TakoTea.Views.settings;
 namespace TakoTea.Views.MainForm
 {
     public partial class TakoTeaForm : MaterialForm
@@ -15,6 +27,8 @@ namespace TakoTea.Views.MainForm
         public static TakoTeaForm Instance;
         private readonly IFormFactory _formFactory;
         private readonly FormLoader _formLoader;
+        private readonly Entities _context;
+        private readonly LoginForm loginForm;
         public TakoTeaForm()
         {
             InitializeComponent();
@@ -22,7 +36,124 @@ namespace TakoTea.Views.MainForm
             _formLoader = new FormLoader(_formFactory);
             ThemeConfigurator.ApplyDarkTheme(this);
             Instance = this;
+            InitializeNotificationTimer();
+            _context = new Entities();
         }
+
+
+        private void InitializeNotificationTimer()
+        {
+            // Create a Timer with the specified interval
+            System.Timers.Timer timer = new System.Timers.Timer();
+
+            // Set the interval based on the selected frequency in cmbAlertFrequency
+            timer.Interval = GetNotificationInterval().TotalMilliseconds;
+
+            // Attach the Elapsed event handler
+            timer.Elapsed += CheckInventoryAndSendNotifications;
+
+            // Start the timer
+            timer.Start();
+        }
+        private void CheckInventoryAndSendNotifications(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            var context = new Entities();
+            var settings = context.Settings.FirstOrDefault();
+            if (settings == null)
+            {
+                return;
+            }
+
+            // Check if notifications are enabled
+            if (!settings.EnableInAppNotifications.Value && !settings.EnableEmailNotifications.Value)
+            {
+                return; // Exit if both types of notifications are disabled
+            }
+
+            var emailAddresses = settings.SavedEmails.Split(new[] { '?' }, StringSplitOptions.RemoveEmptyEntries);
+
+            var lowStockIngredients = context.Ingredients.Where(i => i.StockLevel <= i.LowLevel).ToList();
+            var outOfStockIngredients = context.Ingredients.Where(i => i.StockLevel <= 0).ToList();
+
+            StringBuilder message = new StringBuilder();
+            if (lowStockIngredients.Count > 0)
+            {
+                message.AppendLine("Low Stock Ingredients:");
+                foreach (var ingredient in lowStockIngredients)
+                {
+                    message.AppendLine($"- {ingredient.IngredientName}: {ingredient.StockLevel} {ingredient.MeasuringUnit}");
+                }
+            }
+
+            if (outOfStockIngredients.Count > 0)
+            {
+                message.AppendLine("\nOut of Stock Ingredients:");
+                foreach (var ingredient in outOfStockIngredients)
+                {
+                    message.AppendLine($"- {ingredient.IngredientName}");
+                }
+            }
+
+            if (message.Length > 0)
+            {
+                if (settings.EnableInAppNotifications.Value)
+                {
+                    // Show in-app notification (you'll need to implement this)
+                    ShowInAppNotification(message.ToString());
+                }
+
+                if (settings.EnableEmailNotifications.Value && emailAddresses.Length > 0)
+                {
+                    SendEmailNotifications(emailAddresses, "Inventory Alert", message.ToString());
+                }
+            }
+        }
+
+        private void ShowInAppNotification(string message)
+        {
+            MessageBox.Show(message, "Inventory Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        private TimeSpan GetNotificationInterval()
+        {
+            var _context = new Entities();
+
+
+            // Retrieve the selected frequency from the database or settings
+            string selectedFrequency = _context.Settings.FirstOrDefault()?.LowStockFrequency; // Assuming you have a Settings entity
+
+            switch (selectedFrequency)
+            {
+                case "Daily":
+                    return TimeSpan.FromDays(1);
+                case "Hourly":
+                    return TimeSpan.FromHours(1);
+                // Add more cases for other frequencies as needed
+                default:
+                    return TimeSpan.FromDays(1); // Default to daily
+            }
+        }
+
+
+        private void SendEmailNotifications(string[] recipients, string subject, string body)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Tako Tea", "takotea9@gmail.com")); // Replace with your email address
+            foreach (string recipient in recipients)
+            {
+                message.To.Add(new MailboxAddress(recipient, recipient));
+            }
+            message.Subject = subject;
+            message.Body = new TextPart("plain") { Text = body };
+
+            using (var client = new SmtpClient())
+            {
+                client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+                client.Authenticate("takotea9@gmail.com", "rhdl vljl ztfn xzui");
+                client.Send(message);
+                client.Disconnect(true);
+            }
+        }
+
         // Method to adjust the main form's height based on the panel's current height
         private void AdjustFormHeightBasedOnPanel(Panel panel1)
         {
@@ -110,27 +241,43 @@ namespace TakoTea.Views.MainForm
                     targetPanel = panelReports;
                     Text = "TakoTea Reports";
                     break;
-                case "Settings":
-                    targetPanel = panelSettings;
-                    Text = "TakoTea Settings";
-                    break;
+         
                 default:
                     return; // Exit if no valid target panel found
             }
             // If a valid form and target panel were found, add the form to the panel
             if (targetPanel != null && formToLoad != null)
             {
-                targetPanel.Width = formToLoad.Width;
-                targetPanel.Height = formToLoad.Height;
-                CenterPanel(targetPanel);
-                AdjustFormHeightBasedOnPanel(targetPanel);
-                targetPanel.Controls.Clear();
-                targetPanel.Controls.Add(formToLoad);
-                formToLoad.Show();
+                // Create and show the progress bar
+                ProgressBar progressBar = LoadingScreenHelper.CreateProgressBar();
+                targetPanel.Controls.Add(progressBar);
+                progressBar.BringToFront(); // Ensure the progress bar is visible
+
+                // Load the form asynchronously
+                Task.Run(() =>
+                {
+                    // Simulate loading delay (remove this in your actual implementation)
+
+                    // Update the UI on the main thread
+                    BeginInvoke(new Action(() =>
+                    {
+                        targetPanel.Width = formToLoad.Width;
+                        targetPanel.Height = formToLoad.Height;
+                        CenterPanel(targetPanel);
+                        AdjustFormHeightBasedOnPanel(targetPanel);
+                        targetPanel.Controls.Clear(); // This will also remove the progress bar
+                        targetPanel.Controls.Add(formToLoad);
+                        formToLoad.Show();
+                    }));
+                });
             }
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            UserRepository.Initialize(_context);
+            this.Shown += (s, args) => { this.Activate(); };
+
+
             Form form = _formLoader.LoadForm("Dashboard");  // Correct usage with a string as argument
             Form formToLoad = form;
             Panel targetPanel = panelDashboard;
@@ -195,19 +342,6 @@ namespace TakoTea.Views.MainForm
         {
             toolStripQuickAccess.Visible = !toolStripQuickAccess.Visible;
             toolStripQuickAccess.Enabled = toolStripQuickAccess.Visible;
-            // Get the base directory of your application
-            // Get the base directory of your application
-            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-
-            // Navigate up three levels to reach the project directory
-            string projectDirectory = Directory.GetParent(Directory.GetParent(Directory.GetParent(baseDirectory).FullName).FullName).FullName;
-
-            // Construct the image directory relative to the project directory
-            string imageDirectory = Path.Combine(projectDirectory, "Resources");
-
-            // ... (Rest of the code remains the same) ...
-
-            MessageBox.Show(imageDirectory);
         }
         private void toolStripBtnNewOrder_Click(object sender, EventArgs e)
         {
@@ -221,8 +355,109 @@ namespace TakoTea.Views.MainForm
         }
         private void toolStripBtnAddProduct_Click(object sender, EventArgs e)
         {
-         /*   AddProductModal addProductModal = new AddProductModal();
-            _ = addProductModal.ShowDialog();*/
+            /*   AddProductModal addProductModal = new AddProductModal();
+               _ = addProductModal.ShowDialog();*/
+        }
+
+        private void btnReload_Click(object sender, EventArgs e)
+        {
+            CheckInventoryAndSendNotifications(null, null);
+
+
+            // 1. Get the currently selected tab
+            TabPage selectedTab = materialTabControl1.SelectedTab;
+
+            string formKey = ""; // Initialize with an empty string
+            switch (selectedTab.Name)
+            {
+                case "tabPageDashboard":
+                    formKey = "Dashboard";
+                    break;
+                case "tabPageProduct":
+                    formKey = "Product";
+                    break;
+                case "tabPageSales":
+                    formKey = "Sales";
+                    break;
+                case "tabPageItem":
+                    formKey = "Item";
+                    break;
+                case "tabPageStock":
+                    formKey = "Stock";
+                    break;
+                case "tabPageBatch":
+                    formKey = "Batch";
+                    break;
+                case "tabPageReports":
+                    formKey = "Reports";
+                    break;
+                case "tabPageSettings":
+                    formKey = "Settings";
+                    break;
+                default:
+                    return; // Do nothing if an unexpected tab is selected
+            }
+
+            // 3. Load a new instance of the form
+            Form newForm = _formLoader.LoadForm(formKey);
+
+            // 4. Find the correct panel to update
+            Panel targetPanel = null;
+            switch (formKey)
+            {
+                case "Dashboard":
+                    targetPanel = panelDashboard;
+                    break;
+                case "Product":
+                    targetPanel = panelProduct;
+                    break;
+                case "Sales":
+                    targetPanel = panelSales;
+                    break;
+                case "Item":
+                    targetPanel = panelItem;
+                    break;
+                case "Stock":
+                    targetPanel = panelStock;
+                    break;
+                case "Batch":
+                    targetPanel = panelBatch;
+                    break;
+                case "Reports":
+                    targetPanel = panelReports;
+                    break;
+         
+                default:
+                    return; // Do nothing if an unexpected formKey is encountered
+            }
+
+            // If a valid form and target panel were found, replace the form in the panel
+            if (targetPanel != null && newForm != null)
+            {
+                targetPanel.Width = newForm.Width;
+                targetPanel.Height = newForm.Height;
+                CenterPanel(targetPanel);
+                AdjustFormHeightBasedOnPanel(targetPanel);
+
+                // Dispose of the old form before clearing the controls
+                foreach (Control control in targetPanel.Controls)
+                {
+                    if (control is Form oldForm)
+                    {
+                        oldForm.Dispose();
+                    }
+                }
+
+                targetPanel.Controls.Clear();
+                targetPanel.Controls.Add(newForm);
+                newForm.Show();
+            }
+        }
+
+        private void pictureBoxSettings_Click(object sender, EventArgs e)
+        {
+            SettingsForm settingsForm = new SettingsForm();
+            settingsForm.ShowDialog();
         }
     }
 }

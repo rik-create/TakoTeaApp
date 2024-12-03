@@ -27,6 +27,9 @@ namespace TakoTea.Views.Batches
             _ingredientRepository = new IngredientRepository(context);
             batchService = new BatchService();
             SetDecimalPlacesForAllNumericUpDowns(this, 1);
+            this.StartPosition = FormStartPosition.CenterParent;
+
+
         }
 
 
@@ -51,8 +54,7 @@ namespace TakoTea.Views.Batches
             try
             {
                 dateTimePickerExpiration.Value = DateTime.Now.AddMonths(6);
-                
-                
+
                 var batch = new Batch
                 {
                     BatchNumber = txtBoxBatchNumber.Text,
@@ -66,7 +68,8 @@ namespace TakoTea.Views.Batches
                                      ? (DateTime?)null
                                      : dateTimePickerExpiration.Value,
                     IsActive = true,
-                    BatchCost = numericUpDownCost.Value
+                    BatchCost = numericUpDownCost.Value,
+                    InitialStockLevel = numericUpDownQuantity.Value
                 };
                 batchService.AddBatch(batch);
                 DialogHelper.ShowSuccess("Batch saved successfully.");
@@ -75,6 +78,8 @@ namespace TakoTea.Views.Batches
             {
                 DialogHelper.ShowError($"Failed to save the batch. Error: {ex.Message}");
             }
+            this.Close();
+        
         }
         private void btnCancelEdit_Click(object sender, EventArgs e)
         {

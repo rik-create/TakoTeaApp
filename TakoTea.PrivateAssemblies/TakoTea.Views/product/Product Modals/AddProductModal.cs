@@ -5,12 +5,14 @@ using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
 using TakoTea.Interfaces;
 using TakoTea.Models;
+using TakoTea.Repository;
 using TakoTea.Services;
 
 namespace TakoTea.View.Product.Product_Modals
@@ -19,8 +21,12 @@ namespace TakoTea.View.Product.Product_Modals
     {
 
         private readonly IInventoryService _inventoryService;
+        private readonly IngredientRepository ingredientRepository;
         private int selectedRowIndex = -1;
         private readonly ProductsService _productsService;
+
+
+        private readonly Entities context;
         public AddProductModal()
         {
             InitializeComponent();
@@ -28,36 +34,20 @@ namespace TakoTea.View.Product.Product_Modals
             ModalSettingsConfigurator.ApplyStandardModalSettings(this);
             _inventoryService = new InventoryService();
             _productsService = new ProductsService();
+            ColumnProduct.DataSource = (new Entities()).Products.Select(p => p.ProductName).ToList();
+            context = new Entities();
+            ingredientRepository = new IngredientRepository(context);
+
 
             DataGridViewHelper.FormatListView(listViewIngredients);
             DataGridViewHelper.ApplyDataGridViewStylesWithWrite(dgViewAddingMultipleProductVariants);
 
             DataGridViewHelper.AddButtonsToLastRow(dgViewAddingMultipleProductVariants, "ClearIngredients","Clear Ingredients", ClearIngredientsInSelectedRowIndex);
+
+            btnDuplicateRow.Click += btnDuplicateRows_Click;
         }
     
-        private void InitializeProductComboBoxColumn()
-        {
-            try
-            {
-                // Create an instance of ProductService (you can inject it if needed)
-
-                // Retrieve product names
-                var productNames = _productsService.GetProductNames();
-
-                // Clear any existing items in the ComboBox column
-                ColumnProduct.Items.Clear();
-
-                // Add product names to the ComboBox column
-                foreach (var productName in productNames)
-                {
-                    ColumnProduct.Items.Add(productName);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error initializing product combo box: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+     
 
 
         private void AddProductModal_Load(object sender, EventArgs e)
@@ -67,7 +57,6 @@ namespace TakoTea.View.Product.Product_Modals
             dgViewAddingMultipleProductVariants.AllowUserToAddRows = false; // Prevent adding rows manually
 
             PopulateIngredientsList();
-            InitializeProductComboBoxColumn();
             // Enable text wrapping for the "Ingredients" column
             dgViewAddingMultipleProductVariants.Columns["ColumnIngredients"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dgViewAddingMultipleProductVariants.Columns["ColumnInstructions"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
@@ -113,21 +102,23 @@ namespace TakoTea.View.Product.Product_Modals
             
 
         // Handle Duplicate Row button click
-        private void btnDuplicateRow_Click(object sender, EventArgs e)
+        private void btnDuplicateRows_Click(object sender, EventArgs e)
         {
             if (dgViewAddingMultipleProductVariants.SelectedRows.Count > 0)
             {
-                var selectedRow = dgViewAddingMultipleProductVariants.SelectedRows[0];
-                var newRow = (DataGridViewRow)selectedRow.Clone();
-
-                // Copy all cell values from the selected row to the new row
-                for (int i = 0; i < selectedRow.Cells.Count; i++)
+                foreach (DataGridViewRow selectedRow in dgViewAddingMultipleProductVariants.SelectedRows)
                 {
-                    newRow.Cells[i].Value = selectedRow.Cells[i].Value;
-                }
+                    var newRow = (DataGridViewRow)selectedRow.Clone();
 
-                // Add the new row to the grid
-                dgViewAddingMultipleProductVariants.Rows.Add(newRow);
+                    // Copy all cell values from the selected row to the new row
+                    for (int i = 0; i < selectedRow.Cells.Count; i++)
+                    {
+                        newRow.Cells[i].Value = selectedRow.Cells[i].Value;
+                    }
+
+                    // Add the new row to the grid
+                    dgViewAddingMultipleProductVariants.Rows.Add(newRow);
+                }
             }
         }
 
@@ -505,7 +496,8 @@ namespace TakoTea.View.Product.Product_Modals
                     Price = price,
                     Ingredients = ingredients,
                     Instructions = instructions,
-                    ImagePath = imageData // Directly store the byte array
+                    ImagePath = imageData,
+                    StockLevel = 0
                 };
 
                 productVariantsToSave.Add(productVariant);
@@ -559,6 +551,8 @@ namespace TakoTea.View.Product.Product_Modals
                 }
 
                 MessageBox.Show("All product variants have been saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                UpdateFirstBatchItemLevel();
                 Close();
             }
             catch (Exception ex)
@@ -584,6 +578,24 @@ namespace TakoTea.View.Product.Product_Modals
                 var selectedRow = dgViewAddingMultipleProductVariants.Rows[selectedRowIndex];
                 selectedRow.Cells["ColumnIngredients"].Value = string.Empty;
             }
+        }
+        private void UpdateFirstBatchItemLevel()
+        {
+            var allBatch = ingredientRepository.GetAllBatch();
+
+            foreach(var batch in allBatch)
+            {
+                if (batch != null)
+                {
+                    batch.StockLevel += 1;
+                    context.SaveChanges();
+                    batch.StockLevel -= 1;
+                    context.SaveChanges();
+
+
+                }
+            }
+       
         }
 
     }

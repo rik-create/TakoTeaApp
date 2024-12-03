@@ -30,6 +30,7 @@ namespace TakoTea.Models
         public string Supplier { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public decimal BatchCost { get; set; }
+        public Nullable<decimal> InitialStockLevel { get; set; }
     
         public virtual Ingredient Ingredient { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

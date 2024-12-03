@@ -29,11 +29,13 @@ namespace TakoTea.Views.Order
     {
         private readonly Entities _context;
         private readonly ProductsService productsService;
+        private readonly SalesService salesService;
         public MenuOrderFormService()
         {
 
             _context = new Entities();
             productsService = new ProductsService();
+            salesService = new SalesService(_context);
         }
         public int GetLatestDraftOrderId()
         {
@@ -196,10 +198,19 @@ namespace TakoTea.Views.Order
                         flowLayoutPanelCategories.Controls.Add(categoryButton);
                     }
                 }
+
+                var outOfStockButton = new CategoryButtonOrdering();
+                outOfStockButton.buttonCategory.Text = "Out of Stock";
+                outOfStockButton.buttonCategory.Click += (sender, e) =>
+                {
+                    LoadMenuVariants(flPanelProductVariantsMenu, dataGridViewOrderList, true); // Show out-of-stock items
+                };
+                flowLayoutPanelCategories.Controls.Add(outOfStockButton);
+
             }
         }
 
-        public void LoadMenuVariantsByCategory(string categoryName, FlowLayoutPanel flPanelProductVariantsMenu, DataGridView dg)
+        public void LoadMenuVariantsByCategory(string categoryName, FlowLayoutPanel flPanelProductVariantsMenu, DataGridView dg, bool showOutOfStock = false)
         {
             if (flPanelProductVariantsMenu == null)
             {
@@ -215,6 +226,8 @@ namespace TakoTea.Views.Order
                 .Where(pv => pv.Product.ProductName == categoryName)
                 .GroupBy(pv => pv.VariantName)
                 .Select(g => g.FirstOrDefault())
+        .Where(pv => showOutOfStock ? pv.StockLevel <= 0 : pv.StockLevel > 0) // Filter based on showOutOfStock
+
                 .ToList();
 
             flPanelProductVariantsMenu.Controls.Clear();
@@ -258,6 +271,13 @@ namespace TakoTea.Views.Order
                             MessageBox.Show($"Failed to load image: {ex.Message}");
                         }
                     }
+                    if (productVariant.StockLevel <= 0)
+                    {
+                        productWidget.lblOutOfStock.Visible = true;
+                        productWidget.pictureBoxProduct.Visible = false;
+                        productWidget.panelProductContainer.Enabled = false;
+
+                    }
 
                     productWidget.pictureBoxProduct.Click += (sender, e) =>
                     {
@@ -291,31 +311,44 @@ namespace TakoTea.Views.Order
         }
 
         // ... (other methods) ...
-        public void LoadMenuVariants(FlowLayoutPanel flPanelProductVariantsMenu, DataGridView dg)
+        public void LoadMenuVariants(FlowLayoutPanel flPanelProductVariantsMenu, DataGridView dg, bool showOutOfStock = false)
         {
             if (flPanelProductVariantsMenu == null)
+            {
                 throw new ArgumentNullException(nameof(flPanelProductVariantsMenu));
+            }
 
             if (_context == null)
+            {
                 throw new ArgumentNullException(nameof(_context));
+            }
 
             flPanelProductVariantsMenu.Controls.Clear();
 
             var productVariants = _context.ProductVariants
                 .GroupBy(pv => pv.VariantName)
                 .Select(g => g.FirstOrDefault())
+        .Where(pv => showOutOfStock ? pv.StockLevel <= 0 : pv.StockLevel > 0) // Filter based on showOutOfStock
+
                 .ToList();
 
             foreach (var variant in productVariants)
             {
-                flPanelProductVariantsMenu.Controls.Add(CreateProductWidget(variant, dg));
+                flPanelProductVariantsMenu.Controls.Add(CreateProductWidget(variant, dg, showOutOfStock));
             }
+
 
             var comboMeals = _context.ComboMeals.ToList();
 
             foreach (var comboMeal in comboMeals)
             {
-                flPanelProductVariantsMenu.Controls.Add(CreateProductWidget(comboMeal, dg));
+                // Check if any variant in the combo meal is out of stock
+                bool isOutOfStock = _context.ComboMealVariants
+                    .Where(cmv => cmv.ComboMealID == comboMeal.ComboMealID)
+                    .Any(cmv => _context.ProductVariants.Any(pv => pv.ProductVariantID == cmv.ProductVariantID && pv.StockLevel <= 0));
+
+                // Add the combo meal widget, passing the out-of-stock status
+                flPanelProductVariantsMenu.Controls.Add(CreateProductWidget(comboMeal, dg, isOutOfStock, showOutOfStock));
             }
         }
         // If using .NET Framework 4.8 or earlier, use this method instead:
@@ -336,7 +369,7 @@ namespace TakoTea.Views.Order
                 return false;
             }
         }
-        private ProductWidget CreateProductWidget(ProductVariant productVariant, DataGridView dg)
+        private ProductWidget CreateProductWidget(ProductVariant productVariant, DataGridView dg, bool showOutOfStock = false)
         {
             // Initialize the ProductWidget with product variant name and category
             var productWidget = new ProductWidget
@@ -363,6 +396,14 @@ namespace TakoTea.Views.Order
                 }
             }
 
+            if (productVariant.StockLevel <= 0)
+            {
+                productWidget.lblOutOfStock.Visible = true;
+                productWidget.pictureBoxProduct.Visible = false;
+                productWidget.panelProductContainer.Enabled = false;
+               
+            }
+
             // Handle the click event of the product's picture box
             productWidget.pictureBoxProduct.Click += (sender, e) =>
             {
@@ -380,7 +421,7 @@ namespace TakoTea.Views.Order
             return productWidget;
         }
 
-        private ProductWidget CreateProductWidget(ComboMeal comboMeal, DataGridView dg)
+        private ProductWidget CreateProductWidget(ComboMeal comboMeal, DataGridView dg, bool isOutOfStock, bool showOutOfStock = false)
         {
             var productWidget = new ProductWidget
             {
@@ -403,6 +444,15 @@ namespace TakoTea.Views.Order
             catch (Exception ex)
             {
                 MessageBox.Show($"Failed to load image: {ex.Message}");
+            }
+
+            if (isOutOfStock)
+            {
+                productWidget.lblOutOfStock.Visible = true;
+                if (!showOutOfStock)
+                {
+                    productWidget.Enabled = false;
+                }
             }
 
             productWidget.pictureBoxProduct.Click += (sender, e) =>
@@ -458,6 +508,14 @@ namespace TakoTea.Views.Order
                     {
                         MessageBox.Show($"Failed to load image: {ex.Message}");
                     }
+                }
+
+                if (variant.StockLevel <= 0)
+                {
+                    productWidget.lblOutOfStock.Visible = true;
+                    productWidget.pictureBoxProduct.Visible = false;
+                    productWidget.panelProductContainer.Enabled = false;
+
                 }
 
                 productWidget.pictureBoxProduct.Click += (sender, e) =>
@@ -696,9 +754,8 @@ namespace TakoTea.Views.Order
             throw new NotImplementedException();
         }
 
-        //TODO: TEST THIS
 
-        public void ConfirmOrder(DataGridView dataGridViewOrderList, Label lblTotalInOrderList, Label lblOrderId, ComboBox cmbPaymentMethod, ComboBox cmbPaymentStatus, ComboBox cmbOrderStatus)
+        public void ConfirmOrder(DataGridView dataGridViewOrderList, Label lblTotalInOrderList, Label lblOrderId, ComboBox cmbPaymentMethod, ComboBox cmbPaymentStatus, ComboBox cmbOrderStatus, DateTimePicker orderDate, string customerName)
         {
             using (var transaction = _context.Database.BeginTransaction()) // Using simplified syntax
             {
@@ -723,9 +780,10 @@ namespace TakoTea.Views.Order
                     string paymentMethod = cmbPaymentMethod.SelectedItem.ToString();
                     string paymentStatus = cmbPaymentStatus.SelectedItem.ToString();
                     string orderStatus = cmbOrderStatus.SelectedItem.ToString();
+                    DateTime dateTime = orderDate.Value;
 
                     // 4. Save the order to the database
-                    SaveOrderToDb(orderId, dataGridViewOrderList, lblTotalInOrderList, paymentMethod, paymentStatus, orderStatus);
+                    SaveOrderToDb(dataGridViewOrderList, lblTotalInOrderList, customerName, paymentMethod, orderStatus, dateTime, paymentStatus);
 
                     // 5. Update stock levels
                     UpdateStockLevels(dataGridViewOrderList);
@@ -767,11 +825,9 @@ namespace TakoTea.Views.Order
         {
             return MessageBox.Show(message, "Confirm Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
-        //TODO: TEST THIS
 
 
 
-        //TODO: PRODUCTVARIANTINGREDIENT LINK
         public void UpdateStockLevels(DataGridView dataGridViewOrderList)
         {
             UpdateStockLevelsCallCount++;
@@ -814,7 +870,7 @@ namespace TakoTea.Views.Order
                                 productsService.UpdateBatchStockLevel(ingredientId, quantityPerVariant * quantity, "Deduction");
 
                                 // Log the stock update details
-                                sb.AppendLine($"{productName} ({size}) - Ingredient {ingredientId}: {quantityPerVariant * quantity} units deducted");
+                                sb.AppendLine($"{productName} ({size}) - Ingredient {inventoryService.GetIngredientNameById(ingredientId)}: {quantityPerVariant * quantity} units deducted");
                             }
                         }
                     }
@@ -892,89 +948,117 @@ namespace TakoTea.Views.Order
                     .ToList();
             }
         }
-        //TODO: TEST THIS
         // Helper method to update the stock level in the batch
+ 
   
-        public void SaveOrderToDb(int orderId, DataGridView dataGridViewOrderList, Label lblTotalInOrderList, string customerName, string paymentMethod, string orderStatus)
+        public void SaveOrderToDb(DataGridView dataGridViewOrderList, Label lblTotalInOrderList, string customerName, string paymentMethod, string orderStatus, DateTime orderDate, string paymentStatus)
         {
+            var context = new Entities();
 
             var order = new OrderModel
             {
-                OrderId = orderId,
-                OrderDate = DateTime.Now,
+                OrderDate = orderDate,
                 OrderStatus = orderStatus,
                 CustomerName = customerName,
                 PaymentMethod = paymentMethod,
-                PaymentStatus = "Pending", // Or another appropriate initial status
+                PaymentStatus = paymentStatus,
                 TotalAmount = decimal.Parse(lblTotalInOrderList.Text.Substring(1)),
-                CreatedBy = "System", // Or the actual creator's name
-                // ModifiedBy and ModifiedDate can be set later if needed
+                CreatedBy = "System",
+                GrossProfit = 0,
             };
 
-            _context.OrderModels.Add(order);
+            context.OrderModels.Add(order);
+            context.SaveChanges();
+
+            int orderId = order.OrderId;
+
+            decimal totalGrossProfit = 0; // To accumulate gross profit for the order
 
             foreach (DataGridViewRow row in dataGridViewOrderList.Rows)
             {
                 if (row.IsNewRow)
                     continue;
+
                 string productName = row.Cells[0].Value.ToString();
+                string sizeId = row.Cells[1].Value.ToString();
+                int quantity = Convert.ToInt32(row.Cells[3].Value);
+                decimal totalPrice = Convert.ToDecimal(row.Cells[4].Value);
+                decimal price = totalPrice / quantity; // Calculate individual price
 
-                string sizeId = (row.Cells[1].Value.ToString());
-
-                if (string.IsNullOrEmpty(sizeId))
-                {       // Get the ComboMeal details
+                if (string.IsNullOrEmpty(sizeId)) // Combo meal
+                {
                     var comboMeal = _context.ComboMeals.FirstOrDefault(cm => cm.ComboMealName == productName);
 
                     if (comboMeal != null)
                     {
-                        // Get the ProductVariantIDs included in the combo meal
                         var productVariantIds = _context.ComboMealVariants
-                    .Where(cmv => cmv.ComboMealID == comboMeal.ComboMealID)
-                    .ToList(); // Fetch the entire ComboMealVariant objects
+                            .Where(cmv => cmv.ComboMealID == comboMeal.ComboMealID)
+                            .ToList();
 
                         foreach (var variant in productVariantIds)
                         {
+                            decimal grossProfit = salesService.CalculateGrossProfit((int)variant.ProductVariantID, (int)variant.Quantity, variant.Price.Value);
+                            totalGrossProfit += grossProfit; // Add to the total gross profit for the order
+
                             _context.OrderItems.Add(new OrderItem
                             {
                                 OrderId = orderId,
                                 ProductName = productsService.GetProductVariantNameById((int)variant.ProductVariantID),
                                 ProductVariantId = (int)variant.ProductVariantID,
-                                Quantity = (int)variant.Quantity, // Access Quantity from ComboMealVariant
-                                Price = (int)variant.Price, // Access Price from ComboMealVariant
-                                TotalPrice = variant.Price * variant.Quantity, // Calculate TotalPrice
+                                Quantity = (int)variant.Quantity,
+                                Price = (decimal)variant.Price,
+                                TotalPrice = variant.Price * variant.Quantity,
                                 AddOns = row.Cells[2].Value.ToString(),
                                 CreatedBy = "System",
-                                Size = productsService.GetSizeByVariantId((int)variant.ProductVariantID)
+                                Size = productsService.GetSizeByVariantId((int)variant.ProductVariantID),
+                                GrossProfit = grossProfit,
+                                CreatedDate = DateTime.Now
                             });
                         }
                     }
                 }
-                else
+                else // Individual product variant
                 {
-                    int variantId = productsService.GetProductVariantId(productName, sizeId); // Use productName and sizeId
+                    int variantId = productsService.GetProductVariantId(productName, sizeId);
+
+                    decimal grossProfit = salesService.CalculateGrossProfit(variantId, quantity, price);
+
+
+                    // Calculate gross profit for the individual product variant
+                    totalGrossProfit += grossProfit; // Add to the total gross profit for the order
+
                     _context.OrderItems.Add(new OrderItem
                     {
                         OrderId = orderId,
-
                         ProductName = row.Cells[0].Value.ToString(),
                         ProductVariantId = variantId,
                         Quantity = Convert.ToInt32(row.Cells[3].Value),
-                        Price = Convert.ToDecimal(row.Cells[4].Value),
-                        TotalPrice = Convert.ToDecimal(row.Cells[3].Value) * Convert.ToDecimal(row.Cells[4].Value), // Calculate TotalPrice
+                        Price = price,
+                        TotalPrice = totalPrice,
                         AddOns = row.Cells[2].Value.ToString(),
                         CreatedBy = "System",
-                        Size = row.Cells[1].Value.ToString()
+                        Size = row.Cells[1].Value.ToString(),
+                        GrossProfit = grossProfit,
+                        CreatedDate = DateTime.Now
 
                     });
                 }
-
-
-
-           
             }
+
+            // Update the GrossProfit in the OrderModel
+            var latestOrder = _context.OrderModels.OrderByDescending(o => o.OrderId).FirstOrDefault();
+            if (latestOrder != null)
+            {
+                latestOrder.GrossProfit = totalGrossProfit;
+                _context.SaveChanges();
+            }
+
+
 
             _context.SaveChanges();
         }
+
+     
 
         public class IngredientQuantity
         {

@@ -25,8 +25,10 @@ namespace TakoTea.Views.Stock.Stock_Modal
             this.components = new System.ComponentModel.Container();
             this.grpIngredientDetails = new System.Windows.Forms.GroupBox();
             this.lblIngredient = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.lblCurrentQuantity = new System.Windows.Forms.Label();
             this.txtBoxBatchNumber = new System.Windows.Forms.TextBox();
+            this.txtBoxIngredientName = new System.Windows.Forms.TextBox();
             this.txtCurrentQuantity = new System.Windows.Forms.TextBox();
             this.grpStockAdjustment = new System.Windows.Forms.GroupBox();
             this.lblNewQuantity = new System.Windows.Forms.Label();
@@ -38,8 +40,6 @@ namespace TakoTea.Views.Stock.Stock_Modal
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.txtBoxIngredientName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.grpIngredientDetails.SuspendLayout();
             this.grpStockAdjustment.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numNewQuantity)).BeginInit();
@@ -71,6 +71,16 @@ namespace TakoTea.Views.Stock.Stock_Modal
             this.lblIngredient.TabIndex = 0;
             this.lblIngredient.Text = "Batch #:";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 9F);
+            this.label1.Location = new System.Drawing.Point(16, 64);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(102, 15);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Ingredient Name:";
+            // 
             // lblCurrentQuantity
             // 
             this.lblCurrentQuantity.AutoSize = true;
@@ -89,6 +99,15 @@ namespace TakoTea.Views.Stock.Stock_Modal
             this.txtBoxBatchNumber.ReadOnly = true;
             this.txtBoxBatchNumber.Size = new System.Drawing.Size(240, 22);
             this.txtBoxBatchNumber.TabIndex = 3;
+            // 
+            // txtBoxIngredientName
+            // 
+            this.txtBoxIngredientName.Font = new System.Drawing.Font("Arial", 9F);
+            this.txtBoxIngredientName.Location = new System.Drawing.Point(128, 64);
+            this.txtBoxIngredientName.Name = "txtBoxIngredientName";
+            this.txtBoxIngredientName.ReadOnly = true;
+            this.txtBoxIngredientName.Size = new System.Drawing.Size(190, 21);
+            this.txtBoxIngredientName.TabIndex = 3;
             // 
             // txtCurrentQuantity
             // 
@@ -128,6 +147,7 @@ namespace TakoTea.Views.Stock.Stock_Modal
             // 
             // numNewQuantity
             // 
+            this.numNewQuantity.DecimalPlaces = 1;
             this.numNewQuantity.Font = new System.Drawing.Font("Arial", 9F);
             this.numNewQuantity.Location = new System.Drawing.Point(130, 30);
             this.numNewQuantity.Maximum = new decimal(new int[] {
@@ -211,25 +231,6 @@ namespace TakoTea.Views.Stock.Stock_Modal
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // txtBoxIngredientName
-            // 
-            this.txtBoxIngredientName.Font = new System.Drawing.Font("Arial", 9F);
-            this.txtBoxIngredientName.Location = new System.Drawing.Point(128, 64);
-            this.txtBoxIngredientName.Name = "txtBoxIngredientName";
-            this.txtBoxIngredientName.ReadOnly = true;
-            this.txtBoxIngredientName.Size = new System.Drawing.Size(190, 21);
-            this.txtBoxIngredientName.TabIndex = 3;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 9F);
-            this.label1.Location = new System.Drawing.Point(16, 64);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 15);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Ingredient Name:";
             // 
             // EditStockModal
             // 

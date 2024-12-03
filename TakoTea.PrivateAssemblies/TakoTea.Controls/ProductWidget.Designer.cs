@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panelProductContainer = new System.Windows.Forms.Panel();
+            this.lblOutOfStock = new System.Windows.Forms.Label();
             this.lblProductCategory = new System.Windows.Forms.Label();
             this.lblProductName = new System.Windows.Forms.Label();
             this.pictureBoxProduct = new System.Windows.Forms.PictureBox();
@@ -40,6 +41,7 @@
             // 
             this.panelProductContainer.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelProductContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelProductContainer.Controls.Add(this.lblOutOfStock);
             this.panelProductContainer.Controls.Add(this.lblProductCategory);
             this.panelProductContainer.Controls.Add(this.lblProductName);
             this.panelProductContainer.Controls.Add(this.pictureBoxProduct);
@@ -47,6 +49,19 @@
             this.panelProductContainer.Name = "panelProductContainer";
             this.panelProductContainer.Size = new System.Drawing.Size(140, 180);
             this.panelProductContainer.TabIndex = 0;
+            // 
+            // lblOutOfStock
+            // 
+            this.lblOutOfStock.BackColor = System.Drawing.Color.GhostWhite;
+            this.lblOutOfStock.Font = new System.Drawing.Font("Franklin Gothic Book", 15.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOutOfStock.ForeColor = System.Drawing.Color.Maroon;
+            this.lblOutOfStock.Location = new System.Drawing.Point(0, 0);
+            this.lblOutOfStock.Name = "lblOutOfStock";
+            this.lblOutOfStock.Size = new System.Drawing.Size(136, 120);
+            this.lblOutOfStock.TabIndex = 9;
+            this.lblOutOfStock.Text = "Out of stock";
+            this.lblOutOfStock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblOutOfStock.Visible = false;
             // 
             // lblProductCategory
             // 
@@ -102,5 +117,6 @@
         public System.Windows.Forms.Label lblProductName;
         public System.Windows.Forms.PictureBox pictureBoxProduct;
         public System.Windows.Forms.Label lblProductCategory; // New label for category
+        public System.Windows.Forms.Label lblOutOfStock;
     }
 }

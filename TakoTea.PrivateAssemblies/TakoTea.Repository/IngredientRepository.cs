@@ -11,7 +11,7 @@ using TakoTea.Models;
 using System.Windows.Forms;
 namespace TakoTea.Repository
 {
-    public class IngredientRepository : IIngredientRepository
+    public class IngredientRepository
     {
         private readonly Entities _context;
 
@@ -36,6 +36,8 @@ namespace TakoTea.Repository
         }
 
 
+
+    
         // Method to load ingredient data
         public List<object> GetAllIngredient()
         {
@@ -125,10 +127,28 @@ namespace TakoTea.Repository
         {
             throw new NotImplementedException();
         }
-
-        public DataTable GetCurrentStockLevels()
+        public List<object> GetLowStockIngredients()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var lowStockIngredients = _context.Ingredients
+                    .Where(i => i.StockLevel <= i.LowLevel)
+                    .Select(i => new
+                    {
+                        i.IngredientName,
+                        i.StockLevel,
+                        i.LowLevel
+                    })
+                    .ToList<object>();
+
+                return lowStockIngredients;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error loading low stock ingredients: " + ex.Message);
+            }
         }
+
+        
     }
 }

@@ -114,7 +114,6 @@
             this.btnDuplicateRow.TabIndex = 103;
             this.btnDuplicateRow.Text = "Duplicate";
             this.btnDuplicateRow.UseVisualStyleBackColor = true;
-            this.btnDuplicateRow.Click += new System.EventHandler(this.btnDuplicateRow_Click);
             // 
             // btnDelete
             // 
@@ -484,11 +483,11 @@
         }
         #endregion
         private MaterialSkin.Controls.MaterialCard materialCard1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        public System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        public System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        public System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        public System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        public System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.Panel panel1;
         private MaterialSkin.Controls.MaterialLabel lblHeader;
         private System.Windows.Forms.Panel panel2;
@@ -500,7 +499,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelDgViews;
         private System.Windows.Forms.Panel pnlTopButtons;
         protected MaterialSkin.Controls.MaterialButton btnUploadImgToSelectedRow;
-        private System.Windows.Forms.DataGridView dgViewAddingMultipleProductVariants;
+        public System.Windows.Forms.DataGridView dgViewAddingMultipleProductVariants;
         private System.Windows.Forms.NumericUpDown numericUpDownIngredientsQuantity;
         private System.Windows.Forms.TextBox textBoxSearchIngredients;
         private System.Windows.Forms.PictureBox pbSearch;
@@ -508,14 +507,14 @@
         private System.Windows.Forms.Button buttonCloseIngredientsList;
         private System.Windows.Forms.Button buttonAddNewRow;
         private System.Windows.Forms.Button btnUndoRecentlyAddedIngredients;
-        private System.Windows.Forms.DataGridViewTextBoxColumn VariantName;
-        private System.Windows.Forms.DataGridViewComboBoxColumn ColumnProduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSize;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIngredients;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnInstructions;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ImagePathColumn;
-        private System.Windows.Forms.DataGridViewImageColumn ColumnImage;
-        private System.Windows.Forms.DataGridViewButtonColumn Action;
+        public System.Windows.Forms.DataGridViewTextBoxColumn VariantName;
+        public System.Windows.Forms.DataGridViewComboBoxColumn ColumnProduct;
+        public System.Windows.Forms.DataGridViewTextBoxColumn ColumnSize;
+        public System.Windows.Forms.DataGridViewTextBoxColumn ColumnPrice;
+        public System.Windows.Forms.DataGridViewTextBoxColumn ColumnIngredients;
+        public System.Windows.Forms.DataGridViewTextBoxColumn ColumnInstructions;
+        public System.Windows.Forms.DataGridViewTextBoxColumn ImagePathColumn;
+        public System.Windows.Forms.DataGridViewImageColumn ColumnImage;
+        public System.Windows.Forms.DataGridViewButtonColumn Action;
     }
 }

@@ -32,6 +32,7 @@ namespace TakoTea.Repository
                         ingredient => ingredient.IngredientID, // Primary key in Ingredients
                         (batch, ingredient) => new
                         {
+                            batch.IngredientID,
                             batch.BatchNumber,
                             IngredientName = ingredient.IngredientName, // Get IngredientName from Ingredients table
                             batch.StockLevel,

@@ -26,12 +26,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IngredientListForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.miniToolStrip = new System.Windows.Forms.BindingNavigator(this.components);
             this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
+            this.btnImportIngredients = new System.Windows.Forms.Button();
+            this.btnExportSelectedItems = new System.Windows.Forms.Button();
+            this.floatingActionButtonAddIngredients = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panelFilteringComponents = new System.Windows.Forms.Panel();
             this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
@@ -43,35 +46,32 @@
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.panelItemList = new System.Windows.Forms.Panel();
             this.bindingNavigatorBatch = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.dataGridViewIngredients = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.pbImportDataTo = new System.Windows.Forms.PictureBox();
+            this.pBoxShowFilter = new System.Windows.Forms.PictureBox();
             this.btnHideFilters = new MaterialSkin.Controls.MaterialButton();
             this.materialTextBox21 = new MaterialSkin.Controls.MaterialTextBox2();
             this.panel1 = new System.Windows.Forms.Panel();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.panelExportButtons = new System.Windows.Forms.Panel();
-            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.floatingActionButtonAddIngredients = new MaterialSkin.Controls.MaterialFloatingActionButton();
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
-            this.pbImportDataTo = new System.Windows.Forms.PictureBox();
-            this.pBoxShowFilter = new System.Windows.Forms.PictureBox();
             this.pictureBoxExportCsvIngredients = new System.Windows.Forms.PictureBox();
             this.pictureBoxExportPdf = new System.Windows.Forms.PictureBox();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btnExportSelectedItems = new System.Windows.Forms.Button();
-            this.btnImportIngredients = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).BeginInit();
             this.materialCard2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -81,10 +81,10 @@
             this.bindingNavigatorBatch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIngredients)).BeginInit();
             this.panel3.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panelExportButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImportDataTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxShowFilter)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.panelExportButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportCsvIngredients)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportPdf)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -136,6 +136,40 @@
             this.materialCard2.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard2.Size = new System.Drawing.Size(1191, 715);
             this.materialCard2.TabIndex = 70;
+            // 
+            // btnImportIngredients
+            // 
+            this.btnImportIngredients.Location = new System.Drawing.Point(776, 664);
+            this.btnImportIngredients.Name = "btnImportIngredients";
+            this.btnImportIngredients.Size = new System.Drawing.Size(144, 32);
+            this.btnImportIngredients.TabIndex = 106;
+            this.btnImportIngredients.Text = "Import Ingredients";
+            this.btnImportIngredients.UseVisualStyleBackColor = false;
+            this.btnImportIngredients.Click += new System.EventHandler(this.pbImportIngredients_Click);
+            // 
+            // btnExportSelectedItems
+            // 
+            this.btnExportSelectedItems.Location = new System.Drawing.Point(928, 664);
+            this.btnExportSelectedItems.Name = "btnExportSelectedItems";
+            this.btnExportSelectedItems.Size = new System.Drawing.Size(144, 32);
+            this.btnExportSelectedItems.TabIndex = 106;
+            this.btnExportSelectedItems.Text = "Export Selected Items";
+            this.btnExportSelectedItems.UseVisualStyleBackColor = false;
+            this.btnExportSelectedItems.Click += new System.EventHandler(this.btnExportSelectedItems_Click);
+            // 
+            // floatingActionButtonAddIngredients
+            // 
+            this.floatingActionButtonAddIngredients.Depth = 0;
+            this.floatingActionButtonAddIngredients.Icon = global::TakoTea.Views.Properties.Resources.plus;
+            this.floatingActionButtonAddIngredients.Image = global::TakoTea.Views.Properties.Resources.plus;
+            this.floatingActionButtonAddIngredients.Location = new System.Drawing.Point(1110, 80);
+            this.floatingActionButtonAddIngredients.Mini = true;
+            this.floatingActionButtonAddIngredients.MouseState = MaterialSkin.MouseState.HOVER;
+            this.floatingActionButtonAddIngredients.Name = "floatingActionButtonAddIngredients";
+            this.floatingActionButtonAddIngredients.Size = new System.Drawing.Size(40, 40);
+            this.floatingActionButtonAddIngredients.TabIndex = 102;
+            this.floatingActionButtonAddIngredients.UseVisualStyleBackColor = true;
+            this.floatingActionButtonAddIngredients.Click += new System.EventHandler(this.floatingActionButtonAddBatch_Click_1);
             // 
             // flowLayoutPanel1
             // 
@@ -308,12 +342,39 @@
             this.bindingNavigatorBatch.TabIndex = 9;
             this.bindingNavigatorBatch.Text = "bindingNavigator1";
             // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "Add new";
+            // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
             this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
             this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
+            // 
+            // bindingNavigatorMoveFirstItem
+            // 
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem.Text = "Move first";
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
             // 
             // bindingNavigatorSeparator
             // 
@@ -335,45 +396,72 @@
             this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
             this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
+            // bindingNavigatorMoveNextItem
+            // 
+            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
+            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
+            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveNextItem.Text = "Move next";
+            // 
+            // bindingNavigatorMoveLastItem
+            // 
+            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
+            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
+            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveLastItem.Text = "Move last";
+            // 
             // bindingNavigatorSeparator2
             // 
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem.Text = "Delete";
             // 
             // dataGridViewIngredients
             // 
             this.dataGridViewIngredients.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewIngredients.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridViewIngredients.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewIngredients.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewIngredients.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewIngredients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewIngredients.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewIngredients.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewIngredients.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridViewIngredients.EnableHeadersVisualStyles = false;
             this.dataGridViewIngredients.Location = new System.Drawing.Point(0, 30);
             this.dataGridViewIngredients.Name = "dataGridViewIngredients";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewIngredients.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewIngredients.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewIngredients.Size = new System.Drawing.Size(1125, 489);
             this.dataGridViewIngredients.TabIndex = 5;
             // 
@@ -391,6 +479,27 @@
             this.panel3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.panel3.Size = new System.Drawing.Size(1150, 60);
             this.panel3.TabIndex = 104;
+            // 
+            // pbImportDataTo
+            // 
+            this.pbImportDataTo.Image = global::TakoTea.Views.Properties.Resources.search;
+            this.pbImportDataTo.Location = new System.Drawing.Point(352, 8);
+            this.pbImportDataTo.Name = "pbImportDataTo";
+            this.pbImportDataTo.Size = new System.Drawing.Size(40, 40);
+            this.pbImportDataTo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbImportDataTo.TabIndex = 97;
+            this.pbImportDataTo.TabStop = false;
+            // 
+            // pBoxShowFilter
+            // 
+            this.pBoxShowFilter.Image = global::TakoTea.Views.Properties.Resources.filter;
+            this.pBoxShowFilter.Location = new System.Drawing.Point(414, 9);
+            this.pBoxShowFilter.Name = "pBoxShowFilter";
+            this.pBoxShowFilter.Size = new System.Drawing.Size(40, 40);
+            this.pBoxShowFilter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pBoxShowFilter.TabIndex = 96;
+            this.pBoxShowFilter.TabStop = false;
+            this.pBoxShowFilter.Click += new System.EventHandler(this.pBoxShowFilter_Click);
             // 
             // btnHideFilters
             // 
@@ -476,6 +585,28 @@
             this.panelExportButtons.Size = new System.Drawing.Size(76, 38);
             this.panelExportButtons.TabIndex = 98;
             // 
+            // pictureBoxExportCsvIngredients
+            // 
+            this.pictureBoxExportCsvIngredients.Image = global::TakoTea.Views.Properties.Resources.icons8_export_excel_48;
+            this.pictureBoxExportCsvIngredients.Location = new System.Drawing.Point(3, 5);
+            this.pictureBoxExportCsvIngredients.Name = "pictureBoxExportCsvIngredients";
+            this.pictureBoxExportCsvIngredients.Size = new System.Drawing.Size(33, 27);
+            this.pictureBoxExportCsvIngredients.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxExportCsvIngredients.TabIndex = 96;
+            this.pictureBoxExportCsvIngredients.TabStop = false;
+            this.pictureBoxExportCsvIngredients.Click += new System.EventHandler(this.pictureBoxExportAll_Click);
+            // 
+            // pictureBoxExportPdf
+            // 
+            this.pictureBoxExportPdf.Image = global::TakoTea.Views.Properties.Resources.icons8_export_pdf_48;
+            this.pictureBoxExportPdf.Location = new System.Drawing.Point(38, 5);
+            this.pictureBoxExportPdf.Name = "pictureBoxExportPdf";
+            this.pictureBoxExportPdf.Size = new System.Drawing.Size(33, 27);
+            this.pictureBoxExportPdf.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxExportPdf.TabIndex = 97;
+            this.pictureBoxExportPdf.TabStop = false;
+            this.pictureBoxExportPdf.Click += new System.EventHandler(this.pictureBoxExportPdf_Click);
+            // 
             // materialLabel2
             // 
             this.materialLabel2.AutoSize = true;
@@ -500,141 +631,10 @@
             this.materialLabel1.TabIndex = 94;
             this.materialLabel1.Text = "Total Batches: 5";
             // 
-            // floatingActionButtonAddIngredients
-            // 
-            this.floatingActionButtonAddIngredients.Depth = 0;
-            this.floatingActionButtonAddIngredients.Icon = global::TakoTea.Views.Properties.Resources.plus;
-            this.floatingActionButtonAddIngredients.Image = global::TakoTea.Views.Properties.Resources.plus;
-            this.floatingActionButtonAddIngredients.Location = new System.Drawing.Point(1110, 80);
-            this.floatingActionButtonAddIngredients.Mini = true;
-            this.floatingActionButtonAddIngredients.MouseState = MaterialSkin.MouseState.HOVER;
-            this.floatingActionButtonAddIngredients.Name = "floatingActionButtonAddIngredients";
-            this.floatingActionButtonAddIngredients.Size = new System.Drawing.Size(40, 40);
-            this.floatingActionButtonAddIngredients.TabIndex = 102;
-            this.floatingActionButtonAddIngredients.UseVisualStyleBackColor = true;
-            this.floatingActionButtonAddIngredients.Click += new System.EventHandler(this.floatingActionButtonAddBatch_Click_1);
-            // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "Add new";
-            // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveFirstItem.Text = "Move first";
-            // 
-            // bindingNavigatorMovePreviousItem
-            // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
-            // 
-            // bindingNavigatorMoveNextItem
-            // 
-            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
-            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
-            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveNextItem.Text = "Move next";
-            // 
-            // bindingNavigatorMoveLastItem
-            // 
-            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
-            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
-            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveLastItem.Text = "Move last";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "Delete";
-            // 
-            // pbImportDataTo
-            // 
-            this.pbImportDataTo.Image = global::TakoTea.Views.Properties.Resources.search;
-            this.pbImportDataTo.Location = new System.Drawing.Point(352, 8);
-            this.pbImportDataTo.Name = "pbImportDataTo";
-            this.pbImportDataTo.Size = new System.Drawing.Size(40, 40);
-            this.pbImportDataTo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbImportDataTo.TabIndex = 97;
-            this.pbImportDataTo.TabStop = false;
-            // 
-            // pBoxShowFilter
-            // 
-            this.pBoxShowFilter.Image = global::TakoTea.Views.Properties.Resources.filter;
-            this.pBoxShowFilter.Location = new System.Drawing.Point(414, 9);
-            this.pBoxShowFilter.Name = "pBoxShowFilter";
-            this.pBoxShowFilter.Size = new System.Drawing.Size(40, 40);
-            this.pBoxShowFilter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pBoxShowFilter.TabIndex = 96;
-            this.pBoxShowFilter.TabStop = false;
-            this.pBoxShowFilter.Click += new System.EventHandler(this.pBoxShowFilter_Click);
-            // 
-            // pictureBoxExportCsvIngredients
-            // 
-            this.pictureBoxExportCsvIngredients.Image = global::TakoTea.Views.Properties.Resources.icons8_export_excel_48;
-            this.pictureBoxExportCsvIngredients.Location = new System.Drawing.Point(3, 5);
-            this.pictureBoxExportCsvIngredients.Name = "pictureBoxExportCsvIngredients";
-            this.pictureBoxExportCsvIngredients.Size = new System.Drawing.Size(33, 27);
-            this.pictureBoxExportCsvIngredients.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxExportCsvIngredients.TabIndex = 96;
-            this.pictureBoxExportCsvIngredients.TabStop = false;
-            this.pictureBoxExportCsvIngredients.Click += new System.EventHandler(this.pictureBoxExportAll_Click);
-            // 
-            // pictureBoxExportPdf
-            // 
-            this.pictureBoxExportPdf.Image = global::TakoTea.Views.Properties.Resources.icons8_export_pdf_48;
-            this.pictureBoxExportPdf.Location = new System.Drawing.Point(38, 5);
-            this.pictureBoxExportPdf.Name = "pictureBoxExportPdf";
-            this.pictureBoxExportPdf.Size = new System.Drawing.Size(33, 27);
-            this.pictureBoxExportPdf.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxExportPdf.TabIndex = 97;
-            this.pictureBoxExportPdf.TabStop = false;
-            this.pictureBoxExportPdf.Click += new System.EventHandler(this.pictureBoxExportPdf_Click);
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // btnExportSelectedItems
-            // 
-            this.btnExportSelectedItems.Location = new System.Drawing.Point(928, 664);
-            this.btnExportSelectedItems.Name = "btnExportSelectedItems";
-            this.btnExportSelectedItems.Size = new System.Drawing.Size(144, 32);
-            this.btnExportSelectedItems.TabIndex = 106;
-            this.btnExportSelectedItems.Text = "Export Selected Items";
-            this.btnExportSelectedItems.UseVisualStyleBackColor = true;
-            this.btnExportSelectedItems.Click += new System.EventHandler(this.btnExportSelectedItems_Click);
-            // 
-            // btnImportIngredients
-            // 
-            this.btnImportIngredients.Location = new System.Drawing.Point(776, 664);
-            this.btnImportIngredients.Name = "btnImportIngredients";
-            this.btnImportIngredients.Size = new System.Drawing.Size(144, 32);
-            this.btnImportIngredients.TabIndex = 106;
-            this.btnImportIngredients.Text = "Import Ingredients";
-            this.btnImportIngredients.UseVisualStyleBackColor = true;
-            this.btnImportIngredients.Click += new System.EventHandler(this.pbImportIngredients_Click);
             // 
             // IngredientListForm
             // 
@@ -661,11 +661,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIngredients)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImportDataTo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxShowFilter)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panelExportButtons.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbImportDataTo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBoxShowFilter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportCsvIngredients)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportPdf)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();

@@ -18,15 +18,7 @@ namespace TakoTea.Views.Items
         private void Item_Load(object sender, EventArgs e)
         {
         }
-        private void materialButtonEdit_Click(object sender, EventArgs e)
-        {
-            EditItemModal itemEditForm = new EditItemModal
-            {
-                MinimizeBox = false,
-                MaximizeBox = false
-            };
-            _ = itemEditForm.ShowDialog();
-        }
+    
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
         }

@@ -277,7 +277,6 @@ namespace TakoTea.Helpers
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error hiding column: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -519,6 +518,8 @@ namespace TakoTea.Helpers
                     }
                 }
                 context.SaveChanges();
+
+
 
                 // Refresh the DataGridView (you might need to adjust this based on your actual refresh logic)
                 // dataGridView.DataSource = context.Set<T>().ToList(); 

@@ -9,45 +9,55 @@ using TakoTea.Interfaces;
 using TakoTea.Models;
 using TakoTea.Services;
 using System.Data.Entity;
+using TakoTea.Helpers;
 
 namespace TakoTea.View.Orders
 {
     public partial class OrdersQueueForm : MaterialForm
     {
 
-        private readonly Entities _context;
+        private readonly Entities context;
         private readonly ProductsService productsService;
-        public OrdersQueueForm()
+        private readonly SalesService salesService;
+        public OrdersQueueForm(Entities context)
         {
             InitializeComponent();
             ThemeConfigurator.ApplyDarkTheme(this);
-            FormSettingsConfigurator.ApplyStandardFormSettings(this);
 
             cmbStatus.SelectedIndexChanged += cmbStatus_SelectedIndexChanged;
             pbCompleted.Click += pbCompleted_Click;
             pbCancelled.Click += pbCancelled_Click;
             btnProcessOrder.Click += btnProcessOrder_Click;
-            _context = new Entities();
+            this.context = context;
             productsService = new ProductsService();
-            FillOrderQueue();
-
+            DataGridViewHelper.ApplyDataGridViewStyles(dgViewOrderQueue);
+            salesService = new SalesService(context);
+            LoadData();
         }
         private void materialLabel4_Click(object sender, EventArgs e)
         {
         }
         // Assuming your OrderModel class has properties like OrderId, OrderStatus, etc.
 
-        private void FillOrderQueue()
+        private void LoadData()
         {
-            using (var context = new Entities())
-            {
-                var orders = context.OrderModels
-             .Where(o => o.OrderStatus == "New" || o.OrderStatus == "Processing")
-             .ToList();
 
-                dgViewOrderQueue.DataSource = orders;
-            }
-         
+            // Retrieve both Product and ProductVariant data
+
+
+
+            // Bind the data to the DataGridView
+            DataGridViewHelper.LoadData(
+                dataRetrievalFunc: () => salesService.GetOrderQueue(),
+                dataGridView: dgViewOrderQueue,
+                bindingSource: bindingSource1,
+                bindingNavigator: bindingNavigator1,
+                errorMessage: "Failed to load product variants."
+            );
+
+            // Hide the ImagePath column
+            DataGridViewHelper.HideColumn(dgViewOrderQueue, "OrderId");
+
         }
 
         private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
@@ -74,7 +84,7 @@ namespace TakoTea.View.Orders
                 int orderId = Convert.ToInt32(row.Cells["OrderId"].Value); // Assuming "OrderId" is the column name
 
                 // Retrieve the order details from the database
-                var order = _context.OrderModels.Include(o => o.OrderItems).FirstOrDefault(o => o.OrderId == orderId);
+                var order = context.OrderModels.Include(o => o.OrderItems).FirstOrDefault(o => o.OrderId == orderId);
 
                 if (order != null)
                 {
@@ -87,8 +97,10 @@ namespace TakoTea.View.Orders
             }
 
             // Save the changes to the database and refresh the DataGridView
-            _context.SaveChanges();
-            FillOrderQueue();
+            context.SaveChanges();
+
+            LoadData();
+
         }
 
         private void ReturnBatchLevels(OrderModel order)
@@ -96,12 +108,12 @@ namespace TakoTea.View.Orders
             foreach (var orderItem in order.OrderItems)
             {
 
-                if (_context.ComboMeals.Any(cm => cm.ComboMealName == orderItem.ProductName)) // Check if it's a combo meal
+                if (context.ComboMeals.Any(cm => cm.ComboMealName == orderItem.ProductName)) // Check if it's a combo meal
                 {
-                    var comboMeal = _context.ComboMeals.FirstOrDefault(cm => cm.ComboMealName == orderItem.ProductName);
+                    var comboMeal = context.ComboMeals.FirstOrDefault(cm => cm.ComboMealName == orderItem.ProductName);
                     if (comboMeal != null)
                     {
-                        var productVariantIds = _context.ComboMealVariants
+                        var productVariantIds = context.ComboMealVariants
                             .Where(cmv => cmv.ComboMealID == comboMeal.ComboMealID)
                             .Select(cmv => cmv.ProductVariantID)
                             .ToList();
@@ -140,7 +152,7 @@ namespace TakoTea.View.Orders
                         string[] addOnNames = orderItem.AddOns.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
                         foreach (string addOnName in addOnNames)
                         {
-                            var addOn = _context.AddOns.FirstOrDefault(a => a.AddOnName == addOnName);
+                            var addOn = context.AddOns.FirstOrDefault(a => a.AddOnName == addOnName);
                             if (addOn != null)
                             {
                                 int addOnIngredientId = addOn.IngredientID ?? 0;
@@ -169,17 +181,20 @@ namespace TakoTea.View.Orders
             {
                 int orderId = Convert.ToInt32(row.Cells["OrderId"].Value); // Assuming "OrderId" is the column name
 
-                var order = _context.OrderModels.FirstOrDefault(o => o.OrderId == orderId);
+                var order = context.OrderModels.FirstOrDefault(o => o.OrderId == orderId);
                 if (order != null)
                 {
                     order.OrderStatus = newStatus;
                 }
             }
 
-            _context.SaveChanges();
-            FillOrderQueue(); // Refresh the DataGridView
+            context.SaveChanges();
+            LoadData();
         }
 
-      
+        private void pbCancelled_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

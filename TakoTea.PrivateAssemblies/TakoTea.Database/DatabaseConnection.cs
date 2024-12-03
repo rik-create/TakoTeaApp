@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 namespace TakoTea.Database
 {
     public static class DatabaseConnection
@@ -9,7 +10,10 @@ namespace TakoTea.Database
         private static readonly string _connectionString = "data source=192.168.100.12,1433;initial catalog=TakoTea;user id=erick;password=1234;encrypt=False;MultipleActiveResultSets=True;Integrated Security=True;";
 
 
-
+        public static string GetConnectionString()
+        {
+            return _connectionString;
+        }
 
         public static SqlConnection GetConnection()
         {
@@ -49,7 +53,7 @@ namespace TakoTea.Database
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                MessageBox.Show($"Error: {ex.Message}");
             }
             finally
             {

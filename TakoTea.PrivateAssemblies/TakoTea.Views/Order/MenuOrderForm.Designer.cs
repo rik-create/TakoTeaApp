@@ -59,9 +59,9 @@
             private void InitializeComponent()
 
             {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.panel2 = new System.Windows.Forms.Panel();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
@@ -97,6 +97,8 @@
             this.btnConfirmOrder = new MaterialSkin.Controls.MaterialButton();
             this.dgvDraftOrders = new System.Windows.Forms.DataGridView();
             this.panelSeparator = new System.Windows.Forms.Panel();
+            this.dateTimePickerOrderDate = new System.Windows.Forms.DateTimePicker();
+            this.buttonNow = new System.Windows.Forms.Button();
             this.materialCard1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelSearch.SuspendLayout();
@@ -263,6 +265,8 @@
             // 
             this.panelCart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.panelCart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelCart.Controls.Add(this.buttonNow);
+            this.panelCart.Controls.Add(this.dateTimePickerOrderDate);
             this.panelCart.Controls.Add(this.materialLabel1);
             this.panelCart.Controls.Add(this.lblOrderId);
             this.panelCart.Controls.Add(this.lblCustomer);
@@ -341,14 +345,14 @@
             // 
             this.dataGridViewOrderList.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridViewOrderList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewOrderList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewOrderList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewOrderList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewOrderList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnProduct,
@@ -356,32 +360,32 @@
             this.AddOns,
             this.ColumnQty,
             this.ColumnPrice});
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewOrderList.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewOrderList.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewOrderList.EnableHeadersVisualStyles = false;
-            this.dataGridViewOrderList.Location = new System.Drawing.Point(10, 80);
+            this.dataGridViewOrderList.Location = new System.Drawing.Point(10, 112);
             this.dataGridViewOrderList.MultiSelect = false;
             this.dataGridViewOrderList.Name = "dataGridViewOrderList";
             this.dataGridViewOrderList.ReadOnly = true;
             this.dataGridViewOrderList.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataGridViewOrderList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewOrderList.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewOrderList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewOrderList.RowHeadersWidth = 25;
             this.dataGridViewOrderList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridViewOrderList.Size = new System.Drawing.Size(430, 316);
+            this.dataGridViewOrderList.Size = new System.Drawing.Size(430, 284);
             this.dataGridViewOrderList.TabIndex = 100;
             // 
             // ColumnProduct
@@ -665,6 +669,29 @@
             this.panelSeparator.Size = new System.Drawing.Size(1, 731);
             this.panelSeparator.TabIndex = 6;
             // 
+            // dateTimePickerOrderDate
+            // 
+            this.dateTimePickerOrderDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerOrderDate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dateTimePickerOrderDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePickerOrderDate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dateTimePickerOrderDate.Location = new System.Drawing.Point(16, 80);
+            this.dateTimePickerOrderDate.Name = "dateTimePickerOrderDate";
+            this.dateTimePickerOrderDate.ShowUpDown = true;
+            this.dateTimePickerOrderDate.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePickerOrderDate.TabIndex = 104;
+            // 
+            // buttonNow
+            // 
+            this.buttonNow.Location = new System.Drawing.Point(224, 80);
+            this.buttonNow.Name = "buttonNow";
+            this.buttonNow.Size = new System.Drawing.Size(75, 24);
+            this.buttonNow.TabIndex = 105;
+            this.buttonNow.Text = "Now";
+            this.buttonNow.UseVisualStyleBackColor = true;
+            this.buttonNow.Click += new System.EventHandler(this.buttonNow_Click);
+            // 
             // MenuOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -755,6 +782,8 @@
             private MaterialSkin.Controls.MaterialButton btnGoToOrderQueue;
         private MaterialSkin.Controls.MaterialButton btnViewDraftOrders;
         private DataGridView dgvDraftOrders;
+        private Button buttonNow;
+        private DateTimePicker dateTimePickerOrderDate;
 
 
         // ... other controls ...

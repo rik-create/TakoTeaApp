@@ -62,20 +62,35 @@ namespace TakoTea.Helpers
         {
             var context = new Entities();
             var data = context.Set<T>().ToList();
-                
+
             var csvContent = new StringBuilder();
 
-            var properties = typeof(T).GetProperties().Skip(1)
-                                .Where(p => p.PropertyType == typeof(byte[]) ||
-                                            (!typeof(System.Collections.IEnumerable).IsAssignableFrom(p.PropertyType) || p.PropertyType == typeof(string)));
-
-
-            csvContent.AppendLine(string.Join(",", properties.Select(p => p.Name)));
-
-            foreach (var item in data)
+            if (typeof(T) == typeof(Ingredient))
             {
-                var values = properties.Select(p => p.GetValue(item)?.ToString().Replace(",", "?") ?? "");
-                csvContent.AppendLine(string.Join(",", values));
+                ExportIngredientsToCsv(context, data.Cast<object>().ToList(), csvContent);
+            }
+            else
+            {
+                // For other entities, use the original logic
+                var properties = typeof(T).GetProperties().Skip(1)
+                    .Where(p => p.PropertyType == typeof(byte[]) ||
+                               (!typeof(System.Collections.IEnumerable).IsAssignableFrom(p.PropertyType) || p.PropertyType == typeof(string)));
+
+                csvContent.AppendLine(string.Join(",", properties.Select(p => p.Name)));
+
+                foreach (var item in data)
+                {
+                    var values = properties.Select(p =>
+                    {
+                        var value = p.GetValue(item);
+                        if (value is byte[] bytes)
+                        {
+                            return Convert.ToBase64String(bytes);
+                        }
+                        return value?.ToString().Replace(",", "?") ?? "";
+                    });
+                    csvContent.AppendLine(string.Join(",", values));
+                }
             }
 
             string fileName = GenerateExportFileName(typeof(T).Name, DateTime.Now);
@@ -90,17 +105,53 @@ namespace TakoTea.Helpers
             {
                 File.WriteAllText(saveFileDialog.FileName, csvContent.ToString());
                 string directory = Path.GetDirectoryName(saveFileDialog.FileName);
-
                 MessageBox.Show($"Data exported to {fileName} in {directory}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
             else
             {
-                // Handle unsupported types
-                MessageBox.Show("Unsupported type for export.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
+        private static void ExportIngredientsToCsv(Entities context, List<object> data, StringBuilder csvContent)
+        {
+            var ingredients = data.Cast<Ingredient>();
+
+            // Get properties, skipping the first and excluding collections (except string)
+            var ingredientProperties = typeof(Ingredient).GetProperties().Skip(1)
+                .Where(p => !typeof(System.Collections.IEnumerable).IsAssignableFrom(p.PropertyType) || p.PropertyType == typeof(string));
+
+            // Get AddOn properties, skipping the first two and excluding collections (except string)
+            var addOnProperties = typeof(AddOn).GetProperties().Skip(2)
+                .Where(p => !typeof(System.Collections.IEnumerable).IsAssignableFrom(p.PropertyType) || p.PropertyType == typeof(string));
+
+            // Combine property names for the header
+            csvContent.AppendLine(string.Join(",", ingredientProperties.Select(p => p.Name).Concat(addOnProperties.Select(p => p.Name))));
+
+            foreach (var ingredient in ingredients)
+            {
+                var addOn = context.AddOns.FirstOrDefault(a => a.AddOnName == ingredient.IngredientName);
+
+                // Get the values from Ingredient
+                var ingredientValues = ingredientProperties.Select(p =>
+                {
+                    var value = p.GetValue(ingredient);
+                    if (value is byte[] bytes)
+                    {
+                        return Convert.ToBase64String(bytes);
+                    }
+                    return value?.ToString().Replace(",", "?") ?? "";
+                });
+
+                // Get the values from AddOn (if it exists)
+                var addOnValues = addOn != null
+                    ? addOnProperties.Select(p => p.GetValue(addOn)?.ToString().Replace(",", "?") ?? "")
+                    : addOnProperties.Select(p => ""); // Empty strings if no AddOn
+
+                // Combine the values and add to the CSV content
+                csvContent.AppendLine(string.Join(",", ingredientValues.Concat(addOnValues)));
+            }
+        }
+
         public static void ExportSelectedRowsToCsv(DataGridView dataGridView, string fileName)
             {
                 if (dataGridView.SelectedRows.Count == 0)

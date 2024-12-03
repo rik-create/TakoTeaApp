@@ -1,79 +1,157 @@
 ﻿namespace TakoTea.Views.Dashboard
+
 {
+
     partial class DashboardForm
+
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+
+        /// <summary>
+
+        /// Required designer variable.
+
+        /// </summary>
+
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+
+        /// Clean up any resources being used.
+
+        /// </summary>
+
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+
+        protected override void Dispose(bool disposing)
+
         {
+
             if (disposing && (components != null))
+
             {
+
                 components.Dispose();
+
             }
+
             base.Dispose(disposing);
+
         }
-        #region Windows Form Designer generated code
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+
+        /// Required method for Designer support - do not modify
+
+        /// the contents of this method with the code editor.
+
+        /// </summary>
+
+        private void InitializeComponent()
+
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardForm));
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.label12 = new System.Windows.Forms.Label();
-            this.pieChart1 = new LiveCharts.WinForms.PieChart();
-            this.label13 = new System.Windows.Forms.Label();
-            this.cartesianChart1 = new LiveCharts.WinForms.CartesianChart();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.cartesianChartGrossRevenue = new LiveCharts.WinForms.CartesianChart();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.cartesianChartSalesPerProduct = new LiveCharts.WinForms.CartesianChart();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.btnThisMonth = new MaterialSkin.Controls.MaterialButton();
+            this.btnLast30Days = new MaterialSkin.Controls.MaterialButton();
+            this.btnLast7Days = new MaterialSkin.Controls.MaterialButton();
+            this.btnToday = new MaterialSkin.Controls.MaterialButton();
+            this.btnOkCustomDate = new MaterialSkin.Controls.MaterialButton();
+            this.btnCustomDate = new MaterialSkin.Controls.MaterialButton();
+            this.tabControlDataGrids = new System.Windows.Forms.TabControl();
+            this.tabPageLowStock = new System.Windows.Forms.TabPage();
+            this.bnLowStocks = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.dgvUnderstock = new System.Windows.Forms.DataGridView();
+            this.tabPageNewOrders = new System.Windows.Forms.TabPage();
+            this.bnNewOrders = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorCountItem1 = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem1 = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.dataGridViewNewOrders = new System.Windows.Forms.DataGridView();
+            this.pieChartTop5ProductVariant = new LiveCharts.WinForms.PieChart();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label11 = new System.Windows.Forms.Label();
-            this.lblTotalProfit = new System.Windows.Forms.Label();
+            this.lblTotalProfitPercentChange = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lblNumOrders = new System.Windows.Forms.Label();
+            this.lblNumOrdersPercentChange = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnOkCustomDate = new System.Windows.Forms.Button();
-            this.btnCustomDate = new System.Windows.Forms.Button();
-            this.btnToday = new System.Windows.Forms.Button();
-            this.btnLast7Days = new System.Windows.Forms.Button();
-            this.btnLast30Days = new System.Windows.Forms.Button();
-            this.btnThisMonth = new System.Windows.Forms.Button();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.lblTotalRevenue = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblTotalRevenuePercentChange = new System.Windows.Forms.Label();
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.lblNumProducts = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.lblNumSuppliers = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblNumCustomers = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.dgvUnderstock = new System.Windows.Forms.DataGridView();
+            this.labelTop3Product = new MaterialSkin.Controls.MaterialLabel();
+            this.labelTop2Product = new MaterialSkin.Controls.MaterialLabel();
+            this.labelTop1Product = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.labelTop3TotalStock = new System.Windows.Forms.Label();
+            this.labelTop2TotalStock = new System.Windows.Forms.Label();
+            this.labelTop1TotalStock = new System.Windows.Forms.Label();
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorAddNewItem1 = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorDeleteItem1 = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveFirstItem1 = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem1 = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveNextItem1 = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem1 = new System.Windows.Forms.ToolStripButton();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.label14 = new System.Windows.Forms.Label();
+            this.bsNewOrders = new System.Windows.Forms.BindingSource(this.components);
+            this.bsLowStock = new System.Windows.Forms.BindingSource(this.components);
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblNumOrders = new MaterialSkin.Controls.MaterialLabel();
+            this.lblTotalRevenue = new MaterialSkin.Controls.MaterialLabel();
+            this.lblTotalProfit = new MaterialSkin.Controls.MaterialLabel();
             this.materialCard1.SuspendLayout();
             this.panel7.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabControlDataGrids.SuspendLayout();
+            this.tabPageLowStock.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bnLowStocks)).BeginInit();
+            this.bnLowStocks.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUnderstock)).BeginInit();
+            this.tabPageNewOrders.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bnNewOrders)).BeginInit();
+            this.bnNewOrders.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNewOrders)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUnderstock)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsNewOrders)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsLowStock)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // materialCard1
@@ -90,78 +168,452 @@
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard1.Size = new System.Drawing.Size(1197, 695);
             this.materialCard1.TabIndex = 0;
+            this.materialCard1.Paint += new System.Windows.Forms.PaintEventHandler(this.materialCard1_Paint);
             // 
             // panel7
             // 
             this.panel7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel7.Controls.Add(this.label12);
-            this.panel7.Controls.Add(this.pieChart1);
-            this.panel7.Controls.Add(this.label13);
-            this.panel7.Controls.Add(this.cartesianChart1);
-            this.panel7.Controls.Add(this.panel3);
-            this.panel7.Controls.Add(this.panel1);
+            this.panel7.Controls.Add(this.materialLabel2);
+            this.panel7.Controls.Add(this.tabControl1);
+            this.panel7.Controls.Add(this.materialLabel1);
+            this.panel7.Controls.Add(this.btnThisMonth);
+            this.panel7.Controls.Add(this.btnLast30Days);
+            this.panel7.Controls.Add(this.btnLast7Days);
+            this.panel7.Controls.Add(this.btnToday);
             this.panel7.Controls.Add(this.btnOkCustomDate);
             this.panel7.Controls.Add(this.btnCustomDate);
-            this.panel7.Controls.Add(this.btnToday);
-            this.panel7.Controls.Add(this.btnLast7Days);
-            this.panel7.Controls.Add(this.btnLast30Days);
-            this.panel7.Controls.Add(this.btnThisMonth);
+            this.panel7.Controls.Add(this.tabControlDataGrids);
+            this.panel7.Controls.Add(this.pieChartTop5ProductVariant);
+            this.panel7.Controls.Add(this.panel3);
+            this.panel7.Controls.Add(this.panel1);
             this.panel7.Controls.Add(this.dtpEndDate);
-            this.panel7.Controls.Add(this.label1);
             this.panel7.Controls.Add(this.panel2);
             this.panel7.Controls.Add(this.dtpStartDate);
             this.panel7.Controls.Add(this.panel4);
-            this.panel7.Controls.Add(this.panel5);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(14, 14);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(1169, 667);
             this.panel7.TabIndex = 47;
             // 
-            // label12
+            // materialLabel2
             // 
-            this.label12.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(860, 130);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(197, 25);
-            this.label12.TabIndex = 48;
-            this.label12.Text = "5 best-selling product";
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel2.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
+            this.materialLabel2.HighEmphasis = true;
+            this.materialLabel2.Location = new System.Drawing.Point(856, 128);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(231, 29);
+            this.materialLabel2.TabIndex = 52;
+            this.materialLabel2.Text = "5 best-selling product";
+            this.materialLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // pieChart1
+            // tabControl1
             // 
-            this.pieChart1.Location = new System.Drawing.Point(860, 160);
-            this.pieChart1.Name = "pieChart1";
-            this.pieChart1.Size = new System.Drawing.Size(297, 497);
-            this.pieChart1.TabIndex = 47;
-            this.pieChart1.Text = "5 ";
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(8, 128);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(840, 264);
+            this.tabControl1.TabIndex = 51;
             // 
-            // label13
+            // tabPage1
             // 
-            this.label13.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(10, 130);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(147, 25);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "Gross Revenue";
+            this.tabPage1.Controls.Add(this.cartesianChartGrossRevenue);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(832, 238);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Gross total";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // cartesianChart1
+            // cartesianChartGrossRevenue
             // 
-            this.cartesianChart1.Location = new System.Drawing.Point(10, 160);
-            this.cartesianChart1.Name = "cartesianChart1";
-            this.cartesianChart1.Size = new System.Drawing.Size(846, 225);
-            this.cartesianChart1.TabIndex = 46;
-            this.cartesianChart1.Text = "cartesianChart1";
+            this.cartesianChartGrossRevenue.BackColor = System.Drawing.Color.White;
+            this.cartesianChartGrossRevenue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cartesianChartGrossRevenue.Location = new System.Drawing.Point(3, 3);
+            this.cartesianChartGrossRevenue.Name = "cartesianChartGrossRevenue";
+            this.cartesianChartGrossRevenue.Size = new System.Drawing.Size(826, 232);
+            this.cartesianChartGrossRevenue.TabIndex = 48;
+            this.cartesianChartGrossRevenue.Text = "cartesianChart1";
+            this.cartesianChartGrossRevenue.ChildChanged += new System.EventHandler<System.Windows.Forms.Integration.ChildChangedEventArgs>(this.cartesianChartGrossRevenue_ChildChanged_2);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.cartesianChartSalesPerProduct);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(832, 238);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Sales per product";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // cartesianChartSalesPerProduct
+            // 
+            this.cartesianChartSalesPerProduct.BackColor = System.Drawing.Color.White;
+            this.cartesianChartSalesPerProduct.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cartesianChartSalesPerProduct.Location = new System.Drawing.Point(3, 3);
+            this.cartesianChartSalesPerProduct.Name = "cartesianChartSalesPerProduct";
+            this.cartesianChartSalesPerProduct.Size = new System.Drawing.Size(826, 232);
+            this.cartesianChartSalesPerProduct.TabIndex = 48;
+            this.cartesianChartSalesPerProduct.Text = "cartesianChart1";
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
+            this.materialLabel1.HighEmphasis = true;
+            this.materialLabel1.Location = new System.Drawing.Point(24, 8);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(117, 29);
+            this.materialLabel1.TabIndex = 50;
+            this.materialLabel1.Text = "Dashboard";
+            this.materialLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnThisMonth
+            // 
+            this.btnThisMonth.AutoSize = false;
+            this.btnThisMonth.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnThisMonth.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnThisMonth.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnThisMonth.Depth = 0;
+            this.btnThisMonth.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnThisMonth.HighEmphasis = true;
+            this.btnThisMonth.Icon = null;
+            this.btnThisMonth.Location = new System.Drawing.Point(1040, 8);
+            this.btnThisMonth.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnThisMonth.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnThisMonth.Name = "btnThisMonth";
+            this.btnThisMonth.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnThisMonth.Size = new System.Drawing.Size(120, 36);
+            this.btnThisMonth.TabIndex = 4;
+            this.btnThisMonth.Text = "This month";
+            this.btnThisMonth.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnThisMonth.UseAccentColor = false;
+            this.btnThisMonth.UseCompatibleTextRendering = true;
+            this.btnThisMonth.UseVisualStyleBackColor = false;
+            // 
+            // btnLast30Days
+            // 
+            this.btnLast30Days.AutoSize = false;
+            this.btnLast30Days.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnLast30Days.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnLast30Days.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnLast30Days.Depth = 0;
+            this.btnLast30Days.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnLast30Days.HighEmphasis = true;
+            this.btnLast30Days.Icon = null;
+            this.btnLast30Days.Location = new System.Drawing.Point(889, 8);
+            this.btnLast30Days.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnLast30Days.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnLast30Days.Name = "btnLast30Days";
+            this.btnLast30Days.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnLast30Days.Size = new System.Drawing.Size(135, 36);
+            this.btnLast30Days.TabIndex = 4;
+            this.btnLast30Days.Text = "Last 30 days";
+            this.btnLast30Days.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnLast30Days.UseAccentColor = false;
+            this.btnLast30Days.UseCompatibleTextRendering = true;
+            this.btnLast30Days.UseVisualStyleBackColor = false;
+            // 
+            // btnLast7Days
+            // 
+            this.btnLast7Days.AutoSize = false;
+            this.btnLast7Days.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnLast7Days.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnLast7Days.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnLast7Days.Depth = 0;
+            this.btnLast7Days.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnLast7Days.HighEmphasis = true;
+            this.btnLast7Days.Icon = null;
+            this.btnLast7Days.Location = new System.Drawing.Point(755, 8);
+            this.btnLast7Days.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnLast7Days.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnLast7Days.Name = "btnLast7Days";
+            this.btnLast7Days.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnLast7Days.Size = new System.Drawing.Size(117, 36);
+            this.btnLast7Days.TabIndex = 4;
+            this.btnLast7Days.Text = "Last 7 days";
+            this.btnLast7Days.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnLast7Days.UseAccentColor = false;
+            this.btnLast7Days.UseCompatibleTextRendering = true;
+            this.btnLast7Days.UseVisualStyleBackColor = true;
+            // 
+            // btnToday
+            // 
+            this.btnToday.AutoSize = false;
+            this.btnToday.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnToday.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnToday.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnToday.Depth = 0;
+            this.btnToday.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnToday.HighEmphasis = true;
+            this.btnToday.Icon = null;
+            this.btnToday.Location = new System.Drawing.Point(653, 8);
+            this.btnToday.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnToday.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnToday.Name = "btnToday";
+            this.btnToday.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnToday.Size = new System.Drawing.Size(91, 36);
+            this.btnToday.TabIndex = 4;
+            this.btnToday.Text = "Today";
+            this.btnToday.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnToday.UseAccentColor = false;
+            this.btnToday.UseCompatibleTextRendering = true;
+            this.btnToday.UseVisualStyleBackColor = false;
+            // 
+            // btnOkCustomDate
+            // 
+            this.btnOkCustomDate.AutoSize = false;
+            this.btnOkCustomDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnOkCustomDate.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnOkCustomDate.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnOkCustomDate.Depth = 0;
+            this.btnOkCustomDate.Enabled = false;
+            this.btnOkCustomDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnOkCustomDate.HighEmphasis = true;
+            this.btnOkCustomDate.Icon = null;
+            this.btnOkCustomDate.Location = new System.Drawing.Point(440, 8);
+            this.btnOkCustomDate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnOkCustomDate.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnOkCustomDate.Name = "btnOkCustomDate";
+            this.btnOkCustomDate.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnOkCustomDate.Size = new System.Drawing.Size(88, 36);
+            this.btnOkCustomDate.TabIndex = 4;
+            this.btnOkCustomDate.Text = "OK";
+            this.btnOkCustomDate.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnOkCustomDate.UseAccentColor = false;
+            this.btnOkCustomDate.UseCompatibleTextRendering = true;
+            this.btnOkCustomDate.UseVisualStyleBackColor = false;
+            this.btnOkCustomDate.Click += new System.EventHandler(this.btnOkCustomDate_Click);
+            // 
+            // btnCustomDate
+            // 
+            this.btnCustomDate.AutoSize = false;
+            this.btnCustomDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCustomDate.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.btnCustomDate.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCustomDate.Depth = 0;
+            this.btnCustomDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnCustomDate.HighEmphasis = true;
+            this.btnCustomDate.Icon = null;
+            this.btnCustomDate.Location = new System.Drawing.Point(541, 8);
+            this.btnCustomDate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCustomDate.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnCustomDate.Name = "btnCustomDate";
+            this.btnCustomDate.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCustomDate.Size = new System.Drawing.Size(99, 36);
+            this.btnCustomDate.TabIndex = 4;
+            this.btnCustomDate.Text = "Custom";
+            this.btnCustomDate.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
+            this.btnCustomDate.UseAccentColor = false;
+            this.btnCustomDate.UseCompatibleTextRendering = true;
+            this.btnCustomDate.UseVisualStyleBackColor = false;
+            this.btnCustomDate.Click += new System.EventHandler(this.btnCustomDate_Click);
+            // 
+            // tabControlDataGrids
+            // 
+            this.tabControlDataGrids.Controls.Add(this.tabPageLowStock);
+            this.tabControlDataGrids.Controls.Add(this.tabPageNewOrders);
+            this.tabControlDataGrids.Location = new System.Drawing.Point(192, 400);
+            this.tabControlDataGrids.Name = "tabControlDataGrids";
+            this.tabControlDataGrids.SelectedIndex = 0;
+            this.tabControlDataGrids.Size = new System.Drawing.Size(656, 264);
+            this.tabControlDataGrids.TabIndex = 49;
+            // 
+            // tabPageLowStock
+            // 
+            this.tabPageLowStock.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.tabPageLowStock.Controls.Add(this.bnLowStocks);
+            this.tabPageLowStock.Controls.Add(this.dgvUnderstock);
+            this.tabPageLowStock.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(87)))), ((int)(((byte)(168)))));
+            this.tabPageLowStock.Location = new System.Drawing.Point(4, 22);
+            this.tabPageLowStock.Name = "tabPageLowStock";
+            this.tabPageLowStock.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageLowStock.Size = new System.Drawing.Size(648, 238);
+            this.tabPageLowStock.TabIndex = 0;
+            this.tabPageLowStock.Text = "Low Stock Ingredients";
+            // 
+            // bnLowStocks
+            // 
+            this.bnLowStocks.AddNewItem = this.bindingNavigatorAddNewItem;
+            this.bnLowStocks.CountItem = this.bindingNavigatorCountItem;
+            this.bnLowStocks.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.bnLowStocks.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigatorMoveFirstItem,
+            this.bindingNavigatorMovePreviousItem,
+            this.bindingNavigatorSeparator,
+            this.bindingNavigatorPositionItem,
+            this.bindingNavigatorCountItem,
+            this.bindingNavigatorSeparator1,
+            this.bindingNavigatorMoveNextItem,
+            this.bindingNavigatorMoveLastItem,
+            this.bindingNavigatorSeparator2,
+            this.bindingNavigatorAddNewItem,
+            this.bindingNavigatorDeleteItem});
+            this.bnLowStocks.Location = new System.Drawing.Point(3, 3);
+            this.bnLowStocks.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.bnLowStocks.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.bnLowStocks.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.bnLowStocks.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.bnLowStocks.Name = "bnLowStocks";
+            this.bnLowStocks.PositionItem = this.bindingNavigatorPositionItem;
+            this.bnLowStocks.Size = new System.Drawing.Size(642, 25);
+            this.bnLowStocks.TabIndex = 51;
+            this.bnLowStocks.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
+            this.bindingNavigatorCountItem.Text = "of {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
+            // 
+            // bindingNavigatorSeparator
+            // 
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorPositionItem
+            // 
+            this.bindingNavigatorPositionItem.AccessibleName = "Position";
+            this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
+            this.bindingNavigatorPositionItem.Text = "0";
+            this.bindingNavigatorPositionItem.ToolTipText = "Current position";
+            // 
+            // bindingNavigatorSeparator1
+            // 
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // dgvUnderstock
+            // 
+            this.dgvUnderstock.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.dgvUnderstock.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvUnderstock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUnderstock.Location = new System.Drawing.Point(8, 32);
+            this.dgvUnderstock.Name = "dgvUnderstock";
+            this.dgvUnderstock.Size = new System.Drawing.Size(632, 200);
+            this.dgvUnderstock.TabIndex = 50;
+            // 
+            // tabPageNewOrders
+            // 
+            this.tabPageNewOrders.Controls.Add(this.bnNewOrders);
+            this.tabPageNewOrders.Controls.Add(this.dataGridViewNewOrders);
+            this.tabPageNewOrders.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(87)))), ((int)(((byte)(168)))));
+            this.tabPageNewOrders.Location = new System.Drawing.Point(4, 22);
+            this.tabPageNewOrders.Name = "tabPageNewOrders";
+            this.tabPageNewOrders.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageNewOrders.Size = new System.Drawing.Size(648, 238);
+            this.tabPageNewOrders.TabIndex = 1;
+            this.tabPageNewOrders.Text = "New Orders";
+            // 
+            // bnNewOrders
+            // 
+            this.bnNewOrders.AddNewItem = this.bindingNavigatorAddNewItem1;
+            this.bnNewOrders.CountItem = this.bindingNavigatorCountItem1;
+            this.bnNewOrders.DeleteItem = this.bindingNavigatorDeleteItem1;
+            this.bnNewOrders.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigatorMoveFirstItem1,
+            this.bindingNavigatorMovePreviousItem1,
+            this.bindingNavigatorSeparator3,
+            this.bindingNavigatorPositionItem1,
+            this.bindingNavigatorCountItem1,
+            this.bindingNavigatorSeparator4,
+            this.bindingNavigatorMoveNextItem1,
+            this.bindingNavigatorMoveLastItem1,
+            this.bindingNavigatorSeparator5,
+            this.bindingNavigatorAddNewItem1,
+            this.bindingNavigatorDeleteItem1});
+            this.bnNewOrders.Location = new System.Drawing.Point(3, 3);
+            this.bnNewOrders.MoveFirstItem = this.bindingNavigatorMoveFirstItem1;
+            this.bnNewOrders.MoveLastItem = this.bindingNavigatorMoveLastItem1;
+            this.bnNewOrders.MoveNextItem = this.bindingNavigatorMoveNextItem1;
+            this.bnNewOrders.MovePreviousItem = this.bindingNavigatorMovePreviousItem1;
+            this.bnNewOrders.Name = "bnNewOrders";
+            this.bnNewOrders.PositionItem = this.bindingNavigatorPositionItem1;
+            this.bnNewOrders.Size = new System.Drawing.Size(642, 25);
+            this.bnNewOrders.TabIndex = 52;
+            this.bnNewOrders.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorCountItem1
+            // 
+            this.bindingNavigatorCountItem1.Name = "bindingNavigatorCountItem1";
+            this.bindingNavigatorCountItem1.Size = new System.Drawing.Size(35, 22);
+            this.bindingNavigatorCountItem1.Text = "of {0}";
+            this.bindingNavigatorCountItem1.ToolTipText = "Total number of items";
+            // 
+            // bindingNavigatorSeparator3
+            // 
+            this.bindingNavigatorSeparator3.Name = "bindingNavigatorSeparator3";
+            this.bindingNavigatorSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorPositionItem1
+            // 
+            this.bindingNavigatorPositionItem1.AccessibleName = "Position";
+            this.bindingNavigatorPositionItem1.AutoSize = false;
+            this.bindingNavigatorPositionItem1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.bindingNavigatorPositionItem1.Name = "bindingNavigatorPositionItem1";
+            this.bindingNavigatorPositionItem1.Size = new System.Drawing.Size(50, 23);
+            this.bindingNavigatorPositionItem1.Text = "0";
+            this.bindingNavigatorPositionItem1.ToolTipText = "Current position";
+            // 
+            // bindingNavigatorSeparator4
+            // 
+            this.bindingNavigatorSeparator4.Name = "bindingNavigatorSeparator4";
+            this.bindingNavigatorSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorSeparator5
+            // 
+            this.bindingNavigatorSeparator5.Name = "bindingNavigatorSeparator5";
+            this.bindingNavigatorSeparator5.Size = new System.Drawing.Size(6, 25);
+            // 
+            // dataGridViewNewOrders
+            // 
+            this.dataGridViewNewOrders.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.dataGridViewNewOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewNewOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewNewOrders.Location = new System.Drawing.Point(8, 32);
+            this.dataGridViewNewOrders.Name = "dataGridViewNewOrders";
+            this.dataGridViewNewOrders.Size = new System.Drawing.Size(632, 199);
+            this.dataGridViewNewOrders.TabIndex = 51;
+            // 
+            // pieChartTop5ProductVariant
+            // 
+            this.pieChartTop5ProductVariant.BackColor = System.Drawing.Color.White;
+            this.pieChartTop5ProductVariant.Location = new System.Drawing.Point(860, 168);
+            this.pieChartTop5ProductVariant.Name = "pieChartTop5ProductVariant";
+            this.pieChartTop5ProductVariant.Size = new System.Drawing.Size(297, 489);
+            this.pieChartTop5ProductVariant.TabIndex = 47;
+            this.pieChartTop5ProductVariant.Text = "5 ";
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.label11);
             this.panel3.Controls.Add(this.lblTotalProfit);
+            this.panel3.Controls.Add(this.materialLabel6);
+            this.panel3.Controls.Add(this.pictureBox1);
+            this.panel3.Controls.Add(this.lblTotalProfitPercentChange);
             this.panel3.Controls.Add(this.label5);
             this.panel3.Location = new System.Drawing.Point(763, 50);
             this.panel3.Margin = new System.Windows.Forms.Padding(5);
@@ -169,28 +621,18 @@
             this.panel3.Size = new System.Drawing.Size(397, 73);
             this.panel3.TabIndex = 43;
             // 
-            // label11
+            // lblTotalProfitPercentChange
             // 
-            this.label11.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(141)))), ((int)(((byte)(181)))));
-            this.label11.Location = new System.Drawing.Point(345, 30);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(50, 20);
-            this.label11.TabIndex = 3;
-            this.label11.Text = "+19%";
-            // 
-            // lblTotalProfit
-            // 
-            this.lblTotalProfit.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblTotalProfit.AutoSize = true;
-            this.lblTotalProfit.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalProfit.Location = new System.Drawing.Point(61, 33);
-            this.lblTotalProfit.Name = "lblTotalProfit";
-            this.lblTotalProfit.Size = new System.Drawing.Size(78, 25);
-            this.lblTotalProfit.TabIndex = 1;
-            this.lblTotalProfit.Text = "100000";
+            this.lblTotalProfitPercentChange.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblTotalProfitPercentChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalProfitPercentChange.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(141)))), ((int)(((byte)(181)))));
+            this.lblTotalProfitPercentChange.Location = new System.Drawing.Point(232, 32);
+            this.lblTotalProfitPercentChange.Name = "lblTotalProfitPercentChange";
+            this.lblTotalProfitPercentChange.Size = new System.Drawing.Size(163, 20);
+            this.lblTotalProfitPercentChange.TabIndex = 3;
+            this.lblTotalProfitPercentChange.Text = "+19%";
+            this.lblTotalProfitPercentChange.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblTotalProfitPercentChange.Click += new System.EventHandler(this.lblTotalProfitPercentChange_Click);
             // 
             // label5
             // 
@@ -200,16 +642,17 @@
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(141)))), ((int)(((byte)(181)))));
             this.label5.Location = new System.Drawing.Point(62, 13);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(85, 20);
+            this.label5.Size = new System.Drawing.Size(0, 20);
             this.label5.TabIndex = 0;
-            this.label5.Text = "Total Profit";
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.lblNumOrders);
+            this.panel1.Controls.Add(this.materialLabel4);
+            this.panel1.Controls.Add(this.pictureBox3);
+            this.panel1.Controls.Add(this.lblNumOrdersPercentChange);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Location = new System.Drawing.Point(7, 50);
             this.panel1.Margin = new System.Windows.Forms.Padding(5);
@@ -217,28 +660,18 @@
             this.panel1.Size = new System.Drawing.Size(278, 73);
             this.panel1.TabIndex = 39;
             // 
-            // label3
+            // lblNumOrdersPercentChange
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(141)))), ((int)(((byte)(181)))));
-            this.label3.Location = new System.Drawing.Point(224, 26);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 20);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "+15%";
-            // 
-            // lblNumOrders
-            // 
-            this.lblNumOrders.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblNumOrders.AutoSize = true;
-            this.lblNumOrders.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumOrders.Location = new System.Drawing.Point(73, 33);
-            this.lblNumOrders.Name = "lblNumOrders";
-            this.lblNumOrders.Size = new System.Drawing.Size(78, 25);
-            this.lblNumOrders.TabIndex = 1;
-            this.lblNumOrders.Text = "100000";
+            this.lblNumOrdersPercentChange.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblNumOrdersPercentChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNumOrdersPercentChange.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(141)))), ((int)(((byte)(181)))));
+            this.lblNumOrdersPercentChange.Location = new System.Drawing.Point(192, 32);
+            this.lblNumOrdersPercentChange.Name = "lblNumOrdersPercentChange";
+            this.lblNumOrdersPercentChange.Size = new System.Drawing.Size(82, 20);
+            this.lblNumOrdersPercentChange.TabIndex = 2;
+            this.lblNumOrdersPercentChange.Text = "+15%";
+            this.lblNumOrdersPercentChange.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblNumOrdersPercentChange.Click += new System.EventHandler(this.lblNumOrdersPercentChange_Click);
             // 
             // label2
             // 
@@ -248,280 +681,400 @@
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(141)))), ((int)(((byte)(181)))));
             this.label2.Location = new System.Drawing.Point(74, 13);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(135, 20);
+            this.label2.Size = new System.Drawing.Size(0, 20);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Number of Orders";
-            // 
-            // btnOkCustomDate
-            // 
-            this.btnOkCustomDate.Location = new System.Drawing.Point(450, 5);
-            this.btnOkCustomDate.Margin = new System.Windows.Forms.Padding(5);
-            this.btnOkCustomDate.Name = "btnOkCustomDate";
-            this.btnOkCustomDate.Size = new System.Drawing.Size(35, 35);
-            this.btnOkCustomDate.TabIndex = 38;
-            this.btnOkCustomDate.Text = "Ok";
-            this.btnOkCustomDate.UseVisualStyleBackColor = true;
-            this.btnOkCustomDate.Visible = false;
-            // 
-            // btnCustomDate
-            // 
-            this.btnCustomDate.Location = new System.Drawing.Point(490, 5);
-            this.btnCustomDate.Margin = new System.Windows.Forms.Padding(5);
-            this.btnCustomDate.Name = "btnCustomDate";
-            this.btnCustomDate.Size = new System.Drawing.Size(130, 35);
-            this.btnCustomDate.TabIndex = 37;
-            this.btnCustomDate.Text = "Custom";
-            this.btnCustomDate.UseVisualStyleBackColor = true;
-            // 
-            // btnToday
-            // 
-            this.btnToday.Location = new System.Drawing.Point(620, 5);
-            this.btnToday.Margin = new System.Windows.Forms.Padding(5);
-            this.btnToday.Name = "btnToday";
-            this.btnToday.Size = new System.Drawing.Size(130, 35);
-            this.btnToday.TabIndex = 36;
-            this.btnToday.Text = "Today";
-            this.btnToday.UseVisualStyleBackColor = true;
-            // 
-            // btnLast7Days
-            // 
-            this.btnLast7Days.Location = new System.Drawing.Point(750, 5);
-            this.btnLast7Days.Margin = new System.Windows.Forms.Padding(5);
-            this.btnLast7Days.Name = "btnLast7Days";
-            this.btnLast7Days.Size = new System.Drawing.Size(130, 35);
-            this.btnLast7Days.TabIndex = 35;
-            this.btnLast7Days.Text = "Last 7 days";
-            this.btnLast7Days.UseVisualStyleBackColor = true;
-            // 
-            // btnLast30Days
-            // 
-            this.btnLast30Days.Location = new System.Drawing.Point(880, 5);
-            this.btnLast30Days.Margin = new System.Windows.Forms.Padding(5);
-            this.btnLast30Days.Name = "btnLast30Days";
-            this.btnLast30Days.Size = new System.Drawing.Size(130, 35);
-            this.btnLast30Days.TabIndex = 34;
-            this.btnLast30Days.Text = "Last 30 days";
-            this.btnLast30Days.UseVisualStyleBackColor = true;
-            // 
-            // btnThisMonth
-            // 
-            this.btnThisMonth.Location = new System.Drawing.Point(1010, 5);
-            this.btnThisMonth.Margin = new System.Windows.Forms.Padding(5);
-            this.btnThisMonth.Name = "btnThisMonth";
-            this.btnThisMonth.Size = new System.Drawing.Size(130, 35);
-            this.btnThisMonth.TabIndex = 33;
-            this.btnThisMonth.Text = "This month";
-            this.btnThisMonth.UseVisualStyleBackColor = true;
             // 
             // dtpEndDate
             // 
             this.dtpEndDate.CustomFormat = "MMM dd, yyyy";
             this.dtpEndDate.Enabled = false;
-            this.dtpEndDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpEndDate.Font = new System.Drawing.Font("Arial Narrow", 12F);
             this.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpEndDate.Location = new System.Drawing.Point(310, 13);
+            this.dtpEndDate.Location = new System.Drawing.Point(304, 13);
             this.dtpEndDate.Name = "dtpEndDate";
-            this.dtpEndDate.Size = new System.Drawing.Size(122, 20);
+            this.dtpEndDate.Size = new System.Drawing.Size(122, 26);
             this.dtpEndDate.TabIndex = 32;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(5, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(147, 31);
-            this.label1.TabIndex = 30;
-            this.label1.Text = "Dashboard";
+            this.dtpEndDate.ValueChanged += new System.EventHandler(this.dtpEndDate_ValueChanged);
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.label10);
             this.panel2.Controls.Add(this.lblTotalRevenue);
-            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.materialLabel5);
+            this.panel2.Controls.Add(this.pictureBox2);
+            this.panel2.Controls.Add(this.lblTotalRevenuePercentChange);
             this.panel2.Location = new System.Drawing.Point(295, 50);
             this.panel2.Margin = new System.Windows.Forms.Padding(5);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(458, 73);
             this.panel2.TabIndex = 41;
             // 
-            // label10
+            // lblTotalRevenuePercentChange
             // 
-            this.label10.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(141)))), ((int)(((byte)(181)))));
-            this.label10.Location = new System.Drawing.Point(404, 26);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(50, 20);
-            this.label10.TabIndex = 3;
-            this.label10.Text = "+21%";
-            // 
-            // lblTotalRevenue
-            // 
-            this.lblTotalRevenue.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblTotalRevenue.AutoSize = true;
-            this.lblTotalRevenue.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalRevenue.Location = new System.Drawing.Point(73, 33);
-            this.lblTotalRevenue.Name = "lblTotalRevenue";
-            this.lblTotalRevenue.Size = new System.Drawing.Size(78, 25);
-            this.lblTotalRevenue.TabIndex = 1;
-            this.lblTotalRevenue.Text = "100000";
-            // 
-            // label4
-            // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(141)))), ((int)(((byte)(181)))));
-            this.label4.Location = new System.Drawing.Point(74, 13);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(112, 20);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Total Revenue";
+            this.lblTotalRevenuePercentChange.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblTotalRevenuePercentChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalRevenuePercentChange.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(141)))), ((int)(((byte)(181)))));
+            this.lblTotalRevenuePercentChange.Location = new System.Drawing.Point(256, 32);
+            this.lblTotalRevenuePercentChange.Name = "lblTotalRevenuePercentChange";
+            this.lblTotalRevenuePercentChange.Size = new System.Drawing.Size(198, 20);
+            this.lblTotalRevenuePercentChange.TabIndex = 3;
+            this.lblTotalRevenuePercentChange.Text = "+21%";
+            this.lblTotalRevenuePercentChange.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblTotalRevenuePercentChange.Click += new System.EventHandler(this.lblTotalRevenuePercentChange_Click);
             // 
             // dtpStartDate
             // 
+            this.dtpStartDate.CalendarForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.dtpStartDate.CalendarTitleForeColor = System.Drawing.Color.Brown;
             this.dtpStartDate.CustomFormat = "MMM dd, yyyy";
             this.dtpStartDate.Enabled = false;
-            this.dtpStartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpStartDate.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpStartDate.Location = new System.Drawing.Point(180, 13);
+            this.dtpStartDate.Location = new System.Drawing.Point(168, 13);
             this.dtpStartDate.Name = "dtpStartDate";
-            this.dtpStartDate.Size = new System.Drawing.Size(122, 20);
+            this.dtpStartDate.Size = new System.Drawing.Size(122, 26);
             this.dtpStartDate.TabIndex = 31;
+            this.dtpStartDate.ValueChanged += new System.EventHandler(this.dtpStartDate_ValueChanged);
             // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.White;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.lblNumProducts);
-            this.panel4.Controls.Add(this.label9);
-            this.panel4.Controls.Add(this.lblNumSuppliers);
-            this.panel4.Controls.Add(this.label8);
-            this.panel4.Controls.Add(this.label7);
-            this.panel4.Controls.Add(this.lblNumCustomers);
-            this.panel4.Controls.Add(this.label6);
-            this.panel4.Location = new System.Drawing.Point(7, 398);
+            this.panel4.Controls.Add(this.labelTop3Product);
+            this.panel4.Controls.Add(this.labelTop2Product);
+            this.panel4.Controls.Add(this.labelTop1Product);
+            this.panel4.Controls.Add(this.materialLabel3);
+            this.panel4.Controls.Add(this.labelTop3TotalStock);
+            this.panel4.Controls.Add(this.labelTop2TotalStock);
+            this.panel4.Controls.Add(this.labelTop1TotalStock);
+            this.panel4.Location = new System.Drawing.Point(7, 400);
             this.panel4.Margin = new System.Windows.Forms.Padding(5);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(230, 262);
+            this.panel4.Size = new System.Drawing.Size(185, 262);
             this.panel4.TabIndex = 40;
             // 
-            // lblNumProducts
+            // labelTop3Product
             // 
-            this.lblNumProducts.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblNumProducts.AutoSize = true;
-            this.lblNumProducts.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumProducts.Location = new System.Drawing.Point(75, 190);
-            this.lblNumProducts.Name = "lblNumProducts";
-            this.lblNumProducts.Size = new System.Drawing.Size(78, 25);
-            this.lblNumProducts.TabIndex = 6;
-            this.lblNumProducts.Text = "100000";
+            this.labelTop3Product.Depth = 0;
+            this.labelTop3Product.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelTop3Product.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelTop3Product.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
+            this.labelTop3Product.HighEmphasis = true;
+            this.labelTop3Product.Location = new System.Drawing.Point(0, 160);
+            this.labelTop3Product.MouseState = MaterialSkin.MouseState.HOVER;
+            this.labelTop3Product.Name = "labelTop3Product";
+            this.labelTop3Product.Size = new System.Drawing.Size(184, 24);
+            this.labelTop3Product.TabIndex = 56;
+            this.labelTop3Product.Text = "Takoyaki";
+            this.labelTop3Product.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label9
+            // labelTop2Product
             // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(141)))), ((int)(((byte)(181)))));
-            this.label9.Location = new System.Drawing.Point(76, 170);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(72, 20);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "Products";
+            this.labelTop2Product.Depth = 0;
+            this.labelTop2Product.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelTop2Product.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelTop2Product.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
+            this.labelTop2Product.HighEmphasis = true;
+            this.labelTop2Product.Location = new System.Drawing.Point(0, 104);
+            this.labelTop2Product.MouseState = MaterialSkin.MouseState.HOVER;
+            this.labelTop2Product.Name = "labelTop2Product";
+            this.labelTop2Product.Size = new System.Drawing.Size(184, 24);
+            this.labelTop2Product.TabIndex = 55;
+            this.labelTop2Product.Text = "Milktea";
+            this.labelTop2Product.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblNumSuppliers
+            // labelTop1Product
             // 
-            this.lblNumSuppliers.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblNumSuppliers.AutoSize = true;
-            this.lblNumSuppliers.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumSuppliers.Location = new System.Drawing.Point(75, 130);
-            this.lblNumSuppliers.Name = "lblNumSuppliers";
-            this.lblNumSuppliers.Size = new System.Drawing.Size(78, 25);
-            this.lblNumSuppliers.TabIndex = 4;
-            this.lblNumSuppliers.Text = "100000";
+            this.labelTop1Product.Depth = 0;
+            this.labelTop1Product.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelTop1Product.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelTop1Product.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
+            this.labelTop1Product.HighEmphasis = true;
+            this.labelTop1Product.Location = new System.Drawing.Point(0, 48);
+            this.labelTop1Product.MouseState = MaterialSkin.MouseState.HOVER;
+            this.labelTop1Product.Name = "labelTop1Product";
+            this.labelTop1Product.Size = new System.Drawing.Size(184, 24);
+            this.labelTop1Product.TabIndex = 54;
+            this.labelTop1Product.Text = "Takoyaki";
+            this.labelTop1Product.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label8
+            // materialLabel3
             // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(141)))), ((int)(((byte)(181)))));
-            this.label8.Location = new System.Drawing.Point(76, 110);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(75, 20);
-            this.label8.TabIndex = 3;
-            this.label8.Text = "Suppliers";
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel3.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            this.materialLabel3.HighEmphasis = true;
+            this.materialLabel3.Location = new System.Drawing.Point(24, 16);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(136, 24);
+            this.materialLabel3.TabIndex = 53;
+            this.materialLabel3.Text = "Product Stocks";
+            this.materialLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label7
+            // labelTop3TotalStock
             // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(60, 15);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(141, 25);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "Total Counters";
+            this.labelTop3TotalStock.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelTop3TotalStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTop3TotalStock.Location = new System.Drawing.Point(-20, 184);
+            this.labelTop3TotalStock.Name = "labelTop3TotalStock";
+            this.labelTop3TotalStock.Size = new System.Drawing.Size(224, 25);
+            this.labelTop3TotalStock.TabIndex = 6;
+            this.labelTop3TotalStock.Text = "100000";
+            this.labelTop3TotalStock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblNumCustomers
+            // labelTop2TotalStock
             // 
-            this.lblNumCustomers.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblNumCustomers.AutoSize = true;
-            this.lblNumCustomers.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumCustomers.Location = new System.Drawing.Point(75, 70);
-            this.lblNumCustomers.Name = "lblNumCustomers";
-            this.lblNumCustomers.Size = new System.Drawing.Size(78, 25);
-            this.lblNumCustomers.TabIndex = 1;
-            this.lblNumCustomers.Text = "100000";
+            this.labelTop2TotalStock.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelTop2TotalStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTop2TotalStock.Location = new System.Drawing.Point(-20, 128);
+            this.labelTop2TotalStock.Name = "labelTop2TotalStock";
+            this.labelTop2TotalStock.Size = new System.Drawing.Size(224, 25);
+            this.labelTop2TotalStock.TabIndex = 4;
+            this.labelTop2TotalStock.Text = "100000";
+            this.labelTop2TotalStock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelTop2TotalStock.Click += new System.EventHandler(this.labelTop2TotalStock_Click);
             // 
-            // label6
+            // labelTop1TotalStock
             // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(141)))), ((int)(((byte)(181)))));
-            this.label6.Location = new System.Drawing.Point(70, 50);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(86, 20);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Customers";
+            this.labelTop1TotalStock.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelTop1TotalStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTop1TotalStock.Location = new System.Drawing.Point(-20, 72);
+            this.labelTop1TotalStock.Name = "labelTop1TotalStock";
+            this.labelTop1TotalStock.Size = new System.Drawing.Size(224, 25);
+            this.labelTop1TotalStock.TabIndex = 1;
+            this.labelTop1TotalStock.Text = "100000";
+            this.labelTop1TotalStock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelTop1TotalStock.Click += new System.EventHandler(this.labelTop1TotalStock_Click);
             // 
-            // panel5
+            // bindingNavigatorAddNewItem
             // 
-            this.panel5.BackColor = System.Drawing.Color.White;
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.label14);
-            this.panel5.Controls.Add(this.dgvUnderstock);
-            this.panel5.Location = new System.Drawing.Point(247, 398);
-            this.panel5.Margin = new System.Windows.Forms.Padding(5);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(606, 262);
-            this.panel5.TabIndex = 42;
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "Add new";
             // 
-            // dgvUnderstock
+            // bindingNavigatorDeleteItem
             // 
-            this.dgvUnderstock.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.dgvUnderstock.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvUnderstock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvUnderstock.Location = new System.Drawing.Point(14, 35);
-            this.dgvUnderstock.Name = "dgvUnderstock";
-            this.dgvUnderstock.Size = new System.Drawing.Size(574, 230);
-            this.dgvUnderstock.TabIndex = 3;
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem.Text = "Delete";
             // 
-            // label14
+            // bindingNavigatorMoveFirstItem
             // 
-            this.label14.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(10, 10);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(155, 25);
-            this.label14.TabIndex = 49;
-            this.label14.Text = "Low Stocks Item";
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem.Text = "Move first";
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
+            // 
+            // bindingNavigatorMoveNextItem
+            // 
+            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
+            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
+            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveNextItem.Text = "Move next";
+            // 
+            // bindingNavigatorMoveLastItem
+            // 
+            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
+            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
+            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveLastItem.Text = "Move last";
+            // 
+            // bindingNavigatorAddNewItem1
+            // 
+            this.bindingNavigatorAddNewItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem1.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem1.Image")));
+            this.bindingNavigatorAddNewItem1.Name = "bindingNavigatorAddNewItem1";
+            this.bindingNavigatorAddNewItem1.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem1.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem1.Text = "Add new";
+            // 
+            // bindingNavigatorDeleteItem1
+            // 
+            this.bindingNavigatorDeleteItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem1.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem1.Image")));
+            this.bindingNavigatorDeleteItem1.Name = "bindingNavigatorDeleteItem1";
+            this.bindingNavigatorDeleteItem1.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem1.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem1.Text = "Delete";
+            // 
+            // bindingNavigatorMoveFirstItem1
+            // 
+            this.bindingNavigatorMoveFirstItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem1.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem1.Image")));
+            this.bindingNavigatorMoveFirstItem1.Name = "bindingNavigatorMoveFirstItem1";
+            this.bindingNavigatorMoveFirstItem1.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem1.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem1.Text = "Move first";
+            // 
+            // bindingNavigatorMovePreviousItem1
+            // 
+            this.bindingNavigatorMovePreviousItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem1.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem1.Image")));
+            this.bindingNavigatorMovePreviousItem1.Name = "bindingNavigatorMovePreviousItem1";
+            this.bindingNavigatorMovePreviousItem1.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem1.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem1.Text = "Move previous";
+            // 
+            // bindingNavigatorMoveNextItem1
+            // 
+            this.bindingNavigatorMoveNextItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveNextItem1.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem1.Image")));
+            this.bindingNavigatorMoveNextItem1.Name = "bindingNavigatorMoveNextItem1";
+            this.bindingNavigatorMoveNextItem1.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveNextItem1.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveNextItem1.Text = "Move next";
+            // 
+            // bindingNavigatorMoveLastItem1
+            // 
+            this.bindingNavigatorMoveLastItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem1.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem1.Image")));
+            this.bindingNavigatorMoveLastItem1.Name = "bindingNavigatorMoveLastItem1";
+            this.bindingNavigatorMoveLastItem1.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem1.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveLastItem1.Text = "Move last";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::TakoTea.Views.Properties.Resources.output_onlinepngtools;
+            this.pictureBox1.Location = new System.Drawing.Point(8, 8);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(48, 56);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::TakoTea.Views.Properties.Resources.output_onlinepngtools__1_;
+            this.pictureBox2.Location = new System.Drawing.Point(8, 8);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(48, 56);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 5;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::TakoTea.Views.Properties.Resources.output_onlinepngtools__1_;
+            this.pictureBox3.Location = new System.Drawing.Point(8, 8);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(48, 56);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 6;
+            this.pictureBox3.TabStop = false;
+            // 
+            // materialLabel4
+            // 
+            this.materialLabel4.Depth = 0;
+            this.materialLabel4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel4.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
+            this.materialLabel4.HighEmphasis = true;
+            this.materialLabel4.Location = new System.Drawing.Point(72, 8);
+            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel4.Name = "materialLabel4";
+            this.materialLabel4.Size = new System.Drawing.Size(184, 24);
+            this.materialLabel4.TabIndex = 57;
+            this.materialLabel4.Text = "Number of orders";
+            this.materialLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // materialLabel5
+            // 
+            this.materialLabel5.Depth = 0;
+            this.materialLabel5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel5.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
+            this.materialLabel5.HighEmphasis = true;
+            this.materialLabel5.Location = new System.Drawing.Point(72, 8);
+            this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel5.Name = "materialLabel5";
+            this.materialLabel5.Size = new System.Drawing.Size(184, 24);
+            this.materialLabel5.TabIndex = 58;
+            this.materialLabel5.Text = "Total revenue";
+            this.materialLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // materialLabel6
+            // 
+            this.materialLabel6.Depth = 0;
+            this.materialLabel6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.materialLabel6.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel6.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
+            this.materialLabel6.HighEmphasis = true;
+            this.materialLabel6.Location = new System.Drawing.Point(72, 8);
+            this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel6.Name = "materialLabel6";
+            this.materialLabel6.Size = new System.Drawing.Size(184, 24);
+            this.materialLabel6.TabIndex = 59;
+            this.materialLabel6.Text = "Total Profit";
+            this.materialLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblNumOrders
+            // 
+            this.lblNumOrders.Depth = 0;
+            this.lblNumOrders.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblNumOrders.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblNumOrders.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
+            this.lblNumOrders.Location = new System.Drawing.Point(72, 32);
+            this.lblNumOrders.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblNumOrders.Name = "lblNumOrders";
+            this.lblNumOrders.Size = new System.Drawing.Size(96, 24);
+            this.lblNumOrders.TabIndex = 58;
+            this.lblNumOrders.Text = "1000000";
+            this.lblNumOrders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblNumOrders.Click += new System.EventHandler(this.lblNumOrders_Click_1);
+            // 
+            // lblTotalRevenue
+            // 
+            this.lblTotalRevenue.Depth = 0;
+            this.lblTotalRevenue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblTotalRevenue.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblTotalRevenue.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
+            this.lblTotalRevenue.Location = new System.Drawing.Point(72, 32);
+            this.lblTotalRevenue.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblTotalRevenue.Name = "lblTotalRevenue";
+            this.lblTotalRevenue.Size = new System.Drawing.Size(160, 24);
+            this.lblTotalRevenue.TabIndex = 59;
+            this.lblTotalRevenue.Text = "1000000";
+            this.lblTotalRevenue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblTotalProfit
+            // 
+            this.lblTotalProfit.Depth = 0;
+            this.lblTotalProfit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblTotalProfit.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblTotalProfit.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
+            this.lblTotalProfit.Location = new System.Drawing.Point(72, 32);
+            this.lblTotalProfit.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblTotalProfit.Name = "lblTotalProfit";
+            this.lblTotalProfit.Size = new System.Drawing.Size(160, 24);
+            this.lblTotalProfit.TabIndex = 60;
+            this.lblTotalProfit.Text = "1000000";
+            this.lblTotalProfit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // DashboardForm
             // 
@@ -538,59 +1091,171 @@
             this.materialCard1.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabControlDataGrids.ResumeLayout(false);
+            this.tabPageLowStock.ResumeLayout(false);
+            this.tabPageLowStock.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bnLowStocks)).EndInit();
+            this.bnLowStocks.ResumeLayout(false);
+            this.bnLowStocks.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUnderstock)).EndInit();
+            this.tabPageNewOrders.ResumeLayout(false);
+            this.tabPageNewOrders.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bnNewOrders)).EndInit();
+            this.bnNewOrders.ResumeLayout(false);
+            this.bnNewOrders.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNewOrders)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUnderstock)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsNewOrders)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsLowStock)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
+
         }
-        #endregion
-        private MaterialSkin.Controls.MaterialCard materialCard1;
+
+        #endregion
+
+        private MaterialSkin.Controls.MaterialCard materialCard1;
+
         private System.Windows.Forms.Panel panel7;
+
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label lblTotalProfit;
+
+        private System.Windows.Forms.Label lblTotalProfitPercentChange;
+
         private System.Windows.Forms.Label label5;
+
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lblNumOrders;
+
+        private System.Windows.Forms.Label lblNumOrdersPercentChange;
+
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnOkCustomDate;
-        private System.Windows.Forms.Button btnCustomDate;
-        private System.Windows.Forms.Button btnToday;
-        private System.Windows.Forms.Button btnLast7Days;
-        private System.Windows.Forms.Button btnLast30Days;
-        private System.Windows.Forms.Button btnThisMonth;
+
         private System.Windows.Forms.DateTimePicker dtpEndDate;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label lblTotalRevenue;
-        private System.Windows.Forms.Label label4;
+
         private System.Windows.Forms.DateTimePicker dtpStartDate;
+
+        private System.Windows.Forms.Panel panel2;
+
+        private System.Windows.Forms.Label lblTotalRevenuePercentChange;
+
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label lblNumProducts;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label lblNumSuppliers;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label lblNumCustomers;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.DataGridView dgvUnderstock;
-        private System.Windows.Forms.Label label13;
-        private LiveCharts.WinForms.PieChart pieChart1;
-        private LiveCharts.WinForms.CartesianChart cartesianChart1;
+
+        private System.Windows.Forms.Label labelTop3TotalStock;
+
+        private System.Windows.Forms.Label labelTop2TotalStock;
+
+        private System.Windows.Forms.Label labelTop1TotalStock;
+
+        private LiveCharts.WinForms.PieChart pieChartTop5ProductVariant;
+
         private System.Windows.Forms.BindingSource bindingSource1;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label14;
+
+        private System.Windows.Forms.TabControl tabControlDataGrids;
+
+        private System.Windows.Forms.TabPage tabPageLowStock;
+
+        private System.Windows.Forms.DataGridView dgvUnderstock;
+
+        private System.Windows.Forms.TabPage tabPageNewOrders;
+
+        private System.Windows.Forms.DataGridView dataGridViewNewOrders;
+
+        private System.Windows.Forms.BindingSource bsNewOrders;
+
+        private System.Windows.Forms.BindingSource bsLowStock;
+
+        private System.Windows.Forms.BindingNavigator bnLowStocks;
+
+        private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
+
+        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
+
+        private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
+
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
+
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
+
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
+
+        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
+
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
+
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
+
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
+
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
+
+        private System.Windows.Forms.BindingNavigator bnNewOrders;
+
+        private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem1;
+
+        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem1;
+
+        private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem1;
+
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem1;
+
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem1;
+
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator3;
+
+        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem1;
+
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator4;
+
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem1;
+
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem1;
+
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator5;
+
+        private MaterialSkin.Controls.MaterialButton btnCustomDate;
+
+        private MaterialSkin.Controls.MaterialButton btnToday;
+
+        private MaterialSkin.Controls.MaterialButton btnOkCustomDate;
+
+        private MaterialSkin.Controls.MaterialButton btnLast7Days;
+
+        private MaterialSkin.Controls.MaterialButton btnThisMonth;
+
+        private MaterialSkin.Controls.MaterialButton btnLast30Days;
+
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private LiveCharts.WinForms.CartesianChart cartesianChartSalesPerProduct;
+        private LiveCharts.WinForms.CartesianChart cartesianChartGrossRevenue;
+        private MaterialSkin.Controls.MaterialLabel materialLabel2;
+        private MaterialSkin.Controls.MaterialLabel materialLabel3;
+        private MaterialSkin.Controls.MaterialLabel labelTop3Product;
+        private MaterialSkin.Controls.MaterialLabel labelTop2Product;
+        private MaterialSkin.Controls.MaterialLabel labelTop1Product;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private MaterialSkin.Controls.MaterialLabel materialLabel6;
+        private MaterialSkin.Controls.MaterialLabel lblNumOrders;
+        private MaterialSkin.Controls.MaterialLabel materialLabel4;
+        private MaterialSkin.Controls.MaterialLabel materialLabel5;
+        private MaterialSkin.Controls.MaterialLabel lblTotalProfit;
+        private MaterialSkin.Controls.MaterialLabel lblTotalRevenue;
     }
+
 }

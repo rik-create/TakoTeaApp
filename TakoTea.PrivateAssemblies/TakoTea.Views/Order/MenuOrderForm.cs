@@ -33,7 +33,9 @@ namespace TakoTea.View.Orders
 
             dgvDraftOrders.CellClick += dgvDraftOrders_CellClick; // Register the event handler
 
-
+            dateTimePickerOrderDate.Value = DateTime.Now;
+            dateTimePickerOrderDate.Format = DateTimePickerFormat.Custom;
+            dateTimePickerOrderDate.CustomFormat = "MMMM ,d , yyyy";
             // ... rest of the code ...
             this.Load += MenuOrderForm_Load; // Register the Load event handler
             txtBoxSearchVariant.TextChanged += txtBoxSearchVariant_TextChanged;
@@ -51,7 +53,7 @@ namespace TakoTea.View.Orders
 
             // Attach the ContextMenuStrip to the DataGridView
             dgvDraftOrders.ContextMenuStrip = contextMenuStrip;
-
+            lblOrderId.Text = _service.GenerateNewOrderId().ToString();
             // Handle the delete menu item click
             deleteMenuItem.Click += deleteMenuItem_Click;
         }
@@ -386,10 +388,12 @@ namespace TakoTea.View.Orders
             _service.ConfirmOrder(
                 dataGridViewOrderList,
                 lblTotalInOrderList,
+                
                 lblOrderId,
                 cmbPaymentMethod,
                 cmbPaymentStatus,
-                cmbOrderStatus
+                cmbOrderStatus, dateTimePickerOrderDate,
+                lblCustomer.Text
             );
 
 
@@ -413,8 +417,16 @@ namespace TakoTea.View.Orders
 
         private void btnGoToOrderQueue_Click(object sender, EventArgs e)
         {
-            OrdersQueueForm ordersQueueForm = new OrdersQueueForm();
+            OrdersQueueForm ordersQueueForm = new OrdersQueueForm(context);
             ordersQueueForm.Show();
+
+        }
+
+        private void buttonNow_Click(object sender, EventArgs e)
+        {
+            dateTimePickerOrderDate.Value = DateTime.Now;
+            dateTimePickerOrderDate.Format = DateTimePickerFormat.Custom;
+            dateTimePickerOrderDate.CustomFormat = "MMMM ,d , yyyy";
 
         }
     }

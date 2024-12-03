@@ -46,5 +46,10 @@ namespace TakoTea.Models
         public virtual DbSet<AddOn> AddOns { get; set; }
         public virtual DbSet<IngredientChangeLog> IngredientChangeLogs { get; set; }
         public virtual DbSet<Batch> Batches { get; set; }
+        public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Setting> Settings { get; set; }
+        public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
+        public virtual DbSet<Log> Logs { get; set; }
     }
 }

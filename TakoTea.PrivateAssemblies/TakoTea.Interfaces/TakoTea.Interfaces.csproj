@@ -80,6 +80,7 @@
     <Compile Include="IProductRepository.cs" />
     <Compile Include="IProductsModuleService.cs" />
     <Compile Include="IProductVariantService.cs" />
+    <Compile Include="ISettingsForm.cs" />
     <Compile Include="IStockAdjustmentRepository.cs" />
     <Compile Include="IStockAdjustmentService.cs" />
     <Compile Include="IStockService.cs" />

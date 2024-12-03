@@ -15,6 +15,8 @@ namespace TakoTea.Services
         {
             _context = new Entities();
         }
+
+
         public void UpdateBatchStockLevel(int ingredientId, decimal quantityUsed, string action)
         {
 
@@ -50,6 +52,34 @@ namespace TakoTea.Services
                 }
             }
         }
+        public List<ProductVariantWithProductName> GetProductVariantWithProductName()
+        {
+            try
+            {
+                var productVariantsWithProductName = GetAllProductVariants()
+                    .Join(GetAllProducts(),
+                          pv => pv.ProductID,
+                          p => p.ProductID,
+                          (pv, p) => new ProductVariantWithProductName
+                          {
+                              ProductVariantID = pv.ProductVariantID,
+                              ProductName = p.ProductName,
+                              VariantName = pv.VariantName,
+                              Size = pv.Size,
+                              Price = pv.Price,
+                              StockLevel = pv.StockLevel ?? 0, // Provide a default value
+                              ImagePath = pv.ImagePath
+                          })
+                    .ToList();
+
+                return productVariantsWithProductName;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error loading ingredients: " + ex.Message);
+            }
+        }
+
         public string GetSizeByVariantId(int variantId)
         {
             var size = _context.ProductVariants
@@ -97,6 +127,8 @@ namespace TakoTea.Services
                 .Select(pvi => pvi.ProductVariantIngredientID)
                 .ToList();
         }
+
+
         public int GetNewComboMealID(string comboMealName)
         {
             using (var context = new Entities())
@@ -256,7 +288,6 @@ namespace TakoTea.Services
         {
             // Add logic for importing products from a file
         }
-        // TODO: Refactor this method
 
         public void TrackProductAuditHistory(int productId)
         {
@@ -368,5 +399,36 @@ namespace TakoTea.Services
 
             return query.ToList();
         }
+        public List<(int IngredientID, decimal QuantityPerVariant)> GetIngredientIdsAndQuantityPerVariantByProductVariantId(int productVariantId)
+        {
+            return _context.ProductVariantIngredients
+                .Where(pvi => pvi.ProductVariantID == productVariantId)
+                .Select(pvi => new { pvi.IngredientID, pvi.QuantityPerVariant })
+                .ToList()
+                .Select(pvi => (pvi.IngredientID, pvi.QuantityPerVariant))
+                .ToList();
+        }
+
+
+        public List<int> GetIngredientIdsByProductVariantId(int productVariantId)
+        {
+            return _context.ProductVariantIngredients
+                .Where(pvi => pvi.ProductVariantID == productVariantId)
+                .Select(pvi => pvi.IngredientID)
+                .ToList();
+        }
+
+
+    }
+
+    public class ProductVariantWithProductName
+    {
+        public int ProductVariantID { get; set; }
+        public string ProductName { get; set; }
+        public string VariantName { get; set; }
+        public string Size { get; set; }
+        public decimal Price { get; set; }
+        public decimal StockLevel { get; set; }
+        public byte[] ImagePath { get; set; }
     }
 }

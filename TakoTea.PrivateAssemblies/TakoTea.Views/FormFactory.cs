@@ -23,7 +23,7 @@ namespace TakoTea.Views
                 case "Product":
                     return new ProductListForm();
                 case "Sales":
-                    return new AddSalesEntryModal();
+                    return new SalesListForm();
                 case "Item":
                     return new IngredientListForm();
                 case "Stock":

@@ -45,6 +45,11 @@ namespace TakoTea.Helpers
 
         public static Image ByteArrayToImage(byte[] byteArray)
         {
+            if (byteArray == null || byteArray.Length == 0)
+            {
+                return null;
+            }
+
             try
             {
                 using (MemoryStream ms = new MemoryStream(byteArray))
@@ -67,8 +72,16 @@ namespace TakoTea.Helpers
         }
 
 
+
+
         public static byte[] ImageToByteArray(Image image)
         {
+            if (image == null)
+            {
+                MessageBox.Show("No image selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+
             try
             {
                 using (MemoryStream ms = new MemoryStream())
@@ -77,19 +90,13 @@ namespace TakoTea.Helpers
                     return ms.ToArray();
                 }
             }
-            catch (ArgumentNullException ex)
-            {
-                // Handle null image
-                MessageBox.Show("Image is null: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
-            }
             catch (Exception ex)
             {
-                // Handle other exceptions
                 MessageBox.Show("An error occurred while converting image to byte array: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
+
 
     }
 }

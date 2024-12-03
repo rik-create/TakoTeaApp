@@ -26,9 +26,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductListForm));
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
@@ -44,6 +44,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnAddComboMeal = new MaterialSkin.Controls.MaterialButton();
+            this.materialFloatingActionButtonCopyInformation = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.floatingActionButtonAddProduct = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.pbSearch = new System.Windows.Forms.PictureBox();
             this.pBoxShowFilter = new System.Windows.Forms.PictureBox();
@@ -60,11 +61,10 @@
             this.materialLabel21 = new MaterialSkin.Controls.MaterialLabel();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.panelItemList = new System.Windows.Forms.Panel();
-            this.dataGridViewProductList = new System.Windows.Forms.DataGridView();
+            this.dataGridViewProductVariantList = new System.Windows.Forms.DataGridView();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
@@ -73,6 +73,7 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.materialCard1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -86,7 +87,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pBoxShowFilter)).BeginInit();
             this.panelFilteringComponents.SuspendLayout();
             this.panelItemList.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProductList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProductVariantList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
@@ -143,6 +144,7 @@
             this.materialLabel4.Depth = 0;
             this.materialLabel4.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel4.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            this.materialLabel4.HighEmphasis = true;
             this.materialLabel4.Location = new System.Drawing.Point(497, 10);
             this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel4.Name = "materialLabel4";
@@ -193,6 +195,7 @@
             this.materialLabel22.AutoSize = true;
             this.materialLabel22.Depth = 0;
             this.materialLabel22.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel22.HighEmphasis = true;
             this.materialLabel22.Location = new System.Drawing.Point(24, 664);
             this.materialLabel22.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel22.Name = "materialLabel22";
@@ -218,6 +221,7 @@
             this.materialLabel19.AutoSize = true;
             this.materialLabel19.Depth = 0;
             this.materialLabel19.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel19.HighEmphasis = true;
             this.materialLabel19.Location = new System.Drawing.Point(24, 688);
             this.materialLabel19.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel19.Name = "materialLabel19";
@@ -244,6 +248,7 @@
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.btnAddComboMeal);
+            this.panel3.Controls.Add(this.materialFloatingActionButtonCopyInformation);
             this.panel3.Controls.Add(this.floatingActionButtonAddProduct);
             this.panel3.Controls.Add(this.pbSearch);
             this.panel3.Controls.Add(this.pBoxShowFilter);
@@ -275,6 +280,19 @@
             this.btnAddComboMeal.UseAccentColor = true;
             this.btnAddComboMeal.UseVisualStyleBackColor = true;
             this.btnAddComboMeal.Click += new System.EventHandler(this.btnAddComboMeal_Click);
+            // 
+            // materialFloatingActionButtonCopyInformation
+            // 
+            this.materialFloatingActionButtonCopyInformation.Depth = 0;
+            this.materialFloatingActionButtonCopyInformation.Icon = global::TakoTea.Views.Properties.Resources.copy_white;
+            this.materialFloatingActionButtonCopyInformation.Location = new System.Drawing.Point(856, 8);
+            this.materialFloatingActionButtonCopyInformation.Mini = true;
+            this.materialFloatingActionButtonCopyInformation.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialFloatingActionButtonCopyInformation.Name = "materialFloatingActionButtonCopyInformation";
+            this.materialFloatingActionButtonCopyInformation.Size = new System.Drawing.Size(40, 40);
+            this.materialFloatingActionButtonCopyInformation.TabIndex = 101;
+            this.materialFloatingActionButtonCopyInformation.UseVisualStyleBackColor = true;
+            this.materialFloatingActionButtonCopyInformation.Click += new System.EventHandler(this.materialFloatingActionButtonCopyInformation_Click);
             // 
             // floatingActionButtonAddProduct
             // 
@@ -342,7 +360,7 @@
             this.txtBoxSearchForVariants.HideSelection = true;
             this.txtBoxSearchForVariants.Hint = "Search by name or category...";
             this.txtBoxSearchForVariants.LeadingIcon = null;
-            this.txtBoxSearchForVariants.Location = new System.Drawing.Point(16, 8);
+            this.txtBoxSearchForVariants.Location = new System.Drawing.Point(16, 16);
             this.txtBoxSearchForVariants.MaxLength = 32767;
             this.txtBoxSearchForVariants.MouseState = MaterialSkin.MouseState.OUT;
             this.txtBoxSearchForVariants.Name = "txtBoxSearchForVariants";
@@ -354,12 +372,14 @@
             this.txtBoxSearchForVariants.SelectionLength = 0;
             this.txtBoxSearchForVariants.SelectionStart = 0;
             this.txtBoxSearchForVariants.ShortcutsEnabled = true;
-            this.txtBoxSearchForVariants.Size = new System.Drawing.Size(264, 48);
+            this.txtBoxSearchForVariants.Size = new System.Drawing.Size(264, 36);
             this.txtBoxSearchForVariants.TabIndex = 126;
             this.txtBoxSearchForVariants.TabStop = false;
             this.txtBoxSearchForVariants.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtBoxSearchForVariants.TrailingIcon = null;
             this.txtBoxSearchForVariants.UseSystemPasswordChar = false;
+            this.txtBoxSearchForVariants.UseTallSize = false;
+            this.txtBoxSearchForVariants.Click += new System.EventHandler(this.txtBoxSearchForVariants_Click);
             // 
             // panelFilteringComponents
             // 
@@ -460,13 +480,14 @@
             // 
             // dateTimePicker3
             // 
-            this.dateTimePicker3.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker3.CalendarFont = new System.Drawing.Font("Arial Narrow", 15.75F);
+            this.dateTimePicker3.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker3.Location = new System.Drawing.Point(194, 10);
             this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(159, 31);
+            this.dateTimePicker3.Size = new System.Drawing.Size(159, 32);
             this.dateTimePicker3.TabIndex = 97;
+            this.dateTimePicker3.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
             // 
             // materialRadioButton1
             // 
@@ -500,61 +521,62 @@
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker2.CalendarFont = new System.Drawing.Font("Arial Narrow", 15.75F);
+            this.dateTimePicker2.Font = new System.Drawing.Font("Arial Narrow", 15.75F);
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker2.Location = new System.Drawing.Point(20, 10);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(159, 31);
+            this.dateTimePicker2.Size = new System.Drawing.Size(159, 32);
             this.dateTimePicker2.TabIndex = 96;
             // 
             // panelItemList
             // 
             this.panelItemList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelItemList.Controls.Add(this.dataGridViewProductList);
+            this.panelItemList.Controls.Add(this.dataGridViewProductVariantList);
             this.panelItemList.Controls.Add(this.bindingNavigator1);
             this.panelItemList.Location = new System.Drawing.Point(3, 254);
             this.panelItemList.Name = "panelItemList";
             this.panelItemList.Size = new System.Drawing.Size(1141, 509);
             this.panelItemList.TabIndex = 143;
             // 
-            // dataGridViewProductList
+            // dataGridViewProductVariantList
             // 
-            this.dataGridViewProductList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewProductList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridViewProductList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewProductList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewProductList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewProductList.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewProductList.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dataGridViewProductList.EnableHeadersVisualStyles = false;
-            this.dataGridViewProductList.Location = new System.Drawing.Point(0, 27);
-            this.dataGridViewProductList.Name = "dataGridViewProductList";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewProductList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridViewProductList.Size = new System.Drawing.Size(1139, 480);
-            this.dataGridViewProductList.TabIndex = 10;
-            this.dataGridViewProductList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProductList_CellContentClick);
+            this.dataGridViewProductVariantList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewProductVariantList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridViewProductVariantList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewProductVariantList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.dataGridViewProductVariantList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewProductVariantList.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dataGridViewProductVariantList.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dataGridViewProductVariantList.EnableHeadersVisualStyles = false;
+            this.dataGridViewProductVariantList.Location = new System.Drawing.Point(0, 27);
+            this.dataGridViewProductVariantList.Name = "dataGridViewProductVariantList";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewProductVariantList.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.dataGridViewProductVariantList.Size = new System.Drawing.Size(1139, 480);
+            this.dataGridViewProductVariantList.TabIndex = 10;
+            this.dataGridViewProductVariantList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProductList_CellContentClick);
+            this.dataGridViewProductVariantList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProductVariantList_CellDoubleClick);
             // 
             // bindingNavigator1
             // 
@@ -600,15 +622,6 @@
             this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
             this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(60, 22);
-            this.bindingNavigatorDeleteItem.Text = "Delete";
-            this.bindingNavigatorDeleteItem.Click += new System.EventHandler(this.bindingNavigatorDeleteItem_Click);
             // 
             // bindingNavigatorMoveFirstItem
             // 
@@ -671,6 +684,15 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(60, 22);
+            this.bindingNavigatorDeleteItem.Text = "Delete";
+            this.bindingNavigatorDeleteItem.Click += new System.EventHandler(this.bindingNavigatorDeleteItem_Click);
+            // 
             // ProductListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -701,7 +723,7 @@
             this.panelFilteringComponents.PerformLayout();
             this.panelItemList.ResumeLayout(false);
             this.panelItemList.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProductList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProductVariantList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
@@ -754,6 +776,7 @@
         private System.Windows.Forms.Panel panel1;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private System.Windows.Forms.PictureBox pbReloadForm;
-        private System.Windows.Forms.DataGridView dataGridViewProductList;
+        private System.Windows.Forms.DataGridView dataGridViewProductVariantList;
+        private MaterialSkin.Controls.MaterialFloatingActionButton materialFloatingActionButtonCopyInformation;
     }
 }

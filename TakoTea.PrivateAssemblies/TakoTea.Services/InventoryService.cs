@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 using TakoTea.Database;
 using TakoTea.Interfaces;
 using TakoTea.Models;
@@ -19,6 +20,14 @@ namespace TakoTea.Services
             context = new Entities();
         }
 
+        public string GetIngredientNameById(int ingredientId)
+        {
+            using (var context = new Entities())
+            {
+                var ingredient = context.Ingredients.FirstOrDefault(i => i.IngredientID == ingredientId);
+                return ingredient?.IngredientName ?? "Unknown Ingredient";
+            }
+        }
 
         public void DeleteIngredient(int ingredientId)
         {
@@ -52,28 +61,28 @@ namespace TakoTea.Services
                 var line = reader.ReadLine();
                 var values = line.Split(',');
 
-                // Validate the number of columns
-                if (values.Length != 13)
-                {
-                    Console.WriteLine($"Invalid number of columns in line: {line}");
-                    continue;
-                }
-
+         
                 try
                 {
+
+
+
                     // Validate and parse each value
                     var ingredientName = values[0].Replace("?", ",");
                     var brandName = values[1].Replace("?", ",");
                     var description = values[2].Replace("?", ",");
-                    var isAddOn = bool.TryParse(values[4], out bool parsedIsAddOn) ? parsedIsAddOn : throw new FormatException("Invalid boolean format for IsAddOn");
-                    var typeOfIngredient = values[5].Replace("?", ",");
-                    var isActive = bool.TryParse(values[6], out bool parsedIsActive) ? parsedIsActive : throw new FormatException("Invalid boolean format for IsActive");
-                    var allergyInformation = values[7].Replace("?", ",");
-                    var storageConditions = values[8].Replace("?", ",");
-                    var stockLevel = decimal.TryParse(values[9], out decimal parsedStockLevel) ? parsedStockLevel : throw new FormatException("Invalid decimal format for StockLevel");
-                    var lowLevel = decimal.TryParse(values[10], out decimal parsedLowLevel) ? parsedLowLevel : throw new FormatException("Invalid decimal format for LowLevel");
-                    var ingredientCategory = values[11].Replace("?", ",");
-                    var measuringUnit = values[12];
+                    var isAddOn = bool.TryParse(values[3], out bool parsedIsAddOn) ? parsedIsAddOn : throw new FormatException("Invalid boolean format for IsAddOn");
+                    var typeOfIngredient = values[4].Replace("?", ",");
+                    var isActive = bool.TryParse(values[5], out bool parsedIsActive) ? parsedIsActive : throw new FormatException("Invalid boolean format for IsActive");
+                    var allergyInformation = values[6].Replace("?", ",");
+                    var storageConditions = values[7].Replace("?", ",");
+                    var stockLevel = decimal.TryParse(values[8], out decimal parsedStockLevel) ? parsedStockLevel : throw new FormatException("Invalid decimal format for StockLevel");
+                    var lowLevel = decimal.TryParse(values[9], out decimal parsedLowLevel) ? parsedLowLevel : throw new FormatException("Invalid decimal format for LowLevel");
+                    var ingredientCategory = values[10].Replace("?", ",");
+                    var measuringUnit = values[11];
+
+
+
 
                     var ingredient = new Ingredient
                     {
@@ -86,17 +95,37 @@ namespace TakoTea.Services
                         AllergyInformation = allergyInformation,
                         StorageConditions = storageConditions,
                         StockLevel = stockLevel,
+                        IngredientImage = new byte[0],
                         LowLevel = lowLevel,
                         IngredientCategory = ingredientCategory,
                         MeasuringUnit = measuringUnit
                     };
+
+                    if (isAddOn)
+                    {
+                        var additionalPrice = decimal.Parse(values[12]); // Parse AdditionalPrice from CSV
+                        var useForProductId = int.Parse(values[13]); // Parse UseForProductID from CSV
+                        var quantityUsedPerProduct = decimal.Parse(values[14]); // Parse QuantityUsedPerProduct from CSV
+
+
+                        var addOn = new AddOn
+                        {
+                            AddOnName = ingredientName,
+                            AdditionalPrice = additionalPrice,
+                            UseForProductID = useForProductId,
+                            QuantityUsedPerProduct = quantityUsedPerProduct,
+                            IngredientID = GetNextIngredientId()
+                        };
+
+                        AddAddon(addOn);
+                    }
 
                     context.Ingredients.Add(ingredient);
                 }
                 catch (FormatException ex)
                 {
                     // Log or handle the error
-                    Console.WriteLine($"Error parsing line: {line}. Error: {ex.Message}");
+                    MessageBox.Show($"Error parsing line: {line}. Error: {ex.Message}");
                 }
             }
 
@@ -168,7 +197,7 @@ namespace TakoTea.Services
 
                     foreach (var stockData in productVariantStockData)
                     {
-                        var stockLevel = stockData.AvailableStock / stockData.QuantityPerVariant;
+                        var stockLevel = Math.Floor(stockData.AvailableStock / stockData.QuantityPerVariant); // Apply Math.Floor here
 
                         var productVariant = context.ProductVariants.FirstOrDefault(pv => pv.ProductVariantID == stockData.ProductVariantID);
                         if (productVariant != null)
@@ -182,7 +211,7 @@ namespace TakoTea.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error updating stock levels for all product variants: " + ex.Message);
+                MessageBox.Show("Error updating stock levels for all product variants: " + ex.Message);
             }
         }
 

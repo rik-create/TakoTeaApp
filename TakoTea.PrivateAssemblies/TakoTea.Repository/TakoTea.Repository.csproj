@@ -79,6 +79,7 @@
     <Compile Include="IngredientRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StockAdjustmentRepository.cs" />
+    <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TakoTea.Database\TakoTea.Database.csproj">

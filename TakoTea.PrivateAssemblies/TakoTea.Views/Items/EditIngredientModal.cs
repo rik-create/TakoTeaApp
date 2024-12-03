@@ -29,7 +29,6 @@ namespace TakoTea.View.Items.Item_Modals
             cmbAddOnFor.DataSource = products;  // Set the data source of the ComboBox
             cmbAddOnFor.DisplayMember = "ProductName";  // The name to display in the ComboBox
             cmbAddOnFor.ValueMember = "ProductID";
-            cmbAddOnFor.Visible = false;
         }
         private int _ingredientId;
 
@@ -70,6 +69,7 @@ namespace TakoTea.View.Items.Item_Modals
             cmbTypeOfIngredient.SelectedItem = ingredient.TypeOfIngredient;
             numericUpDownLowStockThreshold.Value = ingredient.LowLevel.Value;
             materialCheckedListBoxAllergens.Items.Clear();
+            chkIsAddOn.Checked = ingredient.IsAddOn ?? false;
             var allergens = ingredient.AllergyInformation.Split(new[] { '?' }, StringSplitOptions.RemoveEmptyEntries);
             foreach (var allergen in allergens)
             {
@@ -130,10 +130,14 @@ namespace TakoTea.View.Items.Item_Modals
 
             var addOn = context.AddOns.FirstOrDefault(a => a.IngredientID == ingredient.IngredientID);
 
-            addOn.AddOnName = txtBoxName.Text;
-            addOn.AdditionalPrice = numericUpDownAddOnPrice.Value;
-            addOn.UseForProductID = (int?)cmbAddOnFor.SelectedValue;
-            addOn.QuantityUsedPerProduct = numericUpDownQuantityUsedPerProduct.Value;
+            if (addOn != null)
+            {
+                // Update add-on details if it exists
+                addOn.AddOnName = txtBoxName.Text;
+                addOn.AdditionalPrice = numericUpDownAddOnPrice.Value;
+                addOn.UseForProductID = (int?)cmbAddOnFor.SelectedValue;
+                addOn.QuantityUsedPerProduct = numericUpDownQuantityUsedPerProduct.Value;
+            }
 
             try
             {
@@ -147,6 +151,7 @@ namespace TakoTea.View.Items.Item_Modals
                 MessageBox.Show($"Error updating ingredient: {ex.Message}");
             }
         }
+
 
         private void btnCancelEdit_Click(object sender, EventArgs e)
         {

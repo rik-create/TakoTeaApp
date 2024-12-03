@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="TakoTeaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ActivityLogs">
+          <Key>
+            <PropertyRef Name="ActivityLogId" />
+          </Key>
+          <Property Name="ActivityLogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActivityType" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="text" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="AddOns">
           <Key>
             <PropertyRef Name="Id" />
@@ -30,6 +40,7 @@
           <Property Name="Supplier" Type="varchar" MaxLength="255" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="BatchCost" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="InitialStockLevel" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="ComboMeals">
           <Key>
@@ -117,6 +128,20 @@
           <Property Name="IngredientID" Type="int" />
           <Property Name="ProductID" Type="int" />
         </EntityType>
+        <EntityType Name="Logs">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TableName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="RecordID" Type="int" Nullable="false" />
+          <Property Name="ColumnName" Type="varchar" MaxLength="255" />
+          <Property Name="OldValue" Type="varchar(max)" />
+          <Property Name="NewValue" Type="varchar(max)" />
+          <Property Name="Action" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="OrderItem">
           <Key>
             <PropertyRef Name="OrderItemId" />
@@ -132,6 +157,7 @@
           <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="AddOns" Type="varchar(max)" />
           <Property Name="Size" Type="nchar" MaxLength="50" />
+          <Property Name="GrossProfit" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="OrderModel">
           <Key>
@@ -148,6 +174,16 @@
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="OrderStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GrossProfit" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="PaymentMethods">
+          <Key>
+            <PropertyRef Name="PaymentMethodID" />
+          </Key>
+          <Property Name="PaymentMethodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MethodName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="text" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -208,6 +244,20 @@
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="SettingsID" />
+          </Key>
+          <Property Name="SettingsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LowStockThreshold" Type="varchar" MaxLength="50" />
+          <Property Name="LowStockFrequency" Type="varchar" MaxLength="50" />
+          <Property Name="EnableEmailNotifications" Type="bit" />
+          <Property Name="EnableInAppNotifications" Type="bit" />
+          <Property Name="BackupDestination" Type="varchar" MaxLength="255" />
+          <Property Name="BackupSchedule" Type="varchar" MaxLength="50" />
+          <Property Name="SavedEmails" Type="varchar(max)" />
+          <Property Name="LastBackUpDate" Type="datetime2" Precision="7" />
+        </EntityType>
         <EntityType Name="StockAdjustmentLog">
           <Key>
             <PropertyRef Name="StockAdjustmentID" />
@@ -234,6 +284,17 @@
           <Property Name="Action" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Timestamp" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <Association Name="FK__Batch__Ingredien__6CD828CA">
           <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -248,15 +309,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ComboMeal__Combo__14270015">
-          <End Role="ComboMeals" Type="Self.ComboMeals" Multiplicity="0..1" />
-          <End Role="ComboMealVariants" Type="Self.ComboMealVariants" Multiplicity="*" />
+        <Association Name="FK__Ingredien__Ingre__3B75D760">
+          <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="IngredientChangeLogs" Type="Self.IngredientChangeLogs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ComboMeals">
-              <PropertyRef Name="ComboMealID" />
+            <Principal Role="Ingredient">
+              <PropertyRef Name="IngredientID" />
             </Principal>
-            <Dependent Role="ComboMealVariants">
-              <PropertyRef Name="ComboMealID" />
+            <Dependent Role="IngredientChangeLogs">
+              <PropertyRef Name="IngredientID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -270,18 +333,6 @@
               <PropertyRef Name="IngredientID" />
             </Principal>
             <Dependent Role="IngredientProductLink">
-              <PropertyRef Name="IngredientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Ingredien__Ingre__756D6ECB">
-          <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="1" />
-          <End Role="IngredientChangeLogs" Type="Self.IngredientChangeLogs" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ingredient">
-              <PropertyRef Name="IngredientID" />
-            </Principal>
-            <Dependent Role="IngredientChangeLogs">
               <PropertyRef Name="IngredientID" />
             </Dependent>
           </ReferentialConstraint>
@@ -366,20 +417,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StockLeve__Batch__58D1301D">
-          <End Role="Batch" Type="Self.Batch" Multiplicity="1" />
-          <End Role="StockLevelLogs" Type="Self.StockLevelLogs" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Batch">
-              <PropertyRef Name="BatchID" />
-            </Principal>
-            <Dependent Role="StockLevelLogs">
-              <PropertyRef Name="BatchID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StockLeve__Ingre__6DCC4D03">
-          <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="1" />
+        <Association Name="FK__StockLeve__Ingredient__58D1301D">
+          <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StockLevelLogs" Type="Self.StockLevelLogs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Ingredient">
@@ -391,9 +432,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AddOns_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="AddOns" Type="Self.AddOns" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
@@ -404,15 +443,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ComboMealVariants_ProductVariantID">
-          <End Role="ProductVariants" Type="Self.ProductVariants" Multiplicity="0..1" />
+        <Association Name="FK_ComboMealDetails_ComboMeals">
+          <End Role="ComboMeals" Type="Self.ComboMeals" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ComboMealVariants" Type="Self.ComboMealVariants" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ProductVariants">
-              <PropertyRef Name="ProductVariantID" />
+            <Principal Role="ComboMeals">
+              <PropertyRef Name="ComboMealID" />
             </Principal>
             <Dependent Role="ComboMealVariants">
-              <PropertyRef Name="ProductVariantID" />
+              <PropertyRef Name="ComboMealID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -455,6 +496,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="TakoTeaModelStoreContainer">
+          <EntitySet Name="ActivityLogs" EntityType="Self.ActivityLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AddOns" EntityType="Self.AddOns" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Batch" EntityType="Self.Batch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ComboMeals" EntityType="Self.ComboMeals" Schema="dbo" store:Type="Tables" />
@@ -464,30 +506,30 @@
           <EntitySet Name="Ingredient" EntityType="Self.Ingredient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IngredientChangeLogs" EntityType="Self.IngredientChangeLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IngredientProductLink" EntityType="Self.IngredientProductLink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderItem" EntityType="Self.OrderItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderModel" EntityType="Self.OrderModel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethods" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductVariantIngredients" EntityType="Self.ProductVariantIngredients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductVariants" EntityType="Self.ProductVariants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Receipt" EntityType="Self.Receipt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockAdjustmentLog" EntityType="Self.StockAdjustmentLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockLevelLogs" EntityType="Self.StockLevelLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Batch__Ingredien__6CD828CA" Association="Self.FK__Batch__Ingredien__6CD828CA">
             <End Role="Ingredient" EntitySet="Ingredient" />
             <End Role="Batch" EntitySet="Batch" />
           </AssociationSet>
-          <AssociationSet Name="FK__ComboMeal__Combo__14270015" Association="Self.FK__ComboMeal__Combo__14270015">
-            <End Role="ComboMeals" EntitySet="ComboMeals" />
-            <End Role="ComboMealVariants" EntitySet="ComboMealVariants" />
+          <AssociationSet Name="FK__Ingredien__Ingre__3B75D760" Association="Self.FK__Ingredien__Ingre__3B75D760">
+            <End Role="Ingredient" EntitySet="Ingredient" />
+            <End Role="IngredientChangeLogs" EntitySet="IngredientChangeLogs" />
           </AssociationSet>
           <AssociationSet Name="FK__Ingredien__Ingre__6EC0713C" Association="Self.FK__Ingredien__Ingre__6EC0713C">
             <End Role="Ingredient" EntitySet="Ingredient" />
             <End Role="IngredientProductLink" EntitySet="IngredientProductLink" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Ingredien__Ingre__756D6ECB" Association="Self.FK__Ingredien__Ingre__756D6ECB">
-            <End Role="Ingredient" EntitySet="Ingredient" />
-            <End Role="IngredientChangeLogs" EntitySet="IngredientChangeLogs" />
           </AssociationSet>
           <AssociationSet Name="FK__Ingredien__Produ__60A75C0F" Association="Self.FK__Ingredien__Produ__60A75C0F">
             <End Role="Product" EntitySet="Product" />
@@ -513,11 +555,7 @@
             <End Role="Ingredient" EntitySet="Ingredient" />
             <End Role="StockAdjustmentLog" EntitySet="StockAdjustmentLog" />
           </AssociationSet>
-          <AssociationSet Name="FK__StockLeve__Batch__58D1301D" Association="Self.FK__StockLeve__Batch__58D1301D">
-            <End Role="Batch" EntitySet="Batch" />
-            <End Role="StockLevelLogs" EntitySet="StockLevelLogs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StockLeve__Ingre__6DCC4D03" Association="Self.FK__StockLeve__Ingre__6DCC4D03">
+          <AssociationSet Name="FK__StockLeve__Ingredient__58D1301D" Association="Self.FK__StockLeve__Ingredient__58D1301D">
             <End Role="Ingredient" EntitySet="Ingredient" />
             <End Role="StockLevelLogs" EntitySet="StockLevelLogs" />
           </AssociationSet>
@@ -525,8 +563,8 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="AddOns" EntitySet="AddOns" />
           </AssociationSet>
-          <AssociationSet Name="FK_ComboMealVariants_ProductVariantID" Association="Self.FK_ComboMealVariants_ProductVariantID">
-            <End Role="ProductVariants" EntitySet="ProductVariants" />
+          <AssociationSet Name="FK_ComboMealDetails_ComboMeals" Association="Self.FK_ComboMealDetails_ComboMeals">
+            <End Role="ComboMeals" EntitySet="ComboMeals" />
             <End Role="ComboMealVariants" EntitySet="ComboMealVariants" />
           </AssociationSet>
           <AssociationSet Name="FK_DraftOrderItem_DraftOrder" Association="Self.FK_DraftOrderItem_DraftOrder">
@@ -704,6 +742,11 @@
             <End Role="Batch" EntitySet="Batches" />
             <End Role="StockLevelLog" EntitySet="StockLevelLogs" />
           </AssociationSet>
+          <EntitySet Name="PaymentMethods" EntityType="TakoTeaModel.PaymentMethod" />
+          <EntitySet Name="Users" EntityType="TakoTeaModel.User" />
+          <EntitySet Name="Settings" EntityType="TakoTeaModel.Setting" />
+          <EntitySet Name="ActivityLogs" EntityType="TakoTeaModel.ActivityLog" />
+          <EntitySet Name="Logs" EntityType="TakoTeaModel.Log" />
         </EntityContainer>
         <EntityType Name="ProductVariantIngredient">
           <Key>
@@ -783,6 +826,7 @@
           <Property Name="AddOns" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="OrderModel" Relationship="TakoTeaModel.FK_OrderItem_Order1" FromRole="OrderItem" ToRole="OrderModel" />
           <Property Name="Size" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="GrossProfit" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Receipt">
           <Key>
@@ -818,6 +862,7 @@
           <NavigationProperty Name="OrderItems" Relationship="TakoTeaModel.FK_OrderItem_Order1" FromRole="OrderModel" ToRole="OrderItem" />
           <NavigationProperty Name="Receipts" Relationship="TakoTeaModel.FK_Receipt_Order1" FromRole="OrderModel" ToRole="Receipt" />
           <Property Name="OrderStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GrossProfit" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <Association Name="FK_OrderItem_Order1">
           <End Type="TakoTeaModel.OrderModel" Role="OrderModel" Multiplicity="1" />
@@ -1088,6 +1133,7 @@
           <Property Name="BatchCost" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <NavigationProperty Name="Ingredient" Relationship="TakoTeaModel.FK__Batch__Ingredien__6CD828CA" FromRole="Batch" ToRole="Ingredient" />
           <NavigationProperty Name="StockLevelLogs" Relationship="TakoTeaModel.FK__StockLeve__Batch__58D1301D" FromRole="Batch" ToRole="StockLevelLog" />
+          <Property Name="InitialStockLevel" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
         <Association Name="FK__Batch__Ingredien__6CD828CA">
           <End Type="TakoTeaModel.Ingredient" Role="Ingredient" Multiplicity="0..1">
@@ -1115,6 +1161,64 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PaymentMethod">
+          <Key>
+            <PropertyRef Name="PaymentMethodID" />
+          </Key>
+          <Property Name="PaymentMethodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MethodName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="SettingsID" />
+          </Key>
+          <Property Name="SettingsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LowStockThreshold" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LowStockFrequency" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EnableEmailNotifications" Type="Boolean" />
+          <Property Name="EnableInAppNotifications" Type="Boolean" />
+          <Property Name="BackupDestination" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BackupSchedule" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SavedEmails" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LastBackUpDate" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="ActivityLog">
+          <Key>
+            <PropertyRef Name="ActivityLogId" />
+          </Key>
+          <Property Name="ActivityLogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActivityType" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TableName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RecordID" Type="Int32" Nullable="false" />
+          <Property Name="ColumnName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="OldValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NewValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Action" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1213,6 +1317,7 @@
           <EntitySetMapping Name="OrderItems">
             <EntityTypeMapping TypeName="TakoTeaModel.OrderItem">
               <MappingFragment StoreEntitySet="OrderItem">
+                <ScalarProperty Name="GrossProfit" ColumnName="GrossProfit" />
                 <ScalarProperty Name="Size" ColumnName="Size" />
                 <ScalarProperty Name="AddOns" ColumnName="AddOns" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -1247,6 +1352,7 @@
           <EntitySetMapping Name="OrderModels">
             <EntityTypeMapping TypeName="TakoTeaModel.OrderModel">
               <MappingFragment StoreEntitySet="OrderModel">
+                <ScalarProperty Name="GrossProfit" ColumnName="GrossProfit" />
                 <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
@@ -1355,6 +1461,7 @@
           <EntitySetMapping Name="Batches">
             <EntityTypeMapping TypeName="TakoTeaModel.Batch">
               <MappingFragment StoreEntitySet="Batch">
+                <ScalarProperty Name="InitialStockLevel" ColumnName="InitialStockLevel" />
                 <ScalarProperty Name="BatchCost" ColumnName="BatchCost" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Supplier" ColumnName="Supplier" />
@@ -1365,6 +1472,69 @@
                 <ScalarProperty Name="IngredientID" ColumnName="IngredientID" />
                 <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
                 <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentMethods">
+            <EntityTypeMapping TypeName="TakoTeaModel.PaymentMethod">
+              <MappingFragment StoreEntitySet="PaymentMethods">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="MethodName" ColumnName="MethodName" />
+                <ScalarProperty Name="PaymentMethodID" ColumnName="PaymentMethodID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TakoTeaModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="TakoTeaModel.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="LastBackUpDate" ColumnName="LastBackUpDate" />
+                <ScalarProperty Name="SavedEmails" ColumnName="SavedEmails" />
+                <ScalarProperty Name="BackupSchedule" ColumnName="BackupSchedule" />
+                <ScalarProperty Name="BackupDestination" ColumnName="BackupDestination" />
+                <ScalarProperty Name="EnableInAppNotifications" ColumnName="EnableInAppNotifications" />
+                <ScalarProperty Name="EnableEmailNotifications" ColumnName="EnableEmailNotifications" />
+                <ScalarProperty Name="LowStockFrequency" ColumnName="LowStockFrequency" />
+                <ScalarProperty Name="LowStockThreshold" ColumnName="LowStockThreshold" />
+                <ScalarProperty Name="SettingsID" ColumnName="SettingsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActivityLogs">
+            <EntityTypeMapping TypeName="TakoTeaModel.ActivityLog">
+              <MappingFragment StoreEntitySet="ActivityLogs">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ActivityType" ColumnName="ActivityType" />
+                <ScalarProperty Name="ActivityLogId" ColumnName="ActivityLogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="TakoTeaModel.Log">
+              <MappingFragment StoreEntitySet="Logs">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="NewValue" ColumnName="NewValue" />
+                <ScalarProperty Name="OldValue" ColumnName="OldValue" />
+                <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+                <ScalarProperty Name="RecordID" ColumnName="RecordID" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

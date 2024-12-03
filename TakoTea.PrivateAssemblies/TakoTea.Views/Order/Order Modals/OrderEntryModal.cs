@@ -37,7 +37,7 @@ namespace TakoTea.Views.Order.Order_Modals
             chckListBoxAddOns.ItemCheck += chckListBoxAddOns_ItemCheck;
 
             chckListBoxAddOns.CheckOnClick = true;
-            numericUpDownQuantity.Minimum = 1;
+            numericUpDownQuantity.Minimum = 0;
             // ... rest of the code ...
 
         }

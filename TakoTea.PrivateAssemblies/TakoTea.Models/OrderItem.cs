@@ -25,6 +25,7 @@ namespace TakoTea.Models
         public System.DateTime CreatedDate { get; set; }
         public string AddOns { get; set; }
         public string Size { get; set; }
+        public Nullable<decimal> GrossProfit { get; set; }
     
         public virtual OrderModel OrderModel { get; set; }
     }

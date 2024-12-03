@@ -88,7 +88,8 @@ namespace TakoTea.View.Items.Item_Modals
                             AddOnName = txtBoxName.Text,
                             AdditionalPrice = numericUpDownAddOnPrice.Value,
                             UseForProductID = (int)cmbAddOnFor.SelectedValue,
-                            IngredientID = _inventoryService.GetNextIngredientId()
+                            IngredientID = _inventoryService.GetNextIngredientId(),
+                            QuantityUsedPerProduct = numericUpDownQuantityUsedPerProduct.Value
                         };
 
                         _inventoryService.AddAddon(addOn);
@@ -105,7 +106,8 @@ namespace TakoTea.View.Items.Item_Modals
                         TypeOfIngredient = cmbTypeOfIngredient.SelectedItem?.ToString() ?? "",
                         IsActive = true,
                         MeasuringUnit = cmbMeasuringUnit.SelectedItem?.ToString() ?? "",
-                        AllergyInformation = string.Join(", ", CheckedListBoxHelper.GetCheckedItemsFromIterator(materialCheckedListBoxAllergens))
+                        AllergyInformation = string.Join(", ", CheckedListBoxHelper.GetCheckedItemsFromIterator(materialCheckedListBoxAllergens)),
+                        LowLevel = numericUpDownLowStockThreshold.Value
                     };
 
                     _inventoryService.AddIngredient(ingredient);

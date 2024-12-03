@@ -53,16 +53,16 @@
             this.panelBatch = new System.Windows.Forms.Panel();
             this.tabPageReports = new System.Windows.Forms.TabPage();
             this.panelReports = new System.Windows.Forms.Panel();
-            this.tabPageSettings = new System.Windows.Forms.TabPage();
-            this.panelSettings = new System.Windows.Forms.Panel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.miniToolStrip = new System.Windows.Forms.MenuStrip();
             this.toolStripQuickAccess = new System.Windows.Forms.ToolStrip();
             this.toolStripBtnNewOrder = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnAddIngredient = new System.Windows.Forms.ToolStripButton();
-            this.buttonQuickAccess = new System.Windows.Forms.Button();
             this.toolStripBtnAddProduct = new System.Windows.Forms.ToolStripButton();
+            this.btnReload = new MaterialSkin.Controls.MaterialButton();
+            this.buttonQuickAccess = new MaterialSkin.Controls.MaterialButton();
+            this.pictureBoxSettings = new System.Windows.Forms.PictureBox();
             this.materialTabControl1.SuspendLayout();
             this.tabPageDashboard.SuspendLayout();
             this.menuStripDashboardSections.SuspendLayout();
@@ -75,8 +75,8 @@
             this.menuStripStocks.SuspendLayout();
             this.tabPageBatch.SuspendLayout();
             this.tabPageReports.SuspendLayout();
-            this.tabPageSettings.SuspendLayout();
             this.toolStripQuickAccess.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).BeginInit();
             this.SuspendLayout();
             // 
             // materialTabControl1
@@ -89,7 +89,6 @@
             this.materialTabControl1.Controls.Add(this.tabPageStock);
             this.materialTabControl1.Controls.Add(this.tabPageBatch);
             this.materialTabControl1.Controls.Add(this.tabPageReports);
-            this.materialTabControl1.Controls.Add(this.tabPageSettings);
             this.materialTabControl1.Depth = 0;
             this.materialTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.materialTabControl1.ImageList = this.imageList1;
@@ -346,25 +345,6 @@
             this.panelReports.Size = new System.Drawing.Size(1302, 648);
             this.panelReports.TabIndex = 2;
             // 
-            // tabPageSettings
-            // 
-            this.tabPageSettings.Controls.Add(this.panelSettings);
-            this.tabPageSettings.ImageKey = "settings.png";
-            this.tabPageSettings.Location = new System.Drawing.Point(4, 42);
-            this.tabPageSettings.Name = "tabPageSettings";
-            this.tabPageSettings.Size = new System.Drawing.Size(1302, 648);
-            this.tabPageSettings.TabIndex = 7;
-            this.tabPageSettings.Text = "Settings";
-            this.tabPageSettings.UseVisualStyleBackColor = true;
-            // 
-            // panelSettings
-            // 
-            this.panelSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSettings.Location = new System.Drawing.Point(0, 0);
-            this.panelSettings.Name = "panelSettings";
-            this.panelSettings.Size = new System.Drawing.Size(1302, 648);
-            this.panelSettings.TabIndex = 2;
-            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
@@ -418,7 +398,7 @@
             this.toolStripBtnNewOrder.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripBtnNewOrder.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtnNewOrder.Name = "toolStripBtnNewOrder";
-            this.toolStripBtnNewOrder.Size = new System.Drawing.Size(151, 25);
+            this.toolStripBtnNewOrder.Size = new System.Drawing.Size(195, 25);
             this.toolStripBtnNewOrder.Text = "New Order";
             this.toolStripBtnNewOrder.ToolTipText = "New Order";
             this.toolStripBtnNewOrder.Click += new System.EventHandler(this.toolStripBtnNewOrder_Click);
@@ -428,19 +408,9 @@
             this.toolStripBtnAddIngredient.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.toolStripBtnAddIngredient.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtnAddIngredient.Name = "toolStripBtnAddIngredient";
-            this.toolStripBtnAddIngredient.Size = new System.Drawing.Size(151, 25);
+            this.toolStripBtnAddIngredient.Size = new System.Drawing.Size(195, 25);
             this.toolStripBtnAddIngredient.Text = "Add New IngredientModel";
             this.toolStripBtnAddIngredient.Click += new System.EventHandler(this.toolStripBtnAddIngredient_Click);
-            // 
-            // buttonQuickAccess
-            // 
-            this.buttonQuickAccess.Location = new System.Drawing.Point(1200, 40);
-            this.buttonQuickAccess.Name = "buttonQuickAccess";
-            this.buttonQuickAccess.Size = new System.Drawing.Size(100, 23);
-            this.buttonQuickAccess.TabIndex = 6;
-            this.buttonQuickAccess.Text = "Quick Access";
-            this.buttonQuickAccess.UseVisualStyleBackColor = true;
-            this.buttonQuickAccess.Click += new System.EventHandler(this.button1_Click);
             // 
             // toolStripBtnAddProduct
             // 
@@ -448,9 +418,61 @@
             this.toolStripBtnAddProduct.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.toolStripBtnAddProduct.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtnAddProduct.Name = "toolStripBtnAddProduct";
-            this.toolStripBtnAddProduct.Size = new System.Drawing.Size(151, 25);
+            this.toolStripBtnAddProduct.Size = new System.Drawing.Size(195, 25);
             this.toolStripBtnAddProduct.Text = "Add New Product";
             this.toolStripBtnAddProduct.Click += new System.EventHandler(this.toolStripBtnAddProduct_Click);
+            // 
+            // btnReload
+            // 
+            this.btnReload.AutoSize = false;
+            this.btnReload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnReload.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnReload.Depth = 0;
+            this.btnReload.HighEmphasis = true;
+            this.btnReload.Icon = null;
+            this.btnReload.Location = new System.Drawing.Point(1096, 40);
+            this.btnReload.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnReload.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnReload.Name = "btnReload";
+            this.btnReload.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnReload.Size = new System.Drawing.Size(75, 28);
+            this.btnReload.TabIndex = 0;
+            this.btnReload.Text = "Reload";
+            this.btnReload.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
+            this.btnReload.UseAccentColor = true;
+            this.btnReload.UseVisualStyleBackColor = true;
+            // 
+            // buttonQuickAccess
+            // 
+            this.buttonQuickAccess.AutoSize = false;
+            this.buttonQuickAccess.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonQuickAccess.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.buttonQuickAccess.Depth = 0;
+            this.buttonQuickAccess.HighEmphasis = true;
+            this.buttonQuickAccess.Icon = null;
+            this.buttonQuickAccess.Location = new System.Drawing.Point(1176, 40);
+            this.buttonQuickAccess.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.buttonQuickAccess.MouseState = MaterialSkin.MouseState.HOVER;
+            this.buttonQuickAccess.Name = "buttonQuickAccess";
+            this.buttonQuickAccess.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.buttonQuickAccess.Size = new System.Drawing.Size(123, 28);
+            this.buttonQuickAccess.TabIndex = 7;
+            this.buttonQuickAccess.Text = "Quick Access";
+            this.buttonQuickAccess.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
+            this.buttonQuickAccess.UseAccentColor = true;
+            this.buttonQuickAccess.UseVisualStyleBackColor = true;
+            // 
+            // pictureBoxSettings
+            // 
+            this.pictureBoxSettings.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBoxSettings.Image = global::TakoTea.Views.Properties.Resources.settings;
+            this.pictureBoxSettings.Location = new System.Drawing.Point(1056, 40);
+            this.pictureBoxSettings.Name = "pictureBoxSettings";
+            this.pictureBoxSettings.Size = new System.Drawing.Size(32, 32);
+            this.pictureBoxSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxSettings.TabIndex = 8;
+            this.pictureBoxSettings.TabStop = false;
+            this.pictureBoxSettings.Click += new System.EventHandler(this.pictureBoxSettings_Click);
             // 
             // TakoTeaForm
             // 
@@ -458,7 +480,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(1313, 774);
+            this.Controls.Add(this.pictureBoxSettings);
             this.Controls.Add(this.buttonQuickAccess);
+            this.Controls.Add(this.btnReload);
             this.Controls.Add(this.toolStripQuickAccess);
             this.Controls.Add(this.materialTabControl1);
             this.DrawerHighlightWithAccent = false;
@@ -490,11 +514,12 @@
             this.menuStripStocks.PerformLayout();
             this.tabPageBatch.ResumeLayout(false);
             this.tabPageReports.ResumeLayout(false);
-            this.tabPageSettings.ResumeLayout(false);
             this.toolStripQuickAccess.ResumeLayout(false);
             this.toolStripQuickAccess.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
         #endregion
         private System.Windows.Forms.TabPage tabPageSales;
@@ -502,12 +527,10 @@
         private System.Windows.Forms.TabPage tabPageStock;
         private System.Windows.Forms.TabPage tabPageBatch;
         private System.Windows.Forms.TabPage tabPageReports;
-        private System.Windows.Forms.TabPage tabPageSettings;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Panel panelSales;
         private System.Windows.Forms.Panel panelBatch;
         private System.Windows.Forms.Panel panelReports;
-        private System.Windows.Forms.Panel panelSettings;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.TabPage tabPageDashboard;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemMainOverview;
@@ -531,7 +554,9 @@
         private System.Windows.Forms.ToolStrip toolStripQuickAccess;
         private System.Windows.Forms.ToolStripButton toolStripBtnNewOrder;
         private System.Windows.Forms.ToolStripButton toolStripBtnAddIngredient;
-        private System.Windows.Forms.Button buttonQuickAccess;
         private System.Windows.Forms.ToolStripButton toolStripBtnAddProduct;
+        private MaterialSkin.Controls.MaterialButton btnReload;
+        private MaterialSkin.Controls.MaterialButton buttonQuickAccess;
+        private System.Windows.Forms.PictureBox pictureBoxSettings;
     }
 }

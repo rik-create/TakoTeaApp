@@ -56,6 +56,7 @@
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).BeginInit();
             this.materialCard2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -67,6 +68,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbCompleted)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCancelled)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // miniToolStrip
@@ -270,9 +272,9 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgViewOrderQueue.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgViewOrderQueue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgViewOrderQueue.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgViewOrderQueue.EnableHeadersVisualStyles = false;
-            this.dgViewOrderQueue.Location = new System.Drawing.Point(0, 0);
+            this.dgViewOrderQueue.Location = new System.Drawing.Point(0, 32);
             this.dgViewOrderQueue.Name = "dgViewOrderQueue";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
@@ -282,7 +284,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgViewOrderQueue.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgViewOrderQueue.Size = new System.Drawing.Size(1125, 519);
+            this.dgViewOrderQueue.Size = new System.Drawing.Size(1125, 487);
             this.dgViewOrderQueue.TabIndex = 5;
             // 
             // panel3
@@ -338,6 +340,7 @@
             this.pbCancelled.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbCancelled.TabIndex = 96;
             this.pbCancelled.TabStop = false;
+            this.pbCancelled.Click += new System.EventHandler(this.pbCancelled_Click_1);
             // 
             // cmbStatus
             // 
@@ -437,6 +440,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbCancelled)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -467,5 +471,6 @@
         private System.Windows.Forms.PictureBox pbCompleted;
         private System.Windows.Forms.PictureBox pbCancelled;
         private MaterialSkin.Controls.MaterialButton btnProcessOrder;
+        private System.Windows.Forms.BindingSource bindingSource1;
     }
 }
