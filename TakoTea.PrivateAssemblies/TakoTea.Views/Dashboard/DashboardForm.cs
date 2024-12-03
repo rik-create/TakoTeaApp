@@ -34,6 +34,7 @@ namespace TakoTea.Views.Dashboard
             salesService = new SalesService(context);
             ingredientRepository = new IngredientRepository(context);
             ThemeConfigurator.ApplyDarkTheme(this);
+            FormSettingsConfigurator.ApplyStandardFormSettings(this);   
             LoadDashboard();
             InitializeGrossRevenueChart(DateTime.Now.AddYears(-7), DateTime.Now);
             InitializeSalesPerProductChart(DateTime.Now.AddYears(-1), DateTime.Now);

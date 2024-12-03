@@ -116,11 +116,12 @@
             // 
             // panelDashboard
             // 
+            this.panelDashboard.AutoScroll = true;
             this.panelDashboard.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panelDashboard.Location = new System.Drawing.Point(190, 30);
             this.panelDashboard.Margin = new System.Windows.Forms.Padding(0);
             this.panelDashboard.Name = "panelDashboard";
-            this.panelDashboard.Size = new System.Drawing.Size(930, 450);
+            this.panelDashboard.Size = new System.Drawing.Size(930, 694);
             this.panelDashboard.TabIndex = 3;
             // 
             // menuStripDashboardSections
