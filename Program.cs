@@ -12,6 +12,7 @@ using TakoTea.Views.mainform;
 using TakoTea.Views.MainForm;
 using TakoTea.Views.Order.Order_Modals;
 using TakoTea.Views.Other;
+using TakoTea.Views.reports;
 using TakoTea.Views.settings;
 namespace TakoTea
 {
@@ -25,7 +26,7 @@ namespace TakoTea
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TakoTeaForm());
+            Application.Run(new ReportingForm());
             /*      // Register the dependency in the DI container
                   services.AddSingleton<IFormFactory, TakoTea.Views.FormFactory>();
                   services.AddTransient<FormLoader>();

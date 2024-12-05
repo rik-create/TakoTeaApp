@@ -14,6 +14,8 @@ using System.Data.Entity;
 
 namespace TakoTea.Views.Order.Order_Modals
 {
+
+    //TODO ADD PRINTING FUNCTIONALITY and sending to email
     public partial class ReceiptForm : Form
     {
 
