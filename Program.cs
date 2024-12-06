@@ -26,7 +26,7 @@ namespace TakoTea
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ReportingForm());
+            Application.Run(new SalesListForm());
             /*      // Register the dependency in the DI container
                   services.AddSingleton<IFormFactory, TakoTea.Views.FormFactory>();
                   services.AddTransient<FormLoader>();
