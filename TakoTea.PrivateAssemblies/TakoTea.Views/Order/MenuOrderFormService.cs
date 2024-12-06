@@ -690,7 +690,7 @@ namespace TakoTea.Views.Order
 
         public void SendDigitalReceipt(int orderId, string customerEmail)
         {
-
+            //
             string receiptContent = GenerateReceiptContent(orderId);    
             ReceiptForm receiptForm = new ReceiptForm(orderId); // Assuming ReceiptForm has a constructor that takes orderId
     receiptForm.lblReceiptContent.Text = receiptContent.ToString();
