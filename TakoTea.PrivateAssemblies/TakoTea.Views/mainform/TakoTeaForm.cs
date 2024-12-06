@@ -253,7 +253,7 @@ namespace TakoTea.Views.MainForm
                     break;
                 case "Reports":
                     targetPanel = panelReports;
-                    Text = "TakoTea Reports";
+                    Text = "TakoTea Logs";
                     break;
          
                 default:
@@ -369,8 +369,8 @@ namespace TakoTea.Views.MainForm
         }
         private void toolStripBtnAddProduct_Click(object sender, EventArgs e)
         {
-            /*   AddProductModal addProductModal = new AddProductModal();
-               _ = addProductModal.ShowDialog();*/
+            AddProductModal addProductModal = new AddProductModal();
+            _ = addProductModal.ShowDialog();
         }
 
         private void btnReload_Click(object sender, EventArgs e)

@@ -333,7 +333,7 @@
             this.tabPageReports.Name = "tabPageReports";
             this.tabPageReports.Size = new System.Drawing.Size(1302, 648);
             this.tabPageReports.TabIndex = 6;
-            this.tabPageReports.Text = "Reports";
+            this.tabPageReports.Text = "Logs";
             this.tabPageReports.UseVisualStyleBackColor = true;
             // 
             // panelReports
@@ -397,7 +397,7 @@
             this.toolStripBtnNewOrder.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripBtnNewOrder.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtnNewOrder.Name = "toolStripBtnNewOrder";
-            this.toolStripBtnNewOrder.Size = new System.Drawing.Size(195, 25);
+            this.toolStripBtnNewOrder.Size = new System.Drawing.Size(151, 25);
             this.toolStripBtnNewOrder.Text = "New Order";
             this.toolStripBtnNewOrder.ToolTipText = "New Order";
             this.toolStripBtnNewOrder.Click += new System.EventHandler(this.toolStripBtnNewOrder_Click);
@@ -407,8 +407,8 @@
             this.toolStripBtnAddIngredient.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.toolStripBtnAddIngredient.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtnAddIngredient.Name = "toolStripBtnAddIngredient";
-            this.toolStripBtnAddIngredient.Size = new System.Drawing.Size(195, 25);
-            this.toolStripBtnAddIngredient.Text = "Add New IngredientModel";
+            this.toolStripBtnAddIngredient.Size = new System.Drawing.Size(151, 25);
+            this.toolStripBtnAddIngredient.Text = "Add New Ingredient";
             this.toolStripBtnAddIngredient.Click += new System.EventHandler(this.toolStripBtnAddIngredient_Click);
             // 
             // toolStripBtnAddProduct
@@ -417,7 +417,7 @@
             this.toolStripBtnAddProduct.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.toolStripBtnAddProduct.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtnAddProduct.Name = "toolStripBtnAddProduct";
-            this.toolStripBtnAddProduct.Size = new System.Drawing.Size(195, 25);
+            this.toolStripBtnAddProduct.Size = new System.Drawing.Size(151, 25);
             this.toolStripBtnAddProduct.Text = "Add New Product";
             this.toolStripBtnAddProduct.Click += new System.EventHandler(this.toolStripBtnAddProduct_Click);
             // 
@@ -451,7 +451,7 @@
             this.materialComboBoxQuickAccess.DropDownHeight = 118;
             this.materialComboBoxQuickAccess.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.materialComboBoxQuickAccess.DropDownWidth = 121;
-            this.materialComboBoxQuickAccess.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialComboBoxQuickAccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialComboBoxQuickAccess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialComboBoxQuickAccess.FormattingEnabled = true;
             this.materialComboBoxQuickAccess.IntegralHeight = false;
