@@ -15,13 +15,11 @@ namespace TakoTea.Models
     
     public partial class Entities : DbContext
     {
-
         public Entities()
-     : base("metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=\"Data Source=DESKTOP-0SJIGR5\\SQLEXPRESS;Initial Catalog=TakoTea;Integrated Security=True;\"")
+            : base("name=Entities")
         {
         }
-
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -50,5 +48,6 @@ namespace TakoTea.Models
         public virtual DbSet<Setting> Settings { get; set; }
         public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

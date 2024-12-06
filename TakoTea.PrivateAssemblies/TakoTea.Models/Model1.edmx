@@ -175,6 +175,8 @@
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="OrderStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="GrossProfit" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PaymentAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ChangeAmount" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="PaymentMethods">
           <Key>
@@ -283,6 +285,16 @@
           <Property Name="QuantityChanged" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Action" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Timestamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -457,6 +469,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ComboMealVariants_ProductVariants">
+          <End Role="ProductVariants" Type="Self.ProductVariants" Multiplicity="0..1" />
+          <End Role="ComboMealVariants" Type="Self.ComboMealVariants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductVariants">
+              <PropertyRef Name="ProductVariantID" />
+            </Principal>
+            <Dependent Role="ComboMealVariants">
+              <PropertyRef Name="ProductVariantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DraftOrderItem_DraftOrder">
           <End Role="DraftOrder" Type="Self.DraftOrder" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -472,7 +496,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderItem_Order">
-          <End Role="OrderModel" Type="Self.OrderModel" Multiplicity="1" />
+          <End Role="OrderModel" Type="Self.OrderModel" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="OrderModel">
@@ -518,6 +544,7 @@
           <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockAdjustmentLog" EntityType="Self.StockAdjustmentLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockLevelLogs" EntityType="Self.StockLevelLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Batch__Ingredien__6CD828CA" Association="Self.FK__Batch__Ingredien__6CD828CA">
             <End Role="Ingredient" EntitySet="Ingredient" />
@@ -565,6 +592,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_ComboMealDetails_ComboMeals" Association="Self.FK_ComboMealDetails_ComboMeals">
             <End Role="ComboMeals" EntitySet="ComboMeals" />
+            <End Role="ComboMealVariants" EntitySet="ComboMealVariants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComboMealVariants_ProductVariants" Association="Self.FK_ComboMealVariants_ProductVariants">
+            <End Role="ProductVariants" EntitySet="ProductVariants" />
             <End Role="ComboMealVariants" EntitySet="ComboMealVariants" />
           </AssociationSet>
           <AssociationSet Name="FK_DraftOrderItem_DraftOrder" Association="Self.FK_DraftOrderItem_DraftOrder">
@@ -747,6 +778,7 @@
           <EntitySet Name="Settings" EntityType="TakoTeaModel.Setting" />
           <EntitySet Name="ActivityLogs" EntityType="TakoTeaModel.ActivityLog" />
           <EntitySet Name="Logs" EntityType="TakoTeaModel.Log" />
+          <EntitySet Name="sysdiagrams" EntityType="TakoTeaModel.sysdiagram" />
         </EntityContainer>
         <EntityType Name="ProductVariantIngredient">
           <Key>
@@ -863,6 +895,8 @@
           <NavigationProperty Name="Receipts" Relationship="TakoTeaModel.FK_Receipt_Order1" FromRole="OrderModel" ToRole="Receipt" />
           <Property Name="OrderStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GrossProfit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PaymentAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ChangeAmount" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <Association Name="FK_OrderItem_Order1">
           <End Type="TakoTeaModel.OrderModel" Role="OrderModel" Multiplicity="1" />
@@ -1219,6 +1253,16 @@
           <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1352,6 +1396,8 @@
           <EntitySetMapping Name="OrderModels">
             <EntityTypeMapping TypeName="TakoTeaModel.OrderModel">
               <MappingFragment StoreEntitySet="OrderModel">
+                <ScalarProperty Name="ChangeAmount" ColumnName="ChangeAmount" />
+                <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
                 <ScalarProperty Name="GrossProfit" ColumnName="GrossProfit" />
                 <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
@@ -1535,6 +1581,17 @@
                 <ScalarProperty Name="RecordID" ColumnName="RecordID" />
                 <ScalarProperty Name="TableName" ColumnName="TableName" />
                 <ScalarProperty Name="LogID" ColumnName="LogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="TakoTeaModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

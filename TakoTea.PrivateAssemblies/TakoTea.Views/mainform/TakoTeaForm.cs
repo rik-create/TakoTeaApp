@@ -39,6 +39,19 @@ namespace TakoTea.Views.MainForm
             Instance = this;
             InitializeNotificationTimer();
             _context = new Entities();
+            // Assuming materialComboBoxQuickAccess is your ComboBox control
+
+            // Clear existing items (if any)
+            materialComboBoxQuickAccess.Items.Clear();
+
+            // Add the new items
+            materialComboBoxQuickAccess.Items.Add("Quick Access");
+            materialComboBoxQuickAccess.Items.Add("Reports");
+            materialComboBoxQuickAccess.Items.Add("Settings");
+            materialComboBoxQuickAccess.Items.Add("Reload");
+
+            // Optionally, set a default selected item
+            materialComboBoxQuickAccess.SelectedIndex = 0; // Selects "Quick Access" by default
         }
 
 
@@ -457,14 +470,45 @@ namespace TakoTea.Views.MainForm
 
         private void pictureBoxSettings_Click(object sender, EventArgs e)
         {
-            SettingsForm settingsForm = new SettingsForm();
-            settingsForm.ShowDialog();
+            
         }
 
         private void materialButton1_Click(object sender, EventArgs e)
         {
-            ReportingForm reportingForm = new ReportingForm();
-            reportingForm.Show();
+      
         }
+
+        private void materialComboBoxQuickAccess_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Get the selected item
+            string selectedItem = materialComboBoxQuickAccess.SelectedItem.ToString();
+
+            // Handle different selections
+            switch (selectedItem)
+            {
+                case "Quick Access":
+                    toolStripQuickAccess.Visible = !toolStripQuickAccess.Visible;
+                    toolStripQuickAccess.Enabled = toolStripQuickAccess.Visible;
+                    break;
+                case "Reports":
+                    ReportingForm reportingForm = new ReportingForm();
+                    reportingForm.Show();
+                    materialComboBoxQuickAccess.Text = "Other Module";
+                    break;
+                case "Settings":
+                    SettingsForm settingsForm = new SettingsForm();
+                    settingsForm.ShowDialog();
+                    materialComboBoxQuickAccess.Text = "Other Module";
+
+                    break;
+                case "Reload":
+                    btnReload_Click(sender, e);
+                    materialComboBoxQuickAccess.Text = "Other Module";
+
+                    break;
+             
+            }
+        }
+
     }
 }

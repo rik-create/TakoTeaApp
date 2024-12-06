@@ -60,10 +60,8 @@
             this.toolStripBtnNewOrder = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnAddIngredient = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnAddProduct = new System.Windows.Forms.ToolStripButton();
-            this.btnReload = new MaterialSkin.Controls.MaterialButton();
             this.buttonQuickAccess = new MaterialSkin.Controls.MaterialButton();
-            this.pictureBoxSettings = new System.Windows.Forms.PictureBox();
-            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
+            this.materialComboBoxQuickAccess = new MaterialSkin.Controls.MaterialComboBox();
             this.materialTabControl1.SuspendLayout();
             this.tabPageDashboard.SuspendLayout();
             this.menuStripDashboardSections.SuspendLayout();
@@ -77,7 +75,6 @@
             this.tabPageBatch.SuspendLayout();
             this.tabPageReports.SuspendLayout();
             this.toolStripQuickAccess.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).BeginInit();
             this.SuspendLayout();
             // 
             // materialTabControl1
@@ -424,27 +421,6 @@
             this.toolStripBtnAddProduct.Text = "Add New Product";
             this.toolStripBtnAddProduct.Click += new System.EventHandler(this.toolStripBtnAddProduct_Click);
             // 
-            // btnReload
-            // 
-            this.btnReload.AutoSize = false;
-            this.btnReload.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnReload.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnReload.Depth = 0;
-            this.btnReload.HighEmphasis = true;
-            this.btnReload.Icon = null;
-            this.btnReload.Location = new System.Drawing.Point(1096, 40);
-            this.btnReload.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnReload.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnReload.Name = "btnReload";
-            this.btnReload.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnReload.Size = new System.Drawing.Size(75, 28);
-            this.btnReload.TabIndex = 0;
-            this.btnReload.Text = "Reload";
-            this.btnReload.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
-            this.btnReload.UseAccentColor = true;
-            this.btnReload.UseVisualStyleBackColor = true;
-            this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
-            // 
             // buttonQuickAccess
             // 
             this.buttonQuickAccess.AutoSize = false;
@@ -453,12 +429,12 @@
             this.buttonQuickAccess.Depth = 0;
             this.buttonQuickAccess.HighEmphasis = true;
             this.buttonQuickAccess.Icon = null;
-            this.buttonQuickAccess.Location = new System.Drawing.Point(1176, 40);
+            this.buttonQuickAccess.Location = new System.Drawing.Point(1176, 32);
             this.buttonQuickAccess.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.buttonQuickAccess.MouseState = MaterialSkin.MouseState.HOVER;
             this.buttonQuickAccess.Name = "buttonQuickAccess";
             this.buttonQuickAccess.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.buttonQuickAccess.Size = new System.Drawing.Size(123, 28);
+            this.buttonQuickAccess.Size = new System.Drawing.Size(123, 36);
             this.buttonQuickAccess.TabIndex = 7;
             this.buttonQuickAccess.Text = "Quick Access";
             this.buttonQuickAccess.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
@@ -466,38 +442,29 @@
             this.buttonQuickAccess.UseVisualStyleBackColor = true;
             this.buttonQuickAccess.Click += new System.EventHandler(this.button1_Click);
             // 
-            // pictureBoxSettings
+            // materialComboBoxQuickAccess
             // 
-            this.pictureBoxSettings.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBoxSettings.Image = global::TakoTea.Views.Properties.Resources.settings;
-            this.pictureBoxSettings.Location = new System.Drawing.Point(1056, 40);
-            this.pictureBoxSettings.Name = "pictureBoxSettings";
-            this.pictureBoxSettings.Size = new System.Drawing.Size(32, 32);
-            this.pictureBoxSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxSettings.TabIndex = 8;
-            this.pictureBoxSettings.TabStop = false;
-            this.pictureBoxSettings.Click += new System.EventHandler(this.pictureBoxSettings_Click);
-            // 
-            // materialButton1
-            // 
-            this.materialButton1.AutoSize = false;
-            this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.materialButton1.Depth = 0;
-            this.materialButton1.HighEmphasis = true;
-            this.materialButton1.Icon = null;
-            this.materialButton1.Location = new System.Drawing.Point(974, 40);
-            this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialButton1.Name = "materialButton1";
-            this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton1.Size = new System.Drawing.Size(75, 28);
-            this.materialButton1.TabIndex = 9;
-            this.materialButton1.Text = "Report";
-            this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
-            this.materialButton1.UseAccentColor = true;
-            this.materialButton1.UseVisualStyleBackColor = true;
-            this.materialButton1.Click += new System.EventHandler(this.materialButton1_Click);
+            this.materialComboBoxQuickAccess.AutoResize = false;
+            this.materialComboBoxQuickAccess.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialComboBoxQuickAccess.Depth = 0;
+            this.materialComboBoxQuickAccess.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.materialComboBoxQuickAccess.DropDownHeight = 118;
+            this.materialComboBoxQuickAccess.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.materialComboBoxQuickAccess.DropDownWidth = 121;
+            this.materialComboBoxQuickAccess.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialComboBoxQuickAccess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialComboBoxQuickAccess.FormattingEnabled = true;
+            this.materialComboBoxQuickAccess.IntegralHeight = false;
+            this.materialComboBoxQuickAccess.ItemHeight = 29;
+            this.materialComboBoxQuickAccess.Location = new System.Drawing.Point(1000, 32);
+            this.materialComboBoxQuickAccess.MaxDropDownItems = 4;
+            this.materialComboBoxQuickAccess.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialComboBoxQuickAccess.Name = "materialComboBoxQuickAccess";
+            this.materialComboBoxQuickAccess.Size = new System.Drawing.Size(168, 35);
+            this.materialComboBoxQuickAccess.StartIndex = 0;
+            this.materialComboBoxQuickAccess.TabIndex = 12;
+            this.materialComboBoxQuickAccess.UseTallSize = false;
+            this.materialComboBoxQuickAccess.SelectedIndexChanged += new System.EventHandler(this.materialComboBoxQuickAccess_SelectedIndexChanged);
             // 
             // TakoTeaForm
             // 
@@ -505,10 +472,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(1313, 774);
-            this.Controls.Add(this.materialButton1);
-            this.Controls.Add(this.pictureBoxSettings);
+            this.Controls.Add(this.materialComboBoxQuickAccess);
             this.Controls.Add(this.buttonQuickAccess);
-            this.Controls.Add(this.btnReload);
             this.Controls.Add(this.toolStripQuickAccess);
             this.Controls.Add(this.materialTabControl1);
             this.DrawerHighlightWithAccent = false;
@@ -516,6 +481,7 @@
             this.DrawerTabControl = this.materialTabControl1;
             this.DrawerWidth = 250;
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_56;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TakoTeaForm";
             this.Padding = new System.Windows.Forms.Padding(3, 80, 0, 0);
             this.Text = "TakoTea";
@@ -542,7 +508,6 @@
             this.tabPageReports.ResumeLayout(false);
             this.toolStripQuickAccess.ResumeLayout(false);
             this.toolStripQuickAccess.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -581,9 +546,7 @@
         private System.Windows.Forms.ToolStripButton toolStripBtnNewOrder;
         private System.Windows.Forms.ToolStripButton toolStripBtnAddIngredient;
         private System.Windows.Forms.ToolStripButton toolStripBtnAddProduct;
-        private MaterialSkin.Controls.MaterialButton btnReload;
         private MaterialSkin.Controls.MaterialButton buttonQuickAccess;
-        private System.Windows.Forms.PictureBox pictureBoxSettings;
-        private MaterialSkin.Controls.MaterialButton materialButton1;
+        private MaterialSkin.Controls.MaterialComboBox materialComboBoxQuickAccess;
     }
 }

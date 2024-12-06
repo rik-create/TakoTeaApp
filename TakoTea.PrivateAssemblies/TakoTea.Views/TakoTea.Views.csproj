@@ -726,10 +726,6 @@
     <None Include="Resources\icons8-export-pdf-48.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Helpers\Helpers.csproj">
-      <Project>{EB8914B0-29C2-4CE7-9678-9C0634611B25}</Project>
-      <Name>Helpers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TakoTea.Configurations\TakoTea.Configurations.csproj">
       <Project>{c19375c2-227c-47c8-826f-325fe05f3642}</Project>
       <Name>TakoTea.Configurations</Name>
