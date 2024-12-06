@@ -76,7 +76,7 @@
             this.dateTimePickerOrderDate = new System.Windows.Forms.DateTimePicker();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.lblOrderId = new MaterialSkin.Controls.MaterialLabel();
-            this.lblCustomer = new MaterialSkin.Controls.MaterialLabel();
+            this.lblCustomerlbl = new MaterialSkin.Controls.MaterialLabel();
             this.btnClearOrderList = new MaterialSkin.Controls.MaterialButton();
             this.dataGridViewOrderList = new System.Windows.Forms.DataGridView();
             this.ColumnProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,6 +85,8 @@
             this.ColumnQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBoxPayment = new System.Windows.Forms.GroupBox();
+            this.numericUpDownPaymenAmount = new System.Windows.Forms.NumericUpDown();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.cmbOrderStatus = new MaterialSkin.Controls.MaterialComboBox();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.cmbPaymentStatus = new MaterialSkin.Controls.MaterialComboBox();
@@ -99,16 +101,17 @@
             this.btnConfirmOrder = new MaterialSkin.Controls.MaterialButton();
             this.dgvDraftOrders = new System.Windows.Forms.DataGridView();
             this.panelSeparator = new System.Windows.Forms.Panel();
-            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-            this.numericUpDownPaymenAmount = new System.Windows.Forms.NumericUpDown();
+            this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblChange = new MaterialSkin.Controls.MaterialLabel();
+            this.txtCustomer = new System.Windows.Forms.TextBox();
             this.materialCard1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelSearch.SuspendLayout();
             this.panelCart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrderList)).BeginInit();
             this.groupBoxPayment.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDraftOrders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPaymenAmount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDraftOrders)).BeginInit();
             this.SuspendLayout();
             // 
             // materialCard1
@@ -268,11 +271,14 @@
             // 
             this.panelCart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.panelCart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelCart.Controls.Add(this.txtCustomer);
+            this.panelCart.Controls.Add(this.materialLabel6);
+            this.panelCart.Controls.Add(this.lblChange);
             this.panelCart.Controls.Add(this.buttonNow);
             this.panelCart.Controls.Add(this.dateTimePickerOrderDate);
             this.panelCart.Controls.Add(this.materialLabel1);
             this.panelCart.Controls.Add(this.lblOrderId);
-            this.panelCart.Controls.Add(this.lblCustomer);
+            this.panelCart.Controls.Add(this.lblCustomerlbl);
             this.panelCart.Controls.Add(this.btnClearOrderList);
             this.panelCart.Controls.Add(this.dataGridViewOrderList);
             this.panelCart.Controls.Add(this.groupBoxPayment);
@@ -290,7 +296,7 @@
             // 
             // buttonNow
             // 
-            this.buttonNow.Location = new System.Drawing.Point(224, 80);
+            this.buttonNow.Location = new System.Drawing.Point(224, 72);
             this.buttonNow.Name = "buttonNow";
             this.buttonNow.Size = new System.Drawing.Size(75, 24);
             this.buttonNow.TabIndex = 105;
@@ -305,7 +311,7 @@
             this.dateTimePickerOrderDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePickerOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePickerOrderDate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dateTimePickerOrderDate.Location = new System.Drawing.Point(16, 80);
+            this.dateTimePickerOrderDate.Location = new System.Drawing.Point(16, 72);
             this.dateTimePickerOrderDate.Name = "dateTimePickerOrderDate";
             this.dateTimePickerOrderDate.ShowUpDown = true;
             this.dateTimePickerOrderDate.Size = new System.Drawing.Size(200, 22);
@@ -317,7 +323,7 @@
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.materialLabel1.Location = new System.Drawing.Point(20, 20);
+            this.materialLabel1.Location = new System.Drawing.Point(20, 8);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(89, 24);
@@ -329,24 +335,24 @@
             this.lblOrderId.AutoSize = true;
             this.lblOrderId.Depth = 0;
             this.lblOrderId.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblOrderId.Location = new System.Drawing.Point(384, 10);
+            this.lblOrderId.Location = new System.Drawing.Point(384, 8);
             this.lblOrderId.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblOrderId.Name = "lblOrderId";
             this.lblOrderId.Size = new System.Drawing.Size(47, 19);
             this.lblOrderId.TabIndex = 101;
             this.lblOrderId.Text = "#1234";
             // 
-            // lblCustomer
+            // lblCustomerlbl
             // 
-            this.lblCustomer.AutoSize = true;
-            this.lblCustomer.Depth = 0;
-            this.lblCustomer.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblCustomer.Location = new System.Drawing.Point(20, 50);
-            this.lblCustomer.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblCustomer.Name = "lblCustomer";
-            this.lblCustomer.Size = new System.Drawing.Size(177, 19);
-            this.lblCustomer.TabIndex = 101;
-            this.lblCustomer.Text = "Customer: Mark Gregorio";
+            this.lblCustomerlbl.AutoSize = true;
+            this.lblCustomerlbl.Depth = 0;
+            this.lblCustomerlbl.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblCustomerlbl.Location = new System.Drawing.Point(20, 40);
+            this.lblCustomerlbl.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblCustomerlbl.Name = "lblCustomerlbl";
+            this.lblCustomerlbl.Size = new System.Drawing.Size(73, 19);
+            this.lblCustomerlbl.TabIndex = 101;
+            this.lblCustomerlbl.Text = "Customer:";
             // 
             // btnClearOrderList
             // 
@@ -395,7 +401,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewOrderList.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewOrderList.EnableHeadersVisualStyles = false;
-            this.dataGridViewOrderList.Location = new System.Drawing.Point(10, 112);
+            this.dataGridViewOrderList.Location = new System.Drawing.Point(10, 104);
             this.dataGridViewOrderList.MultiSelect = false;
             this.dataGridViewOrderList.Name = "dataGridViewOrderList";
             this.dataGridViewOrderList.ReadOnly = true;
@@ -411,7 +417,7 @@
             this.dataGridViewOrderList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewOrderList.RowHeadersWidth = 25;
             this.dataGridViewOrderList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridViewOrderList.Size = new System.Drawing.Size(430, 284);
+            this.dataGridViewOrderList.Size = new System.Drawing.Size(430, 264);
             this.dataGridViewOrderList.TabIndex = 100;
             // 
             // ColumnProduct
@@ -458,12 +464,32 @@
             this.groupBoxPayment.Controls.Add(this.lblPaymentStatus);
             this.groupBoxPayment.Controls.Add(this.cmbPaymentMethod);
             this.groupBoxPayment.Controls.Add(this.lblPaymentMethod);
-            this.groupBoxPayment.Location = new System.Drawing.Point(8, 399);
+            this.groupBoxPayment.Location = new System.Drawing.Point(8, 368);
             this.groupBoxPayment.Name = "groupBoxPayment";
             this.groupBoxPayment.Size = new System.Drawing.Size(430, 211);
             this.groupBoxPayment.TabIndex = 103;
             this.groupBoxPayment.TabStop = false;
             this.groupBoxPayment.Text = "Payment";
+            // 
+            // numericUpDownPaymenAmount
+            // 
+            this.numericUpDownPaymenAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDownPaymenAmount.Location = new System.Drawing.Point(162, 166);
+            this.numericUpDownPaymenAmount.Name = "numericUpDownPaymenAmount";
+            this.numericUpDownPaymenAmount.Size = new System.Drawing.Size(250, 31);
+            this.numericUpDownPaymenAmount.TabIndex = 109;
+            // 
+            // materialLabel2
+            // 
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel2.Location = new System.Drawing.Point(22, 166);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(123, 19);
+            this.materialLabel2.TabIndex = 108;
+            this.materialLabel2.Text = "Payment amount";
             // 
             // cmbOrderStatus
             // 
@@ -588,23 +614,23 @@
             // 
             this.lblTotalItems.AutoSize = true;
             this.lblTotalItems.Depth = 0;
-            this.lblTotalItems.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.lblTotalItems.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
+            this.lblTotalItems.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.lblTotalItems.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
             this.lblTotalItems.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblTotalItems.Location = new System.Drawing.Point(16, 613);
+            this.lblTotalItems.Location = new System.Drawing.Point(16, 584);
             this.lblTotalItems.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTotalItems.Name = "lblTotalItems";
-            this.lblTotalItems.Size = new System.Drawing.Size(129, 29);
+            this.lblTotalItems.Size = new System.Drawing.Size(108, 24);
             this.lblTotalItems.TabIndex = 102;
             this.lblTotalItems.Text = "Total Items:";
             // 
             // lblTotalItemInOrderList
             // 
             this.lblTotalItemInOrderList.Depth = 0;
-            this.lblTotalItemInOrderList.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.lblTotalItemInOrderList.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
+            this.lblTotalItemInOrderList.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.lblTotalItemInOrderList.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
             this.lblTotalItemInOrderList.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblTotalItemInOrderList.Location = new System.Drawing.Point(144, 613);
+            this.lblTotalItemInOrderList.Location = new System.Drawing.Point(144, 584);
             this.lblTotalItemInOrderList.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTotalItemInOrderList.Name = "lblTotalItemInOrderList";
             this.lblTotalItemInOrderList.Size = new System.Drawing.Size(293, 29);
@@ -616,23 +642,23 @@
             // 
             this.materialLabel3.AutoSize = true;
             this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel3.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel3.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
             this.materialLabel3.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.materialLabel3.Location = new System.Drawing.Point(16, 645);
+            this.materialLabel3.Location = new System.Drawing.Point(16, 616);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(123, 29);
+            this.materialLabel3.Size = new System.Drawing.Size(103, 24);
             this.materialLabel3.TabIndex = 102;
             this.materialLabel3.Text = "Total Price:";
             // 
             // lblTotalInOrderList
             // 
             this.lblTotalInOrderList.Depth = 0;
-            this.lblTotalInOrderList.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.lblTotalInOrderList.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
+            this.lblTotalInOrderList.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.lblTotalInOrderList.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
             this.lblTotalInOrderList.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblTotalInOrderList.Location = new System.Drawing.Point(144, 645);
+            this.lblTotalInOrderList.Location = new System.Drawing.Point(144, 616);
             this.lblTotalInOrderList.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTotalInOrderList.Name = "lblTotalInOrderList";
             this.lblTotalInOrderList.Size = new System.Drawing.Size(293, 29);
@@ -647,7 +673,7 @@
             this.btnSaveToDraft.Depth = 0;
             this.btnSaveToDraft.HighEmphasis = true;
             this.btnSaveToDraft.Icon = null;
-            this.btnSaveToDraft.Location = new System.Drawing.Point(256, 680);
+            this.btnSaveToDraft.Location = new System.Drawing.Point(256, 688);
             this.btnSaveToDraft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnSaveToDraft.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSaveToDraft.Name = "btnSaveToDraft";
@@ -667,7 +693,7 @@
             this.btnConfirmOrder.Depth = 0;
             this.btnConfirmOrder.HighEmphasis = true;
             this.btnConfirmOrder.Icon = null;
-            this.btnConfirmOrder.Location = new System.Drawing.Point(354, 680);
+            this.btnConfirmOrder.Location = new System.Drawing.Point(354, 688);
             this.btnConfirmOrder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnConfirmOrder.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnConfirmOrder.Name = "btnConfirmOrder";
@@ -697,25 +723,40 @@
             this.panelSeparator.Size = new System.Drawing.Size(1, 731);
             this.panelSeparator.TabIndex = 6;
             // 
-            // materialLabel2
+            // materialLabel6
             // 
-            this.materialLabel2.AutoSize = true;
-            this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.Location = new System.Drawing.Point(22, 166);
-            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(123, 19);
-            this.materialLabel2.TabIndex = 108;
-            this.materialLabel2.Text = "Payment amount";
+            this.materialLabel6.AutoSize = true;
+            this.materialLabel6.Depth = 0;
+            this.materialLabel6.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel6.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            this.materialLabel6.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.materialLabel6.Location = new System.Drawing.Point(16, 648);
+            this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel6.Name = "materialLabel6";
+            this.materialLabel6.Size = new System.Drawing.Size(74, 24);
+            this.materialLabel6.TabIndex = 106;
+            this.materialLabel6.Text = "Change:";
             // 
-            // numericUpDownPaymenAmount
+            // lblChange
             // 
-            this.numericUpDownPaymenAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownPaymenAmount.Location = new System.Drawing.Point(162, 166);
-            this.numericUpDownPaymenAmount.Name = "numericUpDownPaymenAmount";
-            this.numericUpDownPaymenAmount.Size = new System.Drawing.Size(250, 31);
-            this.numericUpDownPaymenAmount.TabIndex = 109;
+            this.lblChange.Depth = 0;
+            this.lblChange.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.lblChange.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            this.lblChange.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblChange.Location = new System.Drawing.Point(144, 648);
+            this.lblChange.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblChange.Name = "lblChange";
+            this.lblChange.Size = new System.Drawing.Size(293, 29);
+            this.lblChange.TabIndex = 107;
+            this.lblChange.Text = "P 100";
+            this.lblChange.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtCustomer
+            // 
+            this.txtCustomer.Location = new System.Drawing.Point(96, 40);
+            this.txtCustomer.Name = "txtCustomer";
+            this.txtCustomer.Size = new System.Drawing.Size(136, 20);
+            this.txtCustomer.TabIndex = 108;
             // 
             // MenuOrderForm
             // 
@@ -738,8 +779,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrderList)).EndInit();
             this.groupBoxPayment.ResumeLayout(false);
             this.groupBoxPayment.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDraftOrders)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPaymenAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDraftOrders)).EndInit();
             this.ResumeLayout(false);
 
             }
@@ -758,7 +799,7 @@
 
             private MaterialSkin.Controls.MaterialLabel lblOrderId;
 
-            private MaterialSkin.Controls.MaterialLabel lblCustomer;
+            private MaterialSkin.Controls.MaterialLabel lblCustomerlbl;
 
             private System.Windows.Forms.DataGridView dataGridViewOrderList;
 
@@ -812,6 +853,9 @@
         private DateTimePicker dateTimePickerOrderDate;
         private NumericUpDown numericUpDownPaymenAmount;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
+        private MaterialSkin.Controls.MaterialLabel materialLabel6;
+        private MaterialSkin.Controls.MaterialLabel lblChange;
+        private TextBox txtCustomer;
 
 
         // ... other controls ...

@@ -887,7 +887,7 @@ namespace TakoTea.Views.Order
         }
 
 
-        public void ConfirmOrder(DataGridView dataGridViewOrderList, Label lblTotalInOrderList, Label lblOrderId, ComboBox cmbPaymentMethod, ComboBox cmbPaymentStatus, ComboBox cmbOrderStatus, DateTimePicker orderDate, string customerName, decimal paymentAmoount)
+        public void ConfirmOrder(DataGridView dataGridViewOrderList, Label lblTotalInOrderList, Label lblOrderId, ComboBox cmbPaymentMethod, ComboBox cmbPaymentStatus, ComboBox cmbOrderStatus, DateTimePicker orderDate, string customerName, decimal paymentAmount)
         {
             using (var transaction = _context.Database.BeginTransaction()) // Using simplified syntax
             {
@@ -915,7 +915,7 @@ namespace TakoTea.Views.Order
                     DateTime dateTime = orderDate.Value;
 
                     // 4. Save the order to the database
-                    SaveOrderToDb(dataGridViewOrderList, lblTotalInOrderList, customerName, paymentMethod, orderStatus, dateTime, paymentStatus, paymentAmoount);
+                    SaveOrderToDb(dataGridViewOrderList, lblTotalInOrderList, customerName, paymentMethod, orderStatus, dateTime, paymentStatus, paymentAmount);
 
                     // 5. Update stock levels
                     UpdateStockLevels(dataGridViewOrderList);
@@ -1097,6 +1097,8 @@ namespace TakoTea.Views.Order
                 TotalAmount = decimal.Parse(lblTotalInOrderList.Text.Substring(1)),
                 CreatedBy = "System",
                 GrossProfit = 0,
+                PaymentAmount = paymentAmount,
+                ChangeAmount = paymentAmount - decimal.Parse(lblTotalInOrderList.Text.Substring(1))
             };
 
             context.OrderModels.Add(order);

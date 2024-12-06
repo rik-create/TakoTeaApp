@@ -90,65 +90,82 @@ namespace TakoTea.View.Orders
 
         private void deleteMenuItem_Click(object sender, EventArgs e)
         {
-            // Confirmation before deleting
-            if (MessageBox.Show("Are you sure you want to delete the selected draft orders?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            try
             {
-                foreach (DataGridViewRow row in dgvDraftOrders.SelectedRows)
+                // Confirmation before deleting
+                if (MessageBox.Show("Are you sure you want to delete the selected draft orders?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    int draftOrderId = Convert.ToInt32(row.Cells["DraftOrderId"].Value);
-
-                    // Delete from the database
-                    var draftOrder = context.DraftOrders.Find(draftOrderId);
-                    if (draftOrder != null)
+                    foreach (DataGridViewRow row in dgvDraftOrders.SelectedRows)
                     {
-                        context.DraftOrders.Remove(draftOrder);
-                        context.SaveChanges();
-                    }
-                }
+                        int draftOrderId = Convert.ToInt32(row.Cells["DraftOrderId"].Value);
 
-                // Refresh the DataGridView
-                PopulateDraftOrdersDataGridView();
+                        // Delete from the database
+                        var draftOrder = context.DraftOrders.Find(draftOrderId);
+                        if (draftOrder != null)
+                        {
+                            context.DraftOrders.Remove(draftOrder);
+                            context.SaveChanges();
+                        }
+                    }
+
+                    // Refresh the DataGridView
+                    PopulateDraftOrdersDataGridView();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while deleting the draft order: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void dgvDraftOrders_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Check if the clicked cell is in the LoadButtonColumn
-            if (e.ColumnIndex == dgvDraftOrders.Columns["LoadButtonColumn"].Index && e.RowIndex >= 0)
+            try
             {
-                // Confirmation
-                if (MessageBox.Show("Are you sure you want to load this draft order?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                // Check if the clicked cell is in the LoadButtonColumn
+                if (e.ColumnIndex == dgvDraftOrders.Columns["LoadButtonColumn"].Index && e.RowIndex >= 0)
                 {
-                    int draftOrderId = Convert.ToInt32(dgvDraftOrders.Rows[e.RowIndex].Cells["DraftOrderId"].Value);
-
-
-                    _service.LoadDraftOrder(draftOrderId, dataGridViewOrderList, lblTotalInOrderList);
-
-                    // Delete the draft from the database
-                    var draftOrder = context.DraftOrders.Find(draftOrderId);
-                    if (draftOrder != null)
+                    // Confirmation
+                    if (MessageBox.Show("Are you sure you want to load this draft order?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        context.DraftOrders.Remove(draftOrder);
-                        context.SaveChanges();
-                    }
+                        int draftOrderId = Convert.ToInt32(dgvDraftOrders.Rows[e.RowIndex].Cells["DraftOrderId"].Value);
 
+                        _service.LoadDraftOrder(draftOrderId, dataGridViewOrderList, lblTotalInOrderList);
+
+                        // Delete the draft from the database
+                        var draftOrder = context.DraftOrders.Find(draftOrderId);
+                        if (draftOrder != null)
+                        {
+                            context.DraftOrders.Remove(draftOrder);
+                            context.SaveChanges();
+                        }
+                    }
                 }
 
+                PopulateDraftOrdersDataGridView();
             }
-
-            PopulateDraftOrdersDataGridView();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while loading the draft order: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnSaveDraft_Click(object sender, EventArgs e)
         {
-            string customerName = lblCustomer.Text; // Assuming you have a TextBox for customer name
-            string paymentMethod = cmbPaymentMethod.SelectedItem.ToString(); // Assuming you have a ComboBox for payment method
-            string totalAmount = lblTotalInOrderList.Text.Substring(1);
+            try
+            {
+                string customerName = lblCustomerlbl.Text; // Assuming you have a TextBox for customer name
+                string paymentMethod = cmbPaymentMethod.SelectedItem.ToString(); // Assuming you have a ComboBox for payment method
+                string totalAmount = lblTotalInOrderList.Text.Substring(1);
 
-            _service.SaveDraftOrder(dataGridViewOrderList, totalAmount, customerName, paymentMethod);
-            MessageBox.Show("Draft order saved successfully.");
-            dataGridViewOrderList.Rows.Clear();
-
+                _service.SaveDraftOrder(dataGridViewOrderList, totalAmount, customerName, paymentMethod);
+                MessageBox.Show("Draft order saved successfully.");
+                dataGridViewOrderList.Rows.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while saving the draft order: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
 
@@ -256,6 +273,7 @@ namespace TakoTea.View.Orders
             {
                 UpdateTotalInOrderList();
                 UpdateTotalItemsInOrderList();
+                UpdateChange();
             }
 
         }
@@ -282,6 +300,7 @@ namespace TakoTea.View.Orders
         {
             UpdateTotalInOrderList();
             UpdateTotalItemsInOrderList();
+            UpdateChange();
         }
 
         // In your parent form class (where the parentDataGridView is located)
@@ -291,7 +310,7 @@ namespace TakoTea.View.Orders
             dataGridViewOrderList.Rows.Clear();
             UpdateTotalInOrderList();
             UpdateTotalItemsInOrderList();
-
+            UpdateChange();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -328,6 +347,20 @@ namespace TakoTea.View.Orders
 
         }
 
+        private void UpdateChange()
+        {
+            if (decimal.TryParse(lblTotalInOrderList.Text.Replace("₱", ""), out decimal totalDue) &&
+                decimal.TryParse(numericUpDownPaymenAmount.Value.ToString(), out decimal amountPaid))
+            {
+                decimal change = amountPaid - totalDue;
+                lblChange.Text = $"₱{change:F2}";
+            }
+            else
+            {
+                // Handle parsing errors if necessary
+                lblChange.Text = "Invalid input";
+            }
+        }
         private void UpdateTotalItemsInOrderList()
         {
             int totalItems = 0;
@@ -382,34 +415,31 @@ namespace TakoTea.View.Orders
 
         }
    
-        private void btnConfirmOrder_Click(object sender, EventArgs e)
+  private void btnConfirmOrder_Click(object sender, EventArgs e)
         {
+            try
+            {
+                // Call the ConfirmOrder method in the productsService class
+                _service.ConfirmOrder(
+                    dataGridViewOrderList,
+                    lblTotalInOrderList,
+                    lblOrderId,
+                    cmbPaymentMethod,
+                    cmbPaymentStatus,
+                    cmbOrderStatus,
+                    dateTimePickerOrderDate,
+                    txtCustomer.Text,
+                    numericUpDownPaymenAmount.Value
+                );
 
+                _service.GenerateReceipt((int.Parse(lblOrderId.Text)));
 
-            // Call the ConfirmOrder method in the productsService class
-            _service.ConfirmOrder(
-                dataGridViewOrderList,
-                lblTotalInOrderList,
-                
-                lblOrderId,
-                cmbPaymentMethod,
-                cmbPaymentStatus,
-                cmbOrderStatus, dateTimePickerOrderDate,
-                lblCustomer.Text, numericUpDownPaymenAmount.Value
-            );
-
-
-            _service.GenerateReceipt((int.Parse(lblOrderId.Text)));
-
-
-            lblOrderId.Text = _service.GenerateNewOrderId().ToString();
-
-            // Optionally, perform additional actions after confirming the order
-            // For example:
-            // - Clear the order list: dataGridViewOrderList.Rows.Clear();
-            // - Generate a receipt: _service.GenerateReceipt(orderId);
-            // - Reset the form
-            // - etc.
+                lblOrderId.Text = _service.GenerateNewOrderId().ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while confirming the order: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnSearch_Click_1(object sender, EventArgs e)

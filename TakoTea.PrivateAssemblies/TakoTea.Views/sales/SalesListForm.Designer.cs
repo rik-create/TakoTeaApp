@@ -43,9 +43,6 @@
             this.materialLabel19 = new MaterialSkin.Controls.MaterialLabel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnAddComboMeal = new MaterialSkin.Controls.MaterialButton();
-            this.materialFloatingActionButtonCopyInformation = new MaterialSkin.Controls.MaterialFloatingActionButton();
-            this.floatingActionButtonAddProduct = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.pbSearch = new System.Windows.Forms.PictureBox();
             this.pBoxShowFilter = new System.Windows.Forms.PictureBox();
             this.btnHideFilters = new MaterialSkin.Controls.MaterialButton();
@@ -243,9 +240,6 @@
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.btnAddComboMeal);
-            this.panel3.Controls.Add(this.materialFloatingActionButtonCopyInformation);
-            this.panel3.Controls.Add(this.floatingActionButtonAddProduct);
             this.panel3.Controls.Add(this.pbSearch);
             this.panel3.Controls.Add(this.pBoxShowFilter);
             this.panel3.Controls.Add(this.btnHideFilters);
@@ -256,49 +250,6 @@
             this.panel3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.panel3.Size = new System.Drawing.Size(1141, 60);
             this.panel3.TabIndex = 144;
-            // 
-            // btnAddComboMeal
-            // 
-            this.btnAddComboMeal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnAddComboMeal.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnAddComboMeal.Depth = 0;
-            this.btnAddComboMeal.HighEmphasis = true;
-            this.btnAddComboMeal.Icon = null;
-            this.btnAddComboMeal.Location = new System.Drawing.Point(960, 8);
-            this.btnAddComboMeal.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnAddComboMeal.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnAddComboMeal.Name = "btnAddComboMeal";
-            this.btnAddComboMeal.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnAddComboMeal.Size = new System.Drawing.Size(149, 36);
-            this.btnAddComboMeal.TabIndex = 131;
-            this.btnAddComboMeal.Text = "Add Combo Meal";
-            this.btnAddComboMeal.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnAddComboMeal.UseAccentColor = true;
-            this.btnAddComboMeal.UseVisualStyleBackColor = true;
-            // 
-            // materialFloatingActionButtonCopyInformation
-            // 
-            this.materialFloatingActionButtonCopyInformation.Depth = 0;
-            this.materialFloatingActionButtonCopyInformation.Icon = global::TakoTea.Views.Properties.Resources.copy_white;
-            this.materialFloatingActionButtonCopyInformation.Location = new System.Drawing.Point(856, 8);
-            this.materialFloatingActionButtonCopyInformation.Mini = true;
-            this.materialFloatingActionButtonCopyInformation.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialFloatingActionButtonCopyInformation.Name = "materialFloatingActionButtonCopyInformation";
-            this.materialFloatingActionButtonCopyInformation.Size = new System.Drawing.Size(40, 40);
-            this.materialFloatingActionButtonCopyInformation.TabIndex = 101;
-            this.materialFloatingActionButtonCopyInformation.UseVisualStyleBackColor = true;
-            // 
-            // floatingActionButtonAddProduct
-            // 
-            this.floatingActionButtonAddProduct.Depth = 0;
-            this.floatingActionButtonAddProduct.Icon = global::TakoTea.Views.Properties.Resources.plus_white;
-            this.floatingActionButtonAddProduct.Location = new System.Drawing.Point(904, 8);
-            this.floatingActionButtonAddProduct.Mini = true;
-            this.floatingActionButtonAddProduct.MouseState = MaterialSkin.MouseState.HOVER;
-            this.floatingActionButtonAddProduct.Name = "floatingActionButtonAddProduct";
-            this.floatingActionButtonAddProduct.Size = new System.Drawing.Size(40, 40);
-            this.floatingActionButtonAddProduct.TabIndex = 101;
-            this.floatingActionButtonAddProduct.UseVisualStyleBackColor = true;
             // 
             // pbSearch
             // 
@@ -725,7 +676,6 @@
         #endregion
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private MaterialSkin.Controls.MaterialCard materialCard1;
-        private MaterialSkin.Controls.MaterialFloatingActionButton floatingActionButtonAddProduct;
         private System.Windows.Forms.Panel panelExportButtons;
         private System.Windows.Forms.PictureBox pictureBoxExportExcel;
         private System.Windows.Forms.PictureBox pictureBoxExportPdf;
@@ -752,7 +702,6 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private MaterialSkin.Controls.MaterialButton btnAddComboMeal;
         private System.Windows.Forms.BindingSource bindingSource;
         private System.Windows.Forms.CheckedListBox chkListBoxProducts;
         private System.Windows.Forms.Panel panel3;
@@ -767,6 +716,5 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private System.Windows.Forms.PictureBox pbReloadForm;
         private System.Windows.Forms.DataGridView dataGridViewSalesList;
-        private MaterialSkin.Controls.MaterialFloatingActionButton materialFloatingActionButtonCopyInformation;
     }
 }
