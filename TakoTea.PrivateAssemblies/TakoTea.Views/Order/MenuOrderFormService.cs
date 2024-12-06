@@ -22,6 +22,7 @@ using TakoTea.Models;
 using TakoTea.Services;
 using TakoTea.View.Orders;
 using TakoTea.Views.Order.Order_Modals;
+using System.Drawing.Printing;
 
 namespace TakoTea.Views.Order
 {
@@ -128,8 +129,7 @@ namespace TakoTea.Views.Order
             foreach (var item in order.OrderItems)
             {
                 // Improved formatting for item details
-                receiptContent.AppendLine($"- {item.ProductName,-15} {item.Quantity} x {item.Price,8:C} = {item.TotalPrice,9:C}");
-
+                receiptContent.AppendLine($"- {item.ProductName,-15} {item.Quantity} x {item.Price,8:₱#,##0.00} = {item.TotalPrice,9:₱#,##0.00}");
                 if (!string.IsNullOrEmpty(item.AddOns))
                 {
                     receiptContent.AppendLine($"   Add-ons: {item.AddOns}"); // Consistent indentation
@@ -137,11 +137,11 @@ namespace TakoTea.Views.Order
             }
 
             receiptContent.AppendLine("=".PadRight(42, '='));
-            receiptContent.AppendLine($"Total: {order.TotalAmount,35:C}"); 
+            receiptContent.AppendLine($"Total: {order.TotalAmount,35:₱#,##0.00}"); 
 
             ReceiptForm receiptForm = new ReceiptForm(orderId);
             receiptForm.lblReceiptContent.Text = receiptContent.ToString();
-            receiptForm.ShowDialog();
+            receiptForm.Show();
         }
 
         public void HandlePayment(int orderId, decimal amountPaid, string paymentMethod)
@@ -673,8 +673,7 @@ namespace TakoTea.Views.Order
             receiptContent.AppendLine("\nItems:");
             foreach (var item in order.OrderItems)
             {
-                receiptContent.AppendLine($"- {item.ProductName,-15} {item.Quantity} x {item.Price,8:C} = {item.TotalPrice,9:C}");
-
+                receiptContent.AppendLine($"- {item.ProductName,-15} {item.Quantity} x {item.Price,8:₱#,##0.00} = {item.TotalPrice,9:₱#,##0.00}");
                 if (!string.IsNullOrEmpty(item.AddOns))
                 {
                     receiptContent.AppendLine($"  Add-ons: {item.AddOns}");
@@ -682,26 +681,156 @@ namespace TakoTea.Views.Order
             }
 
             receiptContent.AppendLine("=".PadRight(42, '='));
-            receiptContent.AppendLine($"Total: {order.TotalAmount,35:C}");
+            receiptContent.AppendLine($"Total: {order.TotalAmount,35:₱#,##0.00}");
 
             return receiptContent.ToString();
         }
 
+        // Helper method to print the receipt form
+        public void PrintReceiptForm(ReceiptForm receiptForm)
+        {
+            // 1. Hide the form's border and buttons
+            receiptForm.FormBorderStyle = FormBorderStyle.None;
+            foreach (Control control in receiptForm.Controls)
+            {
+                if (control is Button)
+                {
+                    control.Visible = false;
+                }
+            }
+            receiptForm.buttonSendToEmail.Visible = false;
+            receiptForm.buttonPrint.Visible = false;
+
+            // 2. Create a PrintDocument and set its properties
+            PrintDocument printDocument = new PrintDocument();
+            printDocument.PrintPage += (s, pe) =>
+            {
+                Bitmap bmp = new Bitmap(receiptForm.Width, receiptForm.Height);
+                receiptForm.DrawToBitmap(bmp, new Rectangle(0, 0, receiptForm.Width, receiptForm.Height));
+                pe.Graphics.DrawImage(bmp, 0, 0);
+            };
+
+            // 3. Calculate paper size based on panelReports
+            var paperSize = new PaperSize("Custom", receiptForm.Width, receiptForm.Height);
+            printDocument.DefaultPageSettings.PaperSize = paperSize;
+
+            // 4. Show print dialog and print
+            PrintDialog printDialog = new PrintDialog();
+            printDialog.Document = printDocument;
+            if (printDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    printDocument.Print();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred during printing: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            // 5. Restore the form's border and buttons
+            receiptForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            foreach (Control control in receiptForm.Controls)
+            {
+                if (control is Button)
+                {
+                    control.Visible = true;
+                }
+            }
+            receiptForm.buttonSendToEmail.Visible = true;
+            receiptForm.buttonPrint.Visible = true;
+        }
+
+
+        public void SendDigitalReceipt(int orderId, string customerEmail, ReceiptForm receiptForm)
+        {
+            string receiptContent = GenerateReceiptContent(orderId);
+            receiptForm.lblReceiptContent.Text = receiptContent.ToString();
+
+            // Hide the form's border
+            receiptForm.FormBorderStyle = FormBorderStyle.None;
+
+            receiptForm.buttonSendToEmail.Visible = false;
+            receiptForm.buttonPrint.Visible = false;
+            // Hide all buttons on the form
+            foreach (Control control in receiptForm.Controls)
+            {
+                if (control is Button)
+                {
+                    control.Visible = false;
+                }
+            }
+
+            // Capture the form as an image 
+            Bitmap bmp = new Bitmap(receiptForm.Width, receiptForm.Height);
+            receiptForm.DrawToBitmap(bmp, new Rectangle(0, 0, receiptForm.Width, receiptForm.Height));
+
+            // Show the form's border again (optional, if you need it later)
+            receiptForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+
+     
+            var imageAttachment = new MimePart("image", "png")
+            {
+                Content = new MimeContent(new MemoryStream(ImageToByteArray(bmp))),
+                ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+                ContentTransferEncoding = ContentEncoding.Base64,
+                FileName
+= "Receipt.png"
+            };
+
+            // Create the email message
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Tako Tea", "takotea9@gmail.com"));
+            message.To.Add(new MailboxAddress("Recipient Name", customerEmail));
+            message.Subject
+     = "Email from MailKit with Gmail";
+            message.Body = new TextPart("plain")
+            {
+                Text = "This email was sent using MailKit with Gmail."
+            };
+
+            var multipart = new Multipart("mixed");
+            multipart.Add(message.Body); // Add the original text part
+            multipart.Add(imageAttachment);
+            message.Body = multipart;
+
+
+
+            // Connect to the Gmail SMTP server
+            using (var client = new SmtpClient())
+            {
+                client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+
+                // Use your Gmail email address and app password
+                client.Authenticate("takotea9@gmail.com", "rhdl vljl ztfn xzui");
+
+                client.Send(message);
+                client.Disconnect(true);
+            }
+
+            MessageBox.Show("Email sent successfully!");
+            receiptForm.buttonSendToEmail.Visible = true;
+            receiptForm.buttonPrint.Visible = true;
+        }
+
+
+
 
         public void SendDigitalReceipt(int orderId, string customerEmail)
         {
-
-            string receiptContent = GenerateReceiptContent(orderId);    
+            //
+            string receiptContent = GenerateReceiptContent(orderId);
             ReceiptForm receiptForm = new ReceiptForm(orderId); // Assuming ReceiptForm has a constructor that takes orderId
-    receiptForm.lblReceiptContent.Text = receiptContent.ToString();
+            receiptForm.lblReceiptContent.Text = receiptContent.ToString();
 
-    // Capture the form as an image
-    Bitmap bmp = new Bitmap(receiptForm.Width, receiptForm.Height);
-    receiptForm.DrawToBitmap(bmp, new Rectangle(0, 0, receiptForm.Width, receiptForm.Height));
+            // Capture the form as an image
+            Bitmap bmp = new Bitmap(receiptForm.Width, receiptForm.Height);
+            receiptForm.DrawToBitmap(bmp, new Rectangle(0, 0, receiptForm.Width, receiptForm.Height));
 
 
             var imageAttachment = new MimePart("image", "png")
-            {   
+            {
                 Content = new MimeContent(new MemoryStream(ImageToByteArray(bmp))),
                 ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
                 ContentTransferEncoding = ContentEncoding.Base64,
@@ -744,6 +873,9 @@ namespace TakoTea.Views.Order
 
 
 
+
+
+
         public void UpdateTotal()
         {
             throw new NotImplementedException();
@@ -755,7 +887,7 @@ namespace TakoTea.Views.Order
         }
 
 
-        public void ConfirmOrder(DataGridView dataGridViewOrderList, Label lblTotalInOrderList, Label lblOrderId, ComboBox cmbPaymentMethod, ComboBox cmbPaymentStatus, ComboBox cmbOrderStatus, DateTimePicker orderDate, string customerName)
+        public void ConfirmOrder(DataGridView dataGridViewOrderList, Label lblTotalInOrderList, Label lblOrderId, ComboBox cmbPaymentMethod, ComboBox cmbPaymentStatus, ComboBox cmbOrderStatus, DateTimePicker orderDate, string customerName, decimal paymentAmoount)
         {
             using (var transaction = _context.Database.BeginTransaction()) // Using simplified syntax
             {
@@ -783,7 +915,7 @@ namespace TakoTea.Views.Order
                     DateTime dateTime = orderDate.Value;
 
                     // 4. Save the order to the database
-                    SaveOrderToDb(dataGridViewOrderList, lblTotalInOrderList, customerName, paymentMethod, orderStatus, dateTime, paymentStatus);
+                    SaveOrderToDb(dataGridViewOrderList, lblTotalInOrderList, customerName, paymentMethod, orderStatus, dateTime, paymentStatus, paymentAmoount);
 
                     // 5. Update stock levels
                     UpdateStockLevels(dataGridViewOrderList);
@@ -951,7 +1083,7 @@ namespace TakoTea.Views.Order
         // Helper method to update the stock level in the batch
  
   
-        public void SaveOrderToDb(DataGridView dataGridViewOrderList, Label lblTotalInOrderList, string customerName, string paymentMethod, string orderStatus, DateTime orderDate, string paymentStatus)
+        public void SaveOrderToDb(DataGridView dataGridViewOrderList, Label lblTotalInOrderList, string customerName, string paymentMethod, string orderStatus, DateTime orderDate, string paymentStatus, decimal paymentAmount)
         {
             var context = new Entities();
 

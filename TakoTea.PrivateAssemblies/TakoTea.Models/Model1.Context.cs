@@ -17,7 +17,7 @@ namespace TakoTea.Models
     {
 
         public Entities()
-        : base("metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=\"data source=192.168.100.12,1433;initial catalog=TakoTea;user id=erick;password=1234;encrypt=False;MultipleActiveResultSets=True;App=EntityFramework\"")
+     : base("metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=\"Data Source=DESKTOP-0SJIGR5\\SQLEXPRESS;Initial Catalog=TakoTea;Integrated Security=True;\"")
         {
         }
 

@@ -395,7 +395,7 @@ namespace TakoTea.View.Orders
                 cmbPaymentMethod,
                 cmbPaymentStatus,
                 cmbOrderStatus, dateTimePickerOrderDate,
-                lblCustomer.Text
+                lblCustomer.Text, numericUpDownPaymenAmount.Value
             );
 
 

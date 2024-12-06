@@ -62,9 +62,14 @@ namespace TakoTea.Views.reports
 
         {
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            this.panelReports = new System.Windows.Forms.Panel();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.btnGenerateReport = new MaterialSkin.Controls.MaterialButton();
             this.groupBoxDateRange = new System.Windows.Forms.GroupBox();
+            this.lblSearchHint = new System.Windows.Forms.Label();
+            this.lblFilterHint = new System.Windows.Forms.Label();
             this.chkLowStockOnly = new System.Windows.Forms.CheckBox();
+            this.cboDateRange = new MaterialSkin.Controls.MaterialComboBox();
             this.cboFilter = new MaterialSkin.Controls.MaterialComboBox();
             this.txtFilter = new MaterialSkin.Controls.MaterialTextBox();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
@@ -75,16 +80,11 @@ namespace TakoTea.Views.reports
             this.lstReportTypes = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.panelReports = new System.Windows.Forms.Panel();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            this.lblFilterHint = new System.Windows.Forms.Label();
-            this.lblSearchHint = new System.Windows.Forms.Label();
-            this.cboDateRange = new MaterialSkin.Controls.MaterialComboBox();
             this.materialCard1.SuspendLayout();
+            this.panelReports.SuspendLayout();
             this.groupBoxDateRange.SuspendLayout();
             this.groupBoxReportSelection.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panelReports.SuspendLayout();
             this.SuspendLayout();
             // 
             // materialCard1
@@ -105,6 +105,23 @@ namespace TakoTea.Views.reports
             this.materialCard1.Padding = new System.Windows.Forms.Padding(12);
             this.materialCard1.Size = new System.Drawing.Size(954, 699);
             this.materialCard1.TabIndex = 0;
+            // 
+            // panelReports
+            // 
+            this.panelReports.Controls.Add(this.webBrowser1);
+            this.panelReports.Location = new System.Drawing.Point(16, 248);
+            this.panelReports.Name = "panelReports";
+            this.panelReports.Size = new System.Drawing.Size(920, 392);
+            this.panelReports.TabIndex = 105;
+            // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(920, 392);
+            this.webBrowser1.TabIndex = 0;
             // 
             // btnGenerateReport
             // 
@@ -145,6 +162,24 @@ namespace TakoTea.Views.reports
             this.groupBoxDateRange.TabStop = false;
             this.groupBoxDateRange.Text = "Date Range";
             // 
+            // lblSearchHint
+            // 
+            this.lblSearchHint.Location = new System.Drawing.Point(16, 96);
+            this.lblSearchHint.Name = "lblSearchHint";
+            this.lblSearchHint.Size = new System.Drawing.Size(216, 16);
+            this.lblSearchHint.TabIndex = 115;
+            this.lblSearchHint.Text = "label1";
+            this.lblSearchHint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblFilterHint
+            // 
+            this.lblFilterHint.Location = new System.Drawing.Point(256, 96);
+            this.lblFilterHint.Name = "lblFilterHint";
+            this.lblFilterHint.Size = new System.Drawing.Size(240, 16);
+            this.lblFilterHint.TabIndex = 114;
+            this.lblFilterHint.Text = "label1";
+            this.lblFilterHint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // chkLowStockOnly
             // 
             this.chkLowStockOnly.AutoSize = true;
@@ -155,6 +190,30 @@ namespace TakoTea.Views.reports
             this.chkLowStockOnly.Text = "Low Stocks";
             this.chkLowStockOnly.UseVisualStyleBackColor = true;
             this.chkLowStockOnly.Visible = false;
+            // 
+            // cboDateRange
+            // 
+            this.cboDateRange.AutoResize = false;
+            this.cboDateRange.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cboDateRange.Depth = 0;
+            this.cboDateRange.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cboDateRange.DropDownHeight = 118;
+            this.cboDateRange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboDateRange.DropDownWidth = 121;
+            this.cboDateRange.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cboDateRange.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cboDateRange.FormattingEnabled = true;
+            this.cboDateRange.IntegralHeight = false;
+            this.cboDateRange.ItemHeight = 29;
+            this.cboDateRange.Location = new System.Drawing.Point(190, 58);
+            this.cboDateRange.MaxDropDownItems = 4;
+            this.cboDateRange.MouseState = MaterialSkin.MouseState.OUT;
+            this.cboDateRange.Name = "cboDateRange";
+            this.cboDateRange.Size = new System.Drawing.Size(216, 35);
+            this.cboDateRange.StartIndex = 0;
+            this.cboDateRange.TabIndex = 113;
+            this.cboDateRange.UseTallSize = false;
+            this.cboDateRange.SelectedIndexChanged += new System.EventHandler(this.cboDateRange_SelectedIndexChanged);
             // 
             // cboFilter
             // 
@@ -286,65 +345,6 @@ namespace TakoTea.Views.reports
             this.materialLabel1.TabIndex = 0;
             this.materialLabel1.Text = "TakoTea Reports";
             // 
-            // panelReports
-            // 
-            this.panelReports.Controls.Add(this.webBrowser1);
-            this.panelReports.Location = new System.Drawing.Point(16, 248);
-            this.panelReports.Name = "panelReports";
-            this.panelReports.Size = new System.Drawing.Size(920, 392);
-            this.panelReports.TabIndex = 105;
-            // 
-            // webBrowser1
-            // 
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(920, 392);
-            this.webBrowser1.TabIndex = 0;
-            // 
-            // lblFilterHint
-            // 
-            this.lblFilterHint.Location = new System.Drawing.Point(256, 96);
-            this.lblFilterHint.Name = "lblFilterHint";
-            this.lblFilterHint.Size = new System.Drawing.Size(240, 16);
-            this.lblFilterHint.TabIndex = 114;
-            this.lblFilterHint.Text = "label1";
-            this.lblFilterHint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblSearchHint
-            // 
-            this.lblSearchHint.Location = new System.Drawing.Point(16, 96);
-            this.lblSearchHint.Name = "lblSearchHint";
-            this.lblSearchHint.Size = new System.Drawing.Size(216, 16);
-            this.lblSearchHint.TabIndex = 115;
-            this.lblSearchHint.Text = "label1";
-            this.lblSearchHint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // cboDateRange
-            // 
-            this.cboDateRange.AutoResize = false;
-            this.cboDateRange.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cboDateRange.Depth = 0;
-            this.cboDateRange.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cboDateRange.DropDownHeight = 118;
-            this.cboDateRange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboDateRange.DropDownWidth = 121;
-            this.cboDateRange.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.cboDateRange.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cboDateRange.FormattingEnabled = true;
-            this.cboDateRange.IntegralHeight = false;
-            this.cboDateRange.ItemHeight = 29;
-            this.cboDateRange.Location = new System.Drawing.Point(184, 56);
-            this.cboDateRange.MaxDropDownItems = 4;
-            this.cboDateRange.MouseState = MaterialSkin.MouseState.OUT;
-            this.cboDateRange.Name = "cboDateRange";
-            this.cboDateRange.Size = new System.Drawing.Size(216, 35);
-            this.cboDateRange.StartIndex = 0;
-            this.cboDateRange.TabIndex = 113;
-            this.cboDateRange.UseTallSize = false;
-            this.cboDateRange.SelectedIndexChanged += new System.EventHandler(this.cboDateRange_SelectedIndexChanged);
-            // 
             // ReportingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -357,12 +357,12 @@ namespace TakoTea.Views.reports
             this.Text = "ReportingForm";
             this.materialCard1.ResumeLayout(false);
             this.materialCard1.PerformLayout();
+            this.panelReports.ResumeLayout(false);
             this.groupBoxDateRange.ResumeLayout(false);
             this.groupBoxDateRange.PerformLayout();
             this.groupBoxReportSelection.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panelReports.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

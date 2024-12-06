@@ -217,8 +217,8 @@ namespace TakoTea.Views.reports
             foreach (var item in salesSummary)
             {
                 table.AddCell(new PdfPCell(new Phrase(item.OrderDate.ToShortDateString())) { Padding = 5 });
-                table.AddCell(new PdfPCell(new Phrase(item.TotalAmount.ToString("C"))) { Padding = 5 });
-                table.AddCell(new PdfPCell(new Phrase(item.GrossProfit.Value.ToString("C"))) { Padding = 5 });
+                table.AddCell(new PdfPCell(new Phrase("₱" + item.TotalAmount.ToString("C", new System.Globalization.CultureInfo("fil-PH")))) { Padding = 5 });
+                table.AddCell(new PdfPCell(new Phrase("₱" + item.GrossProfit.Value.ToString("C", new System.Globalization.CultureInfo("fil-PH")))) { Padding = 5 });
             }
             int pageCount = document.PageNumber;
 
@@ -358,7 +358,7 @@ namespace TakoTea.Views.reports
                 table.AddCell(new PdfPCell(new Phrase(order.CustomerName)) { Padding = 5 });
                 table.AddCell(new PdfPCell(new Phrase(order.PaymentMethod)) { Padding = 5 });
                 table.AddCell(new PdfPCell(new Phrase(order.OrderItems.Count.ToString())) { Padding = 5 });
-                table.AddCell(new PdfPCell(new Phrase(order.TotalAmount.ToString("C"))) { Padding = 5 });
+                table.AddCell(new PdfPCell(new Phrase("₱" + order.TotalAmount.ToString("N"))) { Padding = 5 });
             }
 
             document.Add(table);

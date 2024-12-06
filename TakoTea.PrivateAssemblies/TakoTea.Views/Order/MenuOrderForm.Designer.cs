@@ -72,6 +72,8 @@
             this.flPanelProductVariantsMenu = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanelCategpries = new System.Windows.Forms.FlowLayoutPanel();
             this.panelCart = new System.Windows.Forms.Panel();
+            this.buttonNow = new System.Windows.Forms.Button();
+            this.dateTimePickerOrderDate = new System.Windows.Forms.DateTimePicker();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.lblOrderId = new MaterialSkin.Controls.MaterialLabel();
             this.lblCustomer = new MaterialSkin.Controls.MaterialLabel();
@@ -97,8 +99,8 @@
             this.btnConfirmOrder = new MaterialSkin.Controls.MaterialButton();
             this.dgvDraftOrders = new System.Windows.Forms.DataGridView();
             this.panelSeparator = new System.Windows.Forms.Panel();
-            this.dateTimePickerOrderDate = new System.Windows.Forms.DateTimePicker();
-            this.buttonNow = new System.Windows.Forms.Button();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.numericUpDownPaymenAmount = new System.Windows.Forms.NumericUpDown();
             this.materialCard1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelSearch.SuspendLayout();
@@ -106,6 +108,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrderList)).BeginInit();
             this.groupBoxPayment.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDraftOrders)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPaymenAmount)).BeginInit();
             this.SuspendLayout();
             // 
             // materialCard1
@@ -285,6 +288,29 @@
             this.panelCart.Size = new System.Drawing.Size(454, 731);
             this.panelCart.TabIndex = 1;
             // 
+            // buttonNow
+            // 
+            this.buttonNow.Location = new System.Drawing.Point(224, 80);
+            this.buttonNow.Name = "buttonNow";
+            this.buttonNow.Size = new System.Drawing.Size(75, 24);
+            this.buttonNow.TabIndex = 105;
+            this.buttonNow.Text = "Now";
+            this.buttonNow.UseVisualStyleBackColor = true;
+            this.buttonNow.Click += new System.EventHandler(this.buttonNow_Click);
+            // 
+            // dateTimePickerOrderDate
+            // 
+            this.dateTimePickerOrderDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerOrderDate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dateTimePickerOrderDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePickerOrderDate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dateTimePickerOrderDate.Location = new System.Drawing.Point(16, 80);
+            this.dateTimePickerOrderDate.Name = "dateTimePickerOrderDate";
+            this.dateTimePickerOrderDate.ShowUpDown = true;
+            this.dateTimePickerOrderDate.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePickerOrderDate.TabIndex = 104;
+            // 
             // materialLabel1
             // 
             this.materialLabel1.AutoSize = true;
@@ -424,15 +450,17 @@
             // 
             // groupBoxPayment
             // 
+            this.groupBoxPayment.Controls.Add(this.numericUpDownPaymenAmount);
+            this.groupBoxPayment.Controls.Add(this.materialLabel2);
             this.groupBoxPayment.Controls.Add(this.cmbOrderStatus);
             this.groupBoxPayment.Controls.Add(this.materialLabel4);
             this.groupBoxPayment.Controls.Add(this.cmbPaymentStatus);
             this.groupBoxPayment.Controls.Add(this.lblPaymentStatus);
             this.groupBoxPayment.Controls.Add(this.cmbPaymentMethod);
             this.groupBoxPayment.Controls.Add(this.lblPaymentMethod);
-            this.groupBoxPayment.Location = new System.Drawing.Point(8, 400);
+            this.groupBoxPayment.Location = new System.Drawing.Point(8, 399);
             this.groupBoxPayment.Name = "groupBoxPayment";
-            this.groupBoxPayment.Size = new System.Drawing.Size(430, 196);
+            this.groupBoxPayment.Size = new System.Drawing.Size(430, 211);
             this.groupBoxPayment.TabIndex = 103;
             this.groupBoxPayment.TabStop = false;
             this.groupBoxPayment.Text = "Payment";
@@ -457,7 +485,7 @@
             "Processing",
             "Completed",
             "Cancelled"});
-            this.cmbOrderStatus.Location = new System.Drawing.Point(160, 128);
+            this.cmbOrderStatus.Location = new System.Drawing.Point(162, 114);
             this.cmbOrderStatus.MaxDropDownItems = 4;
             this.cmbOrderStatus.MouseState = MaterialSkin.MouseState.OUT;
             this.cmbOrderStatus.Name = "cmbOrderStatus";
@@ -470,7 +498,7 @@
             this.materialLabel4.AutoSize = true;
             this.materialLabel4.Depth = 0;
             this.materialLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel4.Location = new System.Drawing.Point(20, 138);
+            this.materialLabel4.Location = new System.Drawing.Point(22, 124);
             this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel4.Name = "materialLabel4";
             this.materialLabel4.Size = new System.Drawing.Size(89, 19);
@@ -496,7 +524,7 @@
             "Pending",
             "Partial",
             "Paid"});
-            this.cmbPaymentStatus.Location = new System.Drawing.Point(160, 80);
+            this.cmbPaymentStatus.Location = new System.Drawing.Point(162, 66);
             this.cmbPaymentStatus.MaxDropDownItems = 4;
             this.cmbPaymentStatus.MouseState = MaterialSkin.MouseState.OUT;
             this.cmbPaymentStatus.Name = "cmbPaymentStatus";
@@ -509,7 +537,7 @@
             this.lblPaymentStatus.AutoSize = true;
             this.lblPaymentStatus.Depth = 0;
             this.lblPaymentStatus.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblPaymentStatus.Location = new System.Drawing.Point(20, 90);
+            this.lblPaymentStatus.Location = new System.Drawing.Point(22, 76);
             this.lblPaymentStatus.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblPaymentStatus.Name = "lblPaymentStatus";
             this.lblPaymentStatus.Size = new System.Drawing.Size(114, 19);
@@ -536,7 +564,7 @@
             "GCash",
             "Maya",
             "Card"});
-            this.cmbPaymentMethod.Location = new System.Drawing.Point(160, 30);
+            this.cmbPaymentMethod.Location = new System.Drawing.Point(162, 16);
             this.cmbPaymentMethod.MaxDropDownItems = 4;
             this.cmbPaymentMethod.MouseState = MaterialSkin.MouseState.OUT;
             this.cmbPaymentMethod.Name = "cmbPaymentMethod";
@@ -549,7 +577,7 @@
             this.lblPaymentMethod.AutoSize = true;
             this.lblPaymentMethod.Depth = 0;
             this.lblPaymentMethod.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblPaymentMethod.Location = new System.Drawing.Point(20, 40);
+            this.lblPaymentMethod.Location = new System.Drawing.Point(22, 26);
             this.lblPaymentMethod.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblPaymentMethod.Name = "lblPaymentMethod";
             this.lblPaymentMethod.Size = new System.Drawing.Size(122, 19);
@@ -563,7 +591,7 @@
             this.lblTotalItems.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.lblTotalItems.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
             this.lblTotalItems.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblTotalItems.Location = new System.Drawing.Point(16, 608);
+            this.lblTotalItems.Location = new System.Drawing.Point(16, 613);
             this.lblTotalItems.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTotalItems.Name = "lblTotalItems";
             this.lblTotalItems.Size = new System.Drawing.Size(129, 29);
@@ -576,7 +604,7 @@
             this.lblTotalItemInOrderList.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.lblTotalItemInOrderList.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
             this.lblTotalItemInOrderList.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblTotalItemInOrderList.Location = new System.Drawing.Point(144, 608);
+            this.lblTotalItemInOrderList.Location = new System.Drawing.Point(144, 613);
             this.lblTotalItemInOrderList.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTotalItemInOrderList.Name = "lblTotalItemInOrderList";
             this.lblTotalItemInOrderList.Size = new System.Drawing.Size(293, 29);
@@ -591,7 +619,7 @@
             this.materialLabel3.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel3.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
             this.materialLabel3.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.materialLabel3.Location = new System.Drawing.Point(16, 640);
+            this.materialLabel3.Location = new System.Drawing.Point(16, 645);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
             this.materialLabel3.Size = new System.Drawing.Size(123, 29);
@@ -604,7 +632,7 @@
             this.lblTotalInOrderList.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.lblTotalInOrderList.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
             this.lblTotalInOrderList.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblTotalInOrderList.Location = new System.Drawing.Point(144, 640);
+            this.lblTotalInOrderList.Location = new System.Drawing.Point(144, 645);
             this.lblTotalInOrderList.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblTotalInOrderList.Name = "lblTotalInOrderList";
             this.lblTotalInOrderList.Size = new System.Drawing.Size(293, 29);
@@ -669,28 +697,25 @@
             this.panelSeparator.Size = new System.Drawing.Size(1, 731);
             this.panelSeparator.TabIndex = 6;
             // 
-            // dateTimePickerOrderDate
+            // materialLabel2
             // 
-            this.dateTimePickerOrderDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePickerOrderDate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dateTimePickerOrderDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePickerOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerOrderDate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dateTimePickerOrderDate.Location = new System.Drawing.Point(16, 80);
-            this.dateTimePickerOrderDate.Name = "dateTimePickerOrderDate";
-            this.dateTimePickerOrderDate.ShowUpDown = true;
-            this.dateTimePickerOrderDate.Size = new System.Drawing.Size(200, 22);
-            this.dateTimePickerOrderDate.TabIndex = 104;
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel2.Location = new System.Drawing.Point(22, 166);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(123, 19);
+            this.materialLabel2.TabIndex = 108;
+            this.materialLabel2.Text = "Payment amount";
             // 
-            // buttonNow
+            // numericUpDownPaymenAmount
             // 
-            this.buttonNow.Location = new System.Drawing.Point(224, 80);
-            this.buttonNow.Name = "buttonNow";
-            this.buttonNow.Size = new System.Drawing.Size(75, 24);
-            this.buttonNow.TabIndex = 105;
-            this.buttonNow.Text = "Now";
-            this.buttonNow.UseVisualStyleBackColor = true;
-            this.buttonNow.Click += new System.EventHandler(this.buttonNow_Click);
+            this.numericUpDownPaymenAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDownPaymenAmount.Location = new System.Drawing.Point(162, 166);
+            this.numericUpDownPaymenAmount.Name = "numericUpDownPaymenAmount";
+            this.numericUpDownPaymenAmount.Size = new System.Drawing.Size(250, 31);
+            this.numericUpDownPaymenAmount.TabIndex = 109;
             // 
             // MenuOrderForm
             // 
@@ -714,6 +739,7 @@
             this.groupBoxPayment.ResumeLayout(false);
             this.groupBoxPayment.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDraftOrders)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPaymenAmount)).EndInit();
             this.ResumeLayout(false);
 
             }
@@ -784,6 +810,8 @@
         private DataGridView dgvDraftOrders;
         private Button buttonNow;
         private DateTimePicker dateTimePickerOrderDate;
+        private NumericUpDown numericUpDownPaymenAmount;
+        private MaterialSkin.Controls.MaterialLabel materialLabel2;
 
 
         // ... other controls ...
