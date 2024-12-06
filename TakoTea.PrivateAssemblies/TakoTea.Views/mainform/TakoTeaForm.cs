@@ -19,6 +19,7 @@ using TakoTea.View.Items.Item_Modals;
 using TakoTea.View.Orders;
 using TakoTea.View.Product.Product_Modals;
 using TakoTea.Views.mainform;
+using TakoTea.Views.reports;
 using TakoTea.Views.settings;
 namespace TakoTea.Views.MainForm
 {
@@ -458,6 +459,12 @@ namespace TakoTea.Views.MainForm
         {
             SettingsForm settingsForm = new SettingsForm();
             settingsForm.ShowDialog();
+        }
+
+        private void materialButton1_Click(object sender, EventArgs e)
+        {
+            ReportingForm reportingForm = new ReportingForm();
+            reportingForm.Show();
         }
     }
 }

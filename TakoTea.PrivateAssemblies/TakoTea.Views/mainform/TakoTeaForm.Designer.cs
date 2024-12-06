@@ -63,6 +63,7 @@
             this.btnReload = new MaterialSkin.Controls.MaterialButton();
             this.buttonQuickAccess = new MaterialSkin.Controls.MaterialButton();
             this.pictureBoxSettings = new System.Windows.Forms.PictureBox();
+            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
             this.materialTabControl1.SuspendLayout();
             this.tabPageDashboard.SuspendLayout();
             this.menuStripDashboardSections.SuspendLayout();
@@ -442,6 +443,7 @@
             this.btnReload.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
             this.btnReload.UseAccentColor = true;
             this.btnReload.UseVisualStyleBackColor = true;
+            this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
             // 
             // buttonQuickAccess
             // 
@@ -462,6 +464,7 @@
             this.buttonQuickAccess.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
             this.buttonQuickAccess.UseAccentColor = true;
             this.buttonQuickAccess.UseVisualStyleBackColor = true;
+            this.buttonQuickAccess.Click += new System.EventHandler(this.button1_Click);
             // 
             // pictureBoxSettings
             // 
@@ -475,12 +478,34 @@
             this.pictureBoxSettings.TabStop = false;
             this.pictureBoxSettings.Click += new System.EventHandler(this.pictureBoxSettings_Click);
             // 
+            // materialButton1
+            // 
+            this.materialButton1.AutoSize = false;
+            this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.materialButton1.Depth = 0;
+            this.materialButton1.HighEmphasis = true;
+            this.materialButton1.Icon = null;
+            this.materialButton1.Location = new System.Drawing.Point(974, 40);
+            this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialButton1.Name = "materialButton1";
+            this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.materialButton1.Size = new System.Drawing.Size(75, 28);
+            this.materialButton1.TabIndex = 9;
+            this.materialButton1.Text = "Report";
+            this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
+            this.materialButton1.UseAccentColor = true;
+            this.materialButton1.UseVisualStyleBackColor = true;
+            this.materialButton1.Click += new System.EventHandler(this.materialButton1_Click);
+            // 
             // TakoTeaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(1313, 774);
+            this.Controls.Add(this.materialButton1);
             this.Controls.Add(this.pictureBoxSettings);
             this.Controls.Add(this.buttonQuickAccess);
             this.Controls.Add(this.btnReload);
@@ -559,5 +584,6 @@
         private MaterialSkin.Controls.MaterialButton btnReload;
         private MaterialSkin.Controls.MaterialButton buttonQuickAccess;
         private System.Windows.Forms.PictureBox pictureBoxSettings;
+        private MaterialSkin.Controls.MaterialButton materialButton1;
     }
 }

@@ -220,7 +220,7 @@ namespace TakoTea.Views.Dashboard
                 {
                     Title = "Gross Revenue",
                     Values = new ChartValues<decimal>(revenueByLabel.Values.ToList()),
-                    // ... (other properties) ...
+                    LabelPoint = point => point.Y.ToString("₱#,##0.00")     ,    
                     StrokeThickness = 1,
 
                     Fill = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 118, 207)), // RGB(0, 118, 207)
@@ -231,6 +231,7 @@ namespace TakoTea.Views.Dashboard
                 {
                     Title = "Gross Profit",
                     Values = new ChartValues<decimal>(grossProfitByLabel.Values.ToList()),
+                    LabelPoint = point => point.Y.ToString("₱#,##0.00"),
                     StrokeThickness = 1,
                     Fill = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(184, 35, 32)), // RGB(184, 35, 32)
                     Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(184, 35, 32))
@@ -248,7 +249,7 @@ namespace TakoTea.Views.Dashboard
                 cartesianChartGrossRevenue.AxisY.Add(new Axis
                 {
                     Title = "Amount",
-                    LabelFormatter = value => value.ToString("C"),
+                    LabelFormatter = value => value.ToString("C", new CultureInfo("en-PH")),
                     FontSize = 12,
                     FontFamily = new System.Windows.Media.FontFamily("Segoe UI"),
                     Foreground = System.Windows.Media.Brushes.DimGray,
@@ -453,8 +454,7 @@ namespace TakoTea.Views.Dashboard
                 lblNumOrdersPercentChange.Text = $"+{numOrdersPercentChange:0.##}%"; // Format with a plus sign if positive or zero
             }
 
-            lblTotalRevenue.Text = totalRevenue.ToString("C");
-
+            lblTotalRevenue.Text = totalRevenue.ToString("₱#,##0.00");
             if (totalRevenuePercentChange < 0)
             {
                 lblTotalRevenuePercentChange.Text = $"{totalRevenuePercentChange:0.##}%";
@@ -464,7 +464,7 @@ namespace TakoTea.Views.Dashboard
                 lblTotalRevenuePercentChange.Text = $"+{totalRevenuePercentChange:0.##}%";
             }
 
-            lblTotalProfit.Text = totalProfit.ToString("C");
+            lblTotalProfit.Text = totalProfit.ToString("₱#,##0.00");
 
             if (totalProfitPercentChange < 0)
             {
