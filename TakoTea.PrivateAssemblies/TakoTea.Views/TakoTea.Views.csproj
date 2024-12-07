@@ -404,12 +404,6 @@
     <Compile Include="Items\ItemListForm.Designer.cs">
       <DependentUpon>ItemListForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Logs\LogsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Logs\LogsForm.Designer.cs">
-      <DependentUpon>LogsForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="mainform\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -607,9 +601,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Items\ItemListForm.resx">
       <DependentUpon>ItemListForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Logs\LogsForm.resx">
-      <DependentUpon>LogsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="mainform\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
