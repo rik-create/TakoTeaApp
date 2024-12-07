@@ -15,11 +15,13 @@ namespace TakoTea.Models
     
     public partial class Entities : DbContext
     {
+
         public Entities()
-            : base("name=Entities")
+        : base("metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=\"data source=192.168.100.12,1433;initial catalog=TakoTea;user id=erick;password=1234;encrypt=False;MultipleActiveResultSets=True;App=EntityFramework\"")
         {
         }
-    
+
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

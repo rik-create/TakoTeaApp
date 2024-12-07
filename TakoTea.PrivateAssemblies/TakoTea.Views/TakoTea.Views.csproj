@@ -340,35 +340,26 @@
     <Compile Include="addons\AddAddOnsModal.Designer.cs">
       <DependentUpon>AddAddOnsModal.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+=======
     <Compile Include="batches\EditBatchModal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="batches\EditBatchModal.Designer.cs">
       <DependentUpon>EditBatchModal.cs</DependentUpon>
     </Compile>
+>>>>>>> ef20eaae55084bcf73772bbc0c361d61925e8dbb
     <Compile Include="batches\Batch Modals\AddBatchModal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="batches\Batch Modals\AddBatchModal.Designer.cs">
       <DependentUpon>AddBatchModal.cs</DependentUpon>
     </Compile>
-    <Compile Include="batches\Batch Modals\NewBatchForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="batches\Batch Modals\NewBatchForm.Designer.cs">
-      <DependentUpon>NewBatchForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="batches\BatchListForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="batches\BatchListForm.Designer.cs">
       <DependentUpon>BatchListForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="batches\EditBatchModal2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="batches\EditBatchModal2.Designer.cs">
-      <DependentUpon>EditBatchModal2.cs</DependentUpon>
     </Compile>
     <Compile Include="Custom Controls\UserControl1.cs">
       <SubType>UserControl</SubType>
@@ -587,20 +578,17 @@
     <EmbeddedResource Include="addons\AddAddOnsModal.resx">
       <DependentUpon>AddAddOnsModal.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
+=======
     <EmbeddedResource Include="batches\EditBatchModal.resx">
       <DependentUpon>EditBatchModal.cs</DependentUpon>
     </EmbeddedResource>
+>>>>>>> ef20eaae55084bcf73772bbc0c361d61925e8dbb
     <EmbeddedResource Include="batches\Batch Modals\AddBatchModal.resx">
       <DependentUpon>AddBatchModal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="batches\Batch Modals\NewBatchForm.resx">
-      <DependentUpon>NewBatchForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="batches\BatchListForm.resx">
       <DependentUpon>BatchListForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="batches\EditBatchModal2.resx">
-      <DependentUpon>EditBatchModal2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard\DashboardForm.resx">
       <DependentUpon>DashboardForm.cs</DependentUpon>
@@ -726,6 +714,10 @@
     <None Include="Resources\icons8-export-pdf-48.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Helpers\Helpers.csproj">
+      <Project>{EB8914B0-29C2-4CE7-9678-9C0634611B25}</Project>
+      <Name>Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TakoTea.Configurations\TakoTea.Configurations.csproj">
       <Project>{c19375c2-227c-47c8-826f-325fe05f3642}</Project>
       <Name>TakoTea.Configurations</Name>

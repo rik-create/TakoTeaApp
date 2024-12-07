@@ -107,6 +107,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthenticationHelper.cs" />
     <Compile Include="ChartHelper.cs" />
     <Compile Include="CheckedItemIterator.cs" />
     <Compile Include="CheckedListBoxHelper.cs" />
@@ -130,6 +131,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Helpers\Helpers.csproj">
+      <Project>{EB8914B0-29C2-4CE7-9678-9C0634611B25}</Project>
+      <Name>Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TakoTea.Configurations\TakoTea.Configurations.csproj">
       <Project>{C19375C2-227C-47C8-826F-325FE05F3642}</Project>
       <Name>TakoTea.Configurations</Name>
