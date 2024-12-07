@@ -95,53 +95,69 @@ namespace TakoTea.Views.Order
 
         public void GenerateReceipt(int orderId)
         {
-
-            var order = _context.OrderModels
-                .Include(o => o.OrderItems)
-                .FirstOrDefault(o => o.OrderId == orderId);
-
-            if (order == null)
+            try
             {
-                MessageBox.Show($"Order with ID {orderId} not found.");
-                return;
-            }
+                var order = _context.OrderModels
+                    .Include(o => o.OrderItems)
+                    .FirstOrDefault(o => o.OrderId == orderId);
 
-            var receiptContent = new StringBuilder();
-
-            // Centered and styled header
-            receiptContent.AppendLine("TakoTea".PadLeft(24) + "\n");
-            receiptContent.AppendLine("=".PadRight(42, '='));
-            receiptContent.AppendLine("Order Receipt".PadLeft(27));
-            receiptContent.AppendLine("=".PadRight(42, '=') + "\n"); // Add extra newline for spacing
-
-            receiptContent.AppendLine($"Order ID: {order.OrderId}");
-            receiptContent.AppendLine($"Order Date: {order.OrderDate:yyyy-MM-dd HH:mm:ss}");
-
-            if (!string.IsNullOrEmpty(order.CustomerName))
-            {
-                receiptContent.AppendLine($"Customer: {order.CustomerName}");
-            }
-
-            receiptContent.AppendLine($"Payment Method: {order.PaymentMethod}");
-            receiptContent.AppendLine($"Payment Status: {order.PaymentStatus}");
-
-            receiptContent.AppendLine("\nItems:");
-            foreach (var item in order.OrderItems)
-            {
-                // Improved formatting for item details
-                receiptContent.AppendLine($"- {item.ProductName,-15} {item.Quantity} x {item.Price,8:₱#,##0.00} = {item.TotalPrice,9:₱#,##0.00}");
-                if (!string.IsNullOrEmpty(item.AddOns))
+                if (order == null)
                 {
-                    receiptContent.AppendLine($"   Add-ons: {item.AddOns}"); // Consistent indentation
+                    MessageBox.Show($"Order with ID {orderId} not found.");
+                    return;
                 }
+
+                var receiptContent = new StringBuilder();
+
+                // Centered and styled header
+                receiptContent.AppendLine("TakoTea".PadLeft(24) + "\n");
+                receiptContent.AppendLine("=".PadRight(42, '='));
+                receiptContent.AppendLine("Order Receipt".PadLeft(27));
+                receiptContent.AppendLine("=".PadRight(42, '=') + "\n"); // Add extra newline for spacing
+
+                receiptContent.AppendLine($"Order ID: {order.OrderId}");
+                receiptContent.AppendLine($"Order Date: {order.OrderDate:yyyy-MM-dd HH:mm:ss}");
+
+                if (!string.IsNullOrEmpty(order.CustomerName))
+                {
+                    receiptContent.AppendLine($"Customer: {order.CustomerName}");
+                }
+
+                receiptContent.AppendLine($"Payment Method: {order.PaymentMethod}");
+                receiptContent.AppendLine($"Payment Status: {order.PaymentStatus}");
+
+                receiptContent.AppendLine("\nItems:");
+                foreach (var item in order.OrderItems)
+                {
+                    // Improved formatting for item details
+                    receiptContent.AppendLine($"- {item.ProductName,-15} {item.Quantity} x {item.Price,8:₱#,##0.00} = {item.TotalPrice,9:₱#,##0.00}");
+                    if (!string.IsNullOrEmpty(item.AddOns))
+                    {
+                        receiptContent.AppendLine($"   Add-ons: {item.AddOns}"); // Consistent indentation
+                    }
+                }
+
+                receiptContent.AppendLine("=".PadRight(42, '='));
+                receiptContent.AppendLine($"Total: {order.TotalAmount,35:₱#,##0.00}");
+
+                // Add Paid Amount and Change
+                if (order.PaymentAmount.HasValue)
+                {
+                    receiptContent.AppendLine($"Paid Amount: {order.PaymentAmount.Value,30:₱#,##0.00}");
+                }
+                if (order.ChangeAmount.HasValue)
+                {
+                    receiptContent.AppendLine($"Change: {order.ChangeAmount.Value,37:₱#,##0.00}");
+                }
+
+                ReceiptForm receiptForm = new ReceiptForm(orderId);
+                receiptForm.lblReceiptContent.Text = receiptContent.ToString();
+                receiptForm.Show();
             }
-
-            receiptContent.AppendLine("=".PadRight(42, '='));
-            receiptContent.AppendLine($"Total: {order.TotalAmount,35:₱#,##0.00}"); 
-
-            ReceiptForm receiptForm = new ReceiptForm(orderId);
-            receiptForm.lblReceiptContent.Text = receiptContent.ToString();
-            receiptForm.Show();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while generating the receipt: {ex.Message}");
+            }
         }
 
         public void HandlePayment(int orderId, decimal amountPaid, string paymentMethod)
@@ -548,86 +564,99 @@ namespace TakoTea.Views.Order
 
         public void SaveDraftOrder(DataGridView dataGridViewOrderList, string totalAmount, string customerName, string paymentMethod)
         {
-            using (var context = new Entities())
+            try
             {
-                var draftOrder = new DraftOrder
+                using (var context = new Entities())
                 {
-                    CreatedDate = DateTime.Now,
-                    CustomerName = customerName,
-                    TotalAmount = decimal.Parse(totalAmount)
-                };
-
-
-                if (draftOrder.DraftOrderId == 0)
-                {
-                    context.DraftOrders.Add(draftOrder);
-                }
-
-                context.DraftOrders.Add(draftOrder);
-                context.SaveChanges();
-
-                MenuOrderFormService menuOrderForm = new MenuOrderFormService();
-                int draftOrderId = menuOrderForm.GetLatestDraftOrderId(); // Assuming you have a method to generate the next draft order ID
-
-                context.DraftOrderItems.RemoveRange(context.DraftOrderItems.Where(i => i.DraftOrderId == draftOrderId));
-
-                foreach (DataGridViewRow row in dataGridViewOrderList.Rows)
-                {
-                    if (row.IsNewRow)
-                        continue;
-
-                    string productName = row.Cells[0].Value.ToString();
-                    string sizeId = row.Cells[1].Value?.ToString() ?? string.Empty;
-                    string AddOns = row.Cells[2].Value.ToString();
-                    int variantId = string.IsNullOrEmpty(sizeId)
-                        ? _context.ComboMealVariants.FirstOrDefault(cmv => cmv.ComboMeal.ComboMealName == productName)?.ComboMealVariantID ?? 0
-                        : productsService.GetProductVariantId(productName, sizeId);
-
-                    var draftOrderItem = new DraftOrderItem
+                    var draftOrder = new DraftOrder
                     {
-                        DraftOrderId = draftOrderId,
-                        ProductName = productName,
-                        ProductVariantId = variantId,
-                        Quantity = Convert.ToInt32(row.Cells[3].Value),
-                        Price = Convert.ToDecimal(row.Cells[4].Value),
-                        CreatedBy = "System",
                         CreatedDate = DateTime.Now,
-                        AddOns = AddOns
-
+                        CustomerName = customerName,
+                        TotalAmount = decimal.Parse(totalAmount)
                     };
 
-                    context.DraftOrderItems.Add(draftOrderItem);
-                }
+                    if (draftOrder.DraftOrderId == 0)
+                    {
+                        context.DraftOrders.Add(draftOrder);
+                    }
 
-                context.SaveChanges();
+                    context.DraftOrders.Add(draftOrder);
+                    context.SaveChanges();
+
+                    MenuOrderFormService menuOrderForm = new MenuOrderFormService();
+                    int draftOrderId = menuOrderForm.GetLatestDraftOrderId(); // Assuming you have a method to generate the next draft order ID
+
+                    context.DraftOrderItems.RemoveRange(context.DraftOrderItems.Where(i => i.DraftOrderId == draftOrderId));
+
+                    foreach (DataGridViewRow row in dataGridViewOrderList.Rows)
+                    {
+                        if (row.IsNewRow)
+                            continue;
+
+                        string productName = row.Cells[0].Value.ToString();
+                        string sizeId = row.Cells[1].Value?.ToString() ?? string.Empty;
+                        string AddOns = row.Cells[2].Value.ToString();
+                        int variantId = string.IsNullOrEmpty(sizeId)
+                            ? _context.ComboMealVariants.FirstOrDefault(cmv => cmv.ComboMeal.ComboMealName == productName)?.ComboMealVariantID ?? 0
+                            : productsService.GetProductVariantId(productName, sizeId);
+
+                        var draftOrderItem = new DraftOrderItem
+                        {
+                            DraftOrderId = draftOrderId,
+                            ProductName = productName,
+                            ProductVariantId = variantId,
+                            Quantity = Convert.ToInt32(row.Cells[3].Value),
+                            Price = Convert.ToDecimal(row.Cells[4].Value),
+                            CreatedBy = "System",
+                            CreatedDate = DateTime.Now,
+                            AddOns = AddOns
+                        };
+
+                        context.DraftOrderItems.Add(draftOrderItem);
+                    }
+
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while saving the draft order: {ex.Message}");
             }
         }
 
         public void LoadDraftOrder(int draftOrderId, DataGridView dataGridViewOrderList, Label lblTotalInOrderList)
         {
-            using (var context = new Entities())
+            try
             {
-                var draftOrder = context.DraftOrders.Include(o => o.DraftOrderItems).FirstOrDefault(o => o.DraftOrderId == draftOrderId);
-
-                if (draftOrder == null)
+                using (var context = new Entities())
                 {
-                    return;
+                    var draftOrder = context.DraftOrders.Include(o => o.DraftOrderItems).FirstOrDefault(o => o.DraftOrderId == draftOrderId);
+
+                    if (draftOrder == null)
+                    {
+                        MessageBox.Show($"Draft order with ID {draftOrderId} not found.");
+                        return;
+                    }
+
+                    dataGridViewOrderList.Rows.Clear();
+
+                    foreach (var item in draftOrder.DraftOrderItems)
+                    {
+                        dataGridViewOrderList.Rows.Add(
+                            item.ProductName,
+                            productsService.GetSizeByVariantId(item.ProductVariantId),
+                            item.AddOns,
+                            item.Quantity,
+                            item.Price
+                        );
+                    }
+
+                    lblTotalInOrderList.Text = $"₱{draftOrder.TotalAmount:F2}";
                 }
-
-                dataGridViewOrderList.Rows.Clear();
-
-                foreach (var item in draftOrder.DraftOrderItems)
-                {
-                    dataGridViewOrderList.Rows.Add(
-                        item.ProductName,
-                        productsService.GetSizeByVariantId(item.ProductVariantId),
-                        item.AddOns,
-                        item.Quantity,
-                        item.Price
-                    );
-                }
-
-                lblTotalInOrderList.Text = $"₱{draftOrder.TotalAmount:F2}";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while loading the draft order: {ex.Message}");
             }
         }
         private byte[] ImageToByteArray(Image image)
@@ -815,67 +844,6 @@ namespace TakoTea.Views.Order
         }
 
 
-
-
-        public void SendDigitalReceipt(int orderId, string customerEmail)
-        {
-            //
-            string receiptContent = GenerateReceiptContent(orderId);
-            ReceiptForm receiptForm = new ReceiptForm(orderId); // Assuming ReceiptForm has a constructor that takes orderId
-            receiptForm.lblReceiptContent.Text = receiptContent.ToString();
-
-            // Capture the form as an image
-            Bitmap bmp = new Bitmap(receiptForm.Width, receiptForm.Height);
-            receiptForm.DrawToBitmap(bmp, new Rectangle(0, 0, receiptForm.Width, receiptForm.Height));
-
-
-            var imageAttachment = new MimePart("image", "png")
-            {
-                Content = new MimeContent(new MemoryStream(ImageToByteArray(bmp))),
-                ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
-                ContentTransferEncoding = ContentEncoding.Base64,
-                FileName
-= "Receipt.png"
-            };
-
-            // Create the email message
-            var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("Tako Tea", "takotea9@gmail.com"));
-            message.To.Add(new MailboxAddress("Recipient Name", customerEmail));
-            message.Subject
-     = "Email from MailKit with Gmail";
-            message.Body = new TextPart("plain")
-            {
-                Text = "This email was sent using MailKit with Gmail."
-            };
-
-            var multipart = new Multipart("mixed");
-            multipart.Add(message.Body); // Add the original text part
-            multipart.Add(imageAttachment);
-            message.Body = multipart;
-
-
-
-            // Connect to the Gmail SMTP server
-            using (var client = new SmtpClient())
-            {
-                client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-
-                // Use your Gmail email address and app password
-                client.Authenticate("takotea9@gmail.com", "rhdl vljl ztfn xzui");
-
-                client.Send(message);
-                client.Disconnect(true);
-            }
-
-            MessageBox.Show("Email sent successfully!");
-        }
-
-
-
-
-
-
         public void UpdateTotal()
         {
             throw new NotImplementedException();
@@ -891,7 +859,6 @@ namespace TakoTea.Views.Order
         {
             using (var transaction = _context.Database.BeginTransaction()) // Using simplified syntax
             {
-
                 try
                 {
                     // 1. Validate the order

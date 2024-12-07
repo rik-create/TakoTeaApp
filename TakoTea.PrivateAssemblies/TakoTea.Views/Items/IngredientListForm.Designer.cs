@@ -464,6 +464,8 @@
             this.dataGridViewIngredients.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewIngredients.Size = new System.Drawing.Size(1125, 489);
             this.dataGridViewIngredients.TabIndex = 5;
+            this.dataGridViewIngredients.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewIngredients_CellContentDoubleClick);
+            this.dataGridViewIngredients.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewIngredients_CellDoubleClick);
             // 
             // panel3
             // 

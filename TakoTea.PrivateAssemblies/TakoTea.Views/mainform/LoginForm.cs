@@ -19,6 +19,8 @@ namespace TakoTea.Views.mainform
 
 
         public static LoginForm Instance;
+
+        public static string Username = "";
         public LoginForm()
         {
 
@@ -76,6 +78,7 @@ namespace TakoTea.Views.mainform
                 mainForm.ShowDialog();
 
                 mainForm.Owner = this;
+
 
 
             }

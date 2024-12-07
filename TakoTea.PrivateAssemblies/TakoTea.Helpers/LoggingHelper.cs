@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace TakoTea.Helpers
                 ActivityType = activityType,
                 Description = description,
                 Timestamp = DateTime.Now,
-                Username = Environment.UserName
+                Username = AuthenticationHelper._loggedInUsername
             };
             context.ActivityLogs.Add(activityLog);
             context.SaveChanges();
@@ -36,7 +37,7 @@ namespace TakoTea.Helpers
                 NewValue = newValue,
                 Action = action,
                 Timestamp = DateTime.Now,
-                Username = Environment.UserName
+                Username = AuthenticationHelper._loggedInUsername
             };
             context.Logs.Add(log);
 

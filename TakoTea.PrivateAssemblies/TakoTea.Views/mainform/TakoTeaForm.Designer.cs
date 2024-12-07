@@ -30,8 +30,6 @@
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
             this.tabPageDashboard = new System.Windows.Forms.TabPage();
             this.panelDashboard = new System.Windows.Forms.Panel();
-            this.menuStripDashboardSections = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItemMainOverview = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageProduct = new System.Windows.Forms.TabPage();
             this.panelProduct = new System.Windows.Forms.Panel();
             this.menuStripProducts = new System.Windows.Forms.MenuStrip();
@@ -46,9 +44,6 @@
             this.toolStripMenuItemCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageStock = new System.Windows.Forms.TabPage();
             this.panelStock = new System.Windows.Forms.Panel();
-            this.menuStripStocks = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItemStockLevel = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemLowStockAlerts = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageBatch = new System.Windows.Forms.TabPage();
             this.panelBatch = new System.Windows.Forms.Panel();
             this.tabPageReports = new System.Windows.Forms.TabPage();
@@ -64,14 +59,12 @@
             this.materialComboBoxQuickAccess = new MaterialSkin.Controls.MaterialComboBox();
             this.materialTabControl1.SuspendLayout();
             this.tabPageDashboard.SuspendLayout();
-            this.menuStripDashboardSections.SuspendLayout();
             this.tabPageProduct.SuspendLayout();
             this.menuStripProducts.SuspendLayout();
             this.tabPageSales.SuspendLayout();
             this.tabPageItem.SuspendLayout();
             this.menuStripItem.SuspendLayout();
             this.tabPageStock.SuspendLayout();
-            this.menuStripStocks.SuspendLayout();
             this.tabPageBatch.SuspendLayout();
             this.tabPageReports.SuspendLayout();
             this.toolStripQuickAccess.SuspendLayout();
@@ -103,7 +96,6 @@
             // 
             this.tabPageDashboard.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tabPageDashboard.Controls.Add(this.panelDashboard);
-            this.tabPageDashboard.Controls.Add(this.menuStripDashboardSections);
             this.tabPageDashboard.ImageKey = "icons8-dashboard-24.png";
             this.tabPageDashboard.Location = new System.Drawing.Point(4, 42);
             this.tabPageDashboard.Name = "tabPageDashboard";
@@ -121,25 +113,6 @@
             this.panelDashboard.Name = "panelDashboard";
             this.panelDashboard.Size = new System.Drawing.Size(930, 694);
             this.panelDashboard.TabIndex = 3;
-            // 
-            // menuStripDashboardSections
-            // 
-            this.menuStripDashboardSections.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.menuStripDashboardSections.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
-            this.menuStripDashboardSections.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemMainOverview});
-            this.menuStripDashboardSections.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.menuStripDashboardSections.Location = new System.Drawing.Point(3, 3);
-            this.menuStripDashboardSections.Name = "menuStripDashboardSections";
-            this.menuStripDashboardSections.Size = new System.Drawing.Size(1296, 24);
-            this.menuStripDashboardSections.TabIndex = 2;
-            this.menuStripDashboardSections.Text = "Dashboard Sections";
-            // 
-            // toolStripMenuItemMainOverview
-            // 
-            this.toolStripMenuItemMainOverview.Name = "toolStripMenuItemMainOverview";
-            this.toolStripMenuItemMainOverview.Size = new System.Drawing.Size(98, 20);
-            this.toolStripMenuItemMainOverview.Text = "Main Overview";
             // 
             // tabPageProduct
             // 
@@ -175,18 +148,21 @@
             this.menuStripProducts.Size = new System.Drawing.Size(1279, 24);
             this.menuStripProducts.TabIndex = 3;
             this.menuStripProducts.Text = "Dashboard Sections";
+            this.menuStripProducts.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStripProducts_ItemClicked);
             // 
             // toolStripMenuItemProducts
             // 
             this.toolStripMenuItemProducts.Name = "toolStripMenuItemProducts";
             this.toolStripMenuItemProducts.Size = new System.Drawing.Size(66, 20);
             this.toolStripMenuItemProducts.Text = "Products";
+            this.toolStripMenuItemProducts.Click += new System.EventHandler(this.toolStripMenuItemProducts_Click);
             // 
             // toolStripMenuItemProductVariant
             // 
             this.toolStripMenuItemProductVariant.Name = "toolStripMenuItemProductVariant";
             this.toolStripMenuItemProductVariant.Size = new System.Drawing.Size(60, 20);
             this.toolStripMenuItemProductVariant.Text = "Variants";
+            this.toolStripMenuItemProductVariant.Click += new System.EventHandler(this.toolStripMenuItemProductVariant_Click);
             // 
             // tabPageSales
             // 
@@ -262,7 +238,6 @@
             // 
             this.tabPageStock.AutoScroll = true;
             this.tabPageStock.Controls.Add(this.panelStock);
-            this.tabPageStock.Controls.Add(this.menuStripStocks);
             this.tabPageStock.ImageKey = "inventory.png";
             this.tabPageStock.Location = new System.Drawing.Point(4, 42);
             this.tabPageStock.Name = "tabPageStock";
@@ -278,32 +253,6 @@
             this.panelStock.Name = "panelStock";
             this.panelStock.Size = new System.Drawing.Size(630, 456);
             this.panelStock.TabIndex = 8;
-            // 
-            // menuStripStocks
-            // 
-            this.menuStripStocks.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.menuStripStocks.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
-            this.menuStripStocks.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemStockLevel,
-            this.toolStripMenuItemLowStockAlerts});
-            this.menuStripStocks.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.menuStripStocks.Location = new System.Drawing.Point(0, 0);
-            this.menuStripStocks.Name = "menuStripStocks";
-            this.menuStripStocks.Size = new System.Drawing.Size(1302, 24);
-            this.menuStripStocks.TabIndex = 6;
-            this.menuStripStocks.Text = "Dashboard Sections";
-            // 
-            // toolStripMenuItemStockLevel
-            // 
-            this.toolStripMenuItemStockLevel.Name = "toolStripMenuItemStockLevel";
-            this.toolStripMenuItemStockLevel.Size = new System.Drawing.Size(78, 20);
-            this.toolStripMenuItemStockLevel.Text = "Stock Level";
-            // 
-            // toolStripMenuItemLowStockAlerts
-            // 
-            this.toolStripMenuItemLowStockAlerts.Name = "toolStripMenuItemLowStockAlerts";
-            this.toolStripMenuItemLowStockAlerts.Size = new System.Drawing.Size(81, 20);
-            this.toolStripMenuItemLowStockAlerts.Text = "Stock Alerts";
             // 
             // tabPageBatch
             // 
@@ -488,9 +437,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.materialTabControl1.ResumeLayout(false);
             this.tabPageDashboard.ResumeLayout(false);
-            this.tabPageDashboard.PerformLayout();
-            this.menuStripDashboardSections.ResumeLayout(false);
-            this.menuStripDashboardSections.PerformLayout();
             this.tabPageProduct.ResumeLayout(false);
             this.tabPageProduct.PerformLayout();
             this.menuStripProducts.ResumeLayout(false);
@@ -501,9 +447,6 @@
             this.menuStripItem.ResumeLayout(false);
             this.menuStripItem.PerformLayout();
             this.tabPageStock.ResumeLayout(false);
-            this.tabPageStock.PerformLayout();
-            this.menuStripStocks.ResumeLayout(false);
-            this.menuStripStocks.PerformLayout();
             this.tabPageBatch.ResumeLayout(false);
             this.tabPageReports.ResumeLayout(false);
             this.toolStripQuickAccess.ResumeLayout(false);
@@ -524,7 +467,6 @@
         private System.Windows.Forms.Panel panelReports;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.TabPage tabPageDashboard;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemMainOverview;
         private System.Windows.Forms.MenuStrip menuStripItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemList;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCategory;
@@ -533,13 +475,9 @@
         private System.Windows.Forms.MenuStrip menuStripProducts;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemProducts;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemProductVariant;
-        private System.Windows.Forms.MenuStrip menuStripStocks;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemStockLevel;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemLowStockAlerts;
         private System.Windows.Forms.MenuStrip miniToolStrip;
         private System.Windows.Forms.Panel panelStock;
         public MaterialSkin.Controls.MaterialTabControl materialTabControl1;
-        public System.Windows.Forms.MenuStrip menuStripDashboardSections;
         private System.Windows.Forms.Panel panelDashboard;
         private System.Windows.Forms.Panel panelItem;
         private System.Windows.Forms.ToolStrip toolStripQuickAccess;

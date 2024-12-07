@@ -14,9 +14,11 @@ using TakoTea.Configurations;
 using TakoTea.Helpers;
 using TakoTea.Interfaces;
 using TakoTea.Models;
+using TakoTea.Product;
 using TakoTea.Repository;
 using TakoTea.View.Items.Item_Modals;
 using TakoTea.View.Orders;
+using TakoTea.View.Product;
 using TakoTea.View.Product.Product_Modals;
 using TakoTea.Views.mainform;
 using TakoTea.Views.reports;
@@ -510,5 +512,41 @@ namespace TakoTea.Views.MainForm
             }
         }
 
+        private void toolStripMenuItemProductVariant_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void menuStripProducts_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (e.ClickedItem == toolStripMenuItemProducts) // Assuming toolStripMenuItemProducts is your "Products" menu item
+            {
+                // Load ProductCategoryForm
+                Form formToLoad = new ProductCategoryForm(); // Or use your factory if you have one
+                panelProduct.Width = formToLoad.Width;
+                panelProduct.Height = formToLoad.Height;
+                CenterPanel(panelProduct);
+                AdjustFormHeightBasedOnPanel(panelProduct);
+                panelProduct.Controls.Clear();
+                panelProduct.Controls.Add(formToLoad);
+                formToLoad.Show();
+            }
+            else if (e.ClickedItem == toolStripMenuItemProductVariant) // Assuming toolStripMenuItemVariants is your "Variants" menu item
+            {
+                // Load ProductListForm
+                Form formToLoad = new ProductListForm(); // Or use your factory
+                panelProduct.Width = formToLoad.Width;
+                panelProduct.Height = formToLoad.Height;
+                CenterPanel(panelProduct);
+                AdjustFormHeightBasedOnPanel(panelProduct);
+                panelProduct.Controls.Clear();
+                panelProduct.Controls.Add(formToLoad);
+                formToLoad.Show();
+            }
+        }
+
+        private void toolStripMenuItemProducts_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

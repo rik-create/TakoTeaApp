@@ -8,7 +8,6 @@ using TakoTea.Configurations;
 using TakoTea.Helpers;
 using TakoTea.Repository;
 using TakoTea.View.Items.Item_Modals;
-using TakoTea.Views.Batches.Batch_Modals;
 using TakoTea.Views.Batches;
 namespace TakoTea.View.Batches
 {
@@ -88,6 +87,12 @@ namespace TakoTea.View.Batches
         private void pBoxShowFilter_Click(object sender, EventArgs e)
         {
             FilterPanelHelper.ToggleFilterPanel(panelFilteringComponents, btnHideFilters, pBoxShowFilter, true);
+        }
+
+        private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
+        {
+            DataGridViewHelper.DeleteSelectedRows<TakoTea.Models.Batch>(dataGridViewBatch, "BatchID");
+            LoadData();
         }
     }
 }

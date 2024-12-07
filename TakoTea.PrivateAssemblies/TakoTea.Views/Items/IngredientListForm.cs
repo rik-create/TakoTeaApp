@@ -8,11 +8,11 @@ using TakoTea.Configurations;
 using TakoTea.Helpers;
 using TakoTea.Repository;
 using TakoTea.View.Items.Item_Modals;
-using TakoTea.Views.Batches.Batch_Modals;
 using TakoTea.Interfaces;
 using TakoTea.Views.Batches;
 using TakoTea.Models;
 using TakoTea.Services;
+using TakoTea.View.Product.Product_Modals;
 namespace TakoTea.Views.Items
 {
     public partial class IngredientListForm : MaterialForm
@@ -139,8 +139,6 @@ namespace TakoTea.Views.Items
             LoadData();
             DataGridViewHelper.AddButtonToLastRow(dataGridViewIngredients, "CreateBatchButtonColumn", "Create Batch", ThemeConfigurator.GetAccentColor(), ThemeConfigurator.GetTextColor());
 
-            DataGridViewHelper.AddButtonToLastRow(dataGridViewIngredients, "EditIngredientButtonColumn", "Edit", HandleEditButtonClick, ThemeConfigurator.GetPrimaryColor(), ThemeConfigurator.GetTextColor());
-            DataGridViewHelper.AddButtonToLastRow(dataGridViewIngredients, "View More", "View More", HandleViewMoreButtonClick, ThemeConfigurator.GetAccentColor(), ThemeConfigurator.GetTextColor());
 
         }
 
@@ -219,6 +217,31 @@ namespace TakoTea.Views.Items
         private void btnExportSelectedItems_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridViewIngredients_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridViewIngredients_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && !dataGridViewIngredients.Rows[e.RowIndex].IsNewRow)
+            {
+                try
+                {
+                    // Get the ProductVariantID from the selected row
+                    int IngredientId = Convert.ToInt32(dataGridViewIngredients.Rows[e.RowIndex].Cells["IngredientID"].Value); // Assuming "ProductVariantID" is the column name
+
+                    // Create and show the EditProductVariantModal
+                    EditIngredientModal editIngredientModal = new EditIngredientModal(IngredientId);
+                    editIngredientModal.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error opening the edit modal: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }
