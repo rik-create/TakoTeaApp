@@ -340,6 +340,15 @@
     <Compile Include="addons\AddAddOnsModal.Designer.cs">
       <DependentUpon>AddAddOnsModal.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+=======
+    <Compile Include="batches\EditBatchModal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="batches\EditBatchModal.Designer.cs">
+      <DependentUpon>EditBatchModal.cs</DependentUpon>
+    </Compile>
+>>>>>>> ef20eaae55084bcf73772bbc0c361d61925e8dbb
     <Compile Include="batches\Batch Modals\AddBatchModal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -575,6 +584,12 @@
     <EmbeddedResource Include="addons\AddAddOnsModal.resx">
       <DependentUpon>AddAddOnsModal.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
+=======
+    <EmbeddedResource Include="batches\EditBatchModal.resx">
+      <DependentUpon>EditBatchModal.cs</DependentUpon>
+    </EmbeddedResource>
+>>>>>>> ef20eaae55084bcf73772bbc0c361d61925e8dbb
     <EmbeddedResource Include="batches\Batch Modals\AddBatchModal.resx">
       <DependentUpon>AddBatchModal.cs</DependentUpon>
     </EmbeddedResource>
