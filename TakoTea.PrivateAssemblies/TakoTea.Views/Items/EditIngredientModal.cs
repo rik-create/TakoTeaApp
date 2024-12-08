@@ -121,6 +121,14 @@ namespace TakoTea.View.Items.Item_Modals
                 return;
             }
 
+            // Store original values for logging
+            var originalIngredientName = ingredient.IngredientName;
+            var originalBrandName = ingredient.BrandName;
+            var originalIngredientImage = ingredient.IngredientImage;  // Store the original image as byte array
+            var originalDescription = ingredient.Description;
+            var originalStorageConditions = ingredient.StorageConditions;
+            var originalTypeOfIngredient = ingredient.TypeOfIngredient;
+
             ingredient.IngredientName = txtBoxName.Text;
             ingredient.BrandName = txtBoxBrandName.Text;
             ingredient.IngredientImage = ImageHelper.ImageToByteArray(pictureBoxImg.Image);
@@ -132,18 +140,66 @@ namespace TakoTea.View.Items.Item_Modals
 
             if (addOn != null)
             {
+
+                var originalAddOnName = addOn.AddOnName;
+                var originalAdditionalPrice = addOn.AdditionalPrice;
+                var originalUseForProductID = addOn.UseForProductID;
+                var originalQuantityUsedPerProduct = addOn.QuantityUsedPerProduct;
+
                 // Update add-on details if it exists
                 addOn.AddOnName = txtBoxName.Text;
                 addOn.AdditionalPrice = numericUpDownAddOnPrice.Value;
                 addOn.UseForProductID = (int?)cmbAddOnFor.SelectedValue;
                 addOn.QuantityUsedPerProduct = numericUpDownQuantityUsedPerProduct.Value;
+
+                // Log changes to add-on properties
+                if (originalAddOnName != addOn.AddOnName)
+                {
+                    LoggingHelper.LogChange("AddOns", addOn.Id, "AddOnName", originalAddOnName, addOn.AddOnName, "Updated", $"AddOnName changed from '{originalAddOnName}' to '{addOn.AddOnName}' for ingredient '{ingredient.IngredientName}'");
+                }
+                if (originalAdditionalPrice != addOn.AdditionalPrice)
+                {
+                    LoggingHelper.LogChange("AddOns", addOn.Id, "AdditionalPrice", originalAdditionalPrice.ToString(), addOn.AdditionalPrice.ToString(), "Updated", $"AdditionalPrice changed from '{originalAdditionalPrice}' to '{addOn.AdditionalPrice}' for ingredient '{ingredient.IngredientName}'");
+                }
+                if (originalUseForProductID != addOn.UseForProductID)
+                {
+                    LoggingHelper.LogChange("AddOns", addOn.Id, "UseForProductID", originalUseForProductID.ToString(), addOn.UseForProductID.ToString(), "Updated", $"UseForProductID changed from '{originalUseForProductID}' to '{addOn.UseForProductID}' for ingredient '{ingredient.IngredientName}'");
+                }
+                if (originalQuantityUsedPerProduct != addOn.QuantityUsedPerProduct)
+                {
+                    LoggingHelper.LogChange("AddOns", addOn.Id, "QuantityUsedPerProduct", originalQuantityUsedPerProduct.ToString(), addOn.QuantityUsedPerProduct.ToString(), "Updated", $"QuantityUsedPerProduct changed from '{originalQuantityUsedPerProduct}' to '{addOn.QuantityUsedPerProduct}' for ingredient '{ingredient.IngredientName}'");
+                }
             }
 
             try
             {
                 context.SaveChanges();
                 MessageBox.Show("Ingredient updated successfully.");
-                LogIngredientChange("Edit", ingredient.IngredientID, "Ingredient updated");
+                if (originalIngredientName != ingredient.IngredientName)
+                {
+                    LoggingHelper.LogChange("Ingredients", ingredient.IngredientID, "IngredientName", originalIngredientName, ingredient.IngredientName, "Updated", $"IngredientName changed from '{originalIngredientName}' to '{ingredient.IngredientName}'");
+                }
+                if (originalBrandName != ingredient.BrandName)
+                {
+                    LoggingHelper.LogChange("Ingredients", ingredient.IngredientID, "BrandName", originalBrandName, ingredient.BrandName, "Updated", $"BrandName changed from '{originalBrandName}' to '{ingredient.BrandName}'");
+                }
+                if (!originalIngredientImage.SequenceEqual(ingredient.IngredientImage))
+                {
+                    LoggingHelper.LogChange("Ingredients", ingredient.IngredientID, "IngredientImage", null, null, "Updated", $"IngredientImage changed for '{ingredient.IngredientName}'"); // No need to log the actual image data
+                }
+                if (originalDescription != ingredient.Description)
+                {
+                    LoggingHelper.LogChange("Ingredients", ingredient.IngredientID, "Description", originalDescription, ingredient.Description, "Updated", $"Description changed from '{originalDescription}' to '{ingredient.Description}'");
+                }
+                if (originalStorageConditions != ingredient.StorageConditions)
+                {
+                    LoggingHelper.LogChange("Ingredients", ingredient.IngredientID, "StorageConditions", originalStorageConditions, ingredient.StorageConditions, "Updated", $"StorageConditions changed from '{originalStorageConditions}' to '{ingredient.StorageConditions}'");
+                }
+                if (originalTypeOfIngredient != ingredient.TypeOfIngredient)
+                {
+                    LoggingHelper.LogChange("Ingredients", ingredient.IngredientID, "TypeOfIngredient", originalTypeOfIngredient, ingredient.TypeOfIngredient, "Updated", $"TypeOfIngredient changed from '{originalTypeOfIngredient}' to '{ingredient.TypeOfIngredient}'");
+                }
+
                 Close();
             }
             catch (Exception ex)

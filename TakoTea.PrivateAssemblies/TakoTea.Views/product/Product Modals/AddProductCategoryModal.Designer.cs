@@ -254,6 +254,7 @@
             this.btnSaveProduct.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnSaveProduct.UseAccentColor = false;
             this.btnSaveProduct.UseVisualStyleBackColor = true;
+            this.btnSaveProduct.Click += new System.EventHandler(this.btnSaveProduct_Click_1);
             // 
             // AddProductCategoryModal
             // 

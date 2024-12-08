@@ -6,7 +6,9 @@ using System.Drawing;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
+using TakoTea.Models;
 using TakoTea.Repository;
+using TakoTea.Services;
 using TakoTea.View.Items.Item_Modals;
 using TakoTea.Views.Batches;
 namespace TakoTea.View.Batches
@@ -22,7 +24,9 @@ namespace TakoTea.View.Batches
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
             _dao = new DataAccessObject();
             _batchRepo = new BatchRepository(_dao);
+            LoadData();
             DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewBatch);
+            DataGridViewHelper.HideColumn(dataGridViewBatch, "BatchID");
 
 
         }
@@ -36,7 +40,10 @@ namespace TakoTea.View.Batches
              bindingSource: bindingSource1,
              bindingNavigator: bindingNavigatorBatch,
              errorMessage: "Failed to load batch data."
+
          );
+            DataGridViewHelper.FormatColumnHeaders(dataGridViewBatch);
+
         }
         private void btnShowFilter_Click(object sender, EventArgs e)
         {
@@ -94,5 +101,43 @@ namespace TakoTea.View.Batches
             DataGridViewHelper.DeleteSelectedRows<TakoTea.Models.Batch>(dataGridViewBatch, "BatchID");
             LoadData();
         }
+
+
+        private void dataGridViewBatch_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // 1. Check if a valid row is double-clicked (not the header row)
+            if (e.RowIndex >= 0)
+            {
+                try
+                {
+                    // 2. Get the BatchID from the selected row
+                    int batchID = Convert.ToInt32(dataGridViewBatch.Rows[e.RowIndex].Cells["BatchID"].Value); // Assuming you have a "BatchID" column
+
+                    // 3. Retrieve the Batch object using your BatchService
+                    Batch selectedBatch = _batchRepo.GetBatchByBatchId(batchID); // You'll need to implement this method
+
+                    // 4. Open the EditBatchModal with the selected batch
+                    if (selectedBatch != null)
+                    {
+                        using (var editBatchModal = new EditBatchModal(selectedBatch))
+                        {
+                            editBatchModal.ShowDialog();
+
+                            // 5. Refresh the DataGridView after editing (optional)
+                            LoadData(); // Assuming you have a method to load batch data into the DataGridView
+                        }
+                    }
+                    else
+                    {
+                        DialogHelper.ShowError("Batch not found.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    DialogHelper.ShowError($"An error occurred: {ex.Message}");
+                }
+            }
+        }
+
     }
 }

@@ -12,7 +12,7 @@ namespace TakoTea.View.Product
     public partial class ProductCategoryForm : MaterialForm
     {
 
-        IProductCategoryService service;
+        ProductCategoryService service;
         DataAccessObject _dao;
         public ProductCategoryForm()
         {

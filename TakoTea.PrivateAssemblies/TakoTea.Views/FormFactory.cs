@@ -10,7 +10,7 @@ using TakoTea.View.Settings;
 using TakoTea.Views.Dashboard;
 using TakoTea.Views.Items;
 using TakoTea.Views.Stock;
-using TakoTea.Views.Logs;
+using TakoTea.Views.Logs2;
 namespace TakoTea.Views
 {
     public class FormFactory : IFormFactory
@@ -37,6 +37,8 @@ namespace TakoTea.Views
                     return new LogsForm();
                 case "Settings":
                     return new UserManagementForm();
+                case "ProductCateg":
+                    return new ProductForm();
                 // Add more cases as needed...
                 default:
                     return null;

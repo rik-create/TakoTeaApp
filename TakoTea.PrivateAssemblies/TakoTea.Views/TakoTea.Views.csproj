@@ -410,10 +410,6 @@
     <Compile Include="Logs2\LogsForm.Designer.cs">
       <DependentUpon>LogsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LogsForm.Designer.cs" />
     <Compile Include="mainform\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -463,6 +459,12 @@
     <Compile Include="Other\LoadingScreen.Designer.cs">
       <DependentUpon>LoadingScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProductForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductForm.Designer.cs">
+      <DependentUpon>ProductForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="product\Product Modals\AddComboMealModal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -480,12 +482,6 @@
     </Compile>
     <Compile Include="product\Product Modals\AddProductModal.Designer.cs">
       <DependentUpon>AddProductModal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="product\Product Modals\EditProductModal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="product\Product Modals\EditProductModal.Designer.cs">
-      <DependentUpon>EditProductModal.cs</DependentUpon>
     </Compile>
     <Compile Include="product\Product Modals\EditProductVariantModal.cs">
       <SubType>Form</SubType>
@@ -615,7 +611,6 @@
     <EmbeddedResource Include="Logs2\LogsForm.resx">
       <DependentUpon>LogsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LogsForm.resx" />
     <EmbeddedResource Include="mainform\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -636,6 +631,9 @@
     <EmbeddedResource Include="Order\OrdersQueueForm.resx">
       <DependentUpon>OrdersQueueForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProductForm.resx">
+      <DependentUpon>ProductForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="product\Product Modals\AddComboMealModal.resx">
       <DependentUpon>AddComboMealModal.cs</DependentUpon>
     </EmbeddedResource>
@@ -644,9 +642,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="product\Product Modals\AddProductModal.resx">
       <DependentUpon>AddProductModal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="product\Product Modals\EditProductModal.resx">
-      <DependentUpon>EditProductModal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="product\Product Modals\EditProductVariantModal.resx">
       <DependentUpon>EditProductVariantModal.cs</DependentUpon>

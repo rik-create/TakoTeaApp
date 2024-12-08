@@ -9,7 +9,7 @@ using TakoTea.Configurations;
 using TakoTea.Helpers;
 using TakoTea.Interfaces;
 using TakoTea.Models;
-using TakoTea.Product.Product_Modals;
+using TakoTea.Product;
 using TakoTea.Repository;
 using TakoTea.Services;
 using TakoTea.View.Sales;
@@ -32,9 +32,10 @@ namespace TakoTea.Product
             _dataAccessObject = new DataAccessObject();
             _productService = new ProductsService();
             _salesService = new SalesService(_context);
-            DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewSalesList);
             menuOrderFormService = new MenuOrderFormService();
             LoadData();
+            DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewSalesList);
+
             DataGridViewHelper.HideColumn(dataGridViewSalesList, "OrderId");
 
 
@@ -55,11 +56,7 @@ namespace TakoTea.Product
 
         private void LoadData()
         {
-
             // Retrieve both Product and ProductVariant data
-
-
-
 
             // Bind the data to the DataGridView
             DataGridViewHelper.LoadData(
@@ -72,6 +69,15 @@ namespace TakoTea.Product
 
             // Hide the ImagePath column
             DataGridViewHelper.HideColumn(dataGridViewSalesList, "OrderId");
+
+            // Format TotalAmount column as currency
+            dataGridViewSalesList.Columns["TotalAmount"].DefaultCellStyle.Format = "₱#,##0.00";
+            dataGridViewSalesList.Columns["GrossProfit"].DefaultCellStyle.Format = "₱#,##0.00";
+            DataGridViewHelper.FormatColumnHeaders(dataGridViewSalesList);
+            foreach (DataGridViewColumn column in dataGridViewSalesList.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
+            }
 
         }
 

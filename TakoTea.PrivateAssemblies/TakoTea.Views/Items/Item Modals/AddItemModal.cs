@@ -41,6 +41,7 @@ namespace TakoTea.View.Items.Item_Modals
             numericUpDownQuantityUsedPerProduct.Enabled = false;
             materialLabel3.Enabled = false;
             materialCheckedListBoxAllergens.CheckOnClick = true;
+            btnCancel.Click += btnCancel_Click;
         }// The value to bind (ProductID)
          //
          //
@@ -63,9 +64,33 @@ namespace TakoTea.View.Items.Item_Modals
             addBatchModal.lblQuantity.Text = ingredient.MeasuringUnit;
             addBatchModal.ShowDialog();
         }
-        private void btnConfirm_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
-            _ = MessageBox.Show("Processing...");
+            DialogResult dialogResult = MessageBox.Show(
+               "Are you sure you want to cancel? Any unsaved changes will be lost.",
+               "Confirm Cancel",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Warning
+           );
+            if (dialogResult == DialogResult.Yes)
+            {
+                Close();
+            }
+        }
+            private void btnConfirm_Click(object sender, EventArgs e)
+        {
+            // Validate inputs
+            if (string.IsNullOrWhiteSpace(txtBoxName.Text) ||
+                string.IsNullOrWhiteSpace(txtBoxBrandName.Text) ||
+                string.IsNullOrWhiteSpace(txtBoxItemDescription.Text) ||
+                pictureBoxImg.Image == null ||
+                cmbboxStorageCondition.SelectedItem == null ||
+                cmbTypeOfIngredient.SelectedItem == null ||
+                cmbMeasuringUnit.SelectedItem == null)
+            {
+                MessageBox.Show("Please fill in all required fields and select an image.");
+                return;
+            }
 
             // Load the image into a byte array
             byte[] imageData;
@@ -113,8 +138,19 @@ namespace TakoTea.View.Items.Item_Modals
                     _inventoryService.AddIngredient(ingredient);
                     transaction.Commit();
 
+                    LoggingHelper.LogChange(
+                        "Ingredients",                // Table name
+                        ingredient.IngredientID,      // Record ID
+                        "New Ingredient",             // Column name (or any descriptive text)
+                        null,                         // Old value (null for new ingredient)
+                        ingredient.ToString(),        // New value (you might need to override ToString() in your Ingredient class for a more descriptive log)
+                        "Added",                      // Action
+                        $"Ingredient '{ingredient.IngredientName}' added with ID '{ingredient.IngredientID}'" // Description
+                    );
+
                     _ = MessageBox.Show("Ingredient added successfully.");
                     OpenAddBatchModal(ingredient);
+                    this.Close();
                 }
                 catch (Exception ex)
                 {

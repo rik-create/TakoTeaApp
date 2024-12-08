@@ -111,7 +111,7 @@ namespace TakoTea.Views.Order.Order_Modals
             this.groupBoxProduct.Size = new System.Drawing.Size(500, 249);
             this.groupBoxProduct.TabIndex = 103;
             this.groupBoxProduct.TabStop = false;
-            this.groupBoxProduct.Text = "Product";
+            this.groupBoxProduct.Text = "s";
             // 
             // productCard
             // 
@@ -218,11 +218,11 @@ namespace TakoTea.Views.Order.Order_Modals
             // 
             // btnAddToDgViewOrderList
             // 
-            this.btnAddToDgViewOrderList.Location = new System.Drawing.Point(410, 10);
+            this.btnAddToDgViewOrderList.Location = new System.Drawing.Point(406, 10);
             this.btnAddToDgViewOrderList.Name = "btnAddToDgViewOrderList";
             this.btnAddToDgViewOrderList.Size = new System.Drawing.Size(75, 23);
             this.btnAddToDgViewOrderList.TabIndex = 2;
-            this.btnAddToDgViewOrderList.Text = "Add";
+            this.btnAddToDgViewOrderList.Text = "Confirm";
             this.btnAddToDgViewOrderList.UseVisualStyleBackColor = true;
             this.btnAddToDgViewOrderList.Click += new System.EventHandler(this.btnAddToDgViewOrderList_Click);
             // 

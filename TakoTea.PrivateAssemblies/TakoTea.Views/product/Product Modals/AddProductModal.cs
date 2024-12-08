@@ -520,7 +520,6 @@ namespace TakoTea.View.Product.Product_Modals
 
                             ProductVariantIngredient productVariantIngredient = new ProductVariantIngredient
                             {
-                                // Assuming GetNextProductVariantId returns the correct ID for the current variant
                                 ProductVariantID = _productsService.GetNextProductVariantId(),
                                 IngredientID = ingredientId,
                                 QuantityPerVariant = quantity,
@@ -528,6 +527,17 @@ namespace TakoTea.View.Product.Product_Modals
                             };
 
                             productVariantIngredientsToSave.Add(productVariantIngredient);
+
+                            // Log the addition of the new ingredient
+                            LoggingHelper.LogChange(
+                                "ProductVariantIngredients",
+                                productVariantIngredient.ProductVariantIngredientID,
+                                "New Ingredient",
+                                null,
+                                productVariantIngredient.ToString(),
+                                "Added",
+                                $"Ingredient '{ingredientName}' added with quantity '{quantity} {measuringUnit}'"
+                            );
                         }
                         else
                         {
@@ -547,6 +557,15 @@ namespace TakoTea.View.Product.Product_Modals
                     {
                         ingredient.ProductVariantID = productVariant.ProductVariantID;
                         _productsService.AddProductVariantIngredient(ingredient);
+                        LoggingHelper.LogChange(
+                            "ProductVariantIngredients",                // Table name
+                            ingredient.ProductVariantIngredientID,      // Record ID
+                            "New ProductVariantIngredient",             // Column name
+                            null,                                       // Old value
+                            ingredient.ToString(),                      // New value
+                            "Added",                                    // Action
+                            $"Ingredient '{ingredient.IngredientID}' added to product variant '{ingredient.ProductVariantID}'" // Description
+                        );
                     }
                 }
 

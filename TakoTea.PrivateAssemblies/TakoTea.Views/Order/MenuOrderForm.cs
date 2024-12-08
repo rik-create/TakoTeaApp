@@ -8,6 +8,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Controls;
+using TakoTea.Helpers;
 using TakoTea.Models;
 using TakoTea.Services;
 using TakoTea.Views.Order;
@@ -58,6 +59,9 @@ namespace TakoTea.View.Orders
             lblOrderId.Text = _service.GenerateNewOrderId().ToString();
             // Handle the delete menu item click
             deleteMenuItem.Click += deleteMenuItem_Click;
+            numericUpDownPaymenAmount.Maximum = 100000000;
+
+            LoadPaymentMethods();
         }
 
         // Assuming you have a DataGridView named dgvDraftOrders and a Button named btnLoadDraft
@@ -276,6 +280,18 @@ namespace TakoTea.View.Orders
                 UpdateChange();
             }
 
+            // Check if the changed cell is in the quantity column (assuming it's column index 3)
+            if (e.ColumnIndex == 3)
+            {
+                var quantityCell = dataGridViewOrderList.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                if (quantityCell.Value != null && int.TryParse(quantityCell.Value.ToString(), out int quantity))
+                {
+                    if (quantity == 0)
+                    {
+                        dataGridViewOrderList.Rows.RemoveAt(e.RowIndex);
+                    }
+                }
+            }
         }
 
 
@@ -387,8 +403,27 @@ namespace TakoTea.View.Orders
             }
             lblTotalInOrderList.Text = $"₱{total:F2}";
         }
-        
 
+        // Assuming you have these controls on your Form:
+        // - cmbPaymentMethod (ComboBox)
+
+        private void LoadPaymentMethods()
+        {
+            // Clear existing items in the ComboBox
+            cmbPaymentMethod.Items.Clear();
+
+            // Get the payment methods (assuming you have a method to retrieve them)
+            var paymentMethods = PaymentMethodService.GetAllPaymentMethods(); // Or however you get your payment methods
+
+            // Add the payment methods to the ComboBox
+            cmbPaymentMethod.Items.AddRange(paymentMethods.ToArray());
+
+            // Optionally, set a default selected item
+            if (cmbPaymentMethod.Items.Count > 0)
+            {
+                cmbPaymentMethod.SelectedIndex = 0; // Select the first item by default
+            }
+        }
         private void txtBoxSearchVariant_TextChanged(object sender, EventArgs e)
         {
             string searchText = txtBoxSearchVariant.Text.Trim();
@@ -460,6 +495,11 @@ namespace TakoTea.View.Orders
             dateTimePickerOrderDate.Format = DateTimePickerFormat.Custom;
             dateTimePickerOrderDate.CustomFormat = "MMMM ,d , yyyy";
 
+        }
+
+        private void numericUpDownPaymenAmount_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateChange();
         }
     }
 }

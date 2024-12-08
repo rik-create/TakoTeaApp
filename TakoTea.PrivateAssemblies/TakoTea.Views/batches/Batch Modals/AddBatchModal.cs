@@ -53,6 +53,38 @@ namespace TakoTea.Views.Batches
         {
             try
             {
+                // Validate inputs
+                if (string.IsNullOrEmpty(txtBoxBatchNumber.Text))
+                {
+                    DialogHelper.ShowError("Batch number cannot be empty.");
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(lblIngredientId.Text) || !int.TryParse(lblIngredientId.Text, out int ingredientId))
+                {
+                    DialogHelper.ShowError("Invalid ingredient ID.");
+                    return;
+                }
+
+                if (numericUpDownQuantity.Value <= 0)
+                {
+                    DialogHelper.ShowError("Quantity must be greater than zero.");
+                    return;
+                }
+
+                if (numericUpDownCost.Value <= 0)
+                {
+                    DialogHelper.ShowError("Cost must be greater than zero.");
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(dateTimePickerExpiration.Text))
+                {
+                    DialogHelper.ShowError("Expiration date cannot be empty.");
+                    return;
+                }
+
+                // Set expiration date to 6 months from now if not set
                 dateTimePickerExpiration.Value = DateTime.Now.AddMonths(6);
 
                 var batch = new Batch
@@ -71,15 +103,27 @@ namespace TakoTea.Views.Batches
                     BatchCost = numericUpDownCost.Value,
                     InitialStockLevel = numericUpDownQuantity.Value
                 };
+
                 batchService.AddBatch(batch);
+
+                LoggingHelper.LogChange(
+                    "Batches",                // Table name
+                    batch.BatchID,            // Record ID (assuming BatchID is auto-generated)
+                    "New Batch",              // Column name (or any descriptive text)
+                    null,                     // Old value (null for new batch)
+                    batch.ToString(),         // New value (you might need to override ToString() in your Batch class for a more descriptive log)
+                    "Added",                  // Action
+                    $"Batch '{batch.BatchNumber}' added for ingredient '{batch.IngredientID}'" // Description
+                );
+
                 DialogHelper.ShowSuccess("Batch saved successfully.");
+                this.Close();
             }
             catch (Exception ex)
             {
                 DialogHelper.ShowError($"Failed to save the batch. Error: {ex.Message}");
             }
             this.Close();
-        
         }
         private void btnCancelEdit_Click(object sender, EventArgs e)
         {

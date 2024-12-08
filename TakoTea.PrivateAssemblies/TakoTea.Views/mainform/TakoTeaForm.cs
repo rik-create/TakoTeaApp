@@ -43,17 +43,11 @@ namespace TakoTea.Views.MainForm
             _context = new Entities();
             // Assuming materialComboBoxQuickAccess is your ComboBox control
 
-            // Clear existing items (if any)
-            materialComboBoxQuickAccess.Items.Clear();
 
-            // Add the new items
-            materialComboBoxQuickAccess.Items.Add("Quick Access");
-            materialComboBoxQuickAccess.Items.Add("Reports");
-            materialComboBoxQuickAccess.Items.Add("Settings");
-            materialComboBoxQuickAccess.Items.Add("Reload");
 
             // Optionally, set a default selected item
-            materialComboBoxQuickAccess.SelectedIndex = 0; // Selects "Quick Access" by default
+            toolStripQuickAccess.Visible = false;
+        
         }
 
 
@@ -220,6 +214,10 @@ namespace TakoTea.Views.MainForm
                 case "tabPageSettings":
                     formKey = "Settings";
                     break;
+                case "tabPageProductCateg":
+                    formKey = "ProductCateg";
+                    break;
+
                 default:
                     return; // Exit if no valid tab is selected
             }
@@ -257,7 +255,12 @@ namespace TakoTea.Views.MainForm
                     targetPanel = panelReports;
                     Text = "TakoTea Logs";
                     break;
-         
+                case "ProductCateg":
+                    targetPanel = panelProductCateg;
+                    Text = "TakoTea Product Category";
+
+                    break;
+
                 default:
                     return; // Exit if no valid target panel found
             }
@@ -368,6 +371,7 @@ namespace TakoTea.Views.MainForm
         {
             AddItemModal addItemModal = new AddItemModal();
             _ = addItemModal.ShowDialog();
+
         }
         private void toolStripBtnAddProduct_Click(object sender, EventArgs e)
         {
@@ -377,7 +381,6 @@ namespace TakoTea.Views.MainForm
 
         private void btnReload_Click(object sender, EventArgs e)
         {
-            CheckInventoryAndSendNotifications(null, null);
 
 
             // 1. Get the currently selected tab
@@ -409,6 +412,9 @@ namespace TakoTea.Views.MainForm
                     break;
                 case "tabPageSettings":
                     formKey = "Settings";
+                    break;
+                case "tabPageProductCateg":
+                    formKey = "ProductCateg";
                     break;
                 default:
                     return; // Do nothing if an unexpected tab is selected
@@ -442,11 +448,13 @@ namespace TakoTea.Views.MainForm
                 case "Reports":
                     targetPanel = panelReports;
                     break;
-         
+                case "ProductCateg":
+                    targetPanel = panelProductCateg;
+                    break;
                 default:
                     return; // Do nothing if an unexpected formKey is encountered
             }
-
+            
             // If a valid form and target panel were found, replace the form in the panel
             if (targetPanel != null && newForm != null)
             {
@@ -470,83 +478,33 @@ namespace TakoTea.Views.MainForm
             }
         }
 
-        private void pictureBoxSettings_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void materialButton1_Click(object sender, EventArgs e)
         {
       
         }
 
-        private void materialComboBoxQuickAccess_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Get the selected item
-            string selectedItem = materialComboBoxQuickAccess.SelectedItem.ToString();
 
-            // Handle different selections
-            switch (selectedItem)
-            {
-                case "Quick Access":
-                    toolStripQuickAccess.Visible = !toolStripQuickAccess.Visible;
-                    toolStripQuickAccess.Enabled = toolStripQuickAccess.Visible;
-                    break;
-                case "Reports":
-                    ReportingForm reportingForm = new ReportingForm();
-                    reportingForm.Show();
-                    materialComboBoxQuickAccess.Text = "Other Module";
-                    break;
-                case "Settings":
-                    SettingsForm settingsForm = new SettingsForm();
-                    settingsForm.ShowDialog();
-                    materialComboBoxQuickAccess.Text = "Other Module";
-
-                    break;
-                case "Reload":
-                    btnReload_Click(sender, e);
-                    materialComboBoxQuickAccess.Text = "Other Module";
-
-                    break;
-             
-            }
-        }
 
         private void toolStripMenuItemProductVariant_Click(object sender, EventArgs e)
         {
 
         }
-        private void menuStripProducts_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            if (e.ClickedItem == toolStripMenuItemProducts) // Assuming toolStripMenuItemProducts is your "Products" menu item
-            {
-                // Load ProductCategoryForm
-                Form formToLoad = new ProductCategoryForm(); // Or use your factory if you have one
-                panelProduct.Width = formToLoad.Width;
-                panelProduct.Height = formToLoad.Height;
-                CenterPanel(panelProduct);
-                AdjustFormHeightBasedOnPanel(panelProduct);
-                panelProduct.Controls.Clear();
-                panelProduct.Controls.Add(formToLoad);
-                formToLoad.Show();
-            }
-            else if (e.ClickedItem == toolStripMenuItemProductVariant) // Assuming toolStripMenuItemVariants is your "Variants" menu item
-            {
-                // Load ProductListForm
-                Form formToLoad = new ProductListForm(); // Or use your factory
-                panelProduct.Width = formToLoad.Width;
-                panelProduct.Height = formToLoad.Height;
-                CenterPanel(panelProduct);
-                AdjustFormHeightBasedOnPanel(panelProduct);
-                panelProduct.Controls.Clear();
-                panelProduct.Controls.Add(formToLoad);
-                formToLoad.Show();
-            }
-        }
-
+   
         private void toolStripMenuItemProducts_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            ReportingForm reportingForm = new ReportingForm();
+            reportingForm.Show();
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            SettingsForm settingsForm = new SettingsForm();
+            settingsForm.ShowDialog();
         }
     }
 }

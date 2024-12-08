@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\..\packages\xunit.runner.visualstudio.2.8.2\build\net462\xunit.runner.visualstudio.props" Condition="Exists('..\..\packages\xunit.runner.visualstudio.2.8.2\build\net462\xunit.runner.visualstudio.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -73,10 +73,6 @@
     <ProjectReference Include="..\TakoTea.Repository\TakoTea.Repository.csproj">
       <Project>{7daba7c5-30ff-471f-9f11-322fd40745bd}</Project>
       <Name>TakoTea.Repository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TakoTea.Views\TakoTea.Views.csproj">
-      <Project>{33c2935e-d694-4d14-8470-e796bd37e31f}</Project>
-      <Name>TakoTea.Views</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

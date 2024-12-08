@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Runtime.Remoting.Contexts;
 using TakoTea.Controls;
 using TakoTea.View.Orders;
+using TakoTea.Services;
 namespace TakoTea.Views.Order.Order_Modals
 {
     public partial class OrderEntryModal : MaterialForm
@@ -58,12 +59,13 @@ namespace TakoTea.Views.Order.Order_Modals
         // ... (rest of the code) ...
 
 
-        private void PopulateAddOns()
+        private void PopulateAddOns(string productName)
         {
-            // Fetch add-ons from the database that have matching batches with StockLevel > 0
+            // Fetch add-ons from the database that have matching batches with StockLevel > 0 and match the product name
             var addOns = _context.AddOns
                 .Where(a => a.IngredientID != null &&
-                            _context.Batches.Any(b => b.IngredientID == a.IngredientID && b.StockLevel > 0))
+                            _context.Batches.Any(b => b.IngredientID == a.IngredientID && b.StockLevel > 0) &&
+                            a.Product.ProductName == productName)
                 .ToList();
 
             // Clear existing items in the CheckedListBox
@@ -156,9 +158,9 @@ namespace TakoTea.Views.Order.Order_Modals
                 {
                     cmbSizes.SelectedIndex = 0;
                 }
-
+                string productName = (new ProductsService()).GetProductNameById(productVariant.ProductID);
                 // Populate add-ons
-                PopulateAddOns();
+                PopulateAddOns(productName);
 
                 // Update total price
                 UpdateTotalPrice();

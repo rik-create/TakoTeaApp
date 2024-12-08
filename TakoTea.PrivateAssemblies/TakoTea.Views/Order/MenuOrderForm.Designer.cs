@@ -72,6 +72,9 @@
             this.flPanelProductVariantsMenu = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanelCategpries = new System.Windows.Forms.FlowLayoutPanel();
             this.panelCart = new System.Windows.Forms.Panel();
+            this.txtCustomer = new System.Windows.Forms.TextBox();
+            this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblChange = new MaterialSkin.Controls.MaterialLabel();
             this.buttonNow = new System.Windows.Forms.Button();
             this.dateTimePickerOrderDate = new System.Windows.Forms.DateTimePicker();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
@@ -101,9 +104,6 @@
             this.btnConfirmOrder = new MaterialSkin.Controls.MaterialButton();
             this.dgvDraftOrders = new System.Windows.Forms.DataGridView();
             this.panelSeparator = new System.Windows.Forms.Panel();
-            this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
-            this.lblChange = new MaterialSkin.Controls.MaterialLabel();
-            this.txtCustomer = new System.Windows.Forms.TextBox();
             this.materialCard1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelSearch.SuspendLayout();
@@ -294,6 +294,41 @@
             this.panelCart.Size = new System.Drawing.Size(454, 731);
             this.panelCart.TabIndex = 1;
             // 
+            // txtCustomer
+            // 
+            this.txtCustomer.Location = new System.Drawing.Point(96, 40);
+            this.txtCustomer.Name = "txtCustomer";
+            this.txtCustomer.Size = new System.Drawing.Size(136, 20);
+            this.txtCustomer.TabIndex = 108;
+            // 
+            // materialLabel6
+            // 
+            this.materialLabel6.AutoSize = true;
+            this.materialLabel6.Depth = 0;
+            this.materialLabel6.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel6.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            this.materialLabel6.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.materialLabel6.Location = new System.Drawing.Point(16, 648);
+            this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel6.Name = "materialLabel6";
+            this.materialLabel6.Size = new System.Drawing.Size(74, 24);
+            this.materialLabel6.TabIndex = 106;
+            this.materialLabel6.Text = "Change:";
+            // 
+            // lblChange
+            // 
+            this.lblChange.Depth = 0;
+            this.lblChange.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.lblChange.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            this.lblChange.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblChange.Location = new System.Drawing.Point(144, 648);
+            this.lblChange.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblChange.Name = "lblChange";
+            this.lblChange.Size = new System.Drawing.Size(293, 29);
+            this.lblChange.TabIndex = 107;
+            this.lblChange.Text = "P 100";
+            this.lblChange.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // buttonNow
             // 
             this.buttonNow.Location = new System.Drawing.Point(224, 72);
@@ -478,6 +513,7 @@
             this.numericUpDownPaymenAmount.Name = "numericUpDownPaymenAmount";
             this.numericUpDownPaymenAmount.Size = new System.Drawing.Size(250, 31);
             this.numericUpDownPaymenAmount.TabIndex = 109;
+            this.numericUpDownPaymenAmount.ValueChanged += new System.EventHandler(this.numericUpDownPaymenAmount_ValueChanged);
             // 
             // materialLabel2
             // 
@@ -585,11 +621,6 @@
             this.cmbPaymentMethod.Hint = "Choose payment method";
             this.cmbPaymentMethod.IntegralHeight = false;
             this.cmbPaymentMethod.ItemHeight = 43;
-            this.cmbPaymentMethod.Items.AddRange(new object[] {
-            "Cash",
-            "GCash",
-            "Maya",
-            "Card"});
             this.cmbPaymentMethod.Location = new System.Drawing.Point(162, 16);
             this.cmbPaymentMethod.MaxDropDownItems = 4;
             this.cmbPaymentMethod.MouseState = MaterialSkin.MouseState.OUT;
@@ -722,41 +753,6 @@
             this.panelSeparator.Name = "panelSeparator";
             this.panelSeparator.Size = new System.Drawing.Size(1, 731);
             this.panelSeparator.TabIndex = 6;
-            // 
-            // materialLabel6
-            // 
-            this.materialLabel6.AutoSize = true;
-            this.materialLabel6.Depth = 0;
-            this.materialLabel6.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel6.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.materialLabel6.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.materialLabel6.Location = new System.Drawing.Point(16, 648);
-            this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel6.Name = "materialLabel6";
-            this.materialLabel6.Size = new System.Drawing.Size(74, 24);
-            this.materialLabel6.TabIndex = 106;
-            this.materialLabel6.Text = "Change:";
-            // 
-            // lblChange
-            // 
-            this.lblChange.Depth = 0;
-            this.lblChange.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.lblChange.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.lblChange.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblChange.Location = new System.Drawing.Point(144, 648);
-            this.lblChange.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblChange.Name = "lblChange";
-            this.lblChange.Size = new System.Drawing.Size(293, 29);
-            this.lblChange.TabIndex = 107;
-            this.lblChange.Text = "P 100";
-            this.lblChange.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtCustomer
-            // 
-            this.txtCustomer.Location = new System.Drawing.Point(96, 40);
-            this.txtCustomer.Name = "txtCustomer";
-            this.txtCustomer.Size = new System.Drawing.Size(136, 20);
-            this.txtCustomer.TabIndex = 108;
             // 
             // MenuOrderForm
             // 

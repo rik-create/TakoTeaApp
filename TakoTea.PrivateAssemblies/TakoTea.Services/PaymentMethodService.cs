@@ -9,7 +9,7 @@ using TakoTea.Models;
 
 namespace TakoTea.Services
 {
-    public class PaymentMethodService : IPaymentMethodForm
+    public class PaymentMethodService
     {
         private readonly Entities _context;
 
@@ -24,16 +24,53 @@ namespace TakoTea.Services
             // ... and populate the UI elements in the PaymentMethodForm
         }
 
-        public void AddPaymentMethod(PaymentMethod paymentMethod)
+        public static void RemovePaymentMethod(string paymentMethodName)
         {
-            // Validate the payment method
-            ValidatePaymentMethod(paymentMethod);
-
-            // Add the payment method to the database
-            _context.PaymentMethods.Add(paymentMethod);
-            _context.SaveChanges();
+            using (var context = new Entities())
+            {
+                var paymentMethod = context.PaymentMethods.FirstOrDefault(p => p.MethodName == paymentMethodName);
+                if (paymentMethod != null)
+                {
+                    paymentMethod.IsActive = false; // Soft delete by setting IsActive to false
+                    context.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("Payment method not found.");
+                }
+            }
         }
 
+        public static void AddPaymentMethod(string paymentMethodName)
+        {
+            using (var context = new Entities())
+            {
+                // Check if the payment method already exists (ignoring case)
+                if (context.PaymentMethods.Any(p => p.MethodName.Equals(paymentMethodName, StringComparison.OrdinalIgnoreCase)))
+                {
+                    throw new Exception("Payment method already exists.");
+                }
+
+                var newPaymentMethod = new PaymentMethod
+                {
+                    MethodName = paymentMethodName,
+                    IsActive = true
+                };
+
+                context.PaymentMethods.Add(newPaymentMethod);
+                context.SaveChanges();
+            }
+        }
+        public static List<string> GetAllPaymentMethods()
+        {
+            using (var context = new Entities())
+            {
+                return context.PaymentMethods
+                    .Where(p => p.IsActive) // Filter for active payment methods
+                    .Select(p => p.MethodName)
+                    .ToList();
+            }
+        }
         public void EditPaymentMethod(PaymentMethod paymentMethod)
         {
             // Validate the payment method

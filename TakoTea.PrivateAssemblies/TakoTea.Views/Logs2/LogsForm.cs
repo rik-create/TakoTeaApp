@@ -10,7 +10,7 @@ using TakoTea.Configurations;
 using TakoTea.Helpers;
 using TakoTea.Interfaces;
 using TakoTea.Models;
-using TakoTea.Product.Product_Modals;
+using TakoTea.Product;
 using TakoTea.Repository;
 using TakoTea.Services;
 using TakoTea.View.Sales;

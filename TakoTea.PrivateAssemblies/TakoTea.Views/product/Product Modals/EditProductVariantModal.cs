@@ -106,7 +106,6 @@ namespace TakoTea.View.Product.Product_Modals
             decimal priceChange = numericUpDownPriceChanges.Value;
             UpdatePriceAll(_originalProductVariant.VariantName, priceChange, false); // Decrease
         }
-
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             var transaction = _context.Database.BeginTransaction();
@@ -128,6 +127,10 @@ namespace TakoTea.View.Product.Product_Modals
                     return;
                 }
 
+                var originalPrice = productVariant.Price;
+                var originalInstructions = productVariant.Instructions;
+                var originalImagePath = productVariant.ImagePath;
+
                 productVariant.Price = decimal.Parse(txtBoxCurrentPrice.Text);
                 productVariant.Instructions = txtBoxInstructions.Text;
 
@@ -140,6 +143,19 @@ namespace TakoTea.View.Product.Product_Modals
                 _context.SaveChanges();
                 transaction.Commit();
                 MessageBox.Show("Updated successfully.");
+                if (originalPrice != productVariant.Price)
+                {
+                    LoggingHelper.LogChange("ProductVariants", productVariant.ProductVariantID, "Price", originalPrice.ToString(), productVariant.Price.ToString(), "Updated", $"Price changed from '{originalPrice}' to '{productVariant.Price}' for variant '{productVariant.VariantName}'");
+                }
+                if (originalInstructions != productVariant.Instructions)
+                {
+                    LoggingHelper.LogChange("ProductVariants", productVariant.ProductVariantID, "Instructions", originalInstructions, productVariant.Instructions, "Updated", $"Instructions changed from '{originalInstructions}' to '{productVariant.Instructions}' for variant '{productVariant.VariantName}'");
+                }
+                if (!originalImagePath.SequenceEqual(productVariant.ImagePath))
+                {
+                    LoggingHelper.LogChange("ProductVariants", productVariant.ProductVariantID, "ImagePath", null, null, "Updated", $"ImagePath changed for '{productVariant.VariantName}'"); // Image data not logged
+                }
+
                 Close();
             }
             catch (Exception ex)

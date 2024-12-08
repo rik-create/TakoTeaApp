@@ -27,9 +27,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CurrentStockLevelForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.miniToolStrip = new System.Windows.Forms.BindingNavigator(this.components);
             this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
             this.floatingActionButtonAddBatch = new MaterialSkin.Controls.MaterialFloatingActionButton();
@@ -65,7 +65,6 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dataGridViewStockLevels = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.pbSearch = new System.Windows.Forms.PictureBox();
             this.pBoxShowFilter = new System.Windows.Forms.PictureBox();
             this.btnHideFilters = new MaterialSkin.Controls.MaterialButton();
@@ -75,8 +74,6 @@
             this.panelExportButtons = new System.Windows.Forms.Panel();
             this.pictureBoxExportExcel = new System.Windows.Forms.PictureBox();
             this.pictureBoxExportPdf = new System.Windows.Forms.PictureBox();
-            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).BeginInit();
             this.materialCard2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -126,8 +123,6 @@
             this.materialCard2.Controls.Add(this.panel3);
             this.materialCard2.Controls.Add(this.panel1);
             this.materialCard2.Controls.Add(this.panelExportButtons);
-            this.materialCard2.Controls.Add(this.materialLabel2);
-            this.materialCard2.Controls.Add(this.materialLabel1);
             this.materialCard2.Depth = 0;
             this.materialCard2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.materialCard2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -526,36 +521,36 @@
             this.dataGridViewStockLevels.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewStockLevels.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridViewStockLevels.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewStockLevels.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewStockLevels.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewStockLevels.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewStockLevels.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewStockLevels.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewStockLevels.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridViewStockLevels.EnableHeadersVisualStyles = false;
             this.dataGridViewStockLevels.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dataGridViewStockLevels.Location = new System.Drawing.Point(0, 30);
             this.dataGridViewStockLevels.Name = "dataGridViewStockLevels";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewStockLevels.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewStockLevels.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewStockLevels.Size = new System.Drawing.Size(1125, 489);
             this.dataGridViewStockLevels.TabIndex = 5;
             // 
@@ -563,7 +558,6 @@
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.button1);
             this.panel3.Controls.Add(this.pbSearch);
             this.panel3.Controls.Add(this.pBoxShowFilter);
             this.panel3.Controls.Add(this.btnHideFilters);
@@ -574,16 +568,6 @@
             this.panel3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.panel3.Size = new System.Drawing.Size(1150, 60);
             this.panel3.TabIndex = 104;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(660, 20);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(130, 23);
-            this.button1.TabIndex = 96;
-            this.button1.Text = "**edit clicked";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // pbSearch
             // 
@@ -708,30 +692,6 @@
             this.pictureBoxExportPdf.TabIndex = 97;
             this.pictureBoxExportPdf.TabStop = false;
             // 
-            // materialLabel2
-            // 
-            this.materialLabel2.AutoSize = true;
-            this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.Location = new System.Drawing.Point(30, 680);
-            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(176, 19);
-            this.materialLabel2.TabIndex = 95;
-            this.materialLabel2.Text = "Total Low Stocks Item: 2";
-            // 
-            // materialLabel1
-            // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(30, 660);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(90, 19);
-            this.materialLabel1.TabIndex = 94;
-            this.materialLabel1.Text = "Total Item: 5";
-            // 
             // CurrentStockLevelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -744,7 +704,6 @@
             this.Text = "BatchListForm";
             ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).EndInit();
             this.materialCard2.ResumeLayout(false);
-            this.materialCard2.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panelFilteringComponents.ResumeLayout(false);
             this.panelFilteringComponents.PerformLayout();
@@ -772,8 +731,6 @@
         private System.Windows.Forms.Panel panelExportButtons;
         private System.Windows.Forms.PictureBox pictureBoxExportExcel;
         private System.Windows.Forms.PictureBox pictureBoxExportPdf;
-        private MaterialSkin.Controls.MaterialLabel materialLabel2;
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private System.Windows.Forms.Panel panel1;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private MaterialSkin.Controls.MaterialFloatingActionButton floatingActionButtonAddBatch;
@@ -813,6 +770,5 @@
         private MaterialSkin.Controls.MaterialSlider materialSlider1;
         private System.Windows.Forms.PictureBox pBoxShowFilter;
         private System.Windows.Forms.PictureBox pbSearch;
-        private System.Windows.Forms.Button button1;
     }
 }

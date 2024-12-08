@@ -32,6 +32,7 @@ namespace TakoTea.Repository
                         ingredient => ingredient.IngredientID, // Primary key in Ingredients
                         (batch, ingredient) => new
                         {
+                            batch.BatchID,
                             batch.IngredientID,
                             batch.BatchNumber,
                             IngredientName = ingredient.IngredientName, // Get IngredientName from Ingredients table
@@ -142,6 +143,14 @@ namespace TakoTea.Repository
             }
         }
 
+
+        public Batch GetBatchByBatchId(int batchID)
+        {
+            using (var context = new Entities()) // Replace YourDbContext
+            {
+                return context.Batches.Find(batchID);
+            }
+        }
         // Method to get a batch by its ID
         public BatchModel GetBatchById(int batchId)
         {

@@ -15,12 +15,12 @@ using TakoTea.Services;
 using TakoTea.View.Product.Product_Modals;
 namespace TakoTea.Product
 {
-    public partial class ProductListForm : MaterialForm
+    public partial class ProductForm : MaterialForm
     {
         DataAccessObject _dataAccessObject;
         ProductsService _productService;
         Entities _context;
-        public ProductListForm()
+        public ProductForm()
         {
             InitializeComponent();
             ThemeConfigurator.ApplyDarkTheme(this);
@@ -28,23 +28,23 @@ namespace TakoTea.Product
              _context = new Entities();
             _dataAccessObject = new DataAccessObject();
             _productService = new ProductsService();
+            DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewProductList);
             LoadData();
-            DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewProductVariantList);
+            DataGridViewHelper.HideColumn(dataGridViewProductList, "ProductCategoryID");
 
-            DataGridViewHelper.HideColumn(dataGridViewProductVariantList, "ProductVariantID");
+            DataGridViewHelper.HideColumn(dataGridViewProductList, "ProductImage");
 
 
-
-/*            DataGridViewHelper.AddButtonsToLastRow(dataGridViewProductVariantList, "IngredientsAndInstructions", "Ingredients & Instructions", handleIAndIButton);
-*/
+            /*            DataGridViewHelper.AddButtonsToLastRow(dataGridViewProductVariantList, "IngredientsAndInstructions", "Ingredients & Instructions", handleIAndIButton);
+            */
         }
 
 
         private void handleIAndIButton(int selectedRowIndex)
         {
-            if (selectedRowIndex >= 0 && selectedRowIndex < dataGridViewProductVariantList.Rows.Count)
+            if (selectedRowIndex >= 0 && selectedRowIndex < dataGridViewProductList.Rows.Count)
             {
-                int productVariantId = Convert.ToInt32(dataGridViewProductVariantList.Rows[selectedRowIndex].Cells["ProductVariantID"].Value);
+                int productVariantId = Convert.ToInt32(dataGridViewProductList.Rows[selectedRowIndex].Cells["ProductVariantID"].Value);
                 var productVariant = _context.ProductVariants.FirstOrDefault(pv => pv.ProductVariantID == productVariantId);
 
                 if (productVariant != null)
@@ -52,7 +52,7 @@ namespace TakoTea.Product
                     string message = $"Ingredients: {productVariant.Ingredients}\n\nInstructions: {productVariant.Instructions}";
 
                     // Create a custom font with increased size
-                    Font largerFont = new Font(dataGridViewProductVariantList.Font.FontFamily, 12, FontStyle.Regular);
+                    Font largerFont = new Font(dataGridViewProductList.Font.FontFamily, 12, FontStyle.Regular);
 
                     // Show the message box with the custom font and title
                     // Show the message box with the custom font and title
@@ -79,32 +79,30 @@ namespace TakoTea.Product
             PopulateProductCheckedListBox();
         }
 
- 
+
+
 
         private void LoadData()
         {
 
             // Retrieve both Product and ProductVariant data
-     
 
-            
+
+
 
             // Bind the data to the DataGridView
             DataGridViewHelper.LoadData(
-                dataRetrievalFunc: () => _productService.GetProductVariantWithProductName(),
-                dataGridView: dataGridViewProductVariantList,
+                dataRetrievalFunc: () => GetAllProducts(),
+                dataGridView: dataGridViewProductList,
                 bindingSource: bindingSource,
                 bindingNavigator: bindingNavigator1,
                 errorMessage: "Failed to load product variants."
             );
 
             // Hide the ImagePath column
-            DataGridViewHelper.HideColumn(dataGridViewProductVariantList, "ImagePath");
 
             // Add the Image column for image display (optional)
-            DataGridViewHelper.AddImageColumnFromImagePath(dataGridViewProductVariantList, "ImagePath", 64, 64);
-            dataGridViewProductVariantList.Columns["Price"].DefaultCellStyle.Format = "₱#,##0.00";
-            DataGridViewHelper.FormatColumnHeaders(dataGridViewProductVariantList);
+
 
         }
 
@@ -112,22 +110,13 @@ namespace TakoTea.Product
         private void PopulateProductCheckedListBox()
         {
             // Get all products from the database
-            var products = _productService.GetAllProducts();
-
-            // Clear existing items from the CheckedListBox
-            chkListBoxProducts.Items.Clear();
-
-            // Add each product to the CheckedListBox
-            foreach (var product in products)
-            {
-                chkListBoxProducts.Items.Add(product.ProductName, false); // Assuming 'Name' is the product's name
-            }
+            
         }
 
         // Example usage in any form or class
         private void UpdateProductVariantsGrid(List<object> filteredVariants)
         {
-            DataGridViewHelper.UpdateGrid(dataGridViewProductVariantList, bindingSource, filteredVariants);
+            DataGridViewHelper.UpdateGrid(dataGridViewProductList, bindingSource, filteredVariants);
         }
 
 
@@ -142,11 +131,6 @@ namespace TakoTea.Product
 
         private void floatingActionButtonAddProduct_Click(object sender, EventArgs e)
         {
-            AddProductModal addProductModal = new AddProductModal();
-            _ = addProductModal.ShowDialog();
-            ThemeConfigurator.ApplyDarkTheme(this);
-            LoadData();
-
 
         }
 
@@ -159,24 +143,7 @@ namespace TakoTea.Product
         }
         private void FilterProductVariants()
         {
-            try
-            {
-                string searchTerm = txtBoxSearchForVariants.Text.ToLower().Trim();
-                var selectedProductNames = chkListBoxProducts.CheckedItems.Cast<string>().ToList();
-
-                var filteredVariants = _productService.GetProductVariantWithProductName()
-                    .Where(variant =>
-                        (string.IsNullOrWhiteSpace(searchTerm) || variant.VariantName.ToLower().Contains(searchTerm) ||
-                         variant.Size.ToLower().Contains(searchTerm) || variant.ProductName.ToLower().Contains(searchTerm)) &&
-                        (selectedProductNames.Count == 0 || selectedProductNames.Contains(variant.ProductName)));
-
-                DataGridViewHelper.UpdateGrid(dataGridViewProductVariantList, bindingSource, filteredVariants.ToList());
-                DataGridViewHelper.AddImageColumnFromImagePath(dataGridViewProductVariantList, "ImagePath", 64, 64);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error filtering product variants: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+           
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -200,7 +167,7 @@ namespace TakoTea.Product
 
         private void pbReloadForm_Click(object sender, EventArgs e)
         {
-            dataGridViewProductVariantList.Refresh();
+            dataGridViewProductList.Refresh();
             LoadData();
             PopulateProductCheckedListBox();
         }
@@ -212,7 +179,7 @@ namespace TakoTea.Product
 
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
-            DataGridViewHelper.DeleteSelectedRows<ProductVariant>(dataGridViewProductVariantList, "ProductVariantID");
+            DataGridViewHelper.DeleteSelectedRows<TakoTea.Models.Product>(dataGridViewProductList, "ProductsID");
             LoadData();
         }
 
@@ -226,12 +193,12 @@ namespace TakoTea.Product
         private void dataGridViewProductVariantList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             // Check if a valid row was double-clicked
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && !dataGridViewProductVariantList.Rows[e.RowIndex].IsNewRow)
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && !dataGridViewProductList.Rows[e.RowIndex].IsNewRow)
             {
                 try
                 {
                     // Get the ProductVariantID from the selected row
-                    int productVariantId = Convert.ToInt32(dataGridViewProductVariantList.Rows[e.RowIndex].Cells["ProductVariantID"].Value); // Assuming "ProductVariantID" is the column name
+                    int productVariantId = Convert.ToInt32(dataGridViewProductList.Rows[e.RowIndex].Cells["ProductVariantID"].Value); // Assuming "ProductVariantID" is the column name
 
                     // Create and show the EditProductVariantModal
                     EditProductVariantModal editProductVariantModal = new EditProductVariantModal(productVariantId);
@@ -250,7 +217,7 @@ namespace TakoTea.Product
 
         private void materialFloatingActionButtonCopyInformation_Click(object sender, EventArgs e)
         {
-            if (dataGridViewProductVariantList.SelectedRows.Count == 0)
+            if (dataGridViewProductList.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Please select at least one row to copy.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -259,7 +226,7 @@ namespace TakoTea.Product
             // Create an instance of AddProductModal
             AddProductModal addProductModal = new AddProductModal();
 
-            foreach (DataGridViewRow row in dataGridViewProductVariantList.SelectedRows)
+            foreach (DataGridViewRow row in dataGridViewProductList.SelectedRows)
             {
                 int productVariantId = Convert.ToInt32(row.Cells["ProductVariantID"].Value);
 
@@ -298,9 +265,32 @@ namespace TakoTea.Product
         {
 
         }
-
-        private void panelFilteringComponents_Paint(object sender, PaintEventArgs e)
+        public List<ProductInfo> GetAllProducts()
         {
+            using (var context = new Entities())
+            {
+                return context.Products
+                              .Select(p => new ProductInfo
+                              {
+                                  ProductID = p.ProductID,
+                                  ProductName = p.ProductName,
+                              })
+                              .ToList();
+            }
+        }
+
+        public class ProductInfo
+        {
+            public int ProductID { get; set; }
+            public string ProductName { get; set; }
+            public int? ProductCategoryID { get; set; }
+            public string ProductImage { get; set; }
+        }
+
+        private void floatingActionButtonAddProduct_Click_1(object sender, EventArgs e)
+        {
+            AddProductCategoryModal addProductCategoryModal = new AddProductCategoryModal(new ProductCategoryService(new DataAccessObject()));
+            _ = addProductCategoryModal.ShowDialog();
 
         }
     }

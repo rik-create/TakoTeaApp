@@ -34,17 +34,10 @@
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.panel1 = new System.Windows.Forms.Panel();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
-            this.pbReloadForm = new System.Windows.Forms.PictureBox();
             this.panelExportButtons = new System.Windows.Forms.Panel();
-            this.pictureBoxExportExcel = new System.Windows.Forms.PictureBox();
-            this.pictureBoxExportPdf = new System.Windows.Forms.PictureBox();
-            this.materialLabel22 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel18 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel19 = new MaterialSkin.Controls.MaterialLabel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.pbSearch = new System.Windows.Forms.PictureBox();
-            this.pBoxShowFilter = new System.Windows.Forms.PictureBox();
             this.btnHideFilters = new MaterialSkin.Controls.MaterialButton();
             this.txtBoxSearchSales = new MaterialSkin.Controls.MaterialTextBox2();
             this.panelFilteringComponents = new System.Windows.Forms.Panel();
@@ -60,33 +53,38 @@
             this.panelItemList = new System.Windows.Forms.Panel();
             this.dataGridViewSalesList = new System.Windows.Forms.DataGridView();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.pbReloadForm = new System.Windows.Forms.PictureBox();
+            this.pictureBoxExportExcel = new System.Windows.Forms.PictureBox();
+            this.pictureBoxExportPdf = new System.Windows.Forms.PictureBox();
+            this.pbSearch = new System.Windows.Forms.PictureBox();
+            this.pBoxShowFilter = new System.Windows.Forms.PictureBox();
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.materialCard1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbReloadForm)).BeginInit();
             this.panelExportButtons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportExcel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportPdf)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBoxShowFilter)).BeginInit();
             this.panelFilteringComponents.SuspendLayout();
             this.panelItemList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSalesList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbReloadForm)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportExcel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportPdf)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxShowFilter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -107,9 +105,7 @@
             this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.materialCard1.Controls.Add(this.panel1);
             this.materialCard1.Controls.Add(this.panelExportButtons);
-            this.materialCard1.Controls.Add(this.materialLabel22);
             this.materialCard1.Controls.Add(this.materialLabel18);
-            this.materialCard1.Controls.Add(this.materialLabel19);
             this.materialCard1.Controls.Add(this.flowLayoutPanel1);
             this.materialCard1.Depth = 0;
             this.materialCard1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -131,7 +127,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(14, 14);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1163, 46);
+            this.panel1.Size = new System.Drawing.Size(1146, 46);
             this.panel1.TabIndex = 105;
             // 
             // materialLabel4
@@ -147,17 +143,6 @@
             this.materialLabel4.TabIndex = 0;
             this.materialLabel4.Text = "Sales List";
             // 
-            // pbReloadForm
-            // 
-            this.pbReloadForm.Image = global::TakoTea.Views.Properties.Resources.restart1;
-            this.pbReloadForm.Location = new System.Drawing.Point(1101, 5);
-            this.pbReloadForm.Name = "pbReloadForm";
-            this.pbReloadForm.Size = new System.Drawing.Size(27, 27);
-            this.pbReloadForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbReloadForm.TabIndex = 97;
-            this.pbReloadForm.TabStop = false;
-            this.pbReloadForm.Click += new System.EventHandler(this.pbReloadForm_Click);
-            // 
             // panelExportButtons
             // 
             this.panelExportButtons.Controls.Add(this.pictureBoxExportExcel);
@@ -166,36 +151,6 @@
             this.panelExportButtons.Name = "panelExportButtons";
             this.panelExportButtons.Size = new System.Drawing.Size(76, 38);
             this.panelExportButtons.TabIndex = 104;
-            // 
-            // pictureBoxExportExcel
-            // 
-            this.pictureBoxExportExcel.Location = new System.Drawing.Point(3, 5);
-            this.pictureBoxExportExcel.Name = "pictureBoxExportExcel";
-            this.pictureBoxExportExcel.Size = new System.Drawing.Size(33, 27);
-            this.pictureBoxExportExcel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxExportExcel.TabIndex = 96;
-            this.pictureBoxExportExcel.TabStop = false;
-            // 
-            // pictureBoxExportPdf
-            // 
-            this.pictureBoxExportPdf.Location = new System.Drawing.Point(38, 5);
-            this.pictureBoxExportPdf.Name = "pictureBoxExportPdf";
-            this.pictureBoxExportPdf.Size = new System.Drawing.Size(33, 27);
-            this.pictureBoxExportPdf.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxExportPdf.TabIndex = 97;
-            this.pictureBoxExportPdf.TabStop = false;
-            // 
-            // materialLabel22
-            // 
-            this.materialLabel22.AutoSize = true;
-            this.materialLabel22.Depth = 0;
-            this.materialLabel22.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel22.Location = new System.Drawing.Point(24, 664);
-            this.materialLabel22.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel22.Name = "materialLabel22";
-            this.materialLabel22.Size = new System.Drawing.Size(85, 19);
-            this.materialLabel22.TabIndex = 101;
-            this.materialLabel22.Text = "Total Sales:";
             // 
             // materialLabel18
             // 
@@ -210,18 +165,6 @@
             this.materialLabel18.TabIndex = 100;
             this.materialLabel18.Text = "Product Variants";
             // 
-            // materialLabel19
-            // 
-            this.materialLabel19.AutoSize = true;
-            this.materialLabel19.Depth = 0;
-            this.materialLabel19.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel19.Location = new System.Drawing.Point(24, 688);
-            this.materialLabel19.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel19.Name = "materialLabel19";
-            this.materialLabel19.Size = new System.Drawing.Size(189, 19);
-            this.materialLabel19.TabIndex = 102;
-            this.materialLabel19.Text = "Total Nearing Expiration: 2";
-            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -233,7 +176,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(16, 64);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1168, 584);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1151, 584);
             this.flowLayoutPanel1.TabIndex = 99;
             // 
             // panel3
@@ -250,28 +193,6 @@
             this.panel3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.panel3.Size = new System.Drawing.Size(1141, 60);
             this.panel3.TabIndex = 144;
-            // 
-            // pbSearch
-            // 
-            this.pbSearch.Image = global::TakoTea.Views.Properties.Resources.search;
-            this.pbSearch.Location = new System.Drawing.Point(296, 8);
-            this.pbSearch.Name = "pbSearch";
-            this.pbSearch.Size = new System.Drawing.Size(40, 40);
-            this.pbSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbSearch.TabIndex = 97;
-            this.pbSearch.TabStop = false;
-            this.pbSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // pBoxShowFilter
-            // 
-            this.pBoxShowFilter.Image = global::TakoTea.Views.Properties.Resources.filter;
-            this.pBoxShowFilter.Location = new System.Drawing.Point(414, 9);
-            this.pBoxShowFilter.Name = "pBoxShowFilter";
-            this.pBoxShowFilter.Size = new System.Drawing.Size(40, 40);
-            this.pBoxShowFilter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pBoxShowFilter.TabIndex = 96;
-            this.pBoxShowFilter.TabStop = false;
-            this.pBoxShowFilter.Click += new System.EventHandler(this.pBoxShowFilter_Click);
             // 
             // btnHideFilters
             // 
@@ -548,39 +469,12 @@
             this.bindingNavigator1.TabIndex = 9;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "Add new";
-            // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
             this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
             this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
-            // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveFirstItem.Text = "Move first";
-            // 
-            // bindingNavigatorMovePreviousItem
-            // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
             // 
             // bindingNavigatorSeparator
             // 
@@ -602,6 +496,89 @@
             this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
             this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // pbReloadForm
+            // 
+            this.pbReloadForm.Image = global::TakoTea.Views.Properties.Resources.restart1;
+            this.pbReloadForm.Location = new System.Drawing.Point(1101, 5);
+            this.pbReloadForm.Name = "pbReloadForm";
+            this.pbReloadForm.Size = new System.Drawing.Size(27, 27);
+            this.pbReloadForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbReloadForm.TabIndex = 97;
+            this.pbReloadForm.TabStop = false;
+            this.pbReloadForm.Click += new System.EventHandler(this.pbReloadForm_Click);
+            // 
+            // pictureBoxExportExcel
+            // 
+            this.pictureBoxExportExcel.Location = new System.Drawing.Point(3, 5);
+            this.pictureBoxExportExcel.Name = "pictureBoxExportExcel";
+            this.pictureBoxExportExcel.Size = new System.Drawing.Size(33, 27);
+            this.pictureBoxExportExcel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxExportExcel.TabIndex = 96;
+            this.pictureBoxExportExcel.TabStop = false;
+            // 
+            // pictureBoxExportPdf
+            // 
+            this.pictureBoxExportPdf.Location = new System.Drawing.Point(38, 5);
+            this.pictureBoxExportPdf.Name = "pictureBoxExportPdf";
+            this.pictureBoxExportPdf.Size = new System.Drawing.Size(33, 27);
+            this.pictureBoxExportPdf.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxExportPdf.TabIndex = 97;
+            this.pictureBoxExportPdf.TabStop = false;
+            // 
+            // pbSearch
+            // 
+            this.pbSearch.Image = global::TakoTea.Views.Properties.Resources.search;
+            this.pbSearch.Location = new System.Drawing.Point(296, 8);
+            this.pbSearch.Name = "pbSearch";
+            this.pbSearch.Size = new System.Drawing.Size(40, 40);
+            this.pbSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbSearch.TabIndex = 97;
+            this.pbSearch.TabStop = false;
+            this.pbSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // pBoxShowFilter
+            // 
+            this.pBoxShowFilter.Image = global::TakoTea.Views.Properties.Resources.filter;
+            this.pBoxShowFilter.Location = new System.Drawing.Point(414, 9);
+            this.pBoxShowFilter.Name = "pBoxShowFilter";
+            this.pBoxShowFilter.Size = new System.Drawing.Size(40, 40);
+            this.pBoxShowFilter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pBoxShowFilter.TabIndex = 96;
+            this.pBoxShowFilter.TabStop = false;
+            this.pBoxShowFilter.Click += new System.EventHandler(this.pBoxShowFilter_Click);
+            // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "Add new";
+            // 
+            // bindingNavigatorMoveFirstItem
+            // 
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem.Text = "Move first";
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
+            // 
             // bindingNavigatorMoveNextItem
             // 
             this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -619,11 +596,6 @@
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveLastItem.Text = "Move last";
-            // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // bindingNavigatorDeleteItem
             // 
@@ -651,15 +623,10 @@
             this.materialCard1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbReloadForm)).EndInit();
             this.panelExportButtons.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportExcel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportPdf)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBoxShowFilter)).EndInit();
             this.panelFilteringComponents.ResumeLayout(false);
             this.panelFilteringComponents.PerformLayout();
             this.panelItemList.ResumeLayout(false);
@@ -668,6 +635,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbReloadForm)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportExcel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportPdf)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxShowFilter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -679,9 +651,7 @@
         private System.Windows.Forms.Panel panelExportButtons;
         private System.Windows.Forms.PictureBox pictureBoxExportExcel;
         private System.Windows.Forms.PictureBox pictureBoxExportPdf;
-        private MaterialSkin.Controls.MaterialLabel materialLabel22;
         private MaterialSkin.Controls.MaterialLabel materialLabel18;
-        private MaterialSkin.Controls.MaterialLabel materialLabel19;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private MaterialSkin.Controls.MaterialLabel materialLabel21;
         private MaterialSkin.Controls.MaterialRadioButton materialRadioButton4;

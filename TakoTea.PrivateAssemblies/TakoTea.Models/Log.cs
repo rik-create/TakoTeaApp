@@ -23,5 +23,6 @@ namespace TakoTea.Models
         public string Action { get; set; }
         public System.DateTime Timestamp { get; set; }
         public string Username { get; set; }
+        public string Description { get; set; }
     }
 }

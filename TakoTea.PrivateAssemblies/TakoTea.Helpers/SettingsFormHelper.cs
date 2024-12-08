@@ -13,7 +13,24 @@ namespace TakoTea.Helpers
     public static class SettingsFormHelper
     {
         // In your SettingsFormHelper class
+        // In your SettingsFormHelper class
 
+        public static void LoadPaymentMethods(CheckedListBox checkedListBoxPaymentMethods)
+        {
+            var context = new Entities(); // Assuming you have an Entity Framework context
+
+            // Retrieve the payment methods from the database
+            var paymentMethods = context.PaymentMethods
+                .Where(p => p.IsActive) // Filter for active payment methods
+                .Select(p => p.MethodName)
+                .ToList();
+
+            // Clear existing items in the CheckedListBox
+            checkedListBoxPaymentMethods.Items.Clear();
+
+            // Add the payment methods to the CheckedListBox
+            checkedListBoxPaymentMethods.Items.AddRange(paymentMethods.ToArray());
+        }
         public static void PopulateUsersListView(MaterialListView listView, List<User> users)
         {
             listView.Items.Clear();

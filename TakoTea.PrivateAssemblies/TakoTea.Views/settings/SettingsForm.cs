@@ -47,7 +47,7 @@ namespace TakoTea.Views.settings
             {
                 // Load user roles
                 SettingsFormHelper.LoadUserRoles(cmbRoleAssignment);
-
+                SettingsFormHelper.LoadPaymentMethods(checkedListBoxPaymentMethod);
                 // Load alert thresholds
 
                 // Load alert frequencies
@@ -404,6 +404,71 @@ namespace TakoTea.Views.settings
         private void btnPerformBackup_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+  
+        // Helper method to load payment methods into the CheckedListBox
+        private void LoadPaymentMethods()
+        {
+            checkedListBoxPaymentMethod.Items.Clear();
+            var paymentMethods = PaymentMethodService.GetAllPaymentMethods();
+            checkedListBoxPaymentMethod.Items.AddRange(paymentMethods.ToArray());
+        }
+        private void materialFloatingActionButtonRemoveSelectedPaymentMethod_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (checkedListBoxPaymentMethod.CheckedItems.Count == 0)
+                {
+                    MessageBox.Show("Please select at least one payment method to remove.");
+                    return;
+                }
+
+                if (MessageBox.Show("Are you sure you want to delete the selected payment method(s)?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    foreach (var item in checkedListBoxPaymentMethod.CheckedItems)
+                    {
+                        string paymentMethodName = item.ToString();
+
+                        // Remove the payment method using your PaymentMethodService
+                        PaymentMethodService.RemovePaymentMethod(paymentMethodName);
+                    }
+
+                    // Refresh the payment methods in the CheckedListBox
+                    LoadPaymentMethods();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error removing payment method(s): " + ex.Message);
+            }
+        }
+
+        private void materialFloatingActionButtonAddPaymentMethod_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                string newPaymentMethod = txtBoxAddPaymentMethod.Text.Trim();
+
+                // Basic validation (you might want to add more robust validation)
+                if (string.IsNullOrWhiteSpace(newPaymentMethod))
+                {
+                    MessageBox.Show("Please enter a payment method.");
+                    return;
+                }
+
+                // Add the new payment method using your PaymentMethodService
+                PaymentMethodService.AddPaymentMethod(newPaymentMethod);
+
+                // Refresh the payment methods in the CheckedListBox
+                LoadPaymentMethods();
+
+                txtBoxAddPaymentMethod.Text = ""; // Clear the input field
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error adding payment method: " + ex.Message);
+            }
         }
     }
 }

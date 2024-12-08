@@ -27,9 +27,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrdersQueueForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.miniToolStrip = new System.Windows.Forms.BindingNavigator(this.components);
             this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -51,7 +51,6 @@
             this.btnProcessOrder = new MaterialSkin.Controls.MaterialButton();
             this.pbCompleted = new System.Windows.Forms.PictureBox();
             this.pbCancelled = new System.Windows.Forms.PictureBox();
-            this.cmbStatus = new MaterialSkin.Controls.MaterialComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
@@ -106,12 +105,12 @@
             this.materialCard2.Depth = 0;
             this.materialCard2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.materialCard2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard2.Location = new System.Drawing.Point(3, 0);
+            this.materialCard2.Location = new System.Drawing.Point(3, 24);
             this.materialCard2.Margin = new System.Windows.Forms.Padding(0);
             this.materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard2.Name = "materialCard2";
             this.materialCard2.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard2.Size = new System.Drawing.Size(1191, 715);
+            this.materialCard2.Size = new System.Drawing.Size(1191, 691);
             this.materialCard2.TabIndex = 70;
             // 
             // flowLayoutPanel1
@@ -122,7 +121,7 @@
             this.flowLayoutPanel1.Controls.Add(this.panelItemList);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 160);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1150, 490);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1150, 476);
             this.flowLayoutPanel1.TabIndex = 105;
             // 
             // panelItemList
@@ -255,35 +254,35 @@
             this.dgViewOrderQueue.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgViewOrderQueue.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgViewOrderQueue.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgViewOrderQueue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgViewOrderQueue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgViewOrderQueue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgViewOrderQueue.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgViewOrderQueue.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgViewOrderQueue.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgViewOrderQueue.EnableHeadersVisualStyles = false;
             this.dgViewOrderQueue.Location = new System.Drawing.Point(0, 32);
             this.dgViewOrderQueue.Name = "dgViewOrderQueue";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgViewOrderQueue.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgViewOrderQueue.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgViewOrderQueue.Size = new System.Drawing.Size(1125, 487);
             this.dgViewOrderQueue.TabIndex = 5;
             // 
@@ -294,7 +293,6 @@
             this.panel3.Controls.Add(this.btnProcessOrder);
             this.panel3.Controls.Add(this.pbCompleted);
             this.panel3.Controls.Add(this.pbCancelled);
-            this.panel3.Controls.Add(this.cmbStatus);
             this.panel3.Location = new System.Drawing.Point(20, 70);
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 8);
             this.panel3.Name = "panel3";
@@ -320,6 +318,7 @@
             this.btnProcessOrder.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnProcessOrder.UseAccentColor = true;
             this.btnProcessOrder.UseVisualStyleBackColor = true;
+            this.btnProcessOrder.Click += new System.EventHandler(this.btnProcessOrder_Click_1);
             // 
             // pbCompleted
             // 
@@ -330,6 +329,7 @@
             this.pbCompleted.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbCompleted.TabIndex = 97;
             this.pbCompleted.TabStop = false;
+            this.pbCompleted.Click += new System.EventHandler(this.pbCompleted_Click_1);
             // 
             // pbCancelled
             // 
@@ -342,29 +342,6 @@
             this.pbCancelled.TabStop = false;
             this.pbCancelled.Click += new System.EventHandler(this.pbCancelled_Click_1);
             // 
-            // cmbStatus
-            // 
-            this.cmbStatus.AutoResize = false;
-            this.cmbStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cmbStatus.Depth = 0;
-            this.cmbStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cmbStatus.DropDownHeight = 174;
-            this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbStatus.DropDownWidth = 121;
-            this.cmbStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.cmbStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Hint = "Filter by status";
-            this.cmbStatus.IntegralHeight = false;
-            this.cmbStatus.ItemHeight = 43;
-            this.cmbStatus.Location = new System.Drawing.Point(20, 10);
-            this.cmbStatus.MaxDropDownItems = 4;
-            this.cmbStatus.MouseState = MaterialSkin.MouseState.OUT;
-            this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(300, 49);
-            this.cmbStatus.StartIndex = 0;
-            this.cmbStatus.TabIndex = 0;
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -373,7 +350,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(14, 14);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1161, 46);
+            this.panel1.Size = new System.Drawing.Size(1144, 46);
             this.panel1.TabIndex = 101;
             // 
             // materialLabel4
@@ -420,9 +397,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1197, 718);
             this.Controls.Add(this.materialCard2);
-            this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.StatusAndActionBar_None;
+            this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
             this.Name = "OrdersQueueForm";
-            this.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.Padding = new System.Windows.Forms.Padding(3, 24, 3, 3);
             this.Text = "BatchListForm";
             ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).EndInit();
             this.materialCard2.ResumeLayout(false);
@@ -467,7 +444,6 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.DataGridView dgViewOrderQueue;
-        private MaterialSkin.Controls.MaterialComboBox cmbStatus;
         private System.Windows.Forms.PictureBox pbCompleted;
         private System.Windows.Forms.PictureBox pbCancelled;
         private MaterialSkin.Controls.MaterialButton btnProcessOrder;

@@ -401,6 +401,8 @@ namespace TakoTea.Views.Dashboard
             DataGridViewHelper.HideColumn(dataGridViewNewOrders, "OrderId");
             DataGridViewHelper.HideColumn(dataGridViewNewOrders, "GrossProfit");
             DataGridViewHelper.HideColumn(dataGridViewNewOrders, "OrderStatus");
+            DataGridViewHelper.FormatColumnHeaders(dataGridViewNewOrders);
+            DataGridViewHelper.FormatColumnHeaders(dgvUnderstock);
 
             // Autosize the OrderDate column
             dataGridViewNewOrders.Columns["OrderDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -706,11 +708,11 @@ namespace TakoTea.Views.Dashboard
             
             if (span.Days <= 1)
             {
-                InitializeGrossRevenueChart(dtpStartDate.Value, dtpEndDate.Value);
-                InitializeSalesPerProductChart(dtpStartDate.Value, dtpEndDate.Value);
-                InitializePieChartTop5ProductVariant(dtpStartDate.Value, dtpEndDate.Value);
+                InitializeGrossRevenueChart(dtpStartDate.Value.Date, dtpEndDate.Value.Date);
+                InitializeSalesPerProductChart(dtpStartDate.Value.Date, dtpEndDate.Value.Date);
+                InitializePieChartTop5ProductVariant(dtpStartDate.Value.Date, dtpEndDate.Value.Date);
 
-                InitializeDashboardMetrics(dtpStartDate.Value, dtpEndDate.Value);
+                InitializeDashboardMetrics(dtpStartDate.Value.Date, dtpEndDate.Value.Date);
 
             }
             else
@@ -739,27 +741,30 @@ namespace TakoTea.Views.Dashboard
 
         private void btnToday_Click(object sender, EventArgs e)
         {
-            DateTime today = DateTime.Today;
-            InitializeGrossRevenueChart(today, today);
-            InitializeSalesPerProductChart(today, today);
-            InitializeDashboardMetrics(today, today);
-            InitializePieChartTop5ProductVariant(today, today);
+            DateTime todayStart = DateTime.Now.Date; // Start of the day (00:00:00)
+            DateTime todayEnd = todayStart.AddDays(1).AddTicks(-1); // End of the day (23:59:59.9999999)
 
+            InitializeGrossRevenueChart(todayStart, todayEnd);
+            InitializeSalesPerProductChart(todayStart, todayEnd);
+            InitializeDashboardMetrics(todayStart, todayEnd);
+            InitializePieChartTop5ProductVariant(todayStart, todayEnd);
         }
 
         private void btnLast7Days_Click(object sender, EventArgs e)
         {
-            DateTime today = DateTime.Today.Date;
-            DateTime sevenDaysAgo = today.AddDays(-7).Date;
-            InitializeGrossRevenueChart(sevenDaysAgo, today);
-            InitializeSalesPerProductChart(sevenDaysAgo, today);
-            InitializePieChartTop5ProductVariant(sevenDaysAgo, today);
-            InitializeDashboardMetrics(sevenDaysAgo, today);
+            DateTime today = DateTime.Today.AddMinutes(1); // Start of today at 00:01
+            DateTime sevenDaysAgo = today.AddDays(-7).Date.AddMinutes(1); // Start of 7 days ago at 00:01
+            DateTime endOfDay = DateTime.Now; // Current time as the end of the day
+
+            InitializeGrossRevenueChart(sevenDaysAgo, endOfDay);
+            InitializeSalesPerProductChart(sevenDaysAgo, endOfDay);
+            InitializePieChartTop5ProductVariant(sevenDaysAgo, endOfDay);
+            InitializeDashboardMetrics(sevenDaysAgo, endOfDay);
         }
 
         private void btnLast30Days_Click(object sender, EventArgs e)
         {
-            DateTime today = DateTime.Today.Date;
+            DateTime today = DateTime.Today.AddDays(1).AddTicks(-1);
             DateTime thirtyDaysAgo = today.AddDays(-30).Date;
             InitializeGrossRevenueChart(thirtyDaysAgo, today);
             InitializeSalesPerProductChart(thirtyDaysAgo, today);
@@ -787,6 +792,11 @@ namespace TakoTea.Views.Dashboard
         }
 
         private void lblNumOrders_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnToday_Click_1(object sender, EventArgs e)
         {
 
         }

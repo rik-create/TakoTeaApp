@@ -53,10 +53,32 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardForm));
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.bsNewOrders = new System.Windows.Forms.BindingSource(this.components);
-            this.bsLowStock = new System.Windows.Forms.BindingSource(this.components);
             this.panel7 = new System.Windows.Forms.Panel();
+            this.tabControlDataGrids = new System.Windows.Forms.TabControl();
+            this.tabPageLowStock = new System.Windows.Forms.TabPage();
+            this.bnLowStocks = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.dgvUnderstock = new System.Windows.Forms.DataGridView();
+            this.tabPageNewOrders = new System.Windows.Forms.TabPage();
+            this.bnNewOrders = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorCountItem1 = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem1 = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.dataGridViewNewOrders = new System.Windows.Forms.DataGridView();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.labelTop3Product = new MaterialSkin.Controls.MaterialLabel();
+            this.labelTop2Product = new MaterialSkin.Controls.MaterialLabel();
+            this.labelTop1Product = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.labelTop3TotalStock = new System.Windows.Forms.Label();
+            this.labelTop2TotalStock = new System.Windows.Forms.Label();
+            this.labelTop1TotalStock = new System.Windows.Forms.Label();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -74,76 +96,40 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblTotalProfit = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTotalProfitPercentChange = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblNumOrders = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.lblNumOrdersPercentChange = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblTotalRevenue = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lblTotalRevenuePercentChange = new System.Windows.Forms.Label();
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.miniToolStrip = new System.Windows.Forms.BindingNavigator(this.components);
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
-            this.tabControlDataGrids = new System.Windows.Forms.TabControl();
-            this.tabPageLowStock = new System.Windows.Forms.TabPage();
-            this.bnLowStocks = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.dgvUnderstock = new System.Windows.Forms.DataGridView();
-            this.tabPageNewOrders = new System.Windows.Forms.TabPage();
-            this.bnNewOrders = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem1 = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorCountItem1 = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem1 = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem1 = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem1 = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorPositionItem1 = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveNextItem1 = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem1 = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.dataGridViewNewOrders = new System.Windows.Forms.DataGridView();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.labelTop3Product = new MaterialSkin.Controls.MaterialLabel();
-            this.labelTop2Product = new MaterialSkin.Controls.MaterialLabel();
-            this.labelTop1Product = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
-            this.labelTop3TotalStock = new System.Windows.Forms.Label();
-            this.labelTop2TotalStock = new System.Windows.Forms.Label();
-            this.labelTop1TotalStock = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsNewOrders)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsLowStock)).BeginInit();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.bsNewOrders = new System.Windows.Forms.BindingSource(this.components);
+            this.bsLowStock = new System.Windows.Forms.BindingSource(this.components);
             this.panel7.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).BeginInit();
-            this.materialCard1.SuspendLayout();
             this.tabControlDataGrids.SuspendLayout();
             this.tabPageLowStock.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bnLowStocks)).BeginInit();
@@ -154,6 +140,20 @@
             this.bnNewOrders.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNewOrders)).BeginInit();
             this.panel4.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).BeginInit();
+            this.materialCard1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsNewOrders)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsLowStock)).BeginInit();
             this.SuspendLayout();
             // 
             // panel7
@@ -180,6 +180,292 @@
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(1169, 962);
             this.panel7.TabIndex = 47;
+            // 
+            // tabControlDataGrids
+            // 
+            this.tabControlDataGrids.Controls.Add(this.tabPageLowStock);
+            this.tabControlDataGrids.Controls.Add(this.tabPageNewOrders);
+            this.tabControlDataGrids.Location = new System.Drawing.Point(208, 632);
+            this.tabControlDataGrids.Name = "tabControlDataGrids";
+            this.tabControlDataGrids.SelectedIndex = 0;
+            this.tabControlDataGrids.Size = new System.Drawing.Size(952, 264);
+            this.tabControlDataGrids.TabIndex = 54;
+            // 
+            // tabPageLowStock
+            // 
+            this.tabPageLowStock.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.tabPageLowStock.Controls.Add(this.bnLowStocks);
+            this.tabPageLowStock.Controls.Add(this.dgvUnderstock);
+            this.tabPageLowStock.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(87)))), ((int)(((byte)(168)))));
+            this.tabPageLowStock.Location = new System.Drawing.Point(4, 22);
+            this.tabPageLowStock.Name = "tabPageLowStock";
+            this.tabPageLowStock.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageLowStock.Size = new System.Drawing.Size(944, 238);
+            this.tabPageLowStock.TabIndex = 0;
+            this.tabPageLowStock.Text = "Low Stock Ingredients";
+            // 
+            // bnLowStocks
+            // 
+            this.bnLowStocks.AddNewItem = this.bindingNavigatorAddNewItem;
+            this.bnLowStocks.CountItem = this.bindingNavigatorCountItem;
+            this.bnLowStocks.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.bnLowStocks.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigatorMoveFirstItem,
+            this.bindingNavigatorMovePreviousItem,
+            this.bindingNavigatorSeparator,
+            this.bindingNavigatorPositionItem,
+            this.bindingNavigatorCountItem,
+            this.bindingNavigatorSeparator1,
+            this.bindingNavigatorMoveNextItem,
+            this.bindingNavigatorMoveLastItem,
+            this.bindingNavigatorSeparator2,
+            this.bindingNavigatorAddNewItem,
+            this.bindingNavigatorDeleteItem});
+            this.bnLowStocks.Location = new System.Drawing.Point(3, 3);
+            this.bnLowStocks.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.bnLowStocks.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.bnLowStocks.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.bnLowStocks.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.bnLowStocks.Name = "bnLowStocks";
+            this.bnLowStocks.PositionItem = this.bindingNavigatorPositionItem;
+            this.bnLowStocks.Size = new System.Drawing.Size(938, 25);
+            this.bnLowStocks.TabIndex = 51;
+            this.bnLowStocks.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
+            this.bindingNavigatorCountItem.Text = "of {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
+            // 
+            // bindingNavigatorSeparator
+            // 
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorPositionItem
+            // 
+            this.bindingNavigatorPositionItem.AccessibleName = "Position";
+            this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
+            this.bindingNavigatorPositionItem.Text = "0";
+            this.bindingNavigatorPositionItem.ToolTipText = "Current position";
+            // 
+            // bindingNavigatorSeparator1
+            // 
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // dgvUnderstock
+            // 
+            this.dgvUnderstock.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.dgvUnderstock.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvUnderstock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUnderstock.Location = new System.Drawing.Point(8, 32);
+            this.dgvUnderstock.Name = "dgvUnderstock";
+            this.dgvUnderstock.Size = new System.Drawing.Size(928, 200);
+            this.dgvUnderstock.TabIndex = 50;
+            // 
+            // tabPageNewOrders
+            // 
+            this.tabPageNewOrders.Controls.Add(this.bnNewOrders);
+            this.tabPageNewOrders.Controls.Add(this.dataGridViewNewOrders);
+            this.tabPageNewOrders.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(87)))), ((int)(((byte)(168)))));
+            this.tabPageNewOrders.Location = new System.Drawing.Point(4, 22);
+            this.tabPageNewOrders.Name = "tabPageNewOrders";
+            this.tabPageNewOrders.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageNewOrders.Size = new System.Drawing.Size(944, 238);
+            this.tabPageNewOrders.TabIndex = 1;
+            this.tabPageNewOrders.Text = "New Orders";
+            // 
+            // bnNewOrders
+            // 
+            this.bnNewOrders.AddNewItem = this.bindingNavigatorAddNewItem1;
+            this.bnNewOrders.CountItem = this.bindingNavigatorCountItem1;
+            this.bnNewOrders.DeleteItem = this.bindingNavigatorDeleteItem1;
+            this.bnNewOrders.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigatorMoveFirstItem1,
+            this.bindingNavigatorMovePreviousItem1,
+            this.bindingNavigatorSeparator3,
+            this.bindingNavigatorPositionItem1,
+            this.bindingNavigatorCountItem1,
+            this.bindingNavigatorSeparator4,
+            this.bindingNavigatorMoveNextItem1,
+            this.bindingNavigatorMoveLastItem1,
+            this.bindingNavigatorSeparator5,
+            this.bindingNavigatorAddNewItem1,
+            this.bindingNavigatorDeleteItem1});
+            this.bnNewOrders.Location = new System.Drawing.Point(3, 3);
+            this.bnNewOrders.MoveFirstItem = this.bindingNavigatorMoveFirstItem1;
+            this.bnNewOrders.MoveLastItem = this.bindingNavigatorMoveLastItem1;
+            this.bnNewOrders.MoveNextItem = this.bindingNavigatorMoveNextItem1;
+            this.bnNewOrders.MovePreviousItem = this.bindingNavigatorMovePreviousItem1;
+            this.bnNewOrders.Name = "bnNewOrders";
+            this.bnNewOrders.PositionItem = this.bindingNavigatorPositionItem1;
+            this.bnNewOrders.Size = new System.Drawing.Size(938, 25);
+            this.bnNewOrders.TabIndex = 52;
+            this.bnNewOrders.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorCountItem1
+            // 
+            this.bindingNavigatorCountItem1.Name = "bindingNavigatorCountItem1";
+            this.bindingNavigatorCountItem1.Size = new System.Drawing.Size(35, 22);
+            this.bindingNavigatorCountItem1.Text = "of {0}";
+            this.bindingNavigatorCountItem1.ToolTipText = "Total number of items";
+            // 
+            // bindingNavigatorSeparator3
+            // 
+            this.bindingNavigatorSeparator3.Name = "bindingNavigatorSeparator3";
+            this.bindingNavigatorSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorPositionItem1
+            // 
+            this.bindingNavigatorPositionItem1.AccessibleName = "Position";
+            this.bindingNavigatorPositionItem1.AutoSize = false;
+            this.bindingNavigatorPositionItem1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.bindingNavigatorPositionItem1.Name = "bindingNavigatorPositionItem1";
+            this.bindingNavigatorPositionItem1.Size = new System.Drawing.Size(50, 23);
+            this.bindingNavigatorPositionItem1.Text = "0";
+            this.bindingNavigatorPositionItem1.ToolTipText = "Current position";
+            // 
+            // bindingNavigatorSeparator4
+            // 
+            this.bindingNavigatorSeparator4.Name = "bindingNavigatorSeparator4";
+            this.bindingNavigatorSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorSeparator5
+            // 
+            this.bindingNavigatorSeparator5.Name = "bindingNavigatorSeparator5";
+            this.bindingNavigatorSeparator5.Size = new System.Drawing.Size(6, 25);
+            // 
+            // dataGridViewNewOrders
+            // 
+            this.dataGridViewNewOrders.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.dataGridViewNewOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewNewOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewNewOrders.Location = new System.Drawing.Point(8, 32);
+            this.dataGridViewNewOrders.Name = "dataGridViewNewOrders";
+            this.dataGridViewNewOrders.Size = new System.Drawing.Size(928, 199);
+            this.dataGridViewNewOrders.TabIndex = 51;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.White;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.labelTop3Product);
+            this.panel4.Controls.Add(this.labelTop2Product);
+            this.panel4.Controls.Add(this.labelTop1Product);
+            this.panel4.Controls.Add(this.materialLabel3);
+            this.panel4.Controls.Add(this.labelTop3TotalStock);
+            this.panel4.Controls.Add(this.labelTop2TotalStock);
+            this.panel4.Controls.Add(this.labelTop1TotalStock);
+            this.panel4.Location = new System.Drawing.Point(16, 632);
+            this.panel4.Margin = new System.Windows.Forms.Padding(5);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(185, 262);
+            this.panel4.TabIndex = 53;
+            // 
+            // labelTop3Product
+            // 
+            this.labelTop3Product.Depth = 0;
+            this.labelTop3Product.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelTop3Product.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelTop3Product.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
+            this.labelTop3Product.HighEmphasis = true;
+            this.labelTop3Product.Location = new System.Drawing.Point(0, 160);
+            this.labelTop3Product.MouseState = MaterialSkin.MouseState.HOVER;
+            this.labelTop3Product.Name = "labelTop3Product";
+            this.labelTop3Product.Size = new System.Drawing.Size(184, 24);
+            this.labelTop3Product.TabIndex = 56;
+            this.labelTop3Product.Text = "Takoyaki";
+            this.labelTop3Product.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelTop2Product
+            // 
+            this.labelTop2Product.Depth = 0;
+            this.labelTop2Product.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelTop2Product.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelTop2Product.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
+            this.labelTop2Product.HighEmphasis = true;
+            this.labelTop2Product.Location = new System.Drawing.Point(0, 104);
+            this.labelTop2Product.MouseState = MaterialSkin.MouseState.HOVER;
+            this.labelTop2Product.Name = "labelTop2Product";
+            this.labelTop2Product.Size = new System.Drawing.Size(184, 24);
+            this.labelTop2Product.TabIndex = 55;
+            this.labelTop2Product.Text = "Milktea";
+            this.labelTop2Product.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelTop1Product
+            // 
+            this.labelTop1Product.Depth = 0;
+            this.labelTop1Product.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelTop1Product.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelTop1Product.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
+            this.labelTop1Product.HighEmphasis = true;
+            this.labelTop1Product.Location = new System.Drawing.Point(0, 48);
+            this.labelTop1Product.MouseState = MaterialSkin.MouseState.HOVER;
+            this.labelTop1Product.Name = "labelTop1Product";
+            this.labelTop1Product.Size = new System.Drawing.Size(184, 24);
+            this.labelTop1Product.TabIndex = 54;
+            this.labelTop1Product.Text = "Takoyaki";
+            this.labelTop1Product.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // materialLabel3
+            // 
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel3.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            this.materialLabel3.HighEmphasis = true;
+            this.materialLabel3.Location = new System.Drawing.Point(24, 16);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(136, 24);
+            this.materialLabel3.TabIndex = 53;
+            this.materialLabel3.Text = "Product Stocks";
+            this.materialLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelTop3TotalStock
+            // 
+            this.labelTop3TotalStock.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelTop3TotalStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTop3TotalStock.Location = new System.Drawing.Point(-20, 184);
+            this.labelTop3TotalStock.Name = "labelTop3TotalStock";
+            this.labelTop3TotalStock.Size = new System.Drawing.Size(224, 25);
+            this.labelTop3TotalStock.TabIndex = 6;
+            this.labelTop3TotalStock.Text = "100000";
+            this.labelTop3TotalStock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelTop2TotalStock
+            // 
+            this.labelTop2TotalStock.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelTop2TotalStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTop2TotalStock.Location = new System.Drawing.Point(-20, 128);
+            this.labelTop2TotalStock.Name = "labelTop2TotalStock";
+            this.labelTop2TotalStock.Size = new System.Drawing.Size(224, 25);
+            this.labelTop2TotalStock.TabIndex = 4;
+            this.labelTop2TotalStock.Text = "100000";
+            this.labelTop2TotalStock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelTop1TotalStock
+            // 
+            this.labelTop1TotalStock.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelTop1TotalStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTop1TotalStock.Location = new System.Drawing.Point(-20, 72);
+            this.labelTop1TotalStock.Name = "labelTop1TotalStock";
+            this.labelTop1TotalStock.Size = new System.Drawing.Size(224, 25);
+            this.labelTop1TotalStock.TabIndex = 1;
+            this.labelTop1TotalStock.Text = "100000";
+            this.labelTop1TotalStock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // materialLabel2
             // 
@@ -358,6 +644,7 @@
             this.btnToday.UseAccentColor = false;
             this.btnToday.UseCompatibleTextRendering = true;
             this.btnToday.UseVisualStyleBackColor = false;
+            this.btnToday.Click += new System.EventHandler(this.btnToday_Click_1);
             // 
             // btnOkCustomDate
             // 
@@ -461,16 +748,6 @@
             this.materialLabel6.Text = "Total Profit";
             this.materialLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::TakoTea.Views.Properties.Resources.output_onlinepngtools;
-            this.pictureBox1.Location = new System.Drawing.Point(8, 8);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(48, 56);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
-            // 
             // lblTotalProfitPercentChange
             // 
             this.lblTotalProfitPercentChange.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -539,16 +816,6 @@
             this.materialLabel4.TabIndex = 57;
             this.materialLabel4.Text = "Number of orders";
             this.materialLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::TakoTea.Views.Properties.Resources.output_onlinepngtools__1_;
-            this.pictureBox3.Location = new System.Drawing.Point(8, 8);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(48, 56);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 6;
-            this.pictureBox3.TabStop = false;
             // 
             // lblNumOrdersPercentChange
             // 
@@ -629,16 +896,6 @@
             this.materialLabel5.Text = "Total revenue";
             this.materialLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::TakoTea.Views.Properties.Resources.output_onlinepngtools__1_;
-            this.pictureBox2.Location = new System.Drawing.Point(8, 8);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(48, 56);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 5;
-            this.pictureBox2.TabStop = false;
-            // 
             // lblTotalRevenuePercentChange
             // 
             this.lblTotalRevenuePercentChange.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -703,57 +960,6 @@
             this.materialCard1.TabIndex = 0;
             this.materialCard1.Paint += new System.Windows.Forms.PaintEventHandler(this.materialCard1_Paint);
             // 
-            // tabControlDataGrids
-            // 
-            this.tabControlDataGrids.Controls.Add(this.tabPageLowStock);
-            this.tabControlDataGrids.Controls.Add(this.tabPageNewOrders);
-            this.tabControlDataGrids.Location = new System.Drawing.Point(208, 632);
-            this.tabControlDataGrids.Name = "tabControlDataGrids";
-            this.tabControlDataGrids.SelectedIndex = 0;
-            this.tabControlDataGrids.Size = new System.Drawing.Size(952, 264);
-            this.tabControlDataGrids.TabIndex = 54;
-            // 
-            // tabPageLowStock
-            // 
-            this.tabPageLowStock.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.tabPageLowStock.Controls.Add(this.bnLowStocks);
-            this.tabPageLowStock.Controls.Add(this.dgvUnderstock);
-            this.tabPageLowStock.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(87)))), ((int)(((byte)(168)))));
-            this.tabPageLowStock.Location = new System.Drawing.Point(4, 22);
-            this.tabPageLowStock.Name = "tabPageLowStock";
-            this.tabPageLowStock.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageLowStock.Size = new System.Drawing.Size(944, 238);
-            this.tabPageLowStock.TabIndex = 0;
-            this.tabPageLowStock.Text = "Low Stock Ingredients";
-            // 
-            // bnLowStocks
-            // 
-            this.bnLowStocks.AddNewItem = this.bindingNavigatorAddNewItem;
-            this.bnLowStocks.CountItem = this.bindingNavigatorCountItem;
-            this.bnLowStocks.DeleteItem = this.bindingNavigatorDeleteItem;
-            this.bnLowStocks.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bindingNavigatorMoveFirstItem,
-            this.bindingNavigatorMovePreviousItem,
-            this.bindingNavigatorSeparator,
-            this.bindingNavigatorPositionItem,
-            this.bindingNavigatorCountItem,
-            this.bindingNavigatorSeparator1,
-            this.bindingNavigatorMoveNextItem,
-            this.bindingNavigatorMoveLastItem,
-            this.bindingNavigatorSeparator2,
-            this.bindingNavigatorAddNewItem,
-            this.bindingNavigatorDeleteItem});
-            this.bnLowStocks.Location = new System.Drawing.Point(3, 3);
-            this.bnLowStocks.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-            this.bnLowStocks.MoveLastItem = this.bindingNavigatorMoveLastItem;
-            this.bnLowStocks.MoveNextItem = this.bindingNavigatorMoveNextItem;
-            this.bnLowStocks.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-            this.bnLowStocks.Name = "bnLowStocks";
-            this.bnLowStocks.PositionItem = this.bindingNavigatorPositionItem;
-            this.bnLowStocks.Size = new System.Drawing.Size(938, 25);
-            this.bnLowStocks.TabIndex = 51;
-            this.bnLowStocks.Text = "bindingNavigator1";
-            // 
             // bindingNavigatorAddNewItem
             // 
             this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -762,13 +968,6 @@
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorAddNewItem.Text = "Add new";
-            // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
-            this.bindingNavigatorCountItem.Text = "of {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
             // 
             // bindingNavigatorDeleteItem
             // 
@@ -797,26 +996,6 @@
             this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMovePreviousItem.Text = "Move previous";
             // 
-            // bindingNavigatorSeparator
-            // 
-            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorPositionItem
-            // 
-            this.bindingNavigatorPositionItem.AccessibleName = "Position";
-            this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
-            this.bindingNavigatorPositionItem.Text = "0";
-            this.bindingNavigatorPositionItem.ToolTipText = "Current position";
-            // 
-            // bindingNavigatorSeparator1
-            // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
             // bindingNavigatorMoveNextItem
             // 
             this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -835,61 +1014,6 @@
             this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveLastItem.Text = "Move last";
             // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // dgvUnderstock
-            // 
-            this.dgvUnderstock.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.dgvUnderstock.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvUnderstock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvUnderstock.Location = new System.Drawing.Point(8, 32);
-            this.dgvUnderstock.Name = "dgvUnderstock";
-            this.dgvUnderstock.Size = new System.Drawing.Size(928, 200);
-            this.dgvUnderstock.TabIndex = 50;
-            // 
-            // tabPageNewOrders
-            // 
-            this.tabPageNewOrders.Controls.Add(this.bnNewOrders);
-            this.tabPageNewOrders.Controls.Add(this.dataGridViewNewOrders);
-            this.tabPageNewOrders.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(87)))), ((int)(((byte)(168)))));
-            this.tabPageNewOrders.Location = new System.Drawing.Point(4, 22);
-            this.tabPageNewOrders.Name = "tabPageNewOrders";
-            this.tabPageNewOrders.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageNewOrders.Size = new System.Drawing.Size(944, 238);
-            this.tabPageNewOrders.TabIndex = 1;
-            this.tabPageNewOrders.Text = "New Orders";
-            // 
-            // bnNewOrders
-            // 
-            this.bnNewOrders.AddNewItem = this.bindingNavigatorAddNewItem1;
-            this.bnNewOrders.CountItem = this.bindingNavigatorCountItem1;
-            this.bnNewOrders.DeleteItem = this.bindingNavigatorDeleteItem1;
-            this.bnNewOrders.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bindingNavigatorMoveFirstItem1,
-            this.bindingNavigatorMovePreviousItem1,
-            this.bindingNavigatorSeparator3,
-            this.bindingNavigatorPositionItem1,
-            this.bindingNavigatorCountItem1,
-            this.bindingNavigatorSeparator4,
-            this.bindingNavigatorMoveNextItem1,
-            this.bindingNavigatorMoveLastItem1,
-            this.bindingNavigatorSeparator5,
-            this.bindingNavigatorAddNewItem1,
-            this.bindingNavigatorDeleteItem1});
-            this.bnNewOrders.Location = new System.Drawing.Point(3, 3);
-            this.bnNewOrders.MoveFirstItem = this.bindingNavigatorMoveFirstItem1;
-            this.bnNewOrders.MoveLastItem = this.bindingNavigatorMoveLastItem1;
-            this.bnNewOrders.MoveNextItem = this.bindingNavigatorMoveNextItem1;
-            this.bnNewOrders.MovePreviousItem = this.bindingNavigatorMovePreviousItem1;
-            this.bnNewOrders.Name = "bnNewOrders";
-            this.bnNewOrders.PositionItem = this.bindingNavigatorPositionItem1;
-            this.bnNewOrders.Size = new System.Drawing.Size(938, 25);
-            this.bnNewOrders.TabIndex = 52;
-            this.bnNewOrders.Text = "bindingNavigator1";
-            // 
             // bindingNavigatorAddNewItem1
             // 
             this.bindingNavigatorAddNewItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -898,13 +1022,6 @@
             this.bindingNavigatorAddNewItem1.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorAddNewItem1.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorAddNewItem1.Text = "Add new";
-            // 
-            // bindingNavigatorCountItem1
-            // 
-            this.bindingNavigatorCountItem1.Name = "bindingNavigatorCountItem1";
-            this.bindingNavigatorCountItem1.Size = new System.Drawing.Size(35, 22);
-            this.bindingNavigatorCountItem1.Text = "of {0}";
-            this.bindingNavigatorCountItem1.ToolTipText = "Total number of items";
             // 
             // bindingNavigatorDeleteItem1
             // 
@@ -933,26 +1050,6 @@
             this.bindingNavigatorMovePreviousItem1.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMovePreviousItem1.Text = "Move previous";
             // 
-            // bindingNavigatorSeparator3
-            // 
-            this.bindingNavigatorSeparator3.Name = "bindingNavigatorSeparator3";
-            this.bindingNavigatorSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorPositionItem1
-            // 
-            this.bindingNavigatorPositionItem1.AccessibleName = "Position";
-            this.bindingNavigatorPositionItem1.AutoSize = false;
-            this.bindingNavigatorPositionItem1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.bindingNavigatorPositionItem1.Name = "bindingNavigatorPositionItem1";
-            this.bindingNavigatorPositionItem1.Size = new System.Drawing.Size(50, 23);
-            this.bindingNavigatorPositionItem1.Text = "0";
-            this.bindingNavigatorPositionItem1.ToolTipText = "Current position";
-            // 
-            // bindingNavigatorSeparator4
-            // 
-            this.bindingNavigatorSeparator4.Name = "bindingNavigatorSeparator4";
-            this.bindingNavigatorSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
             // bindingNavigatorMoveNextItem1
             // 
             this.bindingNavigatorMoveNextItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -971,131 +1068,35 @@
             this.bindingNavigatorMoveLastItem1.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveLastItem1.Text = "Move last";
             // 
-            // bindingNavigatorSeparator5
+            // pictureBox1
             // 
-            this.bindingNavigatorSeparator5.Name = "bindingNavigatorSeparator5";
-            this.bindingNavigatorSeparator5.Size = new System.Drawing.Size(6, 25);
+            this.pictureBox1.Image = global::TakoTea.Views.Properties.Resources.output_onlinepngtools;
+            this.pictureBox1.Location = new System.Drawing.Point(8, 8);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(48, 56);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
             // 
-            // dataGridViewNewOrders
+            // pictureBox3
             // 
-            this.dataGridViewNewOrders.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.dataGridViewNewOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewNewOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewNewOrders.Location = new System.Drawing.Point(8, 32);
-            this.dataGridViewNewOrders.Name = "dataGridViewNewOrders";
-            this.dataGridViewNewOrders.Size = new System.Drawing.Size(928, 199);
-            this.dataGridViewNewOrders.TabIndex = 51;
+            this.pictureBox3.Image = global::TakoTea.Views.Properties.Resources.output_onlinepngtools__1_;
+            this.pictureBox3.Location = new System.Drawing.Point(8, 8);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(48, 56);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 6;
+            this.pictureBox3.TabStop = false;
             // 
-            // panel4
+            // pictureBox2
             // 
-            this.panel4.BackColor = System.Drawing.Color.White;
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.labelTop3Product);
-            this.panel4.Controls.Add(this.labelTop2Product);
-            this.panel4.Controls.Add(this.labelTop1Product);
-            this.panel4.Controls.Add(this.materialLabel3);
-            this.panel4.Controls.Add(this.labelTop3TotalStock);
-            this.panel4.Controls.Add(this.labelTop2TotalStock);
-            this.panel4.Controls.Add(this.labelTop1TotalStock);
-            this.panel4.Location = new System.Drawing.Point(16, 632);
-            this.panel4.Margin = new System.Windows.Forms.Padding(5);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(185, 262);
-            this.panel4.TabIndex = 53;
-            // 
-            // labelTop3Product
-            // 
-            this.labelTop3Product.Depth = 0;
-            this.labelTop3Product.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelTop3Product.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelTop3Product.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
-            this.labelTop3Product.HighEmphasis = true;
-            this.labelTop3Product.Location = new System.Drawing.Point(0, 160);
-            this.labelTop3Product.MouseState = MaterialSkin.MouseState.HOVER;
-            this.labelTop3Product.Name = "labelTop3Product";
-            this.labelTop3Product.Size = new System.Drawing.Size(184, 24);
-            this.labelTop3Product.TabIndex = 56;
-            this.labelTop3Product.Text = "Takoyaki";
-            this.labelTop3Product.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelTop2Product
-            // 
-            this.labelTop2Product.Depth = 0;
-            this.labelTop2Product.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelTop2Product.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelTop2Product.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
-            this.labelTop2Product.HighEmphasis = true;
-            this.labelTop2Product.Location = new System.Drawing.Point(0, 104);
-            this.labelTop2Product.MouseState = MaterialSkin.MouseState.HOVER;
-            this.labelTop2Product.Name = "labelTop2Product";
-            this.labelTop2Product.Size = new System.Drawing.Size(184, 24);
-            this.labelTop2Product.TabIndex = 55;
-            this.labelTop2Product.Text = "Milktea";
-            this.labelTop2Product.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelTop1Product
-            // 
-            this.labelTop1Product.Depth = 0;
-            this.labelTop1Product.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelTop1Product.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelTop1Product.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle1;
-            this.labelTop1Product.HighEmphasis = true;
-            this.labelTop1Product.Location = new System.Drawing.Point(0, 48);
-            this.labelTop1Product.MouseState = MaterialSkin.MouseState.HOVER;
-            this.labelTop1Product.Name = "labelTop1Product";
-            this.labelTop1Product.Size = new System.Drawing.Size(184, 24);
-            this.labelTop1Product.TabIndex = 54;
-            this.labelTop1Product.Text = "Takoyaki";
-            this.labelTop1Product.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // materialLabel3
-            // 
-            this.materialLabel3.AutoSize = true;
-            this.materialLabel3.Depth = 0;
-            this.materialLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel3.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.materialLabel3.HighEmphasis = true;
-            this.materialLabel3.Location = new System.Drawing.Point(24, 16);
-            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(136, 24);
-            this.materialLabel3.TabIndex = 53;
-            this.materialLabel3.Text = "Product Stocks";
-            this.materialLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelTop3TotalStock
-            // 
-            this.labelTop3TotalStock.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelTop3TotalStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTop3TotalStock.Location = new System.Drawing.Point(-20, 184);
-            this.labelTop3TotalStock.Name = "labelTop3TotalStock";
-            this.labelTop3TotalStock.Size = new System.Drawing.Size(224, 25);
-            this.labelTop3TotalStock.TabIndex = 6;
-            this.labelTop3TotalStock.Text = "100000";
-            this.labelTop3TotalStock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelTop2TotalStock
-            // 
-            this.labelTop2TotalStock.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelTop2TotalStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTop2TotalStock.Location = new System.Drawing.Point(-20, 128);
-            this.labelTop2TotalStock.Name = "labelTop2TotalStock";
-            this.labelTop2TotalStock.Size = new System.Drawing.Size(224, 25);
-            this.labelTop2TotalStock.TabIndex = 4;
-            this.labelTop2TotalStock.Text = "100000";
-            this.labelTop2TotalStock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelTop1TotalStock
-            // 
-            this.labelTop1TotalStock.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelTop1TotalStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTop1TotalStock.Location = new System.Drawing.Point(-20, 72);
-            this.labelTop1TotalStock.Name = "labelTop1TotalStock";
-            this.labelTop1TotalStock.Size = new System.Drawing.Size(224, 25);
-            this.labelTop1TotalStock.TabIndex = 1;
-            this.labelTop1TotalStock.Text = "100000";
-            this.labelTop1TotalStock.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.pictureBox2.Image = global::TakoTea.Views.Properties.Resources.output_onlinepngtools__1_;
+            this.pictureBox2.Location = new System.Drawing.Point(8, 8);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(48, 56);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 5;
+            this.pictureBox2.TabStop = false;
             // 
             // DashboardForm
             // 
@@ -1110,24 +1111,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DashboardForm";
             this.Load += new System.EventHandler(this.DashboardForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsNewOrders)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsLowStock)).EndInit();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).EndInit();
-            this.materialCard1.ResumeLayout(false);
             this.tabControlDataGrids.ResumeLayout(false);
             this.tabPageLowStock.ResumeLayout(false);
             this.tabPageLowStock.PerformLayout();
@@ -1143,6 +1128,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNewOrders)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).EndInit();
+            this.materialCard1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsNewOrders)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsLowStock)).EndInit();
             this.ResumeLayout(false);
 
         }

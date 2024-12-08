@@ -31,6 +31,7 @@ namespace TakoTea.Views.Items
             ingredientRepository = new IngredientRepository(new Entities()); // Fix: Pass an instance of Entities
             DataGridViewHelper.ApplyDefaultStyles(dataGridViewIngredients);
             dataGridViewIngredients.CellClick += dataGridViewIngredients_CellClick;
+            LoadData();
             DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewIngredients);
             _inventoryService = new InventoryService();
 
@@ -55,10 +56,11 @@ namespace TakoTea.Views.Items
 
                 DataGridViewHelper.BindDataToGridView(dataGridViewIngredients, bindingSource1, ingredients);
                 DataGridViewHelper.BindNavigatorToBindingSource(bindingNavigatorBatch, bindingSource1);
-/*                DataGridViewHelper.HideColumn(dataGridViewIngredients, "IngredientID");
-*/
-           
-                
+                /*                DataGridViewHelper.HideColumn(dataGridViewIngredients, "IngredientID");
+                */
+
+                DataGridViewHelper.FormatColumnHeaders(dataGridViewIngredients);
+
 
 
             }
@@ -242,6 +244,11 @@ namespace TakoTea.Views.Items
                     MessageBox.Show("Error opening the edit modal: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void materialRadioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

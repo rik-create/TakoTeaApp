@@ -23,6 +23,7 @@ using TakoTea.Services;
 using TakoTea.View.Orders;
 using TakoTea.Views.Order.Order_Modals;
 using System.Drawing.Printing;
+using TakoTea.Helpers;
 
 namespace TakoTea.Views.Order
 {
@@ -887,10 +888,22 @@ namespace TakoTea.Views.Order
                     // 5. Update stock levels
                     UpdateStockLevels(dataGridViewOrderList);
                     dataGridViewOrderList.Rows.Clear();
+
                     // 6. Commit transaction
                     transaction.Commit();
 
-                    // 7. (Optional) Perform other actions like generating a receipt or printing an order summary
+                    // 7. Log the change
+                    LoggingHelper.LogChange(
+                        "Orders",                // Table name
+                        orderId,                 // Record ID
+                        "Order Confirmation",    // Column name
+                        null,                    // Old value
+                        $"Order {orderId} confirmed", // New value
+                        "Confirmed",             // Action
+                        $"Order '{orderId}' confirmed with payment method '{paymentMethod}' and status '{orderStatus}'" // Description
+                    );
+
+                    // 8. (Optional) Perform other actions like generating a receipt or printing an order summary
                 }
                 catch (Exception ex)
                 {

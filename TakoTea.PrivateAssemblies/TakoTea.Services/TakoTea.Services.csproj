@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\..\packages\xunit.runner.visualstudio.2.8.2\build\net462\xunit.runner.visualstudio.props" Condition="Exists('..\..\packages\xunit.runner.visualstudio.2.8.2\build\net462\xunit.runner.visualstudio.props')" />
   <Import Project="..\..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
@@ -283,6 +283,10 @@
     <ProjectReference Include="..\TakoTea.Database\TakoTea.Database.csproj">
       <Project>{2d88f7bb-0d29-4c06-b447-e2fad1c973c2}</Project>
       <Name>TakoTea.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TakoTea.Helpers\TakoTea.Helpers.csproj">
+      <Project>{F364AB89-A7DC-4C34-BB2B-586C90EB330B}</Project>
+      <Name>TakoTea.Helpers</Name>
     </ProjectReference>
     <ProjectReference Include="..\TakoTea.Interfaces\TakoTea.Interfaces.csproj">
       <Project>{b801f875-789a-4766-b84b-290f2233a7df}</Project>

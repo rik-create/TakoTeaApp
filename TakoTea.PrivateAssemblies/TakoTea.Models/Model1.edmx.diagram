@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="102d72a12c2648348c092c10af13695f" Name="Diagram1" ZoomLevel="47">
+      <Diagram DiagramId="102d72a12c2648348c092c10af13695f" Name="Diagram1" ZoomLevel="71">
         <EntityTypeShape EntityType="TakoTeaModel.IngredientProductLink" Width="1.5" PointX="6" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TakoTeaModel.Product" Width="2.125" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TakoTeaModel.ProductCategory" Width="1.5" PointX="1.5" PointY="1.125" IsExpanded="true" />

@@ -24,7 +24,6 @@ namespace TakoTea.View.Orders
             InitializeComponent();
             ThemeConfigurator.ApplyDarkTheme(this);
 
-            cmbStatus.SelectedIndexChanged += cmbStatus_SelectedIndexChanged;
             pbCompleted.Click += pbCompleted_Click;
             pbCancelled.Click += pbCancelled_Click;
             btnProcessOrder.Click += btnProcessOrder_Click;
@@ -57,16 +56,11 @@ namespace TakoTea.View.Orders
 
             // Hide the ImagePath column
             DataGridViewHelper.HideColumn(dgViewOrderQueue, "OrderId");
+            DataGridViewHelper.FormatColumnHeaders(dgViewOrderQueue);
 
         }
 
-        private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string selectedStatus = cmbStatus.SelectedItem.ToString();
-
-            // Filter the DataGridView based on the selected status
-            (dgViewOrderQueue.DataSource as BindingSource).Filter = $"OrderStatus = '{selectedStatus}'";
-        }
+   
 
         private void pbCompleted_Click(object sender, EventArgs e)
         {
@@ -93,6 +87,17 @@ namespace TakoTea.View.Orders
 
                     // Update the order status to "Cancelled"
                     order.OrderStatus = "Cancelled";
+
+                    // Log the change
+                    LoggingHelper.LogChange(
+                        "OrderModels",                // Table name
+                        order.OrderId,                // Record ID
+                        "OrderStatus",                // Column name
+                        null,                         // Old value (null for new batch)
+                        "Cancelled",                  // New value
+                        "Updated",                    // Action
+                        $"Order '{order.OrderId}' status updated to 'Cancelled'" // Description
+                    );
                 }
             }
 
@@ -100,7 +105,6 @@ namespace TakoTea.View.Orders
             context.SaveChanges();
 
             LoadData();
-
         }
 
         private void ReturnBatchLevels(OrderModel order)
@@ -160,6 +164,7 @@ namespace TakoTea.View.Orders
 
                                 // Return the batch level for the add-on
                                 productsService.UpdateBatchStockLevel(addOnIngredientId, -quantityUsed, "Addition"); // Negative quantity to increase stock
+
                             }
                         }
                     }
@@ -171,8 +176,8 @@ namespace TakoTea.View.Orders
 
         private void btnProcessOrder_Click(object sender, EventArgs e)
         {
-            UpdateOrderStatusForSelectedRows("Processing");
-        }
+           
+;        }
 
         private void UpdateOrderStatusForSelectedRows(string newStatus)
         {
@@ -185,6 +190,17 @@ namespace TakoTea.View.Orders
                 if (order != null)
                 {
                     order.OrderStatus = newStatus;
+
+                    // Log the change
+                    LoggingHelper.LogChange(
+                        "OrderModels",                // Table name
+                        order.OrderId,                // Record ID
+                        "OrderStatus",                // Column name
+                        null,                         // Old value (null for new batch)
+                        newStatus,                    // New value
+                        "Updated",                    // Action
+                        $"Order '{order.OrderId}' status updated to '{newStatus}'" // Description
+                    );
                 }
             }
 
@@ -194,7 +210,29 @@ namespace TakoTea.View.Orders
 
         private void pbCancelled_Click_1(object sender, EventArgs e)
         {
+            UpdateOrderStatusForSelectedRows("Cancelled");
 
+            this.Close();
+            OrdersQueueForm newForm = new OrdersQueueForm(context);
+            newForm.Show();
+        }
+
+        private void btnProcessOrder_Click_1(object sender, EventArgs e)
+        {
+            UpdateOrderStatusForSelectedRows("Processing");
+
+            this.Close();
+            OrdersQueueForm newForm = new OrdersQueueForm(context);
+            newForm.Show();
+        }
+
+        private void pbCompleted_Click_1(object sender, EventArgs e)
+        {
+            UpdateOrderStatusForSelectedRows("Completed");
+
+            this.Close();
+            OrdersQueueForm newForm = new OrdersQueueForm(context);
+            newForm.Show(); ;
         }
     }
 }

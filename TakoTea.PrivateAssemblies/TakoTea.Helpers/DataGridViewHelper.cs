@@ -1,16 +1,34 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Security.Cryptography;
 using System.Windows.Forms;
+using System.Windows.Interop;
 using TakoTea.Configurations;
 using TakoTea.Models;
 namespace TakoTea.Helpers
 {
     public static class DataGridViewHelper
     {
+
+        public static void FormatColumnHeaders(DataGridView dataGridView)
+        {
+            foreach (DataGridViewColumn column in dataGridView.Columns)
+            {
+                column.HeaderText = AddSpacingToName(column.HeaderText);
+            }
+        }
+
+        private static string AddSpacingToName(string name)
+        {
+            return System.Text.RegularExpressions.Regex.Replace(name, "(?<!^)([A-Z])", " $1");
+        }
         public static void BindDataToGridView(DataGridView gridView, BindingSource bindingSource, DataTable dataTable)
         {
             bindingSource.DataSource = dataTable;
@@ -526,9 +544,8 @@ namespace TakoTea.Helpers
             }
         }
    
-        public static void ApplyDataGridViewStyles(DataGridView dataGridView)
+  public static void ApplyDataGridViewStyles(DataGridView dataGridView)
         {
-
             // Disable default visual styles for more control over appearance
             dataGridView.EnableHeadersVisualStyles = false;
 
@@ -564,10 +581,65 @@ namespace TakoTea.Helpers
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
+            // Make columns sortable
+            foreach (DataGridViewColumn column in dataGridView.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
+            }
 
+            dataGridView.ColumnHeaderMouseClick += DataGridView_ColumnHeaderMouseClick;
         }
+      private static void DataGridView_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+{
+    DataGridView dataGridView = (DataGridView)sender;
+    DataGridViewColumn clickedColumn = dataGridView.Columns[e.ColumnIndex];
 
+    if (!(dataGridView.DataSource is IBindingList data))
+    {
+        // Handle the case where the data source is not an IBindingList
+        return;
+    }
 
+    // Determine sort order based on current sort direction
+    SortOrder sortOrder = clickedColumn.HeaderCell.SortGlyphDirection == SortOrder.Ascending
+        ? SortOrder.Descending
+        : SortOrder.Ascending;
+
+    // Sort the IBindingList directly (replace with your actual sorting logic)
+    if (sortOrder == SortOrder.Ascending)
+    {
+        var sortedList = data.Cast<object>().OrderBy(x => GetPropertyValue(x, clickedColumn.DataPropertyName)).ToList();
+        RepopulateIBindingList(data, sortedList);
+    }
+    else
+    {
+        var sortedList = data.Cast<object>().OrderByDescending(x => GetPropertyValue(x, clickedColumn.DataPropertyName)).ToList();
+        RepopulateIBindingList(data, sortedList);
+    }
+
+    // Refresh the DataGridView (no need to rebind)
+    dataGridView.Refresh(); 
+}
+
+private static void RepopulateIBindingList(IBindingList bindingList, List<object> sortedList)
+{
+    // Clear the original IBindingList
+    bindingList.Clear();
+
+    // Add the sorted items back to the IBindingList
+    foreach (var item in sortedList)
+    {
+        bindingList.Add(item);
+    }
+}
+
+// ... (GetPropertyValue helper method remains the same) ...
+
+        // Helper method to get property value dynamically
+        private static object GetPropertyValue(object obj, string propertyName)
+        {
+            return obj.GetType().GetProperty(propertyName)?.GetValue(obj, null);
+        }
 
         public static void ApplyDefaultStyles(DataGridView dataGridView)
         {

@@ -95,7 +95,7 @@
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard1.Size = new System.Drawing.Size(922, 798);
+            this.materialCard1.Size = new System.Drawing.Size(922, 761);
             this.materialCard1.TabIndex = 0;
             // 
             // panel3
@@ -119,12 +119,13 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(14, 60);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(894, 676);
+            this.panel3.Size = new System.Drawing.Size(894, 639);
             this.panel3.TabIndex = 109;
+            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // btnRemoveImage
             // 
-            this.btnRemoveImage.Location = new System.Drawing.Point(344, 624);
+            this.btnRemoveImage.Location = new System.Drawing.Point(344, 600);
             this.btnRemoveImage.Name = "btnRemoveImage";
             this.btnRemoveImage.Size = new System.Drawing.Size(40, 23);
             this.btnRemoveImage.TabIndex = 128;
@@ -134,7 +135,7 @@
             // 
             // btnAddImage
             // 
-            this.btnAddImage.Location = new System.Drawing.Point(296, 624);
+            this.btnAddImage.Location = new System.Drawing.Point(296, 600);
             this.btnAddImage.Name = "btnAddImage";
             this.btnAddImage.Size = new System.Drawing.Size(48, 23);
             this.btnAddImage.TabIndex = 127;
@@ -145,7 +146,7 @@
             // pbComboMealImage
             // 
             this.pbComboMealImage.Image = global::TakoTea.Views.Properties.Resources.takoyaki;
-            this.pbComboMealImage.Location = new System.Drawing.Point(296, 544);
+            this.pbComboMealImage.Location = new System.Drawing.Point(296, 520);
             this.pbComboMealImage.Name = "pbComboMealImage";
             this.pbComboMealImage.Size = new System.Drawing.Size(88, 80);
             this.pbComboMealImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -160,7 +161,7 @@
             this.flowLayoutPanelDgViews.Controls.Add(this.dgViewAddComboMeal);
             this.flowLayoutPanelDgViews.Location = new System.Drawing.Point(8, 8);
             this.flowLayoutPanelDgViews.Name = "flowLayoutPanelDgViews";
-            this.flowLayoutPanelDgViews.Size = new System.Drawing.Size(872, 504);
+            this.flowLayoutPanelDgViews.Size = new System.Drawing.Size(872, 445);
             this.flowLayoutPanelDgViews.TabIndex = 125;
             // 
             // pnlTopButtons
@@ -350,7 +351,7 @@
             this.lblDiscountedPrice.Depth = 0;
             this.lblDiscountedPrice.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.lblDiscountedPrice.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.lblDiscountedPrice.Location = new System.Drawing.Point(464, 616);
+            this.lblDiscountedPrice.Location = new System.Drawing.Point(464, 592);
             this.lblDiscountedPrice.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblDiscountedPrice.Name = "lblDiscountedPrice";
             this.lblDiscountedPrice.Size = new System.Drawing.Size(162, 24);
@@ -364,7 +365,7 @@
             this.lblBasePrice.Depth = 0;
             this.lblBasePrice.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.lblBasePrice.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.lblBasePrice.Location = new System.Drawing.Point(464, 584);
+            this.lblBasePrice.Location = new System.Drawing.Point(464, 560);
             this.lblBasePrice.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblBasePrice.Name = "lblBasePrice";
             this.lblBasePrice.Size = new System.Drawing.Size(107, 24);
@@ -377,7 +378,7 @@
             this.materialLabel7.AutoSize = true;
             this.materialLabel7.Depth = 0;
             this.materialLabel7.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel7.Location = new System.Drawing.Point(464, 520);
+            this.materialLabel7.Location = new System.Drawing.Point(464, 496);
             this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel7.Name = "materialLabel7";
             this.materialLabel7.Size = new System.Drawing.Size(91, 19);
@@ -393,7 +394,7 @@
             0,
             0,
             65536});
-            this.numericUpDownDiscountPercent.Location = new System.Drawing.Point(464, 544);
+            this.numericUpDownDiscountPercent.Location = new System.Drawing.Point(464, 520);
             this.numericUpDownDiscountPercent.Name = "numericUpDownDiscountPercent";
             this.numericUpDownDiscountPercent.Size = new System.Drawing.Size(120, 29);
             this.numericUpDownDiscountPercent.TabIndex = 119;
@@ -409,7 +410,7 @@
             this.txtBoxComboMealName.HideSelection = true;
             this.txtBoxComboMealName.Hint = "Enter Combo Meal Name";
             this.txtBoxComboMealName.LeadingIcon = null;
-            this.txtBoxComboMealName.Location = new System.Drawing.Point(16, 544);
+            this.txtBoxComboMealName.Location = new System.Drawing.Point(16, 520);
             this.txtBoxComboMealName.MaxLength = 32767;
             this.txtBoxComboMealName.MouseState = MaterialSkin.MouseState.OUT;
             this.txtBoxComboMealName.Name = "txtBoxComboMealName";
@@ -441,7 +442,7 @@
             // 
             // btnDeleteRow
             // 
-            this.btnDeleteRow.Location = new System.Drawing.Point(784, 520);
+            this.btnDeleteRow.Location = new System.Drawing.Point(784, 496);
             this.btnDeleteRow.Name = "btnDeleteRow";
             this.btnDeleteRow.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteRow.TabIndex = 117;
@@ -464,7 +465,7 @@
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(288, 520);
+            this.materialLabel1.Location = new System.Drawing.Point(288, 496);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(139, 19);
@@ -476,7 +477,7 @@
             this.materialLabel3.AutoSize = true;
             this.materialLabel3.Depth = 0;
             this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel3.Location = new System.Drawing.Point(16, 522);
+            this.materialLabel3.Location = new System.Drawing.Point(16, 498);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
             this.materialLabel3.Size = new System.Drawing.Size(137, 19);
@@ -491,7 +492,7 @@
             this.panel2.Controls.Add(this.lblTotalVariantsInDg);
             this.panel2.Controls.Add(this.btnSaveCombomeal);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(14, 736);
+            this.panel2.Location = new System.Drawing.Point(14, 699);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(894, 48);
             this.panel2.TabIndex = 108;
@@ -608,7 +609,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(928, 825);
+            this.ClientSize = new System.Drawing.Size(928, 788);
             this.Controls.Add(this.materialCard1);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
             this.Name = "AddComboMealModal";

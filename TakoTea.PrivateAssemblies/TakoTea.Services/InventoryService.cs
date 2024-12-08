@@ -5,8 +5,10 @@ using System.Data.Entity;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Transactions;
 using System.Windows.Forms;
 using TakoTea.Database;
+using TakoTea.Helpers;
 using TakoTea.Interfaces;
 using TakoTea.Models;
 
@@ -31,21 +33,73 @@ namespace TakoTea.Services
 
         public void DeleteIngredient(int ingredientId)
         {
-
-            // 1. Delete related records in StockLevelLogs
-            context.StockLevelLogs.RemoveRange(context.StockLevelLogs.Where(log => log.Batch.IngredientID == ingredientId));
-
-            // 2. Delete related records in Batches
-            context.Batches.RemoveRange(context.Batches.Where(b => b.IngredientID == ingredientId));
-
-            // 3. Delete the ingredient
-            var ingredient = context.Ingredients.Find(ingredientId);
-            if (ingredient != null)
+            using (var transaction = new TransactionScope())
             {
-                context.Ingredients.Remove(ingredient);
-            }
+                try
+                {
+                    // 1. Delete related records in StockLevelLogs
+                    var stockLevelLogs = context.StockLevelLogs.Where(log => log.Batch.IngredientID == ingredientId).ToList();
+                    context.StockLevelLogs.RemoveRange(stockLevelLogs);
 
-            context.SaveChanges(); 
+                    // Log deletion of StockLevelLogs
+                    foreach (var log in stockLevelLogs)
+                    {
+                        LoggingHelper.LogChange(
+                            "StockLevelLogs",
+                            log.LogID,
+                            "Deleted StockLevelLog",
+                            log.OldStockLevel.ToString(),
+                            null,
+                            "Deleted",
+                            $"StockLevelLog with ID '{log.LogID}' deleted for batch '{log.BatchID}'"
+                        );
+                    }
+
+                    // 2. Delete related records in Batches
+                    var batches = context.Batches.Where(b => b.IngredientID == ingredientId).ToList();
+                    context.Batches.RemoveRange(batches);
+
+                    // Log deletion of Batches
+                    foreach (var batch in batches)
+                    {
+                        LoggingHelper.LogChange(
+                            "Batches",
+                            batch.BatchID,
+                            "Deleted Batch",
+                            batch.UpdatedAt.ToString(),
+                            null,
+                            "Deleted",
+                            $"Batch '{batch.BatchNumber}' deleted for ingredient '{batch.IngredientID}'"
+                        );
+                    }
+
+                    // 3. Delete the ingredient
+                    var ingredient = context.Ingredients.Find(ingredientId);
+                    if (ingredient != null)
+                    {
+                        context.Ingredients.Remove(ingredient);
+
+                        // Log deletion of Ingredient
+                        LoggingHelper.LogChange(
+                            "Ingredients",
+                            ingredient.IngredientID,
+                            "Deleted Ingredient",
+                            ingredient.IngredientName,
+                            null,
+                            "Deleted",
+                            $"Ingredient '{ingredient.IngredientName}' with ID '{ingredient.IngredientID}' deleted"
+                        );
+                    }
+
+                    context.SaveChanges();
+                    transaction.Complete();
+                }
+                catch (Exception ex)
+                {
+                    // Handle the exception
+                    MessageBox.Show("Error deleting ingredient: " + ex.Message);
+                }
+            }
         }
 
 
@@ -138,8 +192,18 @@ namespace TakoTea.Services
             using (var context = new Entities())
             {
                 context.Ingredients.Add(ingredient);
-
                 context.SaveChanges();
+
+                // Log addition of Ingredient
+                LoggingHelper.LogChange(
+                    "Ingredients",
+                    ingredient.IngredientID,
+                    "Added Ingredient",
+                    null,
+                    ingredient.IngredientName,
+                    "Added",
+                    $"Ingredient '{ingredient.IngredientName}' with ID '{ingredient.IngredientID}' added"
+                );
             }
         }
         public int GetNextIngredientId()
@@ -202,7 +266,19 @@ namespace TakoTea.Services
                         var productVariant = context.ProductVariants.FirstOrDefault(pv => pv.ProductVariantID == stockData.ProductVariantID);
                         if (productVariant != null)
                         {
+                            var oldStockLevel = productVariant.StockLevel;
                             productVariant.StockLevel = stockLevel;
+
+                            // Log update of ProductVariant stock level
+                            LoggingHelper.LogChange(
+                                "ProductVariants",
+                                productVariant.ProductVariantID,
+                                "Updated StockLevel",
+                                oldStockLevel.ToString(),
+                                stockLevel.ToString(),
+                                "Updated",
+                                $"ProductVariant '{productVariant.VariantName}' stock level updated from '{oldStockLevel}' to '{stockLevel}'"
+                            );
                         }
                     }
 
@@ -212,6 +288,25 @@ namespace TakoTea.Services
             catch (Exception ex)
             {
                 MessageBox.Show("Error updating stock levels for all product variants: " + ex.Message);
+            }
+        }
+        public void AddBatch(Batch batch)
+        {
+            using (var context = new Entities())
+            {
+                context.Batches.Add(batch);
+                context.SaveChanges();
+
+                // Log addition of Batch
+                LoggingHelper.LogChange(
+                    "Batches",                // Table name
+                    batch.BatchID,            // Record ID (assuming BatchID is auto-generated)
+                    "New Batch",              // Column name (or any descriptive text)
+                    null,                     // Old value (null for new batch)
+                    batch.ToString(),         // New value (you might need to override ToString() in your Batch class for a more descriptive log)
+                    "Added",                  // Action
+                    $"Batch '{batch.BatchNumber}' added for ingredient '{batch.IngredientID}'" // Description
+                );
             }
         }
 

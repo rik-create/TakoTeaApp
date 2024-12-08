@@ -68,8 +68,6 @@
             this.panelExportButtons = new System.Windows.Forms.Panel();
             this.pictureBoxExportCsvIngredients = new System.Windows.Forms.PictureBox();
             this.pictureBoxExportPdf = new System.Windows.Forms.PictureBox();
-            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).BeginInit();
@@ -124,8 +122,6 @@
             this.materialCard2.Controls.Add(this.panel3);
             this.materialCard2.Controls.Add(this.panel1);
             this.materialCard2.Controls.Add(this.panelExportButtons);
-            this.materialCard2.Controls.Add(this.materialLabel2);
-            this.materialCard2.Controls.Add(this.materialLabel1);
             this.materialCard2.Depth = 0;
             this.materialCard2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.materialCard2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -219,6 +215,7 @@
             this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.materialButton1.UseAccentColor = false;
             this.materialButton1.UseVisualStyleBackColor = true;
+            this.materialButton1.Visible = false;
             // 
             // dateTimePicker3
             // 
@@ -229,6 +226,7 @@
             this.dateTimePicker3.Name = "dateTimePicker3";
             this.dateTimePicker3.Size = new System.Drawing.Size(159, 31);
             this.dateTimePicker3.TabIndex = 97;
+            this.dateTimePicker3.Visible = false;
             // 
             // dateTimePicker2
             // 
@@ -239,6 +237,7 @@
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(159, 31);
             this.dateTimePicker2.TabIndex = 96;
+            this.dateTimePicker2.Visible = false;
             // 
             // materialRadioButton1
             // 
@@ -256,6 +255,7 @@
             this.materialRadioButton1.TabStop = true;
             this.materialRadioButton1.Text = "Expiration Date(Farthest)";
             this.materialRadioButton1.UseVisualStyleBackColor = true;
+            this.materialRadioButton1.Visible = false;
             // 
             // materialRadioButton3
             // 
@@ -273,6 +273,7 @@
             this.materialRadioButton3.TabStop = true;
             this.materialRadioButton3.Text = "Expired";
             this.materialRadioButton3.UseVisualStyleBackColor = true;
+            this.materialRadioButton3.Visible = false;
             // 
             // materialRadioButton2
             // 
@@ -290,6 +291,8 @@
             this.materialRadioButton2.TabStop = true;
             this.materialRadioButton2.Text = "Expiring Soon";
             this.materialRadioButton2.UseVisualStyleBackColor = true;
+            this.materialRadioButton2.Visible = false;
+            this.materialRadioButton2.CheckedChanged += new System.EventHandler(this.materialRadioButton2_CheckedChanged);
             // 
             // materialLabel3
             // 
@@ -302,6 +305,7 @@
             this.materialLabel3.Size = new System.Drawing.Size(56, 19);
             this.materialLabel3.TabIndex = 93;
             this.materialLabel3.Text = "Sort By:";
+            this.materialLabel3.Visible = false;
             // 
             // panelItemList
             // 
@@ -609,30 +613,6 @@
             this.pictureBoxExportPdf.TabStop = false;
             this.pictureBoxExportPdf.Click += new System.EventHandler(this.pictureBoxExportPdf_Click);
             // 
-            // materialLabel2
-            // 
-            this.materialLabel2.AutoSize = true;
-            this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.Location = new System.Drawing.Point(30, 680);
-            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(189, 19);
-            this.materialLabel2.TabIndex = 95;
-            this.materialLabel2.Text = "Total Nearing Expiration: 2";
-            // 
-            // materialLabel1
-            // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(30, 660);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(116, 19);
-            this.materialLabel1.TabIndex = 94;
-            this.materialLabel1.Text = "Total Batches: 5";
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
@@ -651,7 +631,6 @@
             this.Load += new System.EventHandler(this.BatchListForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).EndInit();
             this.materialCard2.ResumeLayout(false);
-            this.materialCard2.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panelFilteringComponents.ResumeLayout(false);
             this.panelFilteringComponents.PerformLayout();
@@ -680,8 +659,6 @@
         private System.Windows.Forms.Panel panelExportButtons;
         private System.Windows.Forms.PictureBox pictureBoxExportCsvIngredients;
         private System.Windows.Forms.PictureBox pictureBoxExportPdf;
-        private MaterialSkin.Controls.MaterialLabel materialLabel2;
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private System.Windows.Forms.Panel panel1;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private MaterialSkin.Controls.MaterialFloatingActionButton floatingActionButtonAddIngredients;

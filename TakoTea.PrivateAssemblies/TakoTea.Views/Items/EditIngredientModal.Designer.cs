@@ -89,7 +89,7 @@ namespace TakoTea.View.Items.Item_Modals {
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(886, 824);
+            this.panel1.Size = new System.Drawing.Size(886, 761);
             this.panel1.TabIndex = 2;
             // 
             // materialCard1
@@ -106,7 +106,7 @@ namespace TakoTea.View.Items.Item_Modals {
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard1.Size = new System.Drawing.Size(886, 824);
+            this.materialCard1.Size = new System.Drawing.Size(886, 761);
             this.materialCard1.TabIndex = 18;
             // 
             // panel4
@@ -119,7 +119,7 @@ namespace TakoTea.View.Items.Item_Modals {
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(14, 60);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(858, 692);
+            this.panel4.Size = new System.Drawing.Size(858, 629);
             this.panel4.TabIndex = 103;
             // 
             // groupBoxOther
@@ -622,7 +622,7 @@ namespace TakoTea.View.Items.Item_Modals {
             this.panel3.Controls.Add(this.btnConfirmEdit);
             this.panel3.Controls.Add(this.btnCancelEdit);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(14, 752);
+            this.panel3.Location = new System.Drawing.Point(14, 689);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(858, 58);
             this.panel3.TabIndex = 102;
@@ -634,14 +634,14 @@ namespace TakoTea.View.Items.Item_Modals {
             this.btnConfirmEdit.Depth = 0;
             this.btnConfirmEdit.HighEmphasis = true;
             this.btnConfirmEdit.Icon = null;
-            this.btnConfirmEdit.Location = new System.Drawing.Point(688, 8);
+            this.btnConfirmEdit.Location = new System.Drawing.Point(667, 8);
             this.btnConfirmEdit.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnConfirmEdit.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnConfirmEdit.Name = "btnConfirmEdit";
             this.btnConfirmEdit.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnConfirmEdit.Size = new System.Drawing.Size(64, 36);
+            this.btnConfirmEdit.Size = new System.Drawing.Size(86, 36);
             this.btnConfirmEdit.TabIndex = 53;
-            this.btnConfirmEdit.Text = "Add";
+            this.btnConfirmEdit.Text = "Confirm";
             this.btnConfirmEdit.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnConfirmEdit.UseAccentColor = false;
             this.btnConfirmEdit.UseVisualStyleBackColor = true;
@@ -694,7 +694,7 @@ namespace TakoTea.View.Items.Item_Modals {
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 851);
+            this.ClientSize = new System.Drawing.Size(892, 788);
             this.Controls.Add(this.panel1);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
             this.Name = "EditIngredientModal";

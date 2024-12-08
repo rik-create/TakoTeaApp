@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using TakoTea.Interfaces;
 using TakoTea.Models;
-using System.Data.Entity; // Replace with your context, e.g., if you're using Entity Framework
+using System.Data.Entity;
+using TakoTea.Helpers; // Replace with your context, e.g., if you're using Entity Framework
 
 namespace TakoTea.Services
 {
-    public class ProductsService : IProductsService
+    public class ProductsService
     {
         private readonly Entities _context; // Your DB context
 
@@ -19,7 +20,6 @@ namespace TakoTea.Services
 
         public void UpdateBatchStockLevel(int ingredientId, decimal quantityUsed, string action)
         {
-
             var batches = _context.Batches
                 .Where(b => b.IngredientID == ingredientId && b.StockLevel > 0)
                 .OrderBy(b => b.ExpirationDate)
@@ -39,6 +39,16 @@ namespace TakoTea.Services
                     // Log the stock level update
                     LogStockLevelUpdate(batch.BatchID, ingredientId, originalStockLevel, batch.StockLevel, remainingQuantity, action);
 
+                    LoggingHelper.LogChange(
+                        "Batches",                // Table name
+                        batch.BatchID,            // Record ID (assuming BatchID is auto-generated)
+                        "Stock Level Update",     // Column name (or any descriptive text)
+                        originalStockLevel.ToString(), // Old value
+                        batch.StockLevel.ToString(),   // New value
+                        "Updated",                // Action
+                        $"Batch '{batch.BatchNumber}' stock level updated for ingredient '{batch.IngredientID}'" // Description
+                    );
+
                     break;
                 }
                 else
@@ -49,6 +59,16 @@ namespace TakoTea.Services
 
                     // Log the stock level update
                     LogStockLevelUpdate(batch.BatchID, ingredientId, originalStockLevel, batch.StockLevel, batch.StockLevel, action);
+
+                    LoggingHelper.LogChange(
+                        "Batches",                // Table name
+                        batch.BatchID,            // Record ID (assuming BatchID is auto-generated)
+                        "Stock Level Update",     // Column name (or any descriptive text)
+                        originalStockLevel.ToString(), // Old value
+                        batch.StockLevel.ToString(),   // New value
+                        "Updated",                // Action
+                        $"Batch '{batch.BatchNumber}' stock level updated for ingredient '{batch.IngredientID}'" // Description
+                    );
                 }
             }
         }
@@ -244,6 +264,8 @@ namespace TakoTea.Services
 
         }
 
+       
+
         public Product GetProductById(int productId)
         {
             return _context.Products.Find(productId);
@@ -315,32 +337,79 @@ namespace TakoTea.Services
         {
             return _context.ProductVariants.Find(variantId);
         }
-
-        public void AddProductVariant(ProductVariant productVariant)
+        
+public void AddProductVariant(ProductVariant productVariant)
         {
             _context.ProductVariants.Add(productVariant);
             _context.SaveChanges();
+            LoggingHelper.LogChange(
+                "ProductVariants",                // Table name
+                productVariant.ProductVariantID,  // Record ID
+                "New ProductVariant",             // Column name (or any descriptive text)
+                null,                             // Old value (null for new product variant)
+                productVariant.ToString(),        // New value (you might need to override ToString() in your ProductVariant class for a more descriptive log)
+                "Added",                          // Action
+                $"ProductVariant '{productVariant.VariantName}' added for product '{productVariant.ProductID}'" // Description
+            );
         }
 
         public void AddMultipleProductVariants(List<ProductVariant> productVariants)
         {
             _context.ProductVariants.AddRange(productVariants);
             _context.SaveChanges();
+
+            foreach (var variant in productVariants)
+            {
+                LoggingHelper.LogChange(
+                    "ProductVariants",                // Table name
+                    variant.ProductVariantID,         // Record ID
+                    "New ProductVariant",             // Column name (or any descriptive text)
+                    null,                             // Old value (null for new product variant)
+                    variant.ToString(),               // New value (you might need to override ToString() in your ProductVariant class for a more descriptive log)
+                    "Added",                          // Action
+                    $"ProductVariant '{variant.VariantName}' added for product '{variant.ProductID}'" // Description
+                );
+            }
         }
 
         public void UpdateProductVariant(ProductVariant productVariant)
         {
-            _context.Entry(productVariant).State = EntityState.Modified;
-            _context.SaveChanges();
-        }
-
-        public void DeleteProductVariant(int variantId)
-        {
-            var productVariant = _context.ProductVariants.Find(variantId);
-            if (productVariant != null)
+            var existingVariant = _context.ProductVariants.Find(productVariant.ProductVariantID);
+            if (existingVariant != null)
             {
-                _context.ProductVariants.Remove(productVariant);
+                var oldValue = existingVariant.VariantName;
+                existingVariant.VariantName = productVariant.VariantName;
                 _context.SaveChanges();
+                LoggingHelper.LogChange(
+                    "ProductVariants",                // Table name
+                    productVariant.ProductVariantID,  // Record ID
+                    "Updated ProductVariant",         // Column name (or any descriptive text)
+                    oldValue,                         // Old value
+                    productVariant.VariantName,       // New value
+                    "Updated",                        // Action
+                    $"ProductVariant '{productVariant.VariantName}' updated for product '{productVariant.ProductID}'" // Description
+                );
+            }
+        }
+  
+
+    public void DeleteProductVariant(int variantId)
+        {
+            var variant = _context.ProductVariants.Find(variantId);
+            if (variant != null)
+            {
+                var oldValue = variant.VariantName;
+                _context.ProductVariants.Remove(variant);
+                _context.SaveChanges();
+                LoggingHelper.LogChange(
+                    "ProductVariants",                // Table name
+                    variant.ProductVariantID,         // Record ID
+                    "Deleted ProductVariant",         // Column name (or any descriptive text)
+                    oldValue,                         // Old value
+                    null,                             // New value (null for deleted product variant)
+                    "Deleted",                        // Action
+                    $"ProductVariant '{variant.VariantName}' deleted for product '{variant.ProductID}'" // Description
+                );
             }
         }
 

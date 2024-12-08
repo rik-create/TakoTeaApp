@@ -56,8 +56,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.panelExportButtons = new System.Windows.Forms.Panel();
-            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.floatingActionButtonAddBatch = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
@@ -120,8 +118,6 @@
             this.materialCard2.Controls.Add(this.panel3);
             this.materialCard2.Controls.Add(this.panel1);
             this.materialCard2.Controls.Add(this.panelExportButtons);
-            this.materialCard2.Controls.Add(this.materialLabel2);
-            this.materialCard2.Controls.Add(this.materialLabel1);
             this.materialCard2.Depth = 0;
             this.materialCard2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.materialCard2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -372,6 +368,7 @@
             this.dataGridViewBatch.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewBatch.Size = new System.Drawing.Size(1125, 489);
             this.dataGridViewBatch.TabIndex = 5;
+            this.dataGridViewBatch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewBatch_CellDoubleClick);
             // 
             // panel3
             // 
@@ -482,30 +479,6 @@
             this.panelExportButtons.Name = "panelExportButtons";
             this.panelExportButtons.Size = new System.Drawing.Size(76, 38);
             this.panelExportButtons.TabIndex = 98;
-            // 
-            // materialLabel2
-            // 
-            this.materialLabel2.AutoSize = true;
-            this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.Location = new System.Drawing.Point(30, 680);
-            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(189, 19);
-            this.materialLabel2.TabIndex = 95;
-            this.materialLabel2.Text = "Total Nearing Expiration: 2";
-            // 
-            // materialLabel1
-            // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(30, 660);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(116, 19);
-            this.materialLabel1.TabIndex = 94;
-            this.materialLabel1.Text = "Total Batches: 5";
             // 
             // floatingActionButtonAddBatch
             // 
@@ -631,7 +604,6 @@
             this.Load += new System.EventHandler(this.BatchListForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).EndInit();
             this.materialCard2.ResumeLayout(false);
-            this.materialCard2.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panelFilteringComponents.ResumeLayout(false);
             this.panelFilteringComponents.PerformLayout();
@@ -660,8 +632,6 @@
         private System.Windows.Forms.Panel panelExportButtons;
         private System.Windows.Forms.PictureBox pictureBoxExportExcel;
         private System.Windows.Forms.PictureBox pictureBoxExportPdf;
-        private MaterialSkin.Controls.MaterialLabel materialLabel2;
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private System.Windows.Forms.Panel panel1;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private MaterialSkin.Controls.MaterialFloatingActionButton floatingActionButtonAddBatch;

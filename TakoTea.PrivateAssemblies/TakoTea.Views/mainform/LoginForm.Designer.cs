@@ -137,6 +137,7 @@ namespace TakoTea.Views.mainform
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = global::TakoTea.Views.Properties.Resources.Takotea_logo;
             this.pictureBox1.ImageLocation = "";
             this.pictureBox1.Location = new System.Drawing.Point(123, 9);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);

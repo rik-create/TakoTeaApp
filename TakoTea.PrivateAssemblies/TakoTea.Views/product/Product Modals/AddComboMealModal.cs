@@ -473,6 +473,17 @@ namespace TakoTea.View.Product.Product_Modals
                     };
 
                     productsService.AddComboMealVariant(newComboMealVariant);
+
+                    // Log the change
+                    LoggingHelper.LogChange(
+                        "ComboMealVariants",                // Table name
+                        newComboMealVariant.ComboMealVariantID, // Record ID
+                        "New Combo Meal Variant",           // Column name
+                        null,                               // Old value
+                        newComboMealVariant.ToString(),     // New value
+                        "Added",                            // Action
+                        $"Combo meal variant '{newComboMealVariant.VariantName}' added for combo meal '{newComboMeal.ComboMealName}'" // Description
+                    );
                 }
 
                 // Success message
@@ -531,6 +542,11 @@ namespace TakoTea.View.Product.Product_Modals
         }
 
         private void txtBoxComboMealName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
         }

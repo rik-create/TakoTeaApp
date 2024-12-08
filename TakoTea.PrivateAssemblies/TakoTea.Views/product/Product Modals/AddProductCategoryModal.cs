@@ -5,13 +5,14 @@ using TakoTea.Helpers;
 using TakoTea.Interfaces;
 using TakoTea.Views.DataLoaders;
 using TakoTea.Models;
+using TakoTea.Services;
 namespace TakoTea.View.Product.Product_Modals
 {
     public partial class AddProductCategoryModal : MaterialForm
     {
-        private readonly IProductCategoryService _productCategoryService;
+        private readonly ProductCategoryService _productCategoryService;
 
-        public AddProductCategoryModal(IProductCategoryService productCategoryService)
+        public AddProductCategoryModal(ProductCategoryService productCategoryService)
         {
             InitializeComponent();
             _productCategoryService = productCategoryService;
@@ -92,6 +93,11 @@ namespace TakoTea.View.Product.Product_Modals
                     pictureBoxProductImage.ImageLocation = openFileDialog.FileName;
                 }
             }
+        }
+
+        private void btnSaveProduct_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 

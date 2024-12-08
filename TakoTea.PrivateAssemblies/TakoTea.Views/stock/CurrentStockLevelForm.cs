@@ -27,6 +27,7 @@ namespace TakoTea.Views.Stock
             _bindingSource = new BindingSource();
             ThemeConfigurator.ApplyDarkTheme(this);
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
+            LoadData();
             DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewStockLevels);
         }
         protected override void OnLoad(EventArgs e)

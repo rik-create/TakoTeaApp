@@ -26,21 +26,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductListForm));
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.panel1 = new System.Windows.Forms.Panel();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.pbReloadForm = new System.Windows.Forms.PictureBox();
-            this.panelExportButtons = new System.Windows.Forms.Panel();
-            this.pictureBoxExportExcel = new System.Windows.Forms.PictureBox();
-            this.pictureBoxExportPdf = new System.Windows.Forms.PictureBox();
-            this.materialLabel22 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel18 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel19 = new MaterialSkin.Controls.MaterialLabel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnAddComboMeal = new MaterialSkin.Controls.MaterialButton();
@@ -78,9 +73,6 @@
             this.materialCard1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbReloadForm)).BeginInit();
-            this.panelExportButtons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportExcel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportPdf)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).BeginInit();
@@ -109,10 +101,7 @@
             this.materialCard1.AutoScroll = true;
             this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.materialCard1.Controls.Add(this.panel1);
-            this.materialCard1.Controls.Add(this.panelExportButtons);
-            this.materialCard1.Controls.Add(this.materialLabel22);
             this.materialCard1.Controls.Add(this.materialLabel18);
-            this.materialCard1.Controls.Add(this.materialLabel19);
             this.materialCard1.Controls.Add(this.flowLayoutPanel1);
             this.materialCard1.Depth = 0;
             this.materialCard1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -163,46 +152,6 @@
             this.pbReloadForm.TabStop = false;
             this.pbReloadForm.Click += new System.EventHandler(this.pbReloadForm_Click);
             // 
-            // panelExportButtons
-            // 
-            this.panelExportButtons.Controls.Add(this.pictureBoxExportExcel);
-            this.panelExportButtons.Controls.Add(this.pictureBoxExportPdf);
-            this.panelExportButtons.Location = new System.Drawing.Point(1080, 664);
-            this.panelExportButtons.Name = "panelExportButtons";
-            this.panelExportButtons.Size = new System.Drawing.Size(76, 38);
-            this.panelExportButtons.TabIndex = 104;
-            // 
-            // pictureBoxExportExcel
-            // 
-            this.pictureBoxExportExcel.Location = new System.Drawing.Point(3, 5);
-            this.pictureBoxExportExcel.Name = "pictureBoxExportExcel";
-            this.pictureBoxExportExcel.Size = new System.Drawing.Size(33, 27);
-            this.pictureBoxExportExcel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxExportExcel.TabIndex = 96;
-            this.pictureBoxExportExcel.TabStop = false;
-            // 
-            // pictureBoxExportPdf
-            // 
-            this.pictureBoxExportPdf.Location = new System.Drawing.Point(38, 5);
-            this.pictureBoxExportPdf.Name = "pictureBoxExportPdf";
-            this.pictureBoxExportPdf.Size = new System.Drawing.Size(33, 27);
-            this.pictureBoxExportPdf.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxExportPdf.TabIndex = 97;
-            this.pictureBoxExportPdf.TabStop = false;
-            // 
-            // materialLabel22
-            // 
-            this.materialLabel22.AutoSize = true;
-            this.materialLabel22.Depth = 0;
-            this.materialLabel22.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel22.HighEmphasis = true;
-            this.materialLabel22.Location = new System.Drawing.Point(24, 664);
-            this.materialLabel22.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel22.Name = "materialLabel22";
-            this.materialLabel22.Size = new System.Drawing.Size(116, 19);
-            this.materialLabel22.TabIndex = 101;
-            this.materialLabel22.Text = "Total Batches: 5";
-            // 
             // materialLabel18
             // 
             this.materialLabel18.AutoSize = true;
@@ -215,19 +164,6 @@
             this.materialLabel18.Size = new System.Drawing.Size(180, 29);
             this.materialLabel18.TabIndex = 100;
             this.materialLabel18.Text = "Product Variants";
-            // 
-            // materialLabel19
-            // 
-            this.materialLabel19.AutoSize = true;
-            this.materialLabel19.Depth = 0;
-            this.materialLabel19.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel19.HighEmphasis = true;
-            this.materialLabel19.Location = new System.Drawing.Point(24, 688);
-            this.materialLabel19.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel19.Name = "materialLabel19";
-            this.materialLabel19.Size = new System.Drawing.Size(189, 19);
-            this.materialLabel19.TabIndex = 102;
-            this.materialLabel19.Text = "Total Nearing Expiration: 2";
             // 
             // flowLayoutPanel1
             // 
@@ -400,6 +336,7 @@
             this.panelFilteringComponents.Size = new System.Drawing.Size(1141, 174);
             this.panelFilteringComponents.TabIndex = 145;
             this.panelFilteringComponents.Visible = false;
+            this.panelFilteringComponents.Paint += new System.Windows.Forms.PaintEventHandler(this.panelFilteringComponents_Paint);
             // 
             // chkListBoxProducts
             // 
@@ -428,6 +365,7 @@
             this.materialRadioButton4.TabStop = true;
             this.materialRadioButton4.Text = "Price(Descending)";
             this.materialRadioButton4.UseVisualStyleBackColor = true;
+            this.materialRadioButton4.Visible = false;
             // 
             // materialRadioButton5
             // 
@@ -446,6 +384,7 @@
             this.materialRadioButton5.TabStop = true;
             this.materialRadioButton5.Text = "Price (Ascending)";
             this.materialRadioButton5.UseVisualStyleBackColor = true;
+            this.materialRadioButton5.Visible = false;
             // 
             // materialButton1
             // 
@@ -465,6 +404,7 @@
             this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.materialButton1.UseAccentColor = false;
             this.materialButton1.UseVisualStyleBackColor = true;
+            this.materialButton1.Visible = false;
             // 
             // materialLabel20
             // 
@@ -477,6 +417,7 @@
             this.materialLabel20.Size = new System.Drawing.Size(56, 19);
             this.materialLabel20.TabIndex = 124;
             this.materialLabel20.Text = "Sort By:";
+            this.materialLabel20.Visible = false;
             // 
             // dateTimePicker3
             // 
@@ -487,6 +428,7 @@
             this.dateTimePicker3.Name = "dateTimePicker3";
             this.dateTimePicker3.Size = new System.Drawing.Size(159, 32);
             this.dateTimePicker3.TabIndex = 97;
+            this.dateTimePicker3.Visible = false;
             this.dateTimePicker3.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
             // 
             // materialRadioButton1
@@ -506,6 +448,7 @@
             this.materialRadioButton1.TabStop = true;
             this.materialRadioButton1.Text = "Alphabetically";
             this.materialRadioButton1.UseVisualStyleBackColor = true;
+            this.materialRadioButton1.Visible = false;
             // 
             // materialLabel21
             // 
@@ -528,6 +471,7 @@
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(159, 32);
             this.dateTimePicker2.TabIndex = 96;
+            this.dateTimePicker2.Visible = false;
             // 
             // panelItemList
             // 
@@ -544,35 +488,35 @@
             this.dataGridViewProductVariantList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewProductVariantList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridViewProductVariantList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewProductVariantList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewProductVariantList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewProductVariantList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewProductVariantList.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewProductVariantList.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewProductVariantList.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridViewProductVariantList.EnableHeadersVisualStyles = false;
             this.dataGridViewProductVariantList.Location = new System.Drawing.Point(0, 27);
             this.dataGridViewProductVariantList.Name = "dataGridViewProductVariantList";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewProductVariantList.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewProductVariantList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewProductVariantList.Size = new System.Drawing.Size(1139, 480);
             this.dataGridViewProductVariantList.TabIndex = 10;
             this.dataGridViewProductVariantList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProductList_CellContentClick);
@@ -711,9 +655,6 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbReloadForm)).EndInit();
-            this.panelExportButtons.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportExcel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxExportPdf)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -736,12 +677,7 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private MaterialSkin.Controls.MaterialCard materialCard1;
         private MaterialSkin.Controls.MaterialFloatingActionButton floatingActionButtonAddProduct;
-        private System.Windows.Forms.Panel panelExportButtons;
-        private System.Windows.Forms.PictureBox pictureBoxExportExcel;
-        private System.Windows.Forms.PictureBox pictureBoxExportPdf;
-        private MaterialSkin.Controls.MaterialLabel materialLabel22;
         private MaterialSkin.Controls.MaterialLabel materialLabel18;
-        private MaterialSkin.Controls.MaterialLabel materialLabel19;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private MaterialSkin.Controls.MaterialLabel materialLabel21;
         private MaterialSkin.Controls.MaterialRadioButton materialRadioButton4;
