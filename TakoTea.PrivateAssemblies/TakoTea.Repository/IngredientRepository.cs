@@ -37,24 +37,31 @@ namespace TakoTea.Repository
 
 
 
-    
+        public class IngredientDto
+        {
+            public int IngredientID { get; set; }
+            public string IngredientName { get; set; }
+            public string BrandName { get; set; }
+            public decimal  StockLevel { get; set; }
+            public decimal LowLevel { get; set; }
+            public string AddOn { get; set; }
+        }
         // Method to load ingredient data
-        public List<object> GetAllIngredient()
+        public List<IngredientDto> GetAllIngredient()
         {
             try
             {
-                // Query to fetch the ingredient data
                 var ingredientList = _context.Ingredients
-                    .Select(i => new
+                    .Select(i => new IngredientDto
                     {
-                        i.IngredientID,
-                        i.IngredientName,
-                        i.BrandName,
-                        i.StockLevel,
-                        i.LowLevel,
+                        IngredientID = i.IngredientID,
+                        IngredientName = i.IngredientName,
+                        BrandName = i.BrandName,
+                        StockLevel = i.StockLevel.Value,
+                        LowLevel = i.LowLevel.Value,
                         AddOn = i.IsAddOn.HasValue && i.IsAddOn.Value ? "Yes" : "No"
                     })
-                    .ToList<object>(); // Cast to List<object> to match the return type
+                    .ToList();
 
                 return ingredientList;
             }

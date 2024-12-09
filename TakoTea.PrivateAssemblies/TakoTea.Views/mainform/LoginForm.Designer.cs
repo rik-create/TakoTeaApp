@@ -36,8 +36,8 @@ namespace TakoTea.Views.mainform
             this.btnLogin = new System.Windows.Forms.Button();
             this.txtBoxUserName = new MaterialSkin.Controls.MaterialTextBox2();
             this.txtBoxPassword = new MaterialSkin.Controls.MaterialTextBox2();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,8 +45,8 @@ namespace TakoTea.Views.mainform
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Impact", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(128)))), ((int)(((byte)(80)))));
-            this.label1.Location = new System.Drawing.Point(117, 177);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.label1.Location = new System.Drawing.Point(104, 160);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(199, 43);
@@ -56,8 +56,7 @@ namespace TakoTea.Views.mainform
             // 
             // btnLogin
             // 
-            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
             this.btnLogin.ForeColor = System.Drawing.Color.White;
             this.btnLogin.Location = new System.Drawing.Point(100, 372);
             this.btnLogin.Margin = new System.Windows.Forms.Padding(2);
@@ -65,7 +64,7 @@ namespace TakoTea.Views.mainform
             this.btnLogin.Size = new System.Drawing.Size(216, 32);
             this.btnLogin.TabIndex = 5;
             this.btnLogin.Text = "Sign in";
-            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // txtBoxUserName
@@ -98,7 +97,6 @@ namespace TakoTea.Views.mainform
             this.txtBoxUserName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.toolTip1.SetToolTip(this.txtBoxUserName, "Username");
             this.txtBoxUserName.TrailingIcon = null;
-            this.txtBoxUserName.UseAccent = false;
             this.txtBoxUserName.UseSystemPasswordChar = false;
             this.txtBoxUserName.UseTallSize = false;
             // 
@@ -139,7 +137,7 @@ namespace TakoTea.Views.mainform
             // 
             this.pictureBox1.Image = global::TakoTea.Views.Properties.Resources.Takotea_logo;
             this.pictureBox1.ImageLocation = "";
-            this.pictureBox1.Location = new System.Drawing.Point(123, 9);
+            this.pictureBox1.Location = new System.Drawing.Point(112, 8);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(189, 152);

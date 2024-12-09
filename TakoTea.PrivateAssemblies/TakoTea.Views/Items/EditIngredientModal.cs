@@ -135,7 +135,12 @@ namespace TakoTea.View.Items.Item_Modals
             ingredient.Description = txtBoxItemDescription.Text;
             ingredient.StorageConditions = cmbboxStorageCondition.SelectedItem.ToString();
             ingredient.TypeOfIngredient = cmbTypeOfIngredient.SelectedItem.ToString();
-
+            string changeDescription = DialogHelper.ShowInputDialog(
+                formTitle: "Enter Change Description",
+                labelText: "Change Description:",
+                validationMessage: "Description cannot be empty.",
+                validateInput: input => !string.IsNullOrWhiteSpace(input)
+            );
             var addOn = context.AddOns.FirstOrDefault(a => a.IngredientID == ingredient.IngredientID);
 
             if (addOn != null)
@@ -155,19 +160,19 @@ namespace TakoTea.View.Items.Item_Modals
                 // Log changes to add-on properties
                 if (originalAddOnName != addOn.AddOnName)
                 {
-                    LoggingHelper.LogChange("AddOns", addOn.Id, "AddOnName", originalAddOnName, addOn.AddOnName, "Updated", $"AddOnName changed from '{originalAddOnName}' to '{addOn.AddOnName}' for ingredient '{ingredient.IngredientName}'");
+                    LoggingHelper.LogChange("AddOns", addOn.Id, "AddOnName", originalAddOnName, addOn.AddOnName, "Updated", $"AddOnName changed from '{originalAddOnName}' to '{addOn.AddOnName}' for ingredient '{ingredient.IngredientName}'", changeDescription);
                 }
                 if (originalAdditionalPrice != addOn.AdditionalPrice)
                 {
-                    LoggingHelper.LogChange("AddOns", addOn.Id, "AdditionalPrice", originalAdditionalPrice.ToString(), addOn.AdditionalPrice.ToString(), "Updated", $"AdditionalPrice changed from '{originalAdditionalPrice}' to '{addOn.AdditionalPrice}' for ingredient '{ingredient.IngredientName}'");
+                    LoggingHelper.LogChange("AddOns", addOn.Id, "AdditionalPrice", originalAdditionalPrice.ToString(), addOn.AdditionalPrice.ToString(), "Updated", $"AdditionalPrice changed from '{originalAdditionalPrice}' to '{addOn.AdditionalPrice}' for ingredient '{ingredient.IngredientName}'", changeDescription);
                 }
                 if (originalUseForProductID != addOn.UseForProductID)
                 {
-                    LoggingHelper.LogChange("AddOns", addOn.Id, "UseForProductID", originalUseForProductID.ToString(), addOn.UseForProductID.ToString(), "Updated", $"UseForProductID changed from '{originalUseForProductID}' to '{addOn.UseForProductID}' for ingredient '{ingredient.IngredientName}'");
+                    LoggingHelper.LogChange("AddOns", addOn.Id, "UseForProductID", originalUseForProductID.ToString(), addOn.UseForProductID.ToString(), "Updated", $"UseForProductID changed from '{originalUseForProductID}' to '{addOn.UseForProductID}' for ingredient '{ingredient.IngredientName}'", changeDescription);
                 }
                 if (originalQuantityUsedPerProduct != addOn.QuantityUsedPerProduct)
                 {
-                    LoggingHelper.LogChange("AddOns", addOn.Id, "QuantityUsedPerProduct", originalQuantityUsedPerProduct.ToString(), addOn.QuantityUsedPerProduct.ToString(), "Updated", $"QuantityUsedPerProduct changed from '{originalQuantityUsedPerProduct}' to '{addOn.QuantityUsedPerProduct}' for ingredient '{ingredient.IngredientName}'");
+                    LoggingHelper.LogChange("AddOns", addOn.Id, "QuantityUsedPerProduct", originalQuantityUsedPerProduct.ToString(), addOn.QuantityUsedPerProduct.ToString(), "Updated", $"QuantityUsedPerProduct changed from '{originalQuantityUsedPerProduct}' to '{addOn.QuantityUsedPerProduct}' for ingredient '{ingredient.IngredientName}'", changeDescription);
                 }
             }
 
@@ -177,27 +182,27 @@ namespace TakoTea.View.Items.Item_Modals
                 MessageBox.Show("Ingredient updated successfully.");
                 if (originalIngredientName != ingredient.IngredientName)
                 {
-                    LoggingHelper.LogChange("Ingredients", ingredient.IngredientID, "IngredientName", originalIngredientName, ingredient.IngredientName, "Updated", $"IngredientName changed from '{originalIngredientName}' to '{ingredient.IngredientName}'");
+                    LoggingHelper.LogChange("Ingredients", ingredient.IngredientID, "IngredientName", originalIngredientName, ingredient.IngredientName, "Updated", $"IngredientName changed from '{originalIngredientName}' to '{ingredient.IngredientName}'", changeDescription);
                 }
                 if (originalBrandName != ingredient.BrandName)
                 {
-                    LoggingHelper.LogChange("Ingredients", ingredient.IngredientID, "BrandName", originalBrandName, ingredient.BrandName, "Updated", $"BrandName changed from '{originalBrandName}' to '{ingredient.BrandName}'");
+                    LoggingHelper.LogChange("Ingredients", ingredient.IngredientID, "BrandName", originalBrandName, ingredient.BrandName, "Updated", $"BrandName changed from '{originalBrandName}' to '{ingredient.BrandName}'", changeDescription);
                 }
                 if (!originalIngredientImage.SequenceEqual(ingredient.IngredientImage))
                 {
-                    LoggingHelper.LogChange("Ingredients", ingredient.IngredientID, "IngredientImage", null, null, "Updated", $"IngredientImage changed for '{ingredient.IngredientName}'"); // No need to log the actual image data
+                    LoggingHelper.LogChange("Ingredients", ingredient.IngredientID, "IngredientImage", null, null, "Updated", $"IngredientImage changed for '{ingredient.IngredientName}'", changeDescription); // No need to log the actual image data
                 }
                 if (originalDescription != ingredient.Description)
                 {
-                    LoggingHelper.LogChange("Ingredients", ingredient.IngredientID, "Description", originalDescription, ingredient.Description, "Updated", $"Description changed from '{originalDescription}' to '{ingredient.Description}'");
+                    LoggingHelper.LogChange("Ingredients", ingredient.IngredientID, "Description", originalDescription, ingredient.Description, "Updated", $"Description changed from '{originalDescription}' to '{ingredient.Description}'", changeDescription);
                 }
                 if (originalStorageConditions != ingredient.StorageConditions)
                 {
-                    LoggingHelper.LogChange("Ingredients", ingredient.IngredientID, "StorageConditions", originalStorageConditions, ingredient.StorageConditions, "Updated", $"StorageConditions changed from '{originalStorageConditions}' to '{ingredient.StorageConditions}'");
+                    LoggingHelper.LogChange("Ingredients", ingredient.IngredientID, "StorageConditions", originalStorageConditions, ingredient.StorageConditions, "Updated", $"StorageConditions changed from '{originalStorageConditions}' to '{ingredient.StorageConditions}'", changeDescription);
                 }
                 if (originalTypeOfIngredient != ingredient.TypeOfIngredient)
                 {
-                    LoggingHelper.LogChange("Ingredients", ingredient.IngredientID, "TypeOfIngredient", originalTypeOfIngredient, ingredient.TypeOfIngredient, "Updated", $"TypeOfIngredient changed from '{originalTypeOfIngredient}' to '{ingredient.TypeOfIngredient}'");
+                    LoggingHelper.LogChange("Ingredients", ingredient.IngredientID, "TypeOfIngredient", originalTypeOfIngredient, ingredient.TypeOfIngredient, "Updated", $"TypeOfIngredient changed from '{originalTypeOfIngredient}' to '{ingredient.TypeOfIngredient}'", changeDescription);
                 }
 
                 Close();

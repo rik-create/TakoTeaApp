@@ -237,6 +237,7 @@ namespace TakoTea.Views.reports
             this.cboFilter.StartIndex = 0;
             this.cboFilter.TabIndex = 113;
             this.cboFilter.UseTallSize = false;
+            this.cboFilter.SelectedIndexChanged += new System.EventHandler(this.cboFilter_SelectedIndexChanged);
             // 
             // txtFilter
             // 
@@ -255,6 +256,7 @@ namespace TakoTea.Views.reports
             this.txtFilter.Text = "";
             this.txtFilter.TrailingIcon = null;
             this.txtFilter.UseTallSize = false;
+            this.txtFilter.TextChanged += new System.EventHandler(this.txtFilter_TextChanged);
             // 
             // dtpEndDate
             // 
@@ -264,6 +266,7 @@ namespace TakoTea.Views.reports
             this.dtpEndDate.ShowCheckBox = true;
             this.dtpEndDate.Size = new System.Drawing.Size(301, 20);
             this.dtpEndDate.TabIndex = 3;
+            this.dtpEndDate.ValueChanged += new System.EventHandler(this.dtpEndDate_ValueChanged);
             // 
             // materialLabel3
             // 
@@ -285,6 +288,7 @@ namespace TakoTea.Views.reports
             this.dtpStartDate.ShowCheckBox = true;
             this.dtpStartDate.Size = new System.Drawing.Size(301, 20);
             this.dtpStartDate.TabIndex = 1;
+            this.dtpStartDate.ValueChanged += new System.EventHandler(this.dtpStartDate_ValueChanged);
             // 
             // materialLabel2
             // 

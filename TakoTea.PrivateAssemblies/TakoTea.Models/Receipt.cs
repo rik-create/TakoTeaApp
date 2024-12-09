@@ -25,6 +25,9 @@ namespace TakoTea.Models
         public string ReceiptDetails { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
+        public string UpdatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         public virtual OrderModel OrderModel { get; set; }
     }

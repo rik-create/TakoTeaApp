@@ -23,5 +23,9 @@ namespace TakoTea.Models
         public string BackupSchedule { get; set; }
         public string SavedEmails { get; set; }
         public Nullable<System.DateTime> LastBackUpDate { get; set; }
+        public string CreatedBy { get; set; }
+        public string UpdatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
     }
 }

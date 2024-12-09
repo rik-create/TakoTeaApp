@@ -46,7 +46,7 @@ namespace TakoTea.Services
                         originalStockLevel.ToString(), // Old value
                         batch.StockLevel.ToString(),   // New value
                         "Updated",                // Action
-                        $"Batch '{batch.BatchNumber}' stock level updated for ingredient '{batch.IngredientID}'" // Description
+                        $"Batch '{batch.BatchNumber}' stock level updated for ingredient '{batch.IngredientID}'", "" // Description
                     );
 
                     break;
@@ -67,7 +67,7 @@ namespace TakoTea.Services
                         originalStockLevel.ToString(), // Old value
                         batch.StockLevel.ToString(),   // New value
                         "Updated",                // Action
-                        $"Batch '{batch.BatchNumber}' stock level updated for ingredient '{batch.IngredientID}'" // Description
+                        $"Batch '{batch.BatchNumber}' stock level updated for ingredient '{batch.IngredientID}'" , ""// Description
                     );
                 }
             }
@@ -349,7 +349,7 @@ public void AddProductVariant(ProductVariant productVariant)
                 null,                             // Old value (null for new product variant)
                 productVariant.ToString(),        // New value (you might need to override ToString() in your ProductVariant class for a more descriptive log)
                 "Added",                          // Action
-                $"ProductVariant '{productVariant.VariantName}' added for product '{productVariant.ProductID}'" // Description
+                $"ProductVariant '{productVariant.VariantName}' added for product '{productVariant.ProductID}'","" // Description
             );
         }
 
@@ -367,12 +367,12 @@ public void AddProductVariant(ProductVariant productVariant)
                     null,                             // Old value (null for new product variant)
                     variant.ToString(),               // New value (you might need to override ToString() in your ProductVariant class for a more descriptive log)
                     "Added",                          // Action
-                    $"ProductVariant '{variant.VariantName}' added for product '{variant.ProductID}'" // Description
+                    $"ProductVariant '{variant.VariantName}' added for product '{variant.ProductID}'", "" // Description
                 );
             }
         }
 
-        public void UpdateProductVariant(ProductVariant productVariant)
+    /*    public void UpdateProductVariant(ProductVariant productVariant)
         {
             var existingVariant = _context.ProductVariants.Find(productVariant.ProductVariantID);
             if (existingVariant != null)
@@ -391,9 +391,9 @@ public void AddProductVariant(ProductVariant productVariant)
                 );
             }
         }
-  
+  */
 
-    public void DeleteProductVariant(int variantId)
+/*    public void DeleteProductVariant(int variantId)
         {
             var variant = _context.ProductVariants.Find(variantId);
             if (variant != null)
@@ -411,7 +411,7 @@ public void AddProductVariant(ProductVariant productVariant)
                     $"ProductVariant '{variant.VariantName}' deleted for product '{variant.ProductID}'" // Description
                 );
             }
-        }
+        }*/
 
         public void ImportProductVariants(string filePath)
         {

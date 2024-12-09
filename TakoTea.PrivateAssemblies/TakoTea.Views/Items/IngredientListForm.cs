@@ -13,6 +13,8 @@ using TakoTea.Views.Batches;
 using TakoTea.Models;
 using TakoTea.Services;
 using TakoTea.View.Product.Product_Modals;
+using System.Linq;
+using static TakoTea.Repository.IngredientRepository;
 namespace TakoTea.Views.Items
 {
     public partial class IngredientListForm : MaterialForm
@@ -38,6 +40,42 @@ namespace TakoTea.Views.Items
 
             bindingNavigatorDeleteItem.Click += bindingNavigatorDeleteItem_Click;
 
+        }
+
+        private void FilterIngredients()
+        {
+            try
+            {
+                string searchTerm = textBoxSearchIngredients.Text.ToLower().Trim(); // Assuming you have a TextBox named "txtBoxSearchForIngredient"
+                bool isAddOnChecked = checkBoxIsAddOn.Checked; // Assuming you have a CheckBox named "checkBoxIsAddOn"
+
+                var filteredIngredients = ingredientRepository.GetAllIngredient()
+                    .Where(ingredient =>
+                        (string.IsNullOrWhiteSpace(searchTerm) ||
+                         ((dynamic)ingredient).IngredientName.ToLower().Contains(searchTerm) ||
+                         ((dynamic)ingredient).BrandName.ToLower().Contains(searchTerm)));
+
+                var checkedStockLevels = checkedListBoxStockLevel.CheckedIndices.Cast<int>().ToList();
+                if (checkedStockLevels.Count > 0)
+                {
+                    filteredIngredients = filteredIngredients.Where(ingredient =>
+                        checkedStockLevels.Any(index =>
+                            (index == 0 && ((IngredientDto)ingredient).StockLevel > 0) || // In Stock
+                            (index == 1 && ((IngredientDto)ingredient).StockLevel < ((IngredientDto)ingredient).LowLevel) || // Low Stock
+                            (index == 2 && ((IngredientDto)ingredient).StockLevel == 0)));  // Out of Stock
+                }
+
+                filteredIngredients = filteredIngredients.Where(ingredient =>
+                    !isAddOnChecked || // If not checked, include all ingredients
+                    (((dynamic)ingredient).AddOn == "Yes") == isAddOnChecked);
+
+                // Assuming you have a DataGridView named "dataGridViewIngredients" and a BindingSource named "bindingSourceIngredients"
+                DataGridViewHelper.UpdateGrid(dataGridViewIngredients, bindingSource1, filteredIngredients.ToList());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error filtering ingredients: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void LoadData()
         {
@@ -249,6 +287,17 @@ namespace TakoTea.Views.Items
         private void materialRadioButton2_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkedListBoxStockLevel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FilterIngredients();
+
+        }
+
+        private void dataGridViewIngredients_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewHelper.SortDataGridView(dataGridViewIngredients, e.ColumnIndex);
         }
     }
 }

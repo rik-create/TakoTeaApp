@@ -23,6 +23,11 @@ namespace TakoTea.Models
         public string Action { get; set; }
         public System.DateTime Timestamp { get; set; }
         public string Username { get; set; }
+        public string CreatedBy { get; set; }
+        public string UpdatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public string ChangeDescription_ { get; set; }
         public string Description { get; set; }
     }
 }

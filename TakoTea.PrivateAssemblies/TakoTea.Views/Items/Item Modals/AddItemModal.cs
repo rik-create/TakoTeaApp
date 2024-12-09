@@ -11,6 +11,7 @@ using TakoTea.Models;
 using System.Net.Security;
 using System.IO;
 using TakoTea.Views.Batches;
+using Helpers;
 
 
 namespace TakoTea.View.Items.Item_Modals
@@ -132,7 +133,9 @@ namespace TakoTea.View.Items.Item_Modals
                         IsActive = true,
                         MeasuringUnit = cmbMeasuringUnit.SelectedItem?.ToString() ?? "",
                         AllergyInformation = string.Join(", ", CheckedListBoxHelper.GetCheckedItemsFromIterator(materialCheckedListBoxAllergens)),
-                        LowLevel = numericUpDownLowStockThreshold.Value
+                        LowLevel = numericUpDownLowStockThreshold.Value,
+                        CreatedAt = DateTime.Now,
+                        CreatedBy = AuthenticationHelper._loggedInUsername
                     };
 
                     _inventoryService.AddIngredient(ingredient);
@@ -145,7 +148,7 @@ namespace TakoTea.View.Items.Item_Modals
                         null,                         // Old value (null for new ingredient)
                         ingredient.ToString(),        // New value (you might need to override ToString() in your Ingredient class for a more descriptive log)
                         "Added",                      // Action
-                        $"Ingredient '{ingredient.IngredientName}' added with ID '{ingredient.IngredientID}'" // Description
+                        $"Ingredient '{ingredient.IngredientName}' added with ID '{ingredient.IngredientID}'", ""  // Description
                     );
 
                     _ = MessageBox.Show("Ingredient added successfully.");

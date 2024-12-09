@@ -223,8 +223,8 @@ namespace TakoTea.Views.Dashboard
                     LabelPoint = point => point.Y.ToString("₱#,##0.00")     ,    
                     StrokeThickness = 1,
 
-                    Fill = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 118, 207)), // RGB(0, 118, 207)
-                    Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 118, 207))  // Same color for stroke                StrokeThickness = 1,
+                    Fill = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(62, 39, 35)), // RGB(0, 118, 207)
+                    Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(62, 39, 35))  // Same color for stroke                StrokeThickness = 1,
                 };
 
                 var grossProfitSeries = new ColumnSeries // Changed to ColumnSeries for bar chart
@@ -233,8 +233,8 @@ namespace TakoTea.Views.Dashboard
                     Values = new ChartValues<decimal>(grossProfitByLabel.Values.ToList()),
                     LabelPoint = point => point.Y.ToString("₱#,##0.00"),
                     StrokeThickness = 1,
-                    Fill = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(184, 35, 32)), // RGB(184, 35, 32)
-                    Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(184, 35, 32))
+                    Fill = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(226, 20, 20)), // RGB(184, 35, 32)
+                    Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(226, 20, 20))
                 };
 
                 // Add both series to the chart
@@ -496,10 +496,10 @@ namespace TakoTea.Views.Dashboard
             // Create a list of colors
             List<System.Windows.Media.Brush> colors = new List<System.Windows.Media.Brush>()
 {
-    new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(184, 35, 32)),
-    new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(145, 89, 254)),
-    new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 118, 207)),
+    new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(62, 39, 35)),
+    new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(226, 20, 20)),
     new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 64, 78)),
+    new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(199, 128, 80)),
     new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(40, 42, 44)),
     // Add more colors as needed
 };

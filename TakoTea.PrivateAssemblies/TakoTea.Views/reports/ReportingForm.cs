@@ -19,6 +19,10 @@ using Microsoft.SqlServer.Management.Smo.Agent;
 using System.Threading;
 using System.Data.Entity.Core.Objects;
 using iTextSharp.text.pdf.draw;
+using TakoTea.Helpers;
+using System.Threading.Tasks;
+using TakoTea.Repository;
+using Helpers;
 
 
 namespace TakoTea.Views.reports
@@ -44,48 +48,49 @@ namespace TakoTea.Views.reports
         {
             if (lstReportTypes.SelectedItem != null)
             {
-                // Get the selected ReportType from the ListBox
                 var selectedReportType = (ReportType)lstReportTypes.SelectedItem;
+                List<string> dataSource = new List<string>();
 
-                // Clear the existing items in the ComboBox
-                cboFilter.DataSource = null;
-                cboFilter.Items.Clear();
-
-                // Populate the ComboBox based on the selected report type
                 switch (selectedReportType)
                 {
                     case ReportType.SalesSummary:
-                        cboFilter.DataSource = dbContext.OrderModels.Select(o => o.PaymentMethod).Distinct().ToList();
-                        lblFilterHint.Text = "Select Payment Method:"; // Provide a hint for payment method
+                        dataSource = dbContext.OrderModels.Select(o => o.PaymentMethod).Distinct().ToList();
+                        lblFilterHint.Text = "Select Payment Method:";
                         lblSearchHint.Text = "Enter Customer Name or Order ID:";
                         chkLowStockOnly.Visible = false;
-
-
                         break;
                     case ReportType.InventoryReport:
-                        cboFilter.DataSource = dbContext.Ingredients.Select(i => i.IngredientCategory).Distinct().ToList();
-                        lblFilterHint.Text = "Select Ingredient Category:"; // Provide a hint for ingredient category
+                        dataSource = dbContext.Ingredients.Select(i => i.IngredientCategory).Distinct().ToList();
+                        lblFilterHint.Text = "Select Ingredient Category:";
                         lblSearchHint.Text = "Enter Ingredient Name:";
                         chkLowStockOnly.Visible = true;
-
                         break;
                     case ReportType.OrderList:
-                        cboFilter.DataSource = dbContext.OrderModels.Select(o => o.OrderStatus).Distinct().ToList();
-                        lblFilterHint.Text = "Select Order Status:"; // Provide a hint for order status
+                        dataSource = dbContext.OrderModels.Select(o => o.OrderStatus).Distinct().ToList();
+                        lblFilterHint.Text = "Select Order Status:";
                         lblSearchHint.Text = "Enter Customer Name or Order ID:";
                         chkLowStockOnly.Visible = false;
-
                         break;
                     case ReportType.OrderWithItemsList:
-                        cboFilter.DataSource = dbContext.OrderItems.Select(i => i.ProductName).Distinct().ToList();
-                        lblFilterHint.Text = "Select Product Name:"; // Provide a hint for product name
+                        dataSource = dbContext.Products.Select(p => p.ProductName).Distinct().ToList();
+                        lblFilterHint.Text = "Select Product Name:";
                         lblSearchHint.Text = "Enter Product Name or Order ID:";
                         chkLowStockOnly.Visible = false;
-
+                        break;
+                    case ReportType.ChangeLogs:
+                        dataSource = LogChangesRepository.GetAllChangeLogs().Select(l => l.TableName).Distinct().ToList();
+                        lblFilterHint.Text = "Select Table Name:";
+                        lblSearchHint.Text = "Enter Column Name or User:";
+                        chkLowStockOnly.Visible = false;
                         break;
                 }
+
+                dataSource.Insert(0, "All");
+                cboFilter.DataSource = dataSource;
             }
+            GenerateReport();
         }
+
 
         public void GenerateAndDisplayReport(string pdfPath, ReportType reportType, Dictionary<string, object> filters = null)
         {
@@ -117,8 +122,12 @@ namespace TakoTea.Views.reports
                         case ReportType.OrderWithItemsList:
                             AddOrderWithItemsListContent(itextDoc, filters);
                             break;
+                        case ReportType.ChangeLogs:
+                            AddChangeLogsContent(itextDoc, filters);
+                            break;
+
                     }
-             
+
                     // Close the iTextSharp document
                     itextDoc.Close();
           
@@ -177,7 +186,16 @@ namespace TakoTea.Views.reports
                 }
                 if (filters.ContainsKey("PaymentMethod") && filters["PaymentMethod"] is string paymentMethod)
                 {
-                    salesQuery = salesQuery.Where(o => o.PaymentMethod == paymentMethod);
+
+                    if (paymentMethod == "All")
+                    {
+
+                    }
+                    else
+                    {
+                        salesQuery = salesQuery.Where(o => o.PaymentMethod == paymentMethod);
+
+                    }
                 }
             }
             var salesSummary = salesQuery
@@ -204,7 +222,7 @@ namespace TakoTea.Views.reports
             document.Add(dateTimeParagraph);
 
             // Add "Printed By:"
-            var printedByParagraph = new Paragraph($"Printed By: [Your Name or User ID]\n") { Alignment = Element.ALIGN_CENTER };
+            var printedByParagraph = new Paragraph($"Printed By: {AuthenticationHelper._loggedInUsername}\n") { Alignment = Element.ALIGN_CENTER };
             document.Add(printedByParagraph);
             // Add an empty paragraph for spacing
             document.Add(new Paragraph(" "));
@@ -269,7 +287,7 @@ namespace TakoTea.Views.reports
             document.Add(dateTimeParagraph);
 
             // Add "Printed By:"
-            var printedByParagraph = new Paragraph($"Printed By: [Your Name or User ID]\n") { Alignment = Element.ALIGN_CENTER };
+            var printedByParagraph = new Paragraph($"Printed By: {AuthenticationHelper._loggedInUsername}\n") { Alignment = Element.ALIGN_CENTER };
             document.Add(printedByParagraph);
             // Add an empty paragraph for spacing
             document.Add(new Paragraph(" "));
@@ -337,7 +355,7 @@ namespace TakoTea.Views.reports
             document.Add(dateTimeParagraph);
 
             // Add "Printed By:"
-            var printedByParagraph = new Paragraph($"Printed By: [Your Name or User ID]\n") { Alignment = Element.ALIGN_CENTER };
+            var printedByParagraph = new Paragraph($"Printed By: {AuthenticationHelper._loggedInUsername}\n") { Alignment = Element.ALIGN_CENTER };
             document.Add(printedByParagraph);
             // Add an empty paragraph for spacing
             document.Add(new Paragraph(" "));
@@ -371,7 +389,153 @@ namespace TakoTea.Views.reports
                 document.Add(pageNumberParagraph);
             }
         }
+        private int GetProductIdByName(string productName)
+        {
+            return dbContext.Products.FirstOrDefault(p => p.ProductName == productName)?.ProductID ?? 0;
+        }
 
+        private void AddChangeLogsContent(iTextSharp.text.Document document, Dictionary<string, object> filters)
+
+        {
+
+            var logsQuery = LogChangesRepository.GetAllChangeLogs().AsQueryable();
+
+
+
+            if (filters != null)
+
+            {
+
+                if (filters.ContainsKey("TableName") && filters["TableName"] is string tableName)
+
+                {
+
+                    if (tableName != "All")
+
+                    {
+
+                        logsQuery = logsQuery.Where(l => l.TableName == tableName);
+
+                    }
+
+                }
+
+                if (filters.ContainsKey("SearchText") && filters["SearchText"] is string searchText)
+
+                {
+
+                    logsQuery = logsQuery.Where(l =>
+
+                        l.ColumnName.Contains(searchText) || l.Username.Contains(searchText));
+
+                }
+
+                if (filters.ContainsKey("StartDate") && filters["StartDate"] is DateTime startDate)
+
+                {
+
+                    logsQuery = logsQuery.Where(l => l.Timestamp >= startDate);
+
+                }
+
+                if (filters.ContainsKey("EndDate") && filters["EndDate"] is DateTime endDate)
+
+                {
+
+                    logsQuery = logsQuery.Where(l => l.Timestamp <= endDate);
+
+                }
+
+            }
+
+
+
+            var logs = logsQuery.ToList();
+
+
+
+            // Add logs data to the document with styling
+
+            var titleFont = FontFactory.GetFont("Helvetica", 16, iTextSharp.text.Font.BOLD, BaseColor.RED);
+
+            var headerFont = FontFactory.GetFont("Helvetica", 12, iTextSharp.text.Font.BOLD);
+
+            var cellFont = FontFactory.GetFont("Helvetica", 10);
+
+
+
+            document.Add(new Paragraph("TakoTea - Change Logs Report", titleFont) { Alignment = Element.ALIGN_CENTER });
+
+            document.Add(new Paragraph($"Generated on: {DateTime.Now:yyyy-MM-dd HH:mm:ss}") { Alignment = Element.ALIGN_CENTER });
+
+            document.Add(new Paragraph($"Printed By: {AuthenticationHelper._loggedInUsername} \n") { Alignment = Element.ALIGN_CENTER });
+
+            document.Add(new Paragraph(" "));
+
+
+
+            // Create a table to display the logs
+
+            var table = new PdfPTable(7) { WidthPercentage = 100 }; // 7 columns now
+
+            table.AddCell(new PdfPCell(new Phrase("Timestamp", headerFont)) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 5 });
+
+            table.AddCell(new PdfPCell(new Phrase("Table Name", headerFont)) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 5 });
+            table.AddCell(new PdfPCell(new Phrase("Record ID", headerFont)) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 5 });
+
+
+            table.AddCell(new PdfPCell(new Phrase("Column Name", headerFont)) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 5 });
+
+            table.AddCell(new PdfPCell(new Phrase("Old Value", headerFont)) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 5 });
+
+            table.AddCell(new PdfPCell(new Phrase("New Value", headerFont)) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 5 });
+
+            table.AddCell(new PdfPCell(new Phrase("User", headerFont)) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 5 });
+
+
+
+            foreach (var log in logs)
+
+            {
+
+                table.AddCell(new PdfPCell(new Phrase(log.Timestamp.ToString("yyyy-MM-dd HH:mm:ss"), cellFont)) { Padding = 5 });
+
+                table.AddCell(new PdfPCell(new Phrase(log.TableName, cellFont)) { Padding = 5 });
+                table.AddCell(new PdfPCell(new Phrase(log.RecordID.ToString(), cellFont)) { Padding = 5 }); // Add RecordID cell
+
+                table.AddCell(new PdfPCell(new Phrase(log.ColumnName, cellFont)) { Padding = 5 });
+
+                table.AddCell(new PdfPCell(new Phrase(log.OldValue, cellFont)) { Padding = 5 });
+
+                table.AddCell(new PdfPCell(new Phrase(log.NewValue, cellFont)) { Padding = 5 });
+
+                table.AddCell(new PdfPCell(new Phrase(log.Username, cellFont)) { Padding = 5 });
+
+            }
+
+
+
+            document.Add(table);
+
+
+
+            // Add page numbers
+
+            int pageCount = document.PageNumber;
+
+            for (int i = 1; i <= pageCount; i++)
+
+            {
+
+                document.NewPage();
+
+                var pageNumberParagraph = new Paragraph($"Page {i} of {pageCount}", new Font(FontFactory.GetFont("Helvetica", 10))) { Alignment = Element.ALIGN_RIGHT };
+
+                document.Add(pageNumberParagraph);
+
+            }
+
+        }
         private void AddOrderWithItemsListContent(iTextSharp.text.Document document, Dictionary<string, object> filters)
         {
             var ordersQuery = dbContext.OrderModels.Include("OrderItems").AsQueryable();
@@ -381,6 +545,24 @@ namespace TakoTea.Views.reports
                 if (filters.ContainsKey("ProductName") && filters["ProductName"] is string productName)
                 {
                     ordersQuery = ordersQuery.Where(o => o.OrderItems.Any(i => i.ProductName.Contains(productName)));
+                }
+                if (filters.ContainsKey("ProductCategory") && filters["ProductCategory"] is string productCategory)
+                {
+
+                    if (productCategory == "All")
+                    {
+
+                    }
+                    else
+                    {
+                        ordersQuery = ordersQuery.Where(o => o.OrderItems.Any(i =>
+                      dbContext.ProductVariants.Any(pv =>
+                          pv.ProductVariantID == i.ProductVariantId &&
+pv.ProductID == (dbContext.Products.FirstOrDefault(p => p.ProductName == productCategory) != null ? dbContext.Products.FirstOrDefault(p => p.ProductName == productCategory).ProductID : 0)
+                      )
+                  ));
+                    }
+                  
                 }
                 if (filters.ContainsKey("OrderStartDate") && filters["OrderStartDate"] is DateTime orderStartDate)
                 {
@@ -490,10 +672,22 @@ namespace TakoTea.Views.reports
                 case ReportType.OrderWithItemsList:
                     if (!string.IsNullOrEmpty(txtFilter.Text))
                         filters["ProductName"] = txtFilter.Text;
+                    if (cboFilter.SelectedIndex > -1)
+                        filters["ProductCategory"] = cboFilter.SelectedItem.ToString();
                     if (dtpEndDate.Checked)
                         filters["OrderStartDate"] = dtpStartDate.Value.Date;
                     if (dtpEndDate.Checked)
                         filters["OrderEndDate"] = dtpEndDate.Value.Date;
+                    break;
+                case ReportType.ChangeLogs:
+                    if (cboFilter.SelectedItem != null)
+                        filters["TableName"] = cboFilter.SelectedItem.ToString();
+                    if (!string.IsNullOrEmpty(txtFilter.Text))
+                        filters["SearchText"] = txtFilter.Text;
+                    if (dtpStartDate.Checked)
+                        filters["StartDate"] = dtpStartDate.Value.Date;
+                    if (dtpEndDate.Checked)
+                        filters["EndDate"] = dtpEndDate.Value.Date;
                     break;
             }
 
@@ -502,6 +696,19 @@ namespace TakoTea.Views.reports
 
         // Event handler for the Generate Report button
         private void btnGenerateReport_Click(object sender, EventArgs e)
+        {
+            if (lstReportTypes.SelectedItem != null)
+            {
+                var selectedReportType = (ReportType)lstReportTypes.SelectedItem;
+                var filters = GetFiltersForReportType(selectedReportType);
+
+                // Provide a temporary file path for the PDF
+                string pdfPath = Path.Combine(Path.GetTempPath(), "temp_report.pdf");
+
+                GenerateAndDisplayReport(pdfPath, selectedReportType, filters);
+            }
+        }
+        private void GenerateReport()
         {
             if (lstReportTypes.SelectedItem != null)
             {
@@ -548,6 +755,33 @@ namespace TakoTea.Views.reports
                 dtpStartDate.Value = startDate;
                 dtpEndDate.Value = endDate;
             }
+
+            GenerateReport();
+        }
+
+        private void cboFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GenerateReport();
+        }
+
+        private async void txtFilter_TextChanged(object sender, EventArgs e)
+        {
+            await Task.Delay(1500); // Add a delay of 500 milliseconds
+            GenerateReport();
+        }
+
+        private void dtpEndDate_ValueChanged(object sender, EventArgs e)
+        {
+            DateHelper.ValidateDateRange(dtpStartDate, dtpEndDate, "Start date must be before end date.", 1);
+
+            GenerateReport();
+        }
+
+        private void dtpStartDate_ValueChanged(object sender, EventArgs e)
+        {
+            DateHelper.ValidateDateRange(dtpStartDate, dtpEndDate, "Start date must be before end date.", -1);
+
+            GenerateReport();
         }
     }
 
@@ -557,6 +791,8 @@ namespace TakoTea.Views.reports
         SalesSummary,
         InventoryReport,
         OrderList,
-        OrderWithItemsList
+        OrderWithItemsList,
+        ChangeLogs
+
     }
 }

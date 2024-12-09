@@ -19,5 +19,9 @@ namespace TakoTea.Models
         public int diagram_id { get; set; }
         public Nullable<int> version { get; set; }
         public byte[] definition { get; set; }
+        public string CreatedBy { get; set; }
+        public string UpdatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
     }
 }

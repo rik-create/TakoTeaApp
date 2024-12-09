@@ -1,4 +1,5 @@
-﻿using MaterialSkin.Controls;
+﻿using Helpers;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -452,7 +453,8 @@ namespace TakoTea.View.Product.Product_Modals
                     DiscountPercent = discountPercent,
                     DiscountedPrice = discountedPrice,
                     ImagePath = imagePath,
-                    CreatedAt = DateTime.Now
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = AuthenticationHelper._loggedInUsername
                 };
 
                 productsService.AddComboMeal(newComboMeal);
@@ -482,7 +484,7 @@ namespace TakoTea.View.Product.Product_Modals
                         null,                               // Old value
                         newComboMealVariant.ToString(),     // New value
                         "Added",                            // Action
-                        $"Combo meal variant '{newComboMealVariant.VariantName}' added for combo meal '{newComboMeal.ComboMealName}'" // Description
+                        $"Combo meal variant '{newComboMealVariant.VariantName}' added for combo meal '{newComboMeal.ComboMealName}'", ""  // Description
                     );
                 }
 

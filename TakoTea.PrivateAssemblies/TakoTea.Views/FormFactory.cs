@@ -39,6 +39,12 @@ namespace TakoTea.Views
                     return new UserManagementForm();
                 case "ProductCateg":
                     return new ProductForm();
+                case "VariantChanges":
+                    return new ProductListLogsForm();
+                case "IngredientChanges":
+                    return new IngredientListLogsForm();
+                case "BatchChanges":
+                    return new BatchListLogsForm();
                 // Add more cases as needed...
                 default:
                     return null;

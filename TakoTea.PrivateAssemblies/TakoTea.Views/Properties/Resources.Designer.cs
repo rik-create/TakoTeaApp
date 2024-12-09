@@ -83,6 +83,16 @@ namespace TakoTea.Views.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap asdasdasdasdasdasdasdasd {
+            get {
+                object obj = ResourceManager.GetObject("asdasdasdasdasdasdasdasd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap copy_white {
             get {
                 object obj = ResourceManager.GetObject("copy-white", resourceCulture);
@@ -226,6 +236,26 @@ namespace TakoTea.Views.Properties {
         internal static System.Drawing.Bitmap restart1 {
             get {
                 object obj = ResourceManager.GetObject("restart1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sd {
+            get {
+                object obj = ResourceManager.GetObject("sd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sd1 {
+            get {
+                object obj = ResourceManager.GetObject("sd1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

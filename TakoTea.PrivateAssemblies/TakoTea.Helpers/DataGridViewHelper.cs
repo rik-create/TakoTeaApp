@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
@@ -390,8 +391,49 @@ namespace TakoTea.Helpers
                 MessageBox.Show("Error setting row height: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        public static Image ResizeImage(Image image, int width, int height)
+        {
+            Bitmap resizedImage = new Bitmap(width, height);
+            using (Graphics graphics = Graphics.FromImage(resizedImage))
+            {
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic; // For better quality resizing
+                graphics.DrawImage(image, 0, 0, width, height);
+            }
+            return resizedImage;
+        }
+        // Helper function to resize image bytes
+        public static void ResizeImageBytes(DataGridView dataGridView, string sourceColumnName, string targetColumnName, int width, int height)
+        {
+            // Check if the column exists
+            if (!dataGridView.Columns.Contains(sourceColumnName))
+                return;
 
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                // Get the image bytes from the column
+                if (row.Cells[sourceColumnName].Value is byte[] imageBytes)
+                {
+                    using (MemoryStream inputMs = new MemoryStream(imageBytes))
+                    using (Image image = Image.FromStream(inputMs))
+                    {
+                        Bitmap resizedImage = new Bitmap(width, height);
+                        using (Graphics graphics = Graphics.FromImage(resizedImage))
+                        {
+                            graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                            graphics.DrawImage(image, 0, 0, width, height);
+                        }
 
+                        using (MemoryStream outputMs = new MemoryStream())
+                        {
+                            resizedImage.Save(outputMs, image.RawFormat);
+
+                            // Set the resized image bytes back to the same column
+                            row.Cells[targetColumnName].Value = outputMs.ToArray();
+                        }
+                    }
+                }
+            }
+        }
         public static void AddImageColumnFromImagePath(DataGridView dataGridView, string imagePathColumnName, int imageWidth, int imageHeight)
         {
             try
@@ -559,7 +601,7 @@ namespace TakoTea.Helpers
             dataGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
 
             // Use a slightly smaller and a more readable font
-            dataGridView.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            dataGridView.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Regular);
 
             // Style selected rows for better visibility
             dataGridView.DefaultCellStyle.SelectionForeColor = Color.White;
@@ -586,6 +628,9 @@ namespace TakoTea.Helpers
             {
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
             }
+
+            // Set TriState for cells
+            dataGridView.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 
             dataGridView.ColumnHeaderMouseClick += DataGridView_ColumnHeaderMouseClick;
         }
@@ -689,5 +734,72 @@ private static void RepopulateIBindingList(IBindingList bindingList, List<object
             dataGridView.GridColor = SystemColors.ControlDarkDark;
             dataGridView.ReadOnly = true;
         }
+
+
+            private static Dictionary<string, SortOrder> _columnSortDirections = new Dictionary<string, SortOrder>();
+
+            public static void SortDataGridView(DataGridView dataGridView, int columnIndex)
+            {
+                DataGridViewColumn clickedColumn = dataGridView.Columns[columnIndex];
+
+                if (!(dataGridView.DataSource is IBindingList data))
+                {
+                    // Handle the case where the data source is not an IBindingList
+                    return;
+                }
+
+                // Get the current sort order for the clicked column
+                SortOrder sortOrder;
+                if (!_columnSortDirections.TryGetValue(clickedColumn.DataPropertyName, out sortOrder))
+                {
+                    // If not found, default to Ascending
+                    sortOrder = SortOrder.Ascending;
+                }
+                else
+                {
+                    // Toggle the sort order
+                    sortOrder = sortOrder == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+                }
+
+                // Store the new sort order
+                _columnSortDirections[clickedColumn.DataPropertyName] = sortOrder;
+                dataGridView.Refresh();
+
+                // Sort the IBindingList
+                if (sortOrder == SortOrder.Ascending)
+                {
+                    var sortedList = data.Cast<object>().OrderBy(x => GetPropertyValue(x, clickedColumn.DataPropertyName)).ToList();
+                    RepopulateIBindingList(data, sortedList, dataGridView);
+                }
+                else
+                {
+                    var sortedList = data.Cast<object>().OrderByDescending(x => GetPropertyValue(x, clickedColumn.DataPropertyName)).ToList();
+                    RepopulateIBindingList(data, sortedList, dataGridView);
+                }
+
+                // Add visual feedback to the headers
+                foreach (DataGridViewColumn column in dataGridView.Columns)
+                {
+                    column.HeaderCell.SortGlyphDirection = SortOrder.None;
+                }
+
+                // Set the sort glyph for the clicked column
+                clickedColumn.HeaderCell.SortGlyphDirection = sortOrder;
+            }
+
+            // Helper function to resize image bytes (static)
+     
+
+            private static void RepopulateIBindingList(IBindingList bindingList, List<object> sortedList, DataGridView dataGridView)
+            {
+                for (int i = 0; i < sortedList.Count; i++)
+                {
+                    ResizeImageBytes(dataGridView, "ImagePath", "ImagePath", 64, 64);
+                    bindingList[i] = sortedList[i]; // Update the item in the IBindingList
+                }
+            }
+
+       
+        
     }
 }

@@ -20,5 +20,9 @@ namespace TakoTea.Models
         public string Password { get; set; }
         public string Role { get; set; }
         public bool IsActive { get; set; }
+        public string CreatedBy { get; set; }
+        public string UpdatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
     }
 }

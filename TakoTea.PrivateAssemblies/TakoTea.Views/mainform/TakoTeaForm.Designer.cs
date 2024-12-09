@@ -31,6 +31,9 @@
             this.tabPageDashboard = new System.Windows.Forms.TabPage();
             this.panelDashboard = new System.Windows.Forms.Panel();
             this.tabPageProduct = new System.Windows.Forms.TabPage();
+            this.menuStripProduct = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItemVariants = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemProducts = new System.Windows.Forms.ToolStripMenuItem();
             this.panelProduct = new System.Windows.Forms.Panel();
             this.tabPageSales = new System.Windows.Forms.TabPage();
             this.panelSales = new System.Windows.Forms.Panel();
@@ -45,8 +48,6 @@
             this.panelBatch = new System.Windows.Forms.Panel();
             this.tabPageReports = new System.Windows.Forms.TabPage();
             this.panelReports = new System.Windows.Forms.Panel();
-            this.tabPageProductCateg = new System.Windows.Forms.TabPage();
-            this.panelProductCateg = new System.Windows.Forms.Panel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.miniToolStrip = new System.Windows.Forms.MenuStrip();
@@ -56,19 +57,26 @@
             this.toolStripBtnAddProduct = new System.Windows.Forms.ToolStripButton();
             this.buttonQuickAccess = new MaterialSkin.Controls.MaterialButton();
             this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
+            this.takoTeaLabel1 = new TakoTea.Controls.TakoTeaLabel();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.variantsChangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ingredientChangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.batchListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.batchChangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.materialTabControl1.SuspendLayout();
             this.tabPageDashboard.SuspendLayout();
             this.tabPageProduct.SuspendLayout();
+            this.menuStripProduct.SuspendLayout();
             this.tabPageSales.SuspendLayout();
             this.tabPageItem.SuspendLayout();
             this.menuStripItem.SuspendLayout();
             this.tabPageStock.SuspendLayout();
             this.tabPageBatch.SuspendLayout();
             this.tabPageReports.SuspendLayout();
-            this.tabPageProductCateg.SuspendLayout();
             this.toolStripQuickAccess.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // materialTabControl1
@@ -81,7 +89,6 @@
             this.materialTabControl1.Controls.Add(this.tabPageStock);
             this.materialTabControl1.Controls.Add(this.tabPageBatch);
             this.materialTabControl1.Controls.Add(this.tabPageReports);
-            this.materialTabControl1.Controls.Add(this.tabPageProductCateg);
             this.materialTabControl1.Depth = 0;
             this.materialTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.materialTabControl1.ImageList = this.imageList1;
@@ -119,6 +126,7 @@
             // tabPageProduct
             // 
             this.tabPageProduct.AutoScroll = true;
+            this.tabPageProduct.Controls.Add(this.menuStripProduct);
             this.tabPageProduct.Controls.Add(this.panelProduct);
             this.tabPageProduct.ImageKey = "takoyaki(1).png";
             this.tabPageProduct.Location = new System.Drawing.Point(4, 42);
@@ -128,6 +136,35 @@
             this.tabPageProduct.TabIndex = 8;
             this.tabPageProduct.Text = "Product";
             this.tabPageProduct.UseVisualStyleBackColor = true;
+            // 
+            // menuStripProduct
+            // 
+            this.menuStripProduct.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.menuStripProduct.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
+            this.menuStripProduct.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemVariants,
+            this.toolStripMenuItemProducts,
+            this.variantsChangesToolStripMenuItem});
+            this.menuStripProduct.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.menuStripProduct.Location = new System.Drawing.Point(3, 3);
+            this.menuStripProduct.Name = "menuStripProduct";
+            this.menuStripProduct.Size = new System.Drawing.Size(1279, 24);
+            this.menuStripProduct.TabIndex = 5;
+            this.menuStripProduct.Text = "Dashboard Sections";
+            // 
+            // toolStripMenuItemVariants
+            // 
+            this.toolStripMenuItemVariants.Name = "toolStripMenuItemVariants";
+            this.toolStripMenuItemVariants.Size = new System.Drawing.Size(60, 20);
+            this.toolStripMenuItemVariants.Text = "Variants";
+            this.toolStripMenuItemVariants.Click += new System.EventHandler(this.toolStripMenuItemVariants_Click);
+            // 
+            // toolStripMenuItemProducts
+            // 
+            this.toolStripMenuItemProducts.Name = "toolStripMenuItemProducts";
+            this.toolStripMenuItemProducts.Size = new System.Drawing.Size(66, 20);
+            this.toolStripMenuItemProducts.Text = "Products";
+            this.toolStripMenuItemProducts.Click += new System.EventHandler(this.toolStripMenuItemProducts_Click_1);
             // 
             // panelProduct
             // 
@@ -186,7 +223,8 @@
             this.menuStripItem.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.menuStripItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemList,
-            this.toolStripMenuItemCategory});
+            this.toolStripMenuItemCategory,
+            this.ingredientChangesToolStripMenuItem});
             this.menuStripItem.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStripItem.Location = new System.Drawing.Point(3, 3);
             this.menuStripItem.Name = "menuStripItem";
@@ -229,6 +267,7 @@
             // tabPageBatch
             // 
             this.tabPageBatch.AutoScroll = true;
+            this.tabPageBatch.Controls.Add(this.menuStrip1);
             this.tabPageBatch.Controls.Add(this.panelBatch);
             this.tabPageBatch.ImageKey = "stacked-files.png";
             this.tabPageBatch.Location = new System.Drawing.Point(4, 42);
@@ -264,23 +303,6 @@
             this.panelReports.Name = "panelReports";
             this.panelReports.Size = new System.Drawing.Size(1302, 648);
             this.panelReports.TabIndex = 2;
-            // 
-            // tabPageProductCateg
-            // 
-            this.tabPageProductCateg.Controls.Add(this.panelProductCateg);
-            this.tabPageProductCateg.Location = new System.Drawing.Point(4, 42);
-            this.tabPageProductCateg.Name = "tabPageProductCateg";
-            this.tabPageProductCateg.Size = new System.Drawing.Size(1302, 648);
-            this.tabPageProductCateg.TabIndex = 9;
-            this.tabPageProductCateg.Text = "Product Category";
-            this.tabPageProductCateg.UseVisualStyleBackColor = true;
-            // 
-            // panelProductCateg
-            // 
-            this.panelProductCateg.Location = new System.Drawing.Point(230, 20);
-            this.panelProductCateg.Name = "panelProductCateg";
-            this.panelProductCateg.Size = new System.Drawing.Size(820, 660);
-            this.panelProductCateg.TabIndex = 6;
             // 
             // imageList1
             // 
@@ -365,19 +387,19 @@
             // 
             this.buttonQuickAccess.AutoSize = false;
             this.buttonQuickAccess.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonQuickAccess.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.buttonQuickAccess.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Dense;
             this.buttonQuickAccess.Depth = 0;
-            this.buttonQuickAccess.HighEmphasis = true;
+            this.buttonQuickAccess.HighEmphasis = false;
             this.buttonQuickAccess.Icon = null;
-            this.buttonQuickAccess.Location = new System.Drawing.Point(1176, 32);
+            this.buttonQuickAccess.Location = new System.Drawing.Point(1176, 40);
             this.buttonQuickAccess.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.buttonQuickAccess.MouseState = MaterialSkin.MouseState.HOVER;
             this.buttonQuickAccess.Name = "buttonQuickAccess";
             this.buttonQuickAccess.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.buttonQuickAccess.Size = new System.Drawing.Size(123, 36);
+            this.buttonQuickAccess.Size = new System.Drawing.Size(123, 24);
             this.buttonQuickAccess.TabIndex = 7;
             this.buttonQuickAccess.Text = "Quick Access";
-            this.buttonQuickAccess.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
+            this.buttonQuickAccess.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.buttonQuickAccess.UseAccentColor = true;
             this.buttonQuickAccess.UseVisualStyleBackColor = true;
             this.buttonQuickAccess.Click += new System.EventHandler(this.button1_Click);
@@ -386,22 +408,31 @@
             // 
             this.materialButton1.AutoSize = false;
             this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Dense;
             this.materialButton1.Depth = 0;
-            this.materialButton1.HighEmphasis = true;
+            this.materialButton1.HighEmphasis = false;
             this.materialButton1.Icon = null;
-            this.materialButton1.Location = new System.Drawing.Point(1047, 32);
+            this.materialButton1.Location = new System.Drawing.Point(1088, 40);
             this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton1.Name = "materialButton1";
             this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton1.Size = new System.Drawing.Size(123, 36);
+            this.materialButton1.Size = new System.Drawing.Size(77, 24);
             this.materialButton1.TabIndex = 8;
             this.materialButton1.Text = "Reload";
-            this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
+            this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.materialButton1.UseAccentColor = true;
             this.materialButton1.UseVisualStyleBackColor = true;
             this.materialButton1.Click += new System.EventHandler(this.btnReload_Click);
+            // 
+            // takoTeaLabel1
+            // 
+            this.takoTeaLabel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(32)))), ((int)(((byte)(35)))));
+            this.takoTeaLabel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("takoTeaLabel1.BackgroundImage")));
+            this.takoTeaLabel1.Location = new System.Drawing.Point(64, 32);
+            this.takoTeaLabel1.Name = "takoTeaLabel1";
+            this.takoTeaLabel1.Size = new System.Drawing.Size(149, 47);
+            this.takoTeaLabel1.TabIndex = 9;
             // 
             // toolStripButton1
             // 
@@ -425,12 +456,55 @@
             this.toolStripButton2.Text = "Settings";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
+            // variantsChangesToolStripMenuItem
+            // 
+            this.variantsChangesToolStripMenuItem.Name = "variantsChangesToolStripMenuItem";
+            this.variantsChangesToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
+            this.variantsChangesToolStripMenuItem.Text = "Variants Changes";
+            this.variantsChangesToolStripMenuItem.Click += new System.EventHandler(this.variantsChangesToolStripMenuItem_Click);
+            // 
+            // ingredientChangesToolStripMenuItem
+            // 
+            this.ingredientChangesToolStripMenuItem.Name = "ingredientChangesToolStripMenuItem";
+            this.ingredientChangesToolStripMenuItem.Size = new System.Drawing.Size(122, 20);
+            this.ingredientChangesToolStripMenuItem.Text = "Ingredient Changes";
+            this.ingredientChangesToolStripMenuItem.Click += new System.EventHandler(this.ingredientChangesToolStripMenuItem_Click);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.batchListToolStripMenuItem,
+            this.batchChangesToolStripMenuItem});
+            this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1302, 24);
+            this.menuStrip1.TabIndex = 4;
+            this.menuStrip1.Text = "Dashboard Sections";
+            // 
+            // batchListToolStripMenuItem
+            // 
+            this.batchListToolStripMenuItem.Name = "batchListToolStripMenuItem";
+            this.batchListToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
+            this.batchListToolStripMenuItem.Text = "Batch List";
+            this.batchListToolStripMenuItem.Click += new System.EventHandler(this.batchListToolStripMenuItem_Click);
+            // 
+            // batchChangesToolStripMenuItem
+            // 
+            this.batchChangesToolStripMenuItem.Name = "batchChangesToolStripMenuItem";
+            this.batchChangesToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
+            this.batchChangesToolStripMenuItem.Text = "Batch Changes";
+            this.batchChangesToolStripMenuItem.Click += new System.EventHandler(this.batchChangesToolStripMenuItem_Click);
+            // 
             // TakoTeaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(1313, 774);
+            this.Controls.Add(this.takoTeaLabel1);
             this.Controls.Add(this.materialButton1);
             this.Controls.Add(this.buttonQuickAccess);
             this.Controls.Add(this.toolStripQuickAccess);
@@ -443,11 +517,13 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TakoTeaForm";
             this.Padding = new System.Windows.Forms.Padding(3, 80, 0, 0);
-            this.Text = "TakoTea";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.materialTabControl1.ResumeLayout(false);
             this.tabPageDashboard.ResumeLayout(false);
             this.tabPageProduct.ResumeLayout(false);
+            this.tabPageProduct.PerformLayout();
+            this.menuStripProduct.ResumeLayout(false);
+            this.menuStripProduct.PerformLayout();
             this.tabPageSales.ResumeLayout(false);
             this.tabPageItem.ResumeLayout(false);
             this.tabPageItem.PerformLayout();
@@ -455,10 +531,12 @@
             this.menuStripItem.PerformLayout();
             this.tabPageStock.ResumeLayout(false);
             this.tabPageBatch.ResumeLayout(false);
+            this.tabPageBatch.PerformLayout();
             this.tabPageReports.ResumeLayout(false);
-            this.tabPageProductCateg.ResumeLayout(false);
             this.toolStripQuickAccess.ResumeLayout(false);
             this.toolStripQuickAccess.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -474,7 +552,6 @@
         private System.Windows.Forms.Panel panelBatch;
         private System.Windows.Forms.Panel panelReports;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.TabPage tabPageDashboard;
         private System.Windows.Forms.MenuStrip menuStripItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemList;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCategory;
@@ -483,17 +560,25 @@
         private System.Windows.Forms.MenuStrip miniToolStrip;
         private System.Windows.Forms.Panel panelStock;
         public MaterialSkin.Controls.MaterialTabControl materialTabControl1;
-        private System.Windows.Forms.Panel panelDashboard;
         private System.Windows.Forms.Panel panelItem;
         private System.Windows.Forms.ToolStrip toolStripQuickAccess;
         private System.Windows.Forms.ToolStripButton toolStripBtnNewOrder;
         private System.Windows.Forms.ToolStripButton toolStripBtnAddIngredient;
         private System.Windows.Forms.ToolStripButton toolStripBtnAddProduct;
         private MaterialSkin.Controls.MaterialButton buttonQuickAccess;
-        private System.Windows.Forms.TabPage tabPageProductCateg;
-        private System.Windows.Forms.Panel panelProductCateg;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private MaterialSkin.Controls.MaterialButton materialButton1;
+        private System.Windows.Forms.MenuStrip menuStripProduct;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemVariants;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemProducts;
+        private System.Windows.Forms.TabPage tabPageDashboard;
+        private System.Windows.Forms.Panel panelDashboard;
+        private Controls.TakoTeaLabel takoTeaLabel1;
+        private System.Windows.Forms.ToolStripMenuItem variantsChangesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ingredientChangesToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem batchListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem batchChangesToolStripMenuItem;
     }
 }

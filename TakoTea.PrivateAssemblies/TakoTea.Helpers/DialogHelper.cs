@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 namespace TakoTea.Helpers
 {
     public static class DialogHelper
@@ -46,6 +47,73 @@ namespace TakoTea.Helpers
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information
             );
+        }
+
+        public static string ShowInputDialog(string formTitle, string labelText, string validationMessage, Func<string, bool> validateInput)
+        {
+            using (var form = new Form())
+            {
+                form.Text = formTitle;
+                form.StartPosition = FormStartPosition.CenterParent;
+                form.FormBorderStyle = FormBorderStyle.FixedDialog;
+                form.MaximizeBox = false;
+                form.MinimizeBox = false;
+                form.ShowIcon = false;
+                form.Width = 300;
+                form.Height = 150;
+
+                var label = new Label
+                {
+                    Text = labelText,
+                    Left = 12,
+                    Top = 12,
+                    AutoSize = true
+                };
+
+                var textBox = new TextBox
+                {
+                    Left = 12,
+                    Top = 35,
+                    Width = 260,
+                    Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top
+                };
+
+                var buttonOk = new Button
+                {
+                    Text = "OK",
+                    Left = 114,
+                    Top = 70,
+                    Width = 75,
+                    DialogResult = DialogResult.OK,
+                    Anchor = AnchorStyles.Bottom | AnchorStyles.Right
+                };
+
+                buttonOk.Click += (s, a) =>
+                {
+                    string input = textBox.Text.Trim();
+                    if (!validateInput(input))
+                    {
+                        MessageBox.Show(validationMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        textBox.Focus();
+                        form.DialogResult = DialogResult.None; // Prevent dialog from closing
+                    }
+                };
+
+                form.Controls.Add(label);
+                form.Controls.Add(textBox);
+                form.Controls.Add(buttonOk);
+                form.AcceptButton = buttonOk;
+                form.TopMost = true;
+
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    return textBox.Text.Trim();
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
     }
 }

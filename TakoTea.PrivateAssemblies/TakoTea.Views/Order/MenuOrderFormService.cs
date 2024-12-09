@@ -24,6 +24,7 @@ using TakoTea.View.Orders;
 using TakoTea.Views.Order.Order_Modals;
 using System.Drawing.Printing;
 using TakoTea.Helpers;
+using Helpers;
 
 namespace TakoTea.Views.Order
 {
@@ -899,8 +900,8 @@ namespace TakoTea.Views.Order
                         "Order Confirmation",    // Column name
                         null,                    // Old value
                         $"Order {orderId} confirmed", // New value
-                        "Confirmed",             // Action
-                        $"Order '{orderId}' confirmed with payment method '{paymentMethod}' and status '{orderStatus}'" // Description
+                        "Inserted",             // Action
+                        $"Order '{orderId}' confirmed with payment method '{paymentMethod}' and status '{orderStatus}'", ""  // Description
                     );
 
                     // 8. (Optional) Perform other actions like generating a receipt or printing an order summary
@@ -1075,7 +1076,8 @@ namespace TakoTea.Views.Order
                 PaymentMethod = paymentMethod,
                 PaymentStatus = paymentStatus,
                 TotalAmount = decimal.Parse(lblTotalInOrderList.Text.Substring(1)),
-                CreatedBy = "System",
+                CreatedAt = DateTime.Now,
+                CreatedBy = AuthenticationHelper._loggedInUsername,
                 GrossProfit = 0,
                 PaymentAmount = paymentAmount,
                 ChangeAmount = paymentAmount - decimal.Parse(lblTotalInOrderList.Text.Substring(1))

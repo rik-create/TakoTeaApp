@@ -79,6 +79,17 @@
     <Compile Include="ProductWidget.Designer.cs">
       <DependentUpon>ProductWidget.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TakoTeaLabel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TakoTeaLabel.Designer.cs">
+      <DependentUpon>TakoTeaLabel.cs</DependentUpon>
+    </Compile>
     <Compile Include="TakoyakiItemControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -101,6 +112,13 @@
     <EmbeddedResource Include="ProductWidget.resx">
       <DependentUpon>ProductWidget.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TakoTeaLabel.resx">
+      <DependentUpon>TakoTeaLabel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TakoyakiItemControl.resx">
       <DependentUpon>TakoyakiItemControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -113,6 +131,15 @@
       <Project>{C19375C2-227C-47C8-826F-325FE05F3642}</Project>
       <Name>TakoTea.Configurations</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lblTakoTea.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Takotea logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lblTAKOOO.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

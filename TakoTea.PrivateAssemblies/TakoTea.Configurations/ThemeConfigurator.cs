@@ -10,7 +10,7 @@ namespace TakoTea.Configurations
             MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(form);
             materialSkinManager.ColorScheme = new ColorScheme(
-                Primary.LightBlue900,
+                Primary.Brown900,
                 Primary.BlueGrey900,
                 Primary.BlueGrey900,
                 Accent.Red700,
@@ -33,7 +33,7 @@ namespace TakoTea.Configurations
         }
         public static Color GetCustomAccentColor()
         {
-            return Color.FromArgb(184, 35, 32); // Return the custom accent color
+            return Color.FromArgb(226, 20, 20); // Return the custom accent color
         }
 
 

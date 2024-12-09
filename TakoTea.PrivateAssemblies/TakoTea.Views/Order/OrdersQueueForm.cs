@@ -96,7 +96,7 @@ namespace TakoTea.View.Orders
                         null,                         // Old value (null for new batch)
                         "Cancelled",                  // New value
                         "Updated",                    // Action
-                        $"Order '{order.OrderId}' status updated to 'Cancelled'" // Description
+                        $"Order '{order.OrderId}' status updated to 'Cancelled'", ""  // Description
                     );
                 }
             }
@@ -199,7 +199,7 @@ namespace TakoTea.View.Orders
                         null,                         // Old value (null for new batch)
                         newStatus,                    // New value
                         "Updated",                    // Action
-                        $"Order '{order.OrderId}' status updated to '{newStatus}'" // Description
+                        $"Order '{order.OrderId}' status updated to '{newStatus}'", ""  // Description
                     );
                 }
             }

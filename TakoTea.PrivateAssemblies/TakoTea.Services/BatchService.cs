@@ -25,7 +25,7 @@ namespace TakoTea.Services
                     null,                     // Old value (null for new batch)
                     batch.ToString(),         // New value (you might need to override ToString() in your Batch class for a more descriptive log)
                     "Added",                  // Action
-                    $"Batch '{batch.BatchNumber}' added for ingredient '{batch.IngredientID}'" // Description
+                    $"Batch '{batch.BatchNumber}' added for ingredient '{batch.IngredientID}'", "" // Description
                 );
             }
         }
@@ -70,7 +70,12 @@ namespace TakoTea.Services
                 {
                     var batch = context.Batches.Find(batchId);
 
-                    if (batch != null)
+                    string deletionDescription = DialogHelper.ShowInputDialog(
+                                                formTitle: "Enter Deletion Description",
+                                                labelText: "Deletion Description:",
+                                                validationMessage: "Description cannot be empty.",
+                                                validateInput: input => !string.IsNullOrWhiteSpace(input)
+                                            ); if (batch != null)
                     {
                         context.Batches.Remove(batch);
                         context.SaveChanges();
@@ -81,7 +86,7 @@ namespace TakoTea.Services
                             batch.ToString(),         // Old value
                             null,                     // New value
                             "Deleted",                // Action
-                            $"Batch '{batch.BatchNumber}' deleted for ingredient '{batch.IngredientID}'" // Description
+                            $"Batch '{batch.BatchNumber}' deleted for ingredient '{batch.IngredientID}'", deletionDescription// Description
                         );
                     }
                     else

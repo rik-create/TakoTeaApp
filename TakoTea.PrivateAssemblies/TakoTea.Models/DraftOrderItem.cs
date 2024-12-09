@@ -24,6 +24,9 @@ namespace TakoTea.Models
         public string CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string AddOns { get; set; }
+        public string UpdatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         public virtual DraftOrder DraftOrder { get; set; }
     }

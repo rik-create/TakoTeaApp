@@ -35,6 +35,9 @@ namespace TakoTea.Models
         public Nullable<decimal> GrossProfit { get; set; }
         public Nullable<decimal> PaymentAmount { get; set; }
         public Nullable<decimal> ChangeAmount { get; set; }
+        public string UpdatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItems { get; set; }

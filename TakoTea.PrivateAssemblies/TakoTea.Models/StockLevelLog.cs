@@ -22,6 +22,10 @@ namespace TakoTea.Models
         public decimal QuantityChanged { get; set; }
         public string Action { get; set; }
         public System.DateTime Timestamp { get; set; }
+        public string CreatedBy { get; set; }
+        public string UpdatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         public virtual Ingredient Ingredient { get; set; }
         public virtual Batch Batch { get; set; }

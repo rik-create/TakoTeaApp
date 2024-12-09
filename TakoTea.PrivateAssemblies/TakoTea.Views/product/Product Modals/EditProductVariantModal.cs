@@ -63,19 +63,38 @@ namespace TakoTea.View.Product.Product_Modals
             var variantToUpdate = _context.ProductVariants.FirstOrDefault(pv => pv.VariantName == variantName && pv.Size == size);
             if (variantToUpdate != null)
             {
+                string originalPrice = variantToUpdate.Price.ToString();
                 variantToUpdate.Price = isIncrease ? variantToUpdate.Price + priceChange : variantToUpdate.Price - priceChange;
-
+                string changeDescription = DialogHelper.ShowInputDialog(
+                              formTitle: "Enter Change Description",
+                              labelText: "Change Description:",
+                              validationMessage: "Description cannot be empty.",
+                              validateInput: input => !string.IsNullOrWhiteSpace(input)
+                          );
                 // Update the displayed price
                 txtBoxCurrentPrice.Text = variantToUpdate.Price.ToString("F2");
+                LoggingHelper.LogChange("ProductVariants", variantToUpdate.ProductVariantID, "Price", originalPrice, variantToUpdate.Price.ToString(), "Updated", $"Price changed from '{originalPrice}' to '{variantToUpdate.Price}' for variant '{variantToUpdate.VariantName}'", changeDescription);
+
             }
         }
 
         private void UpdatePriceAll(string variantName, decimal priceChange, bool isIncrease)
         {
             var variantsToUpdate = _context.ProductVariants.Where(pv => pv.VariantName == variantName).ToList();
+            string changeDescription = DialogHelper.ShowInputDialog(
+                      formTitle: "Enter Change Description",
+                      labelText: "Change Description:",
+                      validationMessage: "Description cannot be empty.",
+                      validateInput: input => !string.IsNullOrWhiteSpace(input)
+                  );
             foreach (var variant in variantsToUpdate)
             {
+                string originalPrice = variant.Price.ToString();
+
                 variant.Price = isIncrease ? variant.Price + priceChange : variant.Price - priceChange;
+                LoggingHelper.LogChange("ProductVariants", variant.ProductVariantID, "Price", originalPrice, variant.Price.ToString(), "Updated", $"Price changed from '{originalPrice}' to '{variant.Price}' for variant '{variant.VariantName}'", changeDescription);
+
+
             }
 
             // Update the displayed price (assuming you want to show the first variant's price)
@@ -139,23 +158,29 @@ namespace TakoTea.View.Product.Product_Modals
                     pictureBoxProductImage.Image.Save(ms, pictureBoxProductImage.Image.RawFormat);
                     productVariant.ImagePath = ms.ToArray();
                 }
+                string changeDescription = DialogHelper.ShowInputDialog(
+                    formTitle: "Enter Change Description",
+                    labelText: "Change Description:",
+                    validationMessage: "Description cannot be empty.",
+                    validateInput: input => !string.IsNullOrWhiteSpace(input)
+                );
 
-                _context.SaveChanges();
-                transaction.Commit();
-                MessageBox.Show("Updated successfully.");
+            
                 if (originalPrice != productVariant.Price)
                 {
-                    LoggingHelper.LogChange("ProductVariants", productVariant.ProductVariantID, "Price", originalPrice.ToString(), productVariant.Price.ToString(), "Updated", $"Price changed from '{originalPrice}' to '{productVariant.Price}' for variant '{productVariant.VariantName}'");
+                    LoggingHelper.LogChange("ProductVariants", productVariant.ProductVariantID, "Price", originalPrice.ToString(), productVariant.Price.ToString(), "Updated", $"Price changed from '{originalPrice}' to '{productVariant.Price}' for variant '{productVariant.VariantName}'", changeDescription);
                 }
                 if (originalInstructions != productVariant.Instructions)
                 {
-                    LoggingHelper.LogChange("ProductVariants", productVariant.ProductVariantID, "Instructions", originalInstructions, productVariant.Instructions, "Updated", $"Instructions changed from '{originalInstructions}' to '{productVariant.Instructions}' for variant '{productVariant.VariantName}'");
+                    LoggingHelper.LogChange("ProductVariants", productVariant.ProductVariantID, "Instructions", originalInstructions, productVariant.Instructions, "Updated", $"Instructions changed from '{originalInstructions}' to '{productVariant.Instructions}' for variant '{productVariant.VariantName}'", changeDescription);
                 }
                 if (!originalImagePath.SequenceEqual(productVariant.ImagePath))
                 {
-                    LoggingHelper.LogChange("ProductVariants", productVariant.ProductVariantID, "ImagePath", null, null, "Updated", $"ImagePath changed for '{productVariant.VariantName}'"); // Image data not logged
+                    LoggingHelper.LogChange("ProductVariants", productVariant.ProductVariantID, "ImagePath", null, null, "Updated", $"ImagePath changed for '{productVariant.VariantName}'", changeDescription); // Image data not logged
                 }
-
+                _context.SaveChanges();
+                transaction.Commit();
+                MessageBox.Show("Updated successfully.");
                 Close();
             }
             catch (Exception ex)

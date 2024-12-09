@@ -9,6 +9,7 @@ using TakoTea.Models;
 using MaterialSkin.Controls;
 using TakoTea.Interfaces;
 using TakoTea.Views.DataLoaders.Modals;
+using Helpers;
 namespace TakoTea.Views.Batches
 {
     public partial class AddBatchModal : MaterialForm
@@ -94,7 +95,7 @@ namespace TakoTea.Views.Batches
                                   ? (int?)null
                                   : Convert.ToInt32(lblIngredientId.Text),
                     CreatedAt = DateTime.Now,
-                    UpdatedAt = DateTime.Now,
+                    CreatedBy = AuthenticationHelper._loggedInUsername  ,                  UpdatedAt = DateTime.Now,
                     StockLevel = numericUpDownQuantity.Value,
                     ExpirationDate = string.IsNullOrEmpty(dateTimePickerExpiration.Text)
                                      ? (DateTime?)null
@@ -113,7 +114,7 @@ namespace TakoTea.Views.Batches
                     null,                     // Old value (null for new batch)
                     batch.ToString(),         // New value (you might need to override ToString() in your Batch class for a more descriptive log)
                     "Added",                  // Action
-                    $"Batch '{batch.BatchNumber}' added for ingredient '{batch.IngredientID}'" // Description
+                    $"Batch '{batch.BatchNumber}' added for ingredient '{batch.IngredientID}'", "" // Description
                 );
 
                 DialogHelper.ShowSuccess("Batch saved successfully.");

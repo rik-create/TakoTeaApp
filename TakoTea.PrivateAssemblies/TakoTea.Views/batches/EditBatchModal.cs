@@ -68,6 +68,14 @@ namespace TakoTea.Views.Batches
                                                  ? (DateTime?)null
                                                  : dateTimePickerExpiration.Value;
                 _existingBatch.BatchCost = numericUpDownCost.Value;
+
+
+                string changeDescription = DialogHelper.ShowInputDialog(
+                                formTitle: "Enter Change Description",
+                                labelText: "Change Description:",
+                                validationMessage: "Description cannot be empty.",
+                                validateInput: input => !string.IsNullOrWhiteSpace(input)
+                            );
                 if (txtBoxBatchNumber.Text != _existingBatch.BatchNumber)
                 {
                     LoggingHelper.LogChange(
@@ -77,55 +85,55 @@ namespace TakoTea.Views.Batches
                         _existingBatch.BatchNumber,
                         txtBoxBatchNumber.Text,
                         "Updated",
-                        $"Batch number changed from '{_existingBatch.BatchNumber}' to '{txtBoxBatchNumber.Text}'"
+                        $"Batch number changed from '{_existingBatch.BatchNumber}' to '{txtBoxBatchNumber.Text}'", changeDescription
                     );
                 }
                 if (lblIngredientId.Text != _existingBatch.IngredientID.ToString())
                 {
                     LoggingHelper.LogChange(
-                        "Batches",
+                        "Batch",
                         _existingBatch.BatchID,
                         "IngredientID",
                         _existingBatch.IngredientID.ToString(),
                         lblIngredientId.Text,
                         "Updated",
-                        $"Ingredient ID changed from '{_existingBatch.IngredientID}' to '{lblIngredientId.Text}'"
+                        $"Ingredient ID changed from '{_existingBatch.IngredientID}' to '{lblIngredientId.Text}'", changeDescription
                     );
                 }
                 if (numericUpDownQuantity.Value != _existingBatch.StockLevel)
                 {
                     LoggingHelper.LogChange(
-                        "Batches",
+                        "Batch",
                         _existingBatch.BatchID,
                         "StockLevel",
                         _existingBatch.StockLevel.ToString(),
                         numericUpDownQuantity.Value.ToString(),
                         "Updated",
-                        $"Stock level changed from '{_existingBatch.StockLevel}' to '{numericUpDownQuantity.Value}'"
+                        $"Stock level changed from '{_existingBatch.StockLevel}' to '{numericUpDownQuantity.Value}'", changeDescription
                     );
                 }
                 if (dateTimePickerExpiration.Value != _existingBatch.ExpirationDate)
                 {
                     LoggingHelper.LogChange(
-                        "Batches",
+                        "Batch",
                         _existingBatch.BatchID,
                         "ExpirationDate",
                         _existingBatch.ExpirationDate.ToString(),
                         dateTimePickerExpiration.Value.ToString(),
                         "Updated",
-                        $"Expiration date changed from '{_existingBatch.ExpirationDate}' to '{dateTimePickerExpiration.Value}'"
+                        $"Expiration date changed from '{_existingBatch.ExpirationDate}' to '{dateTimePickerExpiration.Value}'", changeDescription
                     );
                 }
                 if (numericUpDownCost.Value != _existingBatch.BatchCost)
                 {
                     LoggingHelper.LogChange(
-                        "Batches",
+                        "Batch",
                         _existingBatch.BatchID,
                         "BatchCost",
                         _existingBatch.BatchCost.ToString(),
                         numericUpDownCost.Value.ToString(),
                         "Updated",
-                        $"Batch cost changed from '{_existingBatch.BatchCost}' to '{numericUpDownCost.Value}'"
+                        $"Batch cost changed from '{_existingBatch.BatchCost}' to '{numericUpDownCost.Value}'", changeDescription
                     );
                 }
 

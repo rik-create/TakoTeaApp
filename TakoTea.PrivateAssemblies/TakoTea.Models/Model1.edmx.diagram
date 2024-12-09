@@ -44,8 +44,8 @@
         <EntityTypeShape EntityType="TakoTeaModel.User" Width="1.5" PointX="13.75" PointY="0.75" />
         <EntityTypeShape EntityType="TakoTeaModel.Setting" Width="1.5" PointX="13.375" PointY="8.75" />
         <EntityTypeShape EntityType="TakoTeaModel.ActivityLog" Width="1.5" PointX="13.375" PointY="12.75" />
-        <EntityTypeShape EntityType="TakoTeaModel.Log" Width="1.5" PointX="15.375" PointY="8.75" />
-        <EntityTypeShape EntityType="TakoTeaModel.sysdiagram" Width="1.5" PointX="15.375" PointY="12.75" />
+        <EntityTypeShape EntityType="TakoTeaModel.sysdiagram" Width="1.5" PointX="16" PointY="13.75" />
+        <EntityTypeShape EntityType="TakoTeaModel.Log" Width="1.5" PointX="16.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

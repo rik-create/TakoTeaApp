@@ -4,6 +4,7 @@ using MaterialSkin.Controls;
 using Microsoft.SqlServer.Management.Smo;
 using MimeKit;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
@@ -42,7 +43,6 @@ namespace TakoTea.Views.MainForm
             InitializeNotificationTimer();
             _context = new Entities();
             // Assuming materialComboBoxQuickAccess is your ComboBox control
-
 
 
             // Optionally, set a default selected item
@@ -229,37 +229,26 @@ namespace TakoTea.Views.MainForm
             {
                 case "Dashboard":
                     targetPanel = panelDashboard;
-                    Text = "TakoTea Dashboard";
                     break;
                 case "Product":
                     targetPanel = panelProduct;
-                    Text = "TakoTea Product";
                     break;
                 case "Sales":
                     targetPanel = panelSales;
-                    Text = "TakoTea Sales Management";
                     break;
                 case "Item":
                     targetPanel = panelItem;
-                    Text = "TakoTea Item Management";
                     break;
                 case "Stock":
                     targetPanel = panelStock;
-                    Text = "TakoTea Stock Management";
                     break;
                 case "Batch":
                     targetPanel = panelBatch;
-                    Text = "TakoTea Batch Management";
                     break;
                 case "Reports":
                     targetPanel = panelReports;
-                    Text = "TakoTea Logs";
                     break;
-                case "ProductCateg":
-                    targetPanel = panelProductCateg;
-                    Text = "TakoTea Product Category";
-
-                    break;
+         
 
                 default:
                     return; // Exit if no valid target panel found
@@ -448,9 +437,7 @@ namespace TakoTea.Views.MainForm
                 case "Reports":
                     targetPanel = panelReports;
                     break;
-                case "ProductCateg":
-                    targetPanel = panelProductCateg;
-                    break;
+        
                 default:
                     return; // Do nothing if an unexpected formKey is encountered
             }
@@ -505,6 +492,70 @@ namespace TakoTea.Views.MainForm
         {
             SettingsForm settingsForm = new SettingsForm();
             settingsForm.ShowDialog();
+        }
+        private void LoadFormIntoPanel(string formKey, Panel targetPanel)
+        {
+            Form formToLoad = _formLoader.LoadForm(formKey);
+
+            if (formToLoad != null)
+            {
+                ProgressBar progressBar = LoadingScreenHelper.CreateProgressBar();
+                targetPanel.Controls.Add(progressBar);
+                progressBar.BringToFront();
+
+                Task.Run(() =>
+                {
+                    BeginInvoke(new Action(() =>
+                    {
+                        targetPanel.Width = formToLoad.Width;
+                        targetPanel.Height = formToLoad.Height;
+                        CenterPanel(targetPanel);
+                        AdjustFormHeightBasedOnPanel(targetPanel);
+                        targetPanel.Controls.Clear();
+                        targetPanel.Controls.Add(formToLoad);
+                        formToLoad.Show();
+                    }));
+                });
+            }
+        }
+
+        private void toolStripMenuItemProducts_Click_1(object sender, EventArgs e)
+        {
+            LoadFormIntoPanel("ProductCateg", panelProduct);
+
+        }
+
+  
+
+        private void toolStripMenuItemVariants_Click(object sender, EventArgs e)
+        {
+            LoadFormIntoPanel("Product", panelProduct);
+        }
+
+        private void variantsChangesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadFormIntoPanel("VariantChanges", panelProduct);
+
+        }
+
+        private void ingredientChangesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadFormIntoPanel("IngredientChanges", panelItem);
+
+        }
+
+      
+
+        private void batchChangesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadFormIntoPanel("BatchChanges", panelBatch);
+
+        }
+
+        private void batchListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadFormIntoPanel("Batch", panelBatch);
+
         }
     }
 }

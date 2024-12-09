@@ -37,6 +37,12 @@ namespace TakoTea.Services
             {
                 try
                 {
+                    string deletionDescription = DialogHelper.ShowInputDialog(
+                                 formTitle: "Enter Deletion Description",
+                                 labelText: "Deletion Description:",
+                                 validationMessage: "Description cannot be empty.",
+                                 validateInput: input => !string.IsNullOrWhiteSpace(input)
+                             );
                     // 1. Delete related records in StockLevelLogs
                     var stockLevelLogs = context.StockLevelLogs.Where(log => log.Batch.IngredientID == ingredientId).ToList();
                     context.StockLevelLogs.RemoveRange(stockLevelLogs);
@@ -51,7 +57,7 @@ namespace TakoTea.Services
                             log.OldStockLevel.ToString(),
                             null,
                             "Deleted",
-                            $"StockLevelLog with ID '{log.LogID}' deleted for batch '{log.BatchID}'"
+                            $"StockLevelLog with ID '{log.LogID}' deleted for batch '{log.BatchID}'", deletionDescription
                         );
                     }
 
@@ -69,7 +75,7 @@ namespace TakoTea.Services
                             batch.UpdatedAt.ToString(),
                             null,
                             "Deleted",
-                            $"Batch '{batch.BatchNumber}' deleted for ingredient '{batch.IngredientID}'"
+                            $"Batch '{batch.BatchNumber}' deleted for ingredient '{batch.IngredientID}'", deletionDescription
                         );
                     }
 
@@ -87,7 +93,7 @@ namespace TakoTea.Services
                             ingredient.IngredientName,
                             null,
                             "Deleted",
-                            $"Ingredient '{ingredient.IngredientName}' with ID '{ingredient.IngredientID}' deleted"
+                            $"Ingredient '{ingredient.IngredientName}' with ID '{ingredient.IngredientID}' deleted", deletionDescription
                         );
                     }
 
@@ -202,7 +208,7 @@ namespace TakoTea.Services
                     null,
                     ingredient.IngredientName,
                     "Added",
-                    $"Ingredient '{ingredient.IngredientName}' with ID '{ingredient.IngredientID}' added"
+                    $"Ingredient '{ingredient.IngredientName}' with ID '{ingredient.IngredientID}' added", ""
                 );
             }
         }
@@ -270,15 +276,10 @@ namespace TakoTea.Services
                             productVariant.StockLevel = stockLevel;
 
                             // Log update of ProductVariant stock level
-                            LoggingHelper.LogChange(
-                                "ProductVariants",
-                                productVariant.ProductVariantID,
-                                "Updated StockLevel",
-                                oldStockLevel.ToString(),
-                                stockLevel.ToString(),
-                                "Updated",
-                                $"ProductVariant '{productVariant.VariantName}' stock level updated from '{oldStockLevel}' to '{stockLevel}'"
-                            );
+           
+
+
+
                         }
                     }
 
@@ -288,25 +289,6 @@ namespace TakoTea.Services
             catch (Exception ex)
             {
                 MessageBox.Show("Error updating stock levels for all product variants: " + ex.Message);
-            }
-        }
-        public void AddBatch(Batch batch)
-        {
-            using (var context = new Entities())
-            {
-                context.Batches.Add(batch);
-                context.SaveChanges();
-
-                // Log addition of Batch
-                LoggingHelper.LogChange(
-                    "Batches",                // Table name
-                    batch.BatchID,            // Record ID (assuming BatchID is auto-generated)
-                    "New Batch",              // Column name (or any descriptive text)
-                    null,                     // Old value (null for new batch)
-                    batch.ToString(),         // New value (you might need to override ToString() in your Batch class for a more descriptive log)
-                    "Added",                  // Action
-                    $"Batch '{batch.BatchNumber}' added for ingredient '{batch.IngredientID}'" // Description
-                );
             }
         }
 

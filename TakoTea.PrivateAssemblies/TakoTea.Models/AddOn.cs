@@ -20,6 +20,10 @@ namespace TakoTea.Models
         public Nullable<int> UseForProductID { get; set; }
         public Nullable<decimal> QuantityUsedPerProduct { get; set; }
         public Nullable<int> IngredientID { get; set; }
+        public string CreatedBy { get; set; }
+        public string UpdatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         public virtual Product Product { get; set; }
     }

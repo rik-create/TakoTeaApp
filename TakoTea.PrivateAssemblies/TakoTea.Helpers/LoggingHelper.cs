@@ -25,7 +25,7 @@ namespace TakoTea.Helpers
             context.SaveChanges();
         }
 
-        public static void LogChange(string tableName, int recordId, string columnName, string oldValue, string newValue, string action, string description)
+        public static void LogChange(string tableName, int recordId, string columnName, string oldValue, string newValue, string action, string description, string changeDescription)
         {
             var context = new Entities();
             var log = new Log
@@ -38,9 +38,13 @@ namespace TakoTea.Helpers
                 Action = action,
                 Timestamp = DateTime.Now,
                 Username = AuthenticationHelper._loggedInUsername,
-                Description = description
+                ChangeDescription_ = changeDescription,
+                Description = description   
+
+               
             };
             context.Logs.Add(log);
+            context.SaveChanges();
 
         }
     }

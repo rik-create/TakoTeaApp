@@ -19,6 +19,10 @@ namespace TakoTea.Models
         public int IngredientID { get; set; }
         public decimal QuantityPerVariant { get; set; }
         public string MeasuringUnit { get; set; }
+        public string CreatedBy { get; set; }
+        public string UpdatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         public virtual ProductVariant ProductVariant { get; set; }
         public virtual Ingredient Ingredient { get; set; }

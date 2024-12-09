@@ -1,4 +1,5 @@
-﻿using MaterialSkin.Controls;
+﻿using Helpers;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
@@ -497,7 +498,9 @@ namespace TakoTea.View.Product.Product_Modals
                     Ingredients = ingredients,
                     Instructions = instructions,
                     ImagePath = imageData,
-                    StockLevel = 0
+                    StockLevel = 0,
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = AuthenticationHelper._loggedInUsername
                 };
 
                 productVariantsToSave.Add(productVariant);
@@ -536,7 +539,7 @@ namespace TakoTea.View.Product.Product_Modals
                                 null,
                                 productVariantIngredient.ToString(),
                                 "Added",
-                                $"Ingredient '{ingredientName}' added with quantity '{quantity} {measuringUnit}'"
+                                $"Ingredient '{ingredientName}' added with quantity '{quantity} {measuringUnit}'", ""
                             );
                         }
                         else
@@ -564,7 +567,7 @@ namespace TakoTea.View.Product.Product_Modals
                             null,                                       // Old value
                             ingredient.ToString(),                      // New value
                             "Added",                                    // Action
-                            $"Ingredient '{ingredient.IngredientID}' added to product variant '{ingredient.ProductVariantID}'" // Description
+                            $"Ingredient '{ingredient.IngredientID}' added to product variant '{ingredient.ProductVariantID}'", "" // Description
                         );
                     }
                 }

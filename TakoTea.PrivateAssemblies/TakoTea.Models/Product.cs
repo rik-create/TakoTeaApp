@@ -26,6 +26,10 @@ namespace TakoTea.Models
         public string ProductName { get; set; }
         public Nullable<int> ProductCategoryID { get; set; }
         public string ProductImage { get; set; }
+        public string CreatedBy { get; set; }
+        public string UpdatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IngredientProductLink> IngredientProductLinks { get; set; }

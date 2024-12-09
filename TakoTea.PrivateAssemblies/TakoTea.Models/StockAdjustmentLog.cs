@@ -22,6 +22,10 @@ namespace TakoTea.Models
         public System.DateTime AdjustmentDate { get; set; }
         public decimal PreviousQuantity { get; set; }
         public decimal NewQuantity { get; set; }
+        public string CreatedBy { get; set; }
+        public string UpdatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         public virtual Ingredient Ingredient { get; set; }
     }

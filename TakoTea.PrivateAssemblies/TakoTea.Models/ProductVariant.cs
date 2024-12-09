@@ -33,6 +33,8 @@ namespace TakoTea.Models
         public byte[] ImagePath { get; set; }
         public string Instructions { get; set; }
         public string Ingredients { get; set; }
+        public string CreatedBy { get; set; }
+        public string UpdatedBy { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ComboMealVariant> ComboMealVariants { get; set; }
