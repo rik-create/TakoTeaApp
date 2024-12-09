@@ -32,7 +32,6 @@ namespace TakoTea.Models
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<StockAdjustmentLog> StockAdjustmentLogs { get; set; }
         public virtual DbSet<ProductVariantIngredient> ProductVariantIngredients { get; set; }
-        public virtual DbSet<ComboMeal> ComboMeals { get; set; }
         public virtual DbSet<ComboMealVariant> ComboMealVariants { get; set; }
         public virtual DbSet<DraftOrder> DraftOrders { get; set; }
         public virtual DbSet<OrderItem> OrderItems { get; set; }
@@ -44,12 +43,13 @@ namespace TakoTea.Models
         public virtual DbSet<DraftOrderItem> DraftOrderItems { get; set; }
         public virtual DbSet<AddOn> AddOns { get; set; }
         public virtual DbSet<IngredientChangeLog> IngredientChangeLogs { get; set; }
-        public virtual DbSet<Batch> Batches { get; set; }
         public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
         public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<Batch> Batches { get; set; }
+        public virtual DbSet<ComboMeal> ComboMeals { get; set; }
     }
 }

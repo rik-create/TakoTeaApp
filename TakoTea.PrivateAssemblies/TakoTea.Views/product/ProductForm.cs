@@ -27,7 +27,7 @@ namespace TakoTea.Product
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
              _context = new Entities();
             _dataAccessObject = new DataAccessObject();
-            _productService = new ProductsService();
+            _productService = new ProductsService(_context);
             DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewProductList);
             LoadData();
             DataGridViewHelper.HideColumn(dataGridViewProductList, "ProductCategoryID");
@@ -241,7 +241,7 @@ namespace TakoTea.Product
 
                     // Populate the new row with data from the selected ProductVariant
                     newRow.Cells[addProductModal.VariantName.Index].Value = productVariant.VariantName;
-                    newRow.Cells[addProductModal.ColumnProduct.Index].Value = (new ProductsService()).GetProductNameById(productVariant.ProductID); // Assuming you have a Product navigation property
+                    newRow.Cells[addProductModal.ColumnProduct.Index].Value = (new ProductsService(_context)).GetProductNameById(productVariant.ProductID); // Assuming you have a Product navigation property
                     newRow.Cells[addProductModal.ColumnSize.Index].Value = productVariant.Size;
                     newRow.Cells[addProductModal.ColumnPrice.Index].Value = productVariant.Price;
                     newRow.Cells[addProductModal.ColumnIngredients.Index].Value = productVariant.Ingredients;

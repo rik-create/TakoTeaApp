@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
@@ -18,15 +19,16 @@ namespace TakoTea.View.Product.Product_Modals
 
 
         ProductsService productsService;
+        private Entities context;
         public AddComboMealModal()
         {
             InitializeComponent();
             ThemeConfigurator.ApplyDarkTheme(this);
             ModalSettingsConfigurator.ApplyStandardModalSettings(this);
-
+            context = new Entities();
             DataGridViewHelper.FormatListView(listViewProductVariants);
             DataGridViewHelper.ApplyDataGridViewStyles(dgViewAddComboMeal);
-            productsService = new ProductsService();
+            productsService = new ProductsService(context);
 
             btnSaveCombomeal.BackColor = ThemeConfigurator.GetCustomAccentColor();
         }
@@ -118,16 +120,46 @@ namespace TakoTea.View.Product.Product_Modals
         // Event to handle the Delete Row functionality
         private void btnDeleteRow_Click(object sender, EventArgs e)
         {
+
+    
+
+            // Update the base price label
+
+            // Update the discounted price based on the new base price
             if (dgViewAddComboMeal.SelectedRows.Count > 0)
             {
+         
+
                 foreach (DataGridViewRow selectedRow in dgViewAddComboMeal.SelectedRows)
                 {
                     // Ensure the row isn't the last row (so we don't delete all rows)
                     if (!selectedRow.IsNewRow)
                     {
+                        
                         dgViewAddComboMeal.Rows.RemoveAt(selectedRow.Index);
                     }
                 }
+
+                decimal basePrice = 0;
+
+                // Loop through each row in the DataGridView to calculate the base price
+                foreach (DataGridViewRow row in dgViewAddComboMeal.Rows)
+                {
+                    if (row.Cells["ColumnPrice"].Value != null && row.Cells["Quantity"].Value != null)
+                    {
+                        decimal price = Convert.ToDecimal(row.Cells["ColumnPrice"].Value);
+                        decimal quantity = Convert.ToDecimal(row.Cells["Quantity"].Value);
+
+                        // Add the price * quantity to the base price
+                        basePrice += price * quantity;
+                    }
+                }
+                // Subtract the deleted rows' total price from the base price
+
+                lblBasePrice.Text = $"Base Price: {basePrice:C}";  // Format as currency
+
+                UpdateDiscountedPrice(basePrice); // Update discounted price based on new base price
+                UpdateTotalVariantsLabel(); // Update the total variants label
             }
         }
 
@@ -135,11 +167,11 @@ namespace TakoTea.View.Product.Product_Modals
         {
             listViewProductVariants.Visible = true;
             textBoxSearchVariants.Visible = true;
-            pbSearch.Visible = true;
             btnAddVariantToDgView.Visible = true;
             buttonCloseIngredientsList.Visible = true;
             btnChooseProductVariant.Visible = false;
             numericUpDownVariantQuantity.Visible = true;
+            btnUndo.Visible = true;
 
 
         }
@@ -150,10 +182,10 @@ namespace TakoTea.View.Product.Product_Modals
             // Hide the ingredient selection components
             listViewProductVariants.Visible = false;
             textBoxSearchVariants.Visible = false;
-            pbSearch.Visible = false;
             btnAddVariantToDgView.Visible = false;
             buttonCloseIngredientsList.Visible = false;
             numericUpDownVariantQuantity.Visible = false;
+            btnUndo.Visible = false;
 
             // Show the button to upload an image again (or any other necessary UI components)
             btnChooseProductVariant.Visible = true;
@@ -215,7 +247,7 @@ namespace TakoTea.View.Product.Product_Modals
             }
 
             // Reset labels for total variants, base price, and discounted price
-            lblTotalVariantsInDg.Text = "0"; // Default text or value
+            lblTotalVariantsInDg.Text = $"Total Variants: {0}"; // Default text or value
             lblBasePrice.Text = "0.00";      // Default base price
             lblDiscountedPrice.Text = "0.00"; // Default discounted price
 
@@ -225,8 +257,10 @@ namespace TakoTea.View.Product.Product_Modals
 
 
 
-        private void textBoxSearchVariants_TextChanged(object sender, EventArgs e)
+        private async void textBoxSearchVariants_TextChanged(object sender, EventArgs e)
         {
+            await Task.Delay(1100); // Add a delay of 500 milliseconds
+
             string searchTerm = textBoxSearchVariants.Text.ToLower();
 
             // Clear existing items in the ListView
@@ -257,55 +291,57 @@ namespace TakoTea.View.Product.Product_Modals
 
         private void AddSelectedVariantsToDataGridView()
         {
-
             decimal totalPrice = 0; // Initialize total price to 0
-
-            // Create a list to keep track of the added variants for the success message
             List<string> addedVariants = new List<string>();
-
-            // Get the quantity value from numericUpDownVariantQuantity
             decimal quantity = numericUpDownVariantQuantity.Value;
 
-            // Loop through each selected item in the ListView
+            // Get the current base price (if any)
+            decimal currentBasePrice = 0;
+            if (decimal.TryParse(lblBasePrice.Text.Replace("Base Price: ", "").Replace("₱", "").Trim(), out decimal parsedPrice))
+            {
+                currentBasePrice = parsedPrice;
+            }
+
             foreach (ListViewItem selectedItem in listViewProductVariants.SelectedItems)
             {
-                // Extract data from the selected ListView item
                 string variantName = selectedItem.SubItems[0].Text;
                 string variantId = selectedItem.SubItems[1].Text;
                 string size = selectedItem.SubItems[2].Text;
                 string priceString = selectedItem.SubItems[3].Text;
-                decimal price = decimal.Parse(priceString); // Convert the price string to decimal
+                decimal price = decimal.Parse(priceString);
 
-                // Add the data to the DataGridView
-                AddVariantToComboMealGrid(variantName, variantId, size, priceString, quantity);
+                // Check if the variant ID already exists in the DataGridView
+                bool variantExists = false;
+                foreach (DataGridViewRow row in dgViewAddComboMeal.Rows)
+                {
+                    if (row.Cells[0].Value?.ToString() == variantId) // Assuming VariantID is in the 1st column (index 0)
+                    {
+                        // Update the quantity in the existing row
+                        int currentQuantity = int.Parse(row.Cells[4].Value.ToString()); // Assuming Quantity is in the 5th column (index 4)
+                        row.Cells[4].Value = currentQuantity + quantity;
 
-                // Add the variant name and quantity to the addedVariants list for the message
-                addedVariants.Add($"{variantName} (Quantity: {quantity})");
+                        totalPrice += price * quantity; // Add the price for the additional quantity
+                        addedVariants.Add($"{variantName} (Quantity: +{quantity})"); // Indicate quantity increase in the message
+                        variantExists = true;
+                        break;
+                    }
+                }
 
-                // Push the added variant and its quantity onto the stack for undo
-                recentlyAddedVariants.Push((variantName, quantity));
-
-                totalPrice += price * quantity;
-
+                if (!variantExists)
+                {
+                    // If the variant doesn't exist, add a new row
+                    AddVariantToComboMealGrid(variantName, variantId, size, priceString, quantity);
+                    addedVariants.Add($"{variantName} (Quantity: {quantity})");
+                    recentlyAddedVariants.Push((variantName, quantity));
+                    totalPrice += price * quantity;
+                }
             }
 
-            lblBasePrice.Text = $"Base Price: {totalPrice:C}";  // Format as currency
-
+            totalPrice += currentBasePrice;
+            lblBasePrice.Text = $"Base Price: {totalPrice:C}";
             UpdateDiscountedPrice(totalPrice);
-
             UpdateTotalVariantsLabel();
 
-
-            // Show a success message with the added variants
-            if (addedVariants.Any())
-            {
-                string addedVariantsText = string.Join("\n", addedVariants);  // Join the variants into a formatted string
-                MessageBox.Show($"Variants added successfully:\n\n{addedVariantsText}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("No variants selected to add.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
         }
         private void UpdateDiscountedPrice(decimal basePrice)
         {
@@ -355,7 +391,7 @@ namespace TakoTea.View.Product.Product_Modals
                 foreach (DataGridViewRow row in dgViewAddComboMeal.Rows)
                 {
                     // Check if the variant name matches
-                    if (row.Cells["VariantName"].Value?.ToString() == lastAdded.VariantName)
+                    if (row.Cells["ColumnVarName"].Value?.ToString() == lastAdded.VariantName)
                     {
                         // Remove the row from the DataGridView
                         dgViewAddComboMeal.Rows.RemoveAt(row.Index);
@@ -363,6 +399,27 @@ namespace TakoTea.View.Product.Product_Modals
                     }
                 }
 
+
+                decimal basePrice = 0;
+
+                // Loop through each row in the DataGridView to calculate the base price
+                foreach (DataGridViewRow row in dgViewAddComboMeal.Rows)
+                {
+                    if (row.Cells["ColumnPrice"].Value != null && row.Cells["Quantity"].Value != null)
+                    {
+                        decimal price = Convert.ToDecimal(row.Cells["ColumnPrice"].Value);
+                        decimal quantity = Convert.ToDecimal(row.Cells["Quantity"].Value);
+
+                        // Add the price * quantity to the base price
+                        basePrice += price * quantity;
+                    }
+                }
+                // Subtract the deleted rows' total price from the base price
+
+                lblBasePrice.Text = $"Base Price: {basePrice:C}";  // Format as currency
+
+                UpdateDiscountedPrice(basePrice); // Update discounted price based on new base price
+                UpdateTotalVariantsLabel(); // Update the total variants label
                 // Optional: Notify the user about the undo operation
                 MessageBox.Show($"Variant {lastAdded.VariantName} (Quantity: {lastAdded.Quantity}) removed.", "Undo Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -452,7 +509,7 @@ namespace TakoTea.View.Product.Product_Modals
                     ComboMealName = comboMealName,
                     DiscountPercent = discountPercent,
                     DiscountedPrice = discountedPrice,
-                    ImagePath = imagePath,
+                    ImagePath = ImageHelper.ImageToByteArray(pbComboMealImage.Image), // Assuming you have the image in a PictureBox
                     CreatedAt = DateTime.Now,
                     CreatedBy = AuthenticationHelper._loggedInUsername
                 };
@@ -476,18 +533,18 @@ namespace TakoTea.View.Product.Product_Modals
 
                     productsService.AddComboMealVariant(newComboMealVariant);
 
-                    // Log the change
-                    LoggingHelper.LogChange(
-                        "ComboMealVariants",                // Table name
-                        newComboMealVariant.ComboMealVariantID, // Record ID
-                        "New Combo Meal Variant",           // Column name
-                        null,                               // Old value
-                        newComboMealVariant.ToString(),     // New value
-                        "Added",                            // Action
-                        $"Combo meal variant '{newComboMealVariant.VariantName}' added for combo meal '{newComboMeal.ComboMealName}'", ""  // Description
-                    );
+                   
                 }
-
+                // Log the change
+                LoggingHelper.LogChange(
+                    "ComboMeal",                // Table name
+                    newComboMeal.ComboMealID, // Record ID
+                    "New Combo Meal",           // Column name
+                    null,                               // Old value
+                    "",     // New value
+                    "Added",                            // Action
+                    $"Combo meal '{newComboMeal.ComboMealName}", ""  // Description
+                );
                 // Success message
                 MessageBox.Show("Combo meal saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -549,6 +606,11 @@ namespace TakoTea.View.Product.Product_Modals
         }
 
         private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lblTotalVariantsInDg_Click(object sender, EventArgs e)
         {
 
         }

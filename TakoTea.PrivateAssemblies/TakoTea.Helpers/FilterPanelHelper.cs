@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Windows.Forms;
+using TakoTea.Repository;
 namespace TakoTea.Helpers
 {
     public static class FilterPanelHelper
@@ -15,5 +17,21 @@ namespace TakoTea.Helpers
             hideButton.Enabled = isVisible;
             showPictureBox.Enabled = !isVisible;
         }
+
+        public static void ResetFilters(DateTimePicker startDatePicker, DateTimePicker endDatePicker, string tableName, string dateColumnName)
+        {
+            if (startDatePicker == null || endDatePicker == null || string.IsNullOrEmpty(tableName) || string.IsNullOrEmpty(dateColumnName))
+            {
+                throw new ArgumentNullException("DateTimePickers, tableName, and dateColumnName must not be null or empty.");
+            }
+
+            DateTime firstRecordDate = LogChangesRepository.GetFirstRecordDate(tableName, dateColumnName);
+            DateTime lastRecordDate = LogChangesRepository.GetLastRecordDate(tableName, dateColumnName);
+
+            startDatePicker.Value = firstRecordDate;
+            endDatePicker.Value = lastRecordDate;
+        }
+
+
     }
 }

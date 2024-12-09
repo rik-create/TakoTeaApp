@@ -12,12 +12,31 @@ namespace TakoTea.Services
     {
         private readonly Entities _context; // Your DB context
 
-        public ProductsService()
+        public ProductsService(Entities context)
         {
-            _context = new Entities();
+            _context = context;
         }
 
+        public List<ComboMeal> GetAllComboMeals()
+        {
+           
+                return _context.ComboMeals.ToList();
+            
+        }
+        public bool DeleteComboMeal(int comboMealId)
+        {
+        
+                var comboMeal = _context.ComboMeals.FirstOrDefault(cm => cm.ComboMealID == comboMealId);
+                if (comboMeal == null)
+                {
+                    return false; // Combo meal not found
+                }
 
+            _context.ComboMeals.Remove(comboMeal);
+            _context.SaveChanges();
+                return true; // Combo meal deleted successfully
+            
+        }
         public void UpdateBatchStockLevel(int ingredientId, decimal quantityUsed, string action)
         {
             var batches = _context.Batches
@@ -40,7 +59,7 @@ namespace TakoTea.Services
                     LogStockLevelUpdate(batch.BatchID, ingredientId, originalStockLevel, batch.StockLevel, remainingQuantity, action);
 
                     LoggingHelper.LogChange(
-                        "Batches",                // Table name
+                        "Batch",                // Table name
                         batch.BatchID,            // Record ID (assuming BatchID is auto-generated)
                         "Stock Level Update",     // Column name (or any descriptive text)
                         originalStockLevel.ToString(), // Old value
@@ -61,7 +80,7 @@ namespace TakoTea.Services
                     LogStockLevelUpdate(batch.BatchID, ingredientId, originalStockLevel, batch.StockLevel, batch.StockLevel, action);
 
                     LoggingHelper.LogChange(
-                        "Batches",                // Table name
+                        "Batch",                // Table name
                         batch.BatchID,            // Record ID (assuming BatchID is auto-generated)
                         "Stock Level Update",     // Column name (or any descriptive text)
                         originalStockLevel.ToString(), // Old value

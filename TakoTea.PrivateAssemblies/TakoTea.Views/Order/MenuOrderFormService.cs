@@ -37,7 +37,7 @@ namespace TakoTea.Views.Order
         {
 
             _context = new Entities();
-            productsService = new ProductsService();
+            productsService = new ProductsService(_context);
             salesService = new SalesService(_context);
         }
         public int GetLatestDraftOrderId()
@@ -449,18 +449,13 @@ namespace TakoTea.Views.Order
 
             try
             {
-                if (File.Exists(comboMeal.ImagePath))
-                {
-                    productWidget.pictureBoxProduct.Image = Image.FromFile(comboMeal.ImagePath);
-                    productWidget.pictureBoxProduct.SizeMode = PictureBoxSizeMode.Zoom;
-                }
-                else
-                {
-                    productWidget.pictureBoxProduct.Image = Properties.Resources.multiply;
-                }
+                productWidget.pictureBoxProduct.Image = ImageHelper.ByteArrayToImage(comboMeal.ImagePath);
+
             }
             catch (Exception ex)
             {
+                                productWidget.pictureBoxProduct.Image = Properties.Resources.multiply;
+
                 MessageBox.Show($"Failed to load image: {ex.Message}");
             }
 

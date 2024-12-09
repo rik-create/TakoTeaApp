@@ -44,7 +44,7 @@ namespace TakoTea.Services
                                  validateInput: input => !string.IsNullOrWhiteSpace(input)
                              );
                     // 1. Delete related records in StockLevelLogs
-                    var stockLevelLogs = context.StockLevelLogs.Where(log => log.Batch.IngredientID == ingredientId).ToList();
+                    var stockLevelLogs = context.StockLevelLogs.Where(log => log.IngredientID == ingredientId).ToList();
                     context.StockLevelLogs.RemoveRange(stockLevelLogs);
 
                     // Log deletion of StockLevelLogs
@@ -69,7 +69,7 @@ namespace TakoTea.Services
                     foreach (var batch in batches)
                     {
                         LoggingHelper.LogChange(
-                            "Batches",
+                            "Batch",
                             batch.BatchID,
                             "Deleted Batch",
                             batch.UpdatedAt.ToString(),

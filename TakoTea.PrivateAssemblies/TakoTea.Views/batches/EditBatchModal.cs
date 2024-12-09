@@ -79,7 +79,7 @@ namespace TakoTea.Views.Batches
                 if (txtBoxBatchNumber.Text != _existingBatch.BatchNumber)
                 {
                     LoggingHelper.LogChange(
-                        "Batches",
+                        "Batch",
                         _existingBatch.BatchID,
                         "BatchNumber",
                         _existingBatch.BatchNumber,

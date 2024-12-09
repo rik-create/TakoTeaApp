@@ -28,6 +28,5 @@ namespace TakoTea.Models
         public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         public virtual Ingredient Ingredient { get; set; }
-        public virtual Batch Batch { get; set; }
     }
 }

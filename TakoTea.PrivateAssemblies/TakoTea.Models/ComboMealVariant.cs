@@ -25,7 +25,7 @@ namespace TakoTea.Models
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
     
-        public virtual ComboMeal ComboMeal { get; set; }
         public virtual ProductVariant ProductVariant { get; set; }
+        public virtual ComboMeal ComboMeal { get; set; }
     }
 }

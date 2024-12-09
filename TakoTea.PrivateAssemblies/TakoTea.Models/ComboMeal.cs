@@ -24,7 +24,7 @@ namespace TakoTea.Models
         public string ComboMealName { get; set; }
         public decimal DiscountPercent { get; set; }
         public decimal DiscountedPrice { get; set; }
-        public string ImagePath { get; set; }
+        public byte[] ImagePath { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }

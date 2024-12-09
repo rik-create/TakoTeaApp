@@ -265,6 +265,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddOnService.cs" />
     <Compile Include="BatchService.cs" />
     <Compile Include="InventoryService.cs" />
     <Compile Include="PaymentMethodService.cs" />

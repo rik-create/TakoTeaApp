@@ -31,7 +31,7 @@ namespace TakoTea.Views.Logs2
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
             context = new Entities();
             _dataAccessObject = new DataAccessObject();
-            _productService = new ProductsService();
+            _productService = new ProductsService(context);
             _logsRepository = new LogsRepository(context);
             DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewLogs);
             menuOrderFormService = new MenuOrderFormService();

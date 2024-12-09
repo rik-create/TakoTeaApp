@@ -1,6 +1,6 @@
 ﻿namespace TakoTea.Views.Items
 {
-    partial class IngredientListLogsForm
+    partial class AddOnsListForm
     {
         /// <summary>
         /// Required designer variable.
@@ -26,23 +26,24 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IngredientListLogsForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddOnsListForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.miniToolStrip = new System.Windows.Forms.BindingNavigator(this.components);
             this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
+            this.btnImportIngredients = new System.Windows.Forms.Button();
+            this.btnExportSelectedItems = new System.Windows.Forms.Button();
+            this.floatingActionButtonAddIngredients = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panelFilteringComponents = new System.Windows.Forms.Panel();
-            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.btnClearFilters = new MaterialSkin.Controls.MaterialButton();
+            this.checkBoxIsAddOn = new System.Windows.Forms.CheckBox();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.checkedListBoxAction = new System.Windows.Forms.CheckedListBox();
-            this.chkListBoxColumnName = new System.Windows.Forms.CheckedListBox();
-            this.dateTimePickerEnd = new System.Windows.Forms.DateTimePicker();
-            this.materialLabel21 = new MaterialSkin.Controls.MaterialLabel();
-            this.dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
+            this.checkedListBoxStockLevel = new System.Windows.Forms.CheckedListBox();
             this.panelItemList = new System.Windows.Forms.Panel();
-            this.bindingNavigatorBatch = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddOns = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -54,12 +55,12 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
-            this.dataGridViewIngredientsLogs = new System.Windows.Forms.DataGridView();
+            this.dataGridViewAddOnsList = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
             this.pbImportDataTo = new System.Windows.Forms.PictureBox();
             this.pBoxShowFilter = new System.Windows.Forms.PictureBox();
             this.btnHideFilters = new MaterialSkin.Controls.MaterialButton();
-            this.txtBoxSearchLogs = new MaterialSkin.Controls.MaterialTextBox2();
+            this.textBoxSearchIngredients = new MaterialSkin.Controls.MaterialTextBox2();
             this.panel1 = new System.Windows.Forms.Panel();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.panelExportButtons = new System.Windows.Forms.Panel();
@@ -67,15 +68,14 @@
             this.pictureBoxExportPdf = new System.Windows.Forms.PictureBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btnClearFilters = new MaterialSkin.Controls.MaterialButton();
             ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).BeginInit();
             this.materialCard2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panelFilteringComponents.SuspendLayout();
             this.panelItemList.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorBatch)).BeginInit();
-            this.bindingNavigatorBatch.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIngredientsLogs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorAddOns)).BeginInit();
+            this.bindingNavigatorAddOns.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAddOnsList)).BeginInit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImportDataTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxShowFilter)).BeginInit();
@@ -113,6 +113,9 @@
             this.materialCard2.AutoScroll = true;
             this.materialCard2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.materialCard2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.materialCard2.Controls.Add(this.btnImportIngredients);
+            this.materialCard2.Controls.Add(this.btnExportSelectedItems);
+            this.materialCard2.Controls.Add(this.floatingActionButtonAddIngredients);
             this.materialCard2.Controls.Add(this.flowLayoutPanel1);
             this.materialCard2.Controls.Add(this.panel3);
             this.materialCard2.Controls.Add(this.panel1);
@@ -127,6 +130,40 @@
             this.materialCard2.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard2.Size = new System.Drawing.Size(1191, 715);
             this.materialCard2.TabIndex = 70;
+            // 
+            // btnImportIngredients
+            // 
+            this.btnImportIngredients.Location = new System.Drawing.Point(776, 664);
+            this.btnImportIngredients.Name = "btnImportIngredients";
+            this.btnImportIngredients.Size = new System.Drawing.Size(144, 32);
+            this.btnImportIngredients.TabIndex = 106;
+            this.btnImportIngredients.Text = "Import Ingredients";
+            this.btnImportIngredients.UseVisualStyleBackColor = false;
+            this.btnImportIngredients.Click += new System.EventHandler(this.pbImportIngredients_Click);
+            // 
+            // btnExportSelectedItems
+            // 
+            this.btnExportSelectedItems.Location = new System.Drawing.Point(928, 664);
+            this.btnExportSelectedItems.Name = "btnExportSelectedItems";
+            this.btnExportSelectedItems.Size = new System.Drawing.Size(144, 32);
+            this.btnExportSelectedItems.TabIndex = 106;
+            this.btnExportSelectedItems.Text = "Export Selected Items";
+            this.btnExportSelectedItems.UseVisualStyleBackColor = false;
+            this.btnExportSelectedItems.Click += new System.EventHandler(this.btnExportSelectedItems_Click);
+            // 
+            // floatingActionButtonAddIngredients
+            // 
+            this.floatingActionButtonAddIngredients.Depth = 0;
+            this.floatingActionButtonAddIngredients.Icon = global::TakoTea.Views.Properties.Resources.plus;
+            this.floatingActionButtonAddIngredients.Image = global::TakoTea.Views.Properties.Resources.plus;
+            this.floatingActionButtonAddIngredients.Location = new System.Drawing.Point(1110, 80);
+            this.floatingActionButtonAddIngredients.Mini = true;
+            this.floatingActionButtonAddIngredients.MouseState = MaterialSkin.MouseState.HOVER;
+            this.floatingActionButtonAddIngredients.Name = "floatingActionButtonAddIngredients";
+            this.floatingActionButtonAddIngredients.Size = new System.Drawing.Size(40, 40);
+            this.floatingActionButtonAddIngredients.TabIndex = 102;
+            this.floatingActionButtonAddIngredients.UseVisualStyleBackColor = true;
+            this.floatingActionButtonAddIngredients.Click += new System.EventHandler(this.floatingActionButtonAddBatch_Click_1);
             // 
             // flowLayoutPanel1
             // 
@@ -144,13 +181,10 @@
             // 
             this.panelFilteringComponents.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelFilteringComponents.Controls.Add(this.btnClearFilters);
-            this.panelFilteringComponents.Controls.Add(this.materialLabel3);
+            this.panelFilteringComponents.Controls.Add(this.checkBoxIsAddOn);
+            this.panelFilteringComponents.Controls.Add(this.materialLabel2);
             this.panelFilteringComponents.Controls.Add(this.materialLabel1);
-            this.panelFilteringComponents.Controls.Add(this.checkedListBoxAction);
-            this.panelFilteringComponents.Controls.Add(this.chkListBoxColumnName);
-            this.panelFilteringComponents.Controls.Add(this.dateTimePickerEnd);
-            this.panelFilteringComponents.Controls.Add(this.materialLabel21);
-            this.panelFilteringComponents.Controls.Add(this.dateTimePickerStart);
+            this.panelFilteringComponents.Controls.Add(this.checkedListBoxStockLevel);
             this.panelFilteringComponents.Enabled = false;
             this.panelFilteringComponents.Location = new System.Drawing.Point(3, 3);
             this.panelFilteringComponents.Name = "panelFilteringComponents";
@@ -159,101 +193,91 @@
             this.panelFilteringComponents.Visible = false;
             this.panelFilteringComponents.Paint += new System.Windows.Forms.PaintEventHandler(this.panelFilteringComponents_Paint);
             // 
-            // materialLabel3
+            // btnClearFilters
             // 
-            this.materialLabel3.AutoSize = true;
-            this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel3.Location = new System.Drawing.Point(6, 8);
-            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(38, 19);
-            this.materialLabel3.TabIndex = 143;
-            this.materialLabel3.Text = "Date:";
+            this.btnClearFilters.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnClearFilters.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnClearFilters.Depth = 0;
+            this.btnClearFilters.HighEmphasis = true;
+            this.btnClearFilters.Icon = null;
+            this.btnClearFilters.Location = new System.Drawing.Point(992, 8);
+            this.btnClearFilters.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnClearFilters.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnClearFilters.Name = "btnClearFilters";
+            this.btnClearFilters.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnClearFilters.Size = new System.Drawing.Size(126, 36);
+            this.btnClearFilters.TabIndex = 144;
+            this.btnClearFilters.Text = "Clear filters";
+            this.btnClearFilters.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnClearFilters.UseAccentColor = true;
+            this.btnClearFilters.UseVisualStyleBackColor = true;
+            this.btnClearFilters.Click += new System.EventHandler(this.btnClearFilters_Click);
+            // 
+            // checkBoxIsAddOn
+            // 
+            this.checkBoxIsAddOn.AutoSize = true;
+            this.checkBoxIsAddOn.Location = new System.Drawing.Point(200, 40);
+            this.checkBoxIsAddOn.Name = "checkBoxIsAddOn";
+            this.checkBoxIsAddOn.Size = new System.Drawing.Size(62, 17);
+            this.checkBoxIsAddOn.TabIndex = 138;
+            this.checkBoxIsAddOn.Text = "Add-On";
+            this.checkBoxIsAddOn.UseVisualStyleBackColor = true;
+            // 
+            // materialLabel2
+            // 
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel2.Location = new System.Drawing.Point(200, 8);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(86, 19);
+            this.materialLabel2.TabIndex = 137;
+            this.materialLabel2.Text = "Stock Level:";
             // 
             // materialLabel1
             // 
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(550, 8);
+            this.materialLabel1.Location = new System.Drawing.Point(24, 8);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(50, 19);
-            this.materialLabel1.TabIndex = 142;
-            this.materialLabel1.Text = "Action:";
+            this.materialLabel1.Size = new System.Drawing.Size(86, 19);
+            this.materialLabel1.TabIndex = 137;
+            this.materialLabel1.Text = "Stock Level:";
             // 
-            // checkedListBoxAction
+            // checkedListBoxStockLevel
             // 
-            this.checkedListBoxAction.CheckOnClick = true;
-            this.checkedListBoxAction.FormattingEnabled = true;
-            this.checkedListBoxAction.Location = new System.Drawing.Point(550, 40);
-            this.checkedListBoxAction.Name = "checkedListBoxAction";
-            this.checkedListBoxAction.Size = new System.Drawing.Size(136, 109);
-            this.checkedListBoxAction.TabIndex = 141;
-            this.checkedListBoxAction.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxAction_SelectedIndexChanged);
-            // 
-            // chkListBoxColumnName
-            // 
-            this.chkListBoxColumnName.CheckOnClick = true;
-            this.chkListBoxColumnName.FormattingEnabled = true;
-            this.chkListBoxColumnName.Location = new System.Drawing.Point(358, 40);
-            this.chkListBoxColumnName.Name = "chkListBoxColumnName";
-            this.chkListBoxColumnName.Size = new System.Drawing.Size(176, 109);
-            this.chkListBoxColumnName.TabIndex = 140;
-            this.chkListBoxColumnName.SelectedIndexChanged += new System.EventHandler(this.chkListBoxColumnName_SelectedIndexChanged);
-            // 
-            // dateTimePickerEnd
-            // 
-            this.dateTimePickerEnd.CalendarFont = new System.Drawing.Font("Arial Narrow", 15.75F);
-            this.dateTimePickerEnd.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePickerEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerEnd.Location = new System.Drawing.Point(182, 40);
-            this.dateTimePickerEnd.Name = "dateTimePickerEnd";
-            this.dateTimePickerEnd.Size = new System.Drawing.Size(159, 32);
-            this.dateTimePickerEnd.TabIndex = 138;
-            this.dateTimePickerEnd.ValueChanged += new System.EventHandler(this.dateTimePickerEnd_ValueChanged);
-            // 
-            // materialLabel21
-            // 
-            this.materialLabel21.AutoSize = true;
-            this.materialLabel21.Depth = 0;
-            this.materialLabel21.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel21.Location = new System.Drawing.Point(360, 8);
-            this.materialLabel21.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel21.Name = "materialLabel21";
-            this.materialLabel21.Size = new System.Drawing.Size(129, 19);
-            this.materialLabel21.TabIndex = 139;
-            this.materialLabel21.Text = "Filter By Category:";
-            // 
-            // dateTimePickerStart
-            // 
-            this.dateTimePickerStart.CalendarFont = new System.Drawing.Font("Arial Narrow", 15.75F);
-            this.dateTimePickerStart.Font = new System.Drawing.Font("Arial Narrow", 15.75F);
-            this.dateTimePickerStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerStart.Location = new System.Drawing.Point(8, 40);
-            this.dateTimePickerStart.Name = "dateTimePickerStart";
-            this.dateTimePickerStart.Size = new System.Drawing.Size(159, 32);
-            this.dateTimePickerStart.TabIndex = 137;
-            this.dateTimePickerStart.ValueChanged += new System.EventHandler(this.dateTimePickerStart_ValueChanged);
+            this.checkedListBoxStockLevel.CheckOnClick = true;
+            this.checkedListBoxStockLevel.FormattingEnabled = true;
+            this.checkedListBoxStockLevel.Items.AddRange(new object[] {
+            "In Stock",
+            "Low Stock",
+            "Out of Stock"});
+            this.checkedListBoxStockLevel.Location = new System.Drawing.Point(24, 40);
+            this.checkedListBoxStockLevel.Name = "checkedListBoxStockLevel";
+            this.checkedListBoxStockLevel.Size = new System.Drawing.Size(136, 109);
+            this.checkedListBoxStockLevel.TabIndex = 136;
+            this.checkedListBoxStockLevel.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxStockLevel_SelectedIndexChanged);
             // 
             // panelItemList
             // 
             this.panelItemList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelItemList.Controls.Add(this.bindingNavigatorBatch);
-            this.panelItemList.Controls.Add(this.dataGridViewIngredientsLogs);
+            this.panelItemList.Controls.Add(this.bindingNavigatorAddOns);
+            this.panelItemList.Controls.Add(this.dataGridViewAddOnsList);
             this.panelItemList.Location = new System.Drawing.Point(3, 166);
             this.panelItemList.Name = "panelItemList";
             this.panelItemList.Size = new System.Drawing.Size(1127, 521);
             this.panelItemList.TabIndex = 106;
             // 
-            // bindingNavigatorBatch
+            // bindingNavigatorAddOns
             // 
-            this.bindingNavigatorBatch.AddNewItem = this.bindingNavigatorAddNewItem;
-            this.bindingNavigatorBatch.BackColor = System.Drawing.SystemColors.Control;
-            this.bindingNavigatorBatch.CountItem = this.bindingNavigatorCountItem;
-            this.bindingNavigatorBatch.DeleteItem = null;
-            this.bindingNavigatorBatch.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigatorAddOns.AddNewItem = this.bindingNavigatorAddNewItem;
+            this.bindingNavigatorAddOns.BackColor = System.Drawing.SystemColors.Control;
+            this.bindingNavigatorAddOns.CountItem = this.bindingNavigatorCountItem;
+            this.bindingNavigatorAddOns.DeleteItem = null;
+            this.bindingNavigatorAddOns.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bindingNavigatorMoveFirstItem,
             this.bindingNavigatorMovePreviousItem,
             this.bindingNavigatorSeparator,
@@ -265,16 +289,16 @@
             this.bindingNavigatorSeparator2,
             this.bindingNavigatorAddNewItem,
             this.bindingNavigatorDeleteItem});
-            this.bindingNavigatorBatch.Location = new System.Drawing.Point(0, 0);
-            this.bindingNavigatorBatch.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-            this.bindingNavigatorBatch.MoveLastItem = this.bindingNavigatorMoveLastItem;
-            this.bindingNavigatorBatch.MoveNextItem = this.bindingNavigatorMoveNextItem;
-            this.bindingNavigatorBatch.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-            this.bindingNavigatorBatch.Name = "bindingNavigatorBatch";
-            this.bindingNavigatorBatch.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigatorBatch.Size = new System.Drawing.Size(1125, 25);
-            this.bindingNavigatorBatch.TabIndex = 9;
-            this.bindingNavigatorBatch.Text = "bindingNavigator1";
+            this.bindingNavigatorAddOns.Location = new System.Drawing.Point(0, 0);
+            this.bindingNavigatorAddOns.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.bindingNavigatorAddOns.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.bindingNavigatorAddOns.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.bindingNavigatorAddOns.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.bindingNavigatorAddOns.Name = "bindingNavigatorAddOns";
+            this.bindingNavigatorAddOns.PositionItem = this.bindingNavigatorPositionItem;
+            this.bindingNavigatorAddOns.Size = new System.Drawing.Size(1125, 25);
+            this.bindingNavigatorAddOns.TabIndex = 9;
+            this.bindingNavigatorAddOns.Text = "bindingNavigator1";
             // 
             // bindingNavigatorAddNewItem
             // 
@@ -361,46 +385,47 @@
             this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorDeleteItem.Text = "Delete";
+            this.bindingNavigatorDeleteItem.Click += new System.EventHandler(this.bindingNavigatorDeleteItem_Click_1);
             // 
-            // dataGridViewIngredientsLogs
+            // dataGridViewAddOnsList
             // 
-            this.dataGridViewIngredientsLogs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewIngredientsLogs.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridViewIngredientsLogs.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewIngredientsLogs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridViewIngredientsLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewIngredientsLogs.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridViewIngredientsLogs.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dataGridViewIngredientsLogs.EnableHeadersVisualStyles = false;
-            this.dataGridViewIngredientsLogs.Location = new System.Drawing.Point(0, 30);
-            this.dataGridViewIngredientsLogs.Name = "dataGridViewIngredientsLogs";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewIngredientsLogs.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridViewIngredientsLogs.Size = new System.Drawing.Size(1125, 489);
-            this.dataGridViewIngredientsLogs.TabIndex = 5;
-            this.dataGridViewIngredientsLogs.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewIngredients_CellContentDoubleClick);
-            this.dataGridViewIngredientsLogs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewIngredients_CellDoubleClick);
-            this.dataGridViewIngredientsLogs.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewIngredients_ColumnHeaderMouseClick);
+            this.dataGridViewAddOnsList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewAddOnsList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridViewAddOnsList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewAddOnsList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewAddOnsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewAddOnsList.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewAddOnsList.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dataGridViewAddOnsList.EnableHeadersVisualStyles = false;
+            this.dataGridViewAddOnsList.Location = new System.Drawing.Point(0, 30);
+            this.dataGridViewAddOnsList.Name = "dataGridViewAddOnsList";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewAddOnsList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewAddOnsList.Size = new System.Drawing.Size(1125, 489);
+            this.dataGridViewAddOnsList.TabIndex = 5;
+            this.dataGridViewAddOnsList.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewIngredients_CellContentDoubleClick);
+            this.dataGridViewAddOnsList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewAddOnsList_CellDoubleClick);
+            this.dataGridViewAddOnsList.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewIngredients_ColumnHeaderMouseClick);
             // 
             // panel3
             // 
@@ -409,7 +434,7 @@
             this.panel3.Controls.Add(this.pbImportDataTo);
             this.panel3.Controls.Add(this.pBoxShowFilter);
             this.panel3.Controls.Add(this.btnHideFilters);
-            this.panel3.Controls.Add(this.txtBoxSearchLogs);
+            this.panel3.Controls.Add(this.textBoxSearchIngredients);
             this.panel3.Location = new System.Drawing.Point(20, 70);
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 8);
             this.panel3.Name = "panel3";
@@ -459,34 +484,34 @@
             this.btnHideFilters.UseVisualStyleBackColor = true;
             this.btnHideFilters.Click += new System.EventHandler(this.btnHideFilters_Click);
             // 
-            // txtBoxSearchLogs
+            // textBoxSearchIngredients
             // 
-            this.txtBoxSearchLogs.AnimateReadOnly = false;
-            this.txtBoxSearchLogs.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtBoxSearchLogs.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.txtBoxSearchLogs.Depth = 0;
-            this.txtBoxSearchLogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.txtBoxSearchLogs.HideSelection = true;
-            this.txtBoxSearchLogs.Hint = " Search for ingredients log";
-            this.txtBoxSearchLogs.LeadingIcon = null;
-            this.txtBoxSearchLogs.Location = new System.Drawing.Point(12, 8);
-            this.txtBoxSearchLogs.MaxLength = 32767;
-            this.txtBoxSearchLogs.MouseState = MaterialSkin.MouseState.OUT;
-            this.txtBoxSearchLogs.Name = "txtBoxSearchLogs";
-            this.txtBoxSearchLogs.PasswordChar = '\0';
-            this.txtBoxSearchLogs.PrefixSuffixText = null;
-            this.txtBoxSearchLogs.ReadOnly = false;
-            this.txtBoxSearchLogs.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtBoxSearchLogs.SelectedText = "";
-            this.txtBoxSearchLogs.SelectionLength = 0;
-            this.txtBoxSearchLogs.SelectionStart = 0;
-            this.txtBoxSearchLogs.ShortcutsEnabled = true;
-            this.txtBoxSearchLogs.Size = new System.Drawing.Size(328, 48);
-            this.txtBoxSearchLogs.TabIndex = 70;
-            this.txtBoxSearchLogs.TabStop = false;
-            this.txtBoxSearchLogs.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtBoxSearchLogs.TrailingIcon = null;
-            this.txtBoxSearchLogs.UseSystemPasswordChar = false;
+            this.textBoxSearchIngredients.AnimateReadOnly = false;
+            this.textBoxSearchIngredients.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.textBoxSearchIngredients.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.textBoxSearchIngredients.Depth = 0;
+            this.textBoxSearchIngredients.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.textBoxSearchIngredients.HideSelection = true;
+            this.textBoxSearchIngredients.Hint = " Search for ingredients";
+            this.textBoxSearchIngredients.LeadingIcon = null;
+            this.textBoxSearchIngredients.Location = new System.Drawing.Point(12, 8);
+            this.textBoxSearchIngredients.MaxLength = 32767;
+            this.textBoxSearchIngredients.MouseState = MaterialSkin.MouseState.OUT;
+            this.textBoxSearchIngredients.Name = "textBoxSearchIngredients";
+            this.textBoxSearchIngredients.PasswordChar = '\0';
+            this.textBoxSearchIngredients.PrefixSuffixText = null;
+            this.textBoxSearchIngredients.ReadOnly = false;
+            this.textBoxSearchIngredients.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.textBoxSearchIngredients.SelectedText = "";
+            this.textBoxSearchIngredients.SelectionLength = 0;
+            this.textBoxSearchIngredients.SelectionStart = 0;
+            this.textBoxSearchIngredients.ShortcutsEnabled = true;
+            this.textBoxSearchIngredients.Size = new System.Drawing.Size(328, 48);
+            this.textBoxSearchIngredients.TabIndex = 70;
+            this.textBoxSearchIngredients.TabStop = false;
+            this.textBoxSearchIngredients.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.textBoxSearchIngredients.TrailingIcon = null;
+            this.textBoxSearchIngredients.UseSystemPasswordChar = false;
             // 
             // panel1
             // 
@@ -505,12 +530,12 @@
             this.materialLabel4.Depth = 0;
             this.materialLabel4.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel4.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.materialLabel4.Location = new System.Drawing.Point(473, 10);
+            this.materialLabel4.Location = new System.Drawing.Point(514, 10);
             this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(213, 24);
+            this.materialLabel4.Size = new System.Drawing.Size(116, 24);
             this.materialLabel4.TabIndex = 0;
-            this.materialLabel4.Text = "Ingredient Changes Log";
+            this.materialLabel4.Text = "Add-Ons List";
             // 
             // panelExportButtons
             // 
@@ -549,34 +574,14 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // btnClearFilters
-            // 
-            this.btnClearFilters.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnClearFilters.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnClearFilters.Depth = 0;
-            this.btnClearFilters.HighEmphasis = true;
-            this.btnClearFilters.Icon = null;
-            this.btnClearFilters.Location = new System.Drawing.Point(992, 8);
-            this.btnClearFilters.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnClearFilters.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnClearFilters.Name = "btnClearFilters";
-            this.btnClearFilters.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnClearFilters.Size = new System.Drawing.Size(126, 36);
-            this.btnClearFilters.TabIndex = 144;
-            this.btnClearFilters.Text = "Clear filters";
-            this.btnClearFilters.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnClearFilters.UseAccentColor = true;
-            this.btnClearFilters.UseVisualStyleBackColor = true;
-            this.btnClearFilters.Click += new System.EventHandler(this.btnClearFilters_Click);
-            // 
-            // IngredientListLogsForm
+            // AddOnsListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1197, 718);
             this.Controls.Add(this.materialCard2);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.StatusAndActionBar_None;
-            this.Name = "IngredientListLogsForm";
+            this.Name = "AddOnsListForm";
             this.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.Text = "BatchListForm";
             this.Load += new System.EventHandler(this.BatchListForm_Load);
@@ -587,10 +592,10 @@
             this.panelFilteringComponents.PerformLayout();
             this.panelItemList.ResumeLayout(false);
             this.panelItemList.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorBatch)).EndInit();
-            this.bindingNavigatorBatch.ResumeLayout(false);
-            this.bindingNavigatorBatch.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIngredientsLogs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorAddOns)).EndInit();
+            this.bindingNavigatorAddOns.ResumeLayout(false);
+            this.bindingNavigatorAddOns.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAddOnsList)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImportDataTo)).EndInit();
@@ -612,12 +617,13 @@
         private System.Windows.Forms.PictureBox pictureBoxExportPdf;
         private System.Windows.Forms.Panel panel1;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
+        private MaterialSkin.Controls.MaterialFloatingActionButton floatingActionButtonAddIngredients;
         private System.Windows.Forms.Panel panel3;
-        private MaterialSkin.Controls.MaterialTextBox2 txtBoxSearchLogs;
+        private MaterialSkin.Controls.MaterialTextBox2 textBoxSearchIngredients;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Panel panelFilteringComponents;
         private System.Windows.Forms.Panel panelItemList;
-        private System.Windows.Forms.BindingNavigator bindingNavigatorBatch;
+        private System.Windows.Forms.BindingNavigator bindingNavigatorAddOns;
         private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
@@ -629,19 +635,18 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private System.Windows.Forms.DataGridView dataGridViewIngredientsLogs;
+        private System.Windows.Forms.DataGridView dataGridViewAddOnsList;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.PictureBox pBoxShowFilter;
         private MaterialSkin.Controls.MaterialButton btnHideFilters;
         private System.Windows.Forms.PictureBox pbImportDataTo;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private MaterialSkin.Controls.MaterialLabel materialLabel3;
+        private System.Windows.Forms.Button btnImportIngredients;
+        private System.Windows.Forms.Button btnExportSelectedItems;
+        private System.Windows.Forms.CheckBox checkBoxIsAddOn;
+        private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
-        private System.Windows.Forms.CheckedListBox checkedListBoxAction;
-        private System.Windows.Forms.CheckedListBox chkListBoxColumnName;
-        private System.Windows.Forms.DateTimePicker dateTimePickerEnd;
-        private MaterialSkin.Controls.MaterialLabel materialLabel21;
-        private System.Windows.Forms.DateTimePicker dateTimePickerStart;
+        private System.Windows.Forms.CheckedListBox checkedListBoxStockLevel;
         private MaterialSkin.Controls.MaterialButton btnClearFilters;
     }
 }

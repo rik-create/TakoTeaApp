@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
@@ -137,6 +138,54 @@ namespace TakoTea.View.Batches
                     DialogHelper.ShowError($"An error occurred: {ex.Message}");
                 }
             }
+        }
+
+        private void dataGridViewBatch_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewHelper.SortDataGridView(dataGridViewBatch, e.ColumnIndex);
+        }
+
+        private void dateTimePickerStart_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePickerEnd_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void FilterBatch()
+        {
+            try
+            {
+                DateTime startDate = dateTimePickerStartDate.Value.Date;
+                DateTime endDate = dateTimePickerEndDate.Value.Date.AddDays(1).AddTicks(-1); // End of the selected day
+
+                var filteredBatches = _batchRepo.GetAllBatches()
+                    .Cast<Batch>() // Cast objects to Batch type
+                    .Where(batch => batch.ExpirationDate >= startDate && batch.ExpirationDate <= endDate)
+                    .ToList();
+
+                // Assuming you have a DataGridView named dataGridViewBatch and a BindingSource named bindingSource1
+                DataGridViewHelper.UpdateGrid(dataGridViewBatch, bindingSource1, filteredBatches);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error filtering batches: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void dateTimePickerEndDate_ValueChanged(object sender, EventArgs e)
+        {
+            DateHelper.ValidateDateRange(dateTimePickerStartDate, dateTimePickerEndDate, "End date must be after start date.", 1);
+
+            FilterBatch();
+        }
+
+        private void dateTimePickerStartDate_ValueChanged(object sender, EventArgs e)
+        {
+            DateHelper.ValidateDateRange(dateTimePickerStartDate, dateTimePickerEndDate, "Start date must be before end date.", -1);
+
+            FilterBatch();
         }
 
     }

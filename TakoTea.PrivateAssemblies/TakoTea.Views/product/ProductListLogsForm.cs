@@ -29,7 +29,7 @@ namespace TakoTea.Product
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
              _context = new Entities();
             _dataAccessObject = new DataAccessObject();
-            _productService = new ProductsService();
+            _productService = new ProductsService(_context);
             LoadData();
             DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewProductVariantList);
 
@@ -40,7 +40,7 @@ namespace TakoTea.Product
 
 
             DataGridViewHelper.HideColumn(dataGridViewProductVariantList, "UpdatedBy");
-
+            btnClearFilters.Enabled = true;
 
             /*            DataGridViewHelper.AddButtonsToLastRow(dataGridViewProductVariantList, "IngredientsAndInstructions", "Ingredients & Instructions", handleIAndIButton);
             */
@@ -187,7 +187,7 @@ namespace TakoTea.Product
 
                     // Populate the new row with data from the selected ProductVariant
                     newRow.Cells[addProductModal.VariantName.Index].Value = productVariant.VariantName;
-                    newRow.Cells[addProductModal.ColumnProduct.Index].Value = (new ProductsService()).GetProductNameById(productVariant.ProductID); // Assuming you have a Product navigation property
+                    newRow.Cells[addProductModal.ColumnProduct.Index].Value = (new ProductsService(_context)).GetProductNameById(productVariant.ProductID); // Assuming you have a Product navigation property
                     newRow.Cells[addProductModal.ColumnSize.Index].Value = productVariant.Size;
                     newRow.Cells[addProductModal.ColumnPrice.Index].Value = productVariant.Price;
                     newRow.Cells[addProductModal.ColumnIngredients.Index].Value = productVariant.Ingredients;
@@ -243,6 +243,13 @@ namespace TakoTea.Product
             DateHelper.ValidateDateRange(dateTimePickerStart, dateTimePickerEnd, "Start date must be before end date.",1);
             FilterProductVariantsLogs();
 
+
+        }
+
+        private void btnClearFilters_Click(object sender, EventArgs e)
+        {
+            FilterPanelHelper.ResetFilters(dateTimePickerStart, dateTimePickerEnd, "ProductVariants", "Timestamp");
+            CheckedListBoxHelper.ClearAllCheckedListBoxesInPanel(panelFilteringComponents);
 
         }
     }

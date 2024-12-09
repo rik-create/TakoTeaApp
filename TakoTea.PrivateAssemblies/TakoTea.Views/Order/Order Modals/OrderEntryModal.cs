@@ -158,7 +158,7 @@ namespace TakoTea.Views.Order.Order_Modals
                 {
                     cmbSizes.SelectedIndex = 0;
                 }
-                string productName = (new ProductsService()).GetProductNameById(productVariant.ProductID);
+                string productName = (new ProductsService(_context)).GetProductNameById(productVariant.ProductID);
                 // Populate add-ons
                 PopulateAddOns(productName);
 

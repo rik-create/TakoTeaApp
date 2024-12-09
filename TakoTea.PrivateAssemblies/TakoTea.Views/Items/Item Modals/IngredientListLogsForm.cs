@@ -314,5 +314,11 @@ namespace TakoTea.Views.Items
             FilterIngredientsLogs();
 
         }
+
+        private void btnClearFilters_Click(object sender, EventArgs e)
+        {
+            FilterPanelHelper.ResetFilters(dateTimePickerStart, dateTimePickerEnd, "Ingredients", "Timestamp");
+            CheckedListBoxHelper.ClearAllCheckedListBoxesInPanel(panelFilteringComponents);
+        }
     }
 }

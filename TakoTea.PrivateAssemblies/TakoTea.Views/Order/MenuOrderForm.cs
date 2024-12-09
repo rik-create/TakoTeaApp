@@ -32,7 +32,7 @@ namespace TakoTea.View.Orders
             OrderEntryModal orderEntryModal = new OrderEntryModal(dataGridViewOrderList);
             orderEntryModal.Show();
             orderEntryModal.Close();
-            productsService = new ProductsService();
+            productsService = new ProductsService(context);
 
             dgvDraftOrders.CellClick += dgvDraftOrders_CellClick; // Register the event handler
 

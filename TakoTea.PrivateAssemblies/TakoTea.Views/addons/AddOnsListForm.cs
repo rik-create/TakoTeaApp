@@ -15,30 +15,37 @@ using TakoTea.Services;
 using TakoTea.View.Product.Product_Modals;
 using System.Linq;
 using static TakoTea.Repository.IngredientRepository;
+using TakoTea.Views.addons;
 namespace TakoTea.Views.Items
 {
-    public partial class IngredientListForm : MaterialForm
+    public partial class AddOnsListForm : MaterialForm
     {
         private readonly BatchRepository _batchRepo;
         private readonly DataAccessObject _dao;
         private readonly IngredientRepository ingredientRepository;
         private readonly InventoryService _inventoryService;
-        public IngredientListForm()
+        private readonly AddOnRepository _addOnRepository;
+
+        public AddOnsListForm()
         {
             InitializeComponent();
             ThemeConfigurator.ApplyDarkTheme(this);
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
             _dao = new DataAccessObject();
+            _addOnRepository = new AddOnRepository();
+
             _batchRepo = new BatchRepository(_dao);
             ingredientRepository = new IngredientRepository(new Entities()); // Fix: Pass an instance of Entities
-            DataGridViewHelper.ApplyDefaultStyles(dataGridViewIngredients);
-            dataGridViewIngredients.CellClick += dataGridViewIngredients_CellClick;
+            DataGridViewHelper.ApplyDefaultStyles(dataGridViewAddOnsList);
+            dataGridViewAddOnsList.CellClick += dataGridViewIngredients_CellClick;
             LoadData();
-            DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewIngredients);
+            DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewAddOnsList);
             _inventoryService = new InventoryService();
 
 
             bindingNavigatorDeleteItem.Click += bindingNavigatorDeleteItem_Click;
+            FormatDataGridView();
+
 
         }
 
@@ -70,7 +77,7 @@ namespace TakoTea.Views.Items
                     (((dynamic)ingredient).AddOn == "Yes") == isAddOnChecked);
 
                 // Assuming you have a DataGridView named "dataGridViewIngredients" and a BindingSource named "bindingSourceIngredients"
-                DataGridViewHelper.UpdateGrid(dataGridViewIngredients, bindingSource1, filteredIngredients.ToList());
+                DataGridViewHelper.UpdateGrid(dataGridViewAddOnsList, bindingSource1, filteredIngredients.ToList());
             }
             catch (Exception ex)
             {
@@ -79,41 +86,50 @@ namespace TakoTea.Views.Items
         }
         private void LoadData()
         {
-
-
             try
             {
-                // Get the stock data
-                var ingredients = ingredientRepository.GetAllIngredient();
-                if (ingredients == null)
-                {
-                    DialogHelper.ShowError("Failed to load ingredients data.");
-                    return;
-                }
+                var addOns = _addOnRepository.GetAllAddOns()
+                    .Select(a => new
+                    {
+                        a.Id,
+                        a.AddOnName,
+                        a.AdditionalPrice,
+                        a.UseForProductID,
+                        a.QuantityUsedPerProduct,
+                        a.IngredientID
+                        
+                    })
+                    .ToList();
 
+                bindingSource1.DataSource = addOns;
+                dataGridViewAddOnsList.DataSource = bindingSource1;
+                bindingNavigatorAddOns.BindingSource = bindingSource1;
 
-                DataGridViewHelper.BindDataToGridView(dataGridViewIngredients, bindingSource1, ingredients);
-                DataGridViewHelper.BindNavigatorToBindingSource(bindingNavigatorBatch, bindingSource1);
-                /*                DataGridViewHelper.HideColumn(dataGridViewIngredients, "IngredientID");
-                */
-
-                DataGridViewHelper.FormatColumnHeaders(dataGridViewIngredients);
-
+                dataGridViewAddOnsList.Columns["AdditionalPrice"].DefaultCellStyle.Format = "₱#,##0.00";
 
 
             }
             catch (Exception ex)
             {
-                DialogHelper.ShowError("Error loading data: " + ex.Message);
+                MessageBox.Show("Error loading add-ons: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void FormatDataGridView()
+        {
+            DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewAddOnsList);
+            DataGridViewHelper.HideColumn(dataGridViewAddOnsList, "Id");
+            DataGridViewHelper.HideColumn(dataGridViewAddOnsList, " ");
+            DataGridViewHelper.HideColumn(dataGridViewAddOnsList, "IngredientID");
+            DataGridViewHelper.FormatColumnHeaders(dataGridViewAddOnsList);
+        }
+
         private void dataGridViewIngredients_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dataGridViewIngredients.Columns["CreateBatchButtonColumn"].Index && e.RowIndex >= 0)
+            if (e.ColumnIndex == dataGridViewAddOnsList.Columns["CreateBatchButtonColumn"].Index && e.RowIndex >= 0)
             {
                 // Get the IngredientID and IngredientName from the selected row
-                int ingredientId = Convert.ToInt32(dataGridViewIngredients.Rows[e.RowIndex].Cells["IngredientID"].Value); // Assuming "IngredientID" is the column name
-                string ingredientName = dataGridViewIngredients.Rows[e.RowIndex].Cells["IngredientName"].Value.ToString(); // Assuming "IngredientName" is the column name
+                int ingredientId = Convert.ToInt32(dataGridViewAddOnsList.Rows[e.RowIndex].Cells["IngredientID"].Value); // Assuming "IngredientID" is the column name
+                string ingredientName = dataGridViewAddOnsList.Rows[e.RowIndex].Cells["IngredientName"].Value.ToString(); // Assuming "IngredientName" is the column name
                 
 
                 string  measuringUnit = ingredientRepository.GetAllIngredients().Find(x => x.IngredientID == ingredientId).MeasuringUnit;
@@ -146,7 +162,7 @@ namespace TakoTea.Views.Items
 
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
-            if (dataGridViewIngredients.SelectedRows.Count == 0)
+            if (dataGridViewAddOnsList.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Please select at least one row to delete.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -154,7 +170,7 @@ namespace TakoTea.Views.Items
 
             if (MessageBox.Show("Are you sure you want to delete the selected rows?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                foreach (DataGridViewRow row in dataGridViewIngredients.SelectedRows)
+                foreach (DataGridViewRow row in dataGridViewAddOnsList.SelectedRows)
                 {
                     int ingredientId = Convert.ToInt32(row.Cells["IngredientID"].Value);
 
@@ -177,7 +193,6 @@ namespace TakoTea.Views.Items
         {
             base.OnLoad(e);
             LoadData();
-            DataGridViewHelper.AddButtonToLastRow(dataGridViewIngredients, "CreateBatchButtonColumn", "Create Batch", ThemeConfigurator.GetAccentColor(), ThemeConfigurator.GetTextColor());
 
 
         }
@@ -186,7 +201,7 @@ namespace TakoTea.Views.Items
         private void HandleEditButtonClick(int rowIndex)
         {
             // Get the IngredientID from the selected row
-            int ingredientId = Convert.ToInt32(dataGridViewIngredients.Rows[rowIndex].Cells["IngredientID"].Value);
+            int ingredientId = Convert.ToInt32(dataGridViewAddOnsList.Rows[rowIndex].Cells["IngredientID"].Value);
 
             // Create and show the EditIngredientModal
             EditIngredientModal editIngredientModal = new EditIngredientModal(ingredientId); // Assuming EditIngredientModal has a constructor that takes the IngredientID
@@ -264,26 +279,7 @@ namespace TakoTea.Views.Items
 
         }
 
-        private void dataGridViewIngredients_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && !dataGridViewIngredients.Rows[e.RowIndex].IsNewRow)
-            {
-                try
-                {
-                    // Get the ProductVariantID from the selected row
-                    int IngredientId = Convert.ToInt32(dataGridViewIngredients.Rows[e.RowIndex].Cells["IngredientID"].Value); // Assuming "ProductVariantID" is the column name
-
-                    // Create and show the EditProductVariantModal
-                    EditIngredientModal editIngredientModal = new EditIngredientModal(IngredientId);
-                    editIngredientModal.ShowDialog();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error opening the edit modal: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
+     
         private void materialRadioButton2_CheckedChanged(object sender, EventArgs e)
         {
 
@@ -297,12 +293,43 @@ namespace TakoTea.Views.Items
 
         private void dataGridViewIngredients_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            DataGridViewHelper.SortDataGridView(dataGridViewIngredients, e.ColumnIndex);
+            DataGridViewHelper.SortDataGridView(dataGridViewAddOnsList, e.ColumnIndex);
         }
 
         private void btnClearFilters_Click(object sender, EventArgs e)
         {
             CheckedListBoxHelper.ClearAllCheckedListBoxesInPanel(panelFilteringComponents);
+        }
+
+        private void bindingNavigatorDeleteItem_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        // In the AddOnsListForm.cs file
+
+        private void dataGridViewAddOnsList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if a valid row is double-clicked
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && !dataGridViewAddOnsList.Rows[e.RowIndex].IsNewRow)
+            {
+                try
+                {
+                    // Get the AddOn ID from the selected row
+                    int addOnId = Convert.ToInt32(dataGridViewAddOnsList.Rows[e.RowIndex].Cells["Id"].Value);
+
+                    // Create and show the EditAddOnsModal 
+                    EditAddOnsModal editAddOnsModal = new EditAddOnsModal(addOnId);
+                    if (editAddOnsModal.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadData(); // Refresh the data after editing the add-on
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error opening edit modal: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

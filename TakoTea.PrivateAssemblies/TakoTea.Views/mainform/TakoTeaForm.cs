@@ -557,5 +557,17 @@ namespace TakoTea.Views.MainForm
             LoadFormIntoPanel("Batch", panelBatch);
 
         }
+
+        private void comboMealsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadFormIntoPanel("ComboMeal", panelProduct);
+
+        }
+
+        private void addOnsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadFormIntoPanel("AddOns", panelItem);
+
+        }
     }
 }

@@ -34,52 +34,53 @@
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.panel1 = new System.Windows.Forms.Panel();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            this.pbReloadForm = new System.Windows.Forms.PictureBox();
             this.materialLabel18 = new MaterialSkin.Controls.MaterialLabel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnAddComboMeal = new MaterialSkin.Controls.MaterialButton();
+            this.materialFloatingActionButtonCopyInformation = new MaterialSkin.Controls.MaterialFloatingActionButton();
+            this.floatingActionButtonAddProduct = new MaterialSkin.Controls.MaterialFloatingActionButton();
+            this.pbSearch = new System.Windows.Forms.PictureBox();
+            this.pBoxShowFilter = new System.Windows.Forms.PictureBox();
             this.btnHideFilters = new MaterialSkin.Controls.MaterialButton();
             this.txtBoxSearchForVariants = new MaterialSkin.Controls.MaterialTextBox2();
             this.panelFilteringComponents = new System.Windows.Forms.Panel();
+            this.btnClearFilters = new MaterialSkin.Controls.MaterialButton();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.checkedListBoxStockLevel = new System.Windows.Forms.CheckedListBox();
+            this.chkListBoxProducts = new System.Windows.Forms.CheckedListBox();
+            this.materialLabel21 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.dateTimePickerEnd = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
             this.panelItemList = new System.Windows.Forms.Panel();
             this.dataGridViewProductVariantListLogs = new System.Windows.Forms.DataGridView();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.checkedListBoxStockLevel = new System.Windows.Forms.CheckedListBox();
-            this.chkListBoxProducts = new System.Windows.Forms.CheckedListBox();
-            this.materialLabel21 = new MaterialSkin.Controls.MaterialLabel();
-            this.pbReloadForm = new System.Windows.Forms.PictureBox();
-            this.materialFloatingActionButtonCopyInformation = new MaterialSkin.Controls.MaterialFloatingActionButton();
-            this.floatingActionButtonAddProduct = new MaterialSkin.Controls.MaterialFloatingActionButton();
-            this.pbSearch = new System.Windows.Forms.PictureBox();
-            this.pBoxShowFilter = new System.Windows.Forms.PictureBox();
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.materialCard1.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbReloadForm)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxShowFilter)).BeginInit();
             this.panelFilteringComponents.SuspendLayout();
             this.panelItemList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProductVariantListLogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbReloadForm)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBoxShowFilter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -138,6 +139,17 @@
             this.materialLabel4.Size = new System.Drawing.Size(151, 24);
             this.materialLabel4.TabIndex = 0;
             this.materialLabel4.Text = "Product Variants";
+            // 
+            // pbReloadForm
+            // 
+            this.pbReloadForm.Image = global::TakoTea.Views.Properties.Resources.restart1;
+            this.pbReloadForm.Location = new System.Drawing.Point(1101, 5);
+            this.pbReloadForm.Name = "pbReloadForm";
+            this.pbReloadForm.Size = new System.Drawing.Size(27, 27);
+            this.pbReloadForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbReloadForm.TabIndex = 97;
+            this.pbReloadForm.TabStop = false;
+            this.pbReloadForm.Click += new System.EventHandler(this.pbReloadForm_Click);
             // 
             // materialLabel18
             // 
@@ -204,6 +216,54 @@
             this.btnAddComboMeal.UseVisualStyleBackColor = true;
             this.btnAddComboMeal.Click += new System.EventHandler(this.btnAddComboMeal_Click);
             // 
+            // materialFloatingActionButtonCopyInformation
+            // 
+            this.materialFloatingActionButtonCopyInformation.Depth = 0;
+            this.materialFloatingActionButtonCopyInformation.Icon = global::TakoTea.Views.Properties.Resources.copy_white;
+            this.materialFloatingActionButtonCopyInformation.Location = new System.Drawing.Point(856, 8);
+            this.materialFloatingActionButtonCopyInformation.Mini = true;
+            this.materialFloatingActionButtonCopyInformation.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialFloatingActionButtonCopyInformation.Name = "materialFloatingActionButtonCopyInformation";
+            this.materialFloatingActionButtonCopyInformation.Size = new System.Drawing.Size(40, 40);
+            this.materialFloatingActionButtonCopyInformation.TabIndex = 101;
+            this.materialFloatingActionButtonCopyInformation.UseVisualStyleBackColor = true;
+            this.materialFloatingActionButtonCopyInformation.Click += new System.EventHandler(this.materialFloatingActionButtonCopyInformation_Click);
+            // 
+            // floatingActionButtonAddProduct
+            // 
+            this.floatingActionButtonAddProduct.Depth = 0;
+            this.floatingActionButtonAddProduct.Icon = global::TakoTea.Views.Properties.Resources.plus_white;
+            this.floatingActionButtonAddProduct.Location = new System.Drawing.Point(904, 8);
+            this.floatingActionButtonAddProduct.Mini = true;
+            this.floatingActionButtonAddProduct.MouseState = MaterialSkin.MouseState.HOVER;
+            this.floatingActionButtonAddProduct.Name = "floatingActionButtonAddProduct";
+            this.floatingActionButtonAddProduct.Size = new System.Drawing.Size(40, 40);
+            this.floatingActionButtonAddProduct.TabIndex = 101;
+            this.floatingActionButtonAddProduct.UseVisualStyleBackColor = true;
+            this.floatingActionButtonAddProduct.Click += new System.EventHandler(this.floatingActionButtonAddProduct_Click);
+            // 
+            // pbSearch
+            // 
+            this.pbSearch.Image = global::TakoTea.Views.Properties.Resources.search;
+            this.pbSearch.Location = new System.Drawing.Point(296, 8);
+            this.pbSearch.Name = "pbSearch";
+            this.pbSearch.Size = new System.Drawing.Size(40, 40);
+            this.pbSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbSearch.TabIndex = 97;
+            this.pbSearch.TabStop = false;
+            this.pbSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // pBoxShowFilter
+            // 
+            this.pBoxShowFilter.Image = global::TakoTea.Views.Properties.Resources.filter;
+            this.pBoxShowFilter.Location = new System.Drawing.Point(414, 9);
+            this.pBoxShowFilter.Name = "pBoxShowFilter";
+            this.pBoxShowFilter.Size = new System.Drawing.Size(40, 40);
+            this.pBoxShowFilter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pBoxShowFilter.TabIndex = 96;
+            this.pBoxShowFilter.TabStop = false;
+            this.pBoxShowFilter.Click += new System.EventHandler(this.pBoxShowFilter_Click);
+            // 
             // btnHideFilters
             // 
             this.btnHideFilters.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -259,6 +319,7 @@
             // panelFilteringComponents
             // 
             this.panelFilteringComponents.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelFilteringComponents.Controls.Add(this.btnClearFilters);
             this.panelFilteringComponents.Controls.Add(this.materialLabel1);
             this.panelFilteringComponents.Controls.Add(this.checkedListBoxStockLevel);
             this.panelFilteringComponents.Controls.Add(this.chkListBoxProducts);
@@ -274,6 +335,72 @@
             this.panelFilteringComponents.TabIndex = 145;
             this.panelFilteringComponents.Visible = false;
             this.panelFilteringComponents.Paint += new System.Windows.Forms.PaintEventHandler(this.panelFilteringComponents_Paint);
+            // 
+            // btnClearFilters
+            // 
+            this.btnClearFilters.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnClearFilters.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnClearFilters.Depth = 0;
+            this.btnClearFilters.HighEmphasis = true;
+            this.btnClearFilters.Icon = null;
+            this.btnClearFilters.Location = new System.Drawing.Point(1000, 8);
+            this.btnClearFilters.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnClearFilters.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnClearFilters.Name = "btnClearFilters";
+            this.btnClearFilters.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnClearFilters.Size = new System.Drawing.Size(126, 36);
+            this.btnClearFilters.TabIndex = 141;
+            this.btnClearFilters.Text = "Clear filters";
+            this.btnClearFilters.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnClearFilters.UseAccentColor = true;
+            this.btnClearFilters.UseVisualStyleBackColor = true;
+            this.btnClearFilters.Click += new System.EventHandler(this.btnClearFilters_Click);
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel1.Location = new System.Drawing.Point(597, 16);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(86, 19);
+            this.materialLabel1.TabIndex = 140;
+            this.materialLabel1.Text = "Stock Level:";
+            // 
+            // checkedListBoxStockLevel
+            // 
+            this.checkedListBoxStockLevel.CheckOnClick = true;
+            this.checkedListBoxStockLevel.FormattingEnabled = true;
+            this.checkedListBoxStockLevel.Items.AddRange(new object[] {
+            "In Stock",
+            "Low Stock",
+            "Out of Stock"});
+            this.checkedListBoxStockLevel.Location = new System.Drawing.Point(597, 48);
+            this.checkedListBoxStockLevel.Name = "checkedListBoxStockLevel";
+            this.checkedListBoxStockLevel.Size = new System.Drawing.Size(136, 109);
+            this.checkedListBoxStockLevel.TabIndex = 139;
+            // 
+            // chkListBoxProducts
+            // 
+            this.chkListBoxProducts.CheckOnClick = true;
+            this.chkListBoxProducts.FormattingEnabled = true;
+            this.chkListBoxProducts.Location = new System.Drawing.Point(405, 48);
+            this.chkListBoxProducts.Name = "chkListBoxProducts";
+            this.chkListBoxProducts.Size = new System.Drawing.Size(176, 109);
+            this.chkListBoxProducts.TabIndex = 138;
+            // 
+            // materialLabel21
+            // 
+            this.materialLabel21.AutoSize = true;
+            this.materialLabel21.Depth = 0;
+            this.materialLabel21.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel21.Location = new System.Drawing.Point(407, 16);
+            this.materialLabel21.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel21.Name = "materialLabel21";
+            this.materialLabel21.Size = new System.Drawing.Size(129, 19);
+            this.materialLabel21.TabIndex = 137;
+            this.materialLabel21.Text = "Filter By Category:";
             // 
             // materialLabel3
             // 
@@ -388,12 +515,39 @@
             this.bindingNavigator1.TabIndex = 9;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "Add new";
+            // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
             this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
             this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
+            // 
+            // bindingNavigatorMoveFirstItem
+            // 
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem.Text = "Move first";
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
             // 
             // bindingNavigatorSeparator
             // 
@@ -415,143 +569,6 @@
             this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
             this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // materialLabel1
-            // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(597, 16);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(86, 19);
-            this.materialLabel1.TabIndex = 140;
-            this.materialLabel1.Text = "Stock Level:";
-            // 
-            // checkedListBoxStockLevel
-            // 
-            this.checkedListBoxStockLevel.CheckOnClick = true;
-            this.checkedListBoxStockLevel.FormattingEnabled = true;
-            this.checkedListBoxStockLevel.Items.AddRange(new object[] {
-            "In Stock",
-            "Low Stock",
-            "Out of Stock"});
-            this.checkedListBoxStockLevel.Location = new System.Drawing.Point(597, 48);
-            this.checkedListBoxStockLevel.Name = "checkedListBoxStockLevel";
-            this.checkedListBoxStockLevel.Size = new System.Drawing.Size(136, 109);
-            this.checkedListBoxStockLevel.TabIndex = 139;
-            // 
-            // chkListBoxProducts
-            // 
-            this.chkListBoxProducts.CheckOnClick = true;
-            this.chkListBoxProducts.FormattingEnabled = true;
-            this.chkListBoxProducts.Location = new System.Drawing.Point(405, 48);
-            this.chkListBoxProducts.Name = "chkListBoxProducts";
-            this.chkListBoxProducts.Size = new System.Drawing.Size(176, 109);
-            this.chkListBoxProducts.TabIndex = 138;
-            // 
-            // materialLabel21
-            // 
-            this.materialLabel21.AutoSize = true;
-            this.materialLabel21.Depth = 0;
-            this.materialLabel21.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel21.Location = new System.Drawing.Point(407, 16);
-            this.materialLabel21.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel21.Name = "materialLabel21";
-            this.materialLabel21.Size = new System.Drawing.Size(129, 19);
-            this.materialLabel21.TabIndex = 137;
-            this.materialLabel21.Text = "Filter By Category:";
-            // 
-            // pbReloadForm
-            // 
-            this.pbReloadForm.Image = global::TakoTea.Views.Properties.Resources.restart1;
-            this.pbReloadForm.Location = new System.Drawing.Point(1101, 5);
-            this.pbReloadForm.Name = "pbReloadForm";
-            this.pbReloadForm.Size = new System.Drawing.Size(27, 27);
-            this.pbReloadForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbReloadForm.TabIndex = 97;
-            this.pbReloadForm.TabStop = false;
-            this.pbReloadForm.Click += new System.EventHandler(this.pbReloadForm_Click);
-            // 
-            // materialFloatingActionButtonCopyInformation
-            // 
-            this.materialFloatingActionButtonCopyInformation.Depth = 0;
-            this.materialFloatingActionButtonCopyInformation.Icon = global::TakoTea.Views.Properties.Resources.copy_white;
-            this.materialFloatingActionButtonCopyInformation.Location = new System.Drawing.Point(856, 8);
-            this.materialFloatingActionButtonCopyInformation.Mini = true;
-            this.materialFloatingActionButtonCopyInformation.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialFloatingActionButtonCopyInformation.Name = "materialFloatingActionButtonCopyInformation";
-            this.materialFloatingActionButtonCopyInformation.Size = new System.Drawing.Size(40, 40);
-            this.materialFloatingActionButtonCopyInformation.TabIndex = 101;
-            this.materialFloatingActionButtonCopyInformation.UseVisualStyleBackColor = true;
-            this.materialFloatingActionButtonCopyInformation.Click += new System.EventHandler(this.materialFloatingActionButtonCopyInformation_Click);
-            // 
-            // floatingActionButtonAddProduct
-            // 
-            this.floatingActionButtonAddProduct.Depth = 0;
-            this.floatingActionButtonAddProduct.Icon = global::TakoTea.Views.Properties.Resources.plus_white;
-            this.floatingActionButtonAddProduct.Location = new System.Drawing.Point(904, 8);
-            this.floatingActionButtonAddProduct.Mini = true;
-            this.floatingActionButtonAddProduct.MouseState = MaterialSkin.MouseState.HOVER;
-            this.floatingActionButtonAddProduct.Name = "floatingActionButtonAddProduct";
-            this.floatingActionButtonAddProduct.Size = new System.Drawing.Size(40, 40);
-            this.floatingActionButtonAddProduct.TabIndex = 101;
-            this.floatingActionButtonAddProduct.UseVisualStyleBackColor = true;
-            this.floatingActionButtonAddProduct.Click += new System.EventHandler(this.floatingActionButtonAddProduct_Click);
-            // 
-            // pbSearch
-            // 
-            this.pbSearch.Image = global::TakoTea.Views.Properties.Resources.search;
-            this.pbSearch.Location = new System.Drawing.Point(296, 8);
-            this.pbSearch.Name = "pbSearch";
-            this.pbSearch.Size = new System.Drawing.Size(40, 40);
-            this.pbSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbSearch.TabIndex = 97;
-            this.pbSearch.TabStop = false;
-            this.pbSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // pBoxShowFilter
-            // 
-            this.pBoxShowFilter.Image = global::TakoTea.Views.Properties.Resources.filter;
-            this.pBoxShowFilter.Location = new System.Drawing.Point(414, 9);
-            this.pBoxShowFilter.Name = "pBoxShowFilter";
-            this.pBoxShowFilter.Size = new System.Drawing.Size(40, 40);
-            this.pBoxShowFilter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pBoxShowFilter.TabIndex = 96;
-            this.pBoxShowFilter.TabStop = false;
-            this.pBoxShowFilter.Click += new System.EventHandler(this.pBoxShowFilter_Click);
-            // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "Add new";
-            // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveFirstItem.Text = "Move first";
-            // 
-            // bindingNavigatorMovePreviousItem
-            // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
-            // 
             // bindingNavigatorMoveNextItem
             // 
             this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -569,6 +586,11 @@
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveLastItem.Text = "Move last";
+            // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // bindingNavigatorDeleteItem
             // 
@@ -596,9 +618,12 @@
             this.materialCard1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbReloadForm)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxShowFilter)).EndInit();
             this.panelFilteringComponents.ResumeLayout(false);
             this.panelFilteringComponents.PerformLayout();
             this.panelItemList.ResumeLayout(false);
@@ -607,9 +632,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbReloadForm)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBoxShowFilter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -654,5 +676,6 @@
         private System.Windows.Forms.CheckedListBox checkedListBoxStockLevel;
         private System.Windows.Forms.CheckedListBox chkListBoxProducts;
         private MaterialSkin.Controls.MaterialLabel materialLabel21;
+        private MaterialSkin.Controls.MaterialButton btnClearFilters;
     }
 }

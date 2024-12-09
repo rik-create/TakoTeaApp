@@ -25,7 +25,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnRemoveImage = new System.Windows.Forms.Button();
@@ -34,7 +34,6 @@
             this.flowLayoutPanelDgViews = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlTopButtons = new System.Windows.Forms.Panel();
             this.textBoxSearchVariants = new System.Windows.Forms.TextBox();
-            this.pbSearch = new System.Windows.Forms.PictureBox();
             this.numericUpDownVariantQuantity = new System.Windows.Forms.NumericUpDown();
             this.btnChooseProductVariant = new MaterialSkin.Controls.MaterialButton();
             this.buttonCloseIngredientsList = new System.Windows.Forms.Button();
@@ -73,7 +72,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbComboMealImage)).BeginInit();
             this.flowLayoutPanelDgViews.SuspendLayout();
             this.pnlTopButtons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownVariantQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgViewAddComboMeal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDiscountPercent)).BeginInit();
@@ -168,7 +166,6 @@
             // 
             this.pnlTopButtons.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlTopButtons.Controls.Add(this.textBoxSearchVariants);
-            this.pnlTopButtons.Controls.Add(this.pbSearch);
             this.pnlTopButtons.Controls.Add(this.numericUpDownVariantQuantity);
             this.pnlTopButtons.Controls.Add(this.btnChooseProductVariant);
             this.pnlTopButtons.Controls.Add(this.buttonCloseIngredientsList);
@@ -188,18 +185,6 @@
             this.textBoxSearchVariants.TabIndex = 105;
             this.textBoxSearchVariants.Visible = false;
             this.textBoxSearchVariants.TextChanged += new System.EventHandler(this.textBoxSearchVariants_TextChanged);
-            // 
-            // pbSearch
-            // 
-            this.pbSearch.Image = global::TakoTea.Views.Properties.Resources.search;
-            this.pbSearch.Location = new System.Drawing.Point(120, 16);
-            this.pbSearch.Name = "pbSearch";
-            this.pbSearch.Size = new System.Drawing.Size(24, 24);
-            this.pbSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbSearch.TabIndex = 104;
-            this.pbSearch.TabStop = false;
-            this.pbSearch.Visible = false;
-            this.pbSearch.Click += new System.EventHandler(this.pbSearch_Click);
             // 
             // numericUpDownVariantQuantity
             // 
@@ -296,14 +281,14 @@
             // 
             this.dgViewAddComboMeal.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgViewAddComboMeal.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.IndianRed;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgViewAddComboMeal.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.IndianRed;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgViewAddComboMeal.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgViewAddComboMeal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgViewAddComboMeal.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.VariantID,
@@ -527,7 +512,8 @@
             this.lblTotalVariantsInDg.Name = "lblTotalVariantsInDg";
             this.lblTotalVariantsInDg.Size = new System.Drawing.Size(107, 17);
             this.lblTotalVariantsInDg.TabIndex = 123;
-            this.lblTotalVariantsInDg.Text = "Total Variants: 5";
+            this.lblTotalVariantsInDg.Text = "Total Variants: 0";
+            this.lblTotalVariantsInDg.Click += new System.EventHandler(this.lblTotalVariantsInDg_Click);
             // 
             // btnSaveCombomeal
             // 
@@ -623,7 +609,6 @@
             this.flowLayoutPanelDgViews.ResumeLayout(false);
             this.pnlTopButtons.ResumeLayout(false);
             this.pnlTopButtons.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownVariantQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgViewAddComboMeal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDiscountPercent)).EndInit();
@@ -659,7 +644,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelDgViews;
         private System.Windows.Forms.Panel pnlTopButtons;
         private System.Windows.Forms.TextBox textBoxSearchVariants;
-        private System.Windows.Forms.PictureBox pbSearch;
         protected MaterialSkin.Controls.MaterialButton btnChooseProductVariant;
         private System.Windows.Forms.Button buttonCloseIngredientsList;
         private System.Windows.Forms.Button btnUndo;

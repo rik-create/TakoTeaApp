@@ -340,6 +340,18 @@
     <Compile Include="addons\AddAddOnsModal.Designer.cs">
       <DependentUpon>AddAddOnsModal.cs</DependentUpon>
     </Compile>
+    <Compile Include="addons\AddOnsListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addons\AddOnsListForm.Designer.cs">
+      <DependentUpon>AddOnsListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addons\EditAddOnsModal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addons\EditAddOnsModal.Designer.cs">
+      <DependentUpon>EditAddOnsModal.cs</DependentUpon>
+    </Compile>
     <Compile Include="batches\Batch Modals\BatchListLogsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -363,6 +375,18 @@
     </Compile>
     <Compile Include="batches\BatchListForm.Designer.cs">
       <DependentUpon>BatchListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComboMealForms\ComboMealDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComboMealForms\ComboMealDetailsForm.Designer.cs">
+      <DependentUpon>ComboMealDetailsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComboMealForms\ComboMealListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComboMealForms\ComboMealListForm.Designer.cs">
+      <DependentUpon>ComboMealListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Custom Controls\UserControl1.cs">
       <SubType>UserControl</SubType>
@@ -599,6 +623,9 @@
     <EmbeddedResource Include="addons\AddAddOnsModal.resx">
       <DependentUpon>AddAddOnsModal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="addons\AddOnsListForm.resx">
+      <DependentUpon>AddOnsListForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="batches\Batch Modals\BatchListLogsForm.resx">
       <DependentUpon>BatchListLogsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -610,6 +637,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="batches\BatchListForm.resx">
       <DependentUpon>BatchListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComboMealForms\ComboMealListForm.resx">
+      <DependentUpon>ComboMealListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard\DashboardForm.resx">
       <DependentUpon>DashboardForm.cs</DependentUpon>

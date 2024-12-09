@@ -574,11 +574,36 @@ namespace TakoTea.Helpers
                     var entity = context.Set<T>().Find(id);
                     if (entity != null)
                     {
+                        Type entityType = typeof(T);
+
+                        // Get the properties of the entity
+                        var properties = entityType.GetProperties();
+
+                        // Build the log message dynamically
+                        string logMessage = $"Record deleted: ";
+                        foreach (var property in properties)
+                        {
+                            string propertyName = property.Name;
+                            object propertyValue = property.GetValue(entity);
+                            logMessage += $"{propertyName}: {propertyValue}, ";
+                        }
+                        LoggingHelper.LogChange(
+                            entityType.Name,          // Table name (e.g., "Batch")
+                            id,                      // Record ID
+                            "",                      // Column name (not applicable for delete)
+                            "",                      // Old value (not applicable for delete)
+                            "",                      // New value (not applicable for delete)
+                            "Delete",                // Action
+                            logMessage,              // Description with all property values
+                            ""                       // Additional info (if needed)
+                        );
+
+             
                         context.Set<T>().Remove(entity);
                     }
                 }
                 context.SaveChanges();
-
+         
 
 
                 // Refresh the DataGridView (you might need to adjust this based on your actual refresh logic)

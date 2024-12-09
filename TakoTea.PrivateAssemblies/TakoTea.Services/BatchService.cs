@@ -19,7 +19,7 @@ namespace TakoTea.Services
                 context.Batches.Add(batch);
                 context.SaveChanges();
                 LoggingHelper.LogChange(
-                    "Batches",                // Table name
+                    "Batch",                // Table name
                     batch.BatchID,            // Record ID (assuming BatchID is auto-generated)
                     "New Batch",              // Column name (or any descriptive text)
                     null,                     // Old value (null for new batch)
@@ -80,7 +80,7 @@ namespace TakoTea.Services
                         context.Batches.Remove(batch);
                         context.SaveChanges();
                         LoggingHelper.LogChange(
-                            "Batches",                // Table name
+                            "Batch",                // Table name
                             batchId,                  // Record ID
                             "Deleted Batch",          // Column name (or any descriptive text)
                             batch.ToString(),         // Old value

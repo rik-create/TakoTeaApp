@@ -12,9 +12,7 @@
         <AssociationConnector Association="TakoTeaModel.FK__Ingredien__Produ__60A75C0F" ManuallyRouted="false" />
         <AssociationConnector Association="TakoTeaModel.FK__Product__Product__4CA06362" ManuallyRouted="false" />
         <EntityTypeShape EntityType="TakoTeaModel.ProductVariantIngredient" Width="1.5" PointX="8.25" PointY="5.5" />
-        <EntityTypeShape EntityType="TakoTeaModel.ComboMeal" Width="1.5" PointX="8.375" PointY="1" />
         <EntityTypeShape EntityType="TakoTeaModel.ComboMealVariant" Width="1.5" PointX="10.625" PointY="1" />
-        <AssociationConnector Association="TakoTeaModel.FK__ComboMeal__Combo__14270015" />
         <EntityTypeShape EntityType="TakoTeaModel.DraftOrder" Width="1.5" PointX="10.75" PointY="4.375" />
         <EntityTypeShape EntityType="TakoTeaModel.OrderItem" Width="1.5" PointX="10.625" PointY="13.25" />
         <EntityTypeShape EntityType="TakoTeaModel.Receipt" Width="1.5" PointX="10.625" PointY="9.125" />
@@ -37,15 +35,16 @@
         <AssociationConnector Association="TakoTeaModel.FK_AddOns_Product" />
         <EntityTypeShape EntityType="TakoTeaModel.IngredientChangeLog" Width="1.5" PointX="3" PointY="15.375" />
         <AssociationConnector Association="TakoTeaModel.FK__Ingredien__Ingre__756D6ECB" />
-        <EntityTypeShape EntityType="TakoTeaModel.Batch" Width="1.5" PointX="3" PointY="6.75" />
-        <AssociationConnector Association="TakoTeaModel.FK__Batch__Ingredien__6CD828CA" />
-        <AssociationConnector Association="TakoTeaModel.FK__StockLeve__Batch__58D1301D" />
         <EntityTypeShape EntityType="TakoTeaModel.PaymentMethod" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="TakoTeaModel.User" Width="1.5" PointX="13.75" PointY="0.75" />
         <EntityTypeShape EntityType="TakoTeaModel.Setting" Width="1.5" PointX="13.375" PointY="8.75" />
         <EntityTypeShape EntityType="TakoTeaModel.ActivityLog" Width="1.5" PointX="13.375" PointY="12.75" />
         <EntityTypeShape EntityType="TakoTeaModel.sysdiagram" Width="1.5" PointX="16" PointY="13.75" />
         <EntityTypeShape EntityType="TakoTeaModel.Log" Width="1.5" PointX="16.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TakoTeaModel.Batch" Width="1.5" PointX="3" PointY="6" />
+        <AssociationConnector Association="TakoTeaModel.FK__Batch__Ingredien__6CD828CA" />
+        <EntityTypeShape EntityType="TakoTeaModel.ComboMeal" Width="1.5" PointX="6.375" PointY="1" />
+        <AssociationConnector Association="TakoTeaModel.FK_ComboMealDetails_ComboMeals" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -108,7 +108,7 @@ namespace TakoTea.Views.Batches
                 batchService.AddBatch(batch);
 
                 LoggingHelper.LogChange(
-                    "Batches",                // Table name
+                    "Batch",                // Table name
                     batch.BatchID,            // Record ID (assuming BatchID is auto-generated)
                     "New Batch",              // Column name (or any descriptive text)
                     null,                     // Old value (null for new batch)

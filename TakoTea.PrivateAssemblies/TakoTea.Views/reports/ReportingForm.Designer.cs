@@ -80,6 +80,7 @@ namespace TakoTea.Views.reports
             this.lstReportTypes = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.btnClearFilters = new MaterialSkin.Controls.MaterialButton();
             this.materialCard1.SuspendLayout();
             this.panelReports.SuspendLayout();
             this.groupBoxDateRange.SuspendLayout();
@@ -90,6 +91,7 @@ namespace TakoTea.Views.reports
             // materialCard1
             // 
             this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard1.Controls.Add(this.btnClearFilters);
             this.materialCard1.Controls.Add(this.panelReports);
             this.materialCard1.Controls.Add(this.btnGenerateReport);
             this.materialCard1.Controls.Add(this.groupBoxDateRange);
@@ -205,11 +207,11 @@ namespace TakoTea.Views.reports
             this.cboDateRange.FormattingEnabled = true;
             this.cboDateRange.IntegralHeight = false;
             this.cboDateRange.ItemHeight = 29;
-            this.cboDateRange.Location = new System.Drawing.Point(190, 58);
+            this.cboDateRange.Location = new System.Drawing.Point(432, 56);
             this.cboDateRange.MaxDropDownItems = 4;
             this.cboDateRange.MouseState = MaterialSkin.MouseState.OUT;
             this.cboDateRange.Name = "cboDateRange";
-            this.cboDateRange.Size = new System.Drawing.Size(216, 35);
+            this.cboDateRange.Size = new System.Drawing.Size(136, 35);
             this.cboDateRange.StartIndex = 0;
             this.cboDateRange.TabIndex = 113;
             this.cboDateRange.UseTallSize = false;
@@ -261,10 +263,10 @@ namespace TakoTea.Views.reports
             // dtpEndDate
             // 
             this.dtpEndDate.Checked = false;
-            this.dtpEndDate.Location = new System.Drawing.Point(317, 22);
+            this.dtpEndDate.Location = new System.Drawing.Point(224, 64);
             this.dtpEndDate.Name = "dtpEndDate";
             this.dtpEndDate.ShowCheckBox = true;
-            this.dtpEndDate.Size = new System.Drawing.Size(301, 20);
+            this.dtpEndDate.Size = new System.Drawing.Size(192, 20);
             this.dtpEndDate.TabIndex = 3;
             this.dtpEndDate.ValueChanged += new System.EventHandler(this.dtpEndDate_ValueChanged);
             // 
@@ -273,7 +275,7 @@ namespace TakoTea.Views.reports
             this.materialLabel3.AutoSize = true;
             this.materialLabel3.Depth = 0;
             this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel3.Location = new System.Drawing.Point(317, 3);
+            this.materialLabel3.Location = new System.Drawing.Point(224, 45);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
             this.materialLabel3.Size = new System.Drawing.Size(65, 19);
@@ -283,10 +285,10 @@ namespace TakoTea.Views.reports
             // dtpStartDate
             // 
             this.dtpStartDate.Checked = false;
-            this.dtpStartDate.Location = new System.Drawing.Point(9, 22);
+            this.dtpStartDate.Location = new System.Drawing.Point(12, 64);
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.ShowCheckBox = true;
-            this.dtpStartDate.Size = new System.Drawing.Size(301, 20);
+            this.dtpStartDate.Size = new System.Drawing.Size(204, 20);
             this.dtpStartDate.TabIndex = 1;
             this.dtpStartDate.ValueChanged += new System.EventHandler(this.dtpStartDate_ValueChanged);
             // 
@@ -295,7 +297,7 @@ namespace TakoTea.Views.reports
             this.materialLabel2.AutoSize = true;
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.Location = new System.Drawing.Point(9, 3);
+            this.materialLabel2.Location = new System.Drawing.Point(12, 45);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
             this.materialLabel2.Size = new System.Drawing.Size(72, 19);
@@ -348,6 +350,26 @@ namespace TakoTea.Views.reports
             this.materialLabel1.Size = new System.Drawing.Size(153, 24);
             this.materialLabel1.TabIndex = 0;
             this.materialLabel1.Text = "TakoTea Reports";
+            // 
+            // btnClearFilters
+            // 
+            this.btnClearFilters.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnClearFilters.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnClearFilters.Depth = 0;
+            this.btnClearFilters.Enabled = false;
+            this.btnClearFilters.HighEmphasis = true;
+            this.btnClearFilters.Icon = null;
+            this.btnClearFilters.Location = new System.Drawing.Point(808, 64);
+            this.btnClearFilters.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnClearFilters.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnClearFilters.Name = "btnClearFilters";
+            this.btnClearFilters.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnClearFilters.Size = new System.Drawing.Size(126, 36);
+            this.btnClearFilters.TabIndex = 128;
+            this.btnClearFilters.Text = "Clear filters";
+            this.btnClearFilters.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnClearFilters.UseAccentColor = true;
+            this.btnClearFilters.UseVisualStyleBackColor = true;
             // 
             // ReportingForm
             // 
@@ -406,6 +428,7 @@ namespace TakoTea.Views.reports
         private Label lblSearchHint;
         private Label lblFilterHint;
         private MaterialComboBox cboDateRange;
+        private MaterialButton btnClearFilters;
     }
 
 }

@@ -42,7 +42,7 @@ namespace TakoTea.View.Items.Item_Modals
             ThemeConfigurator.ApplyDarkTheme(this);
             ModalSettingsConfigurator.ApplyStandardModalSettings(this);
             PopulateAllergens(materialCheckedListBoxAllergens);
-            productsService = new ProductsService();
+            productsService = new ProductsService(context);
             PopulateComboboxUseFor();
             btnConfirmEdit.Click += btnConfirmEdit_Click;
             btnCancelEdit.Click += btnCancelEdit_Click;

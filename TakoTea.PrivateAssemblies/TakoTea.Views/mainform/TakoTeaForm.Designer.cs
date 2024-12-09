@@ -34,6 +34,7 @@
             this.menuStripProduct = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItemVariants = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemProducts = new System.Windows.Forms.ToolStripMenuItem();
+            this.variantsChangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelProduct = new System.Windows.Forms.Panel();
             this.tabPageSales = new System.Windows.Forms.TabPage();
             this.panelSales = new System.Windows.Forms.Panel();
@@ -42,9 +43,13 @@
             this.menuStripItem = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItemList = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemCategory = new System.Windows.Forms.ToolStripMenuItem();
+            this.ingredientChangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageStock = new System.Windows.Forms.TabPage();
             this.panelStock = new System.Windows.Forms.Panel();
             this.tabPageBatch = new System.Windows.Forms.TabPage();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.batchListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.batchChangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelBatch = new System.Windows.Forms.Panel();
             this.tabPageReports = new System.Windows.Forms.TabPage();
             this.panelReports = new System.Windows.Forms.Panel();
@@ -57,14 +62,11 @@
             this.toolStripBtnAddProduct = new System.Windows.Forms.ToolStripButton();
             this.buttonQuickAccess = new MaterialSkin.Controls.MaterialButton();
             this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
+            this.comboMealsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.takoTeaLabel1 = new TakoTea.Controls.TakoTeaLabel();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.variantsChangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ingredientChangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.batchListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.batchChangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addOnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.materialTabControl1.SuspendLayout();
             this.tabPageDashboard.SuspendLayout();
             this.tabPageProduct.SuspendLayout();
@@ -74,9 +76,9 @@
             this.menuStripItem.SuspendLayout();
             this.tabPageStock.SuspendLayout();
             this.tabPageBatch.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.tabPageReports.SuspendLayout();
             this.toolStripQuickAccess.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // materialTabControl1
@@ -142,8 +144,9 @@
             this.menuStripProduct.BackColor = System.Drawing.Color.WhiteSmoke;
             this.menuStripProduct.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.menuStripProduct.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemVariants,
             this.toolStripMenuItemProducts,
+            this.toolStripMenuItemVariants,
+            this.comboMealsToolStripMenuItem,
             this.variantsChangesToolStripMenuItem});
             this.menuStripProduct.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStripProduct.Location = new System.Drawing.Point(3, 3);
@@ -165,6 +168,13 @@
             this.toolStripMenuItemProducts.Size = new System.Drawing.Size(66, 20);
             this.toolStripMenuItemProducts.Text = "Products";
             this.toolStripMenuItemProducts.Click += new System.EventHandler(this.toolStripMenuItemProducts_Click_1);
+            // 
+            // variantsChangesToolStripMenuItem
+            // 
+            this.variantsChangesToolStripMenuItem.Name = "variantsChangesToolStripMenuItem";
+            this.variantsChangesToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
+            this.variantsChangesToolStripMenuItem.Text = "Variants Changes";
+            this.variantsChangesToolStripMenuItem.Click += new System.EventHandler(this.variantsChangesToolStripMenuItem_Click);
             // 
             // panelProduct
             // 
@@ -224,7 +234,8 @@
             this.menuStripItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemList,
             this.toolStripMenuItemCategory,
-            this.ingredientChangesToolStripMenuItem});
+            this.ingredientChangesToolStripMenuItem,
+            this.addOnsToolStripMenuItem});
             this.menuStripItem.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStripItem.Location = new System.Drawing.Point(3, 3);
             this.menuStripItem.Name = "menuStripItem";
@@ -243,6 +254,13 @@
             this.toolStripMenuItemCategory.Name = "toolStripMenuItemCategory";
             this.toolStripMenuItemCategory.Size = new System.Drawing.Size(94, 20);
             this.toolStripMenuItemCategory.Text = "Item Category";
+            // 
+            // ingredientChangesToolStripMenuItem
+            // 
+            this.ingredientChangesToolStripMenuItem.Name = "ingredientChangesToolStripMenuItem";
+            this.ingredientChangesToolStripMenuItem.Size = new System.Drawing.Size(122, 20);
+            this.ingredientChangesToolStripMenuItem.Text = "Ingredient Changes";
+            this.ingredientChangesToolStripMenuItem.Click += new System.EventHandler(this.ingredientChangesToolStripMenuItem_Click);
             // 
             // tabPageStock
             // 
@@ -276,6 +294,34 @@
             this.tabPageBatch.TabIndex = 5;
             this.tabPageBatch.Text = "Batch Management";
             this.tabPageBatch.UseVisualStyleBackColor = true;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.batchListToolStripMenuItem,
+            this.batchChangesToolStripMenuItem});
+            this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1302, 24);
+            this.menuStrip1.TabIndex = 4;
+            this.menuStrip1.Text = "Dashboard Sections";
+            // 
+            // batchListToolStripMenuItem
+            // 
+            this.batchListToolStripMenuItem.Name = "batchListToolStripMenuItem";
+            this.batchListToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
+            this.batchListToolStripMenuItem.Text = "Batch List";
+            this.batchListToolStripMenuItem.Click += new System.EventHandler(this.batchListToolStripMenuItem_Click);
+            // 
+            // batchChangesToolStripMenuItem
+            // 
+            this.batchChangesToolStripMenuItem.Name = "batchChangesToolStripMenuItem";
+            this.batchChangesToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
+            this.batchChangesToolStripMenuItem.Text = "Batch Changes";
+            this.batchChangesToolStripMenuItem.Click += new System.EventHandler(this.batchChangesToolStripMenuItem_Click);
             // 
             // panelBatch
             // 
@@ -425,6 +471,13 @@
             this.materialButton1.UseVisualStyleBackColor = true;
             this.materialButton1.Click += new System.EventHandler(this.btnReload_Click);
             // 
+            // comboMealsToolStripMenuItem
+            // 
+            this.comboMealsToolStripMenuItem.Name = "comboMealsToolStripMenuItem";
+            this.comboMealsToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
+            this.comboMealsToolStripMenuItem.Text = "Combo Meals";
+            this.comboMealsToolStripMenuItem.Click += new System.EventHandler(this.comboMealsToolStripMenuItem_Click);
+            // 
             // takoTeaLabel1
             // 
             this.takoTeaLabel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(32)))), ((int)(((byte)(35)))));
@@ -456,47 +509,12 @@
             this.toolStripButton2.Text = "Settings";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
-            // variantsChangesToolStripMenuItem
+            // addOnsToolStripMenuItem
             // 
-            this.variantsChangesToolStripMenuItem.Name = "variantsChangesToolStripMenuItem";
-            this.variantsChangesToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
-            this.variantsChangesToolStripMenuItem.Text = "Variants Changes";
-            this.variantsChangesToolStripMenuItem.Click += new System.EventHandler(this.variantsChangesToolStripMenuItem_Click);
-            // 
-            // ingredientChangesToolStripMenuItem
-            // 
-            this.ingredientChangesToolStripMenuItem.Name = "ingredientChangesToolStripMenuItem";
-            this.ingredientChangesToolStripMenuItem.Size = new System.Drawing.Size(122, 20);
-            this.ingredientChangesToolStripMenuItem.Text = "Ingredient Changes";
-            this.ingredientChangesToolStripMenuItem.Click += new System.EventHandler(this.ingredientChangesToolStripMenuItem_Click);
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.batchListToolStripMenuItem,
-            this.batchChangesToolStripMenuItem});
-            this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1302, 24);
-            this.menuStrip1.TabIndex = 4;
-            this.menuStrip1.Text = "Dashboard Sections";
-            // 
-            // batchListToolStripMenuItem
-            // 
-            this.batchListToolStripMenuItem.Name = "batchListToolStripMenuItem";
-            this.batchListToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
-            this.batchListToolStripMenuItem.Text = "Batch List";
-            this.batchListToolStripMenuItem.Click += new System.EventHandler(this.batchListToolStripMenuItem_Click);
-            // 
-            // batchChangesToolStripMenuItem
-            // 
-            this.batchChangesToolStripMenuItem.Name = "batchChangesToolStripMenuItem";
-            this.batchChangesToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
-            this.batchChangesToolStripMenuItem.Text = "Batch Changes";
-            this.batchChangesToolStripMenuItem.Click += new System.EventHandler(this.batchChangesToolStripMenuItem_Click);
+            this.addOnsToolStripMenuItem.Name = "addOnsToolStripMenuItem";
+            this.addOnsToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.addOnsToolStripMenuItem.Text = "AddOns";
+            this.addOnsToolStripMenuItem.Click += new System.EventHandler(this.addOnsToolStripMenuItem_Click);
             // 
             // TakoTeaForm
             // 
@@ -532,11 +550,11 @@
             this.tabPageStock.ResumeLayout(false);
             this.tabPageBatch.ResumeLayout(false);
             this.tabPageBatch.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.tabPageReports.ResumeLayout(false);
             this.toolStripQuickAccess.ResumeLayout(false);
             this.toolStripQuickAccess.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -580,5 +598,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem batchListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem batchChangesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem comboMealsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addOnsToolStripMenuItem;
     }
 }

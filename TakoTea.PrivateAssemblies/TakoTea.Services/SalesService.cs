@@ -17,7 +17,7 @@ namespace TakoTea.Services
         public SalesService(Entities context)
         {
             this.context = context;
-            productsService = new ProductsService();
+            productsService = new ProductsService(context);
         }
 
             public decimal CalculateTotalRevenue(DateTime startDate, DateTime endDate)
@@ -86,11 +86,14 @@ namespace TakoTea.Services
             {
                 OrderId = o.OrderId,
                 OrderDate = o.OrderDate,
+                OrderStatus = o.OrderStatus,
+
                 CustomerName = o.CustomerName,
+                PaymentStatus = o.PaymentStatus,
                 PaymentMethod = o.PaymentMethod,
+                PaymentAmount = o.PaymentAmount ?? 0, // Handle null values
                 TotalAmount = o.TotalAmount,
-                GrossProfit = o.GrossProfit,
-                OrderStatus = o.OrderStatus
+                GrossProfit = o.GrossProfit
 
             }).ToList();
         }
@@ -114,8 +117,12 @@ namespace TakoTea.Services
         public string CustomerName { get; set; }
         public string PaymentMethod { get; set; }
         public decimal TotalAmount { get; set; }
+        public decimal PaymentAmount { get; set; }
+        
         public decimal? GrossProfit { get; set; }
 
         public string OrderStatus { get; set; }
+        public string PaymentStatus { get; set; }
+
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -10,7 +12,29 @@ namespace TakoTea.Repository
 {
     public static  class LogChangesRepository
     {
+        public static DateTime GetFirstRecordDate(string tableName, string dateColumnName)
+        {
+            using (var context = new Entities())
+            {
+                // Construct the raw SQL query with parameterization
+                string sql = $"SELECT MIN([{dateColumnName}]) FROM [dbo].[Logs] WHERE TableName = @TableName";
 
+                // Execute the query with the parameter
+                return context.Database.SqlQuery<DateTime>(sql, new SqlParameter("@TableName", tableName)).FirstOrDefault();
+            }
+        }
+
+        public static DateTime GetLastRecordDate(string tableName, string dateColumnName)
+        {
+            using (var context = new Entities())
+            {
+                // Construct the raw SQL query with parameterization
+                string sql = $"SELECT MAX([{dateColumnName}]) FROM [dbo].[Logs] WHERE TableName = @TableName";
+
+                // Execute the query with the parameter
+                return context.Database.SqlQuery<DateTime>(sql, new SqlParameter("@TableName", tableName)).FirstOrDefault();
+            }
+        }
         public static List<Log> GetAllChangeLogs()
         {
             try
@@ -108,7 +132,7 @@ namespace TakoTea.Repository
             using (var context = new Entities())
             {
                 return context.Logs
-                    .Where(log => log.TableName == "Batches" && log.RecordID == batchId)
+                    .Where(log => log.TableName == "Batch" && log.RecordID == batchId)
                     .OrderByDescending(log => log.Timestamp)
                     .ToList();
             }

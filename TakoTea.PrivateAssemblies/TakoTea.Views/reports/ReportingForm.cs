@@ -90,7 +90,7 @@ namespace TakoTea.Views.reports
             }
             GenerateReport();
         }
-
+        
 
         public void GenerateAndDisplayReport(string pdfPath, ReportType reportType, Dictionary<string, object> filters = null)
         {

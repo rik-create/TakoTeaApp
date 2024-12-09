@@ -199,5 +199,11 @@ namespace TakoTea.View.Batches
             FilterBatchLogs();
 
         }
+
+        private void btnClearFilters_Click(object sender, EventArgs e)
+        {
+            FilterPanelHelper.ResetFilters(dateTimePickerStart, dateTimePickerEnd, "Batch", "Timestamp");
+            CheckedListBoxHelper.ClearAllCheckedListBoxesInPanel(panelFilteringComponents);
+        }
     }
 }

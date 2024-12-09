@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Markup;
 using TakoTea.Configurations;
@@ -30,7 +31,7 @@ namespace TakoTea.Product
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
             _context = new Entities();
             _dataAccessObject = new DataAccessObject();
-            _productService = new ProductsService();
+            _productService = new ProductsService(_context);
             _salesService = new SalesService(_context);
             menuOrderFormService = new MenuOrderFormService();
             LoadData();
@@ -67,12 +68,33 @@ namespace TakoTea.Product
                 errorMessage: "Failed to load product variants."
             );
 
+            var orderStatuses = _salesService.GetAllSales()
+                                 .Select(s => s.OrderStatus)
+                                 .Distinct()
+                                 .ToList();
+            chkListBoxOrderStatus.DataSource = orderStatuses;
+
+            // Fill checkedListBoxPaymentMethod
+            var paymentMethods = _salesService.GetAllSales()
+                                             .Select(s => s.PaymentMethod)
+                                             .Distinct()
+                                             .ToList();
+            checkedListBoxPaymentMethod.DataSource = paymentMethods;
+
+            // Fill checkedListBoxPaymentStatus
+            var paymentStatuses = _salesService.GetAllSales()
+                                              .Select(s => s.PaymentStatus)
+                                              .Distinct()
+                                              .ToList();
+            checkedListBoxPaymentStatus.DataSource = paymentStatuses;
             // Hide the ImagePath column
             DataGridViewHelper.HideColumn(dataGridViewSalesList, "OrderId");
 
             // Format TotalAmount column as currency
             dataGridViewSalesList.Columns["TotalAmount"].DefaultCellStyle.Format = "₱#,##0.00";
             dataGridViewSalesList.Columns["GrossProfit"].DefaultCellStyle.Format = "₱#,##0.00";
+            dataGridViewSalesList.Columns["PaymentAmount"].DefaultCellStyle.Format = "₱#,##0.00";
+
             DataGridViewHelper.FormatColumnHeaders(dataGridViewSalesList);
             foreach (DataGridViewColumn column in dataGridViewSalesList.Columns)
             {
@@ -91,19 +113,29 @@ namespace TakoTea.Product
         {
             try
             {
-                string searchTerm = txtBoxSearchSales.Text.ToLower().Trim(); // Assuming you have a TextBox named txtBoxSearchSales
+                string searchTerm = txtBoxSearchSales.Text.ToLower().Trim();
+
+                var selectedOrderStatuses = chkListBoxOrderStatus.CheckedItems.Cast<string>().ToList();
+                var selectedPaymentMethods = checkedListBoxPaymentMethod.CheckedItems.Cast<string>().ToList();
+                var selectedPaymentStatuses = checkedListBoxPaymentStatus.CheckedItems.Cast<string>().ToList();
+
+                DateTime startDate = dateTimePickerStartDate.Value.Date;
+                DateTime endDate = dateTimePickerEndDate.Value.Date.AddDays(1).AddTicks(-1); // End of the selected day
 
                 var filteredSales = _salesService.GetAllSales()
                     .Where(sale =>
-                        string.IsNullOrWhiteSpace(searchTerm) ||
-                        sale.OrderId.ToString().Contains(searchTerm) ||
-                        sale.CustomerName.ToLower().Contains(searchTerm) ||
-                        sale.PaymentMethod.ToLower().Contains(searchTerm) ||
-                        sale.OrderDate.ToString("yyyy-MM-dd HH:mm:ss").Contains(searchTerm)
+                        (string.IsNullOrWhiteSpace(searchTerm) ||
+                         sale.OrderId.ToString().Contains(searchTerm) ||
+                         sale.CustomerName.ToLower().Contains(searchTerm) ||
+                         sale.PaymentMethod.ToLower().Contains(searchTerm) ||
+                         sale.OrderDate.ToString("yyyy-MM-dd HH:mm:ss").Contains(searchTerm)) &&
+                        (selectedOrderStatuses.Count == 0 || selectedOrderStatuses.Contains(sale.OrderStatus)) &&
+                        (selectedPaymentMethods.Count == 0 || selectedPaymentMethods.Contains(sale.PaymentMethod)) &&
+                        (selectedPaymentStatuses.Count == 0 || selectedPaymentStatuses.Contains(sale.PaymentStatus)) &&
+                        sale.OrderDate >= startDate && sale.OrderDate <= endDate
                     );
 
                 DataGridViewHelper.UpdateGrid(dataGridViewSalesList, bindingSource, filteredSales.ToList());
-                // No need to add an image column for sales data
             }
             catch (Exception ex)
             {
@@ -190,6 +222,54 @@ namespace TakoTea.Product
             {
                 MessageBox.Show("Error filtering sales by date range: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void dataGridViewSalesList_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewHelper.SortDataGridView(dataGridViewSalesList, e.ColumnIndex);
+
+        }
+
+        private void btnClearFilters_Click(object sender, EventArgs e)
+        {
+            CheckedListBoxHelper.ClearAllCheckedListBoxesInPanel(panelFilteringComponents);
+            FilterSales();
+
+        }
+
+        private void materialLabel21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePickerEndDate_ValueChanged(object sender, EventArgs e)
+        {
+            DateHelper.ValidateDateRange(dateTimePickerStartDate, dateTimePickerEndDate, "End date must be after start date.", 1);
+
+            FilterSales();
+        }
+
+        private void dateTimePickerStartDate_ValueChanged(object sender, EventArgs e)
+        {
+            DateHelper.ValidateDateRange(dateTimePickerStartDate, dateTimePickerEndDate, "Start date must be before end date.", -1);
+
+            FilterSales();
+        }
+
+        private void checkedListBoxPaymentMethod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkedListBoxPaymentStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void txtBoxSearchSales_Click(object sender, EventArgs e)
+        {
+            await Task.Delay(1500); // Add a delay of 1500 milliseconds
+            FilterSales();
         }
     }
 }

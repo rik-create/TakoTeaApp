@@ -11,6 +11,7 @@ using TakoTea.Views.Dashboard;
 using TakoTea.Views.Items;
 using TakoTea.Views.Stock;
 using TakoTea.Views.Logs2;
+using TakoTea.Views.ComboMealForms;
 namespace TakoTea.Views
 {
     public class FormFactory : IFormFactory
@@ -45,6 +46,11 @@ namespace TakoTea.Views
                     return new IngredientListLogsForm();
                 case "BatchChanges":
                     return new BatchListLogsForm();
+                case "ComboMeal":
+                    return new ComboMealListForm();
+                case "AddOn":
+                    return new AddOnsListForm();
+
                 // Add more cases as needed...
                 default:
                     return null;

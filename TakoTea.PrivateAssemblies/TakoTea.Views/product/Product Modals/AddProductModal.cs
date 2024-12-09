@@ -34,9 +34,10 @@ namespace TakoTea.View.Product.Product_Modals
             ThemeConfigurator.ApplyDarkTheme(this);
             ModalSettingsConfigurator.ApplyStandardModalSettings(this);
             _inventoryService = new InventoryService();
-            _productsService = new ProductsService();
             ColumnProduct.DataSource = (new Entities()).Products.Select(p => p.ProductName).ToList();
             context = new Entities();
+            _productsService = new ProductsService(context);
+
             ingredientRepository = new IngredientRepository(context);
 
 

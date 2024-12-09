@@ -28,7 +28,7 @@ namespace TakoTea.View.Orders
             pbCancelled.Click += pbCancelled_Click;
             btnProcessOrder.Click += btnProcessOrder_Click;
             this.context = context;
-            productsService = new ProductsService();
+            productsService = new ProductsService(context);
             DataGridViewHelper.ApplyDataGridViewStyles(dgViewOrderQueue);
             salesService = new SalesService(context);
             LoadData();
