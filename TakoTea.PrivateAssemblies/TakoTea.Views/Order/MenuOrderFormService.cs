@@ -33,12 +33,15 @@ namespace TakoTea.Views.Order
         private readonly Entities _context;
         private readonly ProductsService productsService;
         private readonly SalesService salesService;
+        InventoryService inventoryService;
+
         public MenuOrderFormService()
         {
 
             _context = new Entities();
             productsService = new ProductsService(_context);
             salesService = new SalesService(_context);
+            inventoryService = new InventoryService();
         }
         public int GetLatestDraftOrderId()
         {
@@ -105,7 +108,6 @@ namespace TakoTea.Views.Order
 
                 if (order == null)
                 {
-                    MessageBox.Show($"Order with ID {orderId} not found.");
                     return;
                 }
 
@@ -940,7 +942,6 @@ namespace TakoTea.Views.Order
         {
             UpdateStockLevelsCallCount++;
 
-            InventoryService inventoryService = new InventoryService();
             StringBuilder sb = new StringBuilder();
 
             foreach (DataGridViewRow row in dataGridViewOrderList.Rows)
@@ -974,11 +975,12 @@ namespace TakoTea.Views.Order
                             {
                                 var (ingredientId, quantityPerVariant) = productsService.GetIngredientAndQuantity(pviId);
 
+                              
                                 // Update the stock level for the ingredient
                                 productsService.UpdateBatchStockLevel(ingredientId, quantityPerVariant * quantity, "Deduction");
 
                                 // Log the stock update details
-                                sb.AppendLine($"{productName} ({size}) - Ingredient {inventoryService.GetIngredientNameById(ingredientId)}: {quantityPerVariant * quantity} units deducted");
+                                sb.AppendLine($"{productName} - Ingredient {ingredientId}: {quantityPerVariant * quantity} units deducted");
                             }
                         }
                     }

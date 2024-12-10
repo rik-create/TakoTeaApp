@@ -62,8 +62,7 @@ namespace TakoTea.Views.reports
 
         {
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
-            this.panelReports = new System.Windows.Forms.Panel();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.btnClearFilters = new MaterialSkin.Controls.MaterialButton();
             this.btnGenerateReport = new MaterialSkin.Controls.MaterialButton();
             this.groupBoxDateRange = new System.Windows.Forms.GroupBox();
             this.lblSearchHint = new System.Windows.Forms.Label();
@@ -80,9 +79,8 @@ namespace TakoTea.Views.reports
             this.lstReportTypes = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.btnClearFilters = new MaterialSkin.Controls.MaterialButton();
+            this.pdfViewer1 = new PdfiumViewer.PdfViewer();
             this.materialCard1.SuspendLayout();
-            this.panelReports.SuspendLayout();
             this.groupBoxDateRange.SuspendLayout();
             this.groupBoxReportSelection.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -91,8 +89,8 @@ namespace TakoTea.Views.reports
             // materialCard1
             // 
             this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard1.Controls.Add(this.pdfViewer1);
             this.materialCard1.Controls.Add(this.btnClearFilters);
-            this.materialCard1.Controls.Add(this.panelReports);
             this.materialCard1.Controls.Add(this.btnGenerateReport);
             this.materialCard1.Controls.Add(this.groupBoxDateRange);
             this.materialCard1.Controls.Add(this.groupBoxReportSelection);
@@ -105,25 +103,28 @@ namespace TakoTea.Views.reports
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(12);
-            this.materialCard1.Size = new System.Drawing.Size(954, 699);
+            this.materialCard1.Size = new System.Drawing.Size(954, 839);
             this.materialCard1.TabIndex = 0;
             // 
-            // panelReports
+            // btnClearFilters
             // 
-            this.panelReports.Controls.Add(this.webBrowser1);
-            this.panelReports.Location = new System.Drawing.Point(16, 248);
-            this.panelReports.Name = "panelReports";
-            this.panelReports.Size = new System.Drawing.Size(920, 392);
-            this.panelReports.TabIndex = 105;
-            // 
-            // webBrowser1
-            // 
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(920, 392);
-            this.webBrowser1.TabIndex = 0;
+            this.btnClearFilters.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnClearFilters.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnClearFilters.Depth = 0;
+            this.btnClearFilters.Enabled = false;
+            this.btnClearFilters.HighEmphasis = true;
+            this.btnClearFilters.Icon = null;
+            this.btnClearFilters.Location = new System.Drawing.Point(808, 64);
+            this.btnClearFilters.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnClearFilters.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnClearFilters.Name = "btnClearFilters";
+            this.btnClearFilters.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnClearFilters.Size = new System.Drawing.Size(126, 36);
+            this.btnClearFilters.TabIndex = 128;
+            this.btnClearFilters.Text = "Clear filters";
+            this.btnClearFilters.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnClearFilters.UseAccentColor = true;
+            this.btnClearFilters.UseVisualStyleBackColor = true;
             // 
             // btnGenerateReport
             // 
@@ -132,7 +133,7 @@ namespace TakoTea.Views.reports
             this.btnGenerateReport.Depth = 0;
             this.btnGenerateReport.HighEmphasis = true;
             this.btnGenerateReport.Icon = null;
-            this.btnGenerateReport.Location = new System.Drawing.Point(792, 648);
+            this.btnGenerateReport.Location = new System.Drawing.Point(797, 798);
             this.btnGenerateReport.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnGenerateReport.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnGenerateReport.Name = "btnGenerateReport";
@@ -351,31 +352,20 @@ namespace TakoTea.Views.reports
             this.materialLabel1.TabIndex = 0;
             this.materialLabel1.Text = "TakoTea Reports";
             // 
-            // btnClearFilters
+            // pdfViewer1
             // 
-            this.btnClearFilters.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnClearFilters.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnClearFilters.Depth = 0;
-            this.btnClearFilters.Enabled = false;
-            this.btnClearFilters.HighEmphasis = true;
-            this.btnClearFilters.Icon = null;
-            this.btnClearFilters.Location = new System.Drawing.Point(808, 64);
-            this.btnClearFilters.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnClearFilters.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnClearFilters.Name = "btnClearFilters";
-            this.btnClearFilters.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnClearFilters.Size = new System.Drawing.Size(126, 36);
-            this.btnClearFilters.TabIndex = 128;
-            this.btnClearFilters.Text = "Clear filters";
-            this.btnClearFilters.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnClearFilters.UseAccentColor = true;
-            this.btnClearFilters.UseVisualStyleBackColor = true;
+            this.pdfViewer1.AutoScroll = true;
+            this.pdfViewer1.Location = new System.Drawing.Point(12, 248);
+            this.pdfViewer1.Name = "pdfViewer1";
+            this.pdfViewer1.Size = new System.Drawing.Size(934, 542);
+            this.pdfViewer1.TabIndex = 129;
+            this.pdfViewer1.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitBest;
             // 
             // ReportingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(960, 723);
+            this.ClientSize = new System.Drawing.Size(960, 863);
             this.Controls.Add(this.materialCard1);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
             this.Name = "ReportingForm";
@@ -383,7 +373,6 @@ namespace TakoTea.Views.reports
             this.Text = "ReportingForm";
             this.materialCard1.ResumeLayout(false);
             this.materialCard1.PerformLayout();
-            this.panelReports.ResumeLayout(false);
             this.groupBoxDateRange.ResumeLayout(false);
             this.groupBoxDateRange.PerformLayout();
             this.groupBoxReportSelection.ResumeLayout(false);
@@ -423,12 +412,11 @@ namespace TakoTea.Views.reports
         private CheckBox chkLowStockOnly;
         private MaterialComboBox cboFilter;
         private MaterialTextBox txtFilter;
-        private Panel panelReports;
-        private WebBrowser webBrowser1;
         private Label lblSearchHint;
         private Label lblFilterHint;
         private MaterialComboBox cboDateRange;
         private MaterialButton btnClearFilters;
+        private PdfiumViewer.PdfViewer pdfViewer1;
     }
 
 }

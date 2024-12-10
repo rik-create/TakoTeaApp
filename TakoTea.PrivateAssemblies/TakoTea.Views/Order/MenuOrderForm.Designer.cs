@@ -621,6 +621,8 @@
             this.cmbPaymentMethod.Hint = "Choose payment method";
             this.cmbPaymentMethod.IntegralHeight = false;
             this.cmbPaymentMethod.ItemHeight = 43;
+            this.cmbPaymentMethod.Items.AddRange(new object[] {
+            "Cash"});
             this.cmbPaymentMethod.Location = new System.Drawing.Point(162, 16);
             this.cmbPaymentMethod.MaxDropDownItems = 4;
             this.cmbPaymentMethod.MouseState = MaterialSkin.MouseState.OUT;

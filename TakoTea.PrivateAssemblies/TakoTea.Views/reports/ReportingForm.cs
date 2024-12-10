@@ -11,9 +11,6 @@ using TakoTea.Models;
 using TakoTea.Views.reports;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 using PdfiumViewer;
-using PdfSharp.Drawing;
-using PdfSharp.Pdf.IO;
-using PdfSharp.UniversalAccessibility.Drawing;
 using System.Windows.Controls;
 using Microsoft.SqlServer.Management.Smo.Agent;
 using System.Threading;
@@ -127,37 +124,21 @@ namespace TakoTea.Views.reports
                             break;
 
                     }
-
-                    // Close the iTextSharp document
                     itextDoc.Close();
-          
-                    int retries = 3;
-                    while (retries > 0)
-                    {
-                        try
-                        {
-                            pdfPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + "_temp_report.pdf");
-                            File.WriteAllBytes(pdfPath, stream.ToArray());
-                            break; // Exit the loop if successful
-                        }
-                        catch (IOException)
-                        {
-                            retries--;
-                            Thread.Sleep(100); // Wait for a short time before retrying
-                        }
-                    }
 
-                    if (retries == 0)
-                    {
-                        // Handle the error if all retries fail
-                        MessageBox.Show("Error saving the report. Please try again later.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    byte[] pdfBytes = stream.ToArray();
+
+                   var pdfDocument = PdfiumViewer.PdfDocument.Load(new MemoryStream(pdfBytes));
+                    
+                        pdfViewer1.Document = pdfDocument;
+                    
+
+
+
+
+
                 }
 
-                // Display the PDF in the WebBrowser control
-                webBrowser1.Dock = DockStyle.Fill;
-                panelReports.Controls.Add(webBrowser1);
-                webBrowser1.Navigate(pdfPath);
             }
             catch (Exception ex)
             {
@@ -199,15 +180,18 @@ namespace TakoTea.Views.reports
                 }
             }
             var salesSummary = salesQuery
-            .ToList()
-            .GroupBy(o => o.OrderDate.Date)
-            .Select(g => new
-            {
-                OrderDate = g.Key,
-                TotalAmount = g.Sum(o => o.TotalAmount),
-                GrossProfit = g.Sum(o => o.GrossProfit)
-            })
-            .ToList();
+                .Join(dbContext.OrderModels, s => s.OrderId, o => o.OrderId, (s, o) => new { Sale = s, Order = o })
+                .ToList()
+                .GroupBy(o => o.Sale.OrderDate.Date)
+                .Select(g => new
+                {
+                    OrderDate = g.Key,
+                    TotalAmount = g.Sum(o => o.Sale.TotalAmount),
+                    GrossProfit = g.Sum(o => o.Sale.GrossProfit),
+                    PaymentMethod = g.First().Order.PaymentMethod
+
+                })
+                .ToList();
 
             // Add sales summary data to the document with styling
             var titleParagraph = new Paragraph("TakoTea - Sales Summary")
@@ -227,14 +211,18 @@ namespace TakoTea.Views.reports
             // Add an empty paragraph for spacing
             document.Add(new Paragraph(" "));
             // Add a table to organize the data
-            var table = new PdfPTable(3) { WidthPercentage = 100 };
+            var table = new PdfPTable(4) { WidthPercentage = 100 };
             table.AddCell(new PdfPCell(new Phrase("Order Date")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 5 });
+            table.AddCell(new PdfPCell(new Phrase("Payment Method")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 5 });
+
             table.AddCell(new PdfPCell(new Phrase("Gross Revenue")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 5 });
             table.AddCell(new PdfPCell(new Phrase("Gross Profit")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 5 });
 
             foreach (var item in salesSummary)
             {
                 table.AddCell(new PdfPCell(new Phrase(item.OrderDate.ToShortDateString())) { Padding = 5 });
+                table.AddCell(new PdfPCell(new Phrase(item.PaymentMethod.ToString())) { Padding = 5 });
+
                 table.AddCell(new PdfPCell(new Phrase("₱" + item.TotalAmount.ToString("C", new System.Globalization.CultureInfo("fil-PH")))) { Padding = 5 });
                 table.AddCell(new PdfPCell(new Phrase("₱" + item.GrossProfit.Value.ToString("C", new System.Globalization.CultureInfo("fil-PH")))) { Padding = 5 });
             }
@@ -265,9 +253,19 @@ namespace TakoTea.Views.reports
                 {
                     inventoryQuery = inventoryQuery.Where(i => i.StockLevel <= i.LowLevel);
                 }
+           
                 if (filters.ContainsKey("IngredientCategory") && filters["IngredientCategory"] is string ingredientCategory)
                 {
-                    inventoryQuery = inventoryQuery.Where(i => i.IngredientCategory == ingredientCategory);
+
+                    if (ingredientCategory == "All")
+                    {
+
+                    }
+                    else
+                    {
+                        inventoryQuery = inventoryQuery.Where(i => i.IngredientCategory == ingredientCategory);
+
+                    }
                 }
             }
 
@@ -329,10 +327,20 @@ namespace TakoTea.Views.reports
                 }
                 if (filters.ContainsKey("OrderStatus") && filters["OrderStatus"] is string orderStatus)
                 {
-                    ordersQuery = ordersQuery.Where(o => o.OrderStatus == orderStatus);
+
+                    if (orderStatus == "All")
+                    {
+
+                    }
+                    else
+                    {
+                        ordersQuery = ordersQuery.Where(o => o.OrderStatus == orderStatus);
+
+                    }
                 }
                 if (filters.ContainsKey("PaymentStatus") && filters["PaymentStatus"] is string paymentStatus)
                 {
+
                     ordersQuery = ordersQuery.Where(o => o.PaymentStatus == paymentStatus);
                 }
             }

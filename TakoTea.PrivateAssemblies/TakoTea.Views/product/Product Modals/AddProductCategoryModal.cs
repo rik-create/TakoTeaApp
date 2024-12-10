@@ -67,8 +67,8 @@ namespace TakoTea.View.Product.Product_Modals
                 TakoTea.Models.Product newProduct = new TakoTea.Models.Product
                 {
                     ProductName = productName,
-                    CategoryName = productCategory // Assuming you have a method to get category ID
-                };
+/*                    CategoryName = productCategory // Assuming you have a method to get category ID
+*/                };
 
                 // Save product using ProductService
                 _productsService.AddProduct(newProduct);

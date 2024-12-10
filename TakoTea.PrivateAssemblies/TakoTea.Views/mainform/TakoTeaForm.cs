@@ -52,7 +52,7 @@ namespace TakoTea.Views.MainForm
             timer.Interval = 4000; // 4 seconds
             timer.Tick += (s, args) =>
             {
-                buttonQuickAccess.Visible = false;
+                toolStripQuickAccess.Visible = false;
                 timer.Stop(); // Stop the timer after hiding the button
             };
             timer.Start();

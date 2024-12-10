@@ -450,26 +450,41 @@ namespace TakoTea.View.Orders
 
         }
    
+
+
+
   private void btnConfirmOrder_Click(object sender, EventArgs e)
         {
+
+
+           
             try
             {
-                // Call the ConfirmOrder method in the productsService class
-                _service.ConfirmOrder(
-                    dataGridViewOrderList,
-                    lblTotalInOrderList,
-                    lblOrderId,
-                    cmbPaymentMethod,
-                    cmbPaymentStatus,
-                    cmbOrderStatus,
-                    dateTimePickerOrderDate,
-                    txtCustomer.Text,
-                    numericUpDownPaymenAmount.Value
-                );
 
-                _service.GenerateReceipt((int.Parse(lblOrderId.Text)));
+                if (IsChangeEnough())
+                {
+                    // Call the ConfirmOrder method in the productsService class
+                    _service.ConfirmOrder(
+                        dataGridViewOrderList,
+                        lblTotalInOrderList,
+                        lblOrderId,
+                        cmbPaymentMethod,
+                        cmbPaymentStatus,
+                        cmbOrderStatus,
+                        dateTimePickerOrderDate,
+                        txtCustomer.Text,
+                        numericUpDownPaymenAmount.Value
+                    );
 
-                lblOrderId.Text = _service.GenerateNewOrderId().ToString();
+                    _service.GenerateReceipt((int.Parse(lblOrderId.Text)));
+
+                    lblOrderId.Text = _service.GenerateNewOrderId().ToString();
+                }
+                else
+                {
+                    MessageBox.Show("The payment amount is not enough to cover the total amount due.", "Insufficient Payment", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+          
             }
             catch (Exception ex)
             {
@@ -500,6 +515,15 @@ namespace TakoTea.View.Orders
         private void numericUpDownPaymenAmount_ValueChanged(object sender, EventArgs e)
         {
             UpdateChange();
+        }
+        private bool IsChangeEnough()
+        {
+            if (decimal.TryParse(lblChange.Text.Replace("₱", ""), out decimal change) &&
+                decimal.TryParse(lblTotalInOrderList.Text.Replace("₱", ""), out decimal totalInOrderList))
+            {
+                return change >= totalInOrderList;
+            }
+            return false;
         }
     }
 }
