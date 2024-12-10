@@ -37,8 +37,8 @@ namespace TakoTea.Product
             LoadData();
             DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewSalesList);
 
-            DataGridViewHelper.HideColumn(dataGridViewSalesList, "OrderId");
 
+            DataGridViewHelper.FormatColumnHeaders(dataGridViewSalesList);
 
 
             /*            DataGridViewHelper.AddButtonsToLastRow(dataGridViewProductVariantList, "IngredientsAndInstructions", "Ingredients & Instructions", handleIAndIButton);
@@ -88,14 +88,12 @@ namespace TakoTea.Product
                                               .ToList();
             checkedListBoxPaymentStatus.DataSource = paymentStatuses;
             // Hide the ImagePath column
-            DataGridViewHelper.HideColumn(dataGridViewSalesList, "OrderId");
 
             // Format TotalAmount column as currency
             dataGridViewSalesList.Columns["TotalAmount"].DefaultCellStyle.Format = "₱#,##0.00";
             dataGridViewSalesList.Columns["GrossProfit"].DefaultCellStyle.Format = "₱#,##0.00";
             dataGridViewSalesList.Columns["PaymentAmount"].DefaultCellStyle.Format = "₱#,##0.00";
 
-            DataGridViewHelper.FormatColumnHeaders(dataGridViewSalesList);
             foreach (DataGridViewColumn column in dataGridViewSalesList.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
@@ -268,7 +266,7 @@ namespace TakoTea.Product
 
         private async void txtBoxSearchSales_Click(object sender, EventArgs e)
         {
-            await Task.Delay(1500); // Add a delay of 1500 milliseconds
+            await Task.Delay(300); // Add a delay of 1500 milliseconds
             FilterSales();
         }
     }

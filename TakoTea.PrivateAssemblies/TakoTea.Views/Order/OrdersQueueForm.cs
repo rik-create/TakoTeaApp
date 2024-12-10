@@ -32,6 +32,8 @@ namespace TakoTea.View.Orders
             DataGridViewHelper.ApplyDataGridViewStyles(dgViewOrderQueue);
             salesService = new SalesService(context);
             LoadData();
+            DataGridViewHelper.FormatColumnHeaders(dgViewOrderQueue);
+
         }
         private void materialLabel4_Click(object sender, EventArgs e)
         {
@@ -40,10 +42,7 @@ namespace TakoTea.View.Orders
 
         private void LoadData()
         {
-
             // Retrieve both Product and ProductVariant data
-
-
 
             // Bind the data to the DataGridView
             DataGridViewHelper.LoadData(
@@ -55,9 +54,14 @@ namespace TakoTea.View.Orders
             );
 
             // Hide the ImagePath column
-            DataGridViewHelper.HideColumn(dgViewOrderQueue, "OrderId");
-            DataGridViewHelper.FormatColumnHeaders(dgViewOrderQueue);
 
+            // Count the number of new orders
+            int newOrdersCount = salesService.GetOrderQueue().Count(o => o.OrderStatus == "New");
+            labelNewOrdersCount.Text = $"Total new orders: {newOrdersCount.ToString()}";
+
+            // Count the number of processing orders
+            int processingOrdersCount = salesService.GetOrderQueue().Count(o => o.OrderStatus == "Processing");
+            labelProcessingOrdersCount.Text = $"Total processing orders: {processingOrdersCount.ToString()}";
         }
 
    
@@ -181,7 +185,6 @@ namespace TakoTea.View.Orders
 
         private void UpdateOrderStatusForSelectedRows(string newStatus)
         {
-
             foreach (DataGridViewRow row in dgViewOrderQueue.SelectedRows)
             {
                 int orderId = Convert.ToInt32(row.Cells["OrderId"].Value); // Assuming "OrderId" is the column name
@@ -190,6 +193,7 @@ namespace TakoTea.View.Orders
                 if (order != null)
                 {
                     order.OrderStatus = newStatus;
+                    order.PaymentStatus = newStatus == "Completed" ? "Completed" : order.PaymentStatus;
 
                     // Log the change
                     LoggingHelper.LogChange(
@@ -233,6 +237,40 @@ namespace TakoTea.View.Orders
             this.Close();
             OrdersQueueForm newForm = new OrdersQueueForm(context);
             newForm.Show(); ;
+        }
+
+        private void dgViewOrderQueue_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewHelper.SortDataGridView(dgViewOrderQueue, e.ColumnIndex);
+        }
+
+        private void FilterOrderQueue()
+        {
+            string searchTerm = txtBoxSearchOrders.Text.ToLower().Trim();
+
+         
+
+            var filteredOrder = salesService.GetOrderQueue()
+                .Where(sale =>
+                    (string.IsNullOrWhiteSpace(searchTerm) ||
+                     sale.OrderId.ToString().Contains(searchTerm) ||
+                     sale.CustomerName.ToLower().Contains(searchTerm) ||
+                     sale.PaymentMethod.ToLower().Contains(searchTerm) ||
+                     sale.OrderDate.ToString("yyyy-MM-dd HH:mm:ss").Contains(searchTerm))
+                );
+            DataGridViewHelper.UpdateGrid(dgViewOrderQueue, bindingSource1, filteredOrder.ToList());
+
+        }
+
+        private void txtBoxSearchOrders_Click(object sender, EventArgs e)
+        {
+            FilterOrderQueue();
+        }
+
+        private void txtBoxSearchOrders_TextChanged(object sender, EventArgs e)
+        {
+            FilterOrderQueue();
+
         }
     }
 }
