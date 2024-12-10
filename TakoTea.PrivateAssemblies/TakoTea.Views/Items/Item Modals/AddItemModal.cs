@@ -148,6 +148,7 @@ namespace TakoTea.View.Items.Item_Modals
                         TypeOfIngredient = cmbTypeOfIngredient.SelectedItem?.ToString() ?? "",
                         IsActive = true,
                         MeasuringUnit = cmbMeasuringUnit.SelectedItem?.ToString() ?? "",
+                        StockLevel = 0,
                         AllergyInformation = string.Join(", ", CheckedListBoxHelper.GetCheckedItemsFromIterator(materialCheckedListBoxAllergens)),
                         LowLevel = numericUpDownLowStockThreshold.Value,
                         CreatedAt = DateTime.Now,

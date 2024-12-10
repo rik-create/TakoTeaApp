@@ -604,7 +604,7 @@ namespace TakoTea.Views.Order
                             ProductVariantId = variantId,
                             Quantity = Convert.ToInt32(row.Cells[3].Value),
                             Price = Convert.ToDecimal(row.Cells[4].Value),
-                            CreatedBy = "System",
+                            CreatedBy = AuthenticationHelper._loggedInUsername,
                             CreatedDate = DateTime.Now,
                             AddOns = AddOns
                         };
@@ -1071,7 +1071,6 @@ namespace TakoTea.Views.Order
                 PaymentMethod = paymentMethod,
                 PaymentStatus = paymentStatus,
                 TotalAmount = decimal.Parse(lblTotalInOrderList.Text.Substring(1)),
-                CreatedAt = DateTime.Now,
                 CreatedBy = AuthenticationHelper._loggedInUsername,
                 GrossProfit = 0,
                 PaymentAmount = paymentAmount,
@@ -1120,7 +1119,7 @@ namespace TakoTea.Views.Order
                                 Price = (decimal)variant.Price,
                                 TotalPrice = variant.Price * variant.Quantity,
                                 AddOns = row.Cells[2].Value.ToString(),
-                                CreatedBy = "System",
+                                CreatedBy = AuthenticationHelper._loggedInUsername,
                                 Size = productsService.GetSizeByVariantId((int)variant.ProductVariantID),
                                 GrossProfit = grossProfit,
                                 CreatedDate = DateTime.Now
@@ -1147,7 +1146,7 @@ namespace TakoTea.Views.Order
                         Price = price,
                         TotalPrice = totalPrice,
                         AddOns = row.Cells[2].Value.ToString(),
-                        CreatedBy = "System",
+                        CreatedBy = AuthenticationHelper._loggedInUsername,
                         Size = row.Cells[1].Value.ToString(),
                         GrossProfit = grossProfit,
                         CreatedDate = DateTime.Now

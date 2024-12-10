@@ -30,16 +30,10 @@
             this.cmbProductVategory = new MaterialSkin.Controls.MaterialComboBox();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.txtBoxProductName = new MaterialSkin.Controls.MaterialTextBox2();
-            this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
-            this.btnClearImg = new MaterialSkin.Controls.MaterialButton();
-            this.btnBrowseImg = new MaterialSkin.Controls.MaterialButton();
-            this.pictureBoxProductImage = new System.Windows.Forms.PictureBox();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.btnCancel = new MaterialSkin.Controls.MaterialButton();
             this.btnSaveProduct = new MaterialSkin.Controls.MaterialButton();
             this.materialCard1.SuspendLayout();
-            this.materialCard2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProductImage)).BeginInit();
             this.SuspendLayout();
             // 
             // materialCard1
@@ -49,7 +43,6 @@
             this.materialCard1.Controls.Add(this.cmbProductVategory);
             this.materialCard1.Controls.Add(this.materialLabel2);
             this.materialCard1.Controls.Add(this.txtBoxProductName);
-            this.materialCard1.Controls.Add(this.materialCard2);
             this.materialCard1.Controls.Add(this.materialLabel5);
             this.materialCard1.Controls.Add(this.btnCancel);
             this.materialCard1.Controls.Add(this.btnSaveProduct);
@@ -61,7 +54,7 @@
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard1.Size = new System.Drawing.Size(353, 557);
+            this.materialCard1.Size = new System.Drawing.Size(353, 323);
             this.materialCard1.TabIndex = 88;
             // 
             // materialLabel1
@@ -69,7 +62,7 @@
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(22, 400);
+            this.materialLabel1.Location = new System.Drawing.Point(8, 164);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(64, 19);
@@ -91,7 +84,10 @@
             this.cmbProductVategory.Hint = "Category";
             this.cmbProductVategory.IntegralHeight = false;
             this.cmbProductVategory.ItemHeight = 43;
-            this.cmbProductVategory.Location = new System.Drawing.Point(31, 430);
+            this.cmbProductVategory.Items.AddRange(new object[] {
+            "Food",
+            "Drink"});
+            this.cmbProductVategory.Location = new System.Drawing.Point(17, 194);
             this.cmbProductVategory.MaxDropDownItems = 4;
             this.cmbProductVategory.MouseState = MaterialSkin.MouseState.OUT;
             this.cmbProductVategory.Name = "cmbProductVategory";
@@ -104,7 +100,7 @@
             this.materialLabel2.AutoSize = true;
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.Location = new System.Drawing.Point(22, 310);
+            this.materialLabel2.Location = new System.Drawing.Point(8, 74);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
             this.materialLabel2.Size = new System.Drawing.Size(102, 19);
@@ -121,7 +117,7 @@
             this.txtBoxProductName.HideSelection = true;
             this.txtBoxProductName.Hint = "Enter Product Name";
             this.txtBoxProductName.LeadingIcon = null;
-            this.txtBoxProductName.Location = new System.Drawing.Point(31, 340);
+            this.txtBoxProductName.Location = new System.Drawing.Point(17, 104);
             this.txtBoxProductName.MaxLength = 32767;
             this.txtBoxProductName.MouseState = MaterialSkin.MouseState.OUT;
             this.txtBoxProductName.Name = "txtBoxProductName";
@@ -139,69 +135,6 @@
             this.txtBoxProductName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtBoxProductName.TrailingIcon = null;
             this.txtBoxProductName.UseSystemPasswordChar = false;
-            // 
-            // materialCard2
-            // 
-            this.materialCard2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialCard2.Controls.Add(this.btnClearImg);
-            this.materialCard2.Controls.Add(this.btnBrowseImg);
-            this.materialCard2.Controls.Add(this.pictureBoxProductImage);
-            this.materialCard2.Depth = 0;
-            this.materialCard2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard2.Location = new System.Drawing.Point(31, 60);
-            this.materialCard2.Margin = new System.Windows.Forms.Padding(14);
-            this.materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialCard2.Name = "materialCard2";
-            this.materialCard2.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard2.Size = new System.Drawing.Size(300, 232);
-            this.materialCard2.TabIndex = 92;
-            // 
-            // btnClearImg
-            // 
-            this.btnClearImg.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnClearImg.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnClearImg.Depth = 0;
-            this.btnClearImg.HighEmphasis = true;
-            this.btnClearImg.Icon = null;
-            this.btnClearImg.Location = new System.Drawing.Point(170, 191);
-            this.btnClearImg.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnClearImg.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnClearImg.Name = "btnClearImg";
-            this.btnClearImg.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnClearImg.Size = new System.Drawing.Size(65, 36);
-            this.btnClearImg.TabIndex = 5;
-            this.btnClearImg.Text = "Reset";
-            this.btnClearImg.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnClearImg.UseAccentColor = false;
-            this.btnClearImg.UseVisualStyleBackColor = true;
-            // 
-            // btnBrowseImg
-            // 
-            this.btnBrowseImg.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnBrowseImg.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnBrowseImg.Depth = 0;
-            this.btnBrowseImg.HighEmphasis = true;
-            this.btnBrowseImg.Icon = null;
-            this.btnBrowseImg.Location = new System.Drawing.Point(74, 191);
-            this.btnBrowseImg.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnBrowseImg.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnBrowseImg.Name = "btnBrowseImg";
-            this.btnBrowseImg.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnBrowseImg.Size = new System.Drawing.Size(88, 36);
-            this.btnBrowseImg.TabIndex = 4;
-            this.btnBrowseImg.Text = "Browse..";
-            this.btnBrowseImg.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnBrowseImg.UseAccentColor = false;
-            this.btnBrowseImg.UseVisualStyleBackColor = true;
-            // 
-            // pictureBoxProductImage
-            // 
-            this.pictureBoxProductImage.Location = new System.Drawing.Point(27, 17);
-            this.pictureBoxProductImage.Name = "pictureBoxProductImage";
-            this.pictureBoxProductImage.Size = new System.Drawing.Size(246, 166);
-            this.pictureBoxProductImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxProductImage.TabIndex = 3;
-            this.pictureBoxProductImage.TabStop = false;
             // 
             // materialLabel5
             // 
@@ -224,7 +157,7 @@
             this.btnCancel.Depth = 0;
             this.btnCancel.HighEmphasis = true;
             this.btnCancel.Icon = null;
-            this.btnCancel.Location = new System.Drawing.Point(182, 500);
+            this.btnCancel.Location = new System.Drawing.Point(168, 264);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnCancel.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCancel.Name = "btnCancel";
@@ -243,7 +176,7 @@
             this.btnSaveProduct.Depth = 0;
             this.btnSaveProduct.HighEmphasis = true;
             this.btnSaveProduct.Icon = null;
-            this.btnSaveProduct.Location = new System.Drawing.Point(264, 500);
+            this.btnSaveProduct.Location = new System.Drawing.Point(250, 264);
             this.btnSaveProduct.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnSaveProduct.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSaveProduct.Name = "btnSaveProduct";
@@ -260,7 +193,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(359, 584);
+            this.ClientSize = new System.Drawing.Size(359, 350);
             this.Controls.Add(this.materialCard1);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
             this.Name = "AddProductCategoryModal";
@@ -269,9 +202,6 @@
             this.Text = "Add Product";
             this.materialCard1.ResumeLayout(false);
             this.materialCard1.PerformLayout();
-            this.materialCard2.ResumeLayout(false);
-            this.materialCard2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProductImage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -281,10 +211,6 @@
         private MaterialSkin.Controls.MaterialComboBox cmbProductVategory;
         protected MaterialSkin.Controls.MaterialLabel materialLabel2;
         protected MaterialSkin.Controls.MaterialTextBox2 txtBoxProductName;
-        protected MaterialSkin.Controls.MaterialCard materialCard2;
-        protected MaterialSkin.Controls.MaterialButton btnClearImg;
-        protected MaterialSkin.Controls.MaterialButton btnBrowseImg;
-        protected System.Windows.Forms.PictureBox pictureBoxProductImage;
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
         protected MaterialSkin.Controls.MaterialButton btnCancel;
         protected MaterialSkin.Controls.MaterialButton btnSaveProduct;

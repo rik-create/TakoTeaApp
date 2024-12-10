@@ -6,66 +6,25 @@ using TakoTea.Interfaces;
 using TakoTea.Views.DataLoaders;
 using TakoTea.Models;
 using TakoTea.Services;
+using Helpers;
 namespace TakoTea.View.Product.Product_Modals
 {
     public partial class AddProductCategoryModal : MaterialForm
     {
         private readonly ProductCategoryService _productCategoryService;
+        private readonly ProductsService _productsService;
 
         public AddProductCategoryModal(ProductCategoryService productCategoryService)
         {
             InitializeComponent();
             _productCategoryService = productCategoryService;
+            _productsService = new ProductsService(new Entities());
+            btnCancel.Click += btnCancel_Click;
         }
-
         private void btnSaveProduct_Click(object sender, EventArgs e)
         {
-            // Gather input
-            string productName = txtBoxProductName.Text;
-            string productCategory = cmbProductVategory.SelectedItem?.ToString();
-            string productImage = pictureBoxProductImage.ImageLocation;
-
-            // Validate inputs
-            if (string.IsNullOrEmpty(productName))
-            {
-                DialogHelper.ShowError("Product Name is required.");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(productCategory))
-            {
-                DialogHelper.ShowError("Please select a Product Category.");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(productImage))
-            {
-                DialogHelper.ShowError("Please provide an image for the product.");
-                return;
-            }
-
-            // Create new ProductCategoryModel
-            var newProductCategory = new ProductCategoryModel
-            {
-                Name = productName,
-                Category = productCategory,
-                Image = productImage
-            };
-
-            try
-            {
-                // Save product category
-                _productCategoryService.Save(newProductCategory);
-                DialogHelper.ShowSuccess("Product Category added successfully!");
-                DialogResult = DialogResult.OK;
-                Close();
-            }
-            catch (Exception ex)
-            {
-                DialogHelper.ShowError($"Failed to add Product Category. Error: {ex.Message}");
-            }
+     
         }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             // Confirm cancel action
@@ -82,22 +41,46 @@ namespace TakoTea.View.Product.Product_Modals
             }
         }
 
-        private void btnBrowseImg_Click(object sender, EventArgs e)
-        {
-            // Open file dialog to select an image for the product category
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;";
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    pictureBoxProductImage.ImageLocation = openFileDialog.FileName;
-                }
-            }
-        }
-
+   
         private void btnSaveProduct_Click_1(object sender, EventArgs e)
         {
+            // Gather input
+            string productName = txtBoxProductName.Text;
+            string productCategory = cmbProductVategory.SelectedItem?.ToString();
 
+            // Validate inputs
+            if (string.IsNullOrEmpty(productName))
+            {
+                DialogHelper.ShowError("Product Name is required.");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(productCategory))
+            {
+                DialogHelper.ShowError("Please select a Product Category.");
+                return;
+            }
+
+            try
+            {
+                // Create Product object
+                TakoTea.Models.Product newProduct = new TakoTea.Models.Product
+                {
+                    ProductName = productName,
+                    CategoryName = productCategory // Assuming you have a method to get category ID
+                };
+
+                // Save product using ProductService
+                _productsService.AddProduct(newProduct);
+
+                DialogHelper.ShowSuccess("Product added successfully!");
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+            catch (Exception ex)
+            {
+                DialogHelper.ShowError($"Failed to add Product. Error: {ex.Message}");
+            }
         }
     }
 

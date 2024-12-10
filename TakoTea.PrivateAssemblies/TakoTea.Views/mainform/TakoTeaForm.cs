@@ -47,7 +47,16 @@ namespace TakoTea.Views.MainForm
 
             // Optionally, set a default selected item
             toolStripQuickAccess.Visible = false;
-        
+
+            Timer timer = new Timer();
+            timer.Interval = 4000; // 4 seconds
+            timer.Tick += (s, args) =>
+            {
+                buttonQuickAccess.Visible = false;
+                timer.Stop(); // Stop the timer after hiding the button
+            };
+            timer.Start();
+
         }
 
 
