@@ -120,7 +120,8 @@ namespace TakoTea.Services
         public List<SalesData> GetOrderQueue()
         {
             return context.OrderModels
-                .Where(o => (o.OrderStatus == "New" || o.OrderStatus == "Processing"))
+                .Where(o => o.OrderStatus == "New" || o.OrderStatus == "Processing")
+                .OrderByDescending(o => o.OrderDate) // Sort by OrderDate in descending order
                 .Select(o => new SalesData
                 {
                     OrderId = o.OrderId,
