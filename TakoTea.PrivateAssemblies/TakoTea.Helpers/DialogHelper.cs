@@ -111,6 +111,7 @@ namespace TakoTea.Helpers
                 }
                 else
                 {
+                    MessageBox.Show("Dialog closed. Changes not saved.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return null;
                 }
             }

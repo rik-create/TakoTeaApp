@@ -412,7 +412,7 @@
             this.dataGridViewProductList.Size = new System.Drawing.Size(1139, 480);
             this.dataGridViewProductList.TabIndex = 10;
             this.dataGridViewProductList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProductList_CellContentClick);
-            this.dataGridViewProductList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProductVariantList_CellDoubleClick);
+            this.dataGridViewProductList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProductList_CellDoubleClick);
             // 
             // bindingNavigator1
             // 

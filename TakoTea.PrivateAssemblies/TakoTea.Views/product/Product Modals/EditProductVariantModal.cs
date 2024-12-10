@@ -27,8 +27,10 @@ namespace TakoTea.View.Product.Product_Modals
         {
             _context = new Entities();
             InitializeComponent();
+            numericUpDownPriceChanges.Minimum = 0.1M;
             _originalProductVariant = _context.ProductVariants.Find(productVariantId);
             LoadProductVariantData();
+            txtBoxCurrentPrice.ReadOnly = true;
         }
 
         private void LoadProductVariantData()
@@ -55,7 +57,7 @@ namespace TakoTea.View.Product.Product_Modals
             pictureBoxProductImage.Image = ImageHelper.ByteArrayToImage(_originalProductVariant.ImagePath);
         }
 
-      
+
         // ... (Similar click handlers for other buttons) ...
 
         private void UpdatePrice(string variantName, string size, decimal priceChange, bool isIncrease)
@@ -64,43 +66,108 @@ namespace TakoTea.View.Product.Product_Modals
             if (variantToUpdate != null)
             {
                 string originalPrice = variantToUpdate.Price.ToString();
-                variantToUpdate.Price = isIncrease ? variantToUpdate.Price + priceChange : variantToUpdate.Price - priceChange;
-                string changeDescription = DialogHelper.ShowInputDialog(
-                              formTitle: "Enter Change Description",
-                              labelText: "Change Description:",
-                              validationMessage: "Description cannot be empty.",
-                              validateInput: input => !string.IsNullOrWhiteSpace(input)
-                          );
-                // Update the displayed price
-                txtBoxCurrentPrice.Text = variantToUpdate.Price.ToString("F2");
-                LoggingHelper.LogChange("ProductVariants", variantToUpdate.ProductVariantID, "Price", originalPrice, variantToUpdate.Price.ToString(), "Updated", $"Price changed from '{originalPrice}' to '{variantToUpdate.Price}' for variant '{variantToUpdate.VariantName}'", changeDescription);
+                decimal oldPrice = variantToUpdate.Price;
 
+                // Store the original price before making changes
+                decimal originalVariantPrice = variantToUpdate.Price;
+
+                variantToUpdate.Price = isIncrease
+                    ? variantToUpdate.Price + priceChange
+                    : variantToUpdate.Price - priceChange;
+
+                decimal newPrice = variantToUpdate.Price;
+
+                string changeDescription = DialogHelper.ShowInputDialog(
+                    formTitle: "Enter Change Description",
+                    labelText: "Change Description:",
+                    validationMessage: "Description cannot be empty.",
+                    validateInput: input => !string.IsNullOrWhiteSpace(input)
+                );
+
+                if (changeDescription != null) // Check if the dialog was closed
+                {
+                    // Update the displayed price
+                    txtBoxCurrentPrice.Text = variantToUpdate.Price.ToString("F2");
+
+                    LoggingHelper.LogChange("ProductVariants",
+                        variantToUpdate.ProductVariantID,
+                        "Price",
+                        originalPrice,
+                        variantToUpdate.Price.ToString(),
+                        "Updated",
+                        $"Price changed from '{oldPrice}' to '{newPrice}' for variant '{variantToUpdate.VariantName}'",
+                        changeDescription);
+
+                    _context.SaveChanges();
+
+                    MessageBox.Show($"Price updated successfully from {oldPrice.ToString("F2")} to {newPrice.ToString("F2")}",
+                        "Price Update",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                else
+                {
+                    // Revert the price change
+                    variantToUpdate.Price = originalVariantPrice;
+                }
             }
+            numericUpDownPriceChanges.Value = numericUpDownPriceChanges.Minimum;
         }
 
         private void UpdatePriceAll(string variantName, decimal priceChange, bool isIncrease)
         {
             var variantsToUpdate = _context.ProductVariants.Where(pv => pv.VariantName == variantName).ToList();
+
+            // Store original prices for all variants
+            var originalPrices = variantsToUpdate.ToDictionary(v => v.ProductVariantID, v => v.Price);
+
             string changeDescription = DialogHelper.ShowInputDialog(
-                      formTitle: "Enter Change Description",
-                      labelText: "Change Description:",
-                      validationMessage: "Description cannot be empty.",
-                      validateInput: input => !string.IsNullOrWhiteSpace(input)
-                  );
-            foreach (var variant in variantsToUpdate)
+                formTitle: "Enter Change Description",
+                labelText: "Change Description:",
+                validationMessage: "Description cannot be empty.",
+                validateInput: input => !string.IsNullOrWhiteSpace(input)
+            );
+
+            if (changeDescription != null) // Check if the dialog was closed
             {
-                string originalPrice = variant.Price.ToString();
+                foreach (var variant in variantsToUpdate)
+                {
+                    string originalPrice = variant.Price.ToString();
 
-                variant.Price = isIncrease ? variant.Price + priceChange : variant.Price - priceChange;
-                LoggingHelper.LogChange("ProductVariants", variant.ProductVariantID, "Price", originalPrice, variant.Price.ToString(), "Updated", $"Price changed from '{originalPrice}' to '{variant.Price}' for variant '{variant.VariantName}'", changeDescription);
+                    variant.Price = isIncrease ? variant.Price + priceChange : variant.Price - priceChange;
 
+                    LoggingHelper.LogChange("ProductVariants",
+                                            variant.ProductVariantID,
+                                            "Price",
+                                            originalPrice,
+                                            variant.Price.ToString(),
+                                            "Updated",
+                                            $"Price changed from '{originalPrice}' to '{variant.Price}' for variant '{variant.VariantName}'",
+                                            changeDescription);
+                }
 
+                // Update the displayed price (assuming you want to show the first variant's price)
+                txtBoxCurrentPrice.Text = variantsToUpdate.FirstOrDefault()?.Price.ToString("F2") ?? "0.00";
+
+                // Show message box
+                MessageBox.Show($"Prices updated successfully for all variants of '{variantName}'",
+                                "Price Update",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+
+                _context.SaveChanges(); // Save changes after updating all variants
             }
+            else
+            {
+                // Revert the price changes for all variants
+                foreach (var variant in variantsToUpdate)
+                {
+                    variant.Price = originalPrices[variant.ProductVariantID];
+                }
+            }
+            numericUpDownPriceChanges.Value = numericUpDownPriceChanges.Minimum;
 
-            // Update the displayed price (assuming you want to show the first variant's price)
-            txtBoxCurrentPrice.Text = variantsToUpdate.FirstOrDefault()?.Price.ToString("F2") ?? "0.00";
         }
-
 
         private void btnIncreasePrice_Click(object sender, EventArgs e)
         {

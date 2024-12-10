@@ -304,5 +304,15 @@ namespace TakoTea.Views.Items
         {
             CheckedListBoxHelper.ClearAllCheckedListBoxesInPanel(panelFilteringComponents);
         }
+
+        private void checkBoxIsAddOn_CheckedChanged(object sender, EventArgs e)
+        {
+            FilterIngredients();
+        }
+
+        private void materialLabel2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

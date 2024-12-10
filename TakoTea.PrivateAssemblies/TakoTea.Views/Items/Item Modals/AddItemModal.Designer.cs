@@ -364,6 +364,7 @@ namespace TakoTea.View.Items.Item_Modals {
             this.btnResetIngredientImg.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnResetIngredientImg.UseAccentColor = false;
             this.btnResetIngredientImg.UseVisualStyleBackColor = true;
+            this.btnResetIngredientImg.Click += new System.EventHandler(this.btnResetIngredientImg_Click);
             // 
             // btnBrowseForIngredientImg
             // 
@@ -664,6 +665,7 @@ namespace TakoTea.View.Items.Item_Modals {
             this.btnCancel.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnCancel.UseAccentColor = true;
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click_1);
             // 
             // panel2
             // 

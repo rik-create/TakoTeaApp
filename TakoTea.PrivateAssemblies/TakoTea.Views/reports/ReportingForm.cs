@@ -229,7 +229,7 @@ namespace TakoTea.Views.reports
             // Add a table to organize the data
             var table = new PdfPTable(3) { WidthPercentage = 100 };
             table.AddCell(new PdfPCell(new Phrase("Order Date")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 5 });
-            table.AddCell(new PdfPCell(new Phrase("Total Amount")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 5 });
+            table.AddCell(new PdfPCell(new Phrase("Gross Revenue")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 5 });
             table.AddCell(new PdfPCell(new Phrase("Gross Profit")) { BackgroundColor = BaseColor.LIGHT_GRAY, Padding = 5 });
 
             foreach (var item in salesSummary)

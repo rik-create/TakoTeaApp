@@ -12,6 +12,9 @@ using System.Net.Security;
 using System.IO;
 using TakoTea.Views.Batches;
 using Helpers;
+using System.util;
+using System.Drawing.Imaging;
+using System.Drawing;
 
 
 namespace TakoTea.View.Items.Item_Modals
@@ -84,27 +87,39 @@ namespace TakoTea.View.Items.Item_Modals
             if (string.IsNullOrWhiteSpace(txtBoxName.Text) ||
                 string.IsNullOrWhiteSpace(txtBoxBrandName.Text) ||
                 string.IsNullOrWhiteSpace(txtBoxItemDescription.Text) ||
-                pictureBoxImg.Image == null ||
                 cmbboxStorageCondition.SelectedItem == null ||
                 cmbTypeOfIngredient.SelectedItem == null ||
                 cmbMeasuringUnit.SelectedItem == null)
             {
-                MessageBox.Show("Please fill in all required fields and select an image.");
+                MessageBox.Show("Please fill in all required fields");
                 return;
             }
 
             // Load the image into a byte array
             byte[] imageData;
-            using (var ms = new MemoryStream())
+            if (pictureBoxImg.Image != null)
             {
-                pictureBoxImg.Image.Save(ms, pictureBoxImg.Image.RawFormat);
-                imageData = ms.ToArray();
+                using (var ms = new MemoryStream())
+                {
+                    pictureBoxImg.Image.Save(ms, pictureBoxImg.Image.RawFormat);
+                    imageData = ms.ToArray();
+                }
+            }
+            else
+            {
+                // Set default image if null 
+                pictureBoxImg.Image = TakoTea.Views.Properties.Resources.restart1;
+                imageData = TakoTea.Views.Properties.Resources.restart1.ToByteArray(System.Drawing.Imaging.ImageFormat.Png);
+
+
             }
 
             bool isAddOn = chkIsAddOn.Checked;
 
             using (var transaction = _context.Database.BeginTransaction())
             {
+
+                string type = "Ingredient";
                 try
                 {
                     if (isAddOn)
@@ -117,7 +132,7 @@ namespace TakoTea.View.Items.Item_Modals
                             IngredientID = _inventoryService.GetNextIngredientId(),
                             QuantityUsedPerProduct = numericUpDownQuantityUsedPerProduct.Value
                         };
-
+                        type = "AddOn";
                         _inventoryService.AddAddon(addOn);
                     }
 
@@ -151,7 +166,7 @@ namespace TakoTea.View.Items.Item_Modals
                         $"Ingredient '{ingredient.IngredientName}' added with ID '{ingredient.IngredientID}'", ""  // Description
                     );
 
-                    _ = MessageBox.Show("Ingredient added successfully.");
+                    _ = MessageBox.Show(type + " added successfully.");
                     OpenAddBatchModal(ingredient);
                     this.Close();
                 }
@@ -215,6 +230,31 @@ namespace TakoTea.View.Items.Item_Modals
         private void groupBoxOther_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnCancel_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnResetIngredientImg_Click(object sender, EventArgs e)
+        {
+            if (pictureBoxImg != null)
+            {
+                pictureBoxImg.Image = null;
+            }
+        }
+    }
+
+    public static class ImageExtensions
+    {
+        public static byte[] ToByteArray(this Image image, ImageFormat format)
+        {
+            using (var ms = new MemoryStream())
+            {
+                image.Save(ms, format);
+                return ms.ToArray();
+            }
         }
     }
 }

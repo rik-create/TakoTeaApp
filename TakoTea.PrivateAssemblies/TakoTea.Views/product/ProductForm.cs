@@ -13,6 +13,7 @@ using TakoTea.Product;
 using TakoTea.Repository;
 using TakoTea.Services;
 using TakoTea.View.Product.Product_Modals;
+using TakoTea.Views.product;
 namespace TakoTea.Product
 {
     public partial class ProductForm : MaterialForm
@@ -189,7 +190,7 @@ namespace TakoTea.Product
         }
 
         // In your ProductVariantListForm class
-
+/*
         private void dataGridViewProductVariantList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             // Check if a valid row was double-clicked
@@ -212,7 +213,7 @@ namespace TakoTea.Product
             }
 
 
-        }
+        }*/
 
 
         private void materialFloatingActionButtonCopyInformation_Click(object sender, EventArgs e)
@@ -292,6 +293,27 @@ namespace TakoTea.Product
             AddProductCategoryModal addProductCategoryModal = new AddProductCategoryModal(new ProductCategoryService(new DataAccessObject()));
             _ = addProductCategoryModal.ShowDialog();
 
+        }
+
+        private void dataGridViewProductList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if a valid row is double-clicked
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && !dataGridViewProductList.Rows[e.RowIndex].IsNewRow)
+            {
+                try
+                {
+                    // Get the ProductID from the selected row
+                    int productId = Convert.ToInt32(dataGridViewProductList.Rows[e.RowIndex].Cells["ProductID"].Value);
+
+                    // Create and show the ProductDetailsForm
+                    ProductDetailsForm productDetailsForm = new ProductDetailsForm(productId);
+                    productDetailsForm.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error opening product details form: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 

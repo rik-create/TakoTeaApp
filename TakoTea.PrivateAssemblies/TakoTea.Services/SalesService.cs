@@ -18,9 +18,73 @@ namespace TakoTea.Services
         {
             this.context = context;
             productsService = new ProductsService(context);
+        }// In the SalesService.cs file
+
+        public List<(DateTime Date, decimal? Revenue)> GetGrossRevenuePerDay(int productId)
+        {
+            using (var context = new Entities())
+            {
+                var query = from oi in context.OrderItems
+                            join o in context.OrderModels on oi.OrderId equals o.OrderId
+                            join pv in context.ProductVariants on oi.ProductVariantId equals pv.ProductVariantID
+                            where pv.ProductID == productId
+                            group oi by o.OrderDate into g
+                            select new
+                            {
+                                OrderDate = g.Key,
+                                Revenue = g.Sum(oi => oi.TotalPrice)
+                            };
+
+                return query.AsEnumerable()
+                            .Select(x => (x.OrderDate.Date, x.Revenue))
+                            .ToList();
+            }
         }
 
-            public decimal CalculateTotalRevenue(DateTime startDate, DateTime endDate)
+        public List<(string ProductName, int Sales)> GetSalesPerProduct(int productId)
+        {
+            using (var context = new Entities())
+            {
+                var query = from oi in context.OrderItems
+                            join pv in context.ProductVariants on oi.ProductVariantId equals pv.ProductVariantID
+                            where pv.ProductID == productId
+                            group oi by pv.VariantName into g
+                            select new
+                            {
+                                ProductName = g.Key,
+                                Sales = g.Sum(oi => oi.Quantity)
+                            };
+
+                return query.AsEnumerable()
+                            .Select(x => (x.ProductName, x.Sales))
+                            .ToList();
+            }
+        }
+
+        public List<(string VariantName, int Sales)> GetTop5ProductVariantsBySales(int productId)
+        {
+            using (var context = new Entities())
+            {
+                var query = (from oi in context.OrderItems
+                             join pv in context.ProductVariants on oi.ProductVariantId equals pv.ProductVariantID
+                             where pv.ProductID == productId
+                             group oi by pv.VariantName into g
+                             select new
+                             {
+                                 VariantName = g.Key,
+                                 Sales = g.Sum(oi => oi.Quantity)
+                             })
+                             .OrderByDescending(x => x.Sales)
+                             .Take(5);
+
+                return query.AsEnumerable()
+                            .Select(x => (x.VariantName, x.Sales))
+                            .ToList();
+            }
+        }
+
+
+        public decimal CalculateTotalRevenue(DateTime startDate, DateTime endDate)
             {
                 return context.OrderModels
                     .Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate)

@@ -17,6 +17,20 @@ namespace TakoTea.Services
             _context = context;
         }
 
+        public List<ProductVariant> GetProductVariantsByProductId(int productId)
+        {
+            try
+            {
+                return _context.ProductVariants
+                    .Where(pv => pv.ProductID == productId)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error retrieving product variants for product ID {productId}: {ex.Message}");
+            }
+        }
+
         public List<ComboMeal> GetAllComboMeals()
         {
            

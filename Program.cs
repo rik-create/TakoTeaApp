@@ -13,6 +13,7 @@ using TakoTea.Views.mainform;
 using TakoTea.Views.MainForm;
 using TakoTea.Views.Order.Order_Modals;
 using TakoTea.Views.Other;
+using TakoTea.Views.product;
 using TakoTea.Views.reports;
 using TakoTea.Views.settings;
 namespace TakoTea

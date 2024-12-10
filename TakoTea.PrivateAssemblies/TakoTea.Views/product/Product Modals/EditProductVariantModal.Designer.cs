@@ -53,6 +53,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnCancel = new MaterialSkin.Controls.MaterialButton();
             this.btnConfirm = new MaterialSkin.Controls.MaterialButton();
+            this.label1 = new System.Windows.Forms.Label();
             this.materialCard1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProductImage)).BeginInit();
@@ -80,6 +81,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btnResetIngredientImg);
             this.groupBox1.Controls.Add(this.btnBrowseForIngredientImg);
             this.groupBox1.Controls.Add(this.pictureBoxProductImage);
@@ -505,6 +507,16 @@
             this.btnConfirm.UseVisualStyleBackColor = true;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(392, 280);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(188, 15);
+            this.label1.TabIndex = 121;
+            this.label1.Text = "*changes are applied immedietly";
+            // 
             // EditProductVariantModal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -557,5 +569,6 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel7;
         private MaterialSkin.Controls.MaterialButton btnResetIngredientImg;
         private MaterialSkin.Controls.MaterialButton btnBrowseForIngredientImg;
+        private System.Windows.Forms.Label label1;
     }
 }

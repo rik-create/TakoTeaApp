@@ -531,6 +531,12 @@
     <Compile Include="product\ProductCategoryForm.Designer.cs">
       <DependentUpon>ProductCategoryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="product\ProductDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="product\ProductDetailsForm.Designer.cs">
+      <DependentUpon>ProductDetailsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="product\ProductForm.cs">
       <SubType>Form</SubType>
     </Compile>
