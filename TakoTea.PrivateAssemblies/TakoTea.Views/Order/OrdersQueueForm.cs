@@ -64,9 +64,9 @@ namespace TakoTea.View.Orders
             int processingOrdersCount = salesService.GetOrderQueue().Count(o => o.OrderStatus == "Processing");
             labelProcessingOrdersCount.Text = $"Total processing orders: {processingOrdersCount.ToString()}";
 
-            dgViewOrderQueue.Columns["TotalAmount"].DefaultCellStyle.Format = "₱#,##0.00";
+      /*      dgViewOrderQueue.Columns["TotalAmount"].DefaultCellStyle.Format = "₱#,##0.00";
             dgViewOrderQueue.Columns["PaymentAmount"].DefaultCellStyle.Format = "₱#,##0.00";
-            dgViewOrderQueue.Columns["ChangeAmount"].DefaultCellStyle.Format = "₱#,##0.00";
+            dgViewOrderQueue.Columns["ChangeAmount"].DefaultCellStyle.Format = "₱#,##0.00";*/
 
 
 
@@ -201,7 +201,7 @@ namespace TakoTea.View.Orders
                 if (order != null)
                 {
                     order.OrderStatus = newStatus;
-                    order.PaymentStatus = newStatus == "Completed" ? "Completed" : order.PaymentStatus;
+                    order.PaymentStatus = newStatus == "Completed" ? "Paid" : order.PaymentStatus;
 
                     // Log the change
                     LoggingHelper.LogChange(
