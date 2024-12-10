@@ -66,7 +66,6 @@ namespace TakoTea.Services
             using (var context = new Entities())
             {
                 return context.PaymentMethods
-                    .Where(p => p.IsActive) // Filter for active payment methods
                     .Select(p => p.MethodName)
                     .ToList();
             }

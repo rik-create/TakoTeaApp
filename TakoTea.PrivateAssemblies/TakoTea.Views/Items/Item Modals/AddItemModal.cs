@@ -31,8 +31,9 @@ namespace TakoTea.View.Items.Item_Modals
             ThemeConfigurator.ApplyDarkTheme(this);
             ModalSettingsConfigurator.ApplyStandardModalSettings(this);
             PopulateAllergens(materialCheckedListBoxAllergens);
-            productsService = new ProductsService(_context);
             _context = new Entities();
+
+            productsService = new ProductsService(_context);
             PopulateComboboxUseFor();
             numericUpDownAddOnPrice.Visible = true;
             lblAdditionalPrice.Visible = true;

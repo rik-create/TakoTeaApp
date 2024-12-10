@@ -32,8 +32,9 @@
             this.panelDashboard = new System.Windows.Forms.Panel();
             this.tabPageProduct = new System.Windows.Forms.TabPage();
             this.menuStripProduct = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItemVariants = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemProducts = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemVariants = new System.Windows.Forms.ToolStripMenuItem();
+            this.comboMealsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.variantsChangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelProduct = new System.Windows.Forms.Panel();
             this.tabPageSales = new System.Windows.Forms.TabPage();
@@ -44,6 +45,7 @@
             this.toolStripMenuItemList = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.ingredientChangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addOnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPageStock = new System.Windows.Forms.TabPage();
             this.panelStock = new System.Windows.Forms.Panel();
             this.tabPageBatch = new System.Windows.Forms.TabPage();
@@ -60,13 +62,12 @@
             this.toolStripBtnNewOrder = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnAddIngredient = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnAddProduct = new System.Windows.Forms.ToolStripButton();
-            this.buttonQuickAccess = new MaterialSkin.Controls.MaterialButton();
-            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
-            this.comboMealsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.takoTeaLabel1 = new TakoTea.Controls.TakoTeaLabel();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.addOnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonQuickAccess = new MaterialSkin.Controls.MaterialButton();
+            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
+            this.takoTeaLabel1 = new TakoTea.Controls.TakoTeaLabel();
+            this.materialButtonlow = new MaterialSkin.Controls.MaterialButton();
             this.materialTabControl1.SuspendLayout();
             this.tabPageDashboard.SuspendLayout();
             this.tabPageProduct.SuspendLayout();
@@ -155,6 +156,13 @@
             this.menuStripProduct.TabIndex = 5;
             this.menuStripProduct.Text = "Dashboard Sections";
             // 
+            // toolStripMenuItemProducts
+            // 
+            this.toolStripMenuItemProducts.Name = "toolStripMenuItemProducts";
+            this.toolStripMenuItemProducts.Size = new System.Drawing.Size(66, 20);
+            this.toolStripMenuItemProducts.Text = "Products";
+            this.toolStripMenuItemProducts.Click += new System.EventHandler(this.toolStripMenuItemProducts_Click_1);
+            // 
             // toolStripMenuItemVariants
             // 
             this.toolStripMenuItemVariants.Name = "toolStripMenuItemVariants";
@@ -162,12 +170,12 @@
             this.toolStripMenuItemVariants.Text = "Variants";
             this.toolStripMenuItemVariants.Click += new System.EventHandler(this.toolStripMenuItemVariants_Click);
             // 
-            // toolStripMenuItemProducts
+            // comboMealsToolStripMenuItem
             // 
-            this.toolStripMenuItemProducts.Name = "toolStripMenuItemProducts";
-            this.toolStripMenuItemProducts.Size = new System.Drawing.Size(66, 20);
-            this.toolStripMenuItemProducts.Text = "Products";
-            this.toolStripMenuItemProducts.Click += new System.EventHandler(this.toolStripMenuItemProducts_Click_1);
+            this.comboMealsToolStripMenuItem.Name = "comboMealsToolStripMenuItem";
+            this.comboMealsToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
+            this.comboMealsToolStripMenuItem.Text = "Combo Meals";
+            this.comboMealsToolStripMenuItem.Click += new System.EventHandler(this.comboMealsToolStripMenuItem_Click);
             // 
             // variantsChangesToolStripMenuItem
             // 
@@ -261,6 +269,13 @@
             this.ingredientChangesToolStripMenuItem.Size = new System.Drawing.Size(122, 20);
             this.ingredientChangesToolStripMenuItem.Text = "Ingredient Changes";
             this.ingredientChangesToolStripMenuItem.Click += new System.EventHandler(this.ingredientChangesToolStripMenuItem_Click);
+            // 
+            // addOnsToolStripMenuItem
+            // 
+            this.addOnsToolStripMenuItem.Name = "addOnsToolStripMenuItem";
+            this.addOnsToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.addOnsToolStripMenuItem.Text = "AddOns";
+            this.addOnsToolStripMenuItem.Click += new System.EventHandler(this.addOnsToolStripMenuItem_Click);
             // 
             // tabPageStock
             // 
@@ -429,6 +444,28 @@
             this.toolStripBtnAddProduct.Text = "Add New Product";
             this.toolStripBtnAddProduct.Click += new System.EventHandler(this.toolStripBtnAddProduct_Click);
             // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton1.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(151, 25);
+            this.toolStripButton1.Text = "Reports";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton2.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(151, 25);
+            this.toolStripButton2.Text = "Settings";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+            // 
             // buttonQuickAccess
             // 
             this.buttonQuickAccess.AutoSize = false;
@@ -471,13 +508,6 @@
             this.materialButton1.UseVisualStyleBackColor = true;
             this.materialButton1.Click += new System.EventHandler(this.btnReload_Click);
             // 
-            // comboMealsToolStripMenuItem
-            // 
-            this.comboMealsToolStripMenuItem.Name = "comboMealsToolStripMenuItem";
-            this.comboMealsToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
-            this.comboMealsToolStripMenuItem.Text = "Combo Meals";
-            this.comboMealsToolStripMenuItem.Click += new System.EventHandler(this.comboMealsToolStripMenuItem_Click);
-            // 
             // takoTeaLabel1
             // 
             this.takoTeaLabel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(32)))), ((int)(((byte)(35)))));
@@ -487,34 +517,26 @@
             this.takoTeaLabel1.Size = new System.Drawing.Size(149, 47);
             this.takoTeaLabel1.TabIndex = 9;
             // 
-            // toolStripButton1
+            // materialButtonlow
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(151, 25);
-            this.toolStripButton1.Text = "Reports";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton2.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(151, 25);
-            this.toolStripButton2.Text = "Settings";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
-            // 
-            // addOnsToolStripMenuItem
-            // 
-            this.addOnsToolStripMenuItem.Name = "addOnsToolStripMenuItem";
-            this.addOnsToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-            this.addOnsToolStripMenuItem.Text = "AddOns";
-            this.addOnsToolStripMenuItem.Click += new System.EventHandler(this.addOnsToolStripMenuItem_Click);
+            this.materialButtonlow.AutoSize = false;
+            this.materialButtonlow.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButtonlow.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Dense;
+            this.materialButtonlow.Depth = 0;
+            this.materialButtonlow.HighEmphasis = false;
+            this.materialButtonlow.Icon = null;
+            this.materialButtonlow.Location = new System.Drawing.Point(952, 40);
+            this.materialButtonlow.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButtonlow.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialButtonlow.Name = "materialButtonlow";
+            this.materialButtonlow.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.materialButtonlow.Size = new System.Drawing.Size(128, 24);
+            this.materialButtonlow.TabIndex = 10;
+            this.materialButtonlow.Text = "send lowstock";
+            this.materialButtonlow.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.materialButtonlow.UseAccentColor = true;
+            this.materialButtonlow.UseVisualStyleBackColor = true;
+            this.materialButtonlow.Click += new System.EventHandler(this.materialButtonlow_Click);
             // 
             // TakoTeaForm
             // 
@@ -522,6 +544,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(1313, 774);
+            this.Controls.Add(this.materialButtonlow);
             this.Controls.Add(this.takoTeaLabel1);
             this.Controls.Add(this.materialButton1);
             this.Controls.Add(this.buttonQuickAccess);
@@ -600,5 +623,6 @@
         private System.Windows.Forms.ToolStripMenuItem batchChangesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem comboMealsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addOnsToolStripMenuItem;
+        private MaterialSkin.Controls.MaterialButton materialButtonlow;
     }
 }

@@ -569,5 +569,10 @@ namespace TakoTea.Views.MainForm
             LoadFormIntoPanel("AddOns", panelItem);
 
         }
+
+        private void materialButtonlow_Click(object sender, EventArgs e)
+        {
+            CheckInventoryAndSendNotifications(null, null);
+        }
     }
 }
