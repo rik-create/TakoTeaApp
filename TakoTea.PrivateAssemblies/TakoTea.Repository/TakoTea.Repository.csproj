@@ -81,6 +81,7 @@
     <Compile Include="LogChangesRepository.cs" />
     <Compile Include="LogsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalesRepository.cs" />
     <Compile Include="StockAdjustmentRepository.cs" />
     <Compile Include="UserRepository.cs" />
   </ItemGroup>

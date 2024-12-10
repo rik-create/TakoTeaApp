@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TakoTea.Models
 {
@@ -18,17 +13,17 @@ namespace TakoTea.Models
 
         public decimal BatchCost { get; set; }
 
-        public bool IsActive {  get; set; }
+        public bool IsActive { get; set; }
 
         public decimal ReorderLevel { get; set; }
 
         public DateTime ExpirationDate { get; set; }
 
 
- 
+
         public BatchModel() { }
 
-        public BatchModel(int batchID, int ingredientID, string batchNumber, decimal quantity, string measuringUnit, decimal cost, decimal lowLevel, DateTime expiration , bool isActive)
+        public BatchModel(int batchID, int ingredientID, string batchNumber, decimal quantity, string measuringUnit, decimal cost, decimal lowLevel, DateTime expiration, bool isActive)
         {
             BatchID = batchID;
             IngredientID = ingredientID;
@@ -39,7 +34,7 @@ namespace TakoTea.Models
             ReorderLevel = lowLevel;
             ExpirationDate = expiration;
             IsActive = isActive;
-     
+
         }
 
     }

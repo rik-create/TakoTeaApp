@@ -1,29 +1,24 @@
 ﻿using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Markup;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
-using TakoTea.Interfaces;
 using TakoTea.Models;
-using TakoTea.Product;
 using TakoTea.Repository;
 using TakoTea.Services;
-using TakoTea.View.Sales;
 using TakoTea.Views.Order;
 namespace TakoTea.Product
 {
     public partial class SalesListForm : MaterialForm
     {
-        DataAccessObject _dataAccessObject;
-        ProductsService _productService;
-        SalesService _salesService;
-        MenuOrderFormService menuOrderFormService;
-        Entities _context;
+        private readonly DataAccessObject _dataAccessObject;
+        private readonly ProductsService _productService;
+        private readonly SalesService _salesService;
+        private readonly MenuOrderFormService menuOrderFormService;
+        private readonly Entities _context;
         public SalesListForm()
         {
             InitializeComponent();
@@ -34,8 +29,13 @@ namespace TakoTea.Product
             _productService = new ProductsService(_context);
             _salesService = new SalesService(_context);
             menuOrderFormService = new MenuOrderFormService();
-            LoadData();
             DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewSalesList);
+            dateTimePickerStartDate.MinDate = new DateTime(2019, 1, 1);
+            dateTimePickerEndDate.MaxDate = new DateTime(2400, 12, 31);
+
+            LoadData();
+            clearFilters();
+
 
 
             DataGridViewHelper.FormatColumnHeaders(dataGridViewSalesList);
@@ -68,21 +68,21 @@ namespace TakoTea.Product
                 errorMessage: "Failed to load product variants."
             );
 
-            var orderStatuses = _salesService.GetAllSales()
+            List<string> orderStatuses = _salesService.GetAllSales()
                                  .Select(s => s.OrderStatus)
                                  .Distinct()
                                  .ToList();
             chkListBoxOrderStatus.DataSource = orderStatuses;
 
             // Fill checkedListBoxPaymentMethod
-            var paymentMethods = _salesService.GetAllSales()
+            List<string> paymentMethods = _salesService.GetAllSales()
                                              .Select(s => s.PaymentMethod)
                                              .Distinct()
                                              .ToList();
             checkedListBoxPaymentMethod.DataSource = paymentMethods;
 
             // Fill checkedListBoxPaymentStatus
-            var paymentStatuses = _salesService.GetAllSales()
+            List<string> paymentStatuses = _salesService.GetAllSales()
                                               .Select(s => s.PaymentStatus)
                                               .Distinct()
                                               .ToList();
@@ -113,14 +113,14 @@ namespace TakoTea.Product
             {
                 string searchTerm = txtBoxSearchSales.Text.ToLower().Trim();
 
-                var selectedOrderStatuses = chkListBoxOrderStatus.CheckedItems.Cast<string>().ToList();
-                var selectedPaymentMethods = checkedListBoxPaymentMethod.CheckedItems.Cast<string>().ToList();
-                var selectedPaymentStatuses = checkedListBoxPaymentStatus.CheckedItems.Cast<string>().ToList();
+                List<string> selectedOrderStatuses = chkListBoxOrderStatus.CheckedItems.Cast<string>().ToList();
+                List<string> selectedPaymentMethods = checkedListBoxPaymentMethod.CheckedItems.Cast<string>().ToList();
+                List<string> selectedPaymentStatuses = checkedListBoxPaymentStatus.CheckedItems.Cast<string>().ToList();
 
                 DateTime startDate = dateTimePickerStartDate.Value.Date;
                 DateTime endDate = dateTimePickerEndDate.Value.Date.AddDays(1).AddTicks(-1); // End of the selected day
 
-                var filteredSales = _salesService.GetAllSales()
+                IEnumerable<SalesData> filteredSales = _salesService.GetAllSales()
                     .Where(sale =>
                         (string.IsNullOrWhiteSpace(searchTerm) ||
                          sale.OrderId.ToString().Contains(searchTerm) ||
@@ -137,7 +137,7 @@ namespace TakoTea.Product
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error filtering sales: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show("Error filtering sales: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -193,7 +193,7 @@ namespace TakoTea.Product
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error opening the edit modal: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    _ = MessageBox.Show("Error opening the edit modal: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
 
@@ -210,7 +210,7 @@ namespace TakoTea.Product
                 DateTime startDate = dateTimePickerStartDate.Value.Date;
                 DateTime endDate = dateTimePickerEndDate.Value.Date.AddDays(1).AddTicks(-1); // End of the selected day
 
-                var filteredSales = _salesService.GetAllSales()
+                List<SalesData> filteredSales = _salesService.GetAllSales()
                     .Where(sale => sale.OrderDate >= startDate && sale.OrderDate <= endDate)
                     .ToList();
 
@@ -218,7 +218,7 @@ namespace TakoTea.Product
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error filtering sales by date range: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show("Error filtering sales by date range: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -230,9 +230,16 @@ namespace TakoTea.Product
 
         private void btnClearFilters_Click(object sender, EventArgs e)
         {
+            clearFilters();
+
+        }
+
+        private void clearFilters()
+        {
+            DateHelper.InitializeDateTimePickers(dateTimePickerStartDate, dateTimePickerEndDate);
+
             CheckedListBoxHelper.ClearAllCheckedListBoxesInPanel(panelFilteringComponents);
             FilterSales();
-
         }
 
         private void materialLabel21_Click(object sender, EventArgs e)

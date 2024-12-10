@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TakoTea.Models
+﻿namespace TakoTea.Models
 {
     public class ProductCategoryModel
     {

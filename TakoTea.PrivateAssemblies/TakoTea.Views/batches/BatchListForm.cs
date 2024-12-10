@@ -2,16 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
 using TakoTea.Models;
 using TakoTea.Repository;
-using TakoTea.Services;
-using TakoTea.View.Items.Item_Modals;
 using TakoTea.Views.Batches;
+using static TakoTea.Repository.BatchRepository;
 namespace TakoTea.View.Batches
 {
     public partial class BatchListForm : MaterialForm
@@ -28,6 +28,17 @@ namespace TakoTea.View.Batches
             LoadData();
             DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewBatch);
             DataGridViewHelper.HideColumn(dataGridViewBatch, "BatchID");
+            DataGridViewHelper.HideColumn(dataGridViewBatch, "Active");
+            DateHelper.InitializeDateTimePickers(dateTimePickerStartDate, dateTimePickerEndDate);
+
+            btnClearFilters.Click += btnClearFilters_Click;
+
+            DataGridViewHelper.FormatColumnHeaders(dataGridViewBatch);
+
+
+
+            materialTextBox21.TextChanged += txtSearch_TextChanged;
+
 
 
         }
@@ -36,15 +47,21 @@ namespace TakoTea.View.Batches
 
 
             DataGridViewHelper.LoadData(
-             dataRetrievalFunc: () => _batchRepo.GetAllBatches(),
+             dataRetrievalFunc: () => _batchRepo.GetAllBatch(),
              dataGridView: dataGridViewBatch,
              bindingSource: bindingSource1,
              bindingNavigator: bindingNavigatorBatch,
              errorMessage: "Failed to load batch data."
 
          );
-            DataGridViewHelper.FormatColumnHeaders(dataGridViewBatch);
 
+        }
+
+
+        private async void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            await Task.Delay(300);
+            FilterBatch();
         }
         private void btnShowFilter_Click(object sender, EventArgs e)
         {
@@ -54,12 +71,12 @@ namespace TakoTea.View.Batches
         private void floatingActionButtonAddBatch_Click_1(object sender, EventArgs e)
         {
             AddBatchModal newBatchForm = new AddBatchModal();
-             newBatchForm.ShowDialog();
+            _ = newBatchForm.ShowDialog();
             LoadData();
         }
         private void buttonEditBatch_Click(object sender, EventArgs e)
         {
-         
+
         }
         private void BatchListForm_Load(object sender, EventArgs e)
         {
@@ -68,15 +85,20 @@ namespace TakoTea.View.Batches
 
 
         }
-                 protected override void OnLoad(EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
             LoadData();
 
         }
 
-
-     
+        private void btnClearFilters_Click(object sender, EventArgs e)
+        {
+            DateHelper.InitializeDateTimePickers(dateTimePickerStartDate, dateTimePickerEndDate);
+/*            FilterPanelHelper.ResetFilters(dateTimePickerStartDate, dateTimePickerEndDate, "Ingredients", "Timestamp");
+*/            CheckedListBoxHelper.ClearAllCheckedListBoxesInPanel(panelFilteringComponents);
+            FilterBatch();
+        }
 
 
 
@@ -120,9 +142,9 @@ namespace TakoTea.View.Batches
                     // 4. Open the EditBatchModal with the selected batch
                     if (selectedBatch != null)
                     {
-                        using (var editBatchModal = new EditBatchModal(selectedBatch))
+                        using (EditBatchModal editBatchModal = new EditBatchModal(selectedBatch))
                         {
-                            editBatchModal.ShowDialog();
+                            _ = editBatchModal.ShowDialog();
 
                             // 5. Refresh the DataGridView after editing (optional)
                             LoadData(); // Assuming you have a method to load batch data into the DataGridView
@@ -160,10 +182,17 @@ namespace TakoTea.View.Batches
             {
                 DateTime startDate = dateTimePickerStartDate.Value.Date;
                 DateTime endDate = dateTimePickerEndDate.Value.Date.AddDays(1).AddTicks(-1); // End of the selected day
+                string searchTerm = materialTextBox21.Text.Trim().ToLower(); // Get the search term
 
-                var filteredBatches = _batchRepo.GetAllBatches()
-                    .Cast<Batch>() // Cast objects to Batch type
-                    .Where(batch => batch.ExpirationDate >= startDate && batch.ExpirationDate <= endDate)
+                List<BatchDTO> filteredBatches = _batchRepo.GetAllBatch()
+                    .Where(batch =>
+                        batch.ExpirationDate >= startDate &&
+                        batch.ExpirationDate <= endDate &&
+                        (
+                            batch.BatchNumber.ToLower().Contains(searchTerm) ||
+                            batch.IngredientName.ToLower().Contains(searchTerm)
+                        )
+                    )
                     .ToList();
 
                 // Assuming you have a DataGridView named dataGridViewBatch and a BindingSource named bindingSource1
@@ -171,7 +200,7 @@ namespace TakoTea.View.Batches
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error filtering batches: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show("Error filtering batches: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void dateTimePickerEndDate_ValueChanged(object sender, EventArgs e)

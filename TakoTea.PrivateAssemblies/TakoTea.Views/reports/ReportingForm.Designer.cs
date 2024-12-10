@@ -62,6 +62,7 @@ namespace TakoTea.Views.reports
 
         {
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            this.pdfViewer1 = new PdfiumViewer.PdfViewer();
             this.btnClearFilters = new MaterialSkin.Controls.MaterialButton();
             this.btnGenerateReport = new MaterialSkin.Controls.MaterialButton();
             this.groupBoxDateRange = new System.Windows.Forms.GroupBox();
@@ -79,7 +80,6 @@ namespace TakoTea.Views.reports
             this.lstReportTypes = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.pdfViewer1 = new PdfiumViewer.PdfViewer();
             this.materialCard1.SuspendLayout();
             this.groupBoxDateRange.SuspendLayout();
             this.groupBoxReportSelection.SuspendLayout();
@@ -90,7 +90,6 @@ namespace TakoTea.Views.reports
             // 
             this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.materialCard1.Controls.Add(this.pdfViewer1);
-            this.materialCard1.Controls.Add(this.btnClearFilters);
             this.materialCard1.Controls.Add(this.btnGenerateReport);
             this.materialCard1.Controls.Add(this.groupBoxDateRange);
             this.materialCard1.Controls.Add(this.groupBoxReportSelection);
@@ -106,6 +105,15 @@ namespace TakoTea.Views.reports
             this.materialCard1.Size = new System.Drawing.Size(954, 839);
             this.materialCard1.TabIndex = 0;
             // 
+            // pdfViewer1
+            // 
+            this.pdfViewer1.AutoScroll = true;
+            this.pdfViewer1.Location = new System.Drawing.Point(12, 248);
+            this.pdfViewer1.Name = "pdfViewer1";
+            this.pdfViewer1.Size = new System.Drawing.Size(934, 542);
+            this.pdfViewer1.TabIndex = 129;
+            this.pdfViewer1.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitBest;
+            // 
             // btnClearFilters
             // 
             this.btnClearFilters.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -114,7 +122,7 @@ namespace TakoTea.Views.reports
             this.btnClearFilters.Enabled = false;
             this.btnClearFilters.HighEmphasis = true;
             this.btnClearFilters.Icon = null;
-            this.btnClearFilters.Location = new System.Drawing.Point(808, 64);
+            this.btnClearFilters.Location = new System.Drawing.Point(520, 0);
             this.btnClearFilters.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnClearFilters.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnClearFilters.Name = "btnClearFilters";
@@ -149,6 +157,7 @@ namespace TakoTea.Views.reports
             // groupBoxDateRange
             // 
             this.groupBoxDateRange.Controls.Add(this.lblSearchHint);
+            this.groupBoxDateRange.Controls.Add(this.btnClearFilters);
             this.groupBoxDateRange.Controls.Add(this.lblFilterHint);
             this.groupBoxDateRange.Controls.Add(this.chkLowStockOnly);
             this.groupBoxDateRange.Controls.Add(this.cboDateRange);
@@ -265,6 +274,8 @@ namespace TakoTea.Views.reports
             // 
             this.dtpEndDate.Checked = false;
             this.dtpEndDate.Location = new System.Drawing.Point(224, 64);
+            this.dtpEndDate.MaxDate = new System.DateTime(2400, 1, 1, 0, 0, 0, 0);
+            this.dtpEndDate.MinDate = new System.DateTime(2020, 12, 31, 0, 0, 0, 0);
             this.dtpEndDate.Name = "dtpEndDate";
             this.dtpEndDate.ShowCheckBox = true;
             this.dtpEndDate.Size = new System.Drawing.Size(192, 20);
@@ -287,6 +298,8 @@ namespace TakoTea.Views.reports
             // 
             this.dtpStartDate.Checked = false;
             this.dtpStartDate.Location = new System.Drawing.Point(12, 64);
+            this.dtpStartDate.MaxDate = new System.DateTime(2400, 1, 1, 0, 0, 0, 0);
+            this.dtpStartDate.MinDate = new System.DateTime(2020, 12, 31, 0, 0, 0, 0);
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.ShowCheckBox = true;
             this.dtpStartDate.Size = new System.Drawing.Size(204, 20);
@@ -351,15 +364,6 @@ namespace TakoTea.Views.reports
             this.materialLabel1.Size = new System.Drawing.Size(153, 24);
             this.materialLabel1.TabIndex = 0;
             this.materialLabel1.Text = "TakoTea Reports";
-            // 
-            // pdfViewer1
-            // 
-            this.pdfViewer1.AutoScroll = true;
-            this.pdfViewer1.Location = new System.Drawing.Point(12, 248);
-            this.pdfViewer1.Name = "pdfViewer1";
-            this.pdfViewer1.Size = new System.Drawing.Size(934, 542);
-            this.pdfViewer1.TabIndex = 129;
-            this.pdfViewer1.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitBest;
             // 
             // ReportingForm
             // 

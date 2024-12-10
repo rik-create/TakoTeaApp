@@ -1,30 +1,22 @@
-﻿using LiveCharts.Wpf;
-using Microsoft.ReportingServices.ReportProcessing.OnDemandReportObjectModel;
-using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
+﻿using Helpers;
+using MailKit.Net.Smtp;
+using MailKit.Security;
 using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
-using MailKit.Net.Smtp;
-using MailKit.Security;
-using System.Security.Policy;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Input;
 using TakoTea.Controls;
-using TakoTea.Interfaces;
+using TakoTea.Helpers;
 using TakoTea.Models;
 using TakoTea.Services;
-using TakoTea.View.Orders;
 using TakoTea.Views.Order.Order_Modals;
-using System.Drawing.Printing;
-using TakoTea.Helpers;
-using Helpers;
 
 namespace TakoTea.Views.Order
 {
@@ -33,7 +25,7 @@ namespace TakoTea.Views.Order
         private readonly Entities _context;
         private readonly ProductsService productsService;
         private readonly SalesService salesService;
-        InventoryService inventoryService;
+        private readonly InventoryService inventoryService;
 
         public MenuOrderFormService()
         {
@@ -46,7 +38,7 @@ namespace TakoTea.Views.Order
         public int GetLatestDraftOrderId()
         {
             int? maxDraftOrderId = _context.DraftOrders.Max(o => (int?)o.DraftOrderId);
-            return (maxDraftOrderId ?? 0);
+            return maxDraftOrderId ?? 0;
         }
         public int UpdateStockLevelsCallCount { get; private set; } // Add a counter
 
@@ -86,7 +78,7 @@ namespace TakoTea.Views.Order
 
         public int GenerateNewOrderId()
         {
-            using (var context = new Entities())
+            using (Entities context = new Entities())
             {
                 // Find the maximum existing OrderId
                 int? maxOrderId = context.OrderModels.Max(o => (int?)o.OrderId);
@@ -102,7 +94,7 @@ namespace TakoTea.Views.Order
         {
             try
             {
-                var order = _context.OrderModels
+                OrderModel order = _context.OrderModels
                     .Include(o => o.OrderItems)
                     .FirstOrDefault(o => o.OrderId == orderId);
 
@@ -111,47 +103,47 @@ namespace TakoTea.Views.Order
                     return;
                 }
 
-                var receiptContent = new StringBuilder();
+                StringBuilder receiptContent = new StringBuilder();
 
                 // Centered and styled header
-                receiptContent.AppendLine("TakoTea".PadLeft(24) + "\n");
-                receiptContent.AppendLine("=".PadRight(42, '='));
-                receiptContent.AppendLine("Order Receipt".PadLeft(27));
-                receiptContent.AppendLine("=".PadRight(42, '=') + "\n"); // Add extra newline for spacing
+                _ = receiptContent.AppendLine("TakoTea".PadLeft(24) + "\n");
+                _ = receiptContent.AppendLine("=".PadRight(42, '='));
+                _ = receiptContent.AppendLine("Order Receipt".PadLeft(27));
+                _ = receiptContent.AppendLine("=".PadRight(42, '=') + "\n"); // Add extra newline for spacing
 
-                receiptContent.AppendLine($"Order ID: {order.OrderId}");
-                receiptContent.AppendLine($"Order Date: {order.OrderDate:yyyy-MM-dd HH:mm:ss}");
+                _ = receiptContent.AppendLine($"Order ID: {order.OrderId}");
+                _ = receiptContent.AppendLine($"Order Date: {order.OrderDate:yyyy-MM-dd HH:mm:ss}");
 
                 if (!string.IsNullOrEmpty(order.CustomerName))
                 {
-                    receiptContent.AppendLine($"Customer: {order.CustomerName}");
+                    _ = receiptContent.AppendLine($"Customer: {order.CustomerName}");
                 }
 
-                receiptContent.AppendLine($"Payment Method: {order.PaymentMethod}");
-                receiptContent.AppendLine($"Payment Status: {order.PaymentStatus}");
+                _ = receiptContent.AppendLine($"Payment Method: {order.PaymentMethod}");
+                _ = receiptContent.AppendLine($"Payment Status: {order.PaymentStatus}");
 
-                receiptContent.AppendLine("\nItems:");
-                foreach (var item in order.OrderItems)
+                _ = receiptContent.AppendLine("\nItems:");
+                foreach (OrderItem item in order.OrderItems)
                 {
                     // Improved formatting for item details
-                    receiptContent.AppendLine($"- {item.ProductName,-15} {item.Quantity} x {item.Price,8:₱#,##0.00} = {item.TotalPrice,9:₱#,##0.00}");
+                    _ = receiptContent.AppendLine($"- {item.ProductName,-15} {item.Quantity} x {item.Price,8:₱#,##0.00} = {item.TotalPrice,9:₱#,##0.00}");
                     if (!string.IsNullOrEmpty(item.AddOns))
                     {
-                        receiptContent.AppendLine($"   Add-ons: {item.AddOns}"); // Consistent indentation
+                        _ = receiptContent.AppendLine($"   Add-ons: {item.AddOns}"); // Consistent indentation
                     }
                 }
 
-                receiptContent.AppendLine("=".PadRight(42, '='));
-                receiptContent.AppendLine($"Total: {order.TotalAmount,35:₱#,##0.00}");
+                _ = receiptContent.AppendLine("=".PadRight(42, '='));
+                _ = receiptContent.AppendLine($"Total: {order.TotalAmount,35:₱#,##0.00}");
 
                 // Add Paid Amount and Change
                 if (order.PaymentAmount.HasValue)
                 {
-                    receiptContent.AppendLine($"Paid Amount: {order.PaymentAmount.Value,30:₱#,##0.00}");
+                    _ = receiptContent.AppendLine($"Paid Amount: {order.PaymentAmount.Value,29:₱#,##0.00}");
                 }
                 if (order.ChangeAmount.HasValue)
                 {
-                    receiptContent.AppendLine($"Change: {order.ChangeAmount.Value,37:₱#,##0.00}");
+                    _ = receiptContent.AppendLine($"Change: {order.ChangeAmount.Value,33:₱#,##0.00}");
                 }
 
                 ReceiptForm receiptForm = new ReceiptForm(orderId);
@@ -160,7 +152,7 @@ namespace TakoTea.Views.Order
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while generating the receipt: {ex.Message}");
+                _ = MessageBox.Show($"An error occurred while generating the receipt: {ex.Message}");
             }
         }
 
@@ -185,8 +177,11 @@ namespace TakoTea.Views.Order
             flowLayoutPanelCategories.Controls.Clear();
 
             if (flowLayoutPanelCategories == null)
+            {
                 throw new ArgumentNullException(nameof(flowLayoutPanelCategories));
-            var allCategoryButton = new CategoryButtonOrdering();
+            }
+
+            CategoryButtonOrdering allCategoryButton = new CategoryButtonOrdering();
             allCategoryButton.buttonCategory.Text = "All Category";
             allCategoryButton.buttonCategory.Click += (sender, e) =>
             {
@@ -194,10 +189,10 @@ namespace TakoTea.Views.Order
                 LoadMenuVariants(flPanelProductVariantsMenu, dataGridViewOrderList);
             };
             flowLayoutPanelCategories.Controls.Add(allCategoryButton); // Add the button to the FlowLa
-            using (var dbContext = new Entities()) // Replace with your actual DbContext
+            using (Entities dbContext = new Entities()) // Replace with your actual DbContext
             {
                 // Step 1: Fetch distinct categories from the Products table
-                var categories = dbContext.Products
+                List<string> categories = dbContext.Products
                     .Select(p => p.ProductName) // Replace 'Category' with your actual column name
                     .Distinct()
                     .ToList();
@@ -205,11 +200,11 @@ namespace TakoTea.Views.Order
                 // Step 2: Clear the existing controls
 
                 // Step 3: Create a CategoryButtonOrdering for each category
-                foreach (var category in categories)
+                foreach (string category in categories)
                 {
                     if (!string.IsNullOrEmpty(category))
                     {
-                        var categoryButton = new CategoryButtonOrdering();
+                        CategoryButtonOrdering categoryButton = new CategoryButtonOrdering();
                         categoryButton.buttonCategory.Text = category;
                         categoryButton.buttonCategory.Click += (sender, e) =>
                         {
@@ -219,7 +214,7 @@ namespace TakoTea.Views.Order
                     }
                 }
 
-                var outOfStockButton = new CategoryButtonOrdering();
+                CategoryButtonOrdering outOfStockButton = new CategoryButtonOrdering();
                 outOfStockButton.buttonCategory.Text = "Out of Stock";
                 outOfStockButton.buttonCategory.Click += (sender, e) =>
                 {
@@ -242,7 +237,7 @@ namespace TakoTea.Views.Order
                 throw new ArgumentNullException(nameof(_context));
             }
 
-            var productVariants = _context.ProductVariants
+            List<ProductVariant> productVariants = _context.ProductVariants
                 .Where(pv => pv.Product.ProductName == categoryName)
                 .GroupBy(pv => pv.VariantName)
                 .Select(g => g.FirstOrDefault())
@@ -254,9 +249,11 @@ namespace TakoTea.Views.Order
 
             if (productVariants.Count == 0)
             {
-                Label noVariantsLabel = new Label(); // Declare and initialize the label first
-                noVariantsLabel.Text = $"No variants available for {categoryName}.";
-                noVariantsLabel.AutoSize = true;
+                Label noVariantsLabel = new Label
+                {
+                    Text = $"No variants available for {categoryName}.",
+                    AutoSize = true
+                }; // Declare and initialize the label first
                 noVariantsLabel.Font = new Font(noVariantsLabel.Font.FontFamily, 14, FontStyle.Regular);
 
                 // Now you can use noVariantsLabel.Width and noVariantsLabel.Height
@@ -268,9 +265,9 @@ namespace TakoTea.Views.Order
             }
             else
             {
-                foreach (var productVariant in productVariants)
+                foreach (ProductVariant productVariant in productVariants)
                 {
-                    var productWidget = new ProductWidget
+                    ProductWidget productWidget = new ProductWidget
                     {
                         lblProductName = { Text = productVariant.VariantName },
                         lblProductCategory = { Text = productsService.GetProductNameById(productVariant.ProductID) }
@@ -288,7 +285,7 @@ namespace TakoTea.Views.Order
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show($"Failed to load image: {ex.Message}");
+                            _ = MessageBox.Show($"Failed to load image: {ex.Message}");
                         }
                     }
                     if (productVariant.StockLevel <= 0)
@@ -301,9 +298,9 @@ namespace TakoTea.Views.Order
 
                     productWidget.pictureBoxProduct.Click += (sender, e) =>
                     {
-                         var orderEntryModal = new OrderEntryModal(dg);
+                        OrderEntryModal orderEntryModal = new OrderEntryModal(dg);
                         orderEntryModal.SetProductData(productVariant);
-                        orderEntryModal.ShowDialog();
+                        _ = orderEntryModal.ShowDialog();
                     };
 
                     ToolTip toolTip = new ToolTip();
@@ -345,22 +342,22 @@ namespace TakoTea.Views.Order
 
             flPanelProductVariantsMenu.Controls.Clear();
 
-            var productVariants = _context.ProductVariants
+            List<ProductVariant> productVariants = _context.ProductVariants
                 .GroupBy(pv => pv.VariantName)
                 .Select(g => g.FirstOrDefault())
         .Where(pv => showOutOfStock ? pv.StockLevel <= 0 : pv.StockLevel > 0) // Filter based on showOutOfStock
 
                 .ToList();
 
-            foreach (var variant in productVariants)
+            foreach (ProductVariant variant in productVariants)
             {
                 flPanelProductVariantsMenu.Controls.Add(CreateProductWidget(variant, dg, showOutOfStock));
             }
 
 
-            var comboMeals = _context.ComboMeals.ToList();
+            List<ComboMeal> comboMeals = _context.ComboMeals.ToList();
 
-            foreach (var comboMeal in comboMeals)
+            foreach (ComboMeal comboMeal in comboMeals)
             {
                 // Check if any variant in the combo meal is out of stock
                 bool isOutOfStock = _context.ComboMealVariants
@@ -377,11 +374,13 @@ namespace TakoTea.Views.Order
             // Credit: https://stackoverflow.com/a/33557841
             if (string.IsNullOrEmpty(base64String) || base64String.Length % 4 != 0
                || base64String.Contains(" ") || base64String.Contains("\t") || base64String.Contains("\r") || base64String.Contains("\n"))
+            {
                 return false;
+            }
 
             try
             {
-                Convert.FromBase64String(base64String);
+                _ = Convert.FromBase64String(base64String);
                 return true;
             }
             catch (Exception)
@@ -392,7 +391,7 @@ namespace TakoTea.Views.Order
         private ProductWidget CreateProductWidget(ProductVariant productVariant, DataGridView dg, bool showOutOfStock = false)
         {
             // Initialize the ProductWidget with product variant name and category
-            var productWidget = new ProductWidget
+            ProductWidget productWidget = new ProductWidget
             {
                 lblProductName = { Text = productVariant.VariantName },
                 lblProductCategory = { Text = productsService.GetProductNameById(productVariant.ProductID) }
@@ -412,7 +411,7 @@ namespace TakoTea.Views.Order
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Failed to load image: {ex.Message}");
+                    _ = MessageBox.Show($"Failed to load image: {ex.Message}");
                 }
             }
 
@@ -421,16 +420,16 @@ namespace TakoTea.Views.Order
                 productWidget.lblOutOfStock.Visible = true;
                 productWidget.pictureBoxProduct.Visible = false;
                 productWidget.panelProductContainer.Enabled = false;
-               
+
             }
 
             // Handle the click event of the product's picture box
             productWidget.pictureBoxProduct.Click += (sender, e) =>
             {
-                using (var orderEntryModal = new OrderEntryModal(dg))
+                using (OrderEntryModal orderEntryModal = new OrderEntryModal(dg))
                 {
                     orderEntryModal.SetProductData(productVariant);
-                    orderEntryModal.ShowDialog();
+                    _ = orderEntryModal.ShowDialog();
                 }
             };
 
@@ -443,7 +442,7 @@ namespace TakoTea.Views.Order
 
         private ProductWidget CreateProductWidget(ComboMeal comboMeal, DataGridView dg, bool isOutOfStock, bool showOutOfStock = false)
         {
-            var productWidget = new ProductWidget
+            ProductWidget productWidget = new ProductWidget
             {
                 lblProductName = { Text = comboMeal.ComboMealName },
                 lblProductCategory = { Text = "ComboMeal" }
@@ -456,9 +455,9 @@ namespace TakoTea.Views.Order
             }
             catch (Exception ex)
             {
-                                productWidget.pictureBoxProduct.Image = Properties.Resources.multiply;
+                productWidget.pictureBoxProduct.Image = Properties.Resources.multiply;
 
-                MessageBox.Show($"Failed to load image: {ex.Message}");
+                _ = MessageBox.Show($"Failed to load image: {ex.Message}");
             }
 
             if (isOutOfStock)
@@ -472,12 +471,12 @@ namespace TakoTea.Views.Order
 
             productWidget.pictureBoxProduct.Click += (sender, e) =>
             {
-                using (var orderEntryModal = new OrderEntryModal(dg))
+                using (OrderEntryModal orderEntryModal = new OrderEntryModal(dg))
                 {
                     orderEntryModal.SetComboMealData(comboMeal);
-                    orderEntryModal.ShowDialog();
+                    _ = orderEntryModal.ShowDialog();
                 }
-                
+
             };
 
             // ... (Tooltip logic for combo meals, if needed) ...
@@ -493,17 +492,17 @@ namespace TakoTea.Views.Order
                 throw new ArgumentNullException(nameof(flPanelProductVariantsMenu));
             }
 
-            var filteredVariants = _context.ProductVariants
-                .Where(pv => pv.VariantName.ToLower().Contains(searchText.Trim().ToLower()))
+            List<ProductVariant> filteredVariants = _context.ProductVariants
+                .Where(pv => pv.VariantName.IndexOf(searchText.Trim(), StringComparison.OrdinalIgnoreCase) >= 0)
                 .GroupBy(pv => pv.VariantName)
                 .Select(g => g.FirstOrDefault())
                 .ToList();
 
             flPanelProductVariantsMenu.Controls.Clear();
 
-            foreach (var variant in filteredVariants)
+            foreach (ProductVariant variant in filteredVariants)
             {
-                var productWidget = new ProductWidget
+                ProductWidget productWidget = new ProductWidget
                 {
                     lblProductName = { Text = variant.VariantName },
                     lblProductCategory = { Text = productsService.GetProductNameById(variant.ProductID) }
@@ -521,7 +520,7 @@ namespace TakoTea.Views.Order
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Failed to load image: {ex.Message}");
+                        _ = MessageBox.Show($"Failed to load image: {ex.Message}");
                     }
                 }
 
@@ -535,9 +534,9 @@ namespace TakoTea.Views.Order
 
                 productWidget.pictureBoxProduct.Click += (sender, e) =>
                 {
-                    var orderEntryModal = new OrderEntryModal(dg);
+                    OrderEntryModal orderEntryModal = new OrderEntryModal(dg);
                     orderEntryModal.SetProductData(variant);
-                    orderEntryModal.ShowDialog();
+                    _ = orderEntryModal.ShowDialog();
                 };
 
                 ToolTip toolTip = new ToolTip();
@@ -565,9 +564,9 @@ namespace TakoTea.Views.Order
         {
             try
             {
-                using (var context = new Entities())
+                using (Entities context = new Entities())
                 {
-                    var draftOrder = new DraftOrder
+                    DraftOrder draftOrder = new DraftOrder
                     {
                         CreatedDate = DateTime.Now,
                         CustomerName = customerName,
@@ -576,21 +575,23 @@ namespace TakoTea.Views.Order
 
                     if (draftOrder.DraftOrderId == 0)
                     {
-                        context.DraftOrders.Add(draftOrder);
+                        _ = context.DraftOrders.Add(draftOrder);
                     }
 
-                    context.DraftOrders.Add(draftOrder);
-                    context.SaveChanges();
+                    _ = context.DraftOrders.Add(draftOrder);
+                    _ = context.SaveChanges();
 
                     MenuOrderFormService menuOrderForm = new MenuOrderFormService();
                     int draftOrderId = menuOrderForm.GetLatestDraftOrderId(); // Assuming you have a method to generate the next draft order ID
 
-                    context.DraftOrderItems.RemoveRange(context.DraftOrderItems.Where(i => i.DraftOrderId == draftOrderId));
+                    _ = context.DraftOrderItems.RemoveRange(context.DraftOrderItems.Where(i => i.DraftOrderId == draftOrderId));
 
                     foreach (DataGridViewRow row in dataGridViewOrderList.Rows)
                     {
                         if (row.IsNewRow)
+                        {
                             continue;
+                        }
 
                         string productName = row.Cells[0].Value.ToString();
                         string sizeId = row.Cells[1].Value?.ToString() ?? string.Empty;
@@ -599,7 +600,7 @@ namespace TakoTea.Views.Order
                             ? _context.ComboMealVariants.FirstOrDefault(cmv => cmv.ComboMeal.ComboMealName == productName)?.ComboMealVariantID ?? 0
                             : productsService.GetProductVariantId(productName, sizeId);
 
-                        var draftOrderItem = new DraftOrderItem
+                        DraftOrderItem draftOrderItem = new DraftOrderItem
                         {
                             DraftOrderId = draftOrderId,
                             ProductName = productName,
@@ -611,15 +612,15 @@ namespace TakoTea.Views.Order
                             AddOns = AddOns
                         };
 
-                        context.DraftOrderItems.Add(draftOrderItem);
+                        _ = context.DraftOrderItems.Add(draftOrderItem);
                     }
 
-                    context.SaveChanges();
+                    _ = context.SaveChanges();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while saving the draft order: {ex.Message}");
+                _ = MessageBox.Show($"An error occurred while saving the draft order: {ex.Message}");
             }
         }
 
@@ -627,21 +628,21 @@ namespace TakoTea.Views.Order
         {
             try
             {
-                using (var context = new Entities())
+                using (Entities context = new Entities())
                 {
-                    var draftOrder = context.DraftOrders.Include(o => o.DraftOrderItems).FirstOrDefault(o => o.DraftOrderId == draftOrderId);
+                    DraftOrder draftOrder = context.DraftOrders.Include(o => o.DraftOrderItems).FirstOrDefault(o => o.DraftOrderId == draftOrderId);
 
                     if (draftOrder == null)
                     {
-                        MessageBox.Show($"Draft order with ID {draftOrderId} not found.");
+                        _ = MessageBox.Show($"Draft order with ID {draftOrderId} not found.");
                         return;
                     }
 
                     dataGridViewOrderList.Rows.Clear();
 
-                    foreach (var item in draftOrder.DraftOrderItems)
+                    foreach (DraftOrderItem item in draftOrder.DraftOrderItems)
                     {
-                        dataGridViewOrderList.Rows.Add(
+                        _ = dataGridViewOrderList.Rows.Add(
                             item.ProductName,
                             productsService.GetSizeByVariantId(item.ProductVariantId),
                             item.AddOns,
@@ -655,12 +656,12 @@ namespace TakoTea.Views.Order
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while loading the draft order: {ex.Message}");
+                _ = MessageBox.Show($"An error occurred while loading the draft order: {ex.Message}");
             }
         }
         private byte[] ImageToByteArray(Image image)
         {
-            using (var ms = new MemoryStream())
+            using (MemoryStream ms = new MemoryStream())
             {
                 // Specify the image format explicitly
                 image.Save(ms, ImageFormat.Png); // Or another format like ImageFormat.Jpeg
@@ -671,7 +672,7 @@ namespace TakoTea.Views.Order
         private string GenerateReceiptContent(int orderId)
         {
 
-            var order = _context.OrderModels
+            OrderModel order = _context.OrderModels
                 .Include(o => o.OrderItems)
                 .FirstOrDefault(o => o.OrderId == orderId);
 
@@ -680,36 +681,36 @@ namespace TakoTea.Views.Order
                 return $"Order with ID {orderId} not found."; // Return an error message
             }
 
-            var receiptContent = new StringBuilder();
+            StringBuilder receiptContent = new StringBuilder();
 
-            receiptContent.AppendLine("TakoTea".PadLeft(24) + "\n");
-            receiptContent.AppendLine("=".PadRight(42, '='));
-            receiptContent.AppendLine("Order Receipt".PadLeft(27));
-            receiptContent.AppendLine("=".PadRight(42, '=') + "\n");
+            _ = receiptContent.AppendLine("TakoTea".PadLeft(24) + "\n");
+            _ = receiptContent.AppendLine("=".PadRight(42, '='));
+            _ = receiptContent.AppendLine("Order Receipt".PadLeft(27));
+            _ = receiptContent.AppendLine("=".PadRight(42, '=') + "\n");
 
-            receiptContent.AppendLine($"Order ID: {order.OrderId}");
-            receiptContent.AppendLine($"Order Date: {order.OrderDate:yyyy-MM-dd HH:mm:ss}");
+            _ = receiptContent.AppendLine($"Order ID: {order.OrderId}");
+            _ = receiptContent.AppendLine($"Order Date: {order.OrderDate:yyyy-MM-dd HH:mm:ss}");
 
             if (!string.IsNullOrEmpty(order.CustomerName))
             {
-                receiptContent.AppendLine($"Customer: {order.CustomerName}");
+                _ = receiptContent.AppendLine($"Customer: {order.CustomerName}");
             }
 
-            receiptContent.AppendLine($"Payment Method: {order.PaymentMethod}");
-            receiptContent.AppendLine($"Payment Status: {order.PaymentStatus}");
+            _ = receiptContent.AppendLine($"Payment Method: {order.PaymentMethod}");
+            _ = receiptContent.AppendLine($"Payment Status: {order.PaymentStatus}");
 
-            receiptContent.AppendLine("\nItems:");
-            foreach (var item in order.OrderItems)
+            _ = receiptContent.AppendLine("\nItems:");
+            foreach (OrderItem item in order.OrderItems)
             {
-                receiptContent.AppendLine($"- {item.ProductName,-15} {item.Quantity} x {item.Price,8:₱#,##0.00} = {item.TotalPrice,9:₱#,##0.00}");
+                _ = receiptContent.AppendLine($"- {item.ProductName,-15} {item.Quantity} x {item.Price,8:₱#,##0.00} = {item.TotalPrice,9:₱#,##0.00}");
                 if (!string.IsNullOrEmpty(item.AddOns))
                 {
-                    receiptContent.AppendLine($"  Add-ons: {item.AddOns}");
+                    _ = receiptContent.AppendLine($"  Add-ons: {item.AddOns}");
                 }
             }
 
-            receiptContent.AppendLine("=".PadRight(42, '='));
-            receiptContent.AppendLine($"Total: {order.TotalAmount,35:₱#,##0.00}");
+            _ = receiptContent.AppendLine("=".PadRight(42, '='));
+            _ = receiptContent.AppendLine($"Total: {order.TotalAmount,35:₱#,##0.00}");
 
             return receiptContent.ToString();
         }
@@ -739,12 +740,14 @@ namespace TakoTea.Views.Order
             };
 
             // 3. Calculate paper size based on panelReports
-            var paperSize = new PaperSize("Custom", receiptForm.Width, receiptForm.Height);
+            PaperSize paperSize = new PaperSize("Custom", receiptForm.Width, receiptForm.Height);
             printDocument.DefaultPageSettings.PaperSize = paperSize;
 
             // 4. Show print dialog and print
-            PrintDialog printDialog = new PrintDialog();
-            printDialog.Document = printDocument;
+            PrintDialog printDialog = new PrintDialog
+            {
+                Document = printDocument
+            };
             if (printDialog.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -753,7 +756,7 @@ namespace TakoTea.Views.Order
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"An error occurred during printing: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    _ = MessageBox.Show($"An error occurred during printing: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
@@ -797,8 +800,8 @@ namespace TakoTea.Views.Order
             // Show the form's border again (optional, if you need it later)
             receiptForm.FormBorderStyle = FormBorderStyle.FixedSingle;
 
-     
-            var imageAttachment = new MimePart("image", "png")
+
+            MimePart imageAttachment = new MimePart("image", "png")
             {
                 Content = new MimeContent(new MemoryStream(ImageToByteArray(bmp))),
                 ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
@@ -808,7 +811,7 @@ namespace TakoTea.Views.Order
             };
 
             // Create the email message
-            var message = new MimeMessage();
+            MimeMessage message = new MimeMessage();
             message.From.Add(new MailboxAddress("Tako Tea", "takotea9@gmail.com"));
             message.To.Add(new MailboxAddress("Recipient Name", customerEmail));
             message.Subject
@@ -818,26 +821,28 @@ namespace TakoTea.Views.Order
                 Text = "This email was sent using MailKit with Gmail."
             };
 
-            var multipart = new Multipart("mixed");
-            multipart.Add(message.Body); // Add the original text part
-            multipart.Add(imageAttachment);
+            Multipart multipart = new Multipart("mixed")
+            {
+                message.Body, // Add the original text part
+                imageAttachment
+            };
             message.Body = multipart;
 
 
 
             // Connect to the Gmail SMTP server
-            using (var client = new SmtpClient())
+            using (SmtpClient client = new SmtpClient())
             {
                 client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
 
                 // Use your Gmail email address and app password
                 client.Authenticate("takotea9@gmail.com", "rhdl vljl ztfn xzui");
 
-                client.Send(message);
+                _ = client.Send(message);
                 client.Disconnect(true);
             }
 
-            MessageBox.Show("Email sent successfully!");
+            _ = MessageBox.Show("Email sent successfully!");
             receiptForm.buttonSendToEmail.Visible = true;
             receiptForm.buttonPrint.Visible = true;
         }
@@ -856,7 +861,7 @@ namespace TakoTea.Views.Order
 
         public void ConfirmOrder(DataGridView dataGridViewOrderList, Label lblTotalInOrderList, Label lblOrderId, ComboBox cmbPaymentMethod, ComboBox cmbPaymentStatus, ComboBox cmbOrderStatus, DateTimePicker orderDate, string customerName, decimal paymentAmount)
         {
-            using (var transaction = _context.Database.BeginTransaction()) // Using simplified syntax
+            using (DbContextTransaction transaction = _context.Database.BeginTransaction()) // Using simplified syntax
             {
                 try
                 {
@@ -909,7 +914,7 @@ namespace TakoTea.Views.Order
                     transaction.Rollback();
 
                     // Handle the exception appropriately, e.g., log the error or display a message to the user
-                    MessageBox.Show($"An error occurred while confirming the order: {ex.Message}");
+                    _ = MessageBox.Show($"An error occurred while confirming the order: {ex.Message}");
                 }
             }
         }
@@ -919,7 +924,7 @@ namespace TakoTea.Views.Order
             // Check if there are any items in the order list
             if (dataGridViewOrderList.Rows.Count == 0)
             {
-                MessageBox.Show("Order list is empty. Please add items to the order.");
+                _ = MessageBox.Show("Order list is empty. Please add items to the order.");
                 return false;
             }
 
@@ -947,8 +952,9 @@ namespace TakoTea.Views.Order
             foreach (DataGridViewRow row in dataGridViewOrderList.Rows)
             {
                 if (row.IsNewRow)
+                {
                     continue;
-
+                }
 
                 string productName = row.Cells[0].Value.ToString();
                 string size = row.Cells[1].Value.ToString();
@@ -956,31 +962,31 @@ namespace TakoTea.Views.Order
 
                 if (string.IsNullOrEmpty(size)) // Combo meal
                 {
-                    var comboMeal = _context.ComboMeals.FirstOrDefault(cm => cm.ComboMealName == productName);
+                    ComboMeal comboMeal = _context.ComboMeals.FirstOrDefault(cm => cm.ComboMealName == productName);
 
                     if (comboMeal != null)
                     {
                         // Get the ProductVariantIDs included in the combo meal
-                        var productVariantIds = _context.ComboMealVariants
+                        List<int?> productVariantIds = _context.ComboMealVariants
                             .Where(cmv => cmv.ComboMealID == comboMeal.ComboMealID)
                             .Select(cmv => cmv.ProductVariantID)
                             .ToList();
 
                         // Update stock levels for each ProductVariant in the combo meal
-                        foreach (var variantId in productVariantIds)
+                        foreach (int? variantId in productVariantIds)
                         {
-                            var pviIds = productsService.GetProductVariantIngredientIds(((int)variantId));
+                            List<int> pviIds = productsService.GetProductVariantIngredientIds((int)variantId);
                             // Loop through each ProductVariantIngredientID to get the IngredientID and QuantityPerVariant
-                            foreach (var pviId in pviIds)
+                            foreach (int pviId in pviIds)
                             {
-                                var (ingredientId, quantityPerVariant) = productsService.GetIngredientAndQuantity(pviId);
+                                (int ingredientId, decimal quantityPerVariant) = productsService.GetIngredientAndQuantity(pviId);
 
-                              
+
                                 // Update the stock level for the ingredient
                                 productsService.UpdateBatchStockLevel(ingredientId, quantityPerVariant * quantity, "Deduction");
 
                                 // Log the stock update details
-                                sb.AppendLine($"{productName} - Ingredient {ingredientId}: {quantityPerVariant * quantity} units deducted");
+                                _ = sb.AppendLine($"{productName} - Ingredient {ingredientId}: {quantityPerVariant * quantity} units deducted");
                             }
                         }
                     }
@@ -996,7 +1002,7 @@ namespace TakoTea.Views.Order
                         foreach (string addOnName in addOnNames)
                         {
                             // Get the AddOn details, including QuantityUsedPerProduct
-                            var addOn = _context.AddOns.FirstOrDefault(a => a.AddOnName == addOnName);
+                            AddOn addOn = _context.AddOns.FirstOrDefault(a => a.AddOnName == addOnName);
 
                             if (addOn != null)
                             {
@@ -1007,7 +1013,7 @@ namespace TakoTea.Views.Order
                                 productsService.UpdateBatchStockLevel(addOnIngredientId, quantityUsed, "Deduction");
 
                                 // Log the stock update details for add-ons
-                                sb.AppendLine($"{productName} ({size}) - Add-on {addOnName}: {quantityUsed} units deducted");
+                                _ = sb.AppendLine($"{productName} ({size}) - Add-on {addOnName}: {quantityUsed} units deducted");
                             }
                         }
                     }
@@ -1016,35 +1022,35 @@ namespace TakoTea.Views.Order
                     int productVariantId = productsService.GetProductVariantId(productName, size);
 
                     // Get the ProductVariantIngredientIDs for the current ProductVariant
-                    var productVariantIngredientIds = productsService.GetProductVariantIngredientIds(productVariantId);
+                    List<int> productVariantIngredientIds = productsService.GetProductVariantIngredientIds(productVariantId);
 
                     // Loop through each ProductVariantIngredientID to get the IngredientID and QuantityPerVariant
-                    foreach (var pviId in productVariantIngredientIds)
+                    foreach (int pviId in productVariantIngredientIds)
                     {
-                        var (ingredientId, quantityPerVariant) = productsService.GetIngredientAndQuantity(pviId);
+                        (int ingredientId, decimal quantityPerVariant) = productsService.GetIngredientAndQuantity(pviId);
 
                         // Update the stock level for the ingredient
                         productsService.UpdateBatchStockLevel(ingredientId, quantityPerVariant * quantity, "Deduction");
 
                         // Log the stock update details
-                        sb.AppendLine($"{productName} ({size}) - Ingredient {ingredientId}: {quantityPerVariant * quantity} units deducted");
+                        _ = sb.AppendLine($"{productName} ({size}) - Ingredient {ingredientId}: {quantityPerVariant * quantity} units deducted");
                     }
                 }
             }
 
 
-                // Get the ComboMeal details
-     
+            // Get the ComboMeal details
 
 
 
-            MessageBox.Show("Stock levels updated successfully!\n\nDetails:\n" + sb.ToString());
+
+            _ = MessageBox.Show("Stock levels updated successfully!\n\nDetails:\n" + sb.ToString());
         }
 
         // Helper method to get ingredients for a product variant
         private List<IngredientQuantity> GetIngredientsForProductVariant(string productName, string size)
         {
-            using (var context = new Entities())
+            using (Entities context = new Entities())
             {
                 // Query the database to retrieve the ingredient IDs and quantities for the specified product variant
                 return context.ProductVariants
@@ -1059,13 +1065,13 @@ namespace TakoTea.Views.Order
             }
         }
         // Helper method to update the stock level in the batch
- 
-  
+
+
         public void SaveOrderToDb(DataGridView dataGridViewOrderList, Label lblTotalInOrderList, string customerName, string paymentMethod, string orderStatus, DateTime orderDate, string paymentStatus, decimal paymentAmount)
         {
-            var context = new Entities();
+            Entities context = new Entities();
 
-            var order = new OrderModel
+            OrderModel order = new OrderModel
             {
                 OrderDate = orderDate,
                 OrderStatus = orderStatus,
@@ -1079,8 +1085,8 @@ namespace TakoTea.Views.Order
                 ChangeAmount = paymentAmount - decimal.Parse(lblTotalInOrderList.Text.Substring(1))
             };
 
-            context.OrderModels.Add(order);
-            context.SaveChanges();
+            _ = context.OrderModels.Add(order);
+            _ = context.SaveChanges();
 
             int orderId = order.OrderId;
 
@@ -1089,7 +1095,9 @@ namespace TakoTea.Views.Order
             foreach (DataGridViewRow row in dataGridViewOrderList.Rows)
             {
                 if (row.IsNewRow)
+                {
                     continue;
+                }
 
                 string productName = row.Cells[0].Value.ToString();
                 string sizeId = row.Cells[1].Value.ToString();
@@ -1099,20 +1107,20 @@ namespace TakoTea.Views.Order
 
                 if (string.IsNullOrEmpty(sizeId)) // Combo meal
                 {
-                    var comboMeal = _context.ComboMeals.FirstOrDefault(cm => cm.ComboMealName == productName);
+                    ComboMeal comboMeal = _context.ComboMeals.FirstOrDefault(cm => cm.ComboMealName == productName);
 
                     if (comboMeal != null)
                     {
-                        var productVariantIds = _context.ComboMealVariants
+                        List<ComboMealVariant> productVariantIds = _context.ComboMealVariants
                             .Where(cmv => cmv.ComboMealID == comboMeal.ComboMealID)
                             .ToList();
 
-                        foreach (var variant in productVariantIds)
+                        foreach (ComboMealVariant variant in productVariantIds)
                         {
                             decimal grossProfit = salesService.CalculateGrossProfit((int)variant.ProductVariantID, (int)variant.Quantity, variant.Price.Value);
                             totalGrossProfit += grossProfit; // Add to the total gross profit for the order
 
-                            _context.OrderItems.Add(new OrderItem
+                            _ = _context.OrderItems.Add(new OrderItem
                             {
                                 OrderId = orderId,
                                 ProductName = productsService.GetProductVariantNameById((int)variant.ProductVariantID),
@@ -1139,7 +1147,7 @@ namespace TakoTea.Views.Order
                     // Calculate gross profit for the individual product variant
                     totalGrossProfit += grossProfit; // Add to the total gross profit for the order
 
-                    _context.OrderItems.Add(new OrderItem
+                    _ = _context.OrderItems.Add(new OrderItem
                     {
                         OrderId = orderId,
                         ProductName = row.Cells[0].Value.ToString(),
@@ -1158,19 +1166,19 @@ namespace TakoTea.Views.Order
             }
 
             // Update the GrossProfit in the OrderModel
-            var latestOrder = _context.OrderModels.OrderByDescending(o => o.OrderId).FirstOrDefault();
+            OrderModel latestOrder = _context.OrderModels.OrderByDescending(o => o.OrderId).FirstOrDefault();
             if (latestOrder != null)
             {
                 latestOrder.GrossProfit = totalGrossProfit;
-                _context.SaveChanges();
+                _ = _context.SaveChanges();
             }
 
 
 
-            _context.SaveChanges();
+            _ = _context.SaveChanges();
         }
 
-     
+
 
         public class IngredientQuantity
         {

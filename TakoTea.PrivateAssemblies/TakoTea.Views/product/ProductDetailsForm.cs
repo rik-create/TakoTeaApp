@@ -5,12 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
 using TakoTea.Models;
-using TakoTea.Repository;
 using TakoTea.Services;
 using TakoTea.View.Product.Product_Modals;
 
@@ -30,7 +28,7 @@ namespace TakoTea.Views.product
         private LiveCharts.WinForms.CartesianChart cartesianChartGrossRevenue;
         private LiveCharts.WinForms.CartesianChart cartesianChartSalesPerProduct;
         private LiveCharts.WinForms.PieChart pieChartTop5ProductVariant;
-        private Entities context;
+        private readonly Entities context;
 
         public ProductDetailsForm(int productId)
         {
@@ -73,7 +71,7 @@ namespace TakoTea.Views.product
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error opening the edit modal: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    _ = MessageBox.Show("Error opening the edit modal: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -83,9 +81,9 @@ namespace TakoTea.Views.product
 
             string title = GetProductNameById(_productId);
             // Set form properties
-            this.Text = title;
-            this.Size = new Size(800, 600);
-            this.StartPosition = FormStartPosition.CenterParent;
+            Text = title;
+            Size = new Size(800, 600);
+            StartPosition = FormStartPosition.CenterParent;
 
             // Create DataGridView for product variants
             dataGridViewProductVariants = new DataGridView
@@ -128,9 +126,10 @@ namespace TakoTea.Views.product
                 Location = new Point(20, 300),
                 Size = new Size(350, 250)
             };
+            DataGridViewHelper.FormatColumnHeaders(dataGridViewProductVariants);
 
             // Add controls to the form
-            this.Controls.AddRange(new Control[] { dataGridViewProductVariants, tabControl1, pieChartTop5ProductVariant });
+            Controls.AddRange(new Control[] { dataGridViewProductVariants, tabControl1, pieChartTop5ProductVariant });
         }
 
         private void LoadData()
@@ -156,11 +155,10 @@ namespace TakoTea.Views.product
                 DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewProductVariants);
                 DataGridViewHelper.HideColumn(dataGridViewProductVariants, "ProductVariantID");
                 DataGridViewHelper.HideColumn(dataGridViewProductVariants, "ProductID");
-                DataGridViewHelper.FormatColumnHeaders(dataGridViewProductVariants);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading product variants: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show("Error loading product variants: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -174,7 +172,7 @@ namespace TakoTea.Views.product
         private void InitializeGrossRevenueChart()
         {
             // Fetch and filter data for the _productId
-            var grossRevenueData = _salesService.GetGrossRevenuePerDay(_productId);
+            List<(DateTime Date, decimal? Revenue)> grossRevenueData = _salesService.GetGrossRevenuePerDay(_productId);
 
             // Create series for the chart
             cartesianChartGrossRevenue.Series = new SeriesCollection
@@ -203,7 +201,7 @@ namespace TakoTea.Views.product
         private void InitializeSalesPerProductChart()
         {
             // Fetch and filter data for the _productId
-            var salesPerProductData = _salesService.GetSalesPerProduct(_productId);
+            List<(string ProductName, int Sales)> salesPerProductData = _salesService.GetSalesPerProduct(_productId);
 
             // Create series for the chart
             cartesianChartSalesPerProduct.Series = new SeriesCollection
@@ -232,23 +230,23 @@ namespace TakoTea.Views.product
         private void InitializePieChartTop5ProductVariant()
         {
             // Fetch and filter data for the _productId
-            var top5VariantsData = _salesService.GetTop5ProductVariantsBySales(_productId);
+            List<(string VariantName, int Sales)> top5VariantsData = _salesService.GetTop5ProductVariantsBySales(_productId);
 
             // Create series for the chart
             pieChartTop5ProductVariant.Series = new SeriesCollection();
-            foreach (var variant in top5VariantsData)
+            foreach ((string VariantName, int Sales) in top5VariantsData)
             {
                 pieChartTop5ProductVariant.Series.Add(new PieSeries
                 {
-                    Title = variant.VariantName,
-                    Values = new ChartValues<int> { variant.Sales },
+                    Title = VariantName,
+                    Values = new ChartValues<int> { Sales },
                     DataLabels = true
                 });
             }
         }
         private string GetProductNameById(int productId)
         {
-            var product = _productsService.GetProductById(productId);
+            Models.Product product = _productsService.GetProductById(productId);
             return product?.ProductName ?? "Product not found";
         }
     }

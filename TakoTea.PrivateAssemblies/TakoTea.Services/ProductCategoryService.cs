@@ -26,14 +26,14 @@ namespace TakoTea.Services
                 INSERT INTO ProductCategories (Name, Category, Image)
                 VALUES (@Name, @Category, @Image)";
 
-            var parameters = new SqlParameter[]
+            SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@Name", productCategory.Name),
                 new SqlParameter("@Category", productCategory.Category),
                 new SqlParameter("@Image", productCategory.Image)
             };
 
-            _dataAccessObject.ExecuteNonQuery(query, parameters);
+            _ = _dataAccessObject.ExecuteNonQuery(query, parameters);
         }
     }
 }

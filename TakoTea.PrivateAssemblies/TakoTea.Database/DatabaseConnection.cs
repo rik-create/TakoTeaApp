@@ -53,7 +53,7 @@ namespace TakoTea.Database
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error: {ex.Message}");
+                _ = MessageBox.Show($"Error: {ex.Message}");
             }
             finally
             {

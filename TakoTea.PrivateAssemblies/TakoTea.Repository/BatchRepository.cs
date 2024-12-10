@@ -1,8 +1,7 @@
 ﻿using Dapper;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using TakoTea.Database;
@@ -19,13 +18,54 @@ namespace TakoTea.Repository
             _dao = dao;
             _context = new Entities();
         }
+        public class BatchDTO
+        {
+            public int BatchID { get; set; }
+            public int IngredientID { get; set; }
+            public string BatchNumber { get; set; }
+            public string IngredientName { get; set; }
+            public decimal StockLevel { get; set; }
+            public DateTime ExpirationDate { get; set; }
+            public decimal BatchCost { get; set; }
+            public string Active { get; set; }
+        }
+        public List<BatchDTO> GetAllBatch()
+        {
+            try
+            {
+                List<Batch> batchList = _context.Batches.ToList();
+                var batchDTOList = batchList.Select(batch => new BatchDTO
+                {
+                    BatchID = batch.BatchID,
+                    IngredientID = batch.IngredientID ?? 0,
+                    BatchNumber = batch.BatchNumber,
+                    // Assuming you have a way to get IngredientName from IngredientID
+                    IngredientName = GetIngredientName((int)batch.IngredientID),
+                    StockLevel = batch.StockLevel,
+                    ExpirationDate = batch.ExpirationDate ?? default,
+                    BatchCost = batch.BatchCost
+                }).ToList();
+
+                return batchDTOList;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error loading Batches: " + ex.Message);
+            }
+        }
+
+        private string GetIngredientName(int ingredientID)
+        {
+            // Example using _context:
+            return _context.Ingredients.FirstOrDefault(i => i.IngredientID == ingredientID)?.IngredientName;
+        }
 
         public List<object> GetAllBatches()
         {
             try
             {
                 // Query to fetch the batch data and join with Ingredients
-                var batchList = _context.Batches
+                List<object> batchList = _context.Batches
                     .Join(
                         _context.Ingredients, // Join Batches with Ingredients
                         batch => batch.IngredientID, // Foreign key in Batches
@@ -35,7 +75,7 @@ namespace TakoTea.Repository
                             batch.BatchID,
                             batch.IngredientID,
                             batch.BatchNumber,
-                            IngredientName = ingredient.IngredientName, // Get IngredientName from Ingredients table
+                            ingredient.IngredientName, // Get IngredientName from Ingredients table
                             batch.StockLevel,
                             batch.ExpirationDate,
                             batch.BatchCost,
@@ -72,39 +112,39 @@ namespace TakoTea.Repository
         public IngredientModel GetIngredientById(int ingredientId)
         {
             string query = "SELECT * FROM Ingredient WHERE IngredientID = @IngredientID";
-            var parameters = new SqlParameter[]
+            SqlParameter[] parameters = new SqlParameter[]
             {
         new SqlParameter("@IngredientID", ingredientId)
             };
 
             // Execute the query to retrieve the ingredient data
-            var result = _dao.ExecuteQuery<IngredientModel>(query, parameters);
+            IEnumerable<IngredientModel> result = _dao.ExecuteQuery<IngredientModel>(query, parameters);
             return result.FirstOrDefault();
         }
 
         public string GetIngredientNameById(int ingredientId)
         {
             string query = "SELECT IngredientName FROM Ingredient WHERE IngredientID = @IngredientID";
-            var parameters = new SqlParameter[]
+            SqlParameter[] parameters = new SqlParameter[]
             {
         new SqlParameter("@IngredientID", ingredientId)
             };
 
             // Execute the query to retrieve the ingredient name
-            var result = _dao.ExecuteQuery<string>(query, parameters);
+            IEnumerable<string> result = _dao.ExecuteQuery<string>(query, parameters);
             return result.FirstOrDefault();
         }
 
         public decimal GetPreviousQuantity(int ingredientId)
         {
             string query = "SELECT QuantityInStock FROM Batch WHERE IngredientID = @IngredientID AND IsActive = 1";
-            var parameters = new SqlParameter[]
+            SqlParameter[] parameters = new SqlParameter[]
             {
         new SqlParameter("@IngredientID", ingredientId)
             };
 
             // Execute the query to retrieve the previous quantity in stock
-            var result = _dao.ExecuteQuery<decimal>(query, parameters);
+            IEnumerable<decimal> result = _dao.ExecuteQuery<decimal>(query, parameters);
             return result.FirstOrDefault();
         }
 
@@ -124,15 +164,15 @@ namespace TakoTea.Repository
                                 ingredient.LowLevel
                             };
 
-                var dataTable = new DataTable();
-                dataTable.Columns.Add("IngredientID", typeof(int));
-                dataTable.Columns.Add("IngredientName", typeof(string));
-                dataTable.Columns.Add("StockLevel", typeof(decimal));
-                dataTable.Columns.Add("ReorderLevel", typeof(decimal));
+                DataTable dataTable = new DataTable();
+                _ = dataTable.Columns.Add("IngredientID", typeof(int));
+                _ = dataTable.Columns.Add("IngredientName", typeof(string));
+                _ = dataTable.Columns.Add("StockLevel", typeof(decimal));
+                _ = dataTable.Columns.Add("ReorderLevel", typeof(decimal));
 
                 foreach (var item in query)
                 {
-                    dataTable.Rows.Add(item.IngredientID, item.IngredientName, item.StockLevel, item.LowLevel);
+                    _ = dataTable.Rows.Add(item.IngredientID, item.IngredientName, item.StockLevel, item.LowLevel);
                 }
 
                 return dataTable;
@@ -146,7 +186,7 @@ namespace TakoTea.Repository
 
         public Batch GetBatchByBatchId(int batchID)
         {
-            using (var context = new Entities()) // Replace YourDbContext
+            using (Entities context = new Entities()) // Replace YourDbContext
             {
                 return context.Batches.Find(batchID);
             }
@@ -155,13 +195,13 @@ namespace TakoTea.Repository
         public BatchModel GetBatchById(int batchId)
         {
             string query = "SELECT * FROM Batch WHERE BatchID = @BatchID";  // Adjust the query to your database schema
-            var parameters = new SqlParameter[]
+            SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@BatchID", batchId)
             };
 
             // Execute the query to retrieve the batch data
-            var result = _dao.ExecuteQuery<BatchModel>(query, parameters);
+            IEnumerable<BatchModel> result = _dao.ExecuteQuery<BatchModel>(query, parameters);
             return result.FirstOrDefault();
         }
 

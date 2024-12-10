@@ -1,9 +1,5 @@
 ﻿using MaterialSkin.Controls;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TakoTea.Models;
 
 namespace TakoTea.Interfaces
@@ -14,8 +10,9 @@ namespace TakoTea.Interfaces
         void SaveSettings();
         void ResetSettingsToDefault();
         void ValidateSettings();
-/*        void ApplyTheme(Theme theme);
-*/      void PerformBackup();
+        /*        void ApplyTheme(Theme theme);
+        */
+        void PerformBackup();
         void RestoreBackup();
     }
 

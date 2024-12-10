@@ -1,15 +1,12 @@
 ﻿using MaterialSkin.Controls;
-using System.Windows.Forms;
 using System;
-using TakoTea.Configurations;
-using TakoTea.Models;
+using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Drawing;
-using System.Collections.Generic;
-using System.Runtime.Remoting.Contexts;
-using TakoTea.Controls;
-using TakoTea.View.Orders;
+using System.Windows.Forms;
+using TakoTea.Configurations;
+using TakoTea.Models;
 using TakoTea.Services;
 namespace TakoTea.Views.Order.Order_Modals
 {
@@ -20,8 +17,8 @@ namespace TakoTea.Views.Order.Order_Modals
 
         private readonly Entities _context;
         //TODO : handle addons feautures and determine the price base on selected size and selected addons
-        private DataGridView parentDataGridView;
-        string initialPrice = "0";
+        private readonly DataGridView parentDataGridView;
+        private string initialPrice = "0";
 
         public OrderEntryModal(DataGridView dataGridView)
         {
@@ -53,7 +50,7 @@ namespace TakoTea.Views.Order.Order_Modals
         private void chckListBoxAddOns_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             // BeginInvoke is used to execute UpdateTotalPrice after the ItemCheck event is finished
-            this.BeginInvoke(new Action(() => UpdateTotalPrice()));
+            _ = BeginInvoke(new Action(() => UpdateTotalPrice()));
         }
 
         // ... (rest of the code) ...
@@ -62,7 +59,7 @@ namespace TakoTea.Views.Order.Order_Modals
         private void PopulateAddOns(string productName)
         {
             // Fetch add-ons from the database that have matching batches with StockLevel > 0 and match the product name
-            var addOns = _context.AddOns
+            List<AddOn> addOns = _context.AddOns
                 .Where(a => a.IngredientID != null &&
                             _context.Batches.Any(b => b.IngredientID == a.IngredientID && b.StockLevel > 0) &&
                             a.Product.ProductName == productName)
@@ -72,16 +69,16 @@ namespace TakoTea.Views.Order.Order_Modals
             chckListBoxAddOns.Items.Clear();
 
             // Add each eligible add-on to the CheckedListBox
-            foreach (var addOn in addOns)
+            foreach (AddOn addOn in addOns)
             {
                 string displayText = $"{addOn.AddOnName} - {addOn.AdditionalPrice:F2}";
-                chckListBoxAddOns.Items.Add(displayText);
+                _ = chckListBoxAddOns.Items.Add(displayText);
             }
         }
 
         public static List<(string Size, decimal Price)> GetSizesAndPricesByVariantName(string variantName)
         {
-            using (var dbContext = new Entities()) // Replace with your actual DbContext
+            using (Entities dbContext = new Entities()) // Replace with your actual DbContext
             {
                 // Find all product variants with the matching name
                 var productVariants = dbContext.ProductVariants
@@ -90,7 +87,7 @@ namespace TakoTea.Views.Order.Order_Modals
                     .ToList();
 
                 // Map the results to a list of tuples
-                var results = productVariants
+                List<(string Size, decimal Price)> results = productVariants
                     .Select(pv => (pv.Size, pv.Price))
                     .ToList();
 
@@ -131,13 +128,13 @@ namespace TakoTea.Views.Order.Order_Modals
                 {
                     try
                     {
-                         MemoryStream ms = new MemoryStream(productVariant.ImagePath);
+                        MemoryStream ms = new MemoryStream(productVariant.ImagePath);
                         productCard.pictureBoxProductIcon.Image = Image.FromStream(ms);
                         productCard.pictureBoxProductIcon.SizeMode = PictureBoxSizeMode.Zoom;
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Failed to load image: {ex.Message}");
+                        _ = MessageBox.Show($"Failed to load image: {ex.Message}");
                         // Consider setting a default image or handling the error appropriately
                     }
                 }
@@ -147,18 +144,18 @@ namespace TakoTea.Views.Order.Order_Modals
                 }
 
                 // Fetch and populate sizes
-                var sizesAndPrices = GetSizesAndPricesByVariantName(productVariant.VariantName);
+                List<(string Size, decimal Price)> sizesAndPrices = GetSizesAndPricesByVariantName(productVariant.VariantName);
                 cmbSizes.Items.Clear();
-                foreach (var sizePrice in sizesAndPrices)
+                foreach ((string Size, decimal Price) sizePrice in sizesAndPrices)
                 {
-                    cmbSizes.Items.Add($"{sizePrice.Size} - ₱{sizePrice.Price:F2}");
+                    _ = cmbSizes.Items.Add($"{sizePrice.Size} - ₱{sizePrice.Price:F2}");
                 }
 
                 if (cmbSizes.Items.Count > 0)
                 {
                     cmbSizes.SelectedIndex = 0;
                 }
-                string productName = (new ProductsService(_context)).GetProductNameById(productVariant.ProductID);
+                string productName = new ProductsService(_context).GetProductNameById(productVariant.ProductID);
                 // Populate add-ons
                 PopulateAddOns(productName);
 
@@ -207,7 +204,7 @@ namespace TakoTea.Views.Order.Order_Modals
 
             // Add prices from selected add-ons
 
-            foreach (var item in chckListBoxAddOns.CheckedItems)
+            foreach (object item in chckListBoxAddOns.CheckedItems)
 
             {
 
@@ -229,7 +226,7 @@ namespace TakoTea.Views.Order.Order_Modals
 
             // Calculate total price including quantity
 
-            lblTotalPrice.Text = $"₱{(price * numericUpDownQuantity.Value):F2}";
+            lblTotalPrice.Text = $"₱{price * numericUpDownQuantity.Value:F2}";
 
         }
 
@@ -295,7 +292,7 @@ namespace TakoTea.Views.Order.Order_Modals
 
                     if (rowProductName == productName && rowSize == selectedSize && rowAddOns == selectedAddOns)
                     {
-                
+
 
                         row.Cells[3].Value = quantity;
                         row.Cells[4].Value = price;
@@ -307,20 +304,20 @@ namespace TakoTea.Views.Order.Order_Modals
                 if (!found)
                 {
                     // Add a new row if no matching row was found
-                    parentDataGridView.Rows.Add(productName, selectedSize, selectedAddOns, quantity, price);
+                    _ = parentDataGridView.Rows.Add(productName, selectedSize, selectedAddOns, quantity, price);
                 }
 
-                        this.Close();
+                Close();
 
                 AddToDgViewOrderListClicked = true; // Set the flag to true
 
             }
             else
             {
-                MessageBox.Show("DataGridView not found!");
+                _ = MessageBox.Show("DataGridView not found!");
             }
 
-            this.Close();
+            Close();
         }
 
         private void lblTotalPrice_Click(object sender, EventArgs e)
@@ -339,4 +336,4 @@ namespace TakoTea.Views.Order.Order_Modals
 
         }
     }
-    }
+}

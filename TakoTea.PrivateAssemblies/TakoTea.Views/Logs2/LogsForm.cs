@@ -1,29 +1,23 @@
 ﻿using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
 using System.Windows.Forms;
-using System.Windows.Markup;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
-using TakoTea.Interfaces;
 using TakoTea.Models;
-using TakoTea.Product;
 using TakoTea.Repository;
 using TakoTea.Services;
-using TakoTea.View.Sales;
 using TakoTea.Views.Order;
 namespace TakoTea.Views.Logs2
 {
     public partial class LogsForm : MaterialForm
     {
-        DataAccessObject _dataAccessObject;
-        ProductsService _productService;
-        LogsRepository _logsRepository;
-        MenuOrderFormService menuOrderFormService;
-        Entities context;
+        private readonly DataAccessObject _dataAccessObject;
+        private readonly ProductsService _productService;
+        private readonly LogsRepository _logsRepository;
+        private readonly MenuOrderFormService menuOrderFormService;
+        private readonly Entities context;
         public LogsForm()
         {
             InitializeComponent();
@@ -85,16 +79,16 @@ namespace TakoTea.Views.Logs2
             try
             {
                 // Fill checkedListBoxTableNames with distinct table names from the Logs table
-                var tableNames = context.Logs.Select(l => l.TableName).Distinct().ToList();
+                List<string> tableNames = context.Logs.Select(l => l.TableName).Distinct().ToList();
                 chkListBoxTableNames.Items.AddRange(tableNames.ToArray());
 
                 // Fill comboBoxActions with distinct actions from the Logs table
-                var actions = context.Logs.Select(l => l.Action).Distinct().ToList();
+                List<string> actions = context.Logs.Select(l => l.Action).Distinct().ToList();
                 cmbActions.Items.AddRange(actions.ToArray());
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading filter controls: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show("Error loading filter controls: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -107,10 +101,10 @@ namespace TakoTea.Views.Logs2
             try
             {
                 string searchTerm = txtBoxSearchLogs.Text.ToLower().Trim(); // Assuming you have a TextBox named txtBoxSearchLogs
-                var selectedTableNames = chkListBoxTableNames.CheckedItems.Cast<string>().ToList();
+                List<string> selectedTableNames = chkListBoxTableNames.CheckedItems.Cast<string>().ToList();
                 string selectedAction = cmbActions.SelectedItem?.ToString();
 
-                var filteredLogs = _logsRepository.GetAllLogs()
+                IEnumerable<LogData> filteredLogs = _logsRepository.GetAllLogs()
                     .Where(log =>
                         (string.IsNullOrWhiteSpace(searchTerm) ||
                          log.TableName.ToLower().Contains(searchTerm) ||
@@ -126,7 +120,7 @@ namespace TakoTea.Views.Logs2
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error filtering logs: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show("Error filtering logs: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -182,7 +176,7 @@ namespace TakoTea.Views.Logs2
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error opening the edit modal: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    _ = MessageBox.Show("Error opening the edit modal: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
 
@@ -199,7 +193,7 @@ namespace TakoTea.Views.Logs2
                 DateTime startDate = dateTimePickerStartDate.Value.Date;
                 DateTime endDate = dateTimePickerEndDate.Value.Date.AddDays(1).AddTicks(-1); // End of the selected day
 
-                var filteredLogs = _logsRepository.GetAllLogs()
+                List<LogData> filteredLogs = _logsRepository.GetAllLogs()
                     .Where(log => log.Timestamp >= startDate && log.Timestamp <= endDate)
                     .ToList();
 
@@ -207,7 +201,7 @@ namespace TakoTea.Views.Logs2
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error filtering logs by date range: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show("Error filtering logs by date range: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

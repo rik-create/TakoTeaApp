@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TakoTea.Models;
 using TakoTea.Repository;
 
@@ -24,7 +21,7 @@ namespace TakoTea.Services
                 throw new ArgumentNullException(nameof(addOn));
             }
 
-            var existingAddOn = _addOnRepository.GetAddOnById(addOn.Id);
+            AddOn existingAddOn = _addOnRepository.GetAddOnById(addOn.Id);
             if (existingAddOn == null)
             {
                 throw new KeyNotFoundException($"AddOn with Id {addOn.Id} not found.");

@@ -1,20 +1,16 @@
-﻿using MaterialSkin.Controls;
+﻿using Helpers;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
-using TakoTea.Interfaces;
-using TakoTea.Services;
 using TakoTea.Models;
-using System.Net.Security;
-using System.IO;
+using TakoTea.Services;
 using TakoTea.Views.Batches;
-using Helpers;
-using System.util;
-using System.Drawing.Imaging;
-using System.Drawing;
 
 
 namespace TakoTea.View.Items.Item_Modals
@@ -55,7 +51,7 @@ namespace TakoTea.View.Items.Item_Modals
         private void PopulateComboboxUseFor()
         {
             // Populate the cmbAddOnFor ComboBox
-            var products = productsService.GetAllProducts();  // This should return a list of products
+            List<Models.Product> products = productsService.GetAllProducts();  // This should return a list of products
             cmbAddOnFor.DataSource = products;  // Set the data source of the ComboBox
             cmbAddOnFor.DisplayMember = "ProductName";  // The name to display in the ComboBox
             cmbAddOnFor.ValueMember = "ProductID";
@@ -67,7 +63,7 @@ namespace TakoTea.View.Items.Item_Modals
             addBatchModal.lblIngredientId.Text = ingredient.IngredientID.ToString();
             addBatchModal.txtBoxIngredientName.Text = ingredient.IngredientName;
             addBatchModal.lblQuantity.Text = ingredient.MeasuringUnit;
-            addBatchModal.ShowDialog();
+            _ = addBatchModal.ShowDialog();
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -82,7 +78,7 @@ namespace TakoTea.View.Items.Item_Modals
                 Close();
             }
         }
-            private void btnConfirm_Click(object sender, EventArgs e)
+        private void btnConfirm_Click(object sender, EventArgs e)
         {
             // Validate inputs
             if (string.IsNullOrWhiteSpace(txtBoxName.Text) ||
@@ -92,7 +88,7 @@ namespace TakoTea.View.Items.Item_Modals
                 cmbTypeOfIngredient.SelectedItem == null ||
                 cmbMeasuringUnit.SelectedItem == null)
             {
-                MessageBox.Show("Please fill in all required fields");
+                _ = MessageBox.Show("Please fill in all required fields");
                 return;
             }
 
@@ -100,7 +96,7 @@ namespace TakoTea.View.Items.Item_Modals
             byte[] imageData;
             if (pictureBoxImg.Image != null)
             {
-                using (var ms = new MemoryStream())
+                using (MemoryStream ms = new MemoryStream())
                 {
                     pictureBoxImg.Image.Save(ms, pictureBoxImg.Image.RawFormat);
                     imageData = ms.ToArray();
@@ -117,7 +113,7 @@ namespace TakoTea.View.Items.Item_Modals
 
             bool isAddOn = chkIsAddOn.Checked;
 
-            using (var transaction = _context.Database.BeginTransaction())
+            using (System.Data.Entity.DbContextTransaction transaction = _context.Database.BeginTransaction())
             {
 
                 string type = "Ingredient";
@@ -125,7 +121,7 @@ namespace TakoTea.View.Items.Item_Modals
                 {
                     if (isAddOn)
                     {
-                        var addOn = new AddOn
+                        AddOn addOn = new AddOn
                         {
                             AddOnName = txtBoxName.Text,
                             AdditionalPrice = numericUpDownAddOnPrice.Value,
@@ -137,7 +133,7 @@ namespace TakoTea.View.Items.Item_Modals
                         _inventoryService.AddAddon(addOn);
                     }
 
-                    var ingredient = new Ingredient
+                    Ingredient ingredient = new Ingredient
                     {
                         IngredientName = txtBoxName.Text,
                         BrandName = txtBoxBrandName.Text,
@@ -170,7 +166,7 @@ namespace TakoTea.View.Items.Item_Modals
 
                     _ = MessageBox.Show(type + " added successfully.");
                     OpenAddBatchModal(ingredient);
-                    this.Close();
+                    Close();
                 }
                 catch (Exception ex)
                 {
@@ -195,7 +191,7 @@ namespace TakoTea.View.Items.Item_Modals
 
             foreach (string allergen in allergens)
             {
-                materialCheckedListBoxAllergens.Items.Add(allergen);
+                _ = materialCheckedListBoxAllergens.Items.Add(allergen);
             }
         }
 
@@ -252,7 +248,7 @@ namespace TakoTea.View.Items.Item_Modals
     {
         public static byte[] ToByteArray(this Image image, ImageFormat format)
         {
-            using (var ms = new MemoryStream())
+            using (MemoryStream ms = new MemoryStream())
             {
                 image.Save(ms, format);
                 return ms.ToArray();

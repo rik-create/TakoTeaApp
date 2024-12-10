@@ -1,11 +1,7 @@
 ﻿using LiveCharts;
-using LiveCharts.WinForms;
 using LiveCharts.Wpf;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TakoTea.Models;
 
 namespace TakoTea.Helpers
@@ -14,7 +10,7 @@ namespace TakoTea.Helpers
     {
         public static void InitializeChart<T>(LiveCharts.WinForms.CartesianChart chart, Func<IQueryable<T>> dataRetrievalFunc, Func<T, DateTime> dateSelector, Func<T, decimal> valueSelector, string xAxisTitle, string yAxisTitle)
         {
-            var context = new Entities();
+            Entities context = new Entities();
 
             var data = dataRetrievalFunc().ToList() // Retrieve data first
                 .GroupBy(item => dateSelector(item).Date) // Group by date
@@ -22,7 +18,7 @@ namespace TakoTea.Helpers
                 .OrderBy(x => x.Date)
                 .ToList();
 
-            var series = new SeriesCollection
+            SeriesCollection series = new SeriesCollection
                 {
                     new LineSeries
                     {

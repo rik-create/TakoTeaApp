@@ -1,15 +1,8 @@
 ﻿using Helpers;
-using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TakoTea.Configurations;
 using TakoTea.Views.MainForm;
 
 namespace TakoTea.Views.mainform
@@ -32,7 +25,7 @@ namespace TakoTea.Views.mainform
             btnLogin.TabIndex = 2;
 
             // Set AcceptButton to trigger btnLogin when Enter is pressed
-            this.AcceptButton = btnLogin;
+            AcceptButton = btnLogin;
             Instance = this;
         }
 
@@ -47,14 +40,16 @@ namespace TakoTea.Views.mainform
             string password = txtBoxPassword.Text;
 
             // Show loading bar
-            ProgressBar loadingBar = new ProgressBar();
-            loadingBar.Style = ProgressBarStyle.Marquee;
-            loadingBar.MarqueeAnimationSpeed = 30;
-            loadingBar.Size = new Size(200, 30);
-            int centerX = (this.Size.Width - loadingBar.Width) / 2;
-            int centerY = (this.Size.Height - loadingBar.Height) / 2;
+            ProgressBar loadingBar = new ProgressBar
+            {
+                Style = ProgressBarStyle.Marquee,
+                MarqueeAnimationSpeed = 30,
+                Size = new Size(200, 30)
+            };
+            int centerX = (Size.Width - loadingBar.Width) / 2;
+            int centerY = (Size.Height - loadingBar.Height) / 2;
             loadingBar.Location = new Point(centerX, centerY);
-            this.Controls.Add(loadingBar);
+            Controls.Add(loadingBar);
             loadingBar.BringToFront();
             loadingBar.Show();
 
@@ -72,10 +67,10 @@ namespace TakoTea.Views.mainform
                 txtBoxUserName.Clear();
                 txtBoxPassword.Clear();
                 loadingBar.Hide();
-                this.Controls.Remove(loadingBar);
-                this.Hide();
+                Controls.Remove(loadingBar);
+                Hide();
 
-                mainForm.ShowDialog();
+                _ = mainForm.ShowDialog();
 
                 mainForm.Owner = this;
 
@@ -85,11 +80,11 @@ namespace TakoTea.Views.mainform
             else
             {
                 loadingBar.Hide();
-                this.Controls.Remove(loadingBar);
-                MessageBox.Show("Invalid username or password.");
+                Controls.Remove(loadingBar);
+                _ = MessageBox.Show("Invalid username or password.");
             }
         }
-     
+
 
         private void TakoTea_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -100,10 +95,10 @@ namespace TakoTea.Views.mainform
                 if (result == DialogResult.Yes)
 
                 {
-                    MessageBox.Show("You have successfully logged out.", "Logout", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _ = MessageBox.Show("You have successfully logged out.", "Logout", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // Hide the TakoTeaForm instead of closing it
-                    this.Show();
+                    Show();
                     // The LoginForm (owner) will remain open
                 }
                 else

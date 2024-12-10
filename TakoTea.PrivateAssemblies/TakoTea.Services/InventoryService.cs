@@ -1,13 +1,9 @@
-﻿using Dapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Transactions;
 using System.Windows.Forms;
-using TakoTea.Database;
 using TakoTea.Helpers;
 using TakoTea.Interfaces;
 using TakoTea.Models;
@@ -18,22 +14,23 @@ namespace TakoTea.Services
     public class InventoryService : IInventoryService
     {
         private readonly Entities context;
-        public InventoryService() { 
+        public InventoryService()
+        {
             context = new Entities();
         }
 
         public string GetIngredientNameById(int ingredientId)
         {
-            using (var context = new Entities())
+            using (Entities context = new Entities())
             {
-                var ingredient = context.Ingredients.FirstOrDefault(i => i.IngredientID == ingredientId);
+                Ingredient ingredient = context.Ingredients.FirstOrDefault(i => i.IngredientID == ingredientId);
                 return ingredient?.IngredientName ?? "Unknown Ingredient";
             }
         }
 
         public void DeleteIngredient(int ingredientId)
         {
-            using (var transaction = new TransactionScope())
+            using (TransactionScope transaction = new TransactionScope())
             {
                 try
                 {
@@ -44,11 +41,11 @@ namespace TakoTea.Services
                                  validateInput: input => !string.IsNullOrWhiteSpace(input)
                              );
                     // 1. Delete related records in StockLevelLogs
-                    var stockLevelLogs = context.StockLevelLogs.Where(log => log.IngredientID == ingredientId).ToList();
-                    context.StockLevelLogs.RemoveRange(stockLevelLogs);
+                    List<StockLevelLog> stockLevelLogs = context.StockLevelLogs.Where(log => log.IngredientID == ingredientId).ToList();
+                    _ = context.StockLevelLogs.RemoveRange(stockLevelLogs);
 
                     // Log deletion of StockLevelLogs
-                    foreach (var log in stockLevelLogs)
+                    foreach (StockLevelLog log in stockLevelLogs)
                     {
                         LoggingHelper.LogChange(
                             "StockLevelLogs",
@@ -62,11 +59,11 @@ namespace TakoTea.Services
                     }
 
                     // 2. Delete related records in Batches
-                    var batches = context.Batches.Where(b => b.IngredientID == ingredientId).ToList();
-                    context.Batches.RemoveRange(batches);
+                    List<Batch> batches = context.Batches.Where(b => b.IngredientID == ingredientId).ToList();
+                    _ = context.Batches.RemoveRange(batches);
 
                     // Log deletion of Batches
-                    foreach (var batch in batches)
+                    foreach (Batch batch in batches)
                     {
                         LoggingHelper.LogChange(
                             "Batch",
@@ -80,10 +77,10 @@ namespace TakoTea.Services
                     }
 
                     // 3. Delete the ingredient
-                    var ingredient = context.Ingredients.Find(ingredientId);
+                    Ingredient ingredient = context.Ingredients.Find(ingredientId);
                     if (ingredient != null)
                     {
-                        context.Ingredients.Remove(ingredient);
+                        _ = context.Ingredients.Remove(ingredient);
 
                         // Log deletion of Ingredient
                         LoggingHelper.LogChange(
@@ -97,13 +94,13 @@ namespace TakoTea.Services
                         );
                     }
 
-                    context.SaveChanges();
+                    _ = context.SaveChanges();
                     transaction.Complete();
                 }
                 catch (Exception ex)
                 {
                     // Handle the exception
-                    MessageBox.Show("Error deleting ingredient: " + ex.Message);
+                    _ = MessageBox.Show("Error deleting ingredient: " + ex.Message);
                 }
             }
         }
@@ -111,40 +108,39 @@ namespace TakoTea.Services
 
         public void ImportIngredientsFromCsv(string filePath)
         {
-            var reader = new StreamReader(filePath);
+            StreamReader reader = new StreamReader(filePath);
 
             // Skip the header row if it exists
-            reader.ReadLine();
+            _ = reader.ReadLine();
 
             while (!reader.EndOfStream)
             {
-                var line = reader.ReadLine();
-                var values = line.Split(',');
+                string line = reader.ReadLine();
+                string[] values = line.Split(',');
 
-         
+
                 try
                 {
 
 
 
                     // Validate and parse each value
-                    var ingredientName = values[0].Replace("?", ",");
-                    var brandName = values[1].Replace("?", ",");
-                    var description = values[2].Replace("?", ",");
-                    var isAddOn = bool.TryParse(values[3], out bool parsedIsAddOn) ? parsedIsAddOn : throw new FormatException("Invalid boolean format for IsAddOn");
-                    var typeOfIngredient = values[4].Replace("?", ",");
-                    var isActive = bool.TryParse(values[5], out bool parsedIsActive) ? parsedIsActive : throw new FormatException("Invalid boolean format for IsActive");
-                    var allergyInformation = values[6].Replace("?", ",");
-                    var storageConditions = values[7].Replace("?", ",");
-                    var stockLevel = decimal.TryParse(values[8], out decimal parsedStockLevel) ? parsedStockLevel : throw new FormatException("Invalid decimal format for StockLevel");
-                    var lowLevel = decimal.TryParse(values[9], out decimal parsedLowLevel) ? parsedLowLevel : throw new FormatException("Invalid decimal format for LowLevel");
-                    var ingredientCategory = values[10].Replace("?", ",");
-                    var measuringUnit = values[11];
+                    string ingredientName = values[0].Replace("?", ",");
+                    string brandName = values[1].Replace("?", ",");
+                    string description = values[2].Replace("?", ",");
+                    bool isAddOn = bool.TryParse(values[3], out bool parsedIsAddOn) ? parsedIsAddOn : throw new FormatException("Invalid boolean format for IsAddOn");
+                    string typeOfIngredient = values[4].Replace("?", ",");
+                    bool isActive = bool.TryParse(values[5], out bool parsedIsActive) ? parsedIsActive : throw new FormatException("Invalid boolean format for IsActive");
+                    string allergyInformation = values[6].Replace("?", ",");
+                    string storageConditions = values[7].Replace("?", ",");
+                    decimal lowLevel = decimal.TryParse(values[9], out decimal parsedLowLevel) ? parsedLowLevel : throw new FormatException("Invalid decimal format for LowLevel");
+                    string ingredientCategory = values[10].Replace("?", ",");
+                    string measuringUnit = values[11];
 
 
 
 
-                    var ingredient = new Ingredient
+                    Ingredient ingredient = new Ingredient
                     {
                         IngredientName = ingredientName,
                         BrandName = brandName,
@@ -154,7 +150,7 @@ namespace TakoTea.Services
                         IsActive = isActive,
                         AllergyInformation = allergyInformation,
                         StorageConditions = storageConditions,
-                        StockLevel = stockLevel,
+                        StockLevel = 0,
                         IngredientImage = new byte[0],
                         LowLevel = lowLevel,
                         IngredientCategory = ingredientCategory,
@@ -163,12 +159,12 @@ namespace TakoTea.Services
 
                     if (isAddOn)
                     {
-                        var additionalPrice = decimal.Parse(values[12]); // Parse AdditionalPrice from CSV
-                        var useForProductId = int.Parse(values[13]); // Parse UseForProductID from CSV
-                        var quantityUsedPerProduct = decimal.Parse(values[14]); // Parse QuantityUsedPerProduct from CSV
+                        decimal additionalPrice = decimal.Parse(values[12]); // Parse AdditionalPrice from CSV
+                        int useForProductId = int.Parse(values[13]); // Parse UseForProductID from CSV
+                        decimal quantityUsedPerProduct = decimal.Parse(values[14]); // Parse QuantityUsedPerProduct from CSV
 
 
-                        var addOn = new AddOn
+                        AddOn addOn = new AddOn
                         {
                             AddOnName = ingredientName,
                             AdditionalPrice = additionalPrice,
@@ -180,25 +176,25 @@ namespace TakoTea.Services
                         AddAddon(addOn);
                     }
 
-                    context.Ingredients.Add(ingredient);
+                    _ = context.Ingredients.Add(ingredient);
                 }
                 catch (FormatException ex)
                 {
                     // Log or handle the error
-                    MessageBox.Show($"Error parsing line: {line}. Error: {ex.Message}");
+                    _ = MessageBox.Show($"Error parsing line: {line}. Error: {ex.Message}");
                 }
             }
 
-            context.SaveChanges();
+            _ = context.SaveChanges();
         }
 
 
         public void AddIngredient(Ingredient ingredient)
         {
-            using (var context = new Entities())
+            using (Entities context = new Entities())
             {
-                context.Ingredients.Add(ingredient);
-                context.SaveChanges();
+                _ = context.Ingredients.Add(ingredient);
+                _ = context.SaveChanges();
 
                 // Log addition of Ingredient
                 LoggingHelper.LogChange(
@@ -223,15 +219,15 @@ namespace TakoTea.Services
         public void AddAddon(AddOn addOn)
         {
             // Add the AddOn to the DbSet
-            context.AddOns.Add(addOn);
+            _ = context.AddOns.Add(addOn);
 
             // Save changes to the database
-            context.SaveChanges();
+            _ = context.SaveChanges();
         }
 
         public int GetIngredientIdByName(string ingredientName)
         {
-            var ingredient = context.Ingredients
+            Ingredient ingredient = context.Ingredients
                 .FirstOrDefault(i => i.IngredientName.Equals(ingredientName, StringComparison.OrdinalIgnoreCase));
 
             if (ingredient != null)
@@ -253,42 +249,42 @@ namespace TakoTea.Services
         {
             try
             {
-                using (var context = new Entities())
+                using (Entities context = new Entities())
                 {
                     var productVariantStockData = from pvi in context.ProductVariantIngredients
                                                   join bi in context.Batches on pvi.IngredientID equals bi.IngredientID
                                                   group bi by new { pvi.ProductVariantID, pvi.QuantityPerVariant } into g
                                                   select new
                                                   {
-                                                      ProductVariantID = g.Key.ProductVariantID,
-                                                      QuantityPerVariant = g.Key.QuantityPerVariant,
+                                                      g.Key.ProductVariantID,
+                                                      g.Key.QuantityPerVariant,
                                                       AvailableStock = g.Sum(x => (decimal?)x.StockLevel) ?? 0
                                                   };
 
                     foreach (var stockData in productVariantStockData)
                     {
-                        var stockLevel = Math.Floor(stockData.AvailableStock / stockData.QuantityPerVariant); // Apply Math.Floor here
+                        decimal stockLevel = Math.Floor(stockData.AvailableStock / stockData.QuantityPerVariant); // Apply Math.Floor here
 
-                        var productVariant = context.ProductVariants.FirstOrDefault(pv => pv.ProductVariantID == stockData.ProductVariantID);
+                        ProductVariant productVariant = context.ProductVariants.FirstOrDefault(pv => pv.ProductVariantID == stockData.ProductVariantID);
                         if (productVariant != null)
                         {
-                            var oldStockLevel = productVariant.StockLevel;
+                            decimal? oldStockLevel = productVariant.StockLevel;
                             productVariant.StockLevel = stockLevel;
 
                             // Log update of ProductVariant stock level
-           
+
 
 
 
                         }
                     }
 
-                    context.SaveChanges();
+                    _ = context.SaveChanges();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error updating stock levels for all product variants: " + ex.Message);
+                _ = MessageBox.Show("Error updating stock levels for all product variants: " + ex.Message);
             }
         }
 

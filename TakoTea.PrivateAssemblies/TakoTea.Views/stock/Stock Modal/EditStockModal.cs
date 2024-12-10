@@ -2,10 +2,9 @@
 using System.Windows.Forms;
 using TakoTea.Helpers;
 using TakoTea.Helpers.Validators;
+using TakoTea.Interfaces;
 using TakoTea.Repository;
 using TakoTea.Services;
-using TakoTea.Models;
-using TakoTea.Interfaces;
 using TakoTea.Views.DataLoaders.Modals;
 
 namespace TakoTea.Views.Stock.Stock_Modal
@@ -33,7 +32,7 @@ namespace TakoTea.Views.Stock.Stock_Modal
         private void EditStockModal_Load(object sender, EventArgs e)
         {
             // Create the data loader for batches and load the data
-            var dataLoader = ModalDataLoaderFactory.GetDataLoader(this, _batchId);  // Adjusted for Batch
+            IModalDataLoader dataLoader = ModalDataLoaderFactory.GetDataLoader(this, _batchId);  // Adjusted for Batch
             dataLoader.LoadData(this);
         }
 
@@ -92,7 +91,7 @@ namespace TakoTea.Views.Stock.Stock_Modal
         private void btnReset_Click(object sender, EventArgs e)
         {
             // Reset the data using the data loader for batch
-            var dataLoader = ModalDataLoaderFactory.GetDataLoader(this, _batchId);  // Adjusted for Batch
+            IModalDataLoader dataLoader = ModalDataLoaderFactory.GetDataLoader(this, _batchId);  // Adjusted for Batch
             dataLoader.ResetData(this);
         }
     }

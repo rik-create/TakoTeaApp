@@ -1,20 +1,18 @@
 ﻿using LiveCharts;
 using LiveCharts.Wpf;
 using MaterialSkin.Controls;
-using System.Linq;
 using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
 using TakoTea.Models;
 using TakoTea.Repository;
 using TakoTea.Services;
-using System.Runtime.InteropServices.ComTypes;
-using System.Globalization;
 using TakoTea.View.Orders;
-using System.Collections.Generic;
 using TakoTea.Views.MainForm;
-using LiveCharts.Defaults;
 namespace TakoTea.Views.Dashboard
 {
     public partial class DashboardForm : MaterialForm
@@ -34,7 +32,7 @@ namespace TakoTea.Views.Dashboard
             salesService = new SalesService(context);
             ingredientRepository = new IngredientRepository(context);
             ThemeConfigurator.ApplyDarkTheme(this);
-            FormSettingsConfigurator.ApplyStandardFormSettings(this);   
+            FormSettingsConfigurator.ApplyStandardFormSettings(this);
             LoadDashboard();
             InitializeGrossRevenueChart(DateTime.Now.AddYears(-7), DateTime.Now);
             InitializeSalesPerProductChart(DateTime.Now.AddYears(-1), DateTime.Now);
@@ -51,6 +49,8 @@ namespace TakoTea.Views.Dashboard
             DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewNewOrders);
 
             DataGridViewHelper.ApplyDataGridViewStyles(dgvUnderstock);
+            DataGridViewHelper.FormatColumnHeaders(dataGridViewNewOrders);
+            DataGridViewHelper.FormatColumnHeaders(dgvUnderstock);
 
 
         }
@@ -58,16 +58,16 @@ namespace TakoTea.Views.Dashboard
         {
             // Fetch data from OrderItem, ProductVariants, and Product tables, filtering by date
             var salesData = context.OrderItems
-                .Where(oi => oi.CreatedDate >= startDate && oi.CreatedDate <= endDate) // Filter by date
-                .Join(context.ProductVariants, oi => oi.ProductVariantId, pv => pv.ProductVariantID, (oi, pv) => new { oi, pv })
-                .Join(context.Products, x => x.pv.ProductID, p => p.ProductID, (x, p) => new { x.oi, x.pv, p })
-                .GroupBy(x => x.p.ProductName)
-                .Select(g => new
-                {
-                    ProductName = g.Key,
-                    TotalSold = g.Sum(x => x.oi.Quantity)
-                })
-                .ToList();
+    .Where(oi => oi.CreatedDate >= startDate && oi.CreatedDate <= endDate && oi.OrderModel.OrderStatus == "Completed") // Filter by date and completed status
+    .Join(context.ProductVariants, oi => oi.ProductVariantId, pv => pv.ProductVariantID, (oi, pv) => new { oi, pv })
+    .Join(context.Products, x => x.pv.ProductID, p => p.ProductID, (x, p) => new { x.oi, x.pv, p })
+    .GroupBy(x => x.p.ProductName)
+    .Select(g => new
+    {
+        ProductName = g.Key,
+        TotalSold = g.Sum(x => x.oi.Quantity)
+    })
+    .ToList();
             cartesianChartSalesPerProduct.Series.Clear();
             cartesianChartSalesPerProduct.AxisX.Clear();
             cartesianChartSalesPerProduct.AxisY.Clear();
@@ -102,7 +102,7 @@ namespace TakoTea.Views.Dashboard
             });
 
             // Add a tooltip
-            var tooltip = new DefaultTooltip
+            DefaultTooltip tooltip = new DefaultTooltip
             {
                 SelectionMode = TooltipSelectionMode.SharedYValues
             };
@@ -120,7 +120,7 @@ namespace TakoTea.Views.Dashboard
                 cartesianChartGrossRevenue.Pan = PanningOptions.X;
                 // Fetch order data within the specified date range
                 orders = context.OrderModels // Assign to the class-level 'orders' variable
-                  .Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate)
+                  .Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate && o.OrderStatus == "Completed")
                   .OrderBy(o => o.OrderDate)
                   .ToList();
                 /*               DateTime minOrderDate = orders.Any() ? orders.Min(o => o.OrderDate).Date : startDate;
@@ -134,7 +134,7 @@ namespace TakoTea.Views.Dashboard
 
                 Dictionary<string, decimal> revenueByLabel = new Dictionary<string, decimal>();
                 Dictionary<string, decimal> grossProfitByLabel = new Dictionary<string, decimal>();
-                var xAxisLabels = GenerateXAxisLabels(startDate, endDate);
+                List<string> xAxisLabels = GenerateXAxisLabels(startDate, endDate);
 
                 foreach (string label in xAxisLabels)
                 {
@@ -143,8 +143,8 @@ namespace TakoTea.Views.Dashboard
                 }
                 // Initialize the dictionaries with labels and zero revenue/profit
                 try
-               {
-                    foreach (var order in orders)
+                {
+                    foreach (OrderModel order in orders)
                     {
                         string label = GetLabelForDate(order.OrderDate, timeSpan, startDate, endDate);
                         revenueByLabel[label] += order.TotalAmount;
@@ -153,7 +153,7 @@ namespace TakoTea.Views.Dashboard
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"An error occurred while processing orders: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    _ = MessageBox.Show($"An error occurred while processing orders: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
 
@@ -164,15 +164,25 @@ namespace TakoTea.Views.Dashboard
                     .GroupBy(o =>
                     {
                         if (timeSpan.Days <= 1) // Hourly labels
+                        {
                             return new DateTime(o.OrderDate.Year, o.OrderDate.Month, o.OrderDate.Day, o.OrderDate.Hour, 0, 0); // Group by hour
+                        }
                         else if (timeSpan.Days <= 15) // Daily labels
+                        {
                             return o.OrderDate.Date; // Group by exact date
+                        }
                         else if (timeSpan.Days <= 31) // Weekly labels (same month)
+                        {
                             return o.OrderDate.Date.AddDays(-(o.OrderDate.Day - 1) % 7); // Group by week starting from the first day of the month
+                        }
                         else if (timeSpan.Days <= 365) // Monthly labels
+                        {
                             return new DateTime(o.OrderDate.Year, o.OrderDate.Month, 1); // Group by month
+                        }
                         else // Yearly labels
+                        {
                             return new DateTime(o.OrderDate.Year, 1, 1); // Group by year
+                        }
                     })
                     .Select(g => new { Date = g.Key, Revenue = g.Sum(o => o.TotalAmount) })
                     .OrderBy(x => x.Date)
@@ -183,15 +193,25 @@ namespace TakoTea.Views.Dashboard
                     .GroupBy(o =>
                     {
                         if (timeSpan.Days <= 1) // Hourly labels
+                        {
                             return new DateTime(o.OrderDate.Year, o.OrderDate.Month, o.OrderDate.Day, o.OrderDate.Hour, 0, 0); // Group by hour
+                        }
                         else if (timeSpan.Days <= 15) // Daily labels
+                        {
                             return o.OrderDate.Date; // Group by exact date
+                        }
                         else if (timeSpan.Days <= 31) // Weekly labels (same month)
+                        {
                             return o.OrderDate.Date.AddDays(-(o.OrderDate.Day - 1) % 7); // Group by week starting from the first day of the month
+                        }
                         else if (timeSpan.Days <= 365) // Monthly labels
+                        {
                             return new DateTime(o.OrderDate.Year, o.OrderDate.Month, 1); // Group by month
+                        }
                         else // Yearly labels
+                        {
                             return new DateTime(o.OrderDate.Year, 1, 1); // Group by year
+                        }
                     })
                     .Select(g => new { Date = g.Key, GrossProfit = g.Sum(o => o.GrossProfit) })
                     .OrderBy(x => x.Date)
@@ -216,18 +236,18 @@ namespace TakoTea.Views.Dashboard
 
                 // Create line series with Mapper
                 // Create line series with improved design
-                var grossRevenueSeries = new ColumnSeries // Changed to ColumnSeries for bar chart
+                ColumnSeries grossRevenueSeries = new ColumnSeries // Changed to ColumnSeries for bar chart
                 {
                     Title = "Gross Revenue",
                     Values = new ChartValues<decimal>(revenueByLabel.Values.ToList()),
-                    LabelPoint = point => point.Y.ToString("₱#,##0.00")     ,    
+                    LabelPoint = point => point.Y.ToString("₱#,##0.00"),
                     StrokeThickness = 1,
 
                     Fill = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(62, 39, 35)), // RGB(0, 118, 207)
                     Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(62, 39, 35))  // Same color for stroke                StrokeThickness = 1,
                 };
 
-                var grossProfitSeries = new ColumnSeries // Changed to ColumnSeries for bar chart
+                ColumnSeries grossProfitSeries = new ColumnSeries // Changed to ColumnSeries for bar chart
                 {
                     Title = "Gross Profit",
                     Values = new ChartValues<decimal>(grossProfitByLabel.Values.ToList()),
@@ -238,7 +258,7 @@ namespace TakoTea.Views.Dashboard
                 };
 
                 // Add both series to the chart
-                var series = new SeriesCollection
+                SeriesCollection series = new SeriesCollection
     {
         grossRevenueSeries,
         grossProfitSeries
@@ -266,7 +286,7 @@ namespace TakoTea.Views.Dashboard
 
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while initializing the gross revenue chart: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show($"An error occurred while initializing the gross revenue chart: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
@@ -306,18 +326,14 @@ namespace TakoTea.Views.Dashboard
                 // If no matching week is found, return an empty string or handle the error appropriately
                 return "";
             }
-            else if (timeSpan.Days <= 365)
-            {
-                return CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(date.Month);
-            }
             else
             {
-                return date.Year.ToString();
+                return timeSpan.Days <= 365 ? CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(date.Month) : date.Year.ToString();
             }
         }
         private List<string> GenerateXAxisLabels(DateTime startDate, DateTime endDate)
         {
-            var labels = new List<string>();
+            List<string> labels = new List<string>();
 
             // Calculate the time span between start and end dates
             TimeSpan timeSpan = endDate - startDate;
@@ -401,8 +417,7 @@ namespace TakoTea.Views.Dashboard
             DataGridViewHelper.HideColumn(dataGridViewNewOrders, "OrderId");
             DataGridViewHelper.HideColumn(dataGridViewNewOrders, "GrossProfit");
             DataGridViewHelper.HideColumn(dataGridViewNewOrders, "OrderStatus");
-            DataGridViewHelper.FormatColumnHeaders(dataGridViewNewOrders);
-            DataGridViewHelper.FormatColumnHeaders(dgvUnderstock);
+        
 
             // Autosize the OrderDate column
             dataGridViewNewOrders.Columns["OrderDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -416,8 +431,8 @@ namespace TakoTea.Views.Dashboard
         private void InitializeDashboardMetrics(DateTime startDate, DateTime endDate)
         {
             // Calculate metrics for the current period
-            var currentOrders = context.OrderModels
-    .Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate)
+            List<OrderModel> currentOrders = context.OrderModels
+    .Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate && o.OrderStatus == "Completed")
     .OrderBy(o => o.OrderDate) // Order by OrderDate
     .ToList();
             int numOrders = currentOrders.Count;
@@ -427,7 +442,7 @@ namespace TakoTea.Views.Dashboard
             // Calculate metrics for the previous period
             DateTime prevStartDate = startDate.AddDays(-(endDate - startDate).TotalDays); // Shift the date range back
             DateTime prevEndDate = endDate.AddDays(-(endDate - startDate).TotalDays);
-            var previousOrders = context.OrderModels
+            List<OrderModel> previousOrders = context.OrderModels
                 .Where(o => o.OrderDate >= prevStartDate && o.OrderDate <= prevEndDate)
                     .OrderBy(o => o.OrderDate) // Order by OrderDate
 
@@ -440,7 +455,7 @@ namespace TakoTea.Views.Dashboard
             // Calculate percentage changes
             // Calculate percentage changes
             // Calculate percentage changes
-            double numOrdersPercentChange = ((double)numOrders - (double)prevNumOrders) / (double)prevNumOrders * 100;
+            double numOrdersPercentChange = (numOrders - (double)prevNumOrders) / prevNumOrders * 100;
             double totalRevenuePercentChange = ((double)totalRevenue - (double)prevTotalRevenue) / (double)prevTotalRevenue * 100;
             double totalProfitPercentChange = ((double)totalProfit - (double)prevTotalProfit) / (double)prevTotalProfit * 100;
 
@@ -457,31 +472,17 @@ namespace TakoTea.Views.Dashboard
             }
 
             lblTotalRevenue.Text = totalRevenue.ToString("₱#,##0.00");
-            if (totalRevenuePercentChange < 0)
-            {
-                lblTotalRevenuePercentChange.Text = $"{totalRevenuePercentChange:0.##}%";
-            }
-            else
-            {
-                lblTotalRevenuePercentChange.Text = $"+{totalRevenuePercentChange:0.##}%";
-            }
+            lblTotalRevenuePercentChange.Text = totalRevenuePercentChange < 0 ? $"{totalRevenuePercentChange:0.##}%" : $"+{totalRevenuePercentChange:0.##}%";
 
             lblTotalProfit.Text = totalProfit.ToString("₱#,##0.00");
 
-            if (totalProfitPercentChange < 0)
-            {
-                lblTotalProfitPercentChange.Text = $"{totalProfitPercentChange:0.##}%";
-            }
-            else
-            {
-                lblTotalProfitPercentChange.Text = $"+{totalProfitPercentChange:0.##}%";
-            }
+            lblTotalProfitPercentChange.Text = totalProfitPercentChange < 0 ? $"{totalProfitPercentChange:0.##}%" : $"+{totalProfitPercentChange:0.##}%";
         }
         private void InitializePieChartTop5ProductVariant(DateTime startDate, DateTime endDate)
         {
             // Fetch data from OrderItem, ProductVariants, and Product tables, filtering by date
             var top5ProductVariants = context.OrderItems
-                .Where(oi => oi.CreatedDate >= startDate && oi.CreatedDate <= endDate)
+                .Where(oi => oi.CreatedDate >= startDate && oi.CreatedDate <= endDate && oi.OrderModel.OrderStatus == "Completed")
                 .Join(context.ProductVariants, oi => oi.ProductVariantId, pv => pv.ProductVariantID, (oi, pv) => new { oi, pv })
                 .GroupBy(x => x.pv.VariantName)
                 .Select(g => new
@@ -520,24 +521,13 @@ namespace TakoTea.Views.Dashboard
             }
 
             // Set chart title dynamically based on date range
-            string chartTitle;
-            if (startDate.Date == endDate.Date)
-            {
-                chartTitle = $"Top 5 Product Variants on {startDate.ToShortDateString()}";
-            }
-            else if (startDate.Year == endDate.Year && startDate.Month == endDate.Month)
-            {
-                chartTitle = $"Top 5 Product Variants in {startDate.ToString("MMMM yyyy")}";
-            }
-            else if (startDate.Year == endDate.Year)
-            {
-                chartTitle = $"Top 5 Product Variants from {startDate.ToString("MMMM")} to {endDate.ToString("MMMM yyyy")}";
-            }
-            else
-            {
-                chartTitle = $"Top 5 Product Variants from {startDate.ToShortDateString()} to {endDate.ToShortDateString()}";
-            }
-
+            string chartTitle = startDate.Date == endDate.Date
+                ? $"Top 5 Product Variants on {startDate.ToShortDateString()}"
+                : startDate.Year == endDate.Year && startDate.Month == endDate.Month
+                    ? $"Top 5 Product Variants in {startDate:MMMM yyyy}"
+                    : startDate.Year == endDate.Year
+                                    ? $"Top 5 Product Variants from {startDate:MMMM} to {endDate:MMMM yyyy}"
+                                    : $"Top 5 Product Variants from {startDate.ToShortDateString()} to {endDate.ToShortDateString()}";
             pieChartTop5ProductVariant.LegendLocation = LegendLocation.Bottom;
         }
         private void panel7_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -605,7 +595,7 @@ namespace TakoTea.Views.Dashboard
         {
             LoadDashboard();
             MenuOrderForm menuOrderForm = new MenuOrderForm();
-            menuOrderForm.ShowDialog();
+            _ = menuOrderForm.ShowDialog();
         }
 
         private void lblNumOrdersPercentChange_Click(object sender, System.EventArgs e)
@@ -693,7 +683,7 @@ namespace TakoTea.Views.Dashboard
 
         private void dtpStartDate_ValueChanged(object sender, EventArgs e)
         {
-        DateHelper.ValidateDateRange(dtpStartDate, dtpEndDate, "Start date must be before end date.", -1);
+            DateHelper.ValidateDateRange(dtpStartDate, dtpEndDate, "Start date must be before end date.", -1);
         }
 
         private void dtpEndDate_ValueChanged(object sender, EventArgs e)
@@ -705,7 +695,7 @@ namespace TakoTea.Views.Dashboard
         private void btnOkCustomDate_Click(object sender, EventArgs e)
         {
             span = dtpEndDate.Value - dtpStartDate.Value;
-            
+
             if (span.Days <= 1)
             {
                 InitializeGrossRevenueChart(dtpStartDate.Value.Date, dtpEndDate.Value.Date);

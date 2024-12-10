@@ -1,13 +1,9 @@
 ﻿using MailKit.Net.Smtp;
 using MailKit.Security;
 using MaterialSkin.Controls;
-using Microsoft.SqlServer.Management.Smo;
 using MimeKit;
 using System;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,24 +11,25 @@ using TakoTea.Configurations;
 using TakoTea.Helpers;
 using TakoTea.Interfaces;
 using TakoTea.Models;
-using TakoTea.Product;
 using TakoTea.Repository;
 using TakoTea.View.Items.Item_Modals;
 using TakoTea.View.Orders;
-using TakoTea.View.Product;
 using TakoTea.View.Product.Product_Modals;
 using TakoTea.Views.mainform;
 using TakoTea.Views.reports;
 using TakoTea.Views.settings;
 namespace TakoTea.Views.MainForm
 {
-    public partial class TakoTeaForm : MaterialForm
+        public partial class TakoTeaForm : MaterialForm
     {
         public static TakoTeaForm Instance;
         private readonly IFormFactory _formFactory;
         private readonly FormLoader _formLoader;
         private readonly Entities _context;
         private readonly LoginForm loginForm;
+        private ToolStripButton toolStripButtonSendLowStock;
+        private ToolStripButton toolStripButtonOrderQueue;
+
         public TakoTeaForm()
         {
             InitializeComponent();
@@ -44,29 +41,47 @@ namespace TakoTea.Views.MainForm
             _context = new Entities();
             // Assuming materialComboBoxQuickAccess is your ComboBox control
 
-
             // Optionally, set a default selected item
             toolStripQuickAccess.Visible = false;
 
-            Timer timer = new Timer();
-            timer.Interval = 4000; // 4 seconds
-            timer.Tick += (s, args) =>
-            {
-                toolStripQuickAccess.Visible = false;
-                timer.Stop(); // Stop the timer after hiding the button
-            };
-            timer.Start();
+            // Create toolStripButtonSendLowStock
+            toolStripButtonSendLowStock = new ToolStripButton();
+            toolStripButtonSendLowStock.Text = "Send Low Stock";
+            toolStripButtonSendLowStock.Click += toolStripButtonSendLowStock_Click; // Add the Click event handler
+
+            // Create toolStripButtonOrderQueue
+            toolStripButtonOrderQueue = new ToolStripButton();
+            toolStripButtonOrderQueue.Text = "Order Queue";
+            toolStripButtonOrderQueue.Click += toolStripButtonOrderQueue_Click; // Add the Click event handler
+
+            // Add buttons to toolStripQuickAccess
+            toolStripQuickAccess.Items.AddRange(new ToolStripItem[] {
+                    toolStripButtonSendLowStock, toolStripButtonOrderQueue
+                });
+        }
+
+        private void toolStripButtonSendLowStock_Click(object sender, EventArgs e)
+        {
+            CheckInventoryAndSendNotifications(null,null);
 
         }
 
+        private void toolStripButtonOrderQueue_Click(object sender, EventArgs e)
+        {
+
+            OrdersQueueForm ordersQueueForm = new OrdersQueueForm(_context);
+            ordersQueueForm.Show();
+
+        }
 
         private void InitializeNotificationTimer()
         {
             // Create a Timer with the specified interval
-            System.Timers.Timer timer = new System.Timers.Timer();
-
-            // Set the interval based on the selected frequency in cmbAlertFrequency
-            timer.Interval = GetNotificationInterval().TotalMilliseconds;
+            System.Timers.Timer timer = new System.Timers.Timer
+            {
+                // Set the interval based on the selected frequency in cmbAlertFrequency
+                Interval = GetNotificationInterval().TotalMilliseconds
+            };
 
             // Attach the Elapsed event handler
             timer.Elapsed += CheckInventoryAndSendNotifications;
@@ -74,10 +89,11 @@ namespace TakoTea.Views.MainForm
             // Start the timer
             timer.Start();
         }
+
         private void CheckInventoryAndSendNotifications(object sender, System.Timers.ElapsedEventArgs e)
         {
-            var context = new Entities();
-            var settings = context.Settings.FirstOrDefault();
+            Entities context = new Entities();
+            Setting settings = context.Settings.FirstOrDefault();
             if (settings == null)
             {
                 return;
@@ -89,27 +105,27 @@ namespace TakoTea.Views.MainForm
                 return; // Exit if both types of notifications are disabled
             }
 
-            var emailAddresses = settings.SavedEmails.Split(new[] { '?' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] emailAddresses = settings.SavedEmails.Split(new[] { '?' }, StringSplitOptions.RemoveEmptyEntries);
 
-            var lowStockIngredients = context.Ingredients.Where(i => i.StockLevel <= i.LowLevel).ToList();
-            var outOfStockIngredients = context.Ingredients.Where(i => i.StockLevel <= 0).ToList();
+            System.Collections.Generic.List<Ingredient> lowStockIngredients = context.Ingredients.Where(i => i.StockLevel <= i.LowLevel).ToList();
+            System.Collections.Generic.List<Ingredient> outOfStockIngredients = context.Ingredients.Where(i => i.StockLevel <= 0).ToList();
 
             StringBuilder message = new StringBuilder();
             if (lowStockIngredients.Count > 0)
             {
-                message.AppendLine("Low Stock Ingredients:");
-                foreach (var ingredient in lowStockIngredients)
+                _ = message.AppendLine("Low Stock Ingredients:");
+                foreach (Ingredient ingredient in lowStockIngredients)
                 {
-                    message.AppendLine($"- {ingredient.IngredientName}: {ingredient.StockLevel} {ingredient.MeasuringUnit}");
+                    _ = message.AppendLine($"- {ingredient.IngredientName}: {ingredient.StockLevel} {ingredient.MeasuringUnit}");
                 }
             }
 
             if (outOfStockIngredients.Count > 0)
             {
-                message.AppendLine("\nOut of Stock Ingredients:");
-                foreach (var ingredient in outOfStockIngredients)
+                _ = message.AppendLine("\nOut of Stock Ingredients:");
+                foreach (Ingredient ingredient in outOfStockIngredients)
                 {
-                    message.AppendLine($"- {ingredient.IngredientName}");
+                    _ = message.AppendLine($"- {ingredient.IngredientName}");
                 }
             }
 
@@ -130,12 +146,12 @@ namespace TakoTea.Views.MainForm
 
         private void ShowInAppNotification(string message)
         {
-            MessageBox.Show(message, "Inventory Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            _ = MessageBox.Show(message, "Inventory Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
         private TimeSpan GetNotificationInterval()
         {
-            var _context = new Entities();
-
+            Entities _context = new Entities();
 
             // Retrieve the selected frequency from the database or settings
             string selectedFrequency = _context.Settings.FirstOrDefault()?.LowStockFrequency; // Assuming you have a Settings entity
@@ -152,10 +168,9 @@ namespace TakoTea.Views.MainForm
             }
         }
 
-
         private void SendEmailNotifications(string[] recipients, string subject, string body)
         {
-            var message = new MimeMessage();
+            MimeMessage message = new MimeMessage();
             message.From.Add(new MailboxAddress("Tako Tea", "takotea9@gmail.com")); // Replace with your email address
             foreach (string recipient in recipients)
             {
@@ -164,11 +179,11 @@ namespace TakoTea.Views.MainForm
             message.Subject = subject;
             message.Body = new TextPart("plain") { Text = body };
 
-            using (var client = new SmtpClient())
+            using (SmtpClient client = new SmtpClient())
             {
                 client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
                 client.Authenticate("takotea9@gmail.com", "rhdl vljl ztfn xzui");
-                client.Send(message);
+                _ = client.Send(message);
                 client.Disconnect(true);
             }
         }
@@ -192,6 +207,7 @@ namespace TakoTea.Views.MainForm
                 Height -= heightDifference;
             }
         }
+
         private void materialTabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             TabPage selectedTab = materialTabControl1.SelectedTab;
@@ -257,7 +273,6 @@ namespace TakoTea.Views.MainForm
                 case "Reports":
                     targetPanel = panelReports;
                     break;
-         
 
                 default:
                     return; // Exit if no valid target panel found
@@ -271,12 +286,12 @@ namespace TakoTea.Views.MainForm
                 progressBar.BringToFront(); // Ensure the progress bar is visible
 
                 // Load the form asynchronously
-                Task.Run(() =>
+                _ = Task.Run(() =>
                 {
                     // Simulate loading delay (remove this in your actual implementation)
 
                     // Update the UI on the main thread
-                    BeginInvoke(new Action(() =>
+                    _ = BeginInvoke(new Action(() =>
                     {
                         targetPanel.Width = formToLoad.Width;
                         targetPanel.Height = formToLoad.Height;
@@ -289,11 +304,11 @@ namespace TakoTea.Views.MainForm
                 });
             }
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             UserRepository.Initialize(_context);
-            this.Shown += (s, args) => { this.Activate(); };
-
+            Shown += (s, args) => { Activate(); };
 
             Form form = _formLoader.LoadForm("Dashboard");  // Correct usage with a string as argument
             Form formToLoad = form;
@@ -309,6 +324,7 @@ namespace TakoTea.Views.MainForm
                 formToLoad.Show();
             }
         }
+
         private ToolStripMenuItem activeMenuItem = null;
         private void HandleMenuItemClick(ToolStripMenuItem clickedMenuItem)
         {
@@ -328,49 +344,44 @@ namespace TakoTea.Views.MainForm
             // Update the active menu item
             activeMenuItem = clickedMenuItem;
         }
+
         private void CenterPanel(Panel panel)
         {
             panel.Left = ((ClientSize.Width - panel.Width) / 2) - 30;
         }
-        /*        private void menuStripItem_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-                {
-                    if (e.ClickedItem is ToolStripMenuItem clickedMenuItem)
-                    {
-                        // Call the reusable method to handle active menu item state
-                        HandleMenuItemClick(clickedMenuItem);
-                        var loader = ItemFormLoaderFactory.GetFormLoader(e.ClickedItem.Name);
-                        if (loader != null)
-                        {
-                            Form form = loader.LoadForm();
-                            panelItem.Width = form.Width;
-                            panelItem.Height = form.Height;
-                            CenterPanel(panelItem);
-                            panelItem.Controls.Clear();
-                            panelItem.Controls.Add(form);
-                            form.Show();
-                        }
-                    }
-                }
-        */
+
         private void tabPageStock_Click(object sender, EventArgs e)
         {
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             toolStripQuickAccess.Visible = !toolStripQuickAccess.Visible;
             toolStripQuickAccess.Enabled = toolStripQuickAccess.Visible;
+            Timer timer = new Timer
+            {
+                Interval = 8000 // 8 seconds
+            };
+            timer.Tick += (s, args) =>
+            {
+                toolStripQuickAccess.Visible = false;
+                timer.Stop(); // Stop the timer after hiding the button
+            };
+            timer.Start();
         }
+
         private void toolStripBtnNewOrder_Click(object sender, EventArgs e)
         {
             MenuOrderForm menuOrderForm = new MenuOrderForm();
             menuOrderForm.Show();
         }
+
         private void toolStripBtnAddIngredient_Click(object sender, EventArgs e)
         {
             AddItemModal addItemModal = new AddItemModal();
             _ = addItemModal.ShowDialog();
-
         }
+
         private void toolStripBtnAddProduct_Click(object sender, EventArgs e)
         {
             AddProductModal addProductModal = new AddProductModal();
@@ -379,12 +390,10 @@ namespace TakoTea.Views.MainForm
 
         private void btnReload_Click(object sender, EventArgs e)
         {
-
-
             // 1. Get the currently selected tab
             TabPage selectedTab = materialTabControl1.SelectedTab;
 
-            string formKey = ""; // Initialize with an empty string
+            string formKey;
             switch (selectedTab.Name)
             {
                 case "tabPageDashboard":
@@ -422,7 +431,7 @@ namespace TakoTea.Views.MainForm
             Form newForm = _formLoader.LoadForm(formKey);
 
             // 4. Find the correct panel to update
-            Panel targetPanel = null;
+            Panel targetPanel;
             switch (formKey)
             {
                 case "Dashboard":
@@ -446,11 +455,11 @@ namespace TakoTea.Views.MainForm
                 case "Reports":
                     targetPanel = panelReports;
                     break;
-        
+
                 default:
                     return; // Do nothing if an unexpected formKey is encountered
             }
-            
+
             // If a valid form and target panel were found, replace the form in the panel
             if (targetPanel != null && newForm != null)
             {
@@ -476,19 +485,14 @@ namespace TakoTea.Views.MainForm
 
         private void materialButton1_Click(object sender, EventArgs e)
         {
-      
         }
-
-
 
         private void toolStripMenuItemProductVariant_Click(object sender, EventArgs e)
         {
-
         }
-   
+
         private void toolStripMenuItemProducts_Click(object sender, EventArgs e)
         {
-
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -500,8 +504,9 @@ namespace TakoTea.Views.MainForm
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             SettingsForm settingsForm = new SettingsForm();
-            settingsForm.ShowDialog();
+            _ = settingsForm.ShowDialog();
         }
+
         private void LoadFormIntoPanel(string formKey, Panel targetPanel)
         {
             Form formToLoad = _formLoader.LoadForm(formKey);
@@ -512,9 +517,9 @@ namespace TakoTea.Views.MainForm
                 targetPanel.Controls.Add(progressBar);
                 progressBar.BringToFront();
 
-                Task.Run(() =>
+                _ = Task.Run(() =>
                 {
-                    BeginInvoke(new Action(() =>
+                    _ = BeginInvoke(new Action(() =>
                     {
                         targetPanel.Width = formToLoad.Width;
                         targetPanel.Height = formToLoad.Height;
@@ -531,10 +536,7 @@ namespace TakoTea.Views.MainForm
         private void toolStripMenuItemProducts_Click_1(object sender, EventArgs e)
         {
             LoadFormIntoPanel("ProductCateg", panelProduct);
-
         }
-
-  
 
         private void toolStripMenuItemVariants_Click(object sender, EventArgs e)
         {
@@ -544,39 +546,31 @@ namespace TakoTea.Views.MainForm
         private void variantsChangesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadFormIntoPanel("VariantChanges", panelProduct);
-
         }
 
         private void ingredientChangesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadFormIntoPanel("IngredientChanges", panelItem);
-
         }
-
-      
 
         private void batchChangesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadFormIntoPanel("BatchChanges", panelBatch);
-
         }
 
         private void batchListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadFormIntoPanel("Batch", panelBatch);
-
         }
 
         private void comboMealsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadFormIntoPanel("ComboMeal", panelProduct);
-
         }
 
         private void addOnsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadFormIntoPanel("AddOns", panelItem);
-
         }
 
         private void materialButtonlow_Click(object sender, EventArgs e)

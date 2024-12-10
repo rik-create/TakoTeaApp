@@ -1,8 +1,7 @@
-﻿using System;
-using System.Windows.Forms;
-using TakoTea.Repository;
-using TakoTea.Models;
+﻿using System.Windows.Forms;
 using TakoTea.Interfaces;
+using TakoTea.Models;
+using TakoTea.Repository;
 using TakoTea.Views.Stock.Stock_Modal;
 
 namespace TakoTea.Views.DataLoaders.Modals
@@ -27,7 +26,7 @@ namespace TakoTea.Views.DataLoaders.Modals
             if (modalForm is EditStockModal editStockModal)
             {
                 // Get the batch details using the batchId
-                var batch = _batchRepository.GetBatchById(_batchId);
+                BatchModel batch = _batchRepository.GetBatchById(_batchId);
                 _originalBatch = batch;  // Store original data for resetting
 
                 // Populate the form fields with the batch data

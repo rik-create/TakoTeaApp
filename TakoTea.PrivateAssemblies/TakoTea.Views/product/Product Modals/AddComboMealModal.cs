@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
-using TakoTea.Interfaces;
 using TakoTea.Models;
 using TakoTea.Services;
 
@@ -16,10 +15,8 @@ namespace TakoTea.View.Product.Product_Modals
 {
     public partial class AddComboMealModal : MaterialForm
     {
-
-
-        ProductsService productsService;
-        private Entities context;
+        private readonly ProductsService productsService;
+        private readonly Entities context;
         public AddComboMealModal()
         {
             InitializeComponent();
@@ -49,10 +46,10 @@ namespace TakoTea.View.Product.Product_Modals
         private void PopulateVariantList()
         {
             // Get the list of ingredients from the productsService
-            var variants = productsService.GetAllProductVariants();
+            List<ProductVariant> variants = productsService.GetAllProductVariants();
 
             // Define column headers for the ListView
-            var columnHeaders = new List<string> { "Variant", "ID", "Size", "Price" };
+            List<string> columnHeaders = new List<string> { "Variant", "ID", "Size", "Price" };
 
             // Use the reusable helper method
             DataGridViewHelper.PopulateListView(
@@ -80,13 +77,13 @@ namespace TakoTea.View.Product.Product_Modals
                 if (selectVariantModal.ShowDialog() == DialogResult.OK)
                 {
                     // Get the selected variants from the modal
-                    var selectedVariants = selectVariantModal.SelectedVariants;
+                    List<ProductVariant> selectedVariants = selectVariantModal.SelectedVariants;
 
                     // Add each selected variant to the DataGridView
-                    foreach (var variant in selectedVariants)
+                    foreach (ProductVariant variant in selectedVariants)
                     {
                         int rowIndex = dgViewAddComboMeal.Rows.Add();
-                        var row = dgViewAddComboMeal.Rows[rowIndex];
+                        DataGridViewRow row = dgViewAddComboMeal.Rows[rowIndex];
 
                         // Populate the row with the variant's details
                         row.Cells["ColumnVarName"].Value = variant.VariantName;
@@ -103,8 +100,8 @@ namespace TakoTea.View.Product.Product_Modals
         {
             if (dgViewAddComboMeal.SelectedRows.Count > 0)
             {
-                var selectedRow = dgViewAddComboMeal.SelectedRows[0];
-                var newRow = (DataGridViewRow)selectedRow.Clone();
+                DataGridViewRow selectedRow = dgViewAddComboMeal.SelectedRows[0];
+                DataGridViewRow newRow = (DataGridViewRow)selectedRow.Clone();
 
                 // Copy all cell values from the selected row to the new row
                 for (int i = 0; i < selectedRow.Cells.Count; i++)
@@ -113,7 +110,7 @@ namespace TakoTea.View.Product.Product_Modals
                 }
 
                 // Add the new row to the DataGridView
-                dgViewAddComboMeal.Rows.Add(newRow);
+                _ = dgViewAddComboMeal.Rows.Add(newRow);
             }
         }
 
@@ -121,21 +118,21 @@ namespace TakoTea.View.Product.Product_Modals
         private void btnDeleteRow_Click(object sender, EventArgs e)
         {
 
-    
+
 
             // Update the base price label
 
             // Update the discounted price based on the new base price
             if (dgViewAddComboMeal.SelectedRows.Count > 0)
             {
-         
+
 
                 foreach (DataGridViewRow selectedRow in dgViewAddComboMeal.SelectedRows)
                 {
                     // Ensure the row isn't the last row (so we don't delete all rows)
                     if (!selectedRow.IsNewRow)
                     {
-                        
+
                         dgViewAddComboMeal.Rows.RemoveAt(selectedRow.Index);
                     }
                 }
@@ -191,9 +188,9 @@ namespace TakoTea.View.Product.Product_Modals
             btnChooseProductVariant.Visible = true;
         }
 
-    
 
-  
+
+
         private void pbSearch_Click(object sender, EventArgs e)
         {
 
@@ -220,7 +217,7 @@ namespace TakoTea.View.Product.Product_Modals
         private void btnAddSelectedVariants_Click(object sender, EventArgs e)
         {
             AddSelectedVariantsToDataGridView();
-           
+
         }
 
         // Method to clear the form
@@ -252,7 +249,7 @@ namespace TakoTea.View.Product.Product_Modals
             lblDiscountedPrice.Text = "0.00"; // Default discounted price
 
             // Optionally show a message to confirm the form was cleared
-            MessageBox.Show("Form has been cleared.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            _ = MessageBox.Show("Form has been cleared.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
 
@@ -267,27 +264,27 @@ namespace TakoTea.View.Product.Product_Modals
             listViewProductVariants.Items.Clear();
 
             // Get the filtered list of product variants
-            var filteredVariants = productsService.GetAllProductVariants()
+            List<ProductVariant> filteredVariants = productsService.GetAllProductVariants()
                 .Where(variant => variant.VariantName.ToLower().Contains(searchTerm) ||
                                   variant.Size.ToLower().Contains(searchTerm) ||
                                   variant.Price.ToString().Contains(searchTerm)) // You can extend this to other fields
                 .ToList();
 
             // Add the filtered variants to the ListView
-            foreach (var variant in filteredVariants)
+            foreach (ProductVariant variant in filteredVariants)
             {
                 ListViewItem item = new ListViewItem(variant.VariantName); // The name of the variant
-                item.SubItems.Add(variant.ProductVariantID.ToString()); // Add the variant ID (or any other details)
-                item.SubItems.Add(variant.Size); // Add the size
-                item.SubItems.Add(variant.Price.ToString()); // Add the price
+                _ = item.SubItems.Add(variant.ProductVariantID.ToString()); // Add the variant ID (or any other details)
+                _ = item.SubItems.Add(variant.Size); // Add the size
+                _ = item.SubItems.Add(variant.Price.ToString()); // Add the price
 
                 // Add the item to the ListView
-                listViewProductVariants.Items.Add(item);
+                _ = listViewProductVariants.Items.Add(item);
             }
         }
 
         // Stack to store the recently added variants for undo functionality
-        private Stack<(string VariantName, decimal Quantity)> recentlyAddedVariants = new Stack<(string, decimal)>();
+        private readonly Stack<(string VariantName, decimal Quantity)> recentlyAddedVariants = new Stack<(string, decimal)>();
 
         private void AddSelectedVariantsToDataGridView()
         {
@@ -385,7 +382,7 @@ namespace TakoTea.View.Product.Product_Modals
             if (recentlyAddedVariants.Any())
             {
                 // Pop the last added variant from the stack
-                var lastAdded = recentlyAddedVariants.Pop();
+                (string VariantName, decimal Quantity) lastAdded = recentlyAddedVariants.Pop();
 
                 // Find the row corresponding to the removed variant
                 foreach (DataGridViewRow row in dgViewAddComboMeal.Rows)
@@ -421,15 +418,15 @@ namespace TakoTea.View.Product.Product_Modals
                 UpdateDiscountedPrice(basePrice); // Update discounted price based on new base price
                 UpdateTotalVariantsLabel(); // Update the total variants label
                 // Optional: Notify the user about the undo operation
-                MessageBox.Show($"Variant {lastAdded.VariantName} (Quantity: {lastAdded.Quantity}) removed.", "Undo Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _ = MessageBox.Show($"Variant {lastAdded.VariantName} (Quantity: {lastAdded.Quantity}) removed.", "Undo Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("No variants to undo.", "Undo Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                _ = MessageBox.Show("No variants to undo.", "Undo Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
- 
+
 
         private void numericUpDownDiscountPercent_ValueChanged_1(object sender, EventArgs e)
         {
@@ -465,13 +462,13 @@ namespace TakoTea.View.Product.Product_Modals
                 // Validate inputs
                 if (string.IsNullOrEmpty(comboMealName))
                 {
-                    MessageBox.Show("Combo meal name cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    _ = MessageBox.Show("Combo meal name cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (pbComboMealImage.Tag == null || string.IsNullOrEmpty(pbComboMealImage.Tag.ToString()))
                 {
-                    MessageBox.Show("Please add an image for the combo meal.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    _ = MessageBox.Show("Please add an image for the combo meal.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -497,7 +494,7 @@ namespace TakoTea.View.Product.Product_Modals
 
                 if (variantDetails.Count == 0)
                 {
-                    MessageBox.Show("No variants added to the combo meal.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    _ = MessageBox.Show("No variants added to the combo meal.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -520,7 +517,7 @@ namespace TakoTea.View.Product.Product_Modals
                 int newComboMealID = productsService.GetNewComboMealID(newComboMeal.ComboMealName);
 
                 // Save the variants related to this combo meal
-                foreach (var (VariantID, VariantName, Price, Quantity) in variantDetails)
+                foreach ((int VariantID, string VariantName, decimal Price, int Quantity) in variantDetails)
                 {
                     ComboMealVariant newComboMealVariant = new ComboMealVariant
                     {
@@ -533,7 +530,7 @@ namespace TakoTea.View.Product.Product_Modals
 
                     productsService.AddComboMealVariant(newComboMealVariant);
 
-                   
+
                 }
                 // Log the change
                 LoggingHelper.LogChange(
@@ -546,7 +543,7 @@ namespace TakoTea.View.Product.Product_Modals
                     $"Combo meal '{newComboMeal.ComboMealName}", ""  // Description
                 );
                 // Success message
-                MessageBox.Show("Combo meal saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _ = MessageBox.Show("Combo meal saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Clear the form after saving
                 ClearForm();
@@ -554,7 +551,7 @@ namespace TakoTea.View.Product.Product_Modals
             catch (Exception ex)
             {
                 // Handle any errors
-                MessageBox.Show($"Error saving combo meal: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show($"Error saving combo meal: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -596,7 +593,7 @@ namespace TakoTea.View.Product.Product_Modals
             else
             {
                 // Notify the user if no image is set
-                MessageBox.Show("No image to remove.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                _ = MessageBox.Show("No image to remove.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

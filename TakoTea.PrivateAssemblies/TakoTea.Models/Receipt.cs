@@ -15,7 +15,7 @@ namespace TakoTea.Models
     public partial class Receipt
     {
         public int ReceiptId { get; set; }
-        public int OrderId { get; set; }
+        public Nullable<int> OrderId { get; set; }
         public System.DateTime ReceiptDate { get; set; }
         public string CustomerName { get; set; }
         public decimal Subtotal { get; set; }
@@ -28,7 +28,5 @@ namespace TakoTea.Models
         public string UpdatedBy { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
-    
-        public virtual OrderModel OrderModel { get; set; }
     }
 }

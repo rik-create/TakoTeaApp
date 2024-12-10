@@ -18,7 +18,6 @@ namespace TakoTea.Models
         public OrderModel()
         {
             this.OrderItems = new HashSet<OrderItem>();
-            this.Receipts = new HashSet<Receipt>();
         }
     
         public int OrderId { get; set; }
@@ -41,7 +40,5 @@ namespace TakoTea.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItems { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Receipt> Receipts { get; set; }
     }
 }

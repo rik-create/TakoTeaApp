@@ -51,9 +51,6 @@
             this.checkedListBoxStockLevel = new System.Windows.Forms.CheckedListBox();
             this.chkListBoxProducts = new System.Windows.Forms.CheckedListBox();
             this.materialLabel21 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
-            this.dateTimePickerEnd = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
             this.panelItemList = new System.Windows.Forms.Panel();
             this.dataGridViewProductVariantListLogs = new System.Windows.Forms.DataGridView();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
@@ -324,9 +321,6 @@
             this.panelFilteringComponents.Controls.Add(this.checkedListBoxStockLevel);
             this.panelFilteringComponents.Controls.Add(this.chkListBoxProducts);
             this.panelFilteringComponents.Controls.Add(this.materialLabel21);
-            this.panelFilteringComponents.Controls.Add(this.materialLabel3);
-            this.panelFilteringComponents.Controls.Add(this.dateTimePickerEnd);
-            this.panelFilteringComponents.Controls.Add(this.dateTimePickerStart);
             this.panelFilteringComponents.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelFilteringComponents.Enabled = false;
             this.panelFilteringComponents.Location = new System.Drawing.Point(3, 74);
@@ -361,7 +355,7 @@
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(597, 16);
+            this.materialLabel1.Location = new System.Drawing.Point(216, 8);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(86, 19);
@@ -376,7 +370,7 @@
             "In Stock",
             "Low Stock",
             "Out of Stock"});
-            this.checkedListBoxStockLevel.Location = new System.Drawing.Point(597, 48);
+            this.checkedListBoxStockLevel.Location = new System.Drawing.Point(216, 40);
             this.checkedListBoxStockLevel.Name = "checkedListBoxStockLevel";
             this.checkedListBoxStockLevel.Size = new System.Drawing.Size(136, 109);
             this.checkedListBoxStockLevel.TabIndex = 139;
@@ -385,7 +379,7 @@
             // 
             this.chkListBoxProducts.CheckOnClick = true;
             this.chkListBoxProducts.FormattingEnabled = true;
-            this.chkListBoxProducts.Location = new System.Drawing.Point(405, 48);
+            this.chkListBoxProducts.Location = new System.Drawing.Point(24, 40);
             this.chkListBoxProducts.Name = "chkListBoxProducts";
             this.chkListBoxProducts.Size = new System.Drawing.Size(176, 109);
             this.chkListBoxProducts.TabIndex = 138;
@@ -395,45 +389,12 @@
             this.materialLabel21.AutoSize = true;
             this.materialLabel21.Depth = 0;
             this.materialLabel21.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel21.Location = new System.Drawing.Point(407, 16);
+            this.materialLabel21.Location = new System.Drawing.Point(26, 8);
             this.materialLabel21.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel21.Name = "materialLabel21";
             this.materialLabel21.Size = new System.Drawing.Size(129, 19);
             this.materialLabel21.TabIndex = 137;
             this.materialLabel21.Text = "Filter By Category:";
-            // 
-            // materialLabel3
-            // 
-            this.materialLabel3.AutoSize = true;
-            this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel3.Location = new System.Drawing.Point(24, 8);
-            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(38, 19);
-            this.materialLabel3.TabIndex = 136;
-            this.materialLabel3.Text = "Date:";
-            // 
-            // dateTimePickerEnd
-            // 
-            this.dateTimePickerEnd.CalendarFont = new System.Drawing.Font("Arial Narrow", 15.75F);
-            this.dateTimePickerEnd.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePickerEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerEnd.Location = new System.Drawing.Point(200, 40);
-            this.dateTimePickerEnd.Name = "dateTimePickerEnd";
-            this.dateTimePickerEnd.Size = new System.Drawing.Size(159, 32);
-            this.dateTimePickerEnd.TabIndex = 97;
-            this.dateTimePickerEnd.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
-            // 
-            // dateTimePickerStart
-            // 
-            this.dateTimePickerStart.CalendarFont = new System.Drawing.Font("Arial Narrow", 15.75F);
-            this.dateTimePickerStart.Font = new System.Drawing.Font("Arial Narrow", 15.75F);
-            this.dateTimePickerStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerStart.Location = new System.Drawing.Point(26, 40);
-            this.dateTimePickerStart.Name = "dateTimePickerStart";
-            this.dateTimePickerStart.Size = new System.Drawing.Size(159, 32);
-            this.dateTimePickerStart.TabIndex = 96;
             // 
             // panelItemList
             // 
@@ -669,9 +630,6 @@
         private System.Windows.Forms.PictureBox pbReloadForm;
         private System.Windows.Forms.DataGridView dataGridViewProductVariantListLogs;
         private MaterialSkin.Controls.MaterialFloatingActionButton materialFloatingActionButtonCopyInformation;
-        private MaterialSkin.Controls.MaterialLabel materialLabel3;
-        private System.Windows.Forms.DateTimePicker dateTimePickerEnd;
-        private System.Windows.Forms.DateTimePicker dateTimePickerStart;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private System.Windows.Forms.CheckedListBox checkedListBoxStockLevel;
         private System.Windows.Forms.CheckedListBox chkListBoxProducts;

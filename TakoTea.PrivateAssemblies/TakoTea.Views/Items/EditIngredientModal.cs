@@ -5,12 +5,8 @@ using System.Linq;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
-using TakoTea.Interfaces;
-using TakoTea.Services;
 using TakoTea.Models;
-using System.Net.Security;
-using System.IO;
-using TakoTea.Views.Batches;
+using TakoTea.Services;
 
 
 namespace TakoTea.View.Items.Item_Modals
@@ -25,12 +21,12 @@ namespace TakoTea.View.Items.Item_Modals
         private void PopulateComboboxUseFor()
         {
             // Populate the cmbAddOnFor ComboBox
-            var products = productsService.GetAllProducts();  // This should return a list of products
+            List<Models.Product> products = productsService.GetAllProducts();  // This should return a list of products
             cmbAddOnFor.DataSource = products;  // Set the data source of the ComboBox
             cmbAddOnFor.DisplayMember = "ProductName";  // The name to display in the ComboBox
             cmbAddOnFor.ValueMember = "ProductID";
         }
-        private int _ingredientId;
+        private readonly int _ingredientId;
 
         public EditIngredientModal(int ingredientId)
         {
@@ -49,12 +45,12 @@ namespace TakoTea.View.Items.Item_Modals
         }
 
 
-  
+
 
         private void LoadIngredientData()
         {
-            var context = new Entities();
-            var ingredient = context.Ingredients.FirstOrDefault(i => i.IngredientID == _ingredientId);
+            Entities context = new Entities();
+            Ingredient ingredient = context.Ingredients.FirstOrDefault(i => i.IngredientID == _ingredientId);
 
             if (ingredient == null)
             {
@@ -70,14 +66,14 @@ namespace TakoTea.View.Items.Item_Modals
             numericUpDownLowStockThreshold.Value = ingredient.LowLevel.Value;
             materialCheckedListBoxAllergens.Items.Clear();
             chkIsAddOn.Checked = ingredient.IsAddOn ?? false;
-            var allergens = ingredient.AllergyInformation.Split(new[] { '?' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var allergen in allergens)
+            string[] allergens = ingredient.AllergyInformation.Split(new[] { '?' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string allergen in allergens)
             {
-                materialCheckedListBoxAllergens.Items.Add(allergen, true);
+                _ = materialCheckedListBoxAllergens.Items.Add(allergen, true);
             }
 
 
-            var addOn = context.AddOns.FirstOrDefault(a => a.IngredientID == ingredient.IngredientID);
+            AddOn addOn = context.AddOns.FirstOrDefault(a => a.IngredientID == ingredient.IngredientID);
             if (addOn != null)
             {
                 EnableAddOnControls();
@@ -113,21 +109,21 @@ namespace TakoTea.View.Items.Item_Modals
 
         private void btnConfirmEdit_Click(object sender, EventArgs e)
         {
-            var ingredient = context.Ingredients.FirstOrDefault(i => i.IngredientID == _ingredientId);
+            Ingredient ingredient = context.Ingredients.FirstOrDefault(i => i.IngredientID == _ingredientId);
 
             if (ingredient == null)
             {
-                MessageBox.Show("Ingredient not found.");
+                _ = MessageBox.Show("Ingredient not found.");
                 return;
             }
 
             // Store original values for logging
-            var originalIngredientName = ingredient.IngredientName;
-            var originalBrandName = ingredient.BrandName;
-            var originalIngredientImage = ingredient.IngredientImage;  // Store the original image as byte array
-            var originalDescription = ingredient.Description;
-            var originalStorageConditions = ingredient.StorageConditions;
-            var originalTypeOfIngredient = ingredient.TypeOfIngredient;
+            string originalIngredientName = ingredient.IngredientName;
+            string originalBrandName = ingredient.BrandName;
+            byte[] originalIngredientImage = ingredient.IngredientImage;  // Store the original image as byte array
+            string originalDescription = ingredient.Description;
+            string originalStorageConditions = ingredient.StorageConditions;
+            string originalTypeOfIngredient = ingredient.TypeOfIngredient;
 
             ingredient.IngredientName = txtBoxName.Text;
             ingredient.BrandName = txtBoxBrandName.Text;
@@ -141,15 +137,15 @@ namespace TakoTea.View.Items.Item_Modals
                 validationMessage: "Description cannot be empty.",
                 validateInput: input => !string.IsNullOrWhiteSpace(input)
             );
-            var addOn = context.AddOns.FirstOrDefault(a => a.IngredientID == ingredient.IngredientID);
+            AddOn addOn = context.AddOns.FirstOrDefault(a => a.IngredientID == ingredient.IngredientID);
 
             if (addOn != null)
             {
 
-                var originalAddOnName = addOn.AddOnName;
-                var originalAdditionalPrice = addOn.AdditionalPrice;
-                var originalUseForProductID = addOn.UseForProductID;
-                var originalQuantityUsedPerProduct = addOn.QuantityUsedPerProduct;
+                string originalAddOnName = addOn.AddOnName;
+                decimal originalAdditionalPrice = addOn.AdditionalPrice;
+                int? originalUseForProductID = addOn.UseForProductID;
+                decimal? originalQuantityUsedPerProduct = addOn.QuantityUsedPerProduct;
 
                 // Update add-on details if it exists
                 addOn.AddOnName = txtBoxName.Text;
@@ -178,8 +174,8 @@ namespace TakoTea.View.Items.Item_Modals
 
             try
             {
-                context.SaveChanges();
-                MessageBox.Show("Ingredient updated successfully.");
+                _ = context.SaveChanges();
+                _ = MessageBox.Show("Ingredient updated successfully.");
                 if (originalIngredientName != ingredient.IngredientName)
                 {
                     LoggingHelper.LogChange("Ingredients", ingredient.IngredientID, "IngredientName", originalIngredientName, ingredient.IngredientName, "Updated", $"IngredientName changed from '{originalIngredientName}' to '{ingredient.IngredientName}'", changeDescription);
@@ -209,7 +205,7 @@ namespace TakoTea.View.Items.Item_Modals
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error updating ingredient: {ex.Message}");
+                _ = MessageBox.Show($"Error updating ingredient: {ex.Message}");
             }
         }
 
@@ -222,15 +218,15 @@ namespace TakoTea.View.Items.Item_Modals
 
         private void LogIngredientChange(string action, int ingredientId, string description)
         {
-            var logEntry = new IngredientChangeLog
+            IngredientChangeLog logEntry = new IngredientChangeLog
             {
                 IngredientID = ingredientId,
                 Action = action,
                 Description = description,
                 Timestamp = DateTime.Now
             };
-            context.IngredientChangeLogs.Add(logEntry);
-            context.SaveChanges();
+            _ = context.IngredientChangeLogs.Add(logEntry);
+            _ = context.SaveChanges();
         }
 
 
@@ -247,7 +243,7 @@ namespace TakoTea.View.Items.Item_Modals
 
             foreach (string allergen in allergens)
             {
-                materialCheckedListBoxAllergens.Items.Add(allergen);
+                _ = materialCheckedListBoxAllergens.Items.Add(allergen);
             }
         }
 
@@ -258,7 +254,7 @@ namespace TakoTea.View.Items.Item_Modals
 
         private void btnBrowseForIngredientImg_Click(object sender, EventArgs e)
         {
-            ImageHelper.BrowseAndLoadImage(pictureBoxImg);
+            _ = ImageHelper.BrowseAndLoadImage(pictureBoxImg);
 
         }
 

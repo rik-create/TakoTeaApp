@@ -1,13 +1,11 @@
 ﻿using MaterialSkin.Controls;
 using System;
-using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
 using TakoTea.Models;
 using TakoTea.Repository;
-using TakoTea.View.Stock.Stock_Modal;
 using TakoTea.Views.Stock.Stock_Modal;
 namespace TakoTea.Views.Stock
 {
@@ -49,7 +47,7 @@ namespace TakoTea.Views.Stock
                         i.IngredientName,         // Product name from Product table
                         i.StockLevel,
                         i.LowLevel
-                      
+
                     })
                 .ToList();  // Execute and retrieve the data
 
@@ -64,7 +62,7 @@ namespace TakoTea.Views.Stock
 
             DataGridViewHelper.HideColumn(dataGridViewStockLevels, "BatchID");
 
-        
+
         }
         private void HandleButtonClick(int rowIndex)
         {

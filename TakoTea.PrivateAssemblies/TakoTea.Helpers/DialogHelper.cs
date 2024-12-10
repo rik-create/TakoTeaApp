@@ -51,7 +51,7 @@ namespace TakoTea.Helpers
 
         public static string ShowInputDialog(string formTitle, string labelText, string validationMessage, Func<string, bool> validateInput)
         {
-            using (var form = new Form())
+            using (Form form = new Form())
             {
                 form.Text = formTitle;
                 form.StartPosition = FormStartPosition.CenterParent;
@@ -62,7 +62,7 @@ namespace TakoTea.Helpers
                 form.Width = 300;
                 form.Height = 150;
 
-                var label = new Label
+                Label label = new Label
                 {
                     Text = labelText,
                     Left = 12,
@@ -70,7 +70,7 @@ namespace TakoTea.Helpers
                     AutoSize = true
                 };
 
-                var textBox = new TextBox
+                TextBox textBox = new TextBox
                 {
                     Left = 12,
                     Top = 35,
@@ -78,7 +78,7 @@ namespace TakoTea.Helpers
                     Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top
                 };
 
-                var buttonOk = new Button
+                Button buttonOk = new Button
                 {
                     Text = "OK",
                     Left = 114,
@@ -93,8 +93,8 @@ namespace TakoTea.Helpers
                     string input = textBox.Text.Trim();
                     if (!validateInput(input))
                     {
-                        MessageBox.Show(validationMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        textBox.Focus();
+                        _ = MessageBox.Show(validationMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        _ = textBox.Focus();
                         form.DialogResult = DialogResult.None; // Prevent dialog from closing
                     }
                 };
@@ -111,7 +111,7 @@ namespace TakoTea.Helpers
                 }
                 else
                 {
-                    MessageBox.Show("Dialog closed. Changes not saved.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _ = MessageBox.Show("Dialog closed. Changes not saved.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return null;
                 }
             }

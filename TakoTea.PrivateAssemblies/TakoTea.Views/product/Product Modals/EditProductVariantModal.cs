@@ -1,14 +1,9 @@
 ﻿using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TakoTea.Helpers;
 using TakoTea.Models;
@@ -19,9 +14,9 @@ namespace TakoTea.View.Product.Product_Modals
     {
         // In your EditProductVariantModal class
 
-        private ProductVariant _originalProductVariant; // Store the original state
+        private readonly ProductVariant _originalProductVariant; // Store the original state
         private readonly Entities _context;
-        private List<ProductVariant> _modifiedVariants = new List<ProductVariant>(); // To store modified variants
+        private readonly List<ProductVariant> _modifiedVariants = new List<ProductVariant>(); // To store modified variants
 
         public EditProductVariantModal(int productVariantId)
         {
@@ -37,12 +32,12 @@ namespace TakoTea.View.Product.Product_Modals
         {
             if (_originalProductVariant == null)
             {
-                MessageBox.Show("Product variant not found.");
+                _ = MessageBox.Show("Product variant not found.");
                 Close();
                 return;
             }
 
-            var sizes = _context.ProductVariants
+            List<string> sizes = _context.ProductVariants
                 .Where(pv => pv.VariantName == _originalProductVariant.VariantName)
                 .Select(pv => pv.Size)
                 .Distinct()
@@ -62,7 +57,7 @@ namespace TakoTea.View.Product.Product_Modals
 
         private void UpdatePrice(string variantName, string size, decimal priceChange, bool isIncrease)
         {
-            var variantToUpdate = _context.ProductVariants.FirstOrDefault(pv => pv.VariantName == variantName && pv.Size == size);
+            ProductVariant variantToUpdate = _context.ProductVariants.FirstOrDefault(pv => pv.VariantName == variantName && pv.Size == size);
             if (variantToUpdate != null)
             {
                 string originalPrice = variantToUpdate.Price.ToString();
@@ -98,9 +93,9 @@ namespace TakoTea.View.Product.Product_Modals
                         $"Price changed from '{oldPrice}' to '{newPrice}' for variant '{variantToUpdate.VariantName}'",
                         changeDescription);
 
-                    _context.SaveChanges();
+                    _ = _context.SaveChanges();
 
-                    MessageBox.Show($"Price updated successfully from {oldPrice.ToString("F2")} to {newPrice.ToString("F2")}",
+                    _ = MessageBox.Show($"Price updated successfully from {oldPrice:F2} to {newPrice:F2}",
                         "Price Update",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
@@ -116,10 +111,10 @@ namespace TakoTea.View.Product.Product_Modals
 
         private void UpdatePriceAll(string variantName, decimal priceChange, bool isIncrease)
         {
-            var variantsToUpdate = _context.ProductVariants.Where(pv => pv.VariantName == variantName).ToList();
+            List<ProductVariant> variantsToUpdate = _context.ProductVariants.Where(pv => pv.VariantName == variantName).ToList();
 
             // Store original prices for all variants
-            var originalPrices = variantsToUpdate.ToDictionary(v => v.ProductVariantID, v => v.Price);
+            Dictionary<int, decimal> originalPrices = variantsToUpdate.ToDictionary(v => v.ProductVariantID, v => v.Price);
 
             string changeDescription = DialogHelper.ShowInputDialog(
                 formTitle: "Enter Change Description",
@@ -130,7 +125,7 @@ namespace TakoTea.View.Product.Product_Modals
 
             if (changeDescription != null) // Check if the dialog was closed
             {
-                foreach (var variant in variantsToUpdate)
+                foreach (ProductVariant variant in variantsToUpdate)
                 {
                     string originalPrice = variant.Price.ToString();
 
@@ -150,17 +145,17 @@ namespace TakoTea.View.Product.Product_Modals
                 txtBoxCurrentPrice.Text = variantsToUpdate.FirstOrDefault()?.Price.ToString("F2") ?? "0.00";
 
                 // Show message box
-                MessageBox.Show($"Prices updated successfully for all variants of '{variantName}'",
+                _ = MessageBox.Show($"Prices updated successfully for all variants of '{variantName}'",
                                 "Price Update",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
 
-                _context.SaveChanges(); // Save changes after updating all variants
+                _ = _context.SaveChanges(); // Save changes after updating all variants
             }
             else
             {
                 // Revert the price changes for all variants
-                foreach (var variant in variantsToUpdate)
+                foreach (ProductVariant variant in variantsToUpdate)
                 {
                     variant.Price = originalPrices[variant.ProductVariantID];
                 }
@@ -194,7 +189,7 @@ namespace TakoTea.View.Product.Product_Modals
         }
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            var transaction = _context.Database.BeginTransaction();
+            System.Data.Entity.DbContextTransaction transaction = _context.Database.BeginTransaction();
             try
             {
                 string variantName = txtBoxVariantName.Text;
@@ -202,25 +197,25 @@ namespace TakoTea.View.Product.Product_Modals
 
                 if (string.IsNullOrEmpty(variantName) || string.IsNullOrEmpty(size))
                 {
-                    MessageBox.Show("Invalid variant name or size.");
+                    _ = MessageBox.Show("Invalid variant name or size.");
                     return;
                 }
 
-                var productVariant = _context.ProductVariants.FirstOrDefault(pv => pv.VariantName == variantName && pv.Size == size);
+                ProductVariant productVariant = _context.ProductVariants.FirstOrDefault(pv => pv.VariantName == variantName && pv.Size == size);
                 if (productVariant == null)
                 {
-                    MessageBox.Show("Product variant not found.");
+                    _ = MessageBox.Show("Product variant not found.");
                     return;
                 }
 
-                var originalPrice = productVariant.Price;
-                var originalInstructions = productVariant.Instructions;
-                var originalImagePath = productVariant.ImagePath;
+                decimal originalPrice = productVariant.Price;
+                string originalInstructions = productVariant.Instructions;
+                byte[] originalImagePath = productVariant.ImagePath;
 
                 productVariant.Price = decimal.Parse(txtBoxCurrentPrice.Text);
                 productVariant.Instructions = txtBoxInstructions.Text;
 
-                using (var ms = new MemoryStream())
+                using (MemoryStream ms = new MemoryStream())
                 {
                     pictureBoxProductImage.Image.Save(ms, pictureBoxProductImage.Image.RawFormat);
                     productVariant.ImagePath = ms.ToArray();
@@ -232,7 +227,7 @@ namespace TakoTea.View.Product.Product_Modals
                     validateInput: input => !string.IsNullOrWhiteSpace(input)
                 );
 
-            
+
                 if (originalPrice != productVariant.Price)
                 {
                     LoggingHelper.LogChange("ProductVariants", productVariant.ProductVariantID, "Price", originalPrice.ToString(), productVariant.Price.ToString(), "Updated", $"Price changed from '{originalPrice}' to '{productVariant.Price}' for variant '{productVariant.VariantName}'", changeDescription);
@@ -245,22 +240,22 @@ namespace TakoTea.View.Product.Product_Modals
                 {
                     LoggingHelper.LogChange("ProductVariants", productVariant.ProductVariantID, "ImagePath", null, null, "Updated", $"ImagePath changed for '{productVariant.VariantName}'", changeDescription); // Image data not logged
                 }
-                _context.SaveChanges();
+                _ = _context.SaveChanges();
                 transaction.Commit();
-                MessageBox.Show("Updated successfully.");
+                _ = MessageBox.Show("Updated successfully.");
                 Close();
             }
             catch (Exception ex)
             {
                 transaction.Rollback();
-                MessageBox.Show("An error occurred while updating the product variant: " + ex.Message);
+                _ = MessageBox.Show("An error occurred while updating the product variant: " + ex.Message);
             }
         }
 
 
         private void btnBrowseForIngredientImg_Click(object sender, EventArgs e)
         {
-            Image image = ImageHelper.BrowseAndLoadImage(pictureBoxProductImage);
+            _ = ImageHelper.BrowseAndLoadImage(pictureBoxProductImage);
         }
 
         private void btnResetIngredientImg_Click(object sender, EventArgs e)
@@ -291,7 +286,7 @@ namespace TakoTea.View.Product.Product_Modals
             EditProductVariantModal newModal = new EditProductVariantModal(productVariantId);
             newModal.Show();
 
-            this.Close();
+            Close();
         }
     }
 }

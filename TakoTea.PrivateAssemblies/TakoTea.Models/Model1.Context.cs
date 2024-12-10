@@ -22,6 +22,7 @@ namespace TakoTea.Models
         }
 
 
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -34,9 +35,6 @@ namespace TakoTea.Models
         public virtual DbSet<ProductVariantIngredient> ProductVariantIngredients { get; set; }
         public virtual DbSet<ComboMealVariant> ComboMealVariants { get; set; }
         public virtual DbSet<DraftOrder> DraftOrders { get; set; }
-        public virtual DbSet<OrderItem> OrderItems { get; set; }
-        public virtual DbSet<Receipt> Receipts { get; set; }
-        public virtual DbSet<OrderModel> OrderModels { get; set; }
         public virtual DbSet<StockLevelLog> StockLevelLogs { get; set; }
         public virtual DbSet<ProductVariant> ProductVariants { get; set; }
         public virtual DbSet<Ingredient> Ingredients { get; set; }
@@ -51,5 +49,8 @@ namespace TakoTea.Models
         public virtual DbSet<Log> Logs { get; set; }
         public virtual DbSet<Batch> Batches { get; set; }
         public virtual DbSet<ComboMeal> ComboMeals { get; set; }
+        public virtual DbSet<OrderItem> OrderItems { get; set; }
+        public virtual DbSet<OrderModel> OrderModels { get; set; }
+        public virtual DbSet<Receipt> Receipts { get; set; }
     }
 }

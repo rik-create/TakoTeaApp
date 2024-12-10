@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
 using TakoTea.Models;
 
 namespace TakoTea.Repository
 {
     public class LogsRepository
     {
-        private Entities context;
+        private readonly Entities context;
         public LogsRepository(Entities context)
         {
             this.context = context;

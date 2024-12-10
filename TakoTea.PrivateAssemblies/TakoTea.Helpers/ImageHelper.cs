@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TakoTea.Helpers
@@ -60,13 +56,13 @@ namespace TakoTea.Helpers
             catch (ArgumentException ex)
             {
                 // Handle invalid byte array format
-                MessageBox.Show("Invalid image format: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show("Invalid image format: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
             catch (Exception ex)
             {
                 // Handle other exceptions
-                MessageBox.Show("An error occurred while converting byte array to image: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show("An error occurred while converting byte array to image: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -78,7 +74,7 @@ namespace TakoTea.Helpers
         {
             if (image == null)
             {
-                MessageBox.Show("No image selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show("No image selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
 
@@ -92,7 +88,7 @@ namespace TakoTea.Helpers
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred while converting image to byte array: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show("An error occurred while converting image to byte array: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }

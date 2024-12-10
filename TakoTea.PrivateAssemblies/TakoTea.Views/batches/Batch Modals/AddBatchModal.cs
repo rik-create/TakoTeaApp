@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Helpers;
+using MaterialSkin.Controls;
+using System;
 using System.Windows.Forms;
 using TakoTea.Helpers;
-using TakoTea.Helpers.Validators;
+using TakoTea.Interfaces;
+using TakoTea.Models;
 using TakoTea.Repository;
 using TakoTea.Services;
-using TakoTea.Models;
-using MaterialSkin.Controls;
-using TakoTea.Interfaces;
-using TakoTea.Views.DataLoaders.Modals;
-using Helpers;
 namespace TakoTea.Views.Batches
 {
     public partial class AddBatchModal : MaterialForm
@@ -28,7 +25,7 @@ namespace TakoTea.Views.Batches
             _ingredientRepository = new IngredientRepository(context);
             batchService = new BatchService();
             SetDecimalPlacesForAllNumericUpDowns(this, 1);
-            this.StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterParent;
 
 
         }
@@ -88,14 +85,15 @@ namespace TakoTea.Views.Batches
                 // Set expiration date to 6 months from now if not set
                 dateTimePickerExpiration.Value = DateTime.Now.AddMonths(6);
 
-                var batch = new Batch
+                Batch batch = new Batch
                 {
                     BatchNumber = txtBoxBatchNumber.Text,
                     IngredientID = string.IsNullOrEmpty(lblIngredientId.Text)
                                   ? (int?)null
                                   : Convert.ToInt32(lblIngredientId.Text),
                     CreatedAt = DateTime.Now,
-                    CreatedBy = AuthenticationHelper._loggedInUsername  ,                  UpdatedAt = DateTime.Now,
+                    CreatedBy = AuthenticationHelper._loggedInUsername,
+                    UpdatedAt = DateTime.Now,
                     StockLevel = numericUpDownQuantity.Value,
                     ExpirationDate = string.IsNullOrEmpty(dateTimePickerExpiration.Text)
                                      ? (DateTime?)null
@@ -118,13 +116,13 @@ namespace TakoTea.Views.Batches
                 );
 
                 DialogHelper.ShowSuccess("Batch saved successfully.");
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {
                 DialogHelper.ShowError($"Failed to save the batch. Error: {ex.Message}");
             }
-            this.Close();
+            Close();
         }
         private void btnCancelEdit_Click(object sender, EventArgs e)
         {

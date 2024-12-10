@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using TakoTea.Configurations;
 namespace TakoTea.Controls
 {
@@ -11,6 +10,6 @@ namespace TakoTea.Controls
             buttonCategory.BackColor = ThemeConfigurator.GetCustomAccentColor();
             buttonCategory.ForeColor = ThemeConfigurator.GetTextColor();
         }
-      
+
     }
 }

@@ -2,10 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using TakoTea.Interfaces;
 using TakoTea.Models;
 
 namespace TakoTea.Helpers
@@ -15,12 +12,32 @@ namespace TakoTea.Helpers
         // In your SettingsFormHelper class
         // In your SettingsFormHelper class
 
+        public static void LoadBackUpPaths(CheckedListBox chk)
+        {
+            using (var context = new Entities()) // Use using statement for proper disposal
+            {
+                chk.Items.Clear();
+
+                var settings = context.Settings.FirstOrDefault();
+                if (settings != null && !string.IsNullOrEmpty(settings.BackupDestination))
+                {
+                    // Split the comma-separated string to get the selected destinations
+                    string[] selectedDestinations = settings.BackupDestination.Split('|');
+
+                    // Add the selected destinations to the CheckedListBox
+                    foreach (var destination in selectedDestinations)
+                    {
+                        chk.Items.Add(destination);
+                    }
+                }
+            }
+        }
         public static void LoadPaymentMethods(CheckedListBox checkedListBoxPaymentMethods)
         {
-            var context = new Entities(); // Assuming you have an Entity Framework context
+            Entities context = new Entities(); // Assuming you have an Entity Framework context
 
             // Retrieve the payment methods from the database
-            var paymentMethods = context.PaymentMethods
+            List<string> paymentMethods = context.PaymentMethods
                 .Where(p => p.IsActive) // Filter for active payment methods
                 .Select(p => p.MethodName)
                 .ToList();
@@ -34,19 +51,19 @@ namespace TakoTea.Helpers
         public static void PopulateUsersListView(MaterialListView listView, List<User> users)
         {
             listView.Items.Clear();
-            foreach (var user in users)
+            foreach (User user in users)
             {
-                var item = new ListViewItem(user.Username.ToString());
-                item.SubItems.Add(user.Role);
-                listView.Items.Add(item);
+                ListViewItem item = new ListViewItem(user.Username.ToString());
+                _ = item.SubItems.Add(user.Role);
+                _ = listView.Items.Add(item);
             }
         }
 
         public static void LoadUserRoles(MaterialComboBox comboBox)
         {
             comboBox.Items.Clear();
-            comboBox.Items.Add("Admin");
-            comboBox.Items.Add("Staff");
+            _ = comboBox.Items.Add("Admin");
+            _ = comboBox.Items.Add("Staff");
             // Add other roles as needed
         }
 
@@ -55,29 +72,29 @@ namespace TakoTea.Helpers
             comboBox.Items.Clear();
             for (int i = 10; i <= 100; i += 10)
             {
-                comboBox.Items.Add(i.ToString() + "%");
+                _ = comboBox.Items.Add(i.ToString() + "%");
             }
         }
 
         public static void LoadAlertFrequencies(MaterialComboBox comboBox)
         {
             comboBox.Items.Clear();
-            comboBox.Items.Add("Daily");
-            comboBox.Items.Add("Hourly");
+            _ = comboBox.Items.Add("Daily");
+            _ = comboBox.Items.Add("Hourly");
 
-            comboBox.Items.Add("Weekly");
-            comboBox.Items.Add("Monthly");
+            _ = comboBox.Items.Add("Weekly");
+            _ = comboBox.Items.Add("Monthly");
         }
 
-    
+
         public static void LoadBackupSchedules(MaterialComboBox comboBox)
         {
             comboBox.Items.Clear();
-            comboBox.Items.Add("Daily");
-            comboBox.Items.Add("Hourly");
+            _ = comboBox.Items.Add("Daily");
+            _ = comboBox.Items.Add("Hourly");
 
-            comboBox.Items.Add("Weekly");
-            comboBox.Items.Add("Monthly");
+            _ = comboBox.Items.Add("Weekly");
+            _ = comboBox.Items.Add("Monthly");
         }
 
         public static void LoadSavedEmails(CheckedListBox checkedListBoxEmails)
@@ -94,7 +111,7 @@ namespace TakoTea.Helpers
             // Add the saved emails to the CheckedListBox
             foreach (string email in savedEmails)
             {
-                checkedListBoxEmails.Items.Add(email);
+                _ = checkedListBoxEmails.Items.Add(email);
             }
         }
 
@@ -102,7 +119,7 @@ namespace TakoTea.Helpers
 
         public static string GetSavedEmails()
         {
-            var context = new Entities();
+            Entities context = new Entities();
             return context.Settings.FirstOrDefault()?.SavedEmails ?? string.Empty;
         }
 

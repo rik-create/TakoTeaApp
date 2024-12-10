@@ -34,20 +34,20 @@ namespace TakoTea.Views.addons
         private void InitializeComponents()
         {
             // Set form properties
-            this.Text = "Edit Add-on";
-            this.Size = new Size(400, 350);
-            this.StartPosition = FormStartPosition.CenterParent;
+            Text = "Edit Add-on";
+            Size = new Size(400, 350);
+            StartPosition = FormStartPosition.CenterParent;
             ThemeConfigurator.ApplyDarkTheme(this);
             FormSettingsConfigurator.ApplyStandardFormSettings(this);
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
 
             // Create labels and text boxes
-            var lblAddOnName = new MaterialLabel { Text = "Add-on Name:", Location = new Point(20, 80), AutoSize = true };
+            MaterialLabel lblAddOnName = new MaterialLabel { Text = "Add-on Name:", Location = new Point(20, 80), AutoSize = true };
             txtAddOnName = new MaterialTextBox { Location = new Point(180, 75), Width = 200 }; // Moved to the right
 
-            var lblAdditionalPrice = new MaterialLabel { Text = "Additional Price:", Location = new Point(20, 130), AutoSize = true };
+            MaterialLabel lblAdditionalPrice = new MaterialLabel { Text = "Additional Price:", Location = new Point(20, 130), AutoSize = true };
             txtAdditionalPrice = new MaterialTextBox { Location = new Point(180, 125), Width = 200 }; // Ensure initialization
             txtAdditionalPrice.KeyPress += (s, e) =>
             {
@@ -58,30 +58,33 @@ namespace TakoTea.Views.addons
                 }
 
                 // Allow only one decimal point
-                var textBox = s as TextBox;
-                if (textBox != null && (e.KeyChar == '.') && (textBox.Text.IndexOf('.') > -1))
+                if (s is TextBox textBox && (e.KeyChar == '.') && (textBox.Text.IndexOf('.') > -1))
                 {
                     e.Handled = true;
                 }
             };
 
-            var lblUseForProductID = new MaterialLabel { Text = "Use For Product ID:", Location = new Point(20, 180), AutoSize = true };
-            txtUseForProductID = new MaterialTextBox { Location = new Point(180, 175), Width = 200 }; // Moved to the right
-            txtUseForProductID.ReadOnly = true;
+            MaterialLabel lblUseForProductID = new MaterialLabel { Text = "Use For Product ID:", Location = new Point(20, 180), AutoSize = true };
+            txtUseForProductID = new MaterialTextBox
+            {
+                Location = new Point(180, 175),
+                Width = 200,
+                ReadOnly = true
+            }; // Moved to the right
 
-            var lblQuantityUsedPerProduct = new MaterialLabel { Text = "Quantity Used:", Location = new Point(20, 230), AutoSize = true };
+            MaterialLabel lblQuantityUsedPerProduct = new MaterialLabel { Text = "Quantity Used:", Location = new Point(20, 230), AutoSize = true };
             txtQuantityUsedPerProduct = new MaterialTextBox { Location = new Point(180, 225), Width = 200 }; // Moved to the right
 
             // Create buttons with adjusted positions and spacing
-            var btnConfirm = new MaterialButton { Text = "Confirm", Location = new Point(80, 280), Width = 100 }; // More spacing
-            var btnCancel = new MaterialButton { Text = "Cancel", Location = new Point(200, 280), Width = 100 }; // More spacing
+            MaterialButton btnConfirm = new MaterialButton { Text = "Confirm", Location = new Point(80, 280), Width = 100 }; // More spacing
+            MaterialButton btnCancel = new MaterialButton { Text = "Cancel", Location = new Point(200, 280), Width = 100 }; // More spacing
 
             // Add event handlers for buttons
             btnConfirm.Click += btnConfirm_Click;
             btnCancel.Click += btnCancel_Click;
 
             // Add controls to the form
-            this.Controls.AddRange(new Control[] {
+            Controls.AddRange(new Control[] {
                     lblAddOnName, txtAddOnName, lblAdditionalPrice, txtAdditionalPrice,
                     lblUseForProductID, txtUseForProductID, lblQuantityUsedPerProduct, txtQuantityUsedPerProduct,
                     btnConfirm, btnCancel
@@ -92,7 +95,7 @@ namespace TakoTea.Views.addons
         {
             try
             {
-                var addOn = _addOnRepository.GetAddOnById(_addOnId);
+                AddOn addOn = _addOnRepository.GetAddOnById(_addOnId);
                 if (addOn != null)
                 {
                     txtAddOnName.Text = addOn.AddOnName;
@@ -102,14 +105,14 @@ namespace TakoTea.Views.addons
                 }
                 else
                 {
-                    MessageBox.Show("Add-on not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    this.Close();
+                    _ = MessageBox.Show("Add-on not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Close();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading add-on: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
+                _ = MessageBox.Show("Error loading add-on: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Close();
             }
         }
 
@@ -151,9 +154,9 @@ namespace TakoTea.Views.addons
                     }
                 }
 
-                var originalAddOn = _addOnRepository.GetAddOnById(_addOnId);
+                AddOn originalAddOn = _addOnRepository.GetAddOnById(_addOnId);
 
-                var updatedAddOn = new AddOn
+                AddOn updatedAddOn = new AddOn
                 {
                     Id = _addOnId,
                     AddOnName = txtAddOnName.Text,
@@ -168,7 +171,7 @@ namespace TakoTea.Views.addons
 
                 DialogHelper.ShowSuccess("Add-on updated successfully!");
                 DialogResult = DialogResult.OK;
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {
@@ -242,7 +245,7 @@ namespace TakoTea.Views.addons
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

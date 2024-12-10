@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using System;
-using System.Data;
 using TakoTea.Database;
 using TakoTea.Interfaces;
 
@@ -47,10 +46,10 @@ namespace TakoTea.Repository
 
             try
             {
-                using (var connection = DatabaseConnection.GetConnection())
+                using (System.Data.SqlClient.SqlConnection connection = DatabaseConnection.GetConnection())
                 {
                     // Execute the query using Dapper
-                    connection.Execute(sql, new
+                    _ = connection.Execute(sql, new
                     {
                         BatchID = batchId,  // Using batchId instead of ingredientId
                         AdjustmentQuantity = adjustmentQuantity,

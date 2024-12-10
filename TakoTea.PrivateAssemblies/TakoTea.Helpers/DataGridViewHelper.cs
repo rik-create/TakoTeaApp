@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,10 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Security.Cryptography;
 using System.Windows.Forms;
-using System.Windows.Interop;
 using TakoTea.Configurations;
 using TakoTea.Models;
 namespace TakoTea.Helpers
@@ -58,7 +54,7 @@ namespace TakoTea.Helpers
             listView.ForeColor = ThemeConfigurator.GetPrimaryColor();
 
             // Set the accent color for selection and highlighting
-   
+
 
             // Adjust column headers appearance
             foreach (ColumnHeader column in listView.Columns)
@@ -115,7 +111,7 @@ namespace TakoTea.Helpers
                // Remove unnecessary borders or settings for a simple look
                listView.BorderStyle = BorderStyle.None;
            }*/
-  
+
 
 
 
@@ -132,7 +128,7 @@ namespace TakoTea.Helpers
             try
             {
                 // Retrieve data using the provided function
-                var data = dataRetrievalFunc.Invoke();
+                List<T> data = dataRetrievalFunc.Invoke();
                 if (data == null)
                 {
                     DialogHelper.ShowError(errorMessage);
@@ -235,7 +231,7 @@ namespace TakoTea.Helpers
             {
                 _ = dataGridView.Columns.Add(buttonColumn);
             }
-    
+
         }
         public static void AddButtonToLastRow(
             DataGridView dataGridView,
@@ -252,7 +248,7 @@ namespace TakoTea.Helpers
                 HeaderText = "Action",
                 Text = buttonText,
                 UseColumnTextForButtonValue = true,
-                    FlatStyle = FlatStyle.Flat // Use Flat style to enable background color customization
+                FlatStyle = FlatStyle.Flat // Use Flat style to enable background color customization
             };
 
             // Apply custom colors if provided
@@ -285,18 +281,13 @@ namespace TakoTea.Helpers
         {
             try
             {
-                if (dataGridView.Columns.Contains(columnName))
-                {
-                    dataGridView.Columns[columnName].Visible = false;
-                }
-                else
-                {
-                    throw new ArgumentException($"Column '{columnName}' does not exist in the DataGridView.");
-                }
+                dataGridView.Columns[columnName].Visible = dataGridView.Columns.Contains(columnName)
+                    ? false
+                    : throw new ArgumentException($"Column '{columnName}' does not exist in the DataGridView.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -308,15 +299,17 @@ namespace TakoTea.Helpers
             if (!dataGridView.Columns.Contains(buttonColumnName))
             {
                 // Create a new DataGridViewButtonColumn
-                DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
-                buttonColumn.HeaderText = "";
-                buttonColumn.Name = buttonColumnName;
-                buttonColumn.Text = buttonText;
-                buttonColumn.UseColumnTextForButtonValue = true;
-                buttonColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells; // Auto size the button column
+                DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn
+                {
+                    HeaderText = "",
+                    Name = buttonColumnName,
+                    Text = buttonText,
+                    UseColumnTextForButtonValue = true,
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells // Auto size the button column
+                };
 
                 // Add the button column to the DataGridView
-                dataGridView.Columns.Add(buttonColumn);
+                _ = dataGridView.Columns.Add(buttonColumn);
             }
 
             // Handle the CellClick event of the DataGridView
@@ -328,16 +321,16 @@ namespace TakoTea.Helpers
                 }
             };
         }
-      
+
         public static void UpdateGrid<T>(DataGridView dataGridView, BindingSource bindingSource, List<T> data)
         {
             // Clear existing data in the BindingSource
             bindingSource.Clear();
 
             // Add the new data to the BindingSource
-            foreach (var item in data)
+            foreach (T item in data)
             {
-                bindingSource.Add(item);
+                _ = bindingSource.Add(item);
             }
 
             // Optionally, refresh the DataGridView to reflect the new data
@@ -357,8 +350,7 @@ namespace TakoTea.Helpers
                 {
                     if (!row.IsNewRow) // Skip new empty row
                     {
-                        var imageCell = row.Cells[imageColumnName] as DataGridViewImageCell;
-                        if (imageCell != null)
+                        if (row.Cells[imageColumnName] is DataGridViewImageCell imageCell)
                         {
                             // Set alignment and image layout for the image cell
                             imageCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter; // Center the image
@@ -370,7 +362,7 @@ namespace TakoTea.Helpers
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error setting image column properties: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show("Error setting image column properties: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -389,7 +381,7 @@ namespace TakoTea.Helpers
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error setting row height: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show("Error setting row height: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public static Image ResizeImage(Image image, int width, int height)
@@ -407,7 +399,9 @@ namespace TakoTea.Helpers
         {
             // Check if the column exists
             if (!dataGridView.Columns.Contains(sourceColumnName))
+            {
                 return;
+            }
 
             foreach (DataGridViewRow row in dataGridView.Rows)
             {
@@ -442,13 +436,13 @@ namespace TakoTea.Helpers
                 const string columnName = "ImageColumn";
                 if (!dataGridView.Columns.Contains(columnName))
                 {
-                    var imageColumn = new DataGridViewImageColumn
+                    DataGridViewImageColumn imageColumn = new DataGridViewImageColumn
                     {
                         Name = columnName,
                         HeaderText = "Image",
                         AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                     };
-                    dataGridView.Columns.Add(imageColumn);
+                    _ = dataGridView.Columns.Add(imageColumn);
                 }
 
                 foreach (DataGridViewRow row in dataGridView.Rows)
@@ -476,7 +470,7 @@ namespace TakoTea.Helpers
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error adding image column: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show("Error adding image column: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -489,34 +483,36 @@ namespace TakoTea.Helpers
         {
             // Validate input parameters
             if (listView == null || data == null || columnHeaders == null || rowGenerator == null)
+            {
                 throw new ArgumentNullException("One or more arguments are null.");
+            }
 
             // Clear the ListView before adding new items
             listView.Items.Clear();
 
             // Clear and add columns to the ListView
             listView.Columns.Clear();
-            foreach (var header in columnHeaders)
+            foreach (string header in columnHeaders)
             {
-                listView.Columns.Add(header, headerWidth); // Set a default width of 330
+                _ = listView.Columns.Add(header, headerWidth); // Set a default width of 330
             }
 
             // Populate the ListView rows
-            foreach (var item in data)
+            foreach (T item in data)
             {
-                var rowValues = rowGenerator(item);
+                List<string> rowValues = rowGenerator(item);
                 if (rowValues != null && rowValues.Count > 0)
                 {
                     ListViewItem row = new ListViewItem(rowValues[0]); // First value is the main item text
                     for (int i = 1; i < rowValues.Count; i++)
                     {
-                        row.SubItems.Add(rowValues[i]); // Add the remaining values as subitems
+                        _ = row.SubItems.Add(rowValues[i]); // Add the remaining values as subitems
                     }
-                    listView.Items.Add(row);
+                    _ = listView.Items.Add(row);
                 }
             }
 
-      
+
         }
         public static void ApplyDataGridViewStylesWithWrite(DataGridView dataGridView)
         {
@@ -560,59 +556,63 @@ namespace TakoTea.Helpers
         }
         public static void DeleteSelectedRows<T>(DataGridView dataGridView, string idColumnName) where T : class
         {
-            if (dataGridView.SelectedRows.Count == 0)
+            try
             {
-                MessageBox.Show("Please select at least one row to delete.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            if (MessageBox.Show("Are you sure you want to delete the selected rows?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                 var context = new Entities();
-                foreach (DataGridViewRow row in dataGridView.SelectedRows)
+                if (dataGridView.SelectedRows.Count == 0)
                 {
-                    int id = Convert.ToInt32(row.Cells[idColumnName].Value);
-                    var entity = context.Set<T>().Find(id);
-                    if (entity != null)
-                    {
-                        Type entityType = typeof(T);
-
-                        // Get the properties of the entity
-                        var properties = entityType.GetProperties();
-
-                        // Build the log message dynamically
-                        string logMessage = $"Record deleted: ";
-                        foreach (var property in properties)
-                        {
-                            string propertyName = property.Name;
-                            object propertyValue = property.GetValue(entity);
-                            logMessage += $"{propertyName}: {propertyValue}, ";
-                        }
-                        LoggingHelper.LogChange(
-                            entityType.Name,          // Table name (e.g., "Batch")
-                            id,                      // Record ID
-                            "",                      // Column name (not applicable for delete)
-                            "",                      // Old value (not applicable for delete)
-                            "",                      // New value (not applicable for delete)
-                            "Delete",                // Action
-                            logMessage,              // Description with all property values
-                            ""                       // Additional info (if needed)
-                        );
-
-             
-                        context.Set<T>().Remove(entity);
-                    }
+                    _ = MessageBox.Show("Please select at least one row to delete.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
                 }
-                context.SaveChanges();
-         
 
+                if (MessageBox.Show("Are you sure you want to delete the selected rows?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Entities context = new Entities();
+                    foreach (DataGridViewRow row in dataGridView.SelectedRows)
+                    {
+                        int id = Convert.ToInt32(row.Cells[idColumnName].Value);
+                        T entity = context.Set<T>().Find(id);
+                        if (entity != null)
+                        {
+                            Type entityType = typeof(T);
 
-                // Refresh the DataGridView (you might need to adjust this based on your actual refresh logic)
-                // dataGridView.DataSource = context.Set<T>().ToList(); 
+                            // Get the properties of the entity
+                            System.Reflection.PropertyInfo[] properties = entityType.GetProperties();
+
+                            // Build the log message dynamically
+                            string logMessage = $"Record deleted: ";
+                            foreach (System.Reflection.PropertyInfo property in properties)
+                            {
+                                string propertyName = property.Name;
+                                object propertyValue = property.GetValue(entity);
+                                logMessage += $"{propertyName}: {propertyValue}, ";
+                            }
+                            LoggingHelper.LogChange(
+                                entityType.Name,          // Table name (e.g., "Batch")
+                                id,                      // Record ID
+                                "",                      // Column name (not applicable for delete)
+                                "",                      // Old value (not applicable for delete)
+                                "",                      // New value (not applicable for delete)
+                                "Delete",                // Action
+                                logMessage,              // Description with all property values
+                                ""                       // Additional info (if needed)
+                            );
+
+                            _ = context.Set<T>().Remove(entity);
+                        }
+                    }
+                    _ = context.SaveChanges();
+
+                    // Refresh the DataGridView (you might need to adjust this based on your actual refresh logic)
+                    // dataGridView.DataSource = context.Set<T>().ToList(); 
+                }
+            }
+            catch (Exception ex)
+            {
+                _ = MessageBox.Show($"An error occurred while deleting rows: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-   
-  public static void ApplyDataGridViewStyles(DataGridView dataGridView)
+
+        public static void ApplyDataGridViewStyles(DataGridView dataGridView)
         {
             // Disable default visual styles for more control over appearance
             dataGridView.EnableHeadersVisualStyles = false;
@@ -660,51 +660,51 @@ namespace TakoTea.Helpers
 
             dataGridView.ColumnHeaderMouseClick += DataGridView_ColumnHeaderMouseClick;
         }
-      private static void DataGridView_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-{
-    DataGridView dataGridView = (DataGridView)sender;
-    DataGridViewColumn clickedColumn = dataGridView.Columns[e.ColumnIndex];
+        private static void DataGridView_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridView dataGridView = (DataGridView)sender;
+            DataGridViewColumn clickedColumn = dataGridView.Columns[e.ColumnIndex];
 
-    if (!(dataGridView.DataSource is IBindingList data))
-    {
-        // Handle the case where the data source is not an IBindingList
-        return;
-    }
+            if (!(dataGridView.DataSource is IBindingList data))
+            {
+                // Handle the case where the data source is not an IBindingList
+                return;
+            }
 
-    // Determine sort order based on current sort direction
-    SortOrder sortOrder = clickedColumn.HeaderCell.SortGlyphDirection == SortOrder.Ascending
-        ? SortOrder.Descending
-        : SortOrder.Ascending;
+            // Determine sort order based on current sort direction
+            SortOrder sortOrder = clickedColumn.HeaderCell.SortGlyphDirection == SortOrder.Ascending
+                ? SortOrder.Descending
+                : SortOrder.Ascending;
 
-    // Sort the IBindingList directly (replace with your actual sorting logic)
-    if (sortOrder == SortOrder.Ascending)
-    {
-        var sortedList = data.Cast<object>().OrderBy(x => GetPropertyValue(x, clickedColumn.DataPropertyName)).ToList();
-        RepopulateIBindingList(data, sortedList);
-    }
-    else
-    {
-        var sortedList = data.Cast<object>().OrderByDescending(x => GetPropertyValue(x, clickedColumn.DataPropertyName)).ToList();
-        RepopulateIBindingList(data, sortedList);
-    }
+            // Sort the IBindingList directly (replace with your actual sorting logic)
+            if (sortOrder == SortOrder.Ascending)
+            {
+                List<object> sortedList = data.Cast<object>().OrderBy(x => GetPropertyValue(x, clickedColumn.DataPropertyName)).ToList();
+                RepopulateIBindingList(data, sortedList);
+            }
+            else
+            {
+                List<object> sortedList = data.Cast<object>().OrderByDescending(x => GetPropertyValue(x, clickedColumn.DataPropertyName)).ToList();
+                RepopulateIBindingList(data, sortedList);
+            }
 
-    // Refresh the DataGridView (no need to rebind)
-    dataGridView.Refresh(); 
-}
+            // Refresh the DataGridView (no need to rebind)
+            dataGridView.Refresh();
+        }
 
-private static void RepopulateIBindingList(IBindingList bindingList, List<object> sortedList)
-{
-    // Clear the original IBindingList
-    bindingList.Clear();
+        private static void RepopulateIBindingList(IBindingList bindingList, List<object> sortedList)
+        {
+            // Clear the original IBindingList
+            bindingList.Clear();
 
-    // Add the sorted items back to the IBindingList
-    foreach (var item in sortedList)
-    {
-        bindingList.Add(item);
-    }
-}
+            // Add the sorted items back to the IBindingList
+            foreach (object item in sortedList)
+            {
+                _ = bindingList.Add(item);
+            }
+        }
 
-// ... (GetPropertyValue helper method remains the same) ...
+        // ... (GetPropertyValue helper method remains the same) ...
 
         // Helper method to get property value dynamically
         private static object GetPropertyValue(object obj, string propertyName)
@@ -762,70 +762,69 @@ private static void RepopulateIBindingList(IBindingList bindingList, List<object
         }
 
 
-            private static Dictionary<string, SortOrder> _columnSortDirections = new Dictionary<string, SortOrder>();
+        private static readonly Dictionary<string, SortOrder> _columnSortDirections = new Dictionary<string, SortOrder>();
 
-            public static void SortDataGridView(DataGridView dataGridView, int columnIndex)
+        public static void SortDataGridView(DataGridView dataGridView, int columnIndex)
+        {
+            DataGridViewColumn clickedColumn = dataGridView.Columns[columnIndex];
+
+            if (!(dataGridView.DataSource is IBindingList data))
             {
-                DataGridViewColumn clickedColumn = dataGridView.Columns[columnIndex];
-
-                if (!(dataGridView.DataSource is IBindingList data))
-                {
-                    // Handle the case where the data source is not an IBindingList
-                    return;
-                }
-
-                // Get the current sort order for the clicked column
-                SortOrder sortOrder;
-                if (!_columnSortDirections.TryGetValue(clickedColumn.DataPropertyName, out sortOrder))
-                {
-                    // If not found, default to Ascending
-                    sortOrder = SortOrder.Ascending;
-                }
-                else
-                {
-                    // Toggle the sort order
-                    sortOrder = sortOrder == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
-                }
-
-                // Store the new sort order
-                _columnSortDirections[clickedColumn.DataPropertyName] = sortOrder;
-                dataGridView.Refresh();
-
-                // Sort the IBindingList
-                if (sortOrder == SortOrder.Ascending)
-                {
-                    var sortedList = data.Cast<object>().OrderBy(x => GetPropertyValue(x, clickedColumn.DataPropertyName)).ToList();
-                    RepopulateIBindingList(data, sortedList, dataGridView);
-                }
-                else
-                {
-                    var sortedList = data.Cast<object>().OrderByDescending(x => GetPropertyValue(x, clickedColumn.DataPropertyName)).ToList();
-                    RepopulateIBindingList(data, sortedList, dataGridView);
-                }
-
-                // Add visual feedback to the headers
-                foreach (DataGridViewColumn column in dataGridView.Columns)
-                {
-                    column.HeaderCell.SortGlyphDirection = SortOrder.None;
-                }
-
-                // Set the sort glyph for the clicked column
-                clickedColumn.HeaderCell.SortGlyphDirection = sortOrder;
+                // Handle the case where the data source is not an IBindingList
+                return;
             }
 
-            // Helper function to resize image bytes (static)
-     
-
-            private static void RepopulateIBindingList(IBindingList bindingList, List<object> sortedList, DataGridView dataGridView)
+            // Get the current sort order for the clicked column
+            if (!_columnSortDirections.TryGetValue(clickedColumn.DataPropertyName, out SortOrder sortOrder))
             {
-                for (int i = 0; i < sortedList.Count; i++)
-                {
-                    ResizeImageBytes(dataGridView, "ImagePath", "ImagePath", 64, 64);
-                    bindingList[i] = sortedList[i]; // Update the item in the IBindingList
-                }
+                // If not found, default to Ascending
+                sortOrder = SortOrder.Ascending;
+            }
+            else
+            {
+                // Toggle the sort order
+                sortOrder = sortOrder == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
             }
 
-       
-        
+            // Store the new sort order
+            _columnSortDirections[clickedColumn.DataPropertyName] = sortOrder;
+            dataGridView.Refresh();
+
+            // Sort the IBindingList
+            if (sortOrder == SortOrder.Ascending)
+            {
+                List<object> sortedList = data.Cast<object>().OrderBy(x => GetPropertyValue(x, clickedColumn.DataPropertyName)).ToList();
+                RepopulateIBindingList(data, sortedList, dataGridView);
+            }
+            else
+            {
+                List<object> sortedList = data.Cast<object>().OrderByDescending(x => GetPropertyValue(x, clickedColumn.DataPropertyName)).ToList();
+                RepopulateIBindingList(data, sortedList, dataGridView);
+            }
+
+            // Add visual feedback to the headers
+            foreach (DataGridViewColumn column in dataGridView.Columns)
+            {
+                column.HeaderCell.SortGlyphDirection = SortOrder.None;
+            }
+
+            // Set the sort glyph for the clicked column
+            clickedColumn.HeaderCell.SortGlyphDirection = sortOrder;
+        }
+
+        // Helper function to resize image bytes (static)
+
+
+        private static void RepopulateIBindingList(IBindingList bindingList, List<object> sortedList, DataGridView dataGridView)
+        {
+            for (int i = 0; i < sortedList.Count; i++)
+            {
+                ResizeImageBytes(dataGridView, "ImagePath", "ImagePath", 64, 64);
+                bindingList[i] = sortedList[i]; // Update the item in the IBindingList
+            }
+        }
+
+
+
     }
 }

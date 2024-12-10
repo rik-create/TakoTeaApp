@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TakoTea.Helpers;
 using TakoTea.Interfaces;
 using TakoTea.Models;
-using TakoTea.Repository;
 
 namespace TakoTea.Services
 {
@@ -14,10 +9,10 @@ namespace TakoTea.Services
     {
         public void AddBatch(Batch batch)
         {
-            using (var context = new Entities())
+            using (Entities context = new Entities())
             {
-                context.Batches.Add(batch);
-                context.SaveChanges();
+                _ = context.Batches.Add(batch);
+                _ = context.SaveChanges();
                 LoggingHelper.LogChange(
                     "Batch",                // Table name
                     batch.BatchID,            // Record ID (assuming BatchID is auto-generated)
@@ -34,9 +29,9 @@ namespace TakoTea.Services
         {
             try
             {
-                using (var context = new Entities())
+                using (Entities context = new Entities())
                 {
-                    var existingBatch = context.Batches.Find(batch.BatchID);
+                    Batch existingBatch = context.Batches.Find(batch.BatchID);
 
                     if (existingBatch != null)
                     {
@@ -48,7 +43,7 @@ namespace TakoTea.Services
                         existingBatch.ExpirationDate = batch.ExpirationDate;
                         existingBatch.BatchCost = batch.BatchCost;
 
-                        context.SaveChanges();
+                        _ = context.SaveChanges();
                     }
                     else
                     {
@@ -66,9 +61,9 @@ namespace TakoTea.Services
         {
             try
             {
-                using (var context = new Entities())
+                using (Entities context = new Entities())
                 {
-                    var batch = context.Batches.Find(batchId);
+                    Batch batch = context.Batches.Find(batchId);
 
                     string deletionDescription = DialogHelper.ShowInputDialog(
                                                 formTitle: "Enter Deletion Description",
@@ -77,8 +72,8 @@ namespace TakoTea.Services
                                                 validateInput: input => !string.IsNullOrWhiteSpace(input)
                                             ); if (batch != null)
                     {
-                        context.Batches.Remove(batch);
-                        context.SaveChanges();
+                        _ = context.Batches.Remove(batch);
+                        _ = context.SaveChanges();
                         LoggingHelper.LogChange(
                             "Batch",                // Table name
                             batchId,                  // Record ID

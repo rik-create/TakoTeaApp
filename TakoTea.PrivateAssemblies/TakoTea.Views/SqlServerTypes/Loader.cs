@@ -7,7 +7,7 @@ namespace SqlServerTypes
     /// <summary>
     /// Utility methods related to CLR Types for SQL Server 
     /// </summary>
-    public class Utilities
+    public static class Utilities
     {
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern IntPtr LoadLibrary(string libname);
@@ -21,7 +21,7 @@ namespace SqlServerTypes
         /// </param>
         public static void LoadNativeAssemblies(string rootApplicationPath)
         {
-            var nativeBinaryPath = IntPtr.Size > 4
+            string nativeBinaryPath = IntPtr.Size > 4
                 ? Path.Combine(rootApplicationPath, @"SqlServerTypes\x64\")
                 : Path.Combine(rootApplicationPath, @"SqlServerTypes\x86\");
 
@@ -31,8 +31,8 @@ namespace SqlServerTypes
 
         private static void LoadNativeAssembly(string nativeBinaryPath, string assemblyName)
         {
-            var path = Path.Combine(nativeBinaryPath, assemblyName);
-            var ptr = LoadLibrary(path);
+            string path = Path.Combine(nativeBinaryPath, assemblyName);
+            IntPtr ptr = LoadLibrary(path);
             if (ptr == IntPtr.Zero)
             {
                 throw new Exception(string.Format(

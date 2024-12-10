@@ -1,14 +1,9 @@
-﻿using Dapper;
+﻿using System;
 using System.Collections.Generic;
-using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using TakoTea.Database;
-using TakoTea.Interfaces;
 using TakoTea.Models;
-using System.Windows.Forms;
 namespace TakoTea.Repository
 {
     public class IngredientRepository
@@ -25,7 +20,7 @@ namespace TakoTea.Repository
             try
             {
                 // Simply retrieve all product variants without any projection
-                var batchList = _context.Batches.ToList();
+                List<Batch> batchList = _context.Batches.ToList();
 
                 return batchList;
             }
@@ -42,7 +37,7 @@ namespace TakoTea.Repository
             public int IngredientID { get; set; }
             public string IngredientName { get; set; }
             public string BrandName { get; set; }
-            public decimal  StockLevel { get; set; }
+            public decimal StockLevel { get; set; }
             public decimal LowLevel { get; set; }
             public string AddOn { get; set; }
         }
@@ -51,7 +46,7 @@ namespace TakoTea.Repository
         {
             try
             {
-                var ingredientList = _context.Ingredients
+                List<IngredientDto> ingredientList = _context.Ingredients
                     .Select(i => new IngredientDto
                     {
                         IngredientID = i.IngredientID,
@@ -76,7 +71,7 @@ namespace TakoTea.Repository
             try
             {
                 // Simply retrieve all product variants without any projection
-                var ingredient = _context.Ingredients.ToList();
+                List<Ingredient> ingredient = _context.Ingredients.ToList();
 
                 return ingredient;
             }
@@ -86,7 +81,7 @@ namespace TakoTea.Repository
             }
 
         }
- 
+
 
         public void UpdateStockLevel(int ingredientID, decimal newQuantity)
         {
@@ -94,7 +89,7 @@ namespace TakoTea.Repository
                     UPDATE Batch
                     SET QuantityInStock = @NewQuantity
                     WHERE IngredientID = @IngredientID";
-            _context.Database.ExecuteSqlCommand(query, new SqlParameter("@IngredientID", ingredientID), new SqlParameter("@NewQuantity", newQuantity));
+            _ = _context.Database.ExecuteSqlCommand(query, new SqlParameter("@IngredientID", ingredientID), new SqlParameter("@NewQuantity", newQuantity));
         }
 
 
@@ -138,7 +133,7 @@ namespace TakoTea.Repository
         {
             try
             {
-                var lowStockIngredients = _context.Ingredients
+                List<object> lowStockIngredients = _context.Ingredients
                     .Where(i => i.StockLevel <= i.LowLevel)
                     .Select(i => new
                     {
@@ -156,6 +151,6 @@ namespace TakoTea.Repository
             }
         }
 
-        
+
     }
 }

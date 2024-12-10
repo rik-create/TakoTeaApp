@@ -1,7 +1,6 @@
 ﻿using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using TakoTea.Models;
 
@@ -12,9 +11,9 @@ namespace TakoTea.View.Product.Product_Modals
         public List<ProductVariant> SelectedVariants { get; private set; }
 
         // Example list of product variants for demonstration
-        private List<ProductVariant> allVariants = new List<ProductVariant>
+        private readonly List<ProductVariant> allVariants = new List<ProductVariant>
         {
-          
+
         };
 
         public SelectVariantModal()
@@ -41,8 +40,7 @@ namespace TakoTea.View.Product.Product_Modals
             // Loop through the selected rows and add them to the SelectedVariants list
             foreach (DataGridViewRow row in dataGridViewVariants.SelectedRows)
             {
-                var variant = row.DataBoundItem as ProductVariant;
-                if (variant != null)
+                if (row.DataBoundItem is ProductVariant variant)
                 {
                     SelectedVariants.Add(variant);
                 }
@@ -59,5 +57,5 @@ namespace TakoTea.View.Product.Product_Modals
         }
     }
 }
-    
+
 

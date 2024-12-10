@@ -1,9 +1,5 @@
 ﻿using Helpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TakoTea.Models;
 
 namespace TakoTea.Helpers
@@ -13,22 +9,22 @@ namespace TakoTea.Helpers
 
         public static void LogActivity(string activityType, string description)
         {
-            var context = new Entities();
-            var activityLog = new ActivityLog
+            Entities context = new Entities();
+            ActivityLog activityLog = new ActivityLog
             {
                 ActivityType = activityType,
                 Description = description,
                 Timestamp = DateTime.Now,
                 Username = AuthenticationHelper._loggedInUsername
             };
-            context.ActivityLogs.Add(activityLog);
-            context.SaveChanges();
+            _ = context.ActivityLogs.Add(activityLog);
+            _ = context.SaveChanges();
         }
 
         public static void LogChange(string tableName, int recordId, string columnName, string oldValue, string newValue, string action, string description, string changeDescription)
         {
-            var context = new Entities();
-            var log = new Log
+            Entities context = new Entities();
+            Log log = new Log
             {
                 TableName = tableName,
                 RecordID = recordId,
@@ -39,12 +35,12 @@ namespace TakoTea.Helpers
                 Timestamp = DateTime.Now,
                 Username = AuthenticationHelper._loggedInUsername,
                 ChangeDescription_ = changeDescription,
-                Description = description   
+                Description = description
 
-               
+
             };
-            context.Logs.Add(log);
-            context.SaveChanges();
+            _ = context.Logs.Add(log);
+            _ = context.SaveChanges();
 
         }
     }

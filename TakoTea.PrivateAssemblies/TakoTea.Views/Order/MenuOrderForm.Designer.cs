@@ -554,6 +554,7 @@
             this.cmbOrderStatus.Size = new System.Drawing.Size(250, 49);
             this.cmbOrderStatus.StartIndex = 0;
             this.cmbOrderStatus.TabIndex = 107;
+            this.cmbOrderStatus.SelectedIndexChanged += new System.EventHandler(this.cmbOrderStatus_SelectedIndexChanged);
             // 
             // materialLabel4
             // 

@@ -1,16 +1,11 @@
-﻿using Microsoft.SqlServer.Management.Common;
-using Microsoft.SqlServer.Management.Smo;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TakoTea.Database;
-using TakoTea.Helpers;
 using TakoTea.Interfaces;
 using TakoTea.Models;
 
@@ -20,7 +15,7 @@ namespace TakoTea.Views.settings
     public static class SettingsService
     {
         private static Entities _context;
-        private static ISettingsFormHelper _helper;
+        private static readonly ISettingsFormHelper _helper;
 
         public static void Initialize(Entities context)
         {
@@ -31,7 +26,7 @@ namespace TakoTea.Views.settings
         {
             try
             {
-                var settings = _context.Settings.FirstOrDefault();
+                Setting settings = _context.Settings.FirstOrDefault();
 
                 if (settings != null)
                 {
@@ -59,7 +54,7 @@ namespace TakoTea.Views.settings
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading settings: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show($"Error loading settings: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -67,16 +62,16 @@ namespace TakoTea.Views.settings
         {
             try
             {
-                var settings = _context.Settings.FirstOrDefault() ?? new TakoTea.Models.Setting();
+                Setting settings = _context.Settings.FirstOrDefault() ?? new TakoTea.Models.Setting();
 
                 settings.LowStockFrequency = settingsForm.cmbAlertFrequency.SelectedItem?.ToString();
                 settings.EnableEmailNotifications = settingsForm.chkBoxEnableEmailNotifications.Checked;
                 settings.EnableInAppNotifications = settingsForm.chkBoxInAppNotification.Checked;
 
-                var selectedDestinations = settingsForm.checkedListBoxBackUpDestinations.CheckedItems.Cast<string>().ToList();
+                List<string> selectedDestinations = settingsForm.checkedListBoxBackUpDestinations.Items.Cast<string>().ToList();
 
                 // Store the selected destinations as a comma-separated string
-                settings.BackupDestination = string.Join(",", selectedDestinations);
+                settings.BackupDestination = string.Join("|", selectedDestinations);
                 settings.BackupSchedule = settingsForm.cmbBackupSchedule.SelectedItem?.ToString();
                 // ... retrieve other settings from UI ...
 
@@ -84,14 +79,14 @@ namespace TakoTea.Views.settings
 
                 if (_context.Entry(settings).State == EntityState.Detached)
                 {
-                    _context.Settings.Add(settings);
+                    _ = _context.Settings.Add(settings);
                 }
 
-                _context.SaveChanges();
+                _ = _context.SaveChanges();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error saving settings: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show($"Error saving settings: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -108,7 +103,7 @@ namespace TakoTea.Views.settings
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error resetting settings to default: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show($"Error resetting settings to default: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -130,7 +125,7 @@ namespace TakoTea.Views.settings
                 // Validate backup settings (optional) - you might need to adjust this based on your new logic
                 if (backupDestinations.Count == 0 || string.IsNullOrEmpty(backupSchedule))
                 {
-                    MessageBox.Show("Please select at least one backup destination and a backup schedule.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    _ = MessageBox.Show("Please select at least one backup destination and a backup schedule.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -145,10 +140,12 @@ namespace TakoTea.Views.settings
 
                 // Update last backup date and time
                 UpdateLastBackupDate(settingsForm);
+                _ = MessageBox.Show("Backup performed and date saved successfully.");
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error performing backup: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show($"Error performing backup: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -167,7 +164,7 @@ namespace TakoTea.Views.settings
                 // 2. Validate backup file path (optional)
                 if (!ValidateBackupFilePath(backupFilePath))
                 {
-                    MessageBox.Show("Invalid backup file path.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    _ = MessageBox.Show("Invalid backup file path.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return; // Or handle the error appropriately
                 }
 
@@ -175,11 +172,11 @@ namespace TakoTea.Views.settings
                 RestoreDatabase(backupFilePath, "TakoTea");
 
                 // 4. (Optional) Display a success message or update the UI
-                MessageBox.Show("Database restored successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _ = MessageBox.Show("Database restored successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error restoring backup: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show($"Error restoring backup: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -213,6 +210,15 @@ namespace TakoTea.Views.settings
         {
             try
             {
+                // Extract the directory from the backupFilePath
+                string backupDirectory = Path.GetDirectoryName(backupFilePath);
+
+                if (!Directory.Exists(backupDirectory))
+                {
+                    MessageBox.Show("The specified backup directory does not exist. \n Directory Path: " + backupDirectory, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 using (SqlConnection connection = new SqlConnection(DatabaseConnection.GetConnectionString()))
                 {
                     connection.Open();
@@ -226,7 +232,6 @@ namespace TakoTea.Views.settings
                 MessageBox.Show($"Error backing up database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private static void RestoreDatabase(string backupFilePath, string databaseName)
         {
             try
@@ -239,12 +244,12 @@ namespace TakoTea.Views.settings
                         RESTORE DATABASE [{databaseName}] FROM DISK = '{backupFilePath}' WITH REPLACE;
                         ALTER DATABASE [{databaseName}] SET MULTI_USER;";
                     SqlCommand command = new SqlCommand(restoreScript, connection);
-                    command.ExecuteNonQuery();
+                    _ = command.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error restoring database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show($"Error restoring database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -1,21 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using TakoTea.Product;
 using TakoTea.View.Batches;
-using TakoTea.View.Items.Item_Modals;
-using TakoTea.View.Orders;
-using TakoTea.View.Product.Product_Modals;
-using TakoTea.Views.Batches;
-using TakoTea.Views.ComboMealForms;
-using TakoTea.Views.Dashboard;
-using TakoTea.Views.Items;
-using TakoTea.Views.mainform;
 using TakoTea.Views.MainForm;
-using TakoTea.Views.Order.Order_Modals;
-using TakoTea.Views.Other;
-using TakoTea.Views.product;
-using TakoTea.Views.reports;
-using TakoTea.Views.settings;
 namespace TakoTea
 {
     internal static class Program

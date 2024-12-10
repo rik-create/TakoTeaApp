@@ -1,9 +1,4 @@
-﻿using BCrypt.Net;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using TakoTea.Models;
 
 namespace Helpers
@@ -15,15 +10,10 @@ namespace Helpers
 
         public static bool AuthenticateUser(string username, string password)
         {
-             var context = new Entities();
-            var user = context.Users.FirstOrDefault(u => u.Username == username);
+            Entities context = new Entities();
+            User user = context.Users.FirstOrDefault(u => u.Username == username);
 
-            if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.Password))
-            {
-                return false;
-            }
-
-            return true;
+            return user != null && BCrypt.Net.BCrypt.Verify(password, user.Password);
         }
 
         public static string HashPassword(string password)
@@ -31,19 +21,19 @@ namespace Helpers
             return BCrypt.Net.BCrypt.HashPassword(password);
         }
 
-        public static bool IsPasswordValid(string password) 
-    {
-        // Implement your password validation logic here, e.g.,
-        // - Minimum length
-        // - Required character types (uppercase, lowercase, digits, symbols)
-        // - etc.
-
-        return true; // Or false if the password is invalid
-    }
-
-    public static TakoTea.Models.User GetCurrentUser()
+        public static bool IsPasswordValid(string password)
         {
-             var context = new Entities();
+            // Implement your password validation logic here, e.g.,
+            // - Minimum length
+            // - Required character types (uppercase, lowercase, digits, symbols)
+            // - etc.
+
+            return true; // Or false if the password is invalid
+        }
+
+        public static TakoTea.Models.User GetCurrentUser()
+        {
+            Entities context = new Entities();
             string username = _loggedInUsername; // Access the logged-in username from the LoginForm
 
             return context.Users.FirstOrDefault(u => u.Username == username);

@@ -27,14 +27,17 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BatchListForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.miniToolStrip = new System.Windows.Forms.BindingNavigator(this.components);
             this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
-            this.floatingActionButtonAddBatch = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panelFilteringComponents = new System.Windows.Forms.Panel();
+            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.dateTimePickerEndDate = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerStartDate = new System.Windows.Forms.DateTimePicker();
+            this.btnClearFilters = new MaterialSkin.Controls.MaterialButton();
             this.panelItemList = new System.Windows.Forms.Panel();
             this.bindingNavigatorBatch = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
@@ -52,7 +55,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.pBoxShowFilter = new System.Windows.Forms.PictureBox();
             this.btnHideFilters = new MaterialSkin.Controls.MaterialButton();
-            this.buttonEditBatch = new System.Windows.Forms.Button();
             this.materialTextBox21 = new MaterialSkin.Controls.MaterialTextBox2();
             this.panel1 = new System.Windows.Forms.Panel();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
@@ -60,10 +62,6 @@
             this.pictureBoxExportExcel = new System.Windows.Forms.PictureBox();
             this.pictureBoxExportPdf = new System.Windows.Forms.PictureBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.btnClearFilters = new MaterialSkin.Controls.MaterialButton();
-            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
-            this.dateTimePickerEndDate = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePickerStartDate = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).BeginInit();
             this.materialCard2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -108,7 +106,6 @@
             this.materialCard2.AutoScroll = true;
             this.materialCard2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.materialCard2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.materialCard2.Controls.Add(this.floatingActionButtonAddBatch);
             this.materialCard2.Controls.Add(this.flowLayoutPanel1);
             this.materialCard2.Controls.Add(this.panel3);
             this.materialCard2.Controls.Add(this.panel1);
@@ -123,20 +120,6 @@
             this.materialCard2.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard2.Size = new System.Drawing.Size(1191, 715);
             this.materialCard2.TabIndex = 70;
-            // 
-            // floatingActionButtonAddBatch
-            // 
-            this.floatingActionButtonAddBatch.Depth = 0;
-            this.floatingActionButtonAddBatch.Icon = global::TakoTea.Views.Properties.Resources.plus;
-            this.floatingActionButtonAddBatch.Image = global::TakoTea.Views.Properties.Resources.plus;
-            this.floatingActionButtonAddBatch.Location = new System.Drawing.Point(1110, 80);
-            this.floatingActionButtonAddBatch.Mini = true;
-            this.floatingActionButtonAddBatch.MouseState = MaterialSkin.MouseState.HOVER;
-            this.floatingActionButtonAddBatch.Name = "floatingActionButtonAddBatch";
-            this.floatingActionButtonAddBatch.Size = new System.Drawing.Size(40, 40);
-            this.floatingActionButtonAddBatch.TabIndex = 102;
-            this.floatingActionButtonAddBatch.UseVisualStyleBackColor = true;
-            this.floatingActionButtonAddBatch.Click += new System.EventHandler(this.floatingActionButtonAddBatch_Click_1);
             // 
             // flowLayoutPanel1
             // 
@@ -164,6 +147,59 @@
             this.panelFilteringComponents.TabIndex = 107;
             this.panelFilteringComponents.Visible = false;
             this.panelFilteringComponents.Paint += new System.Windows.Forms.PaintEventHandler(this.panelFilteringComponents_Paint);
+            // 
+            // materialLabel3
+            // 
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel3.Location = new System.Drawing.Point(16, 8);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(87, 19);
+            this.materialLabel3.TabIndex = 147;
+            this.materialLabel3.Text = "Date Range:";
+            // 
+            // dateTimePickerEndDate
+            // 
+            this.dateTimePickerEndDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerEndDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePickerEndDate.Location = new System.Drawing.Point(190, 40);
+            this.dateTimePickerEndDate.Name = "dateTimePickerEndDate";
+            this.dateTimePickerEndDate.Size = new System.Drawing.Size(159, 31);
+            this.dateTimePickerEndDate.TabIndex = 146;
+            this.dateTimePickerEndDate.ValueChanged += new System.EventHandler(this.dateTimePickerEndDate_ValueChanged);
+            // 
+            // dateTimePickerStartDate
+            // 
+            this.dateTimePickerStartDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerStartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePickerStartDate.Location = new System.Drawing.Point(16, 40);
+            this.dateTimePickerStartDate.Name = "dateTimePickerStartDate";
+            this.dateTimePickerStartDate.Size = new System.Drawing.Size(159, 31);
+            this.dateTimePickerStartDate.TabIndex = 145;
+            this.dateTimePickerStartDate.ValueChanged += new System.EventHandler(this.dateTimePickerStartDate_ValueChanged);
+            // 
+            // btnClearFilters
+            // 
+            this.btnClearFilters.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnClearFilters.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnClearFilters.Depth = 0;
+            this.btnClearFilters.HighEmphasis = true;
+            this.btnClearFilters.Icon = null;
+            this.btnClearFilters.Location = new System.Drawing.Point(984, 8);
+            this.btnClearFilters.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnClearFilters.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnClearFilters.Name = "btnClearFilters";
+            this.btnClearFilters.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnClearFilters.Size = new System.Drawing.Size(126, 36);
+            this.btnClearFilters.TabIndex = 143;
+            this.btnClearFilters.Text = "Clear filters";
+            this.btnClearFilters.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnClearFilters.UseAccentColor = true;
+            this.btnClearFilters.UseVisualStyleBackColor = true;
             // 
             // panelItemList
             // 
@@ -296,35 +332,35 @@
             this.dataGridViewBatch.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewBatch.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridViewBatch.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewBatch.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewBatch.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewBatch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewBatch.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewBatch.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewBatch.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridViewBatch.EnableHeadersVisualStyles = false;
             this.dataGridViewBatch.Location = new System.Drawing.Point(0, 30);
             this.dataGridViewBatch.Name = "dataGridViewBatch";
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewBatch.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewBatch.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewBatch.Size = new System.Drawing.Size(1125, 489);
             this.dataGridViewBatch.TabIndex = 5;
             this.dataGridViewBatch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewBatch_CellDoubleClick);
@@ -336,7 +372,6 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.pBoxShowFilter);
             this.panel3.Controls.Add(this.btnHideFilters);
-            this.panel3.Controls.Add(this.buttonEditBatch);
             this.panel3.Controls.Add(this.materialTextBox21);
             this.panel3.Location = new System.Drawing.Point(20, 70);
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 8);
@@ -376,16 +411,6 @@
             this.btnHideFilters.UseAccentColor = true;
             this.btnHideFilters.UseVisualStyleBackColor = true;
             this.btnHideFilters.Click += new System.EventHandler(this.btnHideFilters_Click);
-            // 
-            // buttonEditBatch
-            // 
-            this.buttonEditBatch.Location = new System.Drawing.Point(930, 20);
-            this.buttonEditBatch.Name = "buttonEditBatch";
-            this.buttonEditBatch.Size = new System.Drawing.Size(75, 23);
-            this.buttonEditBatch.TabIndex = 94;
-            this.buttonEditBatch.Text = "Edit Batch";
-            this.buttonEditBatch.UseVisualStyleBackColor = true;
-            this.buttonEditBatch.Click += new System.EventHandler(this.buttonEditBatch_Click);
             // 
             // materialTextBox21
             // 
@@ -471,59 +496,6 @@
             this.pictureBoxExportPdf.TabStop = false;
             this.pictureBoxExportPdf.Click += new System.EventHandler(this.pictureBoxExportPdf_Click);
             // 
-            // btnClearFilters
-            // 
-            this.btnClearFilters.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnClearFilters.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnClearFilters.Depth = 0;
-            this.btnClearFilters.HighEmphasis = true;
-            this.btnClearFilters.Icon = null;
-            this.btnClearFilters.Location = new System.Drawing.Point(984, 8);
-            this.btnClearFilters.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnClearFilters.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnClearFilters.Name = "btnClearFilters";
-            this.btnClearFilters.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnClearFilters.Size = new System.Drawing.Size(126, 36);
-            this.btnClearFilters.TabIndex = 143;
-            this.btnClearFilters.Text = "Clear filters";
-            this.btnClearFilters.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnClearFilters.UseAccentColor = true;
-            this.btnClearFilters.UseVisualStyleBackColor = true;
-            // 
-            // materialLabel3
-            // 
-            this.materialLabel3.AutoSize = true;
-            this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel3.Location = new System.Drawing.Point(16, 8);
-            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(87, 19);
-            this.materialLabel3.TabIndex = 147;
-            this.materialLabel3.Text = "Date Range:";
-            // 
-            // dateTimePickerEndDate
-            // 
-            this.dateTimePickerEndDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePickerEndDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePickerEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerEndDate.Location = new System.Drawing.Point(190, 40);
-            this.dateTimePickerEndDate.Name = "dateTimePickerEndDate";
-            this.dateTimePickerEndDate.Size = new System.Drawing.Size(159, 31);
-            this.dateTimePickerEndDate.TabIndex = 146;
-            this.dateTimePickerEndDate.ValueChanged += new System.EventHandler(this.dateTimePickerEndDate_ValueChanged);
-            // 
-            // dateTimePickerStartDate
-            // 
-            this.dateTimePickerStartDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePickerStartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePickerStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerStartDate.Location = new System.Drawing.Point(16, 40);
-            this.dateTimePickerStartDate.Name = "dateTimePickerStartDate";
-            this.dateTimePickerStartDate.Size = new System.Drawing.Size(159, 31);
-            this.dateTimePickerStartDate.TabIndex = 145;
-            this.dateTimePickerStartDate.ValueChanged += new System.EventHandler(this.dateTimePickerStartDate_ValueChanged);
-            // 
             // BatchListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -566,7 +538,6 @@
         private System.Windows.Forms.PictureBox pictureBoxExportPdf;
         private System.Windows.Forms.Panel panel1;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
-        private MaterialSkin.Controls.MaterialFloatingActionButton floatingActionButtonAddBatch;
         private System.Windows.Forms.Panel panel3;
         private MaterialSkin.Controls.MaterialTextBox2 materialTextBox21;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
@@ -585,7 +556,6 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.DataGridView dataGridViewBatch;
-        private System.Windows.Forms.Button buttonEditBatch;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.PictureBox pBoxShowFilter;
         private MaterialSkin.Controls.MaterialButton btnHideFilters;

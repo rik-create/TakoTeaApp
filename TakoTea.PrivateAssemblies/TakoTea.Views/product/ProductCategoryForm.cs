@@ -2,8 +2,6 @@
 using System;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
-using TakoTea.Interfaces;
-using TakoTea.Models;
 using TakoTea.Repository;
 using TakoTea.Services;
 using TakoTea.View.Product.Product_Modals;
@@ -11,9 +9,8 @@ namespace TakoTea.View.Product
 {
     public partial class ProductCategoryForm : MaterialForm
     {
-
-        ProductCategoryService service;
-        DataAccessObject _dao;
+        private readonly ProductCategoryService service;
+        private readonly DataAccessObject _dao;
         public ProductCategoryForm()
         {
             InitializeComponent();

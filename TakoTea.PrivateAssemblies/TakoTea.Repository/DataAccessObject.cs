@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Windows.Forms;
 using TakoTea.Database;
 using TakoTea.Exceptions;
 
@@ -21,10 +20,10 @@ namespace TakoTea.Repository
         {
             try
             {
-                using (var connection = DatabaseConnection.GetConnection()) // Open a new connection in the 'using' block
+                using (SqlConnection connection = DatabaseConnection.GetConnection()) // Open a new connection in the 'using' block
                 {
                     // Convert SqlParameter[] to a dictionary or anonymous object
-                    var paramObject = parameters.ToDictionary(p => p.ParameterName, p => p.Value);
+                    Dictionary<string, object> paramObject = parameters.ToDictionary(p => p.ParameterName, p => p.Value);
 
                     // Execute query using Dapper and pass the parameters as an anonymous object
                     return connection.Query<T>(query, paramObject);
@@ -44,17 +43,17 @@ namespace TakoTea.Repository
             DataTable dataTable = new DataTable();
             try
             {
-                using (var connection = DatabaseConnection.GetConnection())
+                using (SqlConnection connection = DatabaseConnection.GetConnection())
                 {
 
-                    using (var command = new SqlCommand(query, connection)) // Using SqlCommand inside the connection scope
+                    using (SqlCommand command = new SqlCommand(query, connection)) // Using SqlCommand inside the connection scope
                     {
                         if (parameters != null)
                         {
                             command.Parameters.AddRange(parameters);
                         }
 
-                        using (var reader = command.ExecuteReader())
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
                             dataTable.Load(reader); // Load data from SqlDataReader into DataTable
                         }
@@ -77,14 +76,14 @@ namespace TakoTea.Repository
             int rowsAffected = 0;
             try
             {
-                using (var connection = DatabaseConnection.GetConnection()) // Open connection in using block
+                using (SqlConnection connection = DatabaseConnection.GetConnection()) // Open connection in using block
                 {
                     connection.Open();
-                    using (var transaction = connection.BeginTransaction()) // Begin transaction inside connection scope
+                    using (SqlTransaction transaction = connection.BeginTransaction()) // Begin transaction inside connection scope
                     {
                         for (int i = 0; i < queries.Length; i++)
                         {
-                            using (var command = new SqlCommand(queries[i], connection, transaction))
+                            using (SqlCommand command = new SqlCommand(queries[i], connection, transaction))
                             {
                                 if (parametersArray[i] != null)
                                 {
@@ -112,8 +111,8 @@ namespace TakoTea.Repository
         {
             try
             {
-                using (var connection = DatabaseConnection.GetConnection()) // Open connection in using block
-                using (var command = new SqlCommand(query, connection)) // SqlCommand inside using block
+                using (SqlConnection connection = DatabaseConnection.GetConnection()) // Open connection in using block
+                using (SqlCommand command = new SqlCommand(query, connection)) // SqlCommand inside using block
                 {
                     if (parameters != null)
                     {
@@ -138,7 +137,7 @@ namespace TakoTea.Repository
                 foreach (DataRow row in dataTable.Rows)
                 {
                     T obj = new T();
-                    foreach (var prop in obj.GetType().GetProperties())
+                    foreach (System.Reflection.PropertyInfo prop in obj.GetType().GetProperties())
                     {
                         if (dataTable.Columns.Contains(prop.Name))
                         {
@@ -160,8 +159,8 @@ namespace TakoTea.Repository
         {
             try
             {
-                using (var connection = DatabaseConnection.GetConnection()) // Open connection in using block
-                using (var command = new SqlCommand(query, connection)) // SqlCommand inside using block
+                using (SqlConnection connection = DatabaseConnection.GetConnection()) // Open connection in using block
+                using (SqlCommand command = new SqlCommand(query, connection)) // SqlCommand inside using block
                 {
                     if (parameters != null)
                     {
@@ -182,8 +181,8 @@ namespace TakoTea.Repository
         {
             try
             {
-                using (var connection = DatabaseConnection.GetConnection()) // Open connection in using block
-                using (var command = new SqlCommand(query, connection)) // SqlCommand inside using block
+                using (SqlConnection connection = DatabaseConnection.GetConnection()) // Open connection in using block
+                using (SqlCommand command = new SqlCommand(query, connection)) // SqlCommand inside using block
                 {
                     if (parameters != null)
                     {
@@ -208,7 +207,7 @@ namespace TakoTea.Repository
                    $"An error occurred while executing the query.\n" +
                    $"Query: {query}\n" + // Shows which query failed
                    $"Method: {System.Reflection.MethodBase.GetCurrentMethod().Name}\n" +
-                   $"Class: {this.GetType().Name}\n" +
+                   $"Class: {GetType().Name}\n" +
                    $"Caller Method: {new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().Name}"; // Indicates where the query originated from
         }
     }

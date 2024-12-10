@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TakoTea.Interfaces;
 using TakoTea.Models;
 
 namespace TakoTea.Services
@@ -26,13 +23,13 @@ namespace TakoTea.Services
 
         public static void RemovePaymentMethod(string paymentMethodName)
         {
-            using (var context = new Entities())
+            using (Entities context = new Entities())
             {
-                var paymentMethod = context.PaymentMethods.FirstOrDefault(p => p.MethodName == paymentMethodName);
+                PaymentMethod paymentMethod = context.PaymentMethods.FirstOrDefault(p => p.MethodName == paymentMethodName);
                 if (paymentMethod != null)
                 {
                     paymentMethod.IsActive = false; // Soft delete by setting IsActive to false
-                    context.SaveChanges();
+                    _ = context.SaveChanges();
                 }
                 else
                 {
@@ -43,7 +40,7 @@ namespace TakoTea.Services
 
         public static void AddPaymentMethod(string paymentMethodName)
         {
-            using (var context = new Entities())
+            using (Entities context = new Entities())
             {
                 // Check if the payment method already exists (ignoring case)
                 if (context.PaymentMethods.Any(p => p.MethodName.Equals(paymentMethodName, StringComparison.OrdinalIgnoreCase)))
@@ -51,21 +48,22 @@ namespace TakoTea.Services
                     throw new Exception("Payment method already exists.");
                 }
 
-                var newPaymentMethod = new PaymentMethod
+                PaymentMethod newPaymentMethod = new PaymentMethod
                 {
                     MethodName = paymentMethodName,
                     IsActive = true
                 };
 
-                context.PaymentMethods.Add(newPaymentMethod);
-                context.SaveChanges();
+                _ = context.PaymentMethods.Add(newPaymentMethod);
+                _ = context.SaveChanges();
             }
         }
         public static List<string> GetAllPaymentMethods()
         {
-            using (var context = new Entities())
+            using (Entities context = new Entities())
             {
                 return context.PaymentMethods
+                    .Where(p => p.IsActive) // Filter for active payment methods
                     .Select(p => p.MethodName)
                     .ToList();
             }
@@ -77,17 +75,17 @@ namespace TakoTea.Services
 
             // Update the payment method in the database
             _context.Entry(paymentMethod).State = EntityState.Modified;
-            _context.SaveChanges();
+            _ = _context.SaveChanges();
         }
 
         public void DeletePaymentMethod(int paymentMethodId)
         {
             // Delete the payment method from the database
-            var paymentMethod = _context.PaymentMethods.Find(paymentMethodId);
+            PaymentMethod paymentMethod = _context.PaymentMethods.Find(paymentMethodId);
             if (paymentMethod != null)
             {
-                _context.PaymentMethods.Remove(paymentMethod);
-                _context.SaveChanges();
+                _ = _context.PaymentMethods.Remove(paymentMethod);
+                _ = _context.SaveChanges();
             }
         }
 

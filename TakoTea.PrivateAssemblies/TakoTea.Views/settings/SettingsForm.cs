@@ -1,28 +1,20 @@
 ﻿using MaterialSkin.Controls;
-using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
-using Org.BouncyCastle.Crypto.Generators;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
 using TakoTea.Models;
 using TakoTea.Repository;
 using TakoTea.Services;
-using Microsoft.SqlServer.Management.Smo;
 
 
 namespace TakoTea.Views.settings
 {
     public partial class SettingsForm : MaterialForm
     {
-        private Entities _context = new Entities();
+        private readonly Entities _context = new Entities();
 
         public SettingsForm()
         {
@@ -36,11 +28,11 @@ namespace TakoTea.Views.settings
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error initializing services: " + ex.Message);
+                _ = MessageBox.Show("Error initializing services: " + ex.Message);
                 LoggingHelper.LogActivity("Initialization", "Error initializing services: " + ex.Message);
             }
 
-            this.DrawerShowIconsWhenHidden = false;
+            DrawerShowIconsWhenHidden = false;
             ThemeConfigurator.ApplyDarkTheme(this);
 
             try
@@ -56,6 +48,7 @@ namespace TakoTea.Views.settings
                 // Load backup destinations
 
                 SettingsFormHelper.LoadSavedEmails(checkedListBoxEmails);
+                SettingsFormHelper.LoadBackUpPaths(checkedListBoxBackUpDestinations);
 
                 // Load backup schedules
                 SettingsFormHelper.LoadBackupSchedules(cmbBackupSchedule);
@@ -65,11 +58,11 @@ namespace TakoTea.Views.settings
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading settings: " + ex.Message);
+                _ = MessageBox.Show("Error loading settings: " + ex.Message);
                 LoggingHelper.LogActivity("LoadSettings", "Error loading settings: " + ex.Message);
             }
 
-            this.Load += SettingsForm_Load;
+            Load += SettingsForm_Load;
             btnAddUser.Click += btnAddUser_Click;
             btnEditUser.Click += btnEditUser_Click;
             btnDeleteUser.Click += btnDeleteUser_Click;
@@ -88,7 +81,7 @@ namespace TakoTea.Views.settings
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading settings: " + ex.Message);
+                _ = MessageBox.Show("Error loading settings: " + ex.Message);
                 LoggingHelper.LogActivity("CancelChanges", "Error loading settings: " + ex.Message);
             }
         }
@@ -107,7 +100,7 @@ namespace TakoTea.Views.settings
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading settings: " + ex.Message);
+                _ = MessageBox.Show("Error loading settings: " + ex.Message);
                 LoggingHelper.LogActivity("FormLoad", "Error loading settings on form load: " + ex.Message);
             }
         }
@@ -120,7 +113,7 @@ namespace TakoTea.Views.settings
                 string hashedPassword = HashPassword(txtBoxPassword.Text);
 
                 // Create a new User object
-                var user = new TakoTea.Models.User
+                Models.User user = new TakoTea.Models.User
                 {
                     Name = txtBoxName.Text,
                     Username = txtBoxUsername.Text,
@@ -136,7 +129,7 @@ namespace TakoTea.Views.settings
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error adding user: " + ex.Message);
+                _ = MessageBox.Show("Error adding user: " + ex.Message);
                 LoggingHelper.LogActivity("AddUser", "Error adding user: " + ex.Message);
             }
         }
@@ -152,7 +145,7 @@ namespace TakoTea.Views.settings
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error hashing password: " + ex.Message);
+                _ = MessageBox.Show("Error hashing password: " + ex.Message);
                 LoggingHelper.LogActivity("HashPassword", "Error hashing password: " + ex.Message);
                 return null;
             }
@@ -163,8 +156,10 @@ namespace TakoTea.Views.settings
             try
             {
                 // Get the selected user from the ListView
-                var selectedUser = materialListViewUsers.SelectedItems[0].Tag as TakoTea.Models.User;
-                if (selectedUser == null) return;
+                if (!(materialListViewUsers.SelectedItems[0].Tag is TakoTea.Models.User selectedUser))
+                {
+                    return;
+                }
 
                 // Update the user's properties with values from the input fields
                 selectedUser.Name = txtBoxName.Text;
@@ -179,7 +174,7 @@ namespace TakoTea.Views.settings
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error editing user: " + ex.Message);
+                _ = MessageBox.Show("Error editing user: " + ex.Message);
                 LoggingHelper.LogActivity("EditUser", "Error editing user: " + ex.Message);
             }
         }
@@ -189,8 +184,10 @@ namespace TakoTea.Views.settings
             try
             {
                 // Get the selected user from the ListView
-                var selectedUser = materialListViewUsers.SelectedItems[0].Tag as TakoTea.Models.User;
-                if (selectedUser == null) return;
+                if (!(materialListViewUsers.SelectedItems[0].Tag is TakoTea.Models.User selectedUser))
+                {
+                    return;
+                }
 
                 // Delete the user
                 UserRepository.DeleteUser(selectedUser.UserID);
@@ -201,7 +198,7 @@ namespace TakoTea.Views.settings
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error deleting user: " + ex.Message);
+                _ = MessageBox.Show("Error deleting user: " + ex.Message);
                 LoggingHelper.LogActivity("DeleteUser", "Error deleting user: " + ex.Message);
             }
         }
@@ -214,19 +211,18 @@ namespace TakoTea.Views.settings
                 LoggingHelper.LogActivity("Backup", "Backup performed successfully.");
 
                 // Save last backup date to settings
-                 var context = new Entities();
-                var settings = context.Settings.FirstOrDefault();
+                Entities context = new Entities();
+                Setting settings = context.Settings.FirstOrDefault();
                 if (settings != null)
                 {
                     settings.LastBackUpDate = DateTime.Now;
-                    context.SaveChanges();
+                    _ = context.SaveChanges();
                 }
 
-                MessageBox.Show("Backup performed and date saved successfully.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error performing backup: " + ex.Message);
+                _ = MessageBox.Show("Error performing backup: " + ex.Message);
                 LoggingHelper.LogActivity("Backup", "Backup failed: " + ex.Message);
             }
         }
@@ -240,7 +236,7 @@ namespace TakoTea.Views.settings
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error restoring backup: " + ex.Message);
+                _ = MessageBox.Show("Error restoring backup: " + ex.Message);
                 LoggingHelper.LogActivity("RestoreBackup", "Error restoring backup: " + ex.Message);
             }
         }
@@ -264,13 +260,13 @@ namespace TakoTea.Views.settings
                 // Validate email format
                 if (!IsValidEmail(newEmail))
                 {
-                    MessageBox.Show("Invalid email format.");
+                    _ = MessageBox.Show("Invalid email format.");
                     LoggingHelper.LogActivity("AddEmail", "Invalid email format.");
                     return;
                 }
 
-                var context = new Entities();
-                var settings = context.Settings.FirstOrDefault();
+                Entities context = new Entities();
+                Setting settings = context.Settings.FirstOrDefault();
 
                 if (settings == null)
                 {
@@ -279,21 +275,21 @@ namespace TakoTea.Views.settings
                 }
 
                 // Check if the email already exists in SavedEmails
-                var savedEmails = settings.SavedEmails?.Split(new[] { '?' }, StringSplitOptions.RemoveEmptyEntries) ?? new string[0];
+                string[] savedEmails = settings.SavedEmails?.Split(new[] { '?' }, StringSplitOptions.RemoveEmptyEntries) ?? new string[0];
                 if (savedEmails.Contains(newEmail))
                 {
-                    MessageBox.Show("Email already exists.");
+                    _ = MessageBox.Show("Email already exists.");
                     LoggingHelper.LogActivity("AddEmail", "Email already exists.");
                     return;
                 }
 
                 // Add the new email to SavedEmails
                 settings.SavedEmails = settings.SavedEmails + "?" + newEmail;
-                context.SaveChanges();
+                _ = context.SaveChanges();
 
                 // Add the new email to the CheckedListBox
 
-                MessageBox.Show("Email added successfully.");
+                _ = MessageBox.Show("Email added successfully.");
                 txtBoxAddEmail.Text = ""; // Clear the input field
 
                 SettingsFormHelper.LoadSavedEmails(checkedListBoxEmails);
@@ -301,7 +297,7 @@ namespace TakoTea.Views.settings
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error adding email: " + ex.Message);
+                _ = MessageBox.Show("Error adding email: " + ex.Message);
                 LoggingHelper.LogActivity("AddEmail", "Error adding email: " + ex.Message);
             }
         }
@@ -321,26 +317,26 @@ namespace TakoTea.Views.settings
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading settings: " + ex.Message);
+                _ = MessageBox.Show("Error loading settings: " + ex.Message);
                 LoggingHelper.LogActivity("ReloadSettings", "Error loading settings: " + ex.Message);
             }
         }
 
         private void btnSaveChanges_Click(object sender, EventArgs e)
         {
-            using (var transaction = _context.Database.BeginTransaction())
+            using (System.Data.Entity.DbContextTransaction transaction = _context.Database.BeginTransaction())
             {
                 try
                 {
                     SettingsService.SaveSettings(this);
                     transaction.Commit();
-                    MessageBox.Show("Settings saved successfully.");
+                    _ = MessageBox.Show("Settings saved successfully.");
                     LoggingHelper.LogActivity("SaveChanges", "Settings saved successfully.");
                 }
                 catch (Exception ex)
                 {
                     transaction.Rollback();
-                    MessageBox.Show("Error saving settings: " + ex.Message);
+                    _ = MessageBox.Show("Error saving settings: " + ex.Message);
                     LoggingHelper.LogActivity("SaveChanges", "Error saving settings: " + ex.Message);
                 }
             }
@@ -361,7 +357,7 @@ namespace TakoTea.Views.settings
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error selecting all emails: " + ex.Message);
+                _ = MessageBox.Show("Error selecting all emails: " + ex.Message);
                 LoggingHelper.LogActivity("SelectAllEmails", "Error selecting all emails: " + ex.Message);
             }
         }
@@ -375,8 +371,11 @@ namespace TakoTea.Views.settings
                 string selectedPath = folderBrowserDialog.SelectedPath;
 
                 // Add the selected path to the CheckedListBox
-                checkedListBoxBackUpDestinations.Items.Add(selectedPath);
+                _ = checkedListBoxBackUpDestinations.Items.Add(selectedPath);
                 LoggingHelper.LogActivity("AddBackupDestination", "Backup destination added: " + selectedPath);
+
+                // Save the selected path to the database
+               
             }
         }
 
@@ -384,7 +383,7 @@ namespace TakoTea.Views.settings
         {
             if (checkedListBoxBackUpDestinations.CheckedItems.Count == 0)
             {
-                MessageBox.Show("Please select at least one backup destination to delete.");
+                _ = MessageBox.Show("Please select at least one backup destination to delete.");
                 LoggingHelper.LogActivity("DeleteBackupDestination", "No backup destination selected for deletion.");
                 return;
             }
@@ -406,12 +405,12 @@ namespace TakoTea.Views.settings
 
         }
 
-  
+
         // Helper method to load payment methods into the CheckedListBox
         private void LoadPaymentMethods()
         {
             checkedListBoxPaymentMethod.Items.Clear();
-            var paymentMethods = PaymentMethodService.GetAllPaymentMethods();
+            List<string> paymentMethods = PaymentMethodService.GetAllPaymentMethods();
             checkedListBoxPaymentMethod.Items.AddRange(paymentMethods.ToArray());
         }
         private void materialFloatingActionButtonRemoveSelectedPaymentMethod_Click(object sender, EventArgs e)
@@ -420,13 +419,13 @@ namespace TakoTea.Views.settings
             {
                 if (checkedListBoxPaymentMethod.CheckedItems.Count == 0)
                 {
-                    MessageBox.Show("Please select at least one payment method to remove.");
+                    _ = MessageBox.Show("Please select at least one payment method to remove.");
                     return;
                 }
 
                 if (MessageBox.Show("Are you sure you want to delete the selected payment method(s)?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    foreach (var item in checkedListBoxPaymentMethod.CheckedItems)
+                    foreach (object item in checkedListBoxPaymentMethod.CheckedItems)
                     {
                         string paymentMethodName = item.ToString();
 
@@ -440,7 +439,7 @@ namespace TakoTea.Views.settings
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error removing payment method(s): " + ex.Message);
+                _ = MessageBox.Show("Error removing payment method(s): " + ex.Message);
             }
         }
 
@@ -453,7 +452,7 @@ namespace TakoTea.Views.settings
                 // Basic validation (you might want to add more robust validation)
                 if (string.IsNullOrWhiteSpace(newPaymentMethod))
                 {
-                    MessageBox.Show("Please enter a payment method.");
+                    _ = MessageBox.Show("Please enter a payment method.");
                     return;
                 }
 
@@ -467,7 +466,7 @@ namespace TakoTea.Views.settings
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error adding payment method: " + ex.Message);
+                _ = MessageBox.Show("Error adding payment method: " + ex.Message);
             }
         }
     }

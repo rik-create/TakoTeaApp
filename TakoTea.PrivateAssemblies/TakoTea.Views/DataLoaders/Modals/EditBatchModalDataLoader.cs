@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using TakoTea.Interfaces;
 using TakoTea.Models;
 using TakoTea.Repository;
@@ -28,7 +23,7 @@ namespace TakoTea.Views.DataLoaders.Modals
         {
             if (modalForm is AddBatchModal editBatchModal)
             {
-                var batch = _batchRepository.GetBatchById(_batchId);
+                BatchModel batch = _batchRepository.GetBatchById(_batchId);
                 _originalBatch = batch; // Store original data for resetting
 
                 // Populate form fields

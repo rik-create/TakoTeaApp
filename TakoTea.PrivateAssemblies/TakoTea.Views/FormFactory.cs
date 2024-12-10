@@ -3,15 +3,12 @@ using TakoTea.Interfaces;
 using TakoTea.Product;
 using TakoTea.View.Batches;
 using TakoTea.View.Orders;
-using TakoTea.View.Product;
-using TakoTea.View.Reports;
-using TakoTea.View.Sales.Sales_Modals;
 using TakoTea.View.Settings;
+using TakoTea.Views.ComboMealForms;
 using TakoTea.Views.Dashboard;
 using TakoTea.Views.Items;
-using TakoTea.Views.Stock;
 using TakoTea.Views.Logs2;
-using TakoTea.Views.ComboMealForms;
+using TakoTea.Views.Stock;
 namespace TakoTea.Views
 {
     public class FormFactory : IFormFactory

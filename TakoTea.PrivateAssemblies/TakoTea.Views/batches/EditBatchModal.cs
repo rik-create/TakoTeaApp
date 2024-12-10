@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MaterialSkin.Controls;
+using System;
 using System.Windows.Forms;
 using TakoTea.Helpers;
-using TakoTea.Helpers.Validators;
+using TakoTea.Interfaces;
+using TakoTea.Models;
 using TakoTea.Repository;
 using TakoTea.Services;
-using TakoTea.Models;
-using MaterialSkin.Controls;
-using TakoTea.Interfaces;
 
 namespace TakoTea.Views.Batches
 {
@@ -17,7 +15,7 @@ namespace TakoTea.Views.Batches
         private readonly IngredientRepository _ingredientRepository;
         private readonly BatchService batchService;
         private readonly DataAccessObject _dao;
-        private Batch _existingBatch; // To hold the batch being edited
+        private readonly Batch _existingBatch; // To hold the batch being edited
 
         public EditBatchModal(Batch batch)
         {

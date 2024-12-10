@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TakoTea.Models;
 
 namespace TakoTea.Repository
@@ -17,7 +14,7 @@ namespace TakoTea.Repository
             _context = context;
         }
 
-       
+
 
         public static List<User> GetAllUsers()
         {
@@ -26,23 +23,23 @@ namespace TakoTea.Repository
 
         public static void AddUser(User user)
         {
-            _context.Users.Add(user);
-            _context.SaveChanges();
+            _ = _context.Users.Add(user);
+            _ = _context.SaveChanges();
         }
 
         public static void UpdateUser(User user)
         {
             _context.Entry(user).State = EntityState.Modified;
-            _context.SaveChanges();
+            _ = _context.SaveChanges();
         }
 
         public static void DeleteUser(int userId)
         {
-            var user = _context.Users.Find(userId);
+            User user = _context.Users.Find(userId);
             if (user != null)
             {
-                _context.Users.Remove(user);
-                _context.SaveChanges();
+                _ = _context.Users.Remove(user);
+                _ = _context.SaveChanges();
             }
         }
     }

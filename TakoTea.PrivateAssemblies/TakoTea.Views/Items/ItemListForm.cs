@@ -3,8 +3,6 @@ using System;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.View.Items.Item_Modals;
-using TakoTea.Views.Batches;
-using TakoTea.View.Items.Item_Modals;
 namespace TakoTea.Views.Items
 {
     public partial class ItemListForm : MaterialForm
@@ -18,7 +16,7 @@ namespace TakoTea.Views.Items
         private void Item_Load(object sender, EventArgs e)
         {
         }
-    
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
         }
@@ -63,8 +61,8 @@ namespace TakoTea.Views.Items
         }
         private void floatingActionButtonAddItem_Click(object sender, EventArgs e)
         {
-      /*      EditBatchModal addItemModal = new EditBatchModal();
-            _ = addItemModal.ShowDialog();*/
+            /*      EditBatchModal addItemModal = new EditBatchModal();
+                  _ = addItemModal.ShowDialog();*/
         }
         private void materialCard1_Paint(object sender, PaintEventArgs e)
         {
