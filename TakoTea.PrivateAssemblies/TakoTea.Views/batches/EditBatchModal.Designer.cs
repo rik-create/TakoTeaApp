@@ -403,6 +403,7 @@
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
             this.Name = "EditBatchModal";
             this.Padding = new System.Windows.Forms.Padding(3, 24, 3, 3);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddItemModal";
             this.panel1.ResumeLayout(false);
             this.materialCard1.ResumeLayout(false);
