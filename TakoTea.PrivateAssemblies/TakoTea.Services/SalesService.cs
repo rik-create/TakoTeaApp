@@ -127,7 +127,11 @@ namespace TakoTea.Services
                     OrderId = o.OrderId,
                     OrderDate = o.OrderDate,
                     CustomerName = o.CustomerName,
+                    PaymentStatus = o.PaymentStatus,
                     PaymentMethod = o.PaymentMethod,
+                    PaymentAmount = o.PaymentAmount ?? 0,
+                    ChangeAmount = o.ChangeAmount ?? 0,
+
                     TotalAmount = o.TotalAmount,
                     OrderStatus = o.OrderStatus
                 }).ToList();
@@ -158,7 +162,7 @@ namespace TakoTea.Services
                 PaymentMethod = o.PaymentMethod,
                 PaymentAmount = o.PaymentAmount ?? 0, // Handle null values
                 TotalAmount = o.TotalAmount,
-                GrossProfit = o.GrossProfit
+                GrossProfit = o.GrossProfit ?? 0
 
             }).ToList();
         }
@@ -181,10 +185,12 @@ namespace TakoTea.Services
         public DateTime OrderDate { get; set; }
         public string CustomerName { get; set; }
         public string PaymentMethod { get; set; }
+
         public decimal TotalAmount { get; set; }
         public decimal PaymentAmount { get; set; }
-        
-        public decimal? GrossProfit { get; set; }
+
+        public decimal ChangeAmount { get; set; }
+        public decimal GrossProfit { get; set; }
 
         public string OrderStatus { get; set; }
         public string PaymentStatus { get; set; }

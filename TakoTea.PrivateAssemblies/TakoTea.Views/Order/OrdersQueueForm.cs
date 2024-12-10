@@ -33,6 +33,7 @@ namespace TakoTea.View.Orders
             salesService = new SalesService(context);
             LoadData();
             DataGridViewHelper.FormatColumnHeaders(dgViewOrderQueue);
+            DataGridViewHelper.HideColumn(dgViewOrderQueue, "GrossProfit");
 
         }
         private void materialLabel4_Click(object sender, EventArgs e)
@@ -62,9 +63,16 @@ namespace TakoTea.View.Orders
             // Count the number of processing orders
             int processingOrdersCount = salesService.GetOrderQueue().Count(o => o.OrderStatus == "Processing");
             labelProcessingOrdersCount.Text = $"Total processing orders: {processingOrdersCount.ToString()}";
+
+            dgViewOrderQueue.Columns["TotalAmount"].DefaultCellStyle.Format = "₱#,##0.00";
+            dgViewOrderQueue.Columns["PaymentAmount"].DefaultCellStyle.Format = "₱#,##0.00";
+            dgViewOrderQueue.Columns["ChangeAmount"].DefaultCellStyle.Format = "₱#,##0.00";
+
+
+
         }
 
-   
+
 
         private void pbCompleted_Click(object sender, EventArgs e)
         {
