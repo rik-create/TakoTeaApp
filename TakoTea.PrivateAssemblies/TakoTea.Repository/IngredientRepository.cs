@@ -93,6 +93,7 @@ namespace TakoTea.Repository
         }
 
 
+
         public string GetIngredientNameById(int ingredientId)
         {
             return _context.Ingredients
@@ -148,6 +149,22 @@ namespace TakoTea.Repository
             catch (Exception ex)
             {
                 throw new Exception("Error loading low stock ingredients: " + ex.Message);
+            }
+        }
+        public void UpdateNullStockLevels()
+        {
+            try
+            {
+                var ingredientsWithNullStock = _context.Ingredients.Where(i => !i.StockLevel.HasValue).ToList();
+                foreach (var ingredient in ingredientsWithNullStock)
+                {
+                    ingredient.StockLevel = 0;
+                }
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error updating null stock levels: " + ex.Message);
             }
         }
 

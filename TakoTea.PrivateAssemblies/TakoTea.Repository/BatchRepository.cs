@@ -18,6 +18,9 @@ namespace TakoTea.Repository
             _dao = dao;
             _context = new Entities();
         }
+
+
+
         public class BatchDTO
         {
             public int BatchID { get; set; }
@@ -273,6 +276,22 @@ namespace TakoTea.Repository
 
             // Use the UpdateRecord method from the DataAccessObject class
             return _dao.UpdateRecord(updateQuery, updateParameters);
+        }
+        public void AutoDeleteBatchWithZeroStock()
+        {
+            try
+            {
+                var batchesToDelete = _context.Batches.Where(b => b.StockLevel == 0).ToList();
+                if (batchesToDelete.Any())
+                {
+                    _context.Batches.RemoveRange(batchesToDelete);
+                    _context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error deleting batches with zero stock level: " + ex.Message);
+            }
         }
 
     }

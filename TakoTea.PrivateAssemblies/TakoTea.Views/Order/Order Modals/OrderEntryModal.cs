@@ -49,8 +49,14 @@ namespace TakoTea.Views.Order.Order_Modals
 
         private void chckListBoxAddOns_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            // BeginInvoke is used to execute UpdateTotalPrice after the ItemCheck event is finished
-            _ = BeginInvoke(new Action(() => UpdateTotalPrice()));
+            if (this.InvokeRequired)
+            {
+                _ = BeginInvoke(new Action(() => UpdateTotalPrice()));
+            }
+            else
+            {
+                UpdateTotalPrice();
+            }
         }
 
         // ... (rest of the code) ...
@@ -101,7 +107,25 @@ namespace TakoTea.Views.Order.Order_Modals
             {
                 productCard.titleLabel.Text = comboMeal.ComboMealName;
                 numericUpDownQuantity.Value = 1;
-
+                productCard.Location = new Point(150, 72);
+                // Set product image (handling blob data)
+                if (comboMeal.ImagePath?.Length > 0)
+                {
+                    try
+                    {
+                        MemoryStream ms = new MemoryStream(comboMeal.ImagePath);
+                        productCard.pictureBoxProductIcon.Image = Image.FromStream(ms);
+                        productCard.pictureBoxProductIcon.SizeMode = PictureBoxSizeMode.Zoom;
+                    }
+                    catch (Exception ex)
+                    {
+                        _ = MessageBox.Show($"Failed to load image: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    productCard.pictureBoxProductIcon.Image = Properties.Resources.multiply;
+                }
                 // ... (Image loading for comboMeal, if needed) ...
 
                 // Hide size and add-on controls

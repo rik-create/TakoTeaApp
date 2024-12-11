@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using TakoTea.View.Batches;
+using TakoTea.Views.mainform;
 using TakoTea.Views.MainForm;
 namespace TakoTea
 {
@@ -14,7 +15,7 @@ namespace TakoTea
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TakoTeaForm());
+            Application.Run(new LoginForm());
             /*      // Register the dependency in the DI container
                   services.AddSingleton<IFormFactory, TakoTea.Views.FormFactory>();
                   services.AddTransient<FormLoader>();

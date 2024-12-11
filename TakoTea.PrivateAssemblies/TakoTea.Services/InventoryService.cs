@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using TakoTea.Helpers;
 using TakoTea.Interfaces;
 using TakoTea.Models;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace TakoTea.Services
@@ -40,6 +41,13 @@ namespace TakoTea.Services
                                  validationMessage: "Description cannot be empty.",
                                  validateInput: input => !string.IsNullOrWhiteSpace(input)
                              );
+
+
+                    if (deletionDescription == null)
+                    {
+                        return;
+                    }
+                   
                     // 1. Delete related records in StockLevelLogs
                     List<StockLevelLog> stockLevelLogs = context.StockLevelLogs.Where(log => log.IngredientID == ingredientId).ToList();
                     _ = context.StockLevelLogs.RemoveRange(stockLevelLogs);

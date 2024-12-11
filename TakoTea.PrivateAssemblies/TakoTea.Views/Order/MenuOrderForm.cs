@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Windows.Forms;
+using TakoTea.Helpers;
 using TakoTea.Models;
 using TakoTea.Services;
 using TakoTea.Views.Order;
@@ -45,7 +46,14 @@ namespace TakoTea.View.Orders
             deleteMenuItem.Click += deleteMenuItem_Click;
             numericUpDownPaymenAmount.Maximum = 100000000;
             LoadPaymentMethods();
+            DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewOrderList);
+            dataGridViewOrderList.ColumnHeaderMouseClick += dataGridViewOrderList_ColumnHeaderMouseClick;
         }
+        private void dataGridViewOrderList_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewHelper.SortDataGridView(dataGridViewOrderList, e.ColumnIndex);
+        }
+        
         // Assuming you have a DataGridView named dgvDraftOrders and a Button named btnLoadDraft
         private void PopulateDraftOrdersDataGridView()
         {
@@ -172,7 +180,7 @@ namespace TakoTea.View.Orders
             {
                 // Get the data from the selected row
                 string productName = dataGridViewOrderList.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string size = dataGridViewOrderList.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string size = dataGridViewOrderList.Rows[e.RowIndex].Cells[1].Value.ToString() ?? string.Empty;
                 string addOns = dataGridViewOrderList.Rows[e.RowIndex].Cells[2].Value.ToString();
                 int quantity = Convert.ToInt32(dataGridViewOrderList.Rows[e.RowIndex].Cells[3].Value);
                 decimal totalPrice = Convert.ToDecimal(dataGridViewOrderList.Rows[e.RowIndex].Cells[4].Value);
@@ -370,6 +378,12 @@ namespace TakoTea.View.Orders
         {
             try
             {
+                if (dataGridViewOrderList.Rows.Count <= 1)
+                {
+                    MessageBox.Show("There are no items in the order list to confirm.", "Empty Order List", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 if (IsChangeEnough())
                 {
                     // Call the ConfirmOrder method in the productsService class
@@ -390,12 +404,12 @@ namespace TakoTea.View.Orders
                 }
                 else
                 {
-                    _ = MessageBox.Show("The payment amount is not enough to cover the total amount due.", "Insufficient Payment", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("The payment amount is not enough to cover the total amount due.", "Insufficient Payment", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                _ = MessageBox.Show($"An error occurred while confirming the order: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred while confirming the order: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void btnSearch_Click_1(object sender, EventArgs e)

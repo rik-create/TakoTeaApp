@@ -137,6 +137,11 @@ namespace TakoTea.Views.Batches
 
                 batchService.Update(_existingBatch); // Assuming you have an UpdateBatch method
                 DialogHelper.ShowSuccess("Batch updated successfully.");
+
+
+                (new ProductsService(new Entities())).UpdateAllProductVariantStockLevels();
+
+                this.Close();
             }
             catch (Exception ex)
             {

@@ -12,6 +12,7 @@ using TakoTea.Helpers;
 using TakoTea.Interfaces;
 using TakoTea.Models;
 using TakoTea.Repository;
+using TakoTea.Services;
 using TakoTea.View.Items.Item_Modals;
 using TakoTea.View.Orders;
 using TakoTea.View.Product.Product_Modals;
@@ -358,16 +359,20 @@ namespace TakoTea.Views.MainForm
         {
             toolStripQuickAccess.Visible = !toolStripQuickAccess.Visible;
             toolStripQuickAccess.Enabled = toolStripQuickAccess.Visible;
-            Timer timer = new Timer
+            if (toolStripQuickAccess.Visible)
             {
-                Interval = 8000 // 8 seconds
-            };
-            timer.Tick += (s, args) =>
-            {
-                toolStripQuickAccess.Visible = false;
-                timer.Stop(); // Stop the timer after hiding the button
-            };
-            timer.Start();
+                Timer timer = new Timer
+                {
+                    Interval = 12000 // 8 seconds
+                };
+                timer.Tick += (s, args) =>
+                {
+                    toolStripQuickAccess.Visible = false;
+                    timer.Stop(); // Stop the timer after hiding the button
+                };
+                timer.Start();
+            }
+        
         }
 
         private void toolStripBtnNewOrder_Click(object sender, EventArgs e)
@@ -390,6 +395,8 @@ namespace TakoTea.Views.MainForm
 
         private void btnReload_Click(object sender, EventArgs e)
         {
+
+            (new ProductsService(_context)).UpdateAllProductVariantStockLevels();
             // 1. Get the currently selected tab
             TabPage selectedTab = materialTabControl1.SelectedTab;
 

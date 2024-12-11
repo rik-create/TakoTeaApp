@@ -16,6 +16,59 @@ namespace TakoTea.Services
             _context = context;
         }
 
+        public decimal GetProductVariantStockLevel(int productVariantId)
+        {
+            using (var context = new Entities())
+            {
+                // Get the quantities of each ingredient used in the product variant
+                var ingredientQuantities = context.ProductVariantIngredients
+                    .Where(pvi => pvi.ProductVariantID == productVariantId)
+                    .Select(pvi => new { pvi.IngredientID, pvi.QuantityPerVariant })
+                    .ToList();
+
+                decimal stockLevel = decimal.MaxValue; // Initialize with a very high value
+
+                foreach (var item in ingredientQuantities)
+                {
+                    // Calculate the total stock level of the ingredient across all batches
+                    decimal ingredientStockLevel = context.Batches
+    .Where(b => b.IngredientID == item.IngredientID && b.IsActive == true)
+    .Select(b => (decimal?)b.StockLevel)
+    .DefaultIfEmpty(0)
+    .Sum() ?? 0;
+
+                    // Calculate the maximum number of product variants that can be made 
+                    // with the available ingredient stock
+                    decimal maxVariantsFromIngredient = ingredientStockLevel / item.QuantityPerVariant;
+
+                    // Update the overall stock level to the minimum value encountered so far
+                    stockLevel = Math.Min(stockLevel, maxVariantsFromIngredient);
+                }
+
+                return stockLevel;
+            }
+        }
+        public void UpdateAllProductVariantStockLevels()
+        {
+            using (var context = new Entities())
+            {
+                // Get all product variants
+                var productVariants = context.ProductVariants.ToList();
+
+                foreach (var variant in productVariants)
+                {
+                    // Calculate the stock level for the current variant
+                    decimal stockLevel = GetProductVariantStockLevel(variant.ProductVariantID);
+
+                    // Update the StockLevel property of the variant
+                    variant.StockLevel = stockLevel;
+                }
+
+                // Save changes to the database
+                context.SaveChanges();
+            }
+        }
+
         public List<ProductVariant> GetProductVariantsByProductId(int productId)
         {
             try
@@ -271,10 +324,17 @@ namespace TakoTea.Services
 
         public void AddProductVariantIngredient(ProductVariantIngredient productVariantIngredient)
         {
-            using (Entities dbContext = new Entities())  // Use your actual DbContext class
+            try
             {
-                _ = dbContext.ProductVariantIngredients.Add(productVariantIngredient);
-                _ = dbContext.SaveChanges();
+                using (Entities dbContext = new Entities())  // Use your actual DbContext class
+                {
+                    _ = dbContext.ProductVariantIngredients.Add(productVariantIngredient);
+                    _ = dbContext.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error adding product variant ingredient: {ex.Message}", ex);
             }
         }
 
@@ -325,7 +385,7 @@ namespace TakoTea.Services
             // Find the maximum existing ProductVariantID
             int maxId = _context.ProductVariants.Any() ? _context.ProductVariants.Max(pv => pv.ProductVariantID) : 0;
 
-            return maxId + 1; // Increment the max ID to get the next ID
+            return maxId; // Increment the max ID to get the next ID
         }
         public List<ProductVariant> GetLinkedProductVariants(int productId)
         {
@@ -366,8 +426,8 @@ namespace TakoTea.Services
 
         public void AddProductVariant(ProductVariant productVariant)
         {
-            _ = _context.ProductVariants.Add(productVariant);
-            _ = _context.SaveChanges();
+            _context.ProductVariants.Add(productVariant);
+            _context.SaveChanges();
             LoggingHelper.LogChange(
                 "ProductVariants",                // Table name
                 productVariant.ProductVariantID,  // Record ID

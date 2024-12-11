@@ -50,7 +50,21 @@ namespace TakoTea.View.Product.Product_Modals
             txtBoxCurrentPrice.Hint = _originalProductVariant.Price.ToString("F2");
             txtBoxInstructions.Text = _originalProductVariant.Instructions;
             pictureBoxProductImage.Image = ImageHelper.ByteArrayToImage(_originalProductVariant.ImagePath);
+
+
+
+            // Assuming 'Ingredients' is a comma-separated string in your ProductVariants table
+            string[] ingredientsArray = _originalProductVariant.Ingredients.Split(',');
+
+            List<string> ingredientStrings = new List<string>();
+            foreach (string ingredient in ingredientsArray)
+            {
+                ingredientStrings.Add(ingredient.Trim()); // Just trim whitespace
+            }
+
+            listBoxIngredients.DataSource = ingredientStrings;
         }
+
 
 
         // ... (Similar click handlers for other buttons) ...

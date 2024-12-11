@@ -25,6 +25,10 @@ namespace TakoTea.View.Batches
             LoadData();
             DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewBatchLogs);
             DataGridViewHelper.HideColumn(dataGridViewBatchLogs, "LogID");
+            DataGridViewHelper.HideColumn(dataGridViewBatchLogs, "CreatedBy");
+            DataGridViewHelper.HideColumn(dataGridViewBatchLogs, "CreatedAt");
+            DataGridViewHelper.HideColumn(dataGridViewBatchLogs, "UpdatedAt");
+            DataGridViewHelper.HideColumn(dataGridViewBatchLogs, "UpdatedBy");
             DataGridViewHelper.FormatColumnHeaders(dataGridViewBatchLogs);
 
         }

@@ -30,6 +30,7 @@
         {
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnResetIngredientImg = new MaterialSkin.Controls.MaterialButton();
             this.btnBrowseForIngredientImg = new MaterialSkin.Controls.MaterialButton();
             this.pictureBoxProductImage = new System.Windows.Forms.PictureBox();
@@ -53,7 +54,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnCancel = new MaterialSkin.Controls.MaterialButton();
             this.btnConfirm = new MaterialSkin.Controls.MaterialButton();
-            this.label1 = new System.Windows.Forms.Label();
+            this.listBoxIngredients = new System.Windows.Forms.ListBox();
+            this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
             this.materialCard1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProductImage)).BeginInit();
@@ -76,11 +78,13 @@
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard1.Size = new System.Drawing.Size(874, 470);
+            this.materialCard1.Size = new System.Drawing.Size(874, 494);
             this.materialCard1.TabIndex = 0;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.materialLabel8);
+            this.groupBox1.Controls.Add(this.listBoxIngredients);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btnResetIngredientImg);
             this.groupBox1.Controls.Add(this.btnBrowseForIngredientImg);
@@ -103,10 +107,20 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(14, 60);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(846, 348);
+            this.groupBox1.Size = new System.Drawing.Size(846, 372);
             this.groupBox1.TabIndex = 103;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Edit Product Variant";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(392, 280);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(188, 15);
+            this.label1.TabIndex = 121;
+            this.label1.Text = "*changes are applied immedietly";
             // 
             // btnResetIngredientImg
             // 
@@ -115,7 +129,7 @@
             this.btnResetIngredientImg.Depth = 0;
             this.btnResetIngredientImg.HighEmphasis = true;
             this.btnResetIngredientImg.Icon = null;
-            this.btnResetIngredientImg.Location = new System.Drawing.Point(752, 216);
+            this.btnResetIngredientImg.Location = new System.Drawing.Point(752, 312);
             this.btnResetIngredientImg.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnResetIngredientImg.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnResetIngredientImg.Name = "btnResetIngredientImg";
@@ -135,7 +149,7 @@
             this.btnBrowseForIngredientImg.Depth = 0;
             this.btnBrowseForIngredientImg.HighEmphasis = true;
             this.btnBrowseForIngredientImg.Icon = null;
-            this.btnBrowseForIngredientImg.Location = new System.Drawing.Point(656, 216);
+            this.btnBrowseForIngredientImg.Location = new System.Drawing.Point(656, 312);
             this.btnBrowseForIngredientImg.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnBrowseForIngredientImg.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnBrowseForIngredientImg.Name = "btnBrowseForIngredientImg";
@@ -150,9 +164,9 @@
             // 
             // pictureBoxProductImage
             // 
-            this.pictureBoxProductImage.Location = new System.Drawing.Point(640, 56);
+            this.pictureBoxProductImage.Location = new System.Drawing.Point(656, 184);
             this.pictureBoxProductImage.Name = "pictureBoxProductImage";
-            this.pictureBoxProductImage.Size = new System.Drawing.Size(200, 151);
+            this.pictureBoxProductImage.Size = new System.Drawing.Size(136, 119);
             this.pictureBoxProductImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxProductImage.TabIndex = 118;
             this.pictureBoxProductImage.TabStop = false;
@@ -363,7 +377,7 @@
             this.materialLabel7.AutoSize = true;
             this.materialLabel7.Depth = 0;
             this.materialLabel7.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel7.Location = new System.Drawing.Point(640, 32);
+            this.materialLabel7.Location = new System.Drawing.Point(656, 160);
             this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel7.Name = "materialLabel7";
             this.materialLabel7.Size = new System.Drawing.Size(45, 19);
@@ -462,7 +476,7 @@
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.btnConfirm);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(14, 408);
+            this.panel1.Location = new System.Drawing.Point(14, 432);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(846, 48);
             this.panel1.TabIndex = 102;
@@ -507,21 +521,31 @@
             this.btnConfirm.UseVisualStyleBackColor = true;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
-            // label1
+            // listBoxIngredients
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(392, 280);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(188, 15);
-            this.label1.TabIndex = 121;
-            this.label1.Text = "*changes are applied immedietly";
+            this.listBoxIngredients.FormattingEnabled = true;
+            this.listBoxIngredients.Location = new System.Drawing.Point(656, 64);
+            this.listBoxIngredients.Name = "listBoxIngredients";
+            this.listBoxIngredients.Size = new System.Drawing.Size(184, 95);
+            this.listBoxIngredients.TabIndex = 122;
+            // 
+            // materialLabel8
+            // 
+            this.materialLabel8.AutoSize = true;
+            this.materialLabel8.Depth = 0;
+            this.materialLabel8.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel8.Location = new System.Drawing.Point(656, 32);
+            this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel8.Name = "materialLabel8";
+            this.materialLabel8.Size = new System.Drawing.Size(79, 19);
+            this.materialLabel8.TabIndex = 123;
+            this.materialLabel8.Text = "Ingredients";
             // 
             // EditProductVariantModal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(880, 497);
+            this.ClientSize = new System.Drawing.Size(880, 521);
             this.Controls.Add(this.materialCard1);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
             this.Name = "EditProductVariantModal";
@@ -570,5 +594,7 @@
         private MaterialSkin.Controls.MaterialButton btnResetIngredientImg;
         private MaterialSkin.Controls.MaterialButton btnBrowseForIngredientImg;
         private System.Windows.Forms.Label label1;
+        private MaterialSkin.Controls.MaterialLabel materialLabel8;
+        private System.Windows.Forms.ListBox listBoxIngredients;
     }
 }

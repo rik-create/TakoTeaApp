@@ -174,6 +174,7 @@ namespace TakoTea.Views.Items
         private void pBoxShowFilter_Click(object sender, EventArgs e)
         {
             FilterPanelHelper.ToggleFilterPanel(panelFilteringComponents, btnHideFilters, pBoxShowFilter, true);
+    
         }
         private void pbImportIngredients_Click(object sender, EventArgs e)
         {

@@ -554,61 +554,108 @@ namespace TakoTea.Helpers
 
 
         }
-        public static void DeleteSelectedRows<T>(DataGridView dataGridView, string idColumnName) where T : class
+        public static void DeleteSelectedRows<T>(DataGridView dataGridView, string idColumnName, bool deleteRows = true) where T : class
         {
             try
             {
-                if (dataGridView.SelectedRows.Count == 0)
+
+
+
+                if ((dataGridView.SelectedRows.Count == 0 && deleteRows))
                 {
-                    _ = MessageBox.Show("Please select at least one row to delete.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _ = MessageBox.Show("Please select at least one row or cell to delete.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
+          
 
-                if (MessageBox.Show("Are you sure you want to delete the selected rows?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show(deleteRows
+                        ? "Are you sure you want to delete the selected rows?"
+                        : "Are you sure you want to clear the contents of the selected cells?",
+                    "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     Entities context = new Entities();
+
                     foreach (DataGridViewRow row in dataGridView.SelectedRows)
                     {
-                        int id = Convert.ToInt32(row.Cells[idColumnName].Value);
-                        T entity = context.Set<T>().Find(id);
-                        if (entity != null)
+                        if (deleteRows)
                         {
-                            Type entityType = typeof(T);
-
-                            // Get the properties of the entity
-                            System.Reflection.PropertyInfo[] properties = entityType.GetProperties();
-
-                            // Build the log message dynamically
-                            string logMessage = $"Record deleted: ";
-                            foreach (System.Reflection.PropertyInfo property in properties)
+                            int id = Convert.ToInt32(row.Cells[idColumnName].Value);
+                            T entity = context.Set<T>().Find(id);
+                            if (entity != null)
                             {
-                                string propertyName = property.Name;
-                                object propertyValue = property.GetValue(entity);
-                                logMessage += $"{propertyName}: {propertyValue}, ";
-                            }
-                            LoggingHelper.LogChange(
-                                entityType.Name,          // Table name (e.g., "Batch")
-                                id,                      // Record ID
-                                "",                      // Column name (not applicable for delete)
-                                "",                      // Old value (not applicable for delete)
-                                "",                      // New value (not applicable for delete)
-                                "Delete",                // Action
-                                logMessage,              // Description with all property values
-                                ""                       // Additional info (if needed)
-                            );
+                                Type entityType = typeof(T);
+                                System.Reflection.PropertyInfo[] properties = entityType.GetProperties();
 
-                            _ = context.Set<T>().Remove(entity);
+                                string logMessage = $"Record deleted: ";
+                                foreach (System.Reflection.PropertyInfo property in properties)
+                                {
+                                    string propertyName = property.Name;
+                                    object propertyValue = property.GetValue(entity);
+                                    logMessage += $"{propertyName}: {propertyValue}, ";
+                                }
+
+                                LoggingHelper.LogChange(
+                                    entityType.Name,
+                                    id,
+                                    "",
+                                    "",
+                                    "",
+                                    "Delete",
+                                    logMessage,
+                                    ""
+                                );
+
+                                _ = context.Set<T>().Remove(entity);
+                            }
                         }
+                       
                     }
+
                     _ = context.SaveChanges();
 
-                    // Refresh the DataGridView (you might need to adjust this based on your actual refresh logic)
+                    // Refresh the DataGridView (you'll likely need to customize this)
                     // dataGridView.DataSource = context.Set<T>().ToList(); 
                 }
             }
             catch (Exception ex)
             {
-                _ = MessageBox.Show($"An error occurred while deleting rows: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = MessageBox.Show($"An error occurred while deleting: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static void DeleteSelectedRows2<T>(DataGridViewRow selectedRow, string idColumnName, bool deleteRows = true) where T : class
+        {
+            try
+            {
+                if (MessageBox.Show(deleteRows
+                        ? "Are you sure you want to delete the selected row?" // Changed to singular
+                        : "Are you sure you want to clear the contents of the selected cells?",
+                    "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Entities context = new Entities();
+
+                    // Store the ID of the row to be deleted
+                    int idToDelete = Convert.ToInt32(selectedRow.Cells[idColumnName].Value);
+
+                    if (deleteRows)
+                    {
+                        T entity = context.Set<T>().Find(idToDelete);
+                        if (entity != null)
+                        {
+                            // ... (your existing code for logging) ...
+                            _ = context.Set<T>().Remove(entity);
+                        }
+                    }
+
+                    _ = context.SaveChanges();
+
+                    // Refresh the DataGridView (you'll likely need to customize this)
+                    // dataGridView.DataSource = context.Set<T>().ToList(); // Or your LoadData() method
+                }
+            }
+            catch (Exception ex)
+            {
+                _ = MessageBox.Show($"An error occurred while deleting: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -111,13 +111,12 @@ namespace TakoTea.Views.Order.Order_Modals
             this.groupBoxProduct.Size = new System.Drawing.Size(500, 249);
             this.groupBoxProduct.TabIndex = 103;
             this.groupBoxProduct.TabStop = false;
-            this.groupBoxProduct.Text = "s";
             // 
             // productCard
             // 
             this.productCard.BackColor = System.Drawing.Color.WhiteSmoke;
             this.productCard.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.productCard.Location = new System.Drawing.Point(24, 16);
+            this.productCard.Location = new System.Drawing.Point(24, 24);
             this.productCard.Name = "productCard";
             this.productCard.Padding = new System.Windows.Forms.Padding(5);
             this.productCard.Size = new System.Drawing.Size(200, 100);

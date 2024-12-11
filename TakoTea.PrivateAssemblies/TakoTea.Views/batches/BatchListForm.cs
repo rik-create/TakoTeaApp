@@ -10,6 +10,7 @@ using TakoTea.Configurations;
 using TakoTea.Helpers;
 using TakoTea.Models;
 using TakoTea.Repository;
+using TakoTea.Services;
 using TakoTea.Views.Batches;
 using static TakoTea.Repository.BatchRepository;
 namespace TakoTea.View.Batches
@@ -36,8 +37,12 @@ namespace TakoTea.View.Batches
             DataGridViewHelper.FormatColumnHeaders(dataGridViewBatch);
 
 
-
+            _batchRepo.AutoDeleteBatchWithZeroStock();
+            (new IngredientRepository(new Entities())).UpdateNullStockLevels();
+            dataGridViewBatch.CellDoubleClick += dataGridViewBatch_CellDoubleClick;
+            dataGridViewBatch.ColumnHeaderMouseClick += dataGridViewBatch_ColumnHeaderMouseClick;
             materialTextBox21.TextChanged += txtSearch_TextChanged;
+            bindingNavigatorDeleteItem.Click += bindingNavigatorDeleteItem_Click;
 
 
 
@@ -117,12 +122,28 @@ namespace TakoTea.View.Batches
         private void pBoxShowFilter_Click(object sender, EventArgs e)
         {
             FilterPanelHelper.ToggleFilterPanel(panelFilteringComponents, btnHideFilters, pBoxShowFilter, true);
+        
         }
 
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
-            DataGridViewHelper.DeleteSelectedRows<TakoTea.Models.Batch>(dataGridViewBatch, "BatchID");
+            if (dataGridViewBatch.SelectedRows.Count == 1) // Ensure one row is selected
+            {
+                DataGridViewRow selectedRow = dataGridViewBatch.SelectedRows[0];
+                DataGridViewHelper.DeleteSelectedRows2<TakoTea.Models.Batch>(selectedRow, "BatchID");
+                LoadData();
+                (new IngredientRepository(new Entities())).UpdateNullStockLevels();
+            }
+            else
+            {
+                // Handle cases where no row or multiple rows are selected
+                MessageBox.Show("Please select one row to delete.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             LoadData();
+            (new IngredientRepository(new Entities())).UpdateNullStockLevels();
+            (new ProductsService(new Entities())).UpdateAllProductVariantStockLevels();
+
+
         }
 
 
@@ -216,6 +237,7 @@ namespace TakoTea.View.Batches
 
             FilterBatch();
         }
+      
 
     }
 }

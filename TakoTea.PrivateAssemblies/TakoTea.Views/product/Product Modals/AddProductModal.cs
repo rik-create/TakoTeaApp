@@ -6,6 +6,7 @@ using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using TakoTea.Configurations;
@@ -401,6 +402,8 @@ namespace TakoTea.View.Product.Product_Modals
                     CreatedAt = DateTime.Now,
                     CreatedBy = AuthenticationHelper._loggedInUsername
                 };
+                _productsService.AddProductVariant(productVariant);
+                context.SaveChanges();
                 productVariantsToSave.Add(productVariant);
                 if (!string.IsNullOrWhiteSpace(ingredients))
                 {
@@ -423,16 +426,9 @@ namespace TakoTea.View.Product.Product_Modals
                                 MeasuringUnit = measuringUnit
                             };
                             productVariantIngredientsToSave.Add(productVariantIngredient);
-                            // Log the addition of the new ingredient
-                            LoggingHelper.LogChange(
-                                "ProductVariantIngredients",
-                                productVariantIngredient.ProductVariantIngredientID,
-                                "New Ingredient",
-                                null,
-                                productVariantIngredient.ToString(),
-                                "Added",
-                                $"Ingredient '{ingredientName}' added with quantity '{quantity} {measuringUnit}'", ""
-                            );
+                            _productsService.AddProductVariantIngredient(productVariantIngredient);
+
+
                         }
                         else
                         {
@@ -448,26 +444,13 @@ namespace TakoTea.View.Product.Product_Modals
                 return;
             }
 
+
+                            (new ProductsService(new Entities())).UpdateAllProductVariantStockLevels();
+
+
             try
             {
-                _productsService.AddMultipleProductVariants(productVariantsToSave);
-                foreach (ProductVariant productVariant in productVariantsToSave)
-                {
-                    foreach (ProductVariantIngredient ingredient in productVariantIngredientsToSave)
-                    {
-                        ingredient.ProductVariantID = productVariant.ProductVariantID;
-                        _productsService.AddProductVariantIngredient(ingredient);
-                        LoggingHelper.LogChange(
-                            "ProductVariantIngredients",                // Table name
-                            ingredient.ProductVariantIngredientID,      // Record ID
-                            "New ProductVariantIngredient",             // Column name
-                            null,                                       // Old value
-                            ingredient.ToString(),                      // New value
-                            "Added",                                    // Action
-                            $"Ingredient '{ingredient.IngredientID}' added to product variant '{ingredient.ProductVariantID}'", "" // Description
-                        );
-                    }
-                }
+
                 _ = MessageBox.Show("All product variants have been saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 UpdateFirstBatchItemLevel();
                 Close();

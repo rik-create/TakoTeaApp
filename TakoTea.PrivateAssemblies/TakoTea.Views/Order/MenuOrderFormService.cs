@@ -126,7 +126,7 @@ namespace TakoTea.Views.Order
                 foreach (OrderItem item in order.OrderItems)
                 {
                     // Improved formatting for item details
-                    _ = receiptContent.AppendLine($"- {item.ProductName,-15} {item.Quantity} x {item.Price,8:₱#,##0.00} = {item.TotalPrice,9:₱#,##0.00}");
+                    _ = receiptContent.AppendLine($"- {item.ProductName,-15} {item.Quantity} x {item.Price,5:₱#,##0.00} = {item.TotalPrice,5:₱#,##0.00}");
                     if (!string.IsNullOrEmpty(item.AddOns))
                     {
                         _ = receiptContent.AppendLine($"   Add-ons: {item.AddOns}"); // Consistent indentation
@@ -148,7 +148,7 @@ namespace TakoTea.Views.Order
 
                 ReceiptForm receiptForm = new ReceiptForm(orderId);
                 receiptForm.lblReceiptContent.Text = receiptContent.ToString();
-                receiptForm.Show();
+                receiptForm.ShowDialog();
             }
             catch (Exception ex)
             {
@@ -354,13 +354,24 @@ namespace TakoTea.Views.Order
                 flPanelProductVariantsMenu.Controls.Add(CreateProductWidget(variant, dg, showOutOfStock));
             }
 
-
-            List<ComboMeal> comboMeals = _context.ComboMeals.ToList();
-
+            var comboMeals = _context.ComboMeals
+                .Where(cm => showOutOfStock
+                    ? _context.ComboMealVariants
+                        .Where(cmv => cmv.ComboMealID == cm.ComboMealID)
+                        .Any(cmv => _context.ProductVariants
+                            .Any(pv => pv.ProductVariantID == cmv.ProductVariantID && pv.StockLevel <= 0)
+                        )
+                    : _context.ComboMealVariants
+                        .Where(cmv => cmv.ComboMealID == cm.ComboMealID)
+                        .All(cmv => _context.ProductVariants
+                            .Any(pv => pv.ProductVariantID == cmv.ProductVariantID && pv.StockLevel > 0)
+                        )
+                )
+                .ToList();
             foreach (ComboMeal comboMeal in comboMeals)
             {
                 // Check if any variant in the combo meal is out of stock
-                bool isOutOfStock = _context.ComboMealVariants
+               bool isOutOfStock = _context.ComboMealVariants
                     .Where(cmv => cmv.ComboMealID == comboMeal.ComboMealID)
                     .Any(cmv => _context.ProductVariants.Any(pv => pv.ProductVariantID == cmv.ProductVariantID && pv.StockLevel <= 0));
 
@@ -644,7 +655,7 @@ namespace TakoTea.Views.Order
                     {
                         _ = dataGridViewOrderList.Rows.Add(
                             item.ProductName,
-                            productsService.GetSizeByVariantId(item.ProductVariantId),
+                            productsService.GetSizeByVariantId(item.ProductVariantId) ?? "",
                             item.AddOns,
                             item.Quantity,
                             item.Price
@@ -888,8 +899,11 @@ namespace TakoTea.Views.Order
                     // 4. Save the order to the database
                     SaveOrderToDb(dataGridViewOrderList, lblTotalInOrderList, customerName, paymentMethod, orderStatus, dateTime, paymentStatus, paymentAmount);
 
-                    // 5. Update stock levels
-                    UpdateStockLevels(dataGridViewOrderList);
+                    // 5. Update stock levels if order status is not Cancelled
+                    if (orderStatus != "Cancelled")
+                    {
+                        UpdateStockLevels(dataGridViewOrderList);
+                    }
                     dataGridViewOrderList.Rows.Clear();
 
                     // 6. Commit transaction
@@ -957,7 +971,17 @@ namespace TakoTea.Views.Order
                 }
 
                 string productName = row.Cells[0].Value.ToString();
-                string size = row.Cells[1].Value.ToString();
+
+                string size = "";
+                if (row.Cells[1].Value.ToString() == null)
+                {
+                    size = "";
+                }
+                else
+                {
+                    size = row.Cells[1].Value.ToString();
+
+                }
                 decimal quantity = Convert.ToDecimal(row.Cells[3].Value);
 
                 if (string.IsNullOrEmpty(size)) // Combo meal
@@ -1100,7 +1124,7 @@ namespace TakoTea.Views.Order
                 }
 
                 string productName = row.Cells[0].Value.ToString();
-                string sizeId = row.Cells[1].Value.ToString();
+                string sizeId = row.Cells[1].Value?.ToString() ?? string.Empty;
                 int quantity = Convert.ToInt32(row.Cells[3].Value);
                 decimal totalPrice = Convert.ToDecimal(row.Cells[4].Value);
                 decimal price = totalPrice / quantity; // Calculate individual price

@@ -65,9 +65,8 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.buttonQuickAccess = new MaterialSkin.Controls.MaterialButton();
-            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
             this.takoTeaLabel1 = new TakoTea.Controls.TakoTeaLabel();
-            this.materialButtonlow = new MaterialSkin.Controls.MaterialButton();
+            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
             this.materialTabControl1.SuspendLayout();
             this.tabPageDashboard.SuspendLayout();
             this.tabPageProduct.SuspendLayout();
@@ -487,6 +486,15 @@
             this.buttonQuickAccess.UseVisualStyleBackColor = true;
             this.buttonQuickAccess.Click += new System.EventHandler(this.button1_Click);
             // 
+            // takoTeaLabel1
+            // 
+            this.takoTeaLabel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(32)))), ((int)(((byte)(35)))));
+            this.takoTeaLabel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("takoTeaLabel1.BackgroundImage")));
+            this.takoTeaLabel1.Location = new System.Drawing.Point(64, 32);
+            this.takoTeaLabel1.Name = "takoTeaLabel1";
+            this.takoTeaLabel1.Size = new System.Drawing.Size(149, 47);
+            this.takoTeaLabel1.TabIndex = 9;
+            // 
             // materialButton1
             // 
             this.materialButton1.AutoSize = false;
@@ -508,48 +516,17 @@
             this.materialButton1.UseVisualStyleBackColor = true;
             this.materialButton1.Click += new System.EventHandler(this.btnReload_Click);
             // 
-            // takoTeaLabel1
-            // 
-            this.takoTeaLabel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(32)))), ((int)(((byte)(35)))));
-            this.takoTeaLabel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("takoTeaLabel1.BackgroundImage")));
-            this.takoTeaLabel1.Location = new System.Drawing.Point(64, 32);
-            this.takoTeaLabel1.Name = "takoTeaLabel1";
-            this.takoTeaLabel1.Size = new System.Drawing.Size(149, 47);
-            this.takoTeaLabel1.TabIndex = 9;
-            // 
-            // materialButtonlow
-            // 
-            this.materialButtonlow.AutoSize = false;
-            this.materialButtonlow.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButtonlow.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Dense;
-            this.materialButtonlow.Depth = 0;
-            this.materialButtonlow.HighEmphasis = false;
-            this.materialButtonlow.Icon = null;
-            this.materialButtonlow.Location = new System.Drawing.Point(952, 40);
-            this.materialButtonlow.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialButtonlow.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialButtonlow.Name = "materialButtonlow";
-            this.materialButtonlow.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButtonlow.Size = new System.Drawing.Size(128, 24);
-            this.materialButtonlow.TabIndex = 10;
-            this.materialButtonlow.Text = "send lowstock";
-            this.materialButtonlow.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialButtonlow.UseAccentColor = true;
-            this.materialButtonlow.UseVisualStyleBackColor = true;
-            this.materialButtonlow.Click += new System.EventHandler(this.materialButtonlow_Click);
-            // 
             // TakoTeaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(1313, 774);
-            this.Controls.Add(this.materialButtonlow);
             this.Controls.Add(this.takoTeaLabel1);
             this.Controls.Add(this.materialButton1);
             this.Controls.Add(this.buttonQuickAccess);
-            this.Controls.Add(this.toolStripQuickAccess);
             this.Controls.Add(this.materialTabControl1);
+            this.Controls.Add(this.toolStripQuickAccess);
             this.DrawerHighlightWithAccent = false;
             this.DrawerShowIconsWhenHidden = true;
             this.DrawerTabControl = this.materialTabControl1;
@@ -609,7 +586,6 @@
         private MaterialSkin.Controls.MaterialButton buttonQuickAccess;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private MaterialSkin.Controls.MaterialButton materialButton1;
         private System.Windows.Forms.MenuStrip menuStripProduct;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemVariants;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemProducts;
@@ -623,6 +599,6 @@
         private System.Windows.Forms.ToolStripMenuItem batchChangesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem comboMealsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addOnsToolStripMenuItem;
-        private MaterialSkin.Controls.MaterialButton materialButtonlow;
+        private MaterialSkin.Controls.MaterialButton materialButton1;
     }
 }

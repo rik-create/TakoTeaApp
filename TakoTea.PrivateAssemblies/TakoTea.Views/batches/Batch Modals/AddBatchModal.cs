@@ -110,7 +110,7 @@ namespace TakoTea.Views.Batches
                     batch.BatchID,            // Record ID (assuming BatchID is auto-generated)
                     "New Batch",              // Column name (or any descriptive text)
                     null,                     // Old value (null for new batch)
-                    batch.ToString(),         // New value (you might need to override ToString() in your Batch class for a more descriptive log)
+                    numericUpDownQuantity.Value.ToString(),         // New value (you might need to override ToString() in your Batch class for a more descriptive log)
                     "Added",                  // Action
                     $"Batch '{batch.BatchNumber}' added for ingredient '{batch.IngredientID}'", "" // Description
                 );

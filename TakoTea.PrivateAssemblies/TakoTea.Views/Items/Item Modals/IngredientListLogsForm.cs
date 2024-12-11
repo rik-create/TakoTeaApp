@@ -34,6 +34,10 @@ namespace TakoTea.Views.Items
             _inventoryService = new InventoryService();
             bindingNavigatorDeleteItem.Click += bindingNavigatorDeleteItem_Click;
             DataGridViewHelper.HideColumn(dataGridViewIngredientsLogs, "LogID");
+            DataGridViewHelper.HideColumn(dataGridViewIngredientsLogs, "CreatedBy");
+            DataGridViewHelper.HideColumn(dataGridViewIngredientsLogs, "CreatedAt");
+            DataGridViewHelper.HideColumn(dataGridViewIngredientsLogs, "UpdatedAt");
+            DataGridViewHelper.HideColumn(dataGridViewIngredientsLogs, "UpdatedBy");
             DataGridViewHelper.FormatColumnHeaders(dataGridViewIngredientsLogs);
 
         }

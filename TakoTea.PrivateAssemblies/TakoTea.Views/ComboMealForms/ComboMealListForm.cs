@@ -32,6 +32,8 @@ namespace TakoTea.Views.ComboMealForms
             DataGridViewHelper.HideColumn(dataGridViewComboMealList, "CreatedBy");
             DataGridViewHelper.HideColumn(dataGridViewComboMealList, "UpdatedBy");
             DataGridViewHelper.HideColumn(dataGridViewComboMealList, "UpdatedAt");
+            DataGridViewHelper.HideColumn(dataGridViewComboMealList, "ComboMealVariants");
+
             checkedListBoxStockLevel.SelectedIndexChanged += checkedListBoxStockLevel_SelectedIndexChanged;
             /*            DataGridViewHelper.AddButtonsToLastRow(dataGridViewProductVariantList, "IngredientsAndInstructions", "Ingredients & Instructions", handleIAndIButton);
             */
