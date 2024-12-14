@@ -265,9 +265,7 @@ namespace TakoTea.Views.MainForm
                 case "Item":
                     targetPanel = panelItem;
                     break;
-                case "Stock":
-                    targetPanel = panelStock;
-                    break;
+
                 case "Batch":
                     targetPanel = panelBatch;
                     break;
@@ -436,9 +434,7 @@ namespace TakoTea.Views.MainForm
                 case "Item":
                     targetPanel = panelItem;
                     break;
-                case "Stock":
-                    targetPanel = panelStock;
-                    break;
+    
                 case "Batch":
                     targetPanel = panelBatch;
                     break;

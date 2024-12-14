@@ -36,7 +36,16 @@ namespace TakoTea.View.Product.Product_Modals
             ingredientRepository = new IngredientRepository(context);
             DataGridViewHelper.FormatListView(listViewIngredients);
             DataGridViewHelper.ApplyDataGridViewStylesWithWrite(dgViewAddingMultipleProductVariants);
-            DataGridViewHelper.AddButtonsToLastRow(dgViewAddingMultipleProductVariants, "ClearIngredients", "Clear Ingredients", ClearIngredientsInSelectedRowIndex);
+
+
+            Image addIngredient = imageListButtons.Images["ingredient.png"]; // Access image by   
+            Image clearIngredient = imageListButtons.Images["broom.png"]; // Access image by   
+            DataGridViewHelper.AddIconButtonColumn(dgViewAddingMultipleProductVariants, "AddIngredients", "Add Ingredients", addIngredient);
+
+            DataGridViewHelper.AddIconButtonColumn(dgViewAddingMultipleProductVariants, "ClearIngredients", "Clear Ingredients", clearIngredient);
+            // Set the width of the columns
+            dgViewAddingMultipleProductVariants.Columns["ClearIngredients"].Width = 90;
+            dgViewAddingMultipleProductVariants.Columns["AddIngredients"].Width = 90;
             btnDuplicateRow.Click += btnDuplicateRows_Click;
         }
         private void AddProductModal_Load(object sender, EventArgs e)
@@ -197,61 +206,7 @@ namespace TakoTea.View.Product.Product_Modals
         private void flowLayoutPanelDgViews_Paint(object sender, PaintEventArgs e)
         {
         }
-        private void dgViewAddingMultipleProductVariants_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                // Ensure the clicked cell and row are valid
-                if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
-                {
-                    // Check if the clicked cell is in the Action column
-                    DataGridViewColumn actionColumn = dgViewAddingMultipleProductVariants.Columns["Action"];
-                    if (actionColumn != null && e.ColumnIndex == actionColumn.Index)
-                    {
-                        // Get the clicked row
-                        DataGridViewRow clickedRow = dgViewAddingMultipleProductVariants.Rows[e.RowIndex];
-                        if (clickedRow != null && clickedRow.Cells["VariantName"]?.Value != null)
-                        {
-                            // Retrieve the VariantName from the clicked row
-                            string variantName = clickedRow.Cells["VariantName"].Value.ToString();
-                            // Update the label header with the variant name
-                            lblHeader.TextAlign = ContentAlignment.MiddleCenter; // Align the text to the center
-                            lblHeader.Text = $"Adding Ingredients to row of {variantName}";
-                            // Make the ingredient selection components visible
-                            listViewIngredients.Visible = true;
-                            textBoxSearchIngredients.Visible = true;
-                            pbSearch.Visible = true;
-                            btnUndoRecentlyAddedIngredients.Visible = true;
-                            numericUpDownIngredientsQuantity.Visible = true;
-                            btnAddIngredientsToDgView.Visible = true;
-                            buttonCloseIngredientsList.Visible = true;
-                            btnUploadImgToSelectedRow.Visible = false;
-                            buttonAddNewRow.Visible = false;
-                            btnDelete.Visible = false;
-                            btnDuplicateRow.Visible = false;
-                            // Optionally, store the selected row index
-                            selectedRowIndex = e.RowIndex;
-                            // Deselect any previously selected row
-                            foreach (DataGridViewRow row in dgViewAddingMultipleProductVariants.Rows)
-                            {
-                                row.Selected = false;
-                            }
-                            // Select the clicked row
-                            clickedRow.Selected = true;
-                        }
-                        else
-                        {
-                            _ = MessageBox.Show("Variant name is missing or invalid in the selected row.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                // Display an error message to the user
-                _ = MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+      
         private string previousIngredients = ""; // Store the previous ingredients (for undo)
         private void btnAddIngredientsToDgView_Click(object sender, EventArgs e)
         {
@@ -492,5 +447,125 @@ namespace TakoTea.View.Product.Product_Modals
                 }
             }
         }
+
+        private void dgViewAddingMultipleProductVariants_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0) // Check for valid cell click
+            {
+                DataGridViewRow clickedRow = dgViewAddingMultipleProductVariants.Rows[e.RowIndex];
+                if (e.ColumnIndex == dgViewAddingMultipleProductVariants.Columns["AddIngredients"].Index && e.RowIndex >= 0)
+                {
+                    if (clickedRow != null && clickedRow.Cells["VariantName"]?.Value != null)
+                    {
+                        HandleAddIngredientsClick(clickedRow);
+
+                    }
+                    else
+                    {
+                        _ = MessageBox.Show("Variant name is missing or invalid in the selected row.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else if (e.ColumnIndex == dgViewAddingMultipleProductVariants.Columns["ClearIngredients"].Index && e.RowIndex >= 0)
+                {
+                    // Clear ingredients logic
+                    if (clickedRow.Cells["ColumnIngredients"].Value != null)
+                    {
+                        clickedRow.Cells["ColumnIngredients"].Value = string.Empty;
+                    }
+                }
+              
+            }
+        }
+        private void HandleAddIngredientsClick(DataGridViewRow clickedRow)
+        {
+            // Add ingredients logic
+            string variantName = clickedRow.Cells["VariantName"].Value.ToString();
+            lblHeader.TextAlign = ContentAlignment.MiddleCenter; // Align the text to the center
+
+            lblHeader.Text = $"Adding Ingredients to row of {variantName}";
+
+            // Show/hide relevant components (adjust as needed)
+            listViewIngredients.Visible = true;
+            textBoxSearchIngredients.Visible = true;
+            pbSearch.Visible = true;
+            btnUndoRecentlyAddedIngredients.Visible = true;
+            numericUpDownIngredientsQuantity.Visible = true;
+            btnAddIngredientsToDgView.Visible = true;
+            buttonCloseIngredientsList.Visible = true;
+            btnUploadImgToSelectedRow.Visible = false;
+            buttonAddNewRow.Visible = false;
+            btnDelete.Visible = false;
+            btnDuplicateRow.Visible = false;
+
+            // Optionally, store the selected row index
+            selectedRowIndex = clickedRow.Index;
+
+            // Deselect any previously selected row
+            foreach (DataGridViewRow row in dgViewAddingMultipleProductVariants.Rows)
+            {
+                row.Selected = false;
+            }
+
+            // Select the clicked row
+            clickedRow.Selected = true;
+            flowLayoutPanelDgViews.Controls.SetChildIndex(listViewIngredients, 1); // 0-based index, so 1 puts it in the 2nd position
+
+        }
+        private void dgViewAddingMultipleProductVariants_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                // Ensure the clicked cell and row are valid
+                if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+                {
+                    // Check if the clicked cell is in the Action column
+                    DataGridViewColumn actionColumn = dgViewAddingMultipleProductVariants.Columns["Action"];
+                    if (actionColumn != null && e.ColumnIndex == actionColumn.Index)
+                    {
+                        // Get the clicked row
+                        DataGridViewRow clickedRow = dgViewAddingMultipleProductVariants.Rows[e.RowIndex];
+                        if (clickedRow != null && clickedRow.Cells["VariantName"]?.Value != null)
+                        {
+                            // Retrieve the VariantName from the clicked row
+                            string variantName = clickedRow.Cells["VariantName"].Value.ToString();
+                            // Update the label header with the variant name
+                            lblHeader.TextAlign = ContentAlignment.MiddleCenter; // Align the text to the center
+                            lblHeader.Text = $"Adding Ingredients to row of {variantName}";
+                            // Make the ingredient selection components visible
+                            listViewIngredients.Visible = true;
+                            textBoxSearchIngredients.Visible = true;
+                            pbSearch.Visible = true;
+                            btnUndoRecentlyAddedIngredients.Visible = true;
+                            numericUpDownIngredientsQuantity.Visible = true;
+                            btnAddIngredientsToDgView.Visible = true;
+                            buttonCloseIngredientsList.Visible = true;
+                            btnUploadImgToSelectedRow.Visible = false;
+                            buttonAddNewRow.Visible = false;
+                            btnDelete.Visible = false;
+                            btnDuplicateRow.Visible = false;
+                            // Optionally, store the selected row index
+                            selectedRowIndex = e.RowIndex;
+                            // Deselect any previously selected row
+                            foreach (DataGridViewRow row in dgViewAddingMultipleProductVariants.Rows)
+                            {
+                                row.Selected = false;
+                            }
+                            // Select the clicked row
+                            clickedRow.Selected = true;
+                        }
+                        else
+                        {
+                            _ = MessageBox.Show("Variant name is missing or invalid in the selected row.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Display an error message to the user
+                _ = MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
     }
 }

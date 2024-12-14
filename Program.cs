@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using TakoTea.Models;
 using TakoTea.View.Batches;
 using TakoTea.View.Orders;
+using TakoTea.View.Product.Product_Modals;
 using TakoTea.Views.mainform;
 using TakoTea.Views.MainForm;
 using TakoTea.Views.settings;
@@ -18,7 +19,7 @@ namespace TakoTea
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TakoTeaForm());
+            Application.Run(new AddProductModal());
             /*      // Register the dependency in the DI container
                   services.AddSingleton<IFormFactory, TakoTea.Views.FormFactory>();
                   services.AddTransient<FormLoader>();

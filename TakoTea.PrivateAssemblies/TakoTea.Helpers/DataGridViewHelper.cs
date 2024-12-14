@@ -514,46 +514,7 @@ namespace TakoTea.Helpers
 
 
         }
-        public static void ApplyDataGridViewStylesWithWrite(DataGridView dataGridView)
-        {
-            // Disable default visual styles for more control over appearance
-            dataGridView.EnableHeadersVisualStyles = false;
-
-            // Set the base colors for the DataGridView
-            dataGridView.BackgroundColor = Color.WhiteSmoke; // Softer background color
-            dataGridView.DefaultCellStyle.BackColor = Color.WhiteSmoke;
-            dataGridView.DefaultCellStyle.ForeColor = Color.FromArgb(64, 64, 64); // Dark gray text for better contrast
-
-            // Style the column headers
-            dataGridView.ColumnHeadersDefaultCellStyle.BackColor = ThemeConfigurator.GetCustomAccentColor(); // Use your accent color
-            dataGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-
-            // Use a slightly smaller and a more readable font
-            dataGridView.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-
-            // Style selected rows for better visibility
-            dataGridView.DefaultCellStyle.SelectionForeColor = Color.White;
-            dataGridView.DefaultCellStyle.SelectionBackColor = ThemeConfigurator.GetPrimaryColor(); // Use your primary color
-
-            // Add subtle grid lines (optional)
-            dataGridView.GridColor = Color.LightGray;
-            dataGridView.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-
-            // Set the default font for the DataGridView
-            dataGridView.DefaultCellStyle.Font = new Font("Segoe UI", 11, FontStyle.Regular); // More readable font
-
-            // Remove the default border
-            dataGridView.BorderStyle = BorderStyle.None;
-
-            // Configure sizing and behavior
-            dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView.ReadOnly = false;
-            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-
-
-
-        }
+      
         public static void DeleteSelectedRows<T>(DataGridView dataGridView, string idColumnName, bool deleteRows = true) where T : class
         {
             try
@@ -675,6 +636,49 @@ namespace TakoTea.Helpers
             }
         }
 
+        public static void ApplyDataGridViewStylesWithWrite(DataGridView dataGridView)
+        {
+            // Disable default visual styles for more control over appearance
+            dataGridView.EnableHeadersVisualStyles = false;
+
+            // Set the base colors for the DataGridView
+            dataGridView.BackgroundColor = Color.WhiteSmoke; // Softer background color
+            dataGridView.DefaultCellStyle.BackColor = Color.WhiteSmoke;
+            dataGridView.DefaultCellStyle.ForeColor = Color.FromArgb(64, 64, 64); // Dark gray text for better contrast
+
+            // Style the column headers
+            dataGridView.ColumnHeadersDefaultCellStyle.BackColor = ThemeConfigurator.GetCustomAccentColor();
+            dataGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dataGridView.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+
+            // Align column header text to center
+            dataGridView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            // Use a slightly smaller and a more readable font
+            dataGridView.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+
+            // Style selected rows for better visibility
+            dataGridView.DefaultCellStyle.SelectionForeColor = Color.White;
+            dataGridView.DefaultCellStyle.SelectionBackColor = ThemeConfigurator.GetPrimaryColor(); // Use your primary color
+
+            // Add subtle grid lines (optional)
+            dataGridView.GridColor = Color.LightGray;
+            dataGridView.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+
+            // Set the default font for the DataGridView
+            dataGridView.DefaultCellStyle.Font = new Font("Segoe UI", 11, FontStyle.Regular); // More readable font
+
+            // Remove the default border
+            dataGridView.BorderStyle = BorderStyle.None;
+
+            // Configure sizing and behavior
+            dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView.ReadOnly = false;
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+
+
+        }
         public static void ApplyDataGridViewStyles(DataGridView dataGridView)
         {
             // Disable default visual styles for more control over appearance

@@ -25,18 +25,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddProductModal));
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.buttonAddNewRow = new System.Windows.Forms.Button();
-            this.btnDuplicateRow = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.btnCancel = new MaterialSkin.Controls.MaterialButton();
             this.btnSaveAll = new MaterialSkin.Controls.MaterialButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblHeader = new MaterialSkin.Controls.MaterialLabel();
             this.flowLayoutPanelDgViews = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlTopButtons = new System.Windows.Forms.Panel();
+            this.buttonAddNewRow = new System.Windows.Forms.Button();
             this.textBoxSearchIngredients = new System.Windows.Forms.TextBox();
+            this.btnDuplicateRow = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.pbSearch = new System.Windows.Forms.PictureBox();
             this.numericUpDownIngredientsQuantity = new System.Windows.Forms.NumericUpDown();
             this.btnUploadImgToSelectedRow = new MaterialSkin.Controls.MaterialButton();
             this.buttonCloseIngredientsList = new System.Windows.Forms.Button();
@@ -44,12 +47,6 @@
             this.btnAddIngredientsToDgView = new System.Windows.Forms.Button();
             this.listViewIngredients = new System.Windows.Forms.ListView();
             this.dgViewAddingMultipleProductVariants = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pbSearch = new System.Windows.Forms.PictureBox();
             this.VariantName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnProduct = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.ColumnSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,15 +55,20 @@
             this.ColumnInstructions = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ImagePathColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnImage = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Action = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.imageListButtons = new System.Windows.Forms.ImageList(this.components);
             this.materialCard1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanelDgViews.SuspendLayout();
             this.pnlTopButtons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIngredientsQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgViewAddingMultipleProductVariants)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).BeginInit();
             this.SuspendLayout();
             // 
             // materialCard1
@@ -95,35 +97,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1026, 64);
             this.panel2.TabIndex = 101;
-            // 
-            // buttonAddNewRow
-            // 
-            this.buttonAddNewRow.Location = new System.Drawing.Point(200, 16);
-            this.buttonAddNewRow.Name = "buttonAddNewRow";
-            this.buttonAddNewRow.Size = new System.Drawing.Size(75, 23);
-            this.buttonAddNewRow.TabIndex = 105;
-            this.buttonAddNewRow.Text = "Add New";
-            this.buttonAddNewRow.UseVisualStyleBackColor = true;
-            this.buttonAddNewRow.Click += new System.EventHandler(this.btnAddNewRow_Click);
-            // 
-            // btnDuplicateRow
-            // 
-            this.btnDuplicateRow.Location = new System.Drawing.Point(40, 16);
-            this.btnDuplicateRow.Name = "btnDuplicateRow";
-            this.btnDuplicateRow.Size = new System.Drawing.Size(75, 23);
-            this.btnDuplicateRow.TabIndex = 103;
-            this.btnDuplicateRow.Text = "Duplicate";
-            this.btnDuplicateRow.UseVisualStyleBackColor = true;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(120, 16);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnDelete.TabIndex = 104;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnCancel
             // 
@@ -219,6 +192,16 @@
             this.pnlTopButtons.Size = new System.Drawing.Size(997, 53);
             this.pnlTopButtons.TabIndex = 0;
             // 
+            // buttonAddNewRow
+            // 
+            this.buttonAddNewRow.Location = new System.Drawing.Point(200, 16);
+            this.buttonAddNewRow.Name = "buttonAddNewRow";
+            this.buttonAddNewRow.Size = new System.Drawing.Size(75, 23);
+            this.buttonAddNewRow.TabIndex = 105;
+            this.buttonAddNewRow.Text = "Add New";
+            this.buttonAddNewRow.UseVisualStyleBackColor = true;
+            this.buttonAddNewRow.Click += new System.EventHandler(this.btnAddNewRow_Click);
+            // 
             // textBoxSearchIngredients
             // 
             this.textBoxSearchIngredients.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -228,6 +211,36 @@
             this.textBoxSearchIngredients.TabIndex = 105;
             this.textBoxSearchIngredients.Visible = false;
             this.textBoxSearchIngredients.TextChanged += new System.EventHandler(this.textBoxSearchIngredients_TextChanged);
+            // 
+            // btnDuplicateRow
+            // 
+            this.btnDuplicateRow.Location = new System.Drawing.Point(40, 16);
+            this.btnDuplicateRow.Name = "btnDuplicateRow";
+            this.btnDuplicateRow.Size = new System.Drawing.Size(75, 23);
+            this.btnDuplicateRow.TabIndex = 103;
+            this.btnDuplicateRow.Text = "Duplicate";
+            this.btnDuplicateRow.UseVisualStyleBackColor = true;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(120, 16);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 104;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // pbSearch
+            // 
+            this.pbSearch.Image = global::TakoTea.Views.Properties.Resources.search;
+            this.pbSearch.Location = new System.Drawing.Point(120, 16);
+            this.pbSearch.Name = "pbSearch";
+            this.pbSearch.Size = new System.Drawing.Size(24, 24);
+            this.pbSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbSearch.TabIndex = 104;
+            this.pbSearch.TabStop = false;
+            this.pbSearch.Visible = false;
             // 
             // numericUpDownIngredientsQuantity
             // 
@@ -292,7 +305,7 @@
             // 
             // btnUndoRecentlyAddedIngredients
             // 
-            this.btnUndoRecentlyAddedIngredients.Location = new System.Drawing.Point(592, 16);
+            this.btnUndoRecentlyAddedIngredients.Location = new System.Drawing.Point(3, 993);
             this.btnUndoRecentlyAddedIngredients.Name = "btnUndoRecentlyAddedIngredients";
             this.btnUndoRecentlyAddedIngredients.Size = new System.Drawing.Size(75, 23);
             this.btnUndoRecentlyAddedIngredients.TabIndex = 102;
@@ -337,58 +350,15 @@
             this.ColumnIngredients,
             this.ColumnInstructions,
             this.ImagePathColumn,
-            this.ColumnImage,
-            this.Action});
+            this.ColumnImage});
             this.dgViewAddingMultipleProductVariants.EnableHeadersVisualStyles = false;
             this.dgViewAddingMultipleProductVariants.Location = new System.Drawing.Point(3, 398);
             this.dgViewAddingMultipleProductVariants.Name = "dgViewAddingMultipleProductVariants";
             this.dgViewAddingMultipleProductVariants.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgViewAddingMultipleProductVariants.Size = new System.Drawing.Size(997, 589);
             this.dgViewAddingMultipleProductVariants.TabIndex = 96;
+            this.dgViewAddingMultipleProductVariants.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgViewAddingMultipleProductVariants_CellClick);
             this.dgViewAddingMultipleProductVariants.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgViewAddingMultipleProductVariants_CellContentClick);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Variant Name";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 133;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.FillWeight = 70F;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Size";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 93;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.FillWeight = 70F;
-            this.dataGridViewTextBoxColumn3.HeaderText = "Price";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Width = 93;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Ingredients";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.Width = 132;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Instructions";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.Width = 133;
-            // 
-            // pbSearch
-            // 
-            this.pbSearch.Image = global::TakoTea.Views.Properties.Resources.search;
-            this.pbSearch.Location = new System.Drawing.Point(120, 16);
-            this.pbSearch.Name = "pbSearch";
-            this.pbSearch.Size = new System.Drawing.Size(24, 24);
-            this.pbSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbSearch.TabIndex = 104;
-            this.pbSearch.TabStop = false;
-            this.pbSearch.Visible = false;
             // 
             // VariantName
             // 
@@ -446,16 +416,44 @@
             this.ColumnImage.Name = "ColumnImage";
             this.ColumnImage.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
-            // Action
+            // dataGridViewTextBoxColumn1
             // 
-            this.Action.FillWeight = 20.73682F;
-            this.Action.HeaderText = "Add Ingredients";
-            this.Action.Name = "Action";
-            this.Action.ReadOnly = true;
-            this.Action.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Action.Text = "Add";
-            this.Action.ToolTipText = "Add";
-            this.Action.UseColumnTextForButtonValue = true;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Variant Name";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 133;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.FillWeight = 70F;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Size";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 93;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.FillWeight = 70F;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Price";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 93;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Ingredients";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Width = 132;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Instructions";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Width = 133;
+            // 
+            // imageListButtons
+            // 
+            this.imageListButtons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListButtons.ImageStream")));
+            this.imageListButtons.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListButtons.Images.SetKeyName(0, "broom.png");
+            this.imageListButtons.Images.SetKeyName(1, "ingredient.png");
             // 
             // AddProductModal
             // 
@@ -475,9 +473,9 @@
             this.flowLayoutPanelDgViews.ResumeLayout(false);
             this.pnlTopButtons.ResumeLayout(false);
             this.pnlTopButtons.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIngredientsQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgViewAddingMultipleProductVariants)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -515,6 +513,6 @@
         public System.Windows.Forms.DataGridViewTextBoxColumn ColumnInstructions;
         public System.Windows.Forms.DataGridViewTextBoxColumn ImagePathColumn;
         public System.Windows.Forms.DataGridViewImageColumn ColumnImage;
-        public System.Windows.Forms.DataGridViewButtonColumn Action;
+        private System.Windows.Forms.ImageList imageListButtons;
     }
 }

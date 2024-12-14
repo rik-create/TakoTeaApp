@@ -63,7 +63,6 @@ namespace TakoTea.Views.reports
         {
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.pdfViewer1 = new PdfiumViewer.PdfViewer();
-            this.btnClearFilters = new MaterialSkin.Controls.MaterialButton();
             this.btnGenerateReport = new MaterialSkin.Controls.MaterialButton();
             this.groupBoxDateRange = new System.Windows.Forms.GroupBox();
             this.lblSearchHint = new System.Windows.Forms.Label();
@@ -114,26 +113,6 @@ namespace TakoTea.Views.reports
             this.pdfViewer1.TabIndex = 129;
             this.pdfViewer1.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitBest;
             // 
-            // btnClearFilters
-            // 
-            this.btnClearFilters.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnClearFilters.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnClearFilters.Depth = 0;
-            this.btnClearFilters.Enabled = false;
-            this.btnClearFilters.HighEmphasis = true;
-            this.btnClearFilters.Icon = null;
-            this.btnClearFilters.Location = new System.Drawing.Point(520, 0);
-            this.btnClearFilters.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnClearFilters.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnClearFilters.Name = "btnClearFilters";
-            this.btnClearFilters.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnClearFilters.Size = new System.Drawing.Size(126, 36);
-            this.btnClearFilters.TabIndex = 128;
-            this.btnClearFilters.Text = "Clear filters";
-            this.btnClearFilters.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnClearFilters.UseAccentColor = true;
-            this.btnClearFilters.UseVisualStyleBackColor = true;
-            // 
             // btnGenerateReport
             // 
             this.btnGenerateReport.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -157,7 +136,6 @@ namespace TakoTea.Views.reports
             // groupBoxDateRange
             // 
             this.groupBoxDateRange.Controls.Add(this.lblSearchHint);
-            this.groupBoxDateRange.Controls.Add(this.btnClearFilters);
             this.groupBoxDateRange.Controls.Add(this.lblFilterHint);
             this.groupBoxDateRange.Controls.Add(this.chkLowStockOnly);
             this.groupBoxDateRange.Controls.Add(this.cboDateRange);
@@ -419,7 +397,6 @@ namespace TakoTea.Views.reports
         private Label lblSearchHint;
         private Label lblFilterHint;
         private MaterialComboBox cboDateRange;
-        private MaterialButton btnClearFilters;
         private PdfiumViewer.PdfViewer pdfViewer1;
     }
 

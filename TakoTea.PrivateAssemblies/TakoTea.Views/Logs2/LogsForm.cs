@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
@@ -32,6 +33,7 @@ namespace TakoTea.Views.Logs2
             LoadData();
             DataGridViewHelper.HideColumn(dataGridViewLogs, "LogID");
 
+            FillFilterControls();
 
 
             /*            DataGridViewHelper.AddButtonsToLastRow(dataGridViewProductVariantList, "IngredientsAndInstructions", "Ingredients & Instructions", handleIAndIButton);
@@ -67,7 +69,6 @@ namespace TakoTea.Views.Logs2
 
             // Hide the ImagePath column
             DataGridViewHelper.HideColumn(dataGridViewLogs, "LogID");
-            FillFilterControls();
         }
 
         // Assuming you have these controls on your Form:
@@ -84,7 +85,7 @@ namespace TakoTea.Views.Logs2
 
                 // Fill comboBoxActions with distinct actions from the Logs table
                 List<string> actions = context.Logs.Select(l => l.Action).Distinct().ToList();
-                cmbActions.Items.AddRange(actions.ToArray());
+                checkedListBoxActions.Items.AddRange(actions.ToArray());
             }
             catch (Exception ex)
             {
@@ -102,7 +103,7 @@ namespace TakoTea.Views.Logs2
             {
                 string searchTerm = txtBoxSearchLogs.Text.ToLower().Trim(); // Assuming you have a TextBox named txtBoxSearchLogs
                 List<string> selectedTableNames = chkListBoxTableNames.CheckedItems.Cast<string>().ToList();
-                string selectedAction = cmbActions.SelectedItem?.ToString();
+                List<string> selectedActionNames = checkedListBoxActions.CheckedItems.Cast<string>().ToList();
 
                 IEnumerable<LogData> filteredLogs = _logsRepository.GetAllLogs()
                     .Where(log =>
@@ -113,7 +114,8 @@ namespace TakoTea.Views.Logs2
                          log.Action.ToLower().Contains(searchTerm) ||
                          log.Username.ToLower().Contains(searchTerm)) &&
                         (selectedTableNames.Count == 0 || selectedTableNames.Contains(log.TableName)) &&
-                        (string.IsNullOrEmpty(selectedAction) || log.Action == selectedAction)
+                        (selectedActionNames.Count == 0 || selectedActionNames.Contains(log.Action
+                        ))
                     );
 
                 DataGridViewHelper.UpdateGrid(dataGridViewLogs, bindingSource, filteredLogs.ToList());
@@ -203,6 +205,51 @@ namespace TakoTea.Views.Logs2
             {
                 _ = MessageBox.Show("Error filtering logs by date range: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void cmbActions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FilterLogs();
+        }
+
+        private async void txtBoxSearchLogs_Click(object sender, EventArgs e)
+        {
+           await Task.Delay(800);
+            FilterLogs();
+        }
+
+        private void btnClearFilters_Click(object sender, EventArgs e)
+        {
+            clearFilters();
+
+        }
+
+        private void clearFilters()
+        {
+            DateHelper.InitializeDateTimePickers(dateTimePickerStartDate, dateTimePickerEndDate);
+
+            CheckedListBoxHelper.ClearAllCheckedListBoxesInPanel(panelFilteringComponents);
+            FilterLogs();
+        }
+
+        private void dateTimePickerEndDate_ValueChanged(object sender, EventArgs e)
+        {
+            DateHelper.ValidateDateRange(dateTimePickerStartDate, dateTimePickerEndDate, "End date must be after start date.", 1);
+
+            FilterLogs();
+        }
+
+        private void dateTimePickerStartDate_ValueChanged(object sender, EventArgs e)
+        {
+            DateHelper.ValidateDateRange(dateTimePickerStartDate, dateTimePickerEndDate, "Start date must be before end date.", -1);
+
+            FilterLogs();
+        }
+
+        private void checkedListBoxActions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FilterLogs();
+
         }
     }
 }

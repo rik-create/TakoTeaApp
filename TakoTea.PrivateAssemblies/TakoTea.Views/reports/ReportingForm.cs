@@ -55,7 +55,11 @@ namespace TakoTea.Views.reports
                         chkLowStockOnly.Visible = true;
                         break;
                     case ReportType.OrderList:
-                        dataSource = dbContext.OrderModels.Select(o => o.OrderStatus).Distinct().ToList();
+                        dataSource = dbContext.OrderModels
+                                             .Where(o => o.OrderStatus != "Processing")
+                                             .Select(o => o.OrderStatus)
+                                             .Distinct()
+                                             .ToList();
                         lblFilterHint.Text = "Select Order Status:";
                         lblSearchHint.Text = "Enter Customer Name or Order ID:";
                         chkLowStockOnly.Visible = false;
@@ -79,7 +83,8 @@ namespace TakoTea.Views.reports
             }
             GenerateReport();
         }
-
+//Report Generation
+#region
 
         public void GenerateAndDisplayReport(string pdfPath, ReportType reportType, Dictionary<string, object> filters = null)
         {
@@ -673,6 +678,7 @@ namespace TakoTea.Views.reports
                 }
             }
         }
+#endregion
 
         private Dictionary<string, object> GetFiltersForReportType(ReportType reportType)
         {

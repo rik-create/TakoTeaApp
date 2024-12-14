@@ -263,11 +263,13 @@ namespace TakoTea.Product
 
         private void checkedListBoxPaymentMethod_SelectedIndexChanged(object sender, EventArgs e)
         {
+            FilterSales();
 
         }
 
         private void checkedListBoxPaymentStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
+            FilterSales();
 
         }
 
