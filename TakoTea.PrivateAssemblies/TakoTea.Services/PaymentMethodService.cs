@@ -33,17 +33,24 @@ namespace TakoTea.Services
         }
         public static void AddPaymentMethod(string paymentMethodName, Entities context)
         {
-            if (context.PaymentMethods.Any(p => p.MethodName.Equals(paymentMethodName, StringComparison.OrdinalIgnoreCase)))
+            try
             {
-                throw new Exception("Payment method already exists.");
+                if (context.PaymentMethods.Any(p => p.MethodName.Equals(paymentMethodName, StringComparison.OrdinalIgnoreCase)))
+                {
+                    throw new Exception("Payment method already exists.");
+                }
+                PaymentMethod newPaymentMethod = new PaymentMethod
+                {
+                    MethodName = paymentMethodName,
+                    IsActive = true
+                };
+                _ = context.PaymentMethods.Add(newPaymentMethod);
+                _ = context.SaveChanges();
             }
-            PaymentMethod newPaymentMethod = new PaymentMethod
+            catch (Exception ex)
             {
-                MethodName = paymentMethodName,
-                IsActive = true
-            };
-            _ = context.PaymentMethods.Add(newPaymentMethod);
-            _ = context.SaveChanges();
+                MessageBox.Show("Error adding payment method: " + ex.Message);
+            }
         }
         public static List<string> GetAllPaymentMethods()
         {
@@ -67,7 +74,9 @@ namespace TakoTea.Services
                 PaymentMethod paymentMethod = context.PaymentMethods.FirstOrDefault(p => p.MethodName == paymentMethodName);
                 if (paymentMethod != null)
                 {
-                    paymentMethod.IsActive = false; context.SaveChanges();
+                    // No need to ask for confirmation again here
+                    context.PaymentMethods.Remove(paymentMethod);
+                    context.SaveChanges();
                 }
             }
             catch (Exception ex)

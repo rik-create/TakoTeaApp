@@ -5,6 +5,7 @@ using TakoTea.View.Batches;
 using TakoTea.View.Orders;
 using TakoTea.Views.mainform;
 using TakoTea.Views.MainForm;
+using TakoTea.Views.settings;
 namespace TakoTea
 {
     internal static class Program
@@ -17,7 +18,7 @@ namespace TakoTea
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new OrdersQueueForm(new Entities()));
+            Application.Run(new TakoTeaForm());
             /*      // Register the dependency in the DI container
                   services.AddSingleton<IFormFactory, TakoTea.Views.FormFactory>();
                   services.AddTransient<FormLoader>();

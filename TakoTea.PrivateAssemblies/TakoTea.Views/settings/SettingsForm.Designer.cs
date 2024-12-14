@@ -31,14 +31,17 @@ namespace TakoTea.Views.settings
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
             this.tabPageUserManagement = new System.Windows.Forms.TabPage();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            this.btnEditUser = new MaterialSkin.Controls.MaterialButton();
             this.btnDeleteUser = new MaterialSkin.Controls.MaterialButton();
             this.groupBoxUserInfo = new System.Windows.Forms.GroupBox();
-            this.btnEditUser = new MaterialSkin.Controls.MaterialButton();
             this.materialCard4 = new MaterialSkin.Controls.MaterialCard();
             this.txtBoxPassword = new MaterialSkin.Controls.MaterialTextBox2();
+            this.btnCancelEditUser = new MaterialSkin.Controls.MaterialButton();
             this.btnAddUser = new MaterialSkin.Controls.MaterialButton();
             this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
             this.txtBoxUsername = new MaterialSkin.Controls.MaterialTextBox2();
@@ -56,6 +59,18 @@ namespace TakoTea.Views.settings
             this.btnAddEmail = new System.Windows.Forms.Button();
             this.txtBoxAddEmail = new System.Windows.Forms.TextBox();
             this.groupBoxEmailSelection = new System.Windows.Forms.GroupBox();
+            this.bindingNavigatorEmails = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorDeleteItemEmails = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dataGridViewEmails = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBoxDeliveryMethod = new System.Windows.Forms.GroupBox();
@@ -65,10 +80,22 @@ namespace TakoTea.Views.settings
             this.tabPageDataBackup = new System.Windows.Forms.TabPage();
             this.materialCard3 = new MaterialSkin.Controls.MaterialCard();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.dataGridViewBackupPaths = new System.Windows.Forms.DataGridView();
+            this.bindingNavigatorBackup = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddNewItem1 = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorCountItem1 = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorMoveFirstItem1 = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem1 = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem1 = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorMoveNextItem1 = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem1 = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorDeleteBackupPaths = new System.Windows.Forms.ToolStripButton();
             this.materialFloatingActionButtonAddBackUpDestination = new MaterialSkin.Controls.MaterialFloatingActionButton();
-            this.materialFloatingActionButtonDeleteBackupDestination = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.cmbBackupSchedule = new MaterialSkin.Controls.MaterialComboBox();
-            this.checkedListBoxBackUpDestinations = new System.Windows.Forms.CheckedListBox();
             this.btnPerformBackup = new MaterialSkin.Controls.MaterialButton();
             this.lblLastBackupDate = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel11 = new MaterialSkin.Controls.MaterialLabel();
@@ -79,6 +106,20 @@ namespace TakoTea.Views.settings
             this.tabPagePaymentMethod = new System.Windows.Forms.TabPage();
             this.materialCard5 = new MaterialSkin.Controls.MaterialCard();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.bindingNavigatorPaymentMethods = new System.Windows.Forms.BindingNavigator(this.components);
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.bindingSourcePaymentMethods = new System.Windows.Forms.BindingSource(this.components);
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.deletePaymentMethods = new System.Windows.Forms.ToolStripButton();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.dgvPaymentMethods = new System.Windows.Forms.DataGridView();
             this.materialFloatingActionButtonAddPaymentMethod = new System.Windows.Forms.Button();
             this.txtBoxAddPaymentMethod = new System.Windows.Forms.TextBox();
@@ -87,6 +128,8 @@ namespace TakoTea.Views.settings
             this.entityCommand1 = new System.Data.Entity.Core.EntityClient.EntityCommand();
             this.btnCancelChanges = new MaterialSkin.Controls.MaterialButton();
             this.btnSaveChanges = new MaterialSkin.Controls.MaterialButton();
+            this.bindingSourceEmails = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSourceBackUpPaths = new System.Windows.Forms.BindingSource(this.components);
             this.materialTabControl1.SuspendLayout();
             this.tabPageUserManagement.SuspendLayout();
             this.materialCard1.SuspendLayout();
@@ -96,16 +139,27 @@ namespace TakoTea.Views.settings
             this.tabPageNotificationSettings.SuspendLayout();
             this.materialCard2.SuspendLayout();
             this.groupBoxEmailSelection.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorEmails)).BeginInit();
+            this.bindingNavigatorEmails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmails)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBoxDeliveryMethod.SuspendLayout();
             this.tabPageDataBackup.SuspendLayout();
             this.materialCard3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBackupPaths)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorBackup)).BeginInit();
+            this.bindingNavigatorBackup.SuspendLayout();
             this.tabPagePaymentMethod.SuspendLayout();
             this.materialCard5.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorPaymentMethods)).BeginInit();
+            this.bindingNavigatorPaymentMethods.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePaymentMethods)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentMethods)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceEmails)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceBackUpPaths)).BeginInit();
             this.SuspendLayout();
             // 
             // materialTabControl1
@@ -123,6 +177,7 @@ namespace TakoTea.Views.settings
             this.materialTabControl1.SelectedIndex = 0;
             this.materialTabControl1.Size = new System.Drawing.Size(730, 466);
             this.materialTabControl1.TabIndex = 0;
+            this.materialTabControl1.SelectedIndexChanged += new System.EventHandler(this.materialTabControl1_SelectedIndexChanged);
             // 
             // tabPageUserManagement
             // 
@@ -139,6 +194,7 @@ namespace TakoTea.Views.settings
             // 
             this.materialCard1.AutoScroll = true;
             this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard1.Controls.Add(this.btnEditUser);
             this.materialCard1.Controls.Add(this.btnDeleteUser);
             this.materialCard1.Controls.Add(this.groupBoxUserInfo);
             this.materialCard1.Controls.Add(this.groupBoxUserList);
@@ -152,6 +208,26 @@ namespace TakoTea.Views.settings
             this.materialCard1.Padding = new System.Windows.Forms.Padding(10);
             this.materialCard1.Size = new System.Drawing.Size(716, 434);
             this.materialCard1.TabIndex = 0;
+            // 
+            // btnEditUser
+            // 
+            this.btnEditUser.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnEditUser.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnEditUser.Depth = 0;
+            this.btnEditUser.HighEmphasis = true;
+            this.btnEditUser.Icon = null;
+            this.btnEditUser.Location = new System.Drawing.Point(152, 384);
+            this.btnEditUser.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnEditUser.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnEditUser.Name = "btnEditUser";
+            this.btnEditUser.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnEditUser.Size = new System.Drawing.Size(92, 36);
+            this.btnEditUser.TabIndex = 3;
+            this.btnEditUser.Text = "Edit User";
+            this.btnEditUser.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnEditUser.UseAccentColor = false;
+            this.btnEditUser.UseVisualStyleBackColor = true;
+            this.btnEditUser.Click += new System.EventHandler(this.btnEditUser_Click);
             // 
             // btnDeleteUser
             // 
@@ -171,43 +247,24 @@ namespace TakoTea.Views.settings
             this.btnDeleteUser.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnDeleteUser.UseAccentColor = false;
             this.btnDeleteUser.UseVisualStyleBackColor = true;
-            this.btnDeleteUser.Click += new System.EventHandler(this.btnDeleteUser_Click_1);
+            this.btnDeleteUser.Click += new System.EventHandler(this.btnDeleteUser_Click);
             // 
             // groupBoxUserInfo
             // 
-            this.groupBoxUserInfo.Controls.Add(this.btnEditUser);
             this.groupBoxUserInfo.Controls.Add(this.materialCard4);
             this.groupBoxUserInfo.Location = new System.Drawing.Point(382, 15);
             this.groupBoxUserInfo.Name = "groupBoxUserInfo";
-            this.groupBoxUserInfo.Size = new System.Drawing.Size(322, 353);
+            this.groupBoxUserInfo.Size = new System.Drawing.Size(322, 401);
             this.groupBoxUserInfo.TabIndex = 1;
             this.groupBoxUserInfo.TabStop = false;
             this.groupBoxUserInfo.Text = "User Information";
-            // 
-            // btnEditUser
-            // 
-            this.btnEditUser.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnEditUser.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnEditUser.Depth = 0;
-            this.btnEditUser.HighEmphasis = true;
-            this.btnEditUser.Icon = null;
-            this.btnEditUser.Location = new System.Drawing.Point(192, 416);
-            this.btnEditUser.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnEditUser.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnEditUser.Name = "btnEditUser";
-            this.btnEditUser.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnEditUser.Size = new System.Drawing.Size(92, 36);
-            this.btnEditUser.TabIndex = 3;
-            this.btnEditUser.Text = "Edit User";
-            this.btnEditUser.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnEditUser.UseAccentColor = false;
-            this.btnEditUser.UseVisualStyleBackColor = true;
             // 
             // materialCard4
             // 
             this.materialCard4.AutoScroll = true;
             this.materialCard4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.materialCard4.Controls.Add(this.txtBoxPassword);
+            this.materialCard4.Controls.Add(this.btnCancelEditUser);
             this.materialCard4.Controls.Add(this.btnAddUser);
             this.materialCard4.Controls.Add(this.materialLabel8);
             this.materialCard4.Controls.Add(this.txtBoxUsername);
@@ -224,7 +281,7 @@ namespace TakoTea.Views.settings
             this.materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard4.Name = "materialCard4";
             this.materialCard4.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard4.Size = new System.Drawing.Size(316, 334);
+            this.materialCard4.Size = new System.Drawing.Size(316, 382);
             this.materialCard4.TabIndex = 12;
             // 
             // txtBoxPassword
@@ -256,6 +313,26 @@ namespace TakoTea.Views.settings
             this.txtBoxPassword.TrailingIcon = null;
             this.txtBoxPassword.UseSystemPasswordChar = true;
             // 
+            // btnCancelEditUser
+            // 
+            this.btnCancelEditUser.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCancelEditUser.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCancelEditUser.Depth = 0;
+            this.btnCancelEditUser.HighEmphasis = true;
+            this.btnCancelEditUser.Icon = null;
+            this.btnCancelEditUser.Location = new System.Drawing.Point(112, 398);
+            this.btnCancelEditUser.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCancelEditUser.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnCancelEditUser.Name = "btnCancelEditUser";
+            this.btnCancelEditUser.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCancelEditUser.Size = new System.Drawing.Size(77, 36);
+            this.btnCancelEditUser.TabIndex = 2;
+            this.btnCancelEditUser.Text = "Cancel";
+            this.btnCancelEditUser.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnCancelEditUser.UseAccentColor = false;
+            this.btnCancelEditUser.UseVisualStyleBackColor = true;
+            this.btnCancelEditUser.Click += new System.EventHandler(this.btnCancelEditUser_Click);
+            // 
             // btnAddUser
             // 
             this.btnAddUser.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -263,7 +340,7 @@ namespace TakoTea.Views.settings
             this.btnAddUser.Depth = 0;
             this.btnAddUser.HighEmphasis = true;
             this.btnAddUser.Icon = null;
-            this.btnAddUser.Location = new System.Drawing.Point(192, 404);
+            this.btnAddUser.Location = new System.Drawing.Point(192, 398);
             this.btnAddUser.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAddUser.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnAddUser.Name = "btnAddUser";
@@ -501,6 +578,7 @@ namespace TakoTea.Views.settings
             // 
             // groupBoxEmailSelection
             // 
+            this.groupBoxEmailSelection.Controls.Add(this.bindingNavigatorEmails);
             this.groupBoxEmailSelection.Controls.Add(this.dataGridViewEmails);
             this.groupBoxEmailSelection.Location = new System.Drawing.Point(384, 24);
             this.groupBoxEmailSelection.Name = "groupBoxEmailSelection";
@@ -509,12 +587,127 @@ namespace TakoTea.Views.settings
             this.groupBoxEmailSelection.TabStop = false;
             this.groupBoxEmailSelection.Text = "Select Email";
             // 
+            // bindingNavigatorEmails
+            // 
+            this.bindingNavigatorEmails.AddNewItem = this.bindingNavigatorAddNewItem;
+            this.bindingNavigatorEmails.CountItem = this.bindingNavigatorCountItem;
+            this.bindingNavigatorEmails.DeleteItem = null;
+            this.bindingNavigatorEmails.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigatorMoveFirstItem,
+            this.bindingNavigatorMovePreviousItem,
+            this.bindingNavigatorSeparator,
+            this.bindingNavigatorPositionItem,
+            this.bindingNavigatorCountItem,
+            this.bindingNavigatorSeparator1,
+            this.bindingNavigatorMoveNextItem,
+            this.bindingNavigatorMoveLastItem,
+            this.bindingNavigatorSeparator2,
+            this.bindingNavigatorAddNewItem,
+            this.bindingNavigatorDeleteItemEmails});
+            this.bindingNavigatorEmails.Location = new System.Drawing.Point(3, 16);
+            this.bindingNavigatorEmails.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.bindingNavigatorEmails.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.bindingNavigatorEmails.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.bindingNavigatorEmails.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.bindingNavigatorEmails.Name = "bindingNavigatorEmails";
+            this.bindingNavigatorEmails.PositionItem = this.bindingNavigatorPositionItem;
+            this.bindingNavigatorEmails.Size = new System.Drawing.Size(306, 25);
+            this.bindingNavigatorEmails.TabIndex = 1;
+            this.bindingNavigatorEmails.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "Add new";
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
+            this.bindingNavigatorCountItem.Text = "of {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
+            // 
+            // bindingNavigatorDeleteItemEmails
+            // 
+            this.bindingNavigatorDeleteItemEmails.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItemEmails.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItemEmails.Image")));
+            this.bindingNavigatorDeleteItemEmails.Name = "bindingNavigatorDeleteItemEmails";
+            this.bindingNavigatorDeleteItemEmails.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItemEmails.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItemEmails.Text = "Delete";
+            this.bindingNavigatorDeleteItemEmails.Click += new System.EventHandler(this.bindingNavigatorDeleteItemEmails_Click);
+            // 
+            // bindingNavigatorMoveFirstItem
+            // 
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem.Text = "Move first";
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
+            // 
+            // bindingNavigatorSeparator
+            // 
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorPositionItem
+            // 
+            this.bindingNavigatorPositionItem.AccessibleName = "Position";
+            this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
+            this.bindingNavigatorPositionItem.Text = "0";
+            this.bindingNavigatorPositionItem.ToolTipText = "Current position";
+            // 
+            // bindingNavigatorSeparator1
+            // 
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorMoveNextItem
+            // 
+            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
+            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
+            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveNextItem.Text = "Move next";
+            // 
+            // bindingNavigatorMoveLastItem
+            // 
+            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
+            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
+            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveLastItem.Text = "Move last";
+            // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // dataGridViewEmails
             // 
             this.dataGridViewEmails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewEmails.Location = new System.Drawing.Point(16, 24);
+            this.dataGridViewEmails.Location = new System.Drawing.Point(0, 40);
             this.dataGridViewEmails.Name = "dataGridViewEmails";
-            this.dataGridViewEmails.Size = new System.Drawing.Size(288, 288);
+            this.dataGridViewEmails.Size = new System.Drawing.Size(312, 272);
             this.dataGridViewEmails.TabIndex = 0;
             this.dataGridViewEmails.CellBorderStyleChanged += new System.EventHandler(this.dataGridViewEmails_CellBorderStyleChanged);
             this.dataGridViewEmails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEmails_CellClick);
@@ -630,10 +823,9 @@ namespace TakoTea.Views.settings
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.panel1);
             this.groupBox2.Controls.Add(this.materialFloatingActionButtonAddBackUpDestination);
-            this.groupBox2.Controls.Add(this.materialFloatingActionButtonDeleteBackupDestination);
             this.groupBox2.Controls.Add(this.cmbBackupSchedule);
-            this.groupBox2.Controls.Add(this.checkedListBoxBackUpDestinations);
             this.groupBox2.Controls.Add(this.btnPerformBackup);
             this.groupBox2.Controls.Add(this.lblLastBackupDate);
             this.groupBox2.Controls.Add(this.materialLabel11);
@@ -647,12 +839,144 @@ namespace TakoTea.Views.settings
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Backup";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.dataGridViewBackupPaths);
+            this.panel1.Controls.Add(this.bindingNavigatorBackup);
+            this.panel1.Location = new System.Drawing.Point(8, 160);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(664, 200);
+            this.panel1.TabIndex = 107;
+            // 
+            // dataGridViewBackupPaths
+            // 
+            this.dataGridViewBackupPaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewBackupPaths.Location = new System.Drawing.Point(0, 24);
+            this.dataGridViewBackupPaths.Name = "dataGridViewBackupPaths";
+            this.dataGridViewBackupPaths.Size = new System.Drawing.Size(660, 176);
+            this.dataGridViewBackupPaths.TabIndex = 107;
+            this.dataGridViewBackupPaths.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewBackupPaths_CellClick);
+            // 
+            // bindingNavigatorBackup
+            // 
+            this.bindingNavigatorBackup.AddNewItem = this.bindingNavigatorAddNewItem1;
+            this.bindingNavigatorBackup.CountItem = this.bindingNavigatorCountItem1;
+            this.bindingNavigatorBackup.DeleteItem = null;
+            this.bindingNavigatorBackup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigatorMoveFirstItem1,
+            this.bindingNavigatorMovePreviousItem1,
+            this.bindingNavigatorSeparator3,
+            this.bindingNavigatorPositionItem1,
+            this.bindingNavigatorCountItem1,
+            this.bindingNavigatorSeparator4,
+            this.bindingNavigatorMoveNextItem1,
+            this.bindingNavigatorMoveLastItem1,
+            this.bindingNavigatorSeparator5,
+            this.bindingNavigatorAddNewItem1,
+            this.bindingNavigatorDeleteBackupPaths});
+            this.bindingNavigatorBackup.Location = new System.Drawing.Point(0, 0);
+            this.bindingNavigatorBackup.MoveFirstItem = this.bindingNavigatorMoveFirstItem1;
+            this.bindingNavigatorBackup.MoveLastItem = this.bindingNavigatorMoveLastItem1;
+            this.bindingNavigatorBackup.MoveNextItem = this.bindingNavigatorMoveNextItem1;
+            this.bindingNavigatorBackup.MovePreviousItem = this.bindingNavigatorMovePreviousItem1;
+            this.bindingNavigatorBackup.Name = "bindingNavigatorBackup";
+            this.bindingNavigatorBackup.PositionItem = this.bindingNavigatorPositionItem1;
+            this.bindingNavigatorBackup.Size = new System.Drawing.Size(664, 25);
+            this.bindingNavigatorBackup.TabIndex = 106;
+            this.bindingNavigatorBackup.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorAddNewItem1
+            // 
+            this.bindingNavigatorAddNewItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem1.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem1.Image")));
+            this.bindingNavigatorAddNewItem1.Name = "bindingNavigatorAddNewItem1";
+            this.bindingNavigatorAddNewItem1.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem1.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem1.Text = "Add new";
+            // 
+            // bindingNavigatorCountItem1
+            // 
+            this.bindingNavigatorCountItem1.Name = "bindingNavigatorCountItem1";
+            this.bindingNavigatorCountItem1.Size = new System.Drawing.Size(35, 22);
+            this.bindingNavigatorCountItem1.Text = "of {0}";
+            this.bindingNavigatorCountItem1.ToolTipText = "Total number of items";
+            // 
+            // bindingNavigatorMoveFirstItem1
+            // 
+            this.bindingNavigatorMoveFirstItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem1.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem1.Image")));
+            this.bindingNavigatorMoveFirstItem1.Name = "bindingNavigatorMoveFirstItem1";
+            this.bindingNavigatorMoveFirstItem1.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem1.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem1.Text = "Move first";
+            // 
+            // bindingNavigatorMovePreviousItem1
+            // 
+            this.bindingNavigatorMovePreviousItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem1.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem1.Image")));
+            this.bindingNavigatorMovePreviousItem1.Name = "bindingNavigatorMovePreviousItem1";
+            this.bindingNavigatorMovePreviousItem1.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem1.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem1.Text = "Move previous";
+            // 
+            // bindingNavigatorSeparator3
+            // 
+            this.bindingNavigatorSeparator3.Name = "bindingNavigatorSeparator3";
+            this.bindingNavigatorSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorPositionItem1
+            // 
+            this.bindingNavigatorPositionItem1.AccessibleName = "Position";
+            this.bindingNavigatorPositionItem1.AutoSize = false;
+            this.bindingNavigatorPositionItem1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.bindingNavigatorPositionItem1.Name = "bindingNavigatorPositionItem1";
+            this.bindingNavigatorPositionItem1.Size = new System.Drawing.Size(50, 23);
+            this.bindingNavigatorPositionItem1.Text = "0";
+            this.bindingNavigatorPositionItem1.ToolTipText = "Current position";
+            // 
+            // bindingNavigatorSeparator4
+            // 
+            this.bindingNavigatorSeparator4.Name = "bindingNavigatorSeparator4";
+            this.bindingNavigatorSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorMoveNextItem1
+            // 
+            this.bindingNavigatorMoveNextItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveNextItem1.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem1.Image")));
+            this.bindingNavigatorMoveNextItem1.Name = "bindingNavigatorMoveNextItem1";
+            this.bindingNavigatorMoveNextItem1.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveNextItem1.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveNextItem1.Text = "Move next";
+            // 
+            // bindingNavigatorMoveLastItem1
+            // 
+            this.bindingNavigatorMoveLastItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem1.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem1.Image")));
+            this.bindingNavigatorMoveLastItem1.Name = "bindingNavigatorMoveLastItem1";
+            this.bindingNavigatorMoveLastItem1.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem1.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveLastItem1.Text = "Move last";
+            // 
+            // bindingNavigatorSeparator5
+            // 
+            this.bindingNavigatorSeparator5.Name = "bindingNavigatorSeparator5";
+            this.bindingNavigatorSeparator5.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorDeleteBackupPaths
+            // 
+            this.bindingNavigatorDeleteBackupPaths.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteBackupPaths.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteBackupPaths.Image")));
+            this.bindingNavigatorDeleteBackupPaths.Name = "bindingNavigatorDeleteBackupPaths";
+            this.bindingNavigatorDeleteBackupPaths.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteBackupPaths.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteBackupPaths.Text = "Delete";
+            // 
             // materialFloatingActionButtonAddBackUpDestination
             // 
             this.materialFloatingActionButtonAddBackUpDestination.Depth = 0;
             this.materialFloatingActionButtonAddBackUpDestination.Icon = global::TakoTea.Views.Properties.Resources.plus_white1;
             this.materialFloatingActionButtonAddBackUpDestination.Image = global::TakoTea.Views.Properties.Resources.plus;
-            this.materialFloatingActionButtonAddBackUpDestination.Location = new System.Drawing.Point(552, 168);
+            this.materialFloatingActionButtonAddBackUpDestination.Location = new System.Drawing.Point(584, 120);
             this.materialFloatingActionButtonAddBackUpDestination.Mini = true;
             this.materialFloatingActionButtonAddBackUpDestination.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFloatingActionButtonAddBackUpDestination.Name = "materialFloatingActionButtonAddBackUpDestination";
@@ -660,20 +984,6 @@ namespace TakoTea.Views.settings
             this.materialFloatingActionButtonAddBackUpDestination.TabIndex = 104;
             this.materialFloatingActionButtonAddBackUpDestination.UseVisualStyleBackColor = true;
             this.materialFloatingActionButtonAddBackUpDestination.Click += new System.EventHandler(this.materialFloatingActionButtonAddBackUpDestination_Click);
-            // 
-            // materialFloatingActionButtonDeleteBackupDestination
-            // 
-            this.materialFloatingActionButtonDeleteBackupDestination.Depth = 0;
-            this.materialFloatingActionButtonDeleteBackupDestination.Icon = global::TakoTea.Views.Properties.Resources.delete;
-            this.materialFloatingActionButtonDeleteBackupDestination.Image = global::TakoTea.Views.Properties.Resources.plus;
-            this.materialFloatingActionButtonDeleteBackupDestination.Location = new System.Drawing.Point(600, 168);
-            this.materialFloatingActionButtonDeleteBackupDestination.Mini = true;
-            this.materialFloatingActionButtonDeleteBackupDestination.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialFloatingActionButtonDeleteBackupDestination.Name = "materialFloatingActionButtonDeleteBackupDestination";
-            this.materialFloatingActionButtonDeleteBackupDestination.Size = new System.Drawing.Size(40, 40);
-            this.materialFloatingActionButtonDeleteBackupDestination.TabIndex = 104;
-            this.materialFloatingActionButtonDeleteBackupDestination.UseVisualStyleBackColor = true;
-            this.materialFloatingActionButtonDeleteBackupDestination.Click += new System.EventHandler(this.materialFloatingActionButtonDeleteBackupDestination_Click);
             // 
             // cmbBackupSchedule
             // 
@@ -703,18 +1013,6 @@ namespace TakoTea.Views.settings
             this.cmbBackupSchedule.StartIndex = 0;
             this.cmbBackupSchedule.TabIndex = 1;
             // 
-            // checkedListBoxBackUpDestinations
-            // 
-            this.checkedListBoxBackUpDestinations.BackColor = System.Drawing.SystemColors.Control;
-            this.checkedListBoxBackUpDestinations.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.checkedListBoxBackUpDestinations.CheckOnClick = true;
-            this.checkedListBoxBackUpDestinations.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.checkedListBoxBackUpDestinations.FormattingEnabled = true;
-            this.checkedListBoxBackUpDestinations.Location = new System.Drawing.Point(8, 160);
-            this.checkedListBoxBackUpDestinations.Name = "checkedListBoxBackUpDestinations";
-            this.checkedListBoxBackUpDestinations.Size = new System.Drawing.Size(648, 200);
-            this.checkedListBoxBackUpDestinations.TabIndex = 8;
-            // 
             // btnPerformBackup
             // 
             this.btnPerformBackup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -733,6 +1031,7 @@ namespace TakoTea.Views.settings
             this.btnPerformBackup.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnPerformBackup.UseAccentColor = false;
             this.btnPerformBackup.UseVisualStyleBackColor = true;
+            this.btnPerformBackup.Click += new System.EventHandler(this.btnPerformBackup_Click);
             // 
             // lblLastBackupDate
             // 
@@ -843,6 +1142,7 @@ namespace TakoTea.Views.settings
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.bindingNavigatorPaymentMethods);
             this.groupBox3.Controls.Add(this.dgvPaymentMethods);
             this.groupBox3.Controls.Add(this.materialFloatingActionButtonAddPaymentMethod);
             this.groupBox3.Controls.Add(this.txtBoxAddPaymentMethod);
@@ -853,14 +1153,135 @@ namespace TakoTea.Views.settings
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Payment Methods";
             // 
+            // bindingNavigatorPaymentMethods
+            // 
+            this.bindingNavigatorPaymentMethods.AddNewItem = this.toolStripButton1;
+            this.bindingNavigatorPaymentMethods.BindingSource = this.bindingSourcePaymentMethods;
+            this.bindingNavigatorPaymentMethods.CountItem = this.toolStripLabel1;
+            this.bindingNavigatorPaymentMethods.DeleteItem = null;
+            this.bindingNavigatorPaymentMethods.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton3,
+            this.toolStripButton4,
+            this.toolStripSeparator1,
+            this.toolStripTextBox1,
+            this.toolStripLabel1,
+            this.toolStripSeparator2,
+            this.toolStripButton5,
+            this.toolStripButton6,
+            this.toolStripSeparator3,
+            this.toolStripButton1,
+            this.deletePaymentMethods,
+            this.toolStripProgressBar1});
+            this.bindingNavigatorPaymentMethods.Location = new System.Drawing.Point(3, 16);
+            this.bindingNavigatorPaymentMethods.MoveFirstItem = this.toolStripButton3;
+            this.bindingNavigatorPaymentMethods.MoveLastItem = this.toolStripButton6;
+            this.bindingNavigatorPaymentMethods.MoveNextItem = this.toolStripButton5;
+            this.bindingNavigatorPaymentMethods.MovePreviousItem = this.toolStripButton4;
+            this.bindingNavigatorPaymentMethods.Name = "bindingNavigatorPaymentMethods";
+            this.bindingNavigatorPaymentMethods.PositionItem = this.toolStripTextBox1;
+            this.bindingNavigatorPaymentMethods.Size = new System.Drawing.Size(313, 25);
+            this.bindingNavigatorPaymentMethods.TabIndex = 108;
+            this.bindingNavigatorPaymentMethods.Text = "bindingNavigator1";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.RightToLeftAutoMirrorImage = true;
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "Add new";
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(35, 22);
+            this.toolStripLabel1.Text = "of {0}";
+            this.toolStripLabel1.ToolTipText = "Total number of items";
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.RightToLeftAutoMirrorImage = true;
+            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton3.Text = "Move first";
+            // 
+            // toolStripButton4
+            // 
+            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.RightToLeftAutoMirrorImage = true;
+            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton4.Text = "Move previous";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.AccessibleName = "Position";
+            this.toolStripTextBox1.AutoSize = false;
+            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(50, 23);
+            this.toolStripTextBox1.Text = "0";
+            this.toolStripTextBox1.ToolTipText = "Current position";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.RightToLeftAutoMirrorImage = true;
+            this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton5.Text = "Move next";
+            // 
+            // toolStripButton6
+            // 
+            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
+            this.toolStripButton6.Name = "toolStripButton6";
+            this.toolStripButton6.RightToLeftAutoMirrorImage = true;
+            this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton6.Text = "Move last";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // deletePaymentMethods
+            // 
+            this.deletePaymentMethods.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.deletePaymentMethods.Image = ((System.Drawing.Image)(resources.GetObject("deletePaymentMethods.Image")));
+            this.deletePaymentMethods.Name = "deletePaymentMethods";
+            this.deletePaymentMethods.RightToLeftAutoMirrorImage = true;
+            this.deletePaymentMethods.Size = new System.Drawing.Size(23, 22);
+            this.deletePaymentMethods.Text = "Delete";
+            this.deletePaymentMethods.Click += new System.EventHandler(this.deletePaymentMethods_Click);
+            // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 15);
+            // 
             // dgvPaymentMethods
             // 
             this.dgvPaymentMethods.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPaymentMethods.Location = new System.Drawing.Point(16, 16);
+            this.dgvPaymentMethods.Location = new System.Drawing.Point(8, 40);
             this.dgvPaymentMethods.Name = "dgvPaymentMethods";
-            this.dgvPaymentMethods.Size = new System.Drawing.Size(288, 272);
+            this.dgvPaymentMethods.Size = new System.Drawing.Size(304, 248);
             this.dgvPaymentMethods.TabIndex = 107;
-            this.dgvPaymentMethods.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPaymentMethods_CellClick);
             // 
             // materialFloatingActionButtonAddPaymentMethod
             // 
@@ -951,7 +1372,7 @@ namespace TakoTea.Views.settings
             this.btnSaveChanges.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnSaveChanges.UseAccentColor = true;
             this.btnSaveChanges.UseVisualStyleBackColor = true;
-            this.btnSaveChanges.Click += new System.EventHandler(this.btnSaveChanges_Click_1);
+            this.btnSaveChanges.Click += new System.EventHandler(this.btnSaveChanges_Click);
             // 
             // SettingsForm
             // 
@@ -964,13 +1385,13 @@ namespace TakoTea.Views.settings
             this.Controls.Add(this.materialTabSelector1);
             this.Name = "SettingsForm";
             this.Padding = new System.Windows.Forms.Padding(3, 21, 3, 3);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings";
             this.materialTabControl1.ResumeLayout(false);
             this.tabPageUserManagement.ResumeLayout(false);
             this.materialCard1.ResumeLayout(false);
             this.materialCard1.PerformLayout();
             this.groupBoxUserInfo.ResumeLayout(false);
-            this.groupBoxUserInfo.PerformLayout();
             this.materialCard4.ResumeLayout(false);
             this.materialCard4.PerformLayout();
             this.groupBoxUserList.ResumeLayout(false);
@@ -978,6 +1399,10 @@ namespace TakoTea.Views.settings
             this.materialCard2.ResumeLayout(false);
             this.materialCard2.PerformLayout();
             this.groupBoxEmailSelection.ResumeLayout(false);
+            this.groupBoxEmailSelection.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorEmails)).EndInit();
+            this.bindingNavigatorEmails.ResumeLayout(false);
+            this.bindingNavigatorEmails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmails)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBoxDeliveryMethod.ResumeLayout(false);
@@ -987,11 +1412,23 @@ namespace TakoTea.Views.settings
             this.materialCard3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBackupPaths)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorBackup)).EndInit();
+            this.bindingNavigatorBackup.ResumeLayout(false);
+            this.bindingNavigatorBackup.PerformLayout();
             this.tabPagePaymentMethod.ResumeLayout(false);
             this.materialCard5.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorPaymentMethods)).EndInit();
+            this.bindingNavigatorPaymentMethods.ResumeLayout(false);
+            this.bindingNavigatorPaymentMethods.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePaymentMethods)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentMethods)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceEmails)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceBackUpPaths)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1047,8 +1484,6 @@ namespace TakoTea.Views.settings
         private MaterialButton btnSaveChanges;
         private GroupBox groupBox2;
         private MaterialFloatingActionButton materialFloatingActionButtonAddBackUpDestination;
-        private MaterialFloatingActionButton materialFloatingActionButtonDeleteBackupDestination;
-        public CheckedListBox checkedListBoxBackUpDestinations;
         private TabPage tabPagePaymentMethod;
         public MaterialCard materialCard5;
         private GroupBox groupBox3;
@@ -1056,6 +1491,49 @@ namespace TakoTea.Views.settings
         private TextBox txtBoxAddPaymentMethod;
         private DataGridView dataGridViewEmails;
         private DataGridView dgvPaymentMethods;
+        private BindingNavigator bindingNavigatorEmails;
+        private ToolStripButton bindingNavigatorAddNewItem;
+        private ToolStripLabel bindingNavigatorCountItem;
+        private ToolStripButton bindingNavigatorDeleteItemEmails;
+        private ToolStripButton bindingNavigatorMoveFirstItem;
+        private ToolStripButton bindingNavigatorMovePreviousItem;
+        private ToolStripSeparator bindingNavigatorSeparator;
+        private ToolStripTextBox bindingNavigatorPositionItem;
+        private ToolStripSeparator bindingNavigatorSeparator1;
+        private ToolStripButton bindingNavigatorMoveNextItem;
+        private ToolStripButton bindingNavigatorMoveLastItem;
+        private ToolStripSeparator bindingNavigatorSeparator2;
+        private BindingNavigator bindingNavigatorPaymentMethods;
+        private ToolStripButton toolStripButton1;
+        private ToolStripLabel toolStripLabel1;
+        private ToolStripButton deletePaymentMethods;
+        private ToolStripButton toolStripButton3;
+        private ToolStripButton toolStripButton4;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripTextBox toolStripTextBox1;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripButton toolStripButton5;
+        private ToolStripButton toolStripButton6;
+        private ToolStripSeparator toolStripSeparator3;
+        private BindingSource bindingSourceEmails;
+        private BindingSource bindingSourcePaymentMethods;
+        public MaterialButton btnCancelEditUser;
+        private ToolStripProgressBar toolStripProgressBar1;
+        private BindingNavigator bindingNavigatorBackup;
+        private ToolStripButton bindingNavigatorAddNewItem1;
+        private ToolStripLabel bindingNavigatorCountItem1;
+        private ToolStripButton bindingNavigatorDeleteBackupPaths;
+        private ToolStripButton bindingNavigatorMoveFirstItem1;
+        private ToolStripButton bindingNavigatorMovePreviousItem1;
+        private ToolStripSeparator bindingNavigatorSeparator3;
+        private ToolStripTextBox bindingNavigatorPositionItem1;
+        private ToolStripSeparator bindingNavigatorSeparator4;
+        private ToolStripButton bindingNavigatorMoveNextItem1;
+        private ToolStripButton bindingNavigatorMoveLastItem1;
+        private ToolStripSeparator bindingNavigatorSeparator5;
+        private Panel panel1;
+        private BindingSource bindingSourceBackUpPaths;
+        public DataGridView dataGridViewBackupPaths;
 
         // ... other controls ...
 

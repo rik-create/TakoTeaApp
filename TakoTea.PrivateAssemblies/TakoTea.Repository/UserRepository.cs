@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Windows.Forms;
 using TakoTea.Models;
 
 namespace TakoTea.Repository
@@ -38,8 +39,12 @@ namespace TakoTea.Repository
             User user = _context.Users.Find(userId);
             if (user != null)
             {
-                _ = _context.Users.Remove(user);
-                _ = _context.SaveChanges();
+                DialogResult result = MessageBox.Show($"Are you sure you want to delete user '{user.Username}'?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    _context.Users.Remove(user);
+                    _context.SaveChanges();
+                }
             }
         }
     }

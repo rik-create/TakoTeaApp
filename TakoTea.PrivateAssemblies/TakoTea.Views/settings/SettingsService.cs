@@ -34,22 +34,8 @@ namespace TakoTea.Views.settings
                     settingsForm.chkBoxEnableEmailNotifications.Checked = settings.EnableEmailNotifications.Value;
                     settingsForm.chkBoxInAppNotification.Checked = settings.EnableInAppNotifications.Value;
                     settingsForm.lblLastBackupDate.Text = settings.LastBackUpDate?.ToString("MMMM dd, yyyy (hh:mm tt)") ?? "N/A";
-
-
-
-                    if (!string.IsNullOrEmpty(settings.BackupDestination))
-                    {
-                        string[] backupDestinations = settings.BackupDestination.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-                        // Set the checked items in the CheckedListBox
-                        for (int i = 0; i < settingsForm.checkedListBoxBackUpDestinations.Items.Count; i++)
-                        {
-                            string item = settingsForm.checkedListBoxBackUpDestinations.Items[i].ToString();
-                            settingsForm.checkedListBoxBackUpDestinations.SetItemChecked(i, backupDestinations.Contains(item));
-                        }
-                    }
+            
                     settingsForm.cmbBackupSchedule.SelectedItem = settings.BackupSchedule;
-                    // ... load other settings ...
                 }
             }
             catch (Exception ex)
@@ -67,11 +53,6 @@ namespace TakoTea.Views.settings
                 settings.LowStockFrequency = settingsForm.cmbAlertFrequency.SelectedItem?.ToString();
                 settings.EnableEmailNotifications = settingsForm.chkBoxEnableEmailNotifications.Checked;
                 settings.EnableInAppNotifications = settingsForm.chkBoxInAppNotification.Checked;
-
-                List<string> selectedDestinations = settingsForm.checkedListBoxBackUpDestinations.Items.Cast<string>().ToList();
-
-                // Store the selected destinations as a comma-separated string
-                settings.BackupDestination = string.Join("|", selectedDestinations);
                 settings.BackupSchedule = settingsForm.cmbBackupSchedule.SelectedItem?.ToString();
                 // ... retrieve other settings from UI ...
 
@@ -117,35 +98,34 @@ namespace TakoTea.Views.settings
         {
             try
             {
-                // Get all checked paths from the CheckedListBox
-                List<string> backupDestinations = settingsForm.checkedListBoxBackUpDestinations.CheckedItems.Cast<string>().ToList();
+                // Get all backup paths from the DataGridView
+                List<string> backupDestinations = new List<string>();
+                foreach (DataGridViewRow row in settingsForm.dataGridViewBackupPaths.Rows)
+                {
+                    backupDestinations.Add(row.Cells[0].Value.ToString());
+                }
 
                 string backupSchedule = settingsForm.cmbBackupSchedule.SelectedItem?.ToString();
 
-                // Validate backup settings (optional) - you might need to adjust this based on your new logic
+                // Validate backup settings
                 if (backupDestinations.Count == 0 || string.IsNullOrEmpty(backupSchedule))
                 {
-                    _ = MessageBox.Show("Please select at least one backup destination and a backup schedule.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Please select at least one backup destination and a backup schedule.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 foreach (string backupDestination in backupDestinations)
                 {
-                    // Generate backup file path
                     string backupFilePath = GenerateBackupFilePath(backupDestination, backupSchedule);
-
-                    // Perform the backup
                     BackupDatabase(backupFilePath, "TakoTea");
                 }
 
-                // Update last backup date and time
                 UpdateLastBackupDate(settingsForm);
-                _ = MessageBox.Show("Backup performed and date saved successfully.");
-
+                MessageBox.Show("Backup performed and date saved successfully.");
             }
             catch (Exception ex)
             {
-                _ = MessageBox.Show($"Error performing backup: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error performing backup: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

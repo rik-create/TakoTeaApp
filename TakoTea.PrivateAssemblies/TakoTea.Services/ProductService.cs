@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Windows.Forms;
 using TakoTea.Helpers; // Replace with your context, e.g., if you're using Entity Framework
 using TakoTea.Models;
 
@@ -361,6 +362,7 @@ namespace TakoTea.Services
         {
             _ = _context.Products.Add(product);
             _ = _context.SaveChanges();
+            DialogHelper.ShowSuccess("Product Category added successfully!");
         }
 
         public void UpdateProduct(Product product)

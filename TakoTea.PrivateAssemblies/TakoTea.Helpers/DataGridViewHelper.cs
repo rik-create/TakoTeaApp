@@ -724,7 +724,6 @@ namespace TakoTea.Helpers
             // Set TriState for cells
             dataGridView.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 
-            dataGridView.ColumnHeaderMouseClick += DataGridView_ColumnHeaderMouseClick;
         }
         private static void DataGridView_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -898,16 +897,49 @@ namespace TakoTea.Helpers
             {
                 if (control is DataGridView dataGridView)
                 {
-                    DataGridViewHelper.ApplyDataGridViewStyles(dataGridView);
+                    ApplyDataGridViewStyles(dataGridView);
                 }
-          /*      else
+                else
                 {
                     // Handle nested controls (e.g., DataGridView inside panels or group boxes)
                     ApplyStylesToChildControls(control);
-                }*/
+                }
+            }
+        }
+        public static void FormatAllColumnHeaders(Form form)
+        {
+            foreach (Control control in form.Controls)
+            {
+                if (control is DataGridView dataGridView)
+                {
+                    FormatColumnHeaders(dataGridView);
+                }
+                else
+                {
+                    // Handle nested controls (e.g., DataGridView inside panels or group boxes)
+                    ApplyStylesToChildControls(control);
+                }
             }
         }
 
+
+
+        private static void ApplyStylesToChildControls(Control parent)
+        {
+            foreach (Control childControl in parent.Controls)
+            {
+                if (childControl is DataGridView dataGridView)
+                {
+                    ApplyDataGridViewStyles(dataGridView);
+                    FormatColumnHeaders(dataGridView);
+
+                }
+                else
+                {
+                    ApplyStylesToChildControls(childControl);
+                }
+            }
+        }
 
         private static void RepopulateIBindingList(IBindingList bindingList, List<object> sortedList, DataGridView dataGridView)
         {
