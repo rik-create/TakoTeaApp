@@ -623,6 +623,22 @@ namespace TakoTea.Helpers
             }
         }
 
+        public static void AddIconButtonColumn(DataGridView dataGridView, string columnName, string headerText, Image icon)
+        {
+            DataGridViewImageColumn iconColumn = new DataGridViewImageColumn();
+            iconColumn.Name = columnName;
+            iconColumn.HeaderText = headerText; // Set the header text
+
+            // Resize the icon
+            Bitmap resizedIcon = new Bitmap(icon, new Size(25, 25));
+            iconColumn.Image = resizedIcon;
+
+            // Insert the column at the last position
+            int lastColumnIndex = dataGridView.Columns.Count;
+            dataGridView.Columns.Insert(lastColumnIndex, iconColumn);
+            iconColumn.Width = 76;
+            iconColumn.Resizable = DataGridViewTriState.False;
+        }
         public static void DeleteSelectedRows2<T>(DataGridViewRow selectedRow, string idColumnName, bool deleteRows = true) where T : class
         {
             try
@@ -670,9 +686,12 @@ namespace TakoTea.Helpers
             dataGridView.DefaultCellStyle.ForeColor = Color.FromArgb(64, 64, 64); // Dark gray text for better contrast
 
             // Style the column headers
-            dataGridView.ColumnHeadersDefaultCellStyle.BackColor = ThemeConfigurator.GetCustomAccentColor(); // Use your accent color
+            dataGridView.ColumnHeadersDefaultCellStyle.BackColor = ThemeConfigurator.GetCustomAccentColor();
             dataGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dataGridView.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Regular);
 
+            // Align column header text to center
+            dataGridView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             // Use a slightly smaller and a more readable font
             dataGridView.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Regular);
 
@@ -813,53 +832,81 @@ namespace TakoTea.Helpers
 
         public static void SortDataGridView(DataGridView dataGridView, int columnIndex)
         {
-            DataGridViewColumn clickedColumn = dataGridView.Columns[columnIndex];
-
-            if (!(dataGridView.DataSource is IBindingList data))
+            try
             {
-                // Handle the case where the data source is not an IBindingList
-                return;
-            }
+                DataGridViewColumn clickedColumn = dataGridView.Columns[columnIndex];
 
-            // Get the current sort order for the clicked column
-            if (!_columnSortDirections.TryGetValue(clickedColumn.DataPropertyName, out SortOrder sortOrder))
-            {
-                // If not found, default to Ascending
-                sortOrder = SortOrder.Ascending;
-            }
-            else
-            {
-                // Toggle the sort order
-                sortOrder = sortOrder == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
-            }
+                if (!(dataGridView.DataSource is IBindingList data))
+                {
+                    // Handle the case where the data source is not an IBindingList
+                    return;
+                }
 
-            // Store the new sort order
-            _columnSortDirections[clickedColumn.DataPropertyName] = sortOrder;
-            dataGridView.Refresh();
+                // Ensure the column is sortable
+                if (clickedColumn.SortMode == DataGridViewColumnSortMode.NotSortable)
+                {
+                    clickedColumn.SortMode = DataGridViewColumnSortMode.Programmatic;
+                }
 
-            // Sort the IBindingList
-            if (sortOrder == SortOrder.Ascending)
-            {
-                List<object> sortedList = data.Cast<object>().OrderBy(x => GetPropertyValue(x, clickedColumn.DataPropertyName)).ToList();
-                RepopulateIBindingList(data, sortedList, dataGridView);
-            }
-            else
-            {
-                List<object> sortedList = data.Cast<object>().OrderByDescending(x => GetPropertyValue(x, clickedColumn.DataPropertyName)).ToList();
-                RepopulateIBindingList(data, sortedList, dataGridView);
-            }
+                // Get the current sort order for the clicked column
+                if (!_columnSortDirections.TryGetValue(clickedColumn.DataPropertyName, out SortOrder sortOrder))
+                {
+                    // If not found, default to Ascending
+                    sortOrder = SortOrder.Ascending;
+                }
+                else
+                {
+                    // Toggle the sort order
+                    sortOrder = sortOrder == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+                }
 
-            // Add visual feedback to the headers
-            foreach (DataGridViewColumn column in dataGridView.Columns)
-            {
-                column.HeaderCell.SortGlyphDirection = SortOrder.None;
-            }
+                // Store the new sort order
+                _columnSortDirections[clickedColumn.DataPropertyName] = sortOrder;
+                dataGridView.Refresh();
 
-            // Set the sort glyph for the clicked column
-            clickedColumn.HeaderCell.SortGlyphDirection = sortOrder;
+                // Sort the IBindingList
+                if (sortOrder == SortOrder.Ascending)
+                {
+                    List<object> sortedList = data.Cast<object>().OrderBy(x => GetPropertyValue(x, clickedColumn.DataPropertyName)).ToList();
+                    RepopulateIBindingList(data, sortedList, dataGridView);
+                }
+                else
+                {
+                    List<object> sortedList = data.Cast<object>().OrderByDescending(x => GetPropertyValue(x, clickedColumn.DataPropertyName)).ToList();
+                    RepopulateIBindingList(data, sortedList, dataGridView);
+                }
+
+                // Add visual feedback to the headers
+                foreach (DataGridViewColumn column in dataGridView.Columns)
+                {
+                    column.HeaderCell.SortGlyphDirection = SortOrder.None;
+                }
+
+                // Set the sort glyph for the clicked column
+                clickedColumn.HeaderCell.SortGlyphDirection = sortOrder;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while sorting: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         // Helper function to resize image bytes (static)
+        public static void ApplyStylesToAllDataGridViews(Form form)
+        {
+            foreach (Control control in form.Controls)
+            {
+                if (control is DataGridView dataGridView)
+                {
+                    DataGridViewHelper.ApplyDataGridViewStyles(dataGridView);
+                }
+          /*      else
+                {
+                    // Handle nested controls (e.g., DataGridView inside panels or group boxes)
+                    ApplyStylesToChildControls(control);
+                }*/
+            }
+        }
 
 
         private static void RepopulateIBindingList(IBindingList bindingList, List<object> sortedList, DataGridView dataGridView)

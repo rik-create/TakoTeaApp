@@ -375,24 +375,7 @@ namespace TakoTea.Views.MainForm
         
         }
 
-        private void toolStripBtnNewOrder_Click(object sender, EventArgs e)
-        {
-            MenuOrderForm menuOrderForm = new MenuOrderForm();
-            menuOrderForm.Show();
-        }
-
-        private void toolStripBtnAddIngredient_Click(object sender, EventArgs e)
-        {
-            AddItemModal addItemModal = new AddItemModal();
-            _ = addItemModal.ShowDialog();
-        }
-
-        private void toolStripBtnAddProduct_Click(object sender, EventArgs e)
-        {
-            AddProductModal addProductModal = new AddProductModal();
-            _ = addProductModal.ShowDialog();
-        }
-
+       
         private void btnReload_Click(object sender, EventArgs e)
         {
 
@@ -502,17 +485,35 @@ namespace TakoTea.Views.MainForm
         {
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-            ReportingForm reportingForm = new ReportingForm();
-            reportingForm.Show();
-        }
+            private void toolStripButton1_Click(object sender, EventArgs e)
+            {
+                ReportingForm reportingForm = new ReportingForm();
+                reportingForm.Show();
+            }
+            private void toolStripBtnNewOrder_Click(object sender, EventArgs e)
+            {
+                MenuOrderForm menuOrderForm = new MenuOrderForm();
+                menuOrderForm.Show();
+            }
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
-        {
-            SettingsForm settingsForm = new SettingsForm();
-            _ = settingsForm.ShowDialog();
-        }
+            private void toolStripBtnAddIngredient_Click(object sender, EventArgs e)
+            {
+                AddItemModal addItemModal = new AddItemModal();
+                _ = addItemModal.ShowDialog();
+            }
+
+            private void toolStripBtnAddProduct_Click(object sender, EventArgs e)
+            {
+                AddProductModal addProductModal = new AddProductModal();
+                _ = addProductModal.ShowDialog();
+            }
+
+
+            private void toolStripButton2_Click(object sender, EventArgs e)
+            {
+                SettingsForm settingsForm = new SettingsForm();
+                _ = settingsForm.ShowDialog();
+            }
 
         private void LoadFormIntoPanel(string formKey, Panel targetPanel)
         {

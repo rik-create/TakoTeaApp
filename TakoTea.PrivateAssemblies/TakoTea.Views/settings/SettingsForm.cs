@@ -1,6 +1,7 @@
 ﻿using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Windows.Forms;
 using TakoTea.Configurations;
@@ -14,16 +15,16 @@ namespace TakoTea.Views.settings
 {
     public partial class SettingsForm : MaterialForm
     {
-        private readonly Entities _context = new Entities();
+        private readonly Entities _context;
 
         public SettingsForm()
         {
             InitializeComponent();
-
+            _context = new Entities();
             try
             {
-                UserRepository.Initialize(new Entities());
-                SettingsService.Initialize(new Entities());
+                UserRepository.Initialize(_context);
+                SettingsService.Initialize(_context);
                 LoggingHelper.LogActivity("Initialization", "Services initialized successfully.");
             }
             catch (Exception ex)
@@ -32,6 +33,10 @@ namespace TakoTea.Views.settings
                 LoggingHelper.LogActivity("Initialization", "Error initializing services: " + ex.Message);
             }
 
+            DataGridViewHelper.ApplyStylesToAllDataGridViews(this);
+            DataGridViewHelper.AddIconButtonColumn(dataGridViewEmails, "DeleteColumn", "Delete", TakoTea.Views.Properties.Resources.multiply);
+            DataGridViewHelper.AddIconButtonColumn(dgvPaymentMethods, "DeleteColumn", "Delete", TakoTea.Views.Properties.Resources.multiply);
+
             DrawerShowIconsWhenHidden = false;
             ThemeConfigurator.ApplyDarkTheme(this);
 
@@ -39,7 +44,7 @@ namespace TakoTea.Views.settings
             {
                 // Load user roles
                 SettingsFormHelper.LoadUserRoles(cmbRoleAssignment);
-                SettingsFormHelper.LoadPaymentMethods(checkedListBoxPaymentMethod);
+                SettingsFormHelper.LoadPaymentMethods(dgvPaymentMethods);
                 // Load alert thresholds
 
                 // Load alert frequencies
@@ -47,7 +52,7 @@ namespace TakoTea.Views.settings
 
                 // Load backup destinations
 
-                SettingsFormHelper.LoadSavedEmails(checkedListBoxEmails);
+                SettingsFormHelper.LoadSavedEmails(dataGridViewEmails);
                 SettingsFormHelper.LoadBackUpPaths(checkedListBoxBackUpDestinations);
 
                 // Load backup schedules
@@ -76,6 +81,10 @@ namespace TakoTea.Views.settings
         {
             try
             {
+                foreach (var entry in _context.ChangeTracker.Entries())
+                {
+                    entry.State = EntityState.Detached;
+                }
                 SettingsService.LoadSettings(this);
                 LoggingHelper.LogActivity("CancelChanges", "Settings reloaded successfully.");
             }
@@ -216,7 +225,6 @@ namespace TakoTea.Views.settings
                 if (settings != null)
                 {
                     settings.LastBackUpDate = DateTime.Now;
-                    _ = context.SaveChanges();
                 }
 
             }
@@ -265,8 +273,7 @@ namespace TakoTea.Views.settings
                     return;
                 }
 
-                Entities context = new Entities();
-                Setting settings = context.Settings.FirstOrDefault();
+                Setting settings = _context.Settings.FirstOrDefault();
 
                 if (settings == null)
                 {
@@ -285,14 +292,13 @@ namespace TakoTea.Views.settings
 
                 // Add the new email to SavedEmails
                 settings.SavedEmails = settings.SavedEmails + "?" + newEmail;
-                _ = context.SaveChanges();
 
                 // Add the new email to the CheckedListBox
 
                 _ = MessageBox.Show("Email added successfully.");
                 txtBoxAddEmail.Text = ""; // Clear the input field
 
-                SettingsFormHelper.LoadSavedEmails(checkedListBoxEmails);
+                SettingsFormHelper.LoadSavedEmails(dataGridViewEmails);
                 LoggingHelper.LogActivity("AddEmail", "Email added successfully.");
             }
             catch (Exception ex)
@@ -308,19 +314,7 @@ namespace TakoTea.Views.settings
             return !string.IsNullOrEmpty(email) && email.Contains("@");
         }
 
-        private void materialButton1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                SettingsService.LoadSettings(this);
-                LoggingHelper.LogActivity("ReloadSettings", "Settings reloaded successfully.");
-            }
-            catch (Exception ex)
-            {
-                _ = MessageBox.Show("Error loading settings: " + ex.Message);
-                LoggingHelper.LogActivity("ReloadSettings", "Error loading settings: " + ex.Message);
-            }
-        }
+ 
 
         private void btnSaveChanges_Click(object sender, EventArgs e)
         {
@@ -330,6 +324,8 @@ namespace TakoTea.Views.settings
                 {
                     SettingsService.SaveSettings(this);
                     transaction.Commit();
+                    _context.SaveChanges();
+
                     _ = MessageBox.Show("Settings saved successfully.");
                     LoggingHelper.LogActivity("SaveChanges", "Settings saved successfully.");
                 }
@@ -340,28 +336,11 @@ namespace TakoTea.Views.settings
                     LoggingHelper.LogActivity("SaveChanges", "Error saving settings: " + ex.Message);
                 }
             }
+
             SettingsService.LoadSettings(this);
         }
 
-        private void checkBoxSelectAllEmails_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                bool isChecked = checkBoxSelectAllEmails.Checked;
-
-                for (int i = 0; i < checkedListBoxEmails.Items.Count; i++)
-                {
-                    checkedListBoxEmails.SetItemChecked(i, isChecked);
-                }
-                LoggingHelper.LogActivity("SelectAllEmails", "All emails selected/deselected.");
-            }
-            catch (Exception ex)
-            {
-                _ = MessageBox.Show("Error selecting all emails: " + ex.Message);
-                LoggingHelper.LogActivity("SelectAllEmails", "Error selecting all emails: " + ex.Message);
-            }
-        }
-
+     
         private void materialFloatingActionButtonAddBackUpDestination_Click(object sender, EventArgs e)
         {
             // Show a dialog to select a folder
@@ -400,48 +379,21 @@ namespace TakoTea.Views.settings
             }
         }
 
-        private void btnPerformBackup_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
+     
 
         // Helper method to load payment methods into the CheckedListBox
         private void LoadPaymentMethods()
         {
-            checkedListBoxPaymentMethod.Items.Clear();
+            // Assuming 'dgvPaymentMethods' is your DataGridView
+            dgvPaymentMethods.Rows.Clear();
+
             List<string> paymentMethods = PaymentMethodService.GetAllPaymentMethods();
-            checkedListBoxPaymentMethod.Items.AddRange(paymentMethods.ToArray());
-        }
-        private void materialFloatingActionButtonRemoveSelectedPaymentMethod_Click(object sender, EventArgs e)
-        {
-            try
+            foreach (string method in paymentMethods)
             {
-                if (checkedListBoxPaymentMethod.CheckedItems.Count == 0)
-                {
-                    _ = MessageBox.Show("Please select at least one payment method to remove.");
-                    return;
-                }
-
-                if (MessageBox.Show("Are you sure you want to delete the selected payment method(s)?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    foreach (object item in checkedListBoxPaymentMethod.CheckedItems)
-                    {
-                        string paymentMethodName = item.ToString();
-
-                        // Remove the payment method using your PaymentMethodService
-                        PaymentMethodService.RemovePaymentMethod(paymentMethodName);
-                    }
-
-                    // Refresh the payment methods in the CheckedListBox
-                    LoadPaymentMethods();
-                }
-            }
-            catch (Exception ex)
-            {
-                _ = MessageBox.Show("Error removing payment method(s): " + ex.Message);
+                dgvPaymentMethods.Rows.Add(method); // Add each payment method to a new row
             }
         }
+
 
         private void materialFloatingActionButtonAddPaymentMethod_Click_1(object sender, EventArgs e)
         {
@@ -457,7 +409,7 @@ namespace TakoTea.Views.settings
                 }
 
                 // Add the new payment method using your PaymentMethodService
-                PaymentMethodService.AddPaymentMethod(newPaymentMethod);
+                PaymentMethodService.AddPaymentMethod(newPaymentMethod, _context);
 
                 // Refresh the payment methods in the CheckedListBox
                 LoadPaymentMethods();
@@ -469,5 +421,61 @@ namespace TakoTea.Views.settings
                 _ = MessageBox.Show("Error adding payment method: " + ex.Message);
             }
         }
+
+        private void dataGridViewEmails_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dataGridViewEmails.Columns[e.ColumnIndex].Name == "DeleteColumn")
+            {
+                DataGridViewRow clickedRow = dataGridViewEmails.Rows[e.RowIndex];
+                string emailToDelete = clickedRow.Cells[0].Value.ToString();
+                dataGridViewEmails.Rows.Remove(clickedRow);
+
+                Setting settings = _context.Settings.FirstOrDefault();
+                if (settings != null)
+                {
+                    string[] savedEmails = settings.SavedEmails.Split(new[] { '?' }, StringSplitOptions.RemoveEmptyEntries);
+                    settings.SavedEmails = string.Join("?", savedEmails.Where(email => email != emailToDelete));
+                }
+            }
+        }
+        private void btnSaveChanges_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCancelChanges_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDeleteUser_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkBoxInAppNotification_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridViewEmails_CellBorderStyleChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvPaymentMethods_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvPaymentMethods.Columns[e.ColumnIndex].Name == "DeleteColumn")
+            {
+                string paymentMethodToDelete = dgvPaymentMethods.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+                // Remove the payment method using your PaymentMethodService
+                PaymentMethodService.DeletePaymentMethod(paymentMethodToDelete, _context);
+
+                // Refresh the payment methods in the DataGridView
+                LoadPaymentMethods();
+            }
+        }
     }
+    
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,14 +30,19 @@ namespace TakoTea.Views.Items
             _dao = new DataAccessObject();
             _batchRepo = new BatchRepository(_dao);
             ingredientRepository = new IngredientRepository(new Entities()); // Fix: Pass an instance of Entities
-            DataGridViewHelper.ApplyDefaultStyles(dataGridViewIngredients);
             dataGridViewIngredients.CellClick += dataGridViewIngredients_CellClick;
-            LoadData();
-            DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewIngredients);
             _inventoryService = new InventoryService();
             bindingNavigatorDeleteItem.Click += bindingNavigatorDeleteItem_Click;
+            InitializeDgs();
+        }
+        private void InitializeDgs()
+        {
+            DataGridViewHelper.ApplyDefaultStyles(dataGridViewIngredients);
+            LoadData();
+            DataGridViewHelper.ApplyDataGridViewStyles(dataGridViewIngredients);
             DataGridViewHelper.FormatColumnHeaders(dataGridViewIngredients);
-
+            Image processIcon = imageListButton.Images["reorder.png"]; // Access image by   
+            DataGridViewHelper.AddIconButtonColumn(dataGridViewIngredients, "CreateBatchButtonColumn", "Create Batch", processIcon);
         }
         private void FilterIngredients()
         {
@@ -147,7 +153,6 @@ namespace TakoTea.Views.Items
         {
             base.OnLoad(e);
             LoadData();
-            DataGridViewHelper.AddButtonToLastRow(dataGridViewIngredients, "CreateBatchButtonColumn", "Create Batch", ThemeConfigurator.GetAccentColor(), ThemeConfigurator.GetTextColor());
         }
         private void HandleEditButtonClick(int rowIndex)
         {
@@ -174,7 +179,6 @@ namespace TakoTea.Views.Items
         private void pBoxShowFilter_Click(object sender, EventArgs e)
         {
             FilterPanelHelper.ToggleFilterPanel(panelFilteringComponents, btnHideFilters, pBoxShowFilter, true);
-    
         }
         private void pbImportIngredients_Click(object sender, EventArgs e)
         {
@@ -251,7 +255,6 @@ namespace TakoTea.Views.Items
         private void materialLabel2_Click(object sender, EventArgs e)
         {
         }
-
         private async void textBoxSearchIngredients_Click(object sender, EventArgs e)
         {
             await Task.Delay(300);

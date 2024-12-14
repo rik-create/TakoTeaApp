@@ -1,12 +1,18 @@
-﻿using MaterialSkin.Controls;
+﻿#region
+using MaterialSkin.Controls;
 using System;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
+using System.util;
 using System.Windows.Forms;
 using TakoTea.Configurations;
 using TakoTea.Helpers;
+using TakoTea.Interfaces;
 using TakoTea.Models;
+using TakoTea.Repository;
 using TakoTea.Services;
+using TakoTea.Views.Batches;
 using TakoTea.Views.Order;
 namespace TakoTea.View.Orders
 {
@@ -16,27 +22,54 @@ namespace TakoTea.View.Orders
         private readonly ProductsService productsService;
         private readonly SalesService salesService;
         private MenuOrderFormService menuOrderFormService;
-
         public OrdersQueueForm(Entities context)
         {
             InitializeComponent();
             ThemeConfigurator.ApplyDarkTheme(this);
-            pbCompleted.Click += pbCompleted_Click;
-            pbCancelled.Click += pbCancelled_Click;
-            btnProcessOrder.Click += btnProcessOrder_Click;
             this.context = context;
             productsService = new ProductsService(context);
             DataGridViewHelper.ApplyDataGridViewStyles(dgViewOrderQueue);
             salesService = new SalesService(context);
             LoadData();
-            DataGridViewHelper.FormatColumnHeaders(dgViewOrderQueue);
-            DataGridViewHelper.HideColumn(dgViewOrderQueue, "GrossProfit");
+            FormatColumns();
 
             menuOrderFormService = new MenuOrderFormService();
-
             dgViewOrderQueue.CellDoubleClick += dataGridViewProductVariantList_CellDoubleClick;
+            dgViewOrderQueue.CellClick += dgViewOrderQueue_CellClick;
         }
+        private void FormatColumns()
+        {
+            Image processIcon = imageListButtons.Images["whisk-and-bowl.png"]; // Access image by   
 
+            DataGridViewHelper.AddIconButtonColumn(dgViewOrderQueue, "ColumnProcessOrder", "Process", processIcon);
+            DataGridViewHelper.AddIconButtonColumn(dgViewOrderQueue, "ColumnCancelOrder", "Cancel", TakoTea.Views.Properties.Resources.multiply);
+            DataGridViewHelper.AddIconButtonColumn(dgViewOrderQueue, "ColumnCompleteOrder", "Complete", TakoTea.Views.Properties.Resources._checked);
+            DataGridViewHelper.FormatColumnHeaders(dgViewOrderQueue);
+            DataGridViewHelper.HideColumn(dgViewOrderQueue, "GrossProfit");
+        }
+     private void dgViewOrderQueue_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0) // Check for valid cell click
+            {
+                DataGridViewRow clickedRow = dgViewOrderQueue.Rows[e.RowIndex];
+                int orderId = Convert.ToInt32(clickedRow.Cells["OrderId"].Value);
+
+                if (e.ColumnIndex == dgViewOrderQueue.Columns["ColumnCancelOrder"].Index && e.RowIndex >= 0)
+                {
+                    UpdateOrderStatusForSelectedRows(clickedRow, "Cancelled");
+                }
+                else if (e.ColumnIndex == dgViewOrderQueue.Columns["ColumnCompleteOrder"].Index && e.RowIndex >= 0)
+                {
+                    UpdateOrderStatusForSelectedRows(clickedRow, "Completed");
+                }
+                else if (e.ColumnIndex == dgViewOrderQueue.Columns["ColumnProcessOrder"].Index && e.RowIndex >= 0)
+                {
+                    UpdateOrderStatusForSelectedRows(clickedRow, "Processing");
+                }
+            }
+
+
+        }
         private void dataGridViewProductVariantList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             // Check if a valid row was double-clicked
@@ -46,7 +79,6 @@ namespace TakoTea.View.Orders
                 {
                     // Get the ProductVariantID from the selected row
                     int orderId = Convert.ToInt32(dgViewOrderQueue.Rows[e.RowIndex].Cells["OrderId"].Value); // Assuming "ProductVariantID" is the column name
-
                     // Create and show the EditProductVariantModal
                     menuOrderFormService.GenerateReceipt(orderId);
                 }
@@ -54,11 +86,7 @@ namespace TakoTea.View.Orders
                 {
                     _ = MessageBox.Show("Error opening the edit modal: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-
-
             }
-
 
         }
         private void materialLabel4_Click(object sender, EventArgs e)
@@ -87,42 +115,8 @@ namespace TakoTea.View.Orders
                   dgViewOrderQueue.Columns["PaymentAmount"].DefaultCellStyle.Format = "₱#,##0.00";
                   dgViewOrderQueue.Columns["ChangeAmount"].DefaultCellStyle.Format = "₱#,##0.00";*/
         }
-        private void pbCompleted_Click(object sender, EventArgs e)
-        {
-            UpdateOrderStatusForSelectedRows("Completed");
-        }
-        private void pbCancelled_Click(object sender, EventArgs e)
-        {
-            // Get the selected rows from the DataGridView
-            DataGridViewSelectedRowCollection selectedRows = dgViewOrderQueue.SelectedRows;
-            // Loop through the selected rows and extract the order information
-            foreach (DataGridViewRow row in selectedRows)
-            {
-                int orderId = Convert.ToInt32(row.Cells["OrderId"].Value); // Assuming "OrderId" is the column name
-                // Retrieve the order details from the database
-                OrderModel order = context.OrderModels.Include(o => o.OrderItems).FirstOrDefault(o => o.OrderId == orderId);
-                if (order != null)
-                {
-                    // Return the batch levels to their original state
-                    ReturnBatchLevels(order);
-                    // Update the order status to "Cancelled"
-                    order.OrderStatus = "Cancelled";
-                    // Log the change
-                    LoggingHelper.LogChange(
-                        "OrderModels",                // Table name
-                        order.OrderId,                // Record ID
-                        "OrderStatus",                // Column name
-                        null,                         // Old value (null for new batch)
-                        "Cancelled",                  // New value
-                        "Updated",                    // Action
-                        $"Order '{order.OrderId}' status updated to 'Cancelled'", ""  // Description
-                    );
-                }
-            }
-            // Save the changes to the database and refresh the DataGridView
-            _ = context.SaveChanges();
-            LoadData();
-        }
+
+
         private void ReturnBatchLevels(OrderModel order)
         {
             foreach (OrderItem orderItem in order.OrderItems)
@@ -179,55 +173,60 @@ namespace TakoTea.View.Orders
                 // Get the ProductVariantID
             }
         }
-        private void btnProcessOrder_Click(object sender, EventArgs e)
-        {
-            ;
-        }
-        private void UpdateOrderStatusForSelectedRows(string newStatus)
-        {
-            int updatedCount = 0; // Counter for updated orders
 
-            foreach (DataGridViewRow row in dgViewOrderQueue.SelectedRows)
+        private void UpdateOrderStatusForSelectedRows(DataGridViewRow row, string newStatus)
+        {
+            if (row.Cells["OrderId"].Value == null) return; // Handle potential null value
+
+            int orderId = Convert.ToInt32(row.Cells["OrderId"].Value);
+            OrderModel order = context.OrderModels.FirstOrDefault(o => o.OrderId == orderId);
+
+            if (order != null)
             {
-                int orderId = Convert.ToInt32(row.Cells["OrderId"].Value);
-                OrderModel order = context.OrderModels.FirstOrDefault(o => o.OrderId == orderId);
-                if (order != null)
+                string oldStatus = order.OrderStatus; if (oldStatus == newStatus)
                 {
-                    order.OrderStatus = newStatus;
-                    order.PaymentStatus = newStatus == "Completed" ? "Paid" : order.PaymentStatus;
-
-                    // ... (your logging code) ...
-
-                    updatedCount++; // Increment the counter
+                    MessageBox.Show($"Order '{order.OrderId}' already has the status '{newStatus}'.", "No Changes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
                 }
+
+
+                if (newStatus == "Cancelled")
+                {
+                    ReturnBatchLevels(order);
+
+                    // Log the change before actually changing the status
+                    LoggingHelper.LogChange(
+                        "OrderModels",
+                        order.OrderId,
+                        "OrderStatus",
+                        oldStatus,               // Use the stored old status
+                        "Cancelled",
+                        "Updated",
+                        $"Order '{order.OrderId}' status updated to 'Cancelled'", ""
+                    );
+                }
+
+                order.OrderStatus = newStatus;
+                order.PaymentStatus = newStatus == "Completed" ? "Paid" : order.PaymentStatus;
+
+                LoggingHelper.LogChange(
+                    "OrderModels",
+                    order.OrderId,
+                    "OrderStatus",
+                    oldStatus,
+                    newStatus,
+                    "Updated",
+                    $"Order '{order.OrderId}' status updated to {newStatus}", ""
+                );
+
+                context.SaveChanges();
             }
 
-            _ = context.SaveChanges();
-            LoadData();
+            LoadData(); // Refresh the DataGridView data
 
-            // Display message box indicating the number of updated orders
-            MessageBox.Show($"{updatedCount} order(s) updated to '{newStatus}' status.", "Orders Updated", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        private void pbCancelled_Click_1(object sender, EventArgs e)
-        {
-            UpdateOrderStatusForSelectedRows("Cancelled");
-            Close();
-            OrdersQueueForm newForm = new OrdersQueueForm(context);
-            newForm.Show();
-        }
-        private void btnProcessOrder_Click_1(object sender, EventArgs e)
-        {
-            UpdateOrderStatusForSelectedRows("Processing");
-            Close();
-            OrdersQueueForm newForm = new OrdersQueueForm(context);
-            newForm.Show();
-        }
-        private void pbCompleted_Click_1(object sender, EventArgs e)
-        {
-            UpdateOrderStatusForSelectedRows("Completed");
-            Close();
-            OrdersQueueForm newForm = new OrdersQueueForm(context);
-            newForm.Show(); ;
+            // You might want to remove this MessageBox or make it optional, 
+            // as it might be repetitive when clicking on individual cells.
+            MessageBox.Show($"Order '{orderId}' updated to '{newStatus}' status.", "Order Updated", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void dgViewOrderQueue_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -256,3 +255,4 @@ namespace TakoTea.View.Orders
         }
     }
 }
+#endregion

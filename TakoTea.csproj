@@ -204,6 +204,10 @@
     <None Include="Resources\Batch Management%281%29.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="TakoTea.PrivateAssemblies\TakoTea.Models\TakoTea.Models.csproj">
+      <Project>{4FF12907-6236-4929-B3C0-E8D10A065437}</Project>
+      <Name>TakoTea.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="TakoTea.PrivateAssemblies\TakoTea.Repository\TakoTea.Repository.csproj">
       <Project>{7DABA7C5-30FF-471F-9F11-322FD40745BD}</Project>
       <Name>TakoTea.Repository</Name>

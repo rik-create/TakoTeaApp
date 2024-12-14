@@ -9,8 +9,15 @@ namespace TakoTea.Helpers
 {
     public static class SettingsFormHelper
     {
-        // In your SettingsFormHelper class
-        // In your SettingsFormHelper class
+        private static Entities _context;
+
+        public static void Initialize(Entities context)
+        {
+            _context = context;
+        }
+
+
+
 
         public static void LoadBackUpPaths(CheckedListBox chk)
         {
@@ -32,21 +39,23 @@ namespace TakoTea.Helpers
                 }
             }
         }
-        public static void LoadPaymentMethods(CheckedListBox checkedListBoxPaymentMethods)
+        public static void LoadPaymentMethods(DataGridView dgvPaymentMethods)
         {
-            Entities context = new Entities(); // Assuming you have an Entity Framework context
 
             // Retrieve the payment methods from the database
-            List<string> paymentMethods = context.PaymentMethods
-                .Where(p => p.IsActive) // Filter for active payment methods
+            List<string> paymentMethods = _context.PaymentMethods
+                .Where(p => p.IsActive)
                 .Select(p => p.MethodName)
                 .ToList();
 
-            // Clear existing items in the CheckedListBox
-            checkedListBoxPaymentMethods.Items.Clear();
+            // Clear existing rows in the DataGridView
+            dgvPaymentMethods.Rows.Clear();
 
-            // Add the payment methods to the CheckedListBox
-            checkedListBoxPaymentMethods.Items.AddRange(paymentMethods.ToArray());
+            // Add the payment methods to the DataGridView
+            foreach (string method in paymentMethods)
+            {
+                dgvPaymentMethods.Rows.Add(method);
+            }
         }
         public static void PopulateUsersListView(MaterialListView listView, List<User> users)
         {
@@ -97,21 +106,18 @@ namespace TakoTea.Helpers
             _ = comboBox.Items.Add("Monthly");
         }
 
-        public static void LoadSavedEmails(CheckedListBox checkedListBoxEmails)
+        public static void LoadSavedEmails(DataGridView dataGridViewEmails)
         {
-            // Get the saved emails from the Settings table
             string savedEmailsString = GetSavedEmails();
-
-            // Split the emails string using the "?" delimiter
             string[] savedEmails = savedEmailsString.Split(new[] { '?' }, StringSplitOptions.RemoveEmptyEntries);
 
-            // Clear existing items in the CheckedListBox
-            checkedListBoxEmails.Items.Clear();
+            // Clear existing rows in the DataGridView
+            dataGridViewEmails.Rows.Clear();
 
-            // Add the saved emails to the CheckedListBox
+            // Add the saved emails to the DataGridView
             foreach (string email in savedEmails)
             {
-                _ = checkedListBoxEmails.Items.Add(email);
+                dataGridViewEmails.Rows.Add(email, "X"); // Add a "Delete" button or icon in the second column
             }
         }
 
@@ -119,8 +125,7 @@ namespace TakoTea.Helpers
 
         public static string GetSavedEmails()
         {
-            Entities context = new Entities();
-            return context.Settings.FirstOrDefault()?.SavedEmails ?? string.Empty;
+            return _context.Settings.FirstOrDefault()?.SavedEmails ?? string.Empty;
         }
 
         // ... other helper methods ...

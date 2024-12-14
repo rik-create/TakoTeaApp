@@ -26,22 +26,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrdersQueueForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.miniToolStrip = new System.Windows.Forms.BindingNavigator(this.components);
             this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
+            this.labelProcessingOrdersCount = new System.Windows.Forms.Label();
+            this.labelNewOrdersCount = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panelItemList = new System.Windows.Forms.Panel();
-            this.dgViewOrderQueue = new System.Windows.Forms.DataGridView();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btnProcessOrder = new MaterialSkin.Controls.MaterialButton();
-            this.pbCompleted = new System.Windows.Forms.PictureBox();
-            this.pbCancelled = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -54,21 +48,23 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.labelNewOrdersCount = new System.Windows.Forms.Label();
-            this.labelProcessingOrdersCount = new System.Windows.Forms.Label();
+            this.dgViewOrderQueue = new System.Windows.Forms.DataGridView();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.txtBoxSearchOrders = new MaterialSkin.Controls.MaterialTextBox2();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.imageListButtons = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.miniToolStrip)).BeginInit();
             this.materialCard2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panelItemList.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgViewOrderQueue)).BeginInit();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCompleted)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCancelled)).BeginInit();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgViewOrderQueue)).BeginInit();
+            this.panel3.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // miniToolStrip
@@ -114,6 +110,26 @@
             this.materialCard2.Size = new System.Drawing.Size(1191, 691);
             this.materialCard2.TabIndex = 70;
             // 
+            // labelProcessingOrdersCount
+            // 
+            this.labelProcessingOrdersCount.AutoSize = true;
+            this.labelProcessingOrdersCount.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelProcessingOrdersCount.Location = new System.Drawing.Point(27, 667);
+            this.labelProcessingOrdersCount.Name = "labelProcessingOrdersCount";
+            this.labelProcessingOrdersCount.Size = new System.Drawing.Size(157, 16);
+            this.labelProcessingOrdersCount.TabIndex = 107;
+            this.labelProcessingOrdersCount.Text = "Total processing orders: 0";
+            // 
+            // labelNewOrdersCount
+            // 
+            this.labelNewOrdersCount.AutoSize = true;
+            this.labelNewOrdersCount.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNewOrdersCount.Location = new System.Drawing.Point(27, 650);
+            this.labelNewOrdersCount.Name = "labelNewOrdersCount";
+            this.labelNewOrdersCount.Size = new System.Drawing.Size(116, 16);
+            this.labelNewOrdersCount.TabIndex = 106;
+            this.labelNewOrdersCount.Text = "Total new orders: 0";
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -134,126 +150,6 @@
             this.panelItemList.Name = "panelItemList";
             this.panelItemList.Size = new System.Drawing.Size(1127, 521);
             this.panelItemList.TabIndex = 106;
-            // 
-            // dgViewOrderQueue
-            // 
-            this.dgViewOrderQueue.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgViewOrderQueue.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgViewOrderQueue.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgViewOrderQueue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            this.dgViewOrderQueue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgViewOrderQueue.DefaultCellStyle = dataGridViewCellStyle8;
-            this.dgViewOrderQueue.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgViewOrderQueue.EnableHeadersVisualStyles = false;
-            this.dgViewOrderQueue.Location = new System.Drawing.Point(0, 32);
-            this.dgViewOrderQueue.Name = "dgViewOrderQueue";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgViewOrderQueue.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            this.dgViewOrderQueue.Size = new System.Drawing.Size(1125, 487);
-            this.dgViewOrderQueue.TabIndex = 5;
-            this.dgViewOrderQueue.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgViewOrderQueue_ColumnHeaderMouseClick);
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.txtBoxSearchOrders);
-            this.panel3.Controls.Add(this.btnProcessOrder);
-            this.panel3.Controls.Add(this.pbCompleted);
-            this.panel3.Controls.Add(this.pbCancelled);
-            this.panel3.Location = new System.Drawing.Point(20, 70);
-            this.panel3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 8);
-            this.panel3.Name = "panel3";
-            this.panel3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
-            this.panel3.Size = new System.Drawing.Size(1150, 70);
-            this.panel3.TabIndex = 104;
-            // 
-            // btnProcessOrder
-            // 
-            this.btnProcessOrder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnProcessOrder.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnProcessOrder.Depth = 0;
-            this.btnProcessOrder.HighEmphasis = true;
-            this.btnProcessOrder.Icon = null;
-            this.btnProcessOrder.Location = new System.Drawing.Point(887, 20);
-            this.btnProcessOrder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnProcessOrder.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnProcessOrder.Name = "btnProcessOrder";
-            this.btnProcessOrder.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnProcessOrder.Size = new System.Drawing.Size(136, 36);
-            this.btnProcessOrder.TabIndex = 98;
-            this.btnProcessOrder.Text = "Process order";
-            this.btnProcessOrder.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnProcessOrder.UseAccentColor = true;
-            this.btnProcessOrder.UseVisualStyleBackColor = true;
-            this.btnProcessOrder.Click += new System.EventHandler(this.btnProcessOrder_Click_1);
-            // 
-            // pbCompleted
-            // 
-            this.pbCompleted.Image = global::TakoTea.Views.Properties.Resources._checked;
-            this.pbCompleted.Location = new System.Drawing.Point(1030, 20);
-            this.pbCompleted.Name = "pbCompleted";
-            this.pbCompleted.Size = new System.Drawing.Size(40, 40);
-            this.pbCompleted.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbCompleted.TabIndex = 97;
-            this.pbCompleted.TabStop = false;
-            this.pbCompleted.Click += new System.EventHandler(this.pbCompleted_Click_1);
-            // 
-            // pbCancelled
-            // 
-            this.pbCancelled.Image = global::TakoTea.Views.Properties.Resources.multiply;
-            this.pbCancelled.Location = new System.Drawing.Point(1080, 20);
-            this.pbCancelled.Name = "pbCancelled";
-            this.pbCancelled.Size = new System.Drawing.Size(40, 40);
-            this.pbCancelled.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbCancelled.TabIndex = 96;
-            this.pbCancelled.TabStop = false;
-            this.pbCancelled.Click += new System.EventHandler(this.pbCancelled_Click_1);
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.materialLabel4);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(14, 14);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1161, 46);
-            this.panel1.TabIndex = 101;
-            // 
-            // materialLabel4
-            // 
-            this.materialLabel4.AutoSize = true;
-            this.materialLabel4.Depth = 0;
-            this.materialLabel4.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel4.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.materialLabel4.Location = new System.Drawing.Point(535, 10);
-            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(114, 24);
-            this.materialLabel4.TabIndex = 0;
-            this.materialLabel4.Text = "Order Queue";
-            this.materialLabel4.Click += new System.EventHandler(this.materialLabel4_Click);
             // 
             // bindingNavigator1
             // 
@@ -370,25 +266,55 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // labelNewOrdersCount
+            // dgViewOrderQueue
             // 
-            this.labelNewOrdersCount.AutoSize = true;
-            this.labelNewOrdersCount.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNewOrdersCount.Location = new System.Drawing.Point(27, 650);
-            this.labelNewOrdersCount.Name = "labelNewOrdersCount";
-            this.labelNewOrdersCount.Size = new System.Drawing.Size(116, 16);
-            this.labelNewOrdersCount.TabIndex = 106;
-            this.labelNewOrdersCount.Text = "Total new orders: 0";
+            this.dgViewOrderQueue.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgViewOrderQueue.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgViewOrderQueue.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgViewOrderQueue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgViewOrderQueue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(50)))), ((int)(((byte)(56)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgViewOrderQueue.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dgViewOrderQueue.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgViewOrderQueue.EnableHeadersVisualStyles = false;
+            this.dgViewOrderQueue.Location = new System.Drawing.Point(0, 32);
+            this.dgViewOrderQueue.Name = "dgViewOrderQueue";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgViewOrderQueue.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.dgViewOrderQueue.Size = new System.Drawing.Size(1125, 487);
+            this.dgViewOrderQueue.TabIndex = 5;
+            this.dgViewOrderQueue.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgViewOrderQueue_ColumnHeaderMouseClick);
             // 
-            // labelProcessingOrdersCount
+            // panel3
             // 
-            this.labelProcessingOrdersCount.AutoSize = true;
-            this.labelProcessingOrdersCount.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelProcessingOrdersCount.Location = new System.Drawing.Point(27, 667);
-            this.labelProcessingOrdersCount.Name = "labelProcessingOrdersCount";
-            this.labelProcessingOrdersCount.Size = new System.Drawing.Size(157, 16);
-            this.labelProcessingOrdersCount.TabIndex = 107;
-            this.labelProcessingOrdersCount.Text = "Total processing orders: 0";
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.txtBoxSearchOrders);
+            this.panel3.Location = new System.Drawing.Point(20, 70);
+            this.panel3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 8);
+            this.panel3.Name = "panel3";
+            this.panel3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
+            this.panel3.Size = new System.Drawing.Size(1150, 70);
+            this.panel3.TabIndex = 104;
             // 
             // txtBoxSearchOrders
             // 
@@ -421,6 +347,37 @@
             this.txtBoxSearchOrders.Click += new System.EventHandler(this.txtBoxSearchOrders_Click);
             this.txtBoxSearchOrders.TextChanged += new System.EventHandler(this.txtBoxSearchOrders_TextChanged);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.materialLabel4);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(14, 14);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1161, 46);
+            this.panel1.TabIndex = 101;
+            // 
+            // materialLabel4
+            // 
+            this.materialLabel4.AutoSize = true;
+            this.materialLabel4.Depth = 0;
+            this.materialLabel4.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel4.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            this.materialLabel4.Location = new System.Drawing.Point(535, 10);
+            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel4.Name = "materialLabel4";
+            this.materialLabel4.Size = new System.Drawing.Size(114, 24);
+            this.materialLabel4.TabIndex = 0;
+            this.materialLabel4.Text = "Order Queue";
+            this.materialLabel4.Click += new System.EventHandler(this.materialLabel4_Click);
+            // 
+            // imageListButtons
+            // 
+            this.imageListButtons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListButtons.ImageStream")));
+            this.imageListButtons.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListButtons.Images.SetKeyName(0, "whisk-and-bowl.png");
+            // 
             // OrdersQueueForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -437,17 +394,14 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panelItemList.ResumeLayout(false);
             this.panelItemList.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgViewOrderQueue)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCompleted)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCancelled)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgViewOrderQueue)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -460,9 +414,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Panel panelItemList;
         private System.Windows.Forms.DataGridView dgViewOrderQueue;
-        private System.Windows.Forms.PictureBox pbCompleted;
-        private System.Windows.Forms.PictureBox pbCancelled;
-        private MaterialSkin.Controls.MaterialButton btnProcessOrder;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.Label labelProcessingOrdersCount;
         private System.Windows.Forms.Label labelNewOrdersCount;
@@ -479,5 +430,6 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private MaterialSkin.Controls.MaterialTextBox2 txtBoxSearchOrders;
+        private System.Windows.Forms.ImageList imageListButtons;
     }
 }

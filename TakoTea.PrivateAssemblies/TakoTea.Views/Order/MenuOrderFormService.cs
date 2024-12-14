@@ -920,7 +920,7 @@ namespace TakoTea.Views.Order
                         $"Order '{orderId}' confirmed with payment method '{paymentMethod}' and status '{orderStatus}'", ""  // Description
                     );
 
-                    // 8. (Optional) Perform other actions like generating a receipt or printing an order summary
+                    // 8. actions like generating a receipt or printing an order summary
                 }
                 catch (Exception ex)
                 {

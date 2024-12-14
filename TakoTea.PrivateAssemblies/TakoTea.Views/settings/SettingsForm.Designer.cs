@@ -37,9 +37,9 @@ namespace TakoTea.Views.settings
             this.btnDeleteUser = new MaterialSkin.Controls.MaterialButton();
             this.groupBoxUserInfo = new System.Windows.Forms.GroupBox();
             this.btnEditUser = new MaterialSkin.Controls.MaterialButton();
-            this.btnAddUser = new MaterialSkin.Controls.MaterialButton();
             this.materialCard4 = new MaterialSkin.Controls.MaterialCard();
             this.txtBoxPassword = new MaterialSkin.Controls.MaterialTextBox2();
+            this.btnAddUser = new MaterialSkin.Controls.MaterialButton();
             this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
             this.txtBoxUsername = new MaterialSkin.Controls.MaterialTextBox2();
             this.materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
@@ -56,9 +56,7 @@ namespace TakoTea.Views.settings
             this.btnAddEmail = new System.Windows.Forms.Button();
             this.txtBoxAddEmail = new System.Windows.Forms.TextBox();
             this.groupBoxEmailSelection = new System.Windows.Forms.GroupBox();
-            this.floatingActionButtonDeleteEmail = new MaterialSkin.Controls.MaterialFloatingActionButton();
-            this.checkedListBoxEmails = new System.Windows.Forms.CheckedListBox();
-            this.checkBoxSelectAllEmails = new MaterialSkin.Controls.MaterialCheckbox();
+            this.dataGridViewEmails = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBoxDeliveryMethod = new System.Windows.Forms.GroupBox();
             this.chkBoxEnableEmailNotifications = new MaterialSkin.Controls.MaterialCheckbox();
@@ -78,18 +76,17 @@ namespace TakoTea.Views.settings
             this.materialLabel10 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
             this.btnRestoreBackup = new MaterialSkin.Controls.MaterialButton();
+            this.tabPagePaymentMethod = new System.Windows.Forms.TabPage();
+            this.materialCard5 = new MaterialSkin.Controls.MaterialCard();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.dgvPaymentMethods = new System.Windows.Forms.DataGridView();
+            this.materialFloatingActionButtonAddPaymentMethod = new System.Windows.Forms.Button();
+            this.txtBoxAddPaymentMethod = new System.Windows.Forms.TextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.materialTabSelector1 = new MaterialSkin.Controls.MaterialTabSelector();
             this.entityCommand1 = new System.Data.Entity.Core.EntityClient.EntityCommand();
             this.btnCancelChanges = new MaterialSkin.Controls.MaterialButton();
             this.btnSaveChanges = new MaterialSkin.Controls.MaterialButton();
-            this.tabPagePaymentMethod = new System.Windows.Forms.TabPage();
-            this.materialCard5 = new MaterialSkin.Controls.MaterialCard();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.materialFloatingActionButtonRemoveSelectedPaymentMethod = new MaterialSkin.Controls.MaterialFloatingActionButton();
-            this.checkedListBoxPaymentMethod = new System.Windows.Forms.CheckedListBox();
-            this.materialFloatingActionButtonAddPaymentMethod = new System.Windows.Forms.Button();
-            this.txtBoxAddPaymentMethod = new System.Windows.Forms.TextBox();
             this.materialTabControl1.SuspendLayout();
             this.tabPageUserManagement.SuspendLayout();
             this.materialCard1.SuspendLayout();
@@ -99,6 +96,7 @@ namespace TakoTea.Views.settings
             this.tabPageNotificationSettings.SuspendLayout();
             this.materialCard2.SuspendLayout();
             this.groupBoxEmailSelection.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmails)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBoxDeliveryMethod.SuspendLayout();
             this.tabPageDataBackup.SuspendLayout();
@@ -107,6 +105,7 @@ namespace TakoTea.Views.settings
             this.tabPagePaymentMethod.SuspendLayout();
             this.materialCard5.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentMethods)).BeginInit();
             this.SuspendLayout();
             // 
             // materialTabControl1
@@ -172,11 +171,11 @@ namespace TakoTea.Views.settings
             this.btnDeleteUser.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnDeleteUser.UseAccentColor = false;
             this.btnDeleteUser.UseVisualStyleBackColor = true;
+            this.btnDeleteUser.Click += new System.EventHandler(this.btnDeleteUser_Click_1);
             // 
             // groupBoxUserInfo
             // 
             this.groupBoxUserInfo.Controls.Add(this.btnEditUser);
-            this.groupBoxUserInfo.Controls.Add(this.btnAddUser);
             this.groupBoxUserInfo.Controls.Add(this.materialCard4);
             this.groupBoxUserInfo.Location = new System.Drawing.Point(382, 15);
             this.groupBoxUserInfo.Name = "groupBoxUserInfo";
@@ -204,30 +203,12 @@ namespace TakoTea.Views.settings
             this.btnEditUser.UseAccentColor = false;
             this.btnEditUser.UseVisualStyleBackColor = true;
             // 
-            // btnAddUser
-            // 
-            this.btnAddUser.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnAddUser.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnAddUser.Depth = 0;
-            this.btnAddUser.HighEmphasis = true;
-            this.btnAddUser.Icon = null;
-            this.btnAddUser.Location = new System.Drawing.Point(96, 416);
-            this.btnAddUser.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnAddUser.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnAddUser.Name = "btnAddUser";
-            this.btnAddUser.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnAddUser.Size = new System.Drawing.Size(90, 36);
-            this.btnAddUser.TabIndex = 2;
-            this.btnAddUser.Text = "Add User";
-            this.btnAddUser.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnAddUser.UseAccentColor = false;
-            this.btnAddUser.UseVisualStyleBackColor = true;
-            // 
             // materialCard4
             // 
             this.materialCard4.AutoScroll = true;
             this.materialCard4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.materialCard4.Controls.Add(this.txtBoxPassword);
+            this.materialCard4.Controls.Add(this.btnAddUser);
             this.materialCard4.Controls.Add(this.materialLabel8);
             this.materialCard4.Controls.Add(this.txtBoxUsername);
             this.materialCard4.Controls.Add(this.materialLabel7);
@@ -274,6 +255,25 @@ namespace TakoTea.Views.settings
             this.txtBoxPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtBoxPassword.TrailingIcon = null;
             this.txtBoxPassword.UseSystemPasswordChar = true;
+            // 
+            // btnAddUser
+            // 
+            this.btnAddUser.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAddUser.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnAddUser.Depth = 0;
+            this.btnAddUser.HighEmphasis = true;
+            this.btnAddUser.Icon = null;
+            this.btnAddUser.Location = new System.Drawing.Point(192, 404);
+            this.btnAddUser.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnAddUser.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnAddUser.Name = "btnAddUser";
+            this.btnAddUser.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnAddUser.Size = new System.Drawing.Size(90, 36);
+            this.btnAddUser.TabIndex = 2;
+            this.btnAddUser.Text = "Add User";
+            this.btnAddUser.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnAddUser.UseAccentColor = false;
+            this.btnAddUser.UseVisualStyleBackColor = true;
             // 
             // materialLabel8
             // 
@@ -501,9 +501,7 @@ namespace TakoTea.Views.settings
             // 
             // groupBoxEmailSelection
             // 
-            this.groupBoxEmailSelection.Controls.Add(this.floatingActionButtonDeleteEmail);
-            this.groupBoxEmailSelection.Controls.Add(this.checkedListBoxEmails);
-            this.groupBoxEmailSelection.Controls.Add(this.checkBoxSelectAllEmails);
+            this.groupBoxEmailSelection.Controls.Add(this.dataGridViewEmails);
             this.groupBoxEmailSelection.Location = new System.Drawing.Point(384, 24);
             this.groupBoxEmailSelection.Name = "groupBoxEmailSelection";
             this.groupBoxEmailSelection.Size = new System.Drawing.Size(312, 320);
@@ -511,47 +509,15 @@ namespace TakoTea.Views.settings
             this.groupBoxEmailSelection.TabStop = false;
             this.groupBoxEmailSelection.Text = "Select Email";
             // 
-            // floatingActionButtonDeleteEmail
+            // dataGridViewEmails
             // 
-            this.floatingActionButtonDeleteEmail.Depth = 0;
-            this.floatingActionButtonDeleteEmail.Icon = global::TakoTea.Views.Properties.Resources.delete;
-            this.floatingActionButtonDeleteEmail.Image = global::TakoTea.Views.Properties.Resources.plus;
-            this.floatingActionButtonDeleteEmail.Location = new System.Drawing.Point(248, 16);
-            this.floatingActionButtonDeleteEmail.Mini = true;
-            this.floatingActionButtonDeleteEmail.MouseState = MaterialSkin.MouseState.HOVER;
-            this.floatingActionButtonDeleteEmail.Name = "floatingActionButtonDeleteEmail";
-            this.floatingActionButtonDeleteEmail.Size = new System.Drawing.Size(40, 40);
-            this.floatingActionButtonDeleteEmail.TabIndex = 103;
-            this.floatingActionButtonDeleteEmail.UseVisualStyleBackColor = true;
-            // 
-            // checkedListBoxEmails
-            // 
-            this.checkedListBoxEmails.BackColor = System.Drawing.SystemColors.Control;
-            this.checkedListBoxEmails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.checkedListBoxEmails.CheckOnClick = true;
-            this.checkedListBoxEmails.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.checkedListBoxEmails.FormattingEnabled = true;
-            this.checkedListBoxEmails.Location = new System.Drawing.Point(20, 70);
-            this.checkedListBoxEmails.Name = "checkedListBoxEmails";
-            this.checkedListBoxEmails.Size = new System.Drawing.Size(284, 222);
-            this.checkedListBoxEmails.TabIndex = 1;
-            // 
-            // checkBoxSelectAllEmails
-            // 
-            this.checkBoxSelectAllEmails.AutoSize = true;
-            this.checkBoxSelectAllEmails.Depth = 0;
-            this.checkBoxSelectAllEmails.Location = new System.Drawing.Point(20, 30);
-            this.checkBoxSelectAllEmails.Margin = new System.Windows.Forms.Padding(0);
-            this.checkBoxSelectAllEmails.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.checkBoxSelectAllEmails.MouseState = MaterialSkin.MouseState.HOVER;
-            this.checkBoxSelectAllEmails.Name = "checkBoxSelectAllEmails";
-            this.checkBoxSelectAllEmails.ReadOnly = false;
-            this.checkBoxSelectAllEmails.Ripple = true;
-            this.checkBoxSelectAllEmails.Size = new System.Drawing.Size(100, 37);
-            this.checkBoxSelectAllEmails.TabIndex = 0;
-            this.checkBoxSelectAllEmails.Text = "Select All";
-            this.checkBoxSelectAllEmails.UseVisualStyleBackColor = true;
-            this.checkBoxSelectAllEmails.CheckedChanged += new System.EventHandler(this.checkBoxSelectAllEmails_CheckedChanged);
+            this.dataGridViewEmails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewEmails.Location = new System.Drawing.Point(16, 24);
+            this.dataGridViewEmails.Name = "dataGridViewEmails";
+            this.dataGridViewEmails.Size = new System.Drawing.Size(288, 288);
+            this.dataGridViewEmails.TabIndex = 0;
+            this.dataGridViewEmails.CellBorderStyleChanged += new System.EventHandler(this.dataGridViewEmails_CellBorderStyleChanged);
+            this.dataGridViewEmails.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEmails_CellClick);
             // 
             // groupBox1
             // 
@@ -634,6 +600,7 @@ namespace TakoTea.Views.settings
             this.chkBoxInAppNotification.TabIndex = 1;
             this.chkBoxInAppNotification.Text = "In-App Notification";
             this.chkBoxInAppNotification.UseVisualStyleBackColor = true;
+            this.chkBoxInAppNotification.CheckedChanged += new System.EventHandler(this.chkBoxInAppNotification_CheckedChanged);
             // 
             // tabPageDataBackup
             // 
@@ -766,7 +733,6 @@ namespace TakoTea.Views.settings
             this.btnPerformBackup.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnPerformBackup.UseAccentColor = false;
             this.btnPerformBackup.UseVisualStyleBackColor = true;
-            this.btnPerformBackup.Click += new System.EventHandler(this.btnPerformBackup_Click_1);
             // 
             // lblLastBackupDate
             // 
@@ -849,6 +815,71 @@ namespace TakoTea.Views.settings
             this.btnRestoreBackup.UseVisualStyleBackColor = true;
             this.btnRestoreBackup.Visible = false;
             // 
+            // tabPagePaymentMethod
+            // 
+            this.tabPagePaymentMethod.Controls.Add(this.materialCard5);
+            this.tabPagePaymentMethod.Location = new System.Drawing.Point(4, 22);
+            this.tabPagePaymentMethod.Name = "tabPagePaymentMethod";
+            this.tabPagePaymentMethod.Size = new System.Drawing.Size(722, 440);
+            this.tabPagePaymentMethod.TabIndex = 3;
+            this.tabPagePaymentMethod.Text = "Payments";
+            this.tabPagePaymentMethod.UseVisualStyleBackColor = true;
+            // 
+            // materialCard5
+            // 
+            this.materialCard5.AutoScroll = true;
+            this.materialCard5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard5.Controls.Add(this.groupBox3);
+            this.materialCard5.Depth = 0;
+            this.materialCard5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.materialCard5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard5.Location = new System.Drawing.Point(0, 0);
+            this.materialCard5.Margin = new System.Windows.Forms.Padding(10);
+            this.materialCard5.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard5.Name = "materialCard5";
+            this.materialCard5.Padding = new System.Windows.Forms.Padding(10);
+            this.materialCard5.Size = new System.Drawing.Size(722, 440);
+            this.materialCard5.TabIndex = 1;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.dgvPaymentMethods);
+            this.groupBox3.Controls.Add(this.materialFloatingActionButtonAddPaymentMethod);
+            this.groupBox3.Controls.Add(this.txtBoxAddPaymentMethod);
+            this.groupBox3.Location = new System.Drawing.Point(25, 40);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(319, 337);
+            this.groupBox3.TabIndex = 10;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Payment Methods";
+            // 
+            // dgvPaymentMethods
+            // 
+            this.dgvPaymentMethods.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPaymentMethods.Location = new System.Drawing.Point(16, 16);
+            this.dgvPaymentMethods.Name = "dgvPaymentMethods";
+            this.dgvPaymentMethods.Size = new System.Drawing.Size(288, 272);
+            this.dgvPaymentMethods.TabIndex = 107;
+            this.dgvPaymentMethods.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPaymentMethods_CellClick);
+            // 
+            // materialFloatingActionButtonAddPaymentMethod
+            // 
+            this.materialFloatingActionButtonAddPaymentMethod.Location = new System.Drawing.Point(224, 296);
+            this.materialFloatingActionButtonAddPaymentMethod.Name = "materialFloatingActionButtonAddPaymentMethod";
+            this.materialFloatingActionButtonAddPaymentMethod.Size = new System.Drawing.Size(75, 23);
+            this.materialFloatingActionButtonAddPaymentMethod.TabIndex = 106;
+            this.materialFloatingActionButtonAddPaymentMethod.Text = "Add";
+            this.materialFloatingActionButtonAddPaymentMethod.UseVisualStyleBackColor = true;
+            this.materialFloatingActionButtonAddPaymentMethod.Click += new System.EventHandler(this.materialFloatingActionButtonAddPaymentMethod_Click_1);
+            // 
+            // txtBoxAddPaymentMethod
+            // 
+            this.txtBoxAddPaymentMethod.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxAddPaymentMethod.Location = new System.Drawing.Point(16, 296);
+            this.txtBoxAddPaymentMethod.Name = "txtBoxAddPaymentMethod";
+            this.txtBoxAddPaymentMethod.Size = new System.Drawing.Size(200, 22);
+            this.txtBoxAddPaymentMethod.TabIndex = 105;
+            // 
             // tabPage1
             // 
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -900,6 +931,7 @@ namespace TakoTea.Views.settings
             this.btnCancelChanges.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnCancelChanges.UseAccentColor = false;
             this.btnCancelChanges.UseVisualStyleBackColor = true;
+            this.btnCancelChanges.Click += new System.EventHandler(this.btnCancelChanges_Click_1);
             // 
             // btnSaveChanges
             // 
@@ -919,89 +951,7 @@ namespace TakoTea.Views.settings
             this.btnSaveChanges.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnSaveChanges.UseAccentColor = true;
             this.btnSaveChanges.UseVisualStyleBackColor = true;
-            // 
-            // tabPagePaymentMethod
-            // 
-            this.tabPagePaymentMethod.Controls.Add(this.materialCard5);
-            this.tabPagePaymentMethod.Location = new System.Drawing.Point(4, 22);
-            this.tabPagePaymentMethod.Name = "tabPagePaymentMethod";
-            this.tabPagePaymentMethod.Size = new System.Drawing.Size(722, 440);
-            this.tabPagePaymentMethod.TabIndex = 3;
-            this.tabPagePaymentMethod.Text = "Payments";
-            this.tabPagePaymentMethod.UseVisualStyleBackColor = true;
-            // 
-            // materialCard5
-            // 
-            this.materialCard5.AutoScroll = true;
-            this.materialCard5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialCard5.Controls.Add(this.groupBox3);
-            this.materialCard5.Depth = 0;
-            this.materialCard5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.materialCard5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard5.Location = new System.Drawing.Point(0, 0);
-            this.materialCard5.Margin = new System.Windows.Forms.Padding(10);
-            this.materialCard5.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialCard5.Name = "materialCard5";
-            this.materialCard5.Padding = new System.Windows.Forms.Padding(10);
-            this.materialCard5.Size = new System.Drawing.Size(722, 440);
-            this.materialCard5.TabIndex = 1;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.materialFloatingActionButtonAddPaymentMethod);
-            this.groupBox3.Controls.Add(this.txtBoxAddPaymentMethod);
-            this.groupBox3.Controls.Add(this.materialFloatingActionButtonRemoveSelectedPaymentMethod);
-            this.groupBox3.Controls.Add(this.checkedListBoxPaymentMethod);
-            this.groupBox3.Location = new System.Drawing.Point(25, 40);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(672, 337);
-            this.groupBox3.TabIndex = 10;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Payment Methods";
-            // 
-            // materialFloatingActionButtonRemoveSelectedPaymentMethod
-            // 
-            this.materialFloatingActionButtonRemoveSelectedPaymentMethod.Depth = 0;
-            this.materialFloatingActionButtonRemoveSelectedPaymentMethod.Icon = global::TakoTea.Views.Properties.Resources.delete;
-            this.materialFloatingActionButtonRemoveSelectedPaymentMethod.Image = global::TakoTea.Views.Properties.Resources.plus;
-            this.materialFloatingActionButtonRemoveSelectedPaymentMethod.Location = new System.Drawing.Point(610, 27);
-            this.materialFloatingActionButtonRemoveSelectedPaymentMethod.Mini = true;
-            this.materialFloatingActionButtonRemoveSelectedPaymentMethod.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialFloatingActionButtonRemoveSelectedPaymentMethod.Name = "materialFloatingActionButtonRemoveSelectedPaymentMethod";
-            this.materialFloatingActionButtonRemoveSelectedPaymentMethod.Size = new System.Drawing.Size(40, 40);
-            this.materialFloatingActionButtonRemoveSelectedPaymentMethod.TabIndex = 104;
-            this.materialFloatingActionButtonRemoveSelectedPaymentMethod.UseVisualStyleBackColor = true;
-            this.materialFloatingActionButtonRemoveSelectedPaymentMethod.Click += new System.EventHandler(this.materialFloatingActionButtonRemoveSelectedPaymentMethod_Click);
-            // 
-            // checkedListBoxPaymentMethod
-            // 
-            this.checkedListBoxPaymentMethod.BackColor = System.Drawing.SystemColors.Control;
-            this.checkedListBoxPaymentMethod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.checkedListBoxPaymentMethod.CheckOnClick = true;
-            this.checkedListBoxPaymentMethod.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.checkedListBoxPaymentMethod.FormattingEnabled = true;
-            this.checkedListBoxPaymentMethod.Location = new System.Drawing.Point(18, 19);
-            this.checkedListBoxPaymentMethod.Name = "checkedListBoxPaymentMethod";
-            this.checkedListBoxPaymentMethod.Size = new System.Drawing.Size(648, 200);
-            this.checkedListBoxPaymentMethod.TabIndex = 8;
-            // 
-            // materialFloatingActionButtonAddPaymentMethod
-            // 
-            this.materialFloatingActionButtonAddPaymentMethod.Location = new System.Drawing.Point(416, 297);
-            this.materialFloatingActionButtonAddPaymentMethod.Name = "materialFloatingActionButtonAddPaymentMethod";
-            this.materialFloatingActionButtonAddPaymentMethod.Size = new System.Drawing.Size(75, 23);
-            this.materialFloatingActionButtonAddPaymentMethod.TabIndex = 106;
-            this.materialFloatingActionButtonAddPaymentMethod.Text = "Add";
-            this.materialFloatingActionButtonAddPaymentMethod.UseVisualStyleBackColor = true;
-            this.materialFloatingActionButtonAddPaymentMethod.Click += new System.EventHandler(this.materialFloatingActionButtonAddPaymentMethod_Click_1);
-            // 
-            // txtBoxAddPaymentMethod
-            // 
-            this.txtBoxAddPaymentMethod.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxAddPaymentMethod.Location = new System.Drawing.Point(208, 297);
-            this.txtBoxAddPaymentMethod.Name = "txtBoxAddPaymentMethod";
-            this.txtBoxAddPaymentMethod.Size = new System.Drawing.Size(200, 22);
-            this.txtBoxAddPaymentMethod.TabIndex = 105;
+            this.btnSaveChanges.Click += new System.EventHandler(this.btnSaveChanges_Click_1);
             // 
             // SettingsForm
             // 
@@ -1028,7 +978,7 @@ namespace TakoTea.Views.settings
             this.materialCard2.ResumeLayout(false);
             this.materialCard2.PerformLayout();
             this.groupBoxEmailSelection.ResumeLayout(false);
-            this.groupBoxEmailSelection.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmails)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBoxDeliveryMethod.ResumeLayout(false);
             this.groupBoxDeliveryMethod.PerformLayout();
@@ -1041,6 +991,7 @@ namespace TakoTea.Views.settings
             this.materialCard5.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentMethods)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1073,7 +1024,6 @@ namespace TakoTea.Views.settings
         public System.Data.Entity.Core.EntityClient.EntityCommand entityCommand1;
 
         private GroupBox groupBoxEmailSelection;
-        private MaterialCheckbox checkBoxSelectAllEmails;
         private TextBox txtBoxAddEmail;
         private GroupBox groupBox1;
         public GroupBox groupBoxDeliveryMethod;
@@ -1081,7 +1031,6 @@ namespace TakoTea.Views.settings
         public MaterialComboBox cmbAlertFrequency;
         private Button btnAddEmail;
         public MaterialCheckbox chkBoxEnableEmailNotifications;
-        private MaterialFloatingActionButton floatingActionButtonDeleteEmail;
         public MaterialButton btnEditUser;
         public MaterialButton btnAddUser;
         private MaterialCard materialCard4;
@@ -1099,15 +1048,14 @@ namespace TakoTea.Views.settings
         private GroupBox groupBox2;
         private MaterialFloatingActionButton materialFloatingActionButtonAddBackUpDestination;
         private MaterialFloatingActionButton materialFloatingActionButtonDeleteBackupDestination;
-        public CheckedListBox checkedListBoxEmails;
         public CheckedListBox checkedListBoxBackUpDestinations;
         private TabPage tabPagePaymentMethod;
         public MaterialCard materialCard5;
         private GroupBox groupBox3;
-        private MaterialFloatingActionButton materialFloatingActionButtonRemoveSelectedPaymentMethod;
-        public CheckedListBox checkedListBoxPaymentMethod;
         private Button materialFloatingActionButtonAddPaymentMethod;
         private TextBox txtBoxAddPaymentMethod;
+        private DataGridView dataGridViewEmails;
+        private DataGridView dgvPaymentMethods;
 
         // ... other controls ...
 
