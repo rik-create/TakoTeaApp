@@ -847,8 +847,8 @@ namespace TakoTea.Views.reports
                 }
 
                 // Update the DateTimePickers with the calculated date range
-                dtpStartDate.Value = startDate;
-                dtpEndDate.Value = endDate;
+                dtpStartDate.Value = dtpStartDate.MinDate;
+                dtpEndDate.Value = dtpEndDate.MaxDate;
             }
 
             GenerateReport();
